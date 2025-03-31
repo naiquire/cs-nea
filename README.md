@@ -2,14 +2,14 @@
 My technical solution for AQA Computer Science NEA 2025. This is a online game where you can improve your writing ability and compete against others
 ## 🛠️ Game Functions
 In general, a player will be given an alphanumeric character and asked to draw it. Their time will be recorded and a server neural network will evaluate the accuracy of their submission.
-# Online Multiplayer
+### Online Multiplayer
 - each player has a ranking which is dependent on their time and accuracy (there are many different ranks for different categories)
 - 1v1 speed matches (competitive ranked)
 - 12 player knockout tournament where last person to submit an answer is knocked out along with all players with an incorrect answer (unranked)
-# Offline
+### Offline
 - 10, 25, 50 speed trials (speed rank)
 - non-timed trials
-# Modes
+### Modes
 - mirror mode lmaoooo enjoy (mirror rank)
 - invisible mode where you cannot see what you are drawing (hidden rank)
 ## Accounts
