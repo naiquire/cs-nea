@@ -2,7 +2,7 @@
 
 namespace server_app.connections
 {
-    public class accounts
+    public class @accounts
     {
     }
 }

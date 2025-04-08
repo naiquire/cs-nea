@@ -2,7 +2,7 @@
 
 namespace server_app.connections
 {
-    public class social
+    public class @social
     {
     }
 }
