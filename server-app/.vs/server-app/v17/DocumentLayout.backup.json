@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\social.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\social.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,12 +51,51 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "data.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\data.cs",
+              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\data.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\data.cs",
+              "RelativeToolTip": "server-app\\neuralNetwork\\data.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T15:58:23.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "social.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\social.cs",
+              "RelativeDocumentMoniker": "server-app\\connections\\social.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\social.cs",
+              "RelativeToolTip": "server-app\\connections\\social.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T17:15:51.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "queueing.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs",
+              "RelativeDocumentMoniker": "server-app\\connections\\queueing.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs",
+              "RelativeToolTip": "server-app\\connections\\queueing.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T17:14:53.035Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "database.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs",
               "RelativeDocumentMoniker": "server-app\\databases\\database.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs",
               "RelativeToolTip": "server-app\\databases\\database.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:05:01.071Z",
               "EditorCaption": ""
@@ -57,33 +108,33 @@
               "RelativeDocumentMoniker": "server-app\\connections\\accounts.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs",
               "RelativeToolTip": "server-app\\connections\\accounts.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:04:43.109Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "queueing.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs",
               "RelativeDocumentMoniker": "server-app\\games\\queueing.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs",
               "RelativeToolTip": "server-app\\games\\queueing.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:03:49.456Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "neuralNetwork.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\neuralNetwork.cs",
               "RelativeDocumentMoniker": "server-app\\neuralNetwork\\neuralNetwork.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\neuralNetwork.cs",
               "RelativeToolTip": "server-app\\neuralNetwork\\neuralNetwork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T16:57:34.076Z",
               "EditorCaption": ""

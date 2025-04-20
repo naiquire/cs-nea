@@ -2,6 +2,7 @@
 
 namespace server_app.databases
 {
+    // handles all requests to the SQL database
     public class @database
     {
         private static readonly string dbPath = "";

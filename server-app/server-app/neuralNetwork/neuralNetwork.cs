@@ -2,9 +2,10 @@
 
 namespace server_app.neuralNetwork
 {
+    // neural network
     public class neuralNetwork
     {
-        private readonly int[] networkLayers = [784, 288, 144, 64, 36];
+        private readonly int[] networkLayers = [784, 144, 72, 72, 26];
         private static readonly int layerCount = 5;
 
         private double[][] neuronValues = new double[5][];
