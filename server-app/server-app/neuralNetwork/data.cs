@@ -6,19 +6,19 @@
         {
             return
             [
-                new double[784, 288],
-                new double[288, 144],
-                new double[144, 64],
-                new double[64, 36]
+                new double[784, 144],
+                new double[144, 72],
+                new double[72, 72],
+                new double[72, 26]
             ];
         }
         public static double[][] loadBiases()
         {
             return
             [
-                new double[288],
                 new double[144],
-                new double[64],
+                new double[72],
+                new double[72],
                 new double[36]
             ];
         }
