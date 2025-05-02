@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\neuralnetwork\\backpropagation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\backpropagation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\neuralnetwork\\evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,16 +27,24 @@
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\social.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\social.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\neuralnetwork\\evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\neuralnetwork\\backpropagation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\backpropagation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\social.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\social.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,45 +70,69 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "backpropagation.cs",
-              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
-              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\backpropagation.cs",
-              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
-              "RelativeToolTip": "server-app\\neuralNetwork\\backpropagation.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T17:03:21.742Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "evaluate.cs",
-              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\evaluate.cs",
-              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\evaluate.cs",
-              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\evaluate.cs",
-              "RelativeToolTip": "server-app\\neuralNetwork\\evaluate.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBgAAAAkAAAAAAAAAA==",
+              "Title": "abstractGame.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractGame.cs",
+              "RelativeDocumentMoniker": "server-app\\games\\abstractGame.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractGame.cs",
+              "RelativeToolTip": "server-app\\games\\abstractGame.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T16:57:34.076Z",
+              "WhenOpened": "2025-05-02T21:05:12.335Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "accuracy.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
+              "RelativeDocumentMoniker": "server-app\\games\\accuracy.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
+              "RelativeToolTip": "server-app\\games\\accuracy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T21:04:27.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "backpropagation.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
+              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\backpropagation.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
+              "RelativeToolTip": "server-app\\neuralNetwork\\backpropagation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T17:03:21.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "evaluate.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\evaluate.cs",
+              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\evaluate.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\evaluate.cs",
+              "RelativeToolTip": "server-app\\neuralNetwork\\evaluate.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T16:57:34.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\Program.cs",
               "RelativeDocumentMoniker": "server-app\\Program.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\Program.cs",
               "RelativeToolTip": "server-app\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAowAwAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T16:06:38.617Z"
+              "WhenOpened": "2025-04-20T16:06:38.617Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "data.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\neuralNetwork\\data.cs",
               "RelativeDocumentMoniker": "server-app\\neuralNetwork\\data.cs",
@@ -112,27 +144,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "social.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\social.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\social.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\social.cs",
               "RelativeToolTip": "server-app\\connections\\social.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:15:51.35Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "queueing.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\queueing.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs",
               "RelativeToolTip": "server-app\\connections\\queueing.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T17:14:53.035Z"
+              "WhenOpened": "2025-04-08T17:14:53.035Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -142,13 +175,13 @@
               "RelativeDocumentMoniker": "server-app\\databases\\database.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs",
               "RelativeToolTip": "server-app\\databases\\database.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:05:01.071Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "accounts.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\accounts.cs",
@@ -166,7 +199,7 @@
               "RelativeDocumentMoniker": "server-app\\games\\queueing.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs",
               "RelativeToolTip": "server-app\\games\\queueing.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T17:03:49.456Z"
             }

@@ -1,6 +1,6 @@
 ﻿namespace server_app.games
 {
-    // contains all instances of running games
+    // contains all instances of running MULTIPLAYER games
     public static class @queueing
     {
         struct currentGames

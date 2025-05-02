@@ -4,12 +4,46 @@
     {
         private double[][] neuronErrors = new double[5][];
         private double learningRate = 0.05;
-        public backpropagation(double[] input, int expected)
+        public backpropagation(List<double[]> input, List<int> expected)
         {
             List<double[][,]> weightAdjustments = new List<double[][,]>();
             List<double[][]> biasAdjustments = new List<double[][]>();
 
-            var adjustments = backpropagate(input, expected);
+            for (int i = 0; i < input.Count; i++)
+            {
+                (double[][,] weights, double[][] biases) adjustments = backpropagate(input[i], expected[i]);
+
+                weightAdjustments.Add(adjustments.weights);
+                biasAdjustments.Add(adjustments.biases);
+            }
+
+            var weights = data.loadWeights();
+            var biases = data.loadBiases();
+
+            // update weights and biases
+            for (int i = 0; i < evaluate.layerCount - 1; i++)
+            {
+                for (int j = 0; j < evaluate.networkLayers[i]; j++)
+                {
+                    for (int k = 0; j < evaluate.networkLayers[i + 1]; k++)
+                    {
+                        double weightSum = 0;
+                        foreach (var weight in weightAdjustments)
+                        {
+                            weightSum += weight[i][j, k];
+                        }
+                        weights[i][j, k] -= (learningRate / input.Count) * weightSum;
+                    }
+
+                    double biasSum = 0;
+                    foreach (var bias in biasAdjustments)
+                    {
+                        biasSum += bias[i][j];
+                    }
+                    biases[i][j] -= (learningRate / input.Count) * biasSum;
+                }
+            }
+
         }
         private (double[][,], double[][]) backpropagate(double[] inputValues, int expectedResult)
         {
@@ -36,7 +70,7 @@
                 }
             }
 
-            // update weights and biases
+            // calculate weight and bias gradients
             double[][,] weightGradients = new double[evaluate.layerCount - 1][,];
             double[][] biasGradients = new double[evaluate.layerCount - 1][];
 
