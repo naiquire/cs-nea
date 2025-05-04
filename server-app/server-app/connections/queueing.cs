@@ -1,34 +1,32 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.games;
+using System.Reflection;
 
 namespace server_app.connections
 {
     // handles requests for queueing games
-    public class @queueing : Hub
+    public partial class @connection : Hub
     {
-        
-        public override Task OnConnectedAsync()
-        {
-            return base.OnConnectedAsync();
-        }
-        public override Task OnDisconnectedAsync(Exception? exception)
-        {
-            return base.OnDisconnectedAsync(exception);
-        }
-
         public void queueGame(string gameID, bool online, string userID) // maybe store online in db
         {
-            if (online)
-            {
+            // format gameID
+            gameID = $"server_app.games.{gameID}";
 
-            }
-            else
+            // get class object from string input
+            var assembly = Assembly.GetCallingAssembly();
+            var type = assembly.GetType(gameID);
+            if (type == null)
             {
-                if (gameID == "accuracy")
-                {
-                    new accuracy(userID);
-                }
+                throw new Exception($"gameID < {gameID} > could not be found");
             }
+
+            // call constructor method
+            ConstructorInfo[] constructor = type.GetConstructors();
+            constructor[0].Invoke([userID]);
+
+
+
+            
         }
     }
 }

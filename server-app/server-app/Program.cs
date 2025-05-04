@@ -20,9 +20,9 @@ namespace server_app
 
             var app = builder.Build();
 
-            app.MapHub<connections.accounts>("/cs-nea/connections");
-            app.MapHub<connections.queueing>("/cs-nea/queueing");
-            app.MapHub<connections.social>("/cs-nea/social");
+            app.MapHub<connections.connection>("/cs-nea/connections");
+            //app.MapHub<connections.queueing>("/cs-nea/queueing");
+            //app.MapHub<connections.social>("/cs-nea/social");
 
             // binds to all address on port 5252
             app.Urls.Add("http://0.0.0.0:3900");

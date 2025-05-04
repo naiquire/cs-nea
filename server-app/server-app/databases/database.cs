@@ -7,5 +7,15 @@ namespace server_app.databases
     {
         private static readonly string dbPath = "";
         private SqliteConnection connection = new(dbPath);
+
+        public int loginRequest(string userID, string password)
+        {
+            string query = "";
+            using (var command = new SqliteCommand(query, connection))
+            {
+                
+            }
+            return 0;
+        }
     }
 }
