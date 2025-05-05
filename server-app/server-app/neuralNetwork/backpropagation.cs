@@ -2,6 +2,9 @@
 {
     public class @backpropagation
     {
+        public static int epochs = 0;
+        public static int correct = 0;
+
         private double[][] neuronErrors = new double[5][];
         private double learningRate = 0.05;
         public backpropagation(List<double[]> input, List<int> expected)
@@ -48,9 +51,12 @@
         private (double[][,], double[][]) backpropagate(double[] inputValues, int expectedResult)
         {
             evaluate network = new evaluate(inputValues);
+            if (network.result == expectedResult) { correct++; }
+            epochs++;
 
             // output layer errors
             int layer = evaluate.layerCount - 1;
+            neuronErrors[layer] = new double[evaluate.networkLayers[layer]];
             for (int i = 0; i < evaluate.networkLayers[layer]; i++)
             {
                 neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - network.result == expectedResult ? 1 : 0) * dx_sigmoid(network.neuronValues[layer][i]);
@@ -59,6 +65,7 @@
             // for each remaining layer
             for (layer -= 1; layer > 0; layer--)
             {
+                neuronErrors[layer] = new double[evaluate.networkLayers[layer]];
                 for (int i = 0; i < evaluate.networkLayers[layer]; i++)
                 {
                     double sum = 0;
@@ -74,8 +81,11 @@
             double[][,] weightGradients = new double[evaluate.layerCount - 1][,];
             double[][] biasGradients = new double[evaluate.layerCount - 1][];
 
-            for (layer = 1; layer < evaluate.layerCount; layer++)
+            for (layer = 0; layer < evaluate.layerCount - 1; layer++)
             {
+                weightGradients[layer] = new double[evaluate.networkLayers[layer], evaluate.networkLayers[layer + 1]];
+                biasGradients[layer] = new double[evaluate.networkLayers[layer + 1]];
+
                 for (int neuron = 0; neuron < evaluate.networkLayers[layer]; neuron++)
                 {
                     for (int weight = 0; weight < evaluate.networkLayers[layer + 1]; weight++)

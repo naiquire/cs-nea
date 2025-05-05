@@ -7,8 +7,10 @@ namespace server_app
     {
         static void Main(string[] args)
         {
+            neuralNetwork.training training = new();
+
             //startNginx();
-            configServer(args).Run();
+            //configServer(args).Run();
         }
         private static WebApplication configServer(string[] args)
         {

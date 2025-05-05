@@ -19,6 +19,8 @@ namespace server_app.neuralNetwork
         {
             neuronValues[0] = input;
             activatedValues[0] = input;
+
+            evaluateNetwork();
         }
         public void evaluateNetwork()
         {
@@ -37,6 +39,7 @@ namespace server_app.neuralNetwork
                 neuronValues[layer] = (neuronsMatrix * weightsMatrix + biasesMatrix).ToArray();
                 var activatedNeurons = new double[networkLayers[layer]];
 
+                activatedValues[layer] = new double[neuronValues.Length];
                 for (int i = 0; i < neuronValues.Length; i++)
                 {
                     activatedValues[layer][i] = sigmoid(neuronValues[layer][i]);
