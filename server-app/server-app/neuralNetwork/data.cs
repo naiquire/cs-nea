@@ -32,6 +32,7 @@ namespace server_app.neuralNetwork
             {
                 biases[i] = new double[evaluate.networkLayers[i + 1]];
             }
+            saveWeights(weights);
             saveBiases(biases);
         }
         public static double[][,] loadWeights()
@@ -83,14 +84,14 @@ namespace server_app.neuralNetwork
                         {
                             sw.Write($"{weights[i][j, k]},");
                         }
-                        sw.WriteLine($"{weights[i][j, weights[i].GetLength(1)]}");
+                        sw.WriteLine($"{weights[i][j, weights[i].GetLength(1) - 1]}");
                     }
                 }
             }
         }
         public static void saveBiases(double[][] biases)
         {
-            for (int i = 0; i < evaluate.layerCount; i++)
+            for (int i = 0; i < evaluate.layerCount - 1; i++)
             {
                 using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
                 {
@@ -98,7 +99,7 @@ namespace server_app.neuralNetwork
                     {
                         sw.Write($"{biases[i][j]},");
                     }
-                    sw.Write($"{biases[i][biases[i].Length]}");
+                    sw.Write($"{biases[i][biases[i].Length - 1]}");
                 }
             }
         }

@@ -7,7 +7,7 @@ namespace server_app
     {
         static void Main(string[] args)
         {
-            neuralNetwork.training training = new();
+            
 
             //startNginx();
             //configServer(args).Run();
