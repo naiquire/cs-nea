@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace server_app.neuralNetwork
 {
     public static class @data
     {
-        public static readonly string location = @"C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\";
+        //public static readonly string location = @"C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\";
+        public static readonly string location = @"H:\Subjects\Computer Science\git\CS-NEA\server-app\server-app\neuralNetwork\data\";
         public static void initialiseParameters()
         {
             // initialise weights
@@ -64,7 +67,7 @@ namespace server_app.neuralNetwork
                 using (StreamReader sr = new($@"{location}weights\{i}.txt"))
                 {
                     string[] s = sr.ReadLine().Split(',');
-                    for (int j = 0; j < evaluate.networkLayers[i]; j++)
+                    for (int j = 0; j < evaluate.networkLayers[i + 1]; j++)
                     {
                         biases[i][j] = double.Parse(s[j]);
                     }
@@ -135,12 +138,27 @@ namespace server_app.neuralNetwork
                 // read 50,000 images
                 for (int i = 0; i < 50000; i++)
                 {
-                    var image = new double[784];
-                    for (int value = 0; value < image.Length; value++)
+                    var image = new byte[784];
+                    gz.ReadExactly(image, 0, 784);
+
+                    var a = new double[784];
+                    for (int j = 0; j < a.Length; j++)
                     {
-                        image[value] = gz.ReadByte() / 255;
+                        a[j] = image[j] / 255;
                     }
-                    images.Add(image);
+                    images.Add(a);
+
+                    int count = 0;
+                    for (int j = 0; j < 28; j++)
+                    {
+                        for (int k = 0; k < 28; k++)
+                        {
+                            Console.Write(a[count]);
+                            count++;
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.ReadKey();
                 }
             }
 

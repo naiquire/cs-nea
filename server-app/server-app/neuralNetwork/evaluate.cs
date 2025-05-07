@@ -31,7 +31,7 @@ namespace server_app.neuralNetwork
             // for each layer excluding the input layer
             for (int layer = 1; layer < layerCount; layer++)
             {
-                Vector<double> neuronsMatrix = Vector<double>.Build.DenseOfArray(activatedValues[layer]);
+                Vector<double> neuronsMatrix = Vector<double>.Build.DenseOfArray(activatedValues[layer - 1]);
 
                 Matrix<double> weightsMatrix = Matrix<double>.Build.DenseOfArray(weights[layer - 1]);
                 Vector<double> biasesMatrix = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
@@ -39,7 +39,7 @@ namespace server_app.neuralNetwork
                 neuronValues[layer] = (neuronsMatrix * weightsMatrix + biasesMatrix).ToArray();
                 var activatedNeurons = new double[networkLayers[layer]];
 
-                activatedValues[layer] = new double[neuronValues.Length];
+                activatedValues[layer] = new double[neuronValues[layer].Length];
                 for (int i = 0; i < neuronValues.Length; i++)
                 {
                     activatedValues[layer][i] = sigmoid(neuronValues[layer][i]);

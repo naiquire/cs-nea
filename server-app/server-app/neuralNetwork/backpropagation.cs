@@ -26,9 +26,9 @@
             // update weights and biases
             for (int i = 0; i < evaluate.layerCount - 1; i++)
             {
-                for (int j = 0; j < evaluate.networkLayers[i]; j++)
+                for (int j = 0; j < evaluate.networkLayers[i + 1]; j++)
                 {
-                    for (int k = 0; j < evaluate.networkLayers[i + 1]; k++)
+                    for (int k = 0; k < evaluate.networkLayers[i + 1]; k++)
                     {
                         double weightSum = 0;
                         foreach (var weight in weightAdjustments)
@@ -46,7 +46,8 @@
                     biases[i][j] -= (learningRate / input.Count) * biasSum;
                 }
             }
-
+            data.saveWeights(weights);
+            data.saveBiases(biases);
         }
         private (double[][,], double[][]) backpropagate(double[] inputValues, int expectedResult)
         {
@@ -59,7 +60,7 @@
             neuronErrors[layer] = new double[evaluate.networkLayers[layer]];
             for (int i = 0; i < evaluate.networkLayers[layer]; i++)
             {
-                neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - network.result == expectedResult ? 1 : 0) * dx_sigmoid(network.neuronValues[layer][i]);
+                neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - (network.result == expectedResult ? 1 : 0)) * dx_sigmoid(network.neuronValues[layer][i]);
             }
 
             // for each remaining layer
@@ -86,14 +87,14 @@
                 weightGradients[layer] = new double[evaluate.networkLayers[layer], evaluate.networkLayers[layer + 1]];
                 biasGradients[layer] = new double[evaluate.networkLayers[layer + 1]];
 
-                for (int neuron = 0; neuron < evaluate.networkLayers[layer]; neuron++)
+                for (int neuron = 0; neuron < evaluate.networkLayers[layer + 1]; neuron++)
                 {
                     for (int weight = 0; weight < evaluate.networkLayers[layer + 1]; weight++)
                     {
                         weightGradients[layer][neuron, weight] = neuronErrors[layer + 1][weight] * network.activatedValues[layer][neuron];
                     }
 
-                    biasGradients[layer][neuron] -= neuronErrors[layer][neuron];
+                    biasGradients[layer][neuron] -= neuronErrors[layer + 1][neuron];
                 }
             }
             return (weightGradients, biasGradients);
