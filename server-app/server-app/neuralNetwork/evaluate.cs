@@ -5,7 +5,7 @@ namespace server_app.neuralNetwork
     // neural network
     public class @evaluate
     {
-        public static readonly int[] networkLayers = [784, 144, 72, 72, 26];
+        public static readonly int[] layerSizes = [784, 144, 72, 72, 26];
         public static readonly int layerCount = 5;
 
         public double[][] neuronValues = new double[5][];
@@ -14,19 +14,19 @@ namespace server_app.neuralNetwork
         public double[][,] weights = new double[4][,];
         public double[][] biases = new double[4][];
 
-        public char? result;
-        public evaluate(double[] input)
+        public int? result;
+        public evaluate(double[] input, double[][,] weights, double[][] biases)
         {
             neuronValues[0] = input;
             activatedValues[0] = input;
+            this.weights = weights;
+            this.biases = biases;
 
             evaluateNetwork();
         }
         public void evaluateNetwork()
         {
             // evaluates the network
-            weights = data.loadWeights();
-            biases = data.loadBiases();
 
             // for each layer excluding the input layer
             for (int layer = 1; layer < layerCount; layer++)
@@ -37,16 +37,38 @@ namespace server_app.neuralNetwork
                 Vector<double> biasesMatrix = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
 
                 neuronValues[layer] = (neuronsMatrix * weightsMatrix + biasesMatrix).ToArray();
-                var activatedNeurons = new double[networkLayers[layer]];
 
                 activatedValues[layer] = new double[neuronValues[layer].Length];
-                for (int i = 0; i < neuronValues.Length; i++)
+                if (layer == 4)
                 {
-                    activatedValues[layer][i] = sigmoid(neuronValues[layer][i]);
+                    activatedValues[layer] = softmax(neuronValues[layer]);
                 }
+                else
+                {
+                    for (int i = 0; i < neuronValues[layer].Length; i++)
+                    {
+                        activatedValues[layer][i] = sigmoid(neuronValues[layer][i]);
+                    }
+                }
+                
             }
-            result = (char) (activatedValues[layerCount - 1].ToList().IndexOf(activatedValues[layerCount - 1].Max()) + 65);
+            result = activatedValues[layerCount - 1].ToList().IndexOf(activatedValues[layerCount - 1].Max());
         }
         private static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
+        private static double[] softmax(double[] input)
+        {
+            double[] output = new double[input.Length];
+            double sum = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                output[i] = Math.Exp(input[i]);
+                sum += output[i];
+            }
+            for (int i = 0; i < output.Length; i++)
+            {
+                output[i] /= sum;
+            }
+            return input;
+        }
     }
 }

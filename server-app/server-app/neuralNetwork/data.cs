@@ -8,8 +8,8 @@ namespace server_app.neuralNetwork
 {
     public static class @data
     {
-        //public static readonly string location = @"C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\";
-        public static readonly string location = @"H:\Subjects\Computer Science\git\CS-NEA\server-app\server-app\neuralNetwork\data\";
+        public static readonly string location = @"C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\";
+        //public static readonly string location = @"H:\Subjects\Computer Science\git\CS-NEA\server-app\server-app\neuralNetwork\data\";
         public static void initialiseParameters()
         {
             // initialise weights
@@ -17,14 +17,13 @@ namespace server_app.neuralNetwork
             double[][,] weights = new double[evaluate.layerCount - 1][,];
             for (int i = 0; i < weights.Length; i++)
             {
-                weights[i] = new double[evaluate.networkLayers[i], evaluate.networkLayers[i + 1]];
-                for (int j = 0; j < evaluate.networkLayers[i]; j++)
+                weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
+                for (int j = 0; j < evaluate.layerSizes[i]; j++)
                 {
-                    for (int k = 0; k < evaluate.networkLayers[i + 1]; k++)
+                    for (int k = 0; k < evaluate.layerSizes[i + 1]; k++)
                     {
-                        double low = - (Math.Sqrt(6) / Math.Sqrt(evaluate.networkLayers[i] + evaluate.networkLayers[i + 1]));
-                        double high = Math.Sqrt(6) / Math.Sqrt(evaluate.networkLayers[i] + evaluate.networkLayers[i + 1]);
-                        weights[i][j, k] = (rnd.NextDouble() * 2 - 1) * high;
+                        double limit = Math.Sqrt(6) / Math.Sqrt(evaluate.layerSizes[i] + evaluate.layerSizes[i + 1]);
+                        weights[i][j, k] = (rnd.NextDouble() * 2 - 1) * limit;
                     }
                 }
             }
@@ -33,7 +32,7 @@ namespace server_app.neuralNetwork
             double[][] biases = new double[evaluate.layerCount - 1][];
             for (int i = 0; i < biases.Length; i++)
             {
-                biases[i] = new double[evaluate.networkLayers[i + 1]];
+                biases[i] = new double[evaluate.layerSizes[i + 1]];
             }
             saveWeights(weights);
             saveBiases(biases);
@@ -43,13 +42,13 @@ namespace server_app.neuralNetwork
             double[][,] weights = new double[evaluate.layerCount - 1][,];
             for (int i = 0; i < evaluate.layerCount - 1; i++)
             {
-                weights[i] = new double[evaluate.networkLayers[i], evaluate.networkLayers[i + 1]];
+                weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
                 using (StreamReader sr = new($@"{location}weights\{i}.txt"))
                 {
-                    for (int j = 0; j < evaluate.networkLayers[i]; j++)
+                    for (int j = 0; j < evaluate.layerSizes[i]; j++)
                     {
                         string[] s = sr.ReadLine().Split(',');
-                        for (int k = 0; k < evaluate.networkLayers[i + 1]; k++)
+                        for (int k = 0; k < evaluate.layerSizes[i + 1]; k++)
                         {
                             weights[i][j, k] = double.Parse(s[k]);
                         }
@@ -63,11 +62,11 @@ namespace server_app.neuralNetwork
             double[][] biases = new double[evaluate.layerCount - 1][];
             for (int i = 0; i < evaluate.layerCount - 1; i++)
             {
-                biases[i] = new double[evaluate.networkLayers[i + 1]];
+                biases[i] = new double[evaluate.layerSizes[i + 1]];
                 using (StreamReader sr = new($@"{location}weights\{i}.txt"))
                 {
                     string[] s = sr.ReadLine().Split(',');
-                    for (int j = 0; j < evaluate.networkLayers[i + 1]; j++)
+                    for (int j = 0; j < evaluate.layerSizes[i + 1]; j++)
                     {
                         biases[i][j] = double.Parse(s[j]);
                     }
@@ -118,7 +117,7 @@ namespace server_app.neuralNetwork
                 var subresults = results.GetRange(i, 50);
                 var network = new backpropagation(subimages, subresults);
 
-                Console.WriteLine($"{backpropagation.correct / backpropagation.epochs * 100}%");
+                
             }
         }
         public static (List<double[]>, List<int>) loadImages()
@@ -144,21 +143,28 @@ namespace server_app.neuralNetwork
                     var a = new double[784];
                     for (int j = 0; j < a.Length; j++)
                     {
-                        a[j] = image[j] / 255;
+                        a[j] = image[j];
+                        a[j] /= 255;
                     }
                     images.Add(a);
 
-                    int count = 0;
-                    for (int j = 0; j < 28; j++)
-                    {
-                        for (int k = 0; k < 28; k++)
-                        {
-                            Console.Write(a[count]);
-                            count++;
-                        }
-                        Console.WriteLine();
-                    }
-                    Console.ReadKey();
+                    //int count = 0;
+                    //Console.Clear();
+                    //for (int j = 0; j < 28; j++)
+                    //{
+                    //    for (int k = 0; k < 28; k++)
+                    //    {
+                    //        //Console.Write(image[count]);
+                    //        if (a[count] > 0.9)
+                    //        {
+                    //            Console.Write("X");
+                    //        }
+                    //        else { Console.Write(" "); }
+                    //        count++;
+                    //    }
+                    //    Console.WriteLine();
+                    //}
+                    
                 }
             }
 
