@@ -62,7 +62,7 @@
             if (network.result == expectedResult - 1)
             { correct++; }
             epochs++;
-            double egg = network.activatedValues[evaluate.layerCount - 1].Sum();
+            
             // output layer errors
             int layer = evaluate.layerCount - 1;
             neuronErrors[layer] = new double[evaluate.layerSizes[layer]];

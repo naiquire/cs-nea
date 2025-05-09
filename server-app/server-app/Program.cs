@@ -7,7 +7,7 @@ namespace server_app
     {
         static void Main(string[] args)
         {
-            neuralNetwork.data.initialiseParameters();
+            //neuralNetwork.data.initialiseParameters();
             neuralNetwork.training training = new neuralNetwork.training();
 
             //startNginx();

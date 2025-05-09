@@ -38,8 +38,8 @@ namespace server_app.neuralNetwork
 
                 neuronValues[layer] = (neuronsMatrix * weightsMatrix + biasesMatrix).ToArray();
 
-                activatedValues[layer] = new double[neuronValues[layer].Length];
-                if (layer == 4)
+                activatedValues[layer] = new double[layerSizes[layer]];
+                if (layer == layerCount - 1)
                 {
                     activatedValues[layer] = softmax(neuronValues[layer]);
                 }
@@ -68,7 +68,7 @@ namespace server_app.neuralNetwork
             {
                 output[i] /= sum;
             }
-            return input;
+            return output;
         }
     }
 }
