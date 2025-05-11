@@ -1,12 +1,15 @@
 ﻿namespace server_app.neuralNetwork
 {
+
+    // OUTPUT LAYER ERRORS ARE ALL BASICALLY THE SAME - COULD BE SOFTMAX
+
     public class @backpropagation
     {
         public static double epochs = 0;
         public static double correct = 0;
 
         private double[][] neuronErrors = new double[5][];
-        private double learningRate = 0.1;
+        private double learningRate = 0.05;
         public backpropagation(List<double[]> input, List<int> expected)
         {
             List<double[][,]> weightAdjustments = new List<double[][,]>();
@@ -40,15 +43,17 @@
                         weights[i][j, k] -= (learningRate / input.Count) * weightSum;
                     }
 
-                    if (i != 0)
+                    
+                
+                }
+                for (int j = 0; j < evaluate.layerSizes[i + 1]; j++)
+                {
+                    double biasSum = 0;
+                    foreach (var bias in biasAdjustments)
                     {
-                        double biasSum = 0;
-                        foreach (var bias in biasAdjustments)
-                        {
-                            biasSum += bias[i][j];
-                        }
-                        biases[i - 1][j] -= (learningRate / input.Count) * biasSum;
+                        biasSum += bias[i + 1][j];
                     }
+                    biases[i][j] -= (learningRate / input.Count) * biasSum;
                 }
             }
             data.saveWeights(weights);
@@ -69,7 +74,7 @@
             for (int i = 0; i < evaluate.layerSizes[layer]; i++)
             {
                 // softmax error function
-                neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - (network.result == expectedResult - 1 ? 1 : 0));
+                neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - (expectedResult - 1 == i ? 1 : 0));
             }
 
             // for each remaining layer
@@ -103,7 +108,7 @@
                 }
             }
             // bias gradients are equal to the neuron errors
-            return (weightGradients, neuronErrors);
+            return (weightGradients, neuronErrors); 
         }
         private static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
         private static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));

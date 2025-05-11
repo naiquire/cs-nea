@@ -13,16 +13,18 @@ namespace server_app.neuralNetwork
         public static void initialiseParameters()
         {
             // initialise weights
-            Random rnd = new();
+            
             double[][,] weights = new double[evaluate.layerCount - 1][,];
             for (int i = 0; i < weights.Length; i++)
             {
+                Random rnd = new();
                 weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
+                double limit = Math.Sqrt(6 / (double)(evaluate.layerSizes[i] + evaluate.layerSizes[i + 1]));
                 for (int j = 0; j < evaluate.layerSizes[i]; j++)
                 {
                     for (int k = 0; k < evaluate.layerSizes[i + 1]; k++)
                     {
-                        double limit = Math.Sqrt(6) / Math.Sqrt(evaluate.layerSizes[i] + evaluate.layerSizes[i + 1]);
+                        // uniform distribution between -limit and limit
                         weights[i][j, k] = (rnd.NextDouble() * 2 - 1) * limit;
                     }
                 }
@@ -63,7 +65,7 @@ namespace server_app.neuralNetwork
             for (int i = 0; i < evaluate.layerCount - 1; i++)
             {
                 biases[i] = new double[evaluate.layerSizes[i + 1]];
-                using (StreamReader sr = new($@"{location}weights\{i}.txt"))
+                using (StreamReader sr = new($@"{location}biases\{i}.txt"))
                 {
                     string[] s = sr.ReadLine().Split(',');
                     for (int j = 0; j < evaluate.layerSizes[i + 1]; j++)
