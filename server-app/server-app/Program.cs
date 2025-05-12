@@ -7,7 +7,7 @@ namespace server_app
     {
         static void Main(string[] args)
         {
-            neuralNetwork.data.initialiseParameters();
+       
             neuralNetwork.training training = new neuralNetwork.training();
 
             //startNginx();
@@ -27,7 +27,7 @@ namespace server_app
             //app.MapHub<connections.queueing>("/cs-nea/queueing");
             //app.MapHub<connections.social>("/cs-nea/social");
 
-            // binds to all address on port 5252
+            // binds to all address on port 3900
             app.Urls.Add("http://0.0.0.0:3900");
 
             return app;

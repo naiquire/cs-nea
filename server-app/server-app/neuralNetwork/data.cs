@@ -136,18 +136,27 @@ namespace server_app.neuralNetwork
                 byte[] header = new byte[16];
                 gz.ReadExactly(header, 0, 16);
 
-                // read 50,000 images
-                for (int i = 0; i < 50000; i++)
+                // read 100,000 images
+                for (int i = 0; i < 100000; i++)
                 {
                     var image = new byte[784];
                     gz.ReadExactly(image, 0, 784);
 
                     var a = new double[784];
-                    for (int j = 0; j < a.Length; j++)
+                    //for (int j = 0; j < a.Length; j++)
+                    //{
+                    //    a[j] = image[j];
+                    //    a[j] /= 255;
+                    //}
+                    int count = 0;
+                    for (int row = 0; row < 28; row++)
                     {
-                        a[j] = image[j];
-                        a[j] /= 255;
+                        for (int column = 0; column < 28; column++, count++)
+                        {
+                            a[column * 28 + row] = (double)image[count] / 255;
+                        }
                     }
+
                     images.Add(a);
 
                     //int count = 0;
@@ -179,7 +188,7 @@ namespace server_app.neuralNetwork
                 gz.ReadExactly(header, 0, 8);
 
                 // read 50,000 labels
-                for (int i = 0; i < 50000; i++)
+                for (int i = 0; i < 100000; i++)
                 {
                     labels.Add(gz.ReadByte());
                 }

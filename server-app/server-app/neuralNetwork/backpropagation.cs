@@ -20,10 +20,31 @@
 
             for (int i = 0; i < input.Count; i++)
             {
+                // print stuff to check some things:
+                //int count = 0;
+                //Console.Clear();
+                //for (int j = 0; j < 28; j++)
+                //{
+                //    for (int k = 0; k < 28; k++)
+                //    {
+                //        //Console.Write(image[count]);
+                //        if (input[i][count] > 0.9)
+                //        {
+                //            Console.Write("X ");
+                //        }
+                //        else { Console.Write("  "); }
+                //        count++;
+                //    }
+                //    Console.WriteLine();
+                //}
+                //Console.WriteLine(expected[i]);
+
+
                 (double[][,] weights, double[][] biases) adjustments = backpropagate(input[i], expected[i], weights, biases);
 
                 weightAdjustments.Add(adjustments.weights);
                 biasAdjustments.Add(adjustments.biases);
+                //Console.ReadKey();
             }
 
             
