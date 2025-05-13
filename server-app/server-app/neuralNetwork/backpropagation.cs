@@ -1,19 +1,18 @@
 ﻿namespace server_app.neuralNetwork
 {
-
-    // OUTPUT LAYER ERRORS ARE ALL BASICALLY THE SAME - COULD BE SOFTMAX
-
     public class @backpropagation
     {
         public static double epochs = 0;
         public static double correct = 0;
 
         private double[][] neuronErrors = new double[5][];
-        private double learningRate = 0.05;
+        private double learningRate = 0.01;
         public backpropagation(List<double[]> input, List<int> expected)
         {
             List<double[][,]> weightAdjustments = new List<double[][,]>();
             List<double[][]> biasAdjustments = new List<double[][]>();
+
+            List<double> loss = new List<double>();
 
             var weights = data.loadWeights();
             var biases = data.loadBiases();
@@ -40,10 +39,11 @@
                 //Console.WriteLine(expected[i]);
 
 
-                (double[][,] weights, double[][] biases) adjustments = backpropagate(input[i], expected[i], weights, biases);
+                (double[][,] weights, double[][] biases, double loss) adjustments = backpropagate(input[i], expected[i], weights, biases);
 
                 weightAdjustments.Add(adjustments.weights);
                 biasAdjustments.Add(adjustments.biases);
+                loss.Add(adjustments.loss);
                 //Console.ReadKey();
             }
 
@@ -80,9 +80,9 @@
             data.saveWeights(weights);
             data.saveBiases(biases);
 
-            Console.WriteLine($"{((double)(correct / epochs)) * (double)(100)}%");
+            Console.WriteLine($"{((double)(correct / epochs)) * (double)(100)}%\t{loss.Sum() / loss.Count}");
         }
-        private (double[][,], double[][]) backpropagate(double[] inputValues, int expectedResult, double[][,] weights, double[][] biases)
+        private (double[][,], double[][], double) backpropagate(double[] inputValues, int expectedResult, double[][,] weights, double[][] biases)
         {
             evaluate network = new evaluate(inputValues, weights, biases);
             if (network.result == expectedResult - 1)
@@ -91,10 +91,12 @@
             
             // output layer errors
             int layer = evaluate.layerCount - 1;
+            double loss = 0;
             neuronErrors[layer] = new double[evaluate.layerSizes[layer]];
             for (int i = 0; i < evaluate.layerSizes[layer]; i++)
             {
                 // softmax error function
+                loss += Math.Pow(network.activatedValues[layer][i] - (expectedResult - 1 == i ? 1 : 0), 2);
                 neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - (expectedResult - 1 == i ? 1 : 0));
             }
 
@@ -129,7 +131,7 @@
                 }
             }
             // bias gradients are equal to the neuron errors
-            return (weightGradients, neuronErrors); 
+            return (weightGradients, neuronErrors, loss); 
         }
         private static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
         private static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));
