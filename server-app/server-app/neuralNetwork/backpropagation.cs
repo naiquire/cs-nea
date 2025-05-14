@@ -6,7 +6,7 @@
         public static double correct = 0;
 
         private double[][] neuronErrors = new double[5][];
-        private double learningRate = 0.01;
+        private double learningRate = 0.05;
         public backpropagation(List<double[]> input, List<int> expected)
         {
             List<double[][,]> weightAdjustments = new List<double[][,]>();

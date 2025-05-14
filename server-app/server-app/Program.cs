@@ -7,8 +7,12 @@ namespace server_app
     {
         static void Main(string[] args)
         {
-           
-            neuralNetwork.training training = new neuralNetwork.training();
+            //neuralNetwork.data.initialiseParameters();
+            
+            for (int i = 0; i < 10; i++)
+            {
+                neuralNetwork.training training = new neuralNetwork.training();
+            }
 
             //startNginx();
             //configServer(args).Run();

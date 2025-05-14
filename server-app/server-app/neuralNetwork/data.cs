@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection.Metadata;
+using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace server_app.neuralNetwork
@@ -80,16 +82,18 @@ namespace server_app.neuralNetwork
         {
             for (int i = 0; i < evaluate.layerCount - 1; i++)
             {
+                StringBuilder build = new();
+                for (int j = 0; j < weights[i].GetLength(0); j++)
+                {
+                    for (int k = 0; k < weights[i].GetLength(1) - 1; k++)
+                    {
+                        build.Append($"{weights[i][j, k]},");
+                    }
+                    build.Append($"{weights[i][j, weights[i].GetLength(1) - 1]}\n");
+                }
                 using (StreamWriter sw = new($@"{location}weights\{i}.txt"))
                 {
-                    for (int j = 0; j < weights[i].GetLength(0); j++)
-                    {
-                        for (int k = 0; k < weights[i].GetLength(1) - 1; k++)
-                        {
-                            sw.Write($"{weights[i][j, k]},");
-                        }
-                        sw.WriteLine($"{weights[i][j, weights[i].GetLength(1) - 1]}");
-                    }
+                    sw.Write(build);
                 }
             }
         }
@@ -97,13 +101,15 @@ namespace server_app.neuralNetwork
         {
             for (int i = 0; i < evaluate.layerCount - 1; i++)
             {
+                StringBuilder build = new();
+                for (int j = 0; j < biases[i].GetLength(0); j++)
+                {
+                    build.Append($"{biases[i][j]},");
+                }
+                build.Append($"{biases[i][biases[i].Length - 1]}");
                 using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
                 {
-                    for (int j = 0; j < biases[i].GetLength(0); j++)
-                    {
-                        sw.Write($"{biases[i][j]},");
-                    }
-                    sw.Write($"{biases[i][biases[i].Length - 1]}");
+                    sw.Write(build);
                 }
             }
         }

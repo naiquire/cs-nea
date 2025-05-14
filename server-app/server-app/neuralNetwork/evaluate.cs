@@ -5,14 +5,14 @@ namespace server_app.neuralNetwork
     // neural network
     public class @evaluate
     {
-        public static readonly int[] layerSizes = [784, 144, 72, 72, 26];
-        public static readonly int layerCount = 5;
+        public static readonly int[] layerSizes = [784, 144, 72, 26];
+        public static readonly int layerCount = layerSizes.Length;
 
-        public double[][] neuronValues = new double[5][];
-        public double[][] activatedValues = new double[5][];
+        public double[][] neuronValues = new double[layerCount][];
+        public double[][] activatedValues = new double[layerCount][];
 
-        public double[][,] weights = new double[4][,];
-        public double[][] biases = new double[4][];
+        public double[][,] weights = new double[layerCount - 1][,];
+        public double[][] biases = new double[layerCount - 1][];
 
         public int? result;
         public evaluate(double[] input, double[][,] weights, double[][] biases)
