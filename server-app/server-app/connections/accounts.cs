@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using server_app.databases;
 
 namespace server_app.connections
 {
@@ -6,16 +7,6 @@ namespace server_app.connections
     public partial class @connection : Hub
     {
         private Dictionary<string, string> map = [];
-        public async void loginRequest(string userID, string password)
-        {
-            var database = new databases.database();
-            int success = database.loginRequest(userID, password);
-
-            if (map.TryGetValue(userID, out string? connectionID))
-            {
-                await Clients.Client(connectionID).SendAsync("loginSuccess", success);
-            }
-        }
         public void clientConnected(string userID)
         {
             map.TryAdd(userID, Context.ConnectionId);
@@ -24,5 +15,16 @@ namespace server_app.connections
         {
             map.Remove(userID);
         }
+        public async void loginRequest(string userID, string password)
+        {
+            int success = database.loginRequest(userID, password);
+            await Clients.Caller.SendAsync("loginSuccess", success);
+        }
+        public async void accountRequest(string userID, string password)
+        {
+            bool success = database.accountRequest(userID, password);
+            await Clients.Caller.SendAsync("accountSuccess", this);
+        }
+      
     }
 }
