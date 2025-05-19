@@ -1,11 +1,25 @@
 ﻿namespace server_app.games
 {
+    // 1 player game
+    // measures time and accuracy only, basically training???
     public class @accuracy : abstractGame
     {
-        public static bool online = false;
-        public accuracy(string userID)
+        public const bool online = false;
+        public accuracy(List<string> userIDs) : base(userIDs)
         {
-            userIDs.Add(userID);
+            
+            startGame();
+        }
+        public override void startGame()
+        {
+            base.startGame();
+            
+            for (int i = 0; i < 10; i++)
+            {
+                // 10 rounds
+
+            }
+
         }
     }
 }
