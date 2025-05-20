@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
+using server_app.connections;
+using server_app.games;
 using System.Diagnostics;
 
 namespace server_app
@@ -7,12 +9,16 @@ namespace server_app
     {
         static void Main(string[] args)
         {
+
+            new connection().queueGame("accuracy", "naiquire");
+
+
             //neuralNetwork.data.initialiseParameters();
             
-            for (int i = 0; i < 10; i++)
-            {
-                neuralNetwork.training training = new neuralNetwork.training();
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    neuralNetwork.training training = new neuralNetwork.training();
+            //}
 
             //startNginx();
             //configServer(args).Run();

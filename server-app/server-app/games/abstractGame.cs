@@ -9,6 +9,8 @@
     public abstract class abstractGame
     {
         protected List<string> userIDs;
+        protected int maxPlayers;
+
         protected stats stats;
         // some kind of structure saving the progress
 
@@ -21,6 +23,7 @@
             // generic stuff for any game
  
         }
+        public int getMaxPlayers() => maxPlayers;
 
 
     }
