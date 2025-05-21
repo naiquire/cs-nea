@@ -13,12 +13,12 @@
         protected int maxPlayers;
 
         protected Dictionary<string, stats> stats;
-        // some kind of structure saving the progress
+        protected static Dictionary<string, double[]> currentResponses = [];
 
         public abstractGame(string userID, int maxPlayers)
         {
             userIDs = [];
-            userIDs.Add(userID);
+            queueUser(userID);
 
             this.maxPlayers = maxPlayers;
             stats = [];
@@ -27,6 +27,10 @@
         {
             userIDs.Add(userID);
         }
+        public static void loadResponse(string userID, double[] input)
+        {
+            currentResponses.Add(userID, input);
+        }
         public virtual void startGame()
         {
             // generic stuff for any game
@@ -34,7 +38,6 @@
             {
                 stats.Add(user, new stats());
             }
- 
         }
         public int getMaxPlayers() => maxPlayers;
         public int getPlayerCount() => userIDs.Count;

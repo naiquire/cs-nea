@@ -19,6 +19,10 @@ namespace server_app.games
                 if (game.getPlayerCount() < game.getMaxPlayers())
                 {
                     game.queueUser(userID);
+                    if (game.getPlayerCount() == game.getMaxPlayers())
+                    {
+                        game.startGame();
+                    }
                     break;
                 }
             }

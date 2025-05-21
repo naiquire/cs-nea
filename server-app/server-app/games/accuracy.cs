@@ -1,4 +1,5 @@
 ﻿using server_app.connections;
+using server_app.neuralNetwork;
 using System.Reflection;
 
 namespace server_app.games
@@ -8,18 +9,14 @@ namespace server_app.games
     public class @accuracy : abstractGame
     {
         public const bool online = false;
+        
         public accuracy(string userID) : base(userID, 1)
         {
-            if (getPlayerCount() == getMaxPlayers())
-            {
-                startGame();
-            }
+            // balls
         }
         public override async void startGame()
         {
             base.startGame();
-            MethodInfo? methodInfo = typeof(connection).GetMethod("sendStartRequest") ?? throw new Exception("Method not found");
-            methodInfo.Invoke(methodInfo, [userIDs]);
 
             List<char> letters = [];
 
@@ -29,13 +26,32 @@ namespace server_app.games
                 letters.Add((char)(rnd.Next(0, 26) + 65));
             }
 
-            for (int i = 0; i < 10; i++)
+            await new connection().accuracyGame(userIDs);
+
+            // for each letter send to client
+            foreach (var letter in letters)
             {
-                methodInfo = typeof(connection).GetMethod("sendLetter") ?? throw new Exception("Method not found");
-                methodInfo.Invoke(methodInfo, [userIDs, letters[i]]);
+                await new connection().sendLetter(userIDs, letter);
 
+                bool receivedAll = false;
+                while (!receivedAll)
+                {
+                    if (currentResponses.Count == getPlayerCount())
+                    {
+                        receivedAll = true;
+                    }
+                }
+                evaluate[] evaluates = new evaluate[getPlayerCount()];
+                for (int i = 0; i < currentResponses.Count; i++)
+                {
+                    evaluates[i] = new evaluate(currentResponses[userIDs[i]]);
+                    // figure out time later
+                    // send back accuracy
+                    // store in stats
+                }
             }
-
+                // get response from all clients
+            
         }
     }
 }
