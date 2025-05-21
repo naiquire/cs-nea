@@ -15,6 +15,15 @@ namespace server_app.neuralNetwork
         public double[][] biases = new double[layerCount - 1][];
 
         public int? result;
+        public evaluate(double[] input)
+        {
+            neuronValues[0] = input;
+            activatedValues[0] = input;
+            weights = data.loadWeights();
+            biases = data.loadBiases();
+
+            evaluateNetwork();
+        }
         public evaluate(double[] input, double[][,] weights, double[][] biases)
         {
             neuronValues[0] = input;

@@ -6,7 +6,7 @@ namespace server_app.connections
     // handles login and account requests
     public partial class @connection : Hub
     {
-        private Dictionary<string, string> map = [];
+        private static Dictionary<string, string> map = [];
         public void clientConnected(string userID)
         {
             map.TryAdd(userID, Context.ConnectionId);

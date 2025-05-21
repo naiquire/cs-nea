@@ -16,9 +16,14 @@ namespace server_app.games
         {
             foreach (var game in currentGames.accuracy)
             {
-                // check if space available
+                if (game.getPlayerCount() < game.getMaxPlayers())
+                {
+                    game.queueUser(userID);
+                    break;
+                }
             }
-
+            // no game found
+            currentGames.accuracy.Add(new accuracy(userID));
 
         }
     }
