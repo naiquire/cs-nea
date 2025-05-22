@@ -12,10 +12,11 @@ namespace server_app.games
     public abstract class abstractGame
     {
         protected List<string> userIDs;
+        public string gameID;
         protected int maxPlayers { get; }
 
         protected Dictionary<string, stats> stats;
-        protected static Dictionary<string, double[]> currentResponses = [];
+        protected Dictionary<string, double[]> currentResponses = [];
 
         public abstractGame(string userID, int maxPlayers)
         {
@@ -23,13 +24,15 @@ namespace server_app.games
             this.maxPlayers = maxPlayers;
             stats = [];
 
+            gameID = userID + DateTime.UtcNow.ToString();
             queueUser(userID);                       
         }
-        public void queueUser(string userID)
+        public async void queueUser(string userID)
         {
             userIDs.Add(userID);
+            await new connection().sendJoinConfirm(userID, gameID);
         }
-        public static void loadResponse(string userID, double[] input)
+        public void loadResponse(string userID, double[] input)
         {
             currentResponses.Add(userID, input);
         }

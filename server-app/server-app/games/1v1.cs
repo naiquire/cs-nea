@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using server_app.connections;
+﻿using server_app.connections;
 using server_app.neuralNetwork;
-using System.Reflection;
+using System.Numerics;
 
 namespace server_app.games
 {
-    // 1 player game
-    // measures time and accuracy only, basically training???
-    public class @accuracy : abstractGame
+    public class _1v1 : abstractGame
     {
-        public const bool online = false;
-        
-        public accuracy(string userID) : base(userID, 1)
+        public const bool online = true;
+
+        public _1v1(string userID) : base(userID, 2)
         {
-            // balls
+            // notify client of wait
         }
         public override async void startGame(string gameID)
         {
@@ -28,9 +25,9 @@ namespace server_app.games
             }
 
             // for each letter send to client
-            foreach (var letter in letters)
+            for (int letter = 0; letter < letters.Count; letter++)
             {
-                await new connection().sendLetter(userIDs, letter);
+                await new connection().sendLetter(userIDs, letters[letter]);
 
                 bool receivedAll = false;
                 while (!receivedAll)
@@ -55,13 +52,25 @@ namespace server_app.games
                     }
                     stats[userIDs[i]] = currentStats;
 
-
-                  
                     await new connection().sendResults(userIDs[i], stats[userIDs[i]], evaluates[i].result == letter + 65);
 
                     // figure out time later
                 }
-            }            
+                // who was first
+                (string user, TimeSpan time) lowest = ("", TimeSpan.MaxValue);
+                foreach (string userID in userIDs)
+                {
+                    var time = stats[userID].time[letter];
+                    if (time < lowest.time)
+                    {
+                        lowest = (userID, time);
+                    }
+                }
+
+                await new connection().send1v1Result(userIDs, lowest.user);
+
+                   
+            }
         }
     }
 }

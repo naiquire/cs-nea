@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using server_app.games;
-using System.Diagnostics.Metrics;
 
 namespace server_app.connections
 {
     public partial class @connection : Hub
     {
+        public async Task sendJoinConfirm(string userID, string gameID)
+        {
+            if (map.TryGetValue(userID, out string? connectionID))
+            {
+                await Clients.Client(connectionID).SendAsync("receiveJoinConfirm", gameID);
+            }
+            else
+            {
+                throw new Exception($"Client <{userID}> disconnected");
+            }
+        }
         public async Task sendStartRequest(string gameID, List<string> userIDs)
         {
             foreach (string userID in userIDs)
@@ -46,9 +55,23 @@ namespace server_app.connections
                 throw new Exception($"Client <{userID}> disconnected");
             }
         }
-        public void receiveSubmission(string userID, double[] input)
+        public async Task send1v1Result(List<string> userIDs, string winner)
         {
-            abstractGame.loadResponse(userID, input);
+            foreach (string userID in userIDs)
+            {
+                if (map.TryGetValue(userID, out string? connectionID))
+                {
+                    await Clients.Client(connectionID).SendAsync("receive1v1result", winner);
+                }
+                else
+                {
+                    throw new Exception($"Client <{userID}> disconnected");
+                }
+            }
+        }
+        public void receiveSubmission(string gameID, string userID, double[] input)
+        {
+            queueing.loadSubmission(gameID, userID, input);
         }
     }
 }
