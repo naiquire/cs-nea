@@ -1,4 +1,6 @@
-﻿namespace server_app.games
+﻿using server_app.connections;
+
+namespace server_app.games
 {
     public struct @stats
     {
@@ -10,7 +12,7 @@
     public abstract class abstractGame
     {
         protected List<string> userIDs;
-        protected int maxPlayers;
+        protected int maxPlayers { get; }
 
         protected Dictionary<string, stats> stats;
         protected static Dictionary<string, double[]> currentResponses = [];
@@ -18,10 +20,10 @@
         public abstractGame(string userID, int maxPlayers)
         {
             userIDs = [];
-            queueUser(userID);
-
             this.maxPlayers = maxPlayers;
             stats = [];
+
+            queueUser(userID);                       
         }
         public void queueUser(string userID)
         {
@@ -31,16 +33,19 @@
         {
             currentResponses.Add(userID, input);
         }
-        public virtual void startGame()
+        public virtual async void startGame(string gameID)
         {
             // generic stuff for any game
             foreach (string user in userIDs)
             {
                 stats.Add(user, new stats());
             }
+            await new connection().sendStartRequest(gameID, userIDs);
         }
         public int getMaxPlayers() => maxPlayers;
         public int getPlayerCount() => userIDs.Count;
+
+
 
     }
     

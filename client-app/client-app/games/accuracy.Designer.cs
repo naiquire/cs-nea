@@ -1,0 +1,32 @@
+﻿
+namespace client_app.games
+{
+    partial class main
+    {
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void initialise_accuracy()
+        {
+            Controls.Clear();
+
+            this.SuspendLayout();
+            // 
+            // accuracy
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Name = "accuracy";
+            this.Text = "accuracy";
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+    }
+}

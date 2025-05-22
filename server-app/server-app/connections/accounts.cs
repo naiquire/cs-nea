@@ -23,7 +23,7 @@ namespace server_app.connections
         public async void accountRequest(string userID, string password)
         {
             bool success = database.accountRequest(userID, password);
-            await Clients.Caller.SendAsync("accountSuccess", this);
+            await Clients.Caller.SendAsync("accountSuccess", success ? 1 : -1);
         }
       
     }

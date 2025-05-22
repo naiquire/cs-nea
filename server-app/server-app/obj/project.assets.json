@@ -402,10 +402,10 @@
           }
         }
       },
-      "Microsoft.Data.Sqlite/9.0.3": {
+      "Microsoft.Data.Sqlite/9.0.5": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "9.0.3",
+          "Microsoft.Data.Sqlite.Core": "9.0.5",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.10",
           "SQLitePCLRaw.core": "2.1.10"
         },
@@ -416,7 +416,7 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.Data.Sqlite.Core/9.0.3": {
+      "Microsoft.Data.Sqlite.Core/9.0.5": {
         "type": "package",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.10"
@@ -1246,24 +1246,24 @@
         "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
-    "Microsoft.Data.Sqlite/9.0.3": {
-      "sha512": "rqw1EZ30C6bRTQ2P9/UVWNpiJhw+n4YtmBqoXXlxpdZuACvGDIZcOsOv2WPjL8HHdOJvTIh8yOufJI0HLWfAoA==",
+    "Microsoft.Data.Sqlite/9.0.5": {
+      "sha512": "Fht/vwX7uzPaIdlj1xtcpKD225GXjPOj7iW8934NNiTfBX5uqeCy2TdlPWPpLj+VPty/UmfgUSJSb55hXHqJMw==",
       "type": "package",
-      "path": "microsoft.data.sqlite/9.0.3",
+      "path": "microsoft.data.sqlite/9.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "PACKAGE.md",
         "lib/netstandard2.0/_._",
-        "microsoft.data.sqlite.9.0.3.nupkg.sha512",
+        "microsoft.data.sqlite.9.0.5.nupkg.sha512",
         "microsoft.data.sqlite.nuspec"
       ]
     },
-    "Microsoft.Data.Sqlite.Core/9.0.3": {
-      "sha512": "rhNmI4KqeL6bOtZ7KwLVZLjrj0Bnf0PFq5Nlv2uOj9n1UuPYTbJaa816EJH5Hp5FM04H2iUcFtmmvqrl3xRCmA==",
+    "Microsoft.Data.Sqlite.Core/9.0.5": {
+      "sha512": "cP5eBSqra4Ae80X72g0h2N+jdrA4BgoMQmz9JaQmKAEXUHw9N21DPIBqIyMjOo2fK9ISiGytlAOxBAJf1hEvqg==",
       "type": "package",
-      "path": "microsoft.data.sqlite.core/9.0.3",
+      "path": "microsoft.data.sqlite.core/9.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1275,7 +1275,7 @@
         "lib/net8.0/Microsoft.Data.Sqlite.xml",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.dll",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.xml",
-        "microsoft.data.sqlite.core.9.0.3.nupkg.sha512",
+        "microsoft.data.sqlite.core.9.0.5.nupkg.sha512",
         "microsoft.data.sqlite.core.nuspec"
       ]
     },
@@ -2280,30 +2280,31 @@
       "MathNet.Numerics >= 5.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
       "Microsoft.AspNetCore.SignalR >= 1.2.0",
-      "Microsoft.Data.Sqlite >= 9.0.3",
+      "Microsoft.Data.Sqlite >= 9.0.5",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\boyss\\.nuget\\packages\\": {}
+    "C:\\Users\\24ns2144\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
+      "projectUniqueName": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj",
       "projectName": "server-app",
-      "projectPath": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
-      "packagesPath": "C:\\Users\\boyss\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\obj\\",
+      "projectPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj",
+      "packagesPath": "C:\\Users\\24ns2144\\.nuget\\packages\\",
+      "outputPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\boyss\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\24ns2144\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -2342,7 +2343,7 @@
           },
           "Microsoft.Data.Sqlite": {
             "target": "Package",
-            "version": "[9.0.3, )"
+            "version": "[9.0.5, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -2368,7 +2369,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

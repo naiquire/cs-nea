@@ -21,7 +21,7 @@ namespace server_app.games
                     game.queueUser(userID);
                     if (game.getPlayerCount() == game.getMaxPlayers())
                     {
-                        game.startGame();
+                        game.startGame("accuracy");
                     }
                     break;
                 }

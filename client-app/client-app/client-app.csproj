@@ -177,6 +177,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="games\accuracy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="games\accuracy.Designer.cs">
+      <DependentUpon>accuracy.cs</DependentUpon>
+    </Compile>
     <Compile Include="hub-connection.cs" />
     <Compile Include="login.cs">
       <SubType>Form</SubType>
@@ -192,6 +198,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="games\accuracy.resx">
+      <DependentUpon>accuracy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>

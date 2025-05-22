@@ -10,7 +10,7 @@ namespace server_app.connections
         public void queueGame(string gameID, string userID)
         {
             // convert gameID to method name
-            MethodInfo? methodInfo = typeof(queueing).GetMethod($"queue_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
+            MethodInfo methodInfo = typeof(queueing).GetMethod($"queue_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
             methodInfo.Invoke(methodInfo, [userID]);
             
         }
