@@ -26,13 +26,14 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void initialiseComponent()
         {
             this.txt_userID = new System.Windows.Forms.TextBox();
             this.txt_password = new System.Windows.Forms.TextBox();
             this.btn_login = new System.Windows.Forms.Button();
             this.pic_logo = new System.Windows.Forms.PictureBox();
             this.btn_createAccount = new System.Windows.Forms.Button();
+            this.btn_requestAccount = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pic_logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.btn_login.TabIndex = 2;
             this.btn_login.Text = "Login";
             this.btn_login.UseVisualStyleBackColor = true;
+            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
             // 
             // pic_logo
             // 
@@ -69,12 +71,24 @@
             // 
             // btn_createAccount
             // 
-            this.btn_createAccount.Location = new System.Drawing.Point(350, 410);
+            this.btn_createAccount.Location = new System.Drawing.Point(350, 408);
             this.btn_createAccount.Name = "btn_createAccount";
             this.btn_createAccount.Size = new System.Drawing.Size(100, 30);
             this.btn_createAccount.TabIndex = 4;
             this.btn_createAccount.Text = "Create Account";
             this.btn_createAccount.UseVisualStyleBackColor = true;
+            this.btn_createAccount.Click += new System.EventHandler(this.btn_createAccount_Click);
+            // 
+            // btn_requestAccount
+            // 
+            this.btn_requestAccount.Enabled = false;
+            this.btn_requestAccount.Location = new System.Drawing.Point(350, 310);
+            this.btn_requestAccount.Name = "btn_requestAccount";
+            this.btn_requestAccount.Size = new System.Drawing.Size(100, 30);
+            this.btn_requestAccount.TabIndex = 5;
+            this.btn_requestAccount.Text = "Request Account";
+            this.btn_requestAccount.UseVisualStyleBackColor = true;
+            this.btn_requestAccount.Click += new System.EventHandler(this.btn_requestAccount_Click);
             // 
             // login
             // 
@@ -82,6 +96,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_requestAccount);
             this.Controls.Add(this.btn_createAccount);
             this.Controls.Add(this.pic_logo);
             this.Controls.Add(this.btn_login);
@@ -103,5 +118,6 @@
         private System.Windows.Forms.Button btn_login;
         private System.Windows.Forms.PictureBox pic_logo;
         private System.Windows.Forms.Button btn_createAccount;
+        private System.Windows.Forms.Button btn_requestAccount;
     }
 }

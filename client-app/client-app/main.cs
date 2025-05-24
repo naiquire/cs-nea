@@ -19,7 +19,8 @@ namespace client_app
     {
         private HubConnection connection;
         private userData userData;
-        public static readonly string address = "https://86.11.15.228:5252/cs-nea";
+        //public static readonly string address = "http://86.11.15.228:5252/cs-nea";
+        public static readonly string address = "http://192.168.0.251:3900/cs-nea";
         public main(string userID)
         {
             userData = new userData()
@@ -33,7 +34,7 @@ namespace client_app
         }
         private async void initialiseConnection()
         {
-            connection = hub_connection.configConnection();
+            connection = hub_connection.configConnection(address + "/connections");
             connection = hub_connection.addHandles(connection);
             connection = hub_connection.startConnection(connection);
 

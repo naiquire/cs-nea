@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.SignalR;
-using server_app.connections;
-using server_app.games;
 using System.Diagnostics;
 
 namespace server_app
@@ -10,18 +8,18 @@ namespace server_app
         static void Main(string[] args)
         {
 
-            new connection().queueGame("accuracy", "naiquire");
+            //new connection().queueGame("accuracy", "naiquire");
 
 
             //neuralNetwork.data.initialiseParameters();
-            
+
             //for (int i = 0; i < 10; i++)
             //{
             //    neuralNetwork.training training = new neuralNetwork.training();
             //}
 
             //startNginx();
-            //configServer(args).Run();
+            configServer(args).Run();
         }
         private static WebApplication configServer(string[] args)
         {
@@ -34,8 +32,8 @@ namespace server_app
             var app = builder.Build();
 
             app.MapHub<connections.connection>("/cs-nea/connections");
-            //app.MapHub<connections.queueing>("/cs-nea/queueing");
-            //app.MapHub<connections.social>("/cs-nea/social");
+            app.MapHub<accounts>("/cs-nea/accounts");
+            
 
             // binds to all address on port 3900
             app.Urls.Add("http://0.0.0.0:3900");

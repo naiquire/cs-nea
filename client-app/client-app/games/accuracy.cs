@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace client_app.games
 {
     // accuracy
-    public partial class main : Form
+    public partial class accuracy : Form
     {
 
     }

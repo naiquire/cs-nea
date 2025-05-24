@@ -5,15 +5,16 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace client_app
 {
     public static class hub_connection
     {
-        public static HubConnection configConnection()
+        public static HubConnection configConnection(string address)
         {
             HubConnection connection = new HubConnectionBuilder()
-                .WithUrl(main.address)
+                .WithUrl(address)
                 .Build();
             return connection;
         }
@@ -33,6 +34,7 @@ namespace client_app
                         break;
                     case 1:
                         // login user
+                        MessageBox.Show("yayayayayyy");
                         break;
                     case -1:
                         // account does not exist

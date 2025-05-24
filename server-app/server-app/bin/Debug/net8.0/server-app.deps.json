@@ -11,7 +11,7 @@
           "MathNet.Numerics": "5.0.0",
           "Microsoft.AspNetCore.OpenApi": "8.0.8",
           "Microsoft.AspNetCore.SignalR": "1.2.0",
-          "Microsoft.Data.Sqlite": "9.0.3",
+          "Microsoft.Data.Sqlite": "9.0.5",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -185,21 +185,21 @@
           "System.Text.Encodings.Web": "8.0.0"
         }
       },
-      "Microsoft.Data.Sqlite/9.0.3": {
+      "Microsoft.Data.Sqlite/9.0.5": {
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "9.0.3",
+          "Microsoft.Data.Sqlite.Core": "9.0.5",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.10",
           "SQLitePCLRaw.core": "2.1.10"
         }
       },
-      "Microsoft.Data.Sqlite.Core/9.0.3": {
+      "Microsoft.Data.Sqlite.Core/9.0.5": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.10"
         },
         "runtime": {
           "lib/net8.0/Microsoft.Data.Sqlite.dll": {
-            "assemblyVersion": "9.0.3.0",
-            "fileVersion": "9.0.325.11202"
+            "assemblyVersion": "9.0.5.0",
+            "fileVersion": "9.0.525.21604"
           }
         }
       },
@@ -660,19 +660,19 @@
       "path": "microsoft.aspnetcore.webutilities/2.3.0",
       "hashPath": "microsoft.aspnetcore.webutilities.2.3.0.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite/9.0.3": {
+    "Microsoft.Data.Sqlite/9.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rqw1EZ30C6bRTQ2P9/UVWNpiJhw+n4YtmBqoXXlxpdZuACvGDIZcOsOv2WPjL8HHdOJvTIh8yOufJI0HLWfAoA==",
-      "path": "microsoft.data.sqlite/9.0.3",
-      "hashPath": "microsoft.data.sqlite.9.0.3.nupkg.sha512"
+      "sha512": "sha512-Fht/vwX7uzPaIdlj1xtcpKD225GXjPOj7iW8934NNiTfBX5uqeCy2TdlPWPpLj+VPty/UmfgUSJSb55hXHqJMw==",
+      "path": "microsoft.data.sqlite/9.0.5",
+      "hashPath": "microsoft.data.sqlite.9.0.5.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite.Core/9.0.3": {
+    "Microsoft.Data.Sqlite.Core/9.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rhNmI4KqeL6bOtZ7KwLVZLjrj0Bnf0PFq5Nlv2uOj9n1UuPYTbJaa816EJH5Hp5FM04H2iUcFtmmvqrl3xRCmA==",
-      "path": "microsoft.data.sqlite.core/9.0.3",
-      "hashPath": "microsoft.data.sqlite.core.9.0.3.nupkg.sha512"
+      "sha512": "sha512-cP5eBSqra4Ae80X72g0h2N+jdrA4BgoMQmz9JaQmKAEXUHw9N21DPIBqIyMjOo2fK9ISiGytlAOxBAJf1hEvqg==",
+      "path": "microsoft.data.sqlite.core/9.0.5",
+      "hashPath": "microsoft.data.sqlite.core.9.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
       "type": "package",
