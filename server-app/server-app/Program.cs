@@ -42,10 +42,10 @@ namespace server_app
         }
         private static void startNginx()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo()
+            ProcessStartInfo startInfo = new()
             {
                 FileName = "nginx.exe",
-                WorkingDirectory = @"C:\Users\boyss\Documents\General\Relay\nginx-1.26.2",
+                WorkingDirectory = @"C:\Users\boyss\Documents\General\Relay\nginx-1.26.2\",
             };
             Process.Start(startInfo);
 

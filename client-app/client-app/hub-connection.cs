@@ -25,33 +25,41 @@ namespace client_app
         }
         public static HubConnection addHandles(HubConnection connection)
         {
-            connection.On<int>("loginSuccess", (success) =>
+            connection.On<int, string>("loginSuccess", (success, userID) =>
             {
                 switch (success)
                 {
                     case 0:
                         // incorrect password
+                        MessageBox.Show("incorrect password");
                         break;
                     case 1:
                         // login user
-                        MessageBox.Show("yayayayayyy");
+                        main main = new main(userID);
+                        login.ActiveForm.Hide();
+                        main.ShowDialog();
                         break;
                     case -1:
                         // account does not exist
+                        MessageBox.Show("account does not exist");
                         break;
                     default:
                         throw new Exception($"Unrecognised login success code < {success} >");
                 }
             });
-            connection.On<int>("accountSuccess", (success) =>
+            connection.On<int, string>("accountSuccess", (success, userID) =>
             {
                 switch (success)
                 {
                     case 1:
                         // login user
+                        main main = new main(userID);
+                        login.ActiveForm.Hide();
+                        main.ShowDialog();
                         break;
                     case -1:
                         // userID already exists
+                        MessageBox.Show("user already exists");
                         break;
                     default:
                         throw new Exception($"Unrecognised account success code < {success} >");
@@ -63,7 +71,6 @@ namespace client_app
                 MethodInfo methodInfo = typeof(main).GetMethod($"initialise_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
                 methodInfo.Invoke(methodInfo, null);
             });
-
 
 
             return connection;
