@@ -14,11 +14,25 @@ namespace client_app
     public struct userData
     {
         public string userID;
+        public List<friendData> friends;
+
+        public string localisation;
+
+        public int rank;
+        public double accuracy;
+    }
+    public struct friendData
+    {
+        public string userID;
+        public bool online;
+
+        public int rank;
+        public double accuracy;
     }
     public partial class main : Form
     {
-        private HubConnection connection;
-        private userData userData;
+        public HubConnection connection;
+        public static userData userData;
         public static readonly string address = "http://86.11.15.228:5252/cs-nea";
         //public static readonly string address = "http://192.168.0.251:3900/cs-nea";
         public main(string userID)
@@ -29,7 +43,24 @@ namespace client_app
             };
 
 
-            initialiseComponent();
+
+            /// <summary>
+            /// this is a possible way of implementing localisation efficiently
+            Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
+            /// 
+            /// first string is the word in english
+            /// the second dictionary stores the translations in the form (language, translation)
+            /// 
+            /// for example if the localisation is set to french:
+            /// <code>
+            /// localisation["friends"]["french"]
+            /// </code>
+            /// "amis" would be outputted
+            /// 
+            /// </summary>
+
+
+            InitializeComponent();
             initialiseConnection();
         }
         private async void initialiseConnection()
@@ -39,6 +70,11 @@ namespace client_app
             connection = hub_connection.startConnection(connection);
 
             await connection.SendAsync("clientConnected", userData.userID);
+        }
+
+        private async Task requestProfile(string userID)
+        {
+            await connection.SendAsync("requestProfile", userID);
         }
     }
 }

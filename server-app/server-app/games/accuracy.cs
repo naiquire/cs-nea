@@ -50,14 +50,14 @@ namespace server_app.games
                     {
                         currentStats.accuracy[i] = evaluates[i].activatedValues[evaluate.layerCount - 1][letter - 65];
                         currentStats.epochs++;
-                        currentStats.correct += evaluates[i].result == letter + 65 ? 1 : 0;
+                        currentStats.correct += evaluates[i].result == letter - 65 ? 1 : 0;
                         currentStats.time[i] = TimeSpan.Zero; // temp
                     }
                     stats[userIDs[i]] = currentStats;
 
 
                   
-                    await new connection().sendResults(userIDs[i], stats[userIDs[i]], evaluates[i].result == letter + 65);
+                    await new connection().sendResults(userIDs[i], stats[userIDs[i]], evaluates[i].result == letter - 65);
 
                     // figure out time later
                 }

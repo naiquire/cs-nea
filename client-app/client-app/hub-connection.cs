@@ -65,10 +65,24 @@ namespace client_app
                         throw new Exception($"Unrecognised account success code < {success} >");
                 }
             });
+            connection.On<userData>("receiveUserData", (userData) =>
+            {
+                main.userData = userData;
+            });
 
+            connection.On<userData>("recieveProfile", (user) =>
+            {
+                // load profile page
+            });
+
+            connection.On<string>("receiveJoinConfirm", (gameID) =>
+            {
+                MethodInfo methodInfo = typeof(main).GetMethod($"join_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
+                methodInfo.Invoke(methodInfo, null);
+            });
             connection.On<string>("startGame", (gameID) =>
             {
-                MethodInfo methodInfo = typeof(main).GetMethod($"initialise_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
+                MethodInfo methodInfo = typeof(main).GetMethod($"start_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
                 methodInfo.Invoke(methodInfo, null);
             });
 
