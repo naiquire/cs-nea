@@ -6,17 +6,22 @@ namespace server_app.neuralNetwork
     {
         public training()
         {
+            // load training data
             (List<double[]> images, List<int> results) = loadImages();
+
+            // random sample of 50 images
             Random rnd = new Random();
             for (int i = 0; i < images.Count / 50; i++)
             {
+                // load sample index
                 int index = rnd.Next(images.Count - 50 - 1);
 
+                // load sampled images and labels
                 var subimages = images.GetRange(index, 50);
                 var subresults = results.GetRange(index, 50);
+
+                // forward propagation and backpropagation
                 var network = new backpropagation(subimages, subresults);
-
-
             }
         }
         public static (List<double[]>, List<int>) loadImages()
@@ -40,11 +45,6 @@ namespace server_app.neuralNetwork
                     gz.ReadExactly(image, 0, 784);
 
                     var a = new double[784];
-                    //for (int j = 0; j < a.Length; j++)
-                    //{
-                    //    a[j] = image[j];
-                    //    a[j] /= 255;
-                    //}
                     int count = 0;
                     for (int row = 0; row < 28; row++)
                     {
@@ -55,24 +55,6 @@ namespace server_app.neuralNetwork
                     }
 
                     images.Add(a);
-
-                    //int count = 0;
-                    //Console.Clear();
-                    //for (int j = 0; j < 28; j++)
-                    //{
-                    //    for (int k = 0; k < 28; k++)
-                    //    {
-                    //        //Console.Write(image[count]);
-                    //        if (a[count] > 0.9)
-                    //        {
-                    //            Console.Write("X");
-                    //        }
-                    //        else { Console.Write(" "); }
-                    //        count++;
-                    //    }
-                    //    Console.WriteLine();
-                    //}
-
                 }
             }
 
@@ -84,7 +66,7 @@ namespace server_app.neuralNetwork
                 byte[] header = new byte[16];
                 gz.ReadExactly(header, 0, 8);
 
-                // read 50,000 labels
+                // read 100,000 labels
                 for (int i = 0; i < 100000; i++)
                 {
                     labels.Add(gz.ReadByte());

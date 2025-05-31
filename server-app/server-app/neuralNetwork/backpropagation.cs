@@ -14,40 +14,19 @@
 
             List<double> loss = new List<double>();
 
+            // load weights and biases
             var weights = data.loadWeights();
             var biases = data.loadBiases();
 
+            // evaluate for each input
             for (int i = 0; i < input.Count; i++)
             {
-                // print stuff to check some things:
-                //int count = 0;
-                //Console.Clear();
-                //for (int j = 0; j < 28; j++)
-                //{
-                //    for (int k = 0; k < 28; k++)
-                //    {
-                //        //Console.Write(image[count]);
-                //        if (input[i][count] > 0.9)
-                //        {
-                //            Console.Write("X ");
-                //        }
-                //        else { Console.Write("  "); }
-                //        count++;
-                //    }
-                //    Console.WriteLine();
-                //}
-                //Console.WriteLine(expected[i]);
-
-
                 (double[][,] weights, double[][] biases, double loss) adjustments = backpropagate(input[i], expected[i], weights, biases);
 
                 weightAdjustments.Add(adjustments.weights);
                 biasAdjustments.Add(adjustments.biases);
                 loss.Add(adjustments.loss);
-                //Console.ReadKey();
             }
-
-            
 
             // update weights and biases
             for (int i = 0; i < evaluate.layerCount - 1; i++)
@@ -63,9 +42,6 @@
                         }
                         weights[i][j, k] -= (learningRate / input.Count) * weightSum;
                     }
-
-                    
-                
                 }
                 for (int j = 0; j < evaluate.layerSizes[i + 1]; j++)
                 {
@@ -77,16 +53,20 @@
                     biases[i][j] -= (learningRate / input.Count) * biasSum;
                 }
             }
+
+            // save weights and biases
             data.saveWeights(weights);
             data.saveBiases(biases);
 
+            // log cumulative percentage and average loss
             Console.WriteLine($"{((double)(correct / epochs)) * (double)(100)}%\t{loss.Sum() / loss.Count}");
         }
         private (double[][,], double[][], double) backpropagate(double[] inputValues, int expectedResult, double[][,] weights, double[][] biases)
         {
+            // evaluate network
             evaluate network = new evaluate(inputValues, weights, biases);
-            if (network.result == expectedResult - 1)
-            { correct++; }
+
+            if (network.result == expectedResult - 1) { correct++; }
             epochs++;
             
             // output layer errors
@@ -111,6 +91,7 @@
                     {
                         sum += weights[layer][i, j] * neuronErrors[layer + 1][j];
                     }
+                    // sigmoid error function
                     neuronErrors[layer][i] = sum * dx_sigmoid(network.neuronValues[layer][i]);
                 }
             }
@@ -130,6 +111,7 @@
                     }
                 }
             }
+            
             // bias gradients are equal to the neuron errors
             return (weightGradients, neuronErrors, loss); 
         }

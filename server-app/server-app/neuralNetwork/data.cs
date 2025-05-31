@@ -15,7 +15,6 @@ namespace server_app.neuralNetwork
         public static void initialiseParameters()
         {
             // initialise weights
-            
             double[][,] weights = new double[evaluate.layerCount - 1][,];
             for (int i = 0; i < weights.Length; i++)
             {
@@ -38,6 +37,8 @@ namespace server_app.neuralNetwork
             {
                 biases[i] = new double[evaluate.layerSizes[i + 1]];
             }
+
+            // save weights and biases
             saveWeights(weights);
             saveBiases(biases);
         }
