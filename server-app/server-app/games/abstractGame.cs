@@ -14,9 +14,10 @@ namespace server_app.games
         protected List<string> userIDs;
         public string gameID;
         protected int maxPlayers { get; }
+        protected DateTime startTime;
 
         protected Dictionary<string, stats> stats;
-        protected Dictionary<string, double[]> currentResponses = [];
+        protected Dictionary<string, (double[] submission, DateTime time)> currentResponses = [];
 
         public abstractGame(string userID, int maxPlayers)
         {
@@ -34,7 +35,7 @@ namespace server_app.games
         }
         public void loadResponse(string userID, double[] input)
         {
-            currentResponses.Add(userID, input);
+            currentResponses.Add(userID, (input, DateTime.UtcNow));
         }
         public virtual async void startGame(string gameID)
         {

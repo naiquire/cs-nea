@@ -27,7 +27,21 @@ namespace server_app.games
             }
             // no game found
             currentGames.accuracy.Add(new accuracy(userID));
-
+        }
+        public static void queue_1v1(string userID)
+        {
+            foreach (var game in currentGames._1v1)
+            {
+                if (game.getPlayerCount() < game.getMaxPlayers())
+                {
+                    game.queueUser(userID);
+                    if (game.getPlayerCount() == game.getMaxPlayers())
+                    {
+                        game.startGame("1v1");
+                    }
+                    break;
+                }
+            }
         }
         public static void loadSubmission(string gameID, string userID, double[] input)
         {
