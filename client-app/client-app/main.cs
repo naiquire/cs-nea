@@ -35,6 +35,8 @@ namespace client_app
         public static userData userData;
         public static readonly string address = "http://86.11.15.228:5252/cs-nea";
         //public static readonly string address = "http://192.168.0.251:3900/cs-nea";
+
+        private Bitmap drawing;
         public main(string userID)
         {
             userData = new userData()

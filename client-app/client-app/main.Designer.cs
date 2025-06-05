@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace client_app
@@ -305,6 +306,10 @@ namespace client_app
         }
 
 
+
+        
+
+
         
 
 
@@ -320,6 +325,7 @@ namespace client_app
         private Panel panel_user;
         private Panel panel_main;
         private PictureBox pictureBox1;
+        private Panel panel_input;
     }
 }
 
