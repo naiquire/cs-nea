@@ -31,7 +31,7 @@ namespace client_app
     }
     public partial class main : Form
     {
-        public HubConnection connection;
+        public static HubConnection connection;
         public static userData userData;
         public static readonly string address = "http://86.11.15.228:5252/cs-nea";
         //public static readonly string address = "http://192.168.0.251:3900/cs-nea";
@@ -71,12 +71,12 @@ namespace client_app
             connection = hub_connection.addHandles(connection);
             connection = hub_connection.startConnection(connection);
 
-            await connection.SendAsync("clientConnected", userData.userID);
+            userData = await connection.InvokeAsync<userData>("clientConnected", userData.userID);
         }
 
         private async Task requestProfile(string userID)
         {
-            await connection.SendAsync("requestProfile", userID);
+            userData profile = await connection.InvokeAsync<userData>("requestProfile", userID);
         }
     }
 }

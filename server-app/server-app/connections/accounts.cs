@@ -7,14 +7,14 @@ namespace server_app.connections
     public partial class @connection : Hub
     {
         private static Dictionary<string, string> map = [];
-        public async void clientConnected(string userID)
+        public userData clientConnected(string userID)
         {
             map.TryAdd(userID, Context.ConnectionId);
 
             if (map.TryGetValue(userID, out string? connectionID))
             {
                 userData userData = database.loadUserData(userID) ?? throw new Exception($"userID <{userID}> does not exist");
-                await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
+                return userData;
             }
             else
             {

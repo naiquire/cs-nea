@@ -3,30 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\knockout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\knockout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\1v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\1v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -35,8 +11,32 @@
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\queueing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\knockout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\knockout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\1v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\1v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\boyss\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,28 +74,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "knockout.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\knockout.cs",
               "RelativeDocumentMoniker": "server-app\\games\\knockout.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\knockout.cs",
               "RelativeToolTip": "server-app\\games\\knockout.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T10:06:08.839Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
+              "Title": "accuracy.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
+              "RelativeDocumentMoniker": "server-app\\games\\accuracy.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
+              "RelativeToolTip": "server-app\\games\\accuracy.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCwAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T14:39:18.434Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "accounts.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\accounts.cs",
               "RelativeDocumentMoniker": "server-app\\accounts.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\accounts.cs",
               "RelativeToolTip": "server-app\\accounts.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T11:20:52.842Z"
+              "WhenOpened": "2025-05-24T11:20:52.842Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -111,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "1v1.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\1v1.cs",
               "RelativeDocumentMoniker": "server-app\\games\\1v1.cs",
@@ -123,7 +136,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "accounts.cs",
+              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs",
+              "RelativeDocumentMoniker": "server-app\\connections\\accounts.cs",
+              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs",
+              "RelativeToolTip": "server-app\\connections\\accounts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T14:43:37.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "abstractGame.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractGame.cs",
               "RelativeDocumentMoniker": "server-app\\games\\abstractGame.cs",
@@ -135,27 +161,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "accuracy.cs",
-              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
-              "RelativeDocumentMoniker": "server-app\\games\\accuracy.cs",
-              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
-              "RelativeToolTip": "server-app\\games\\accuracy.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAA1wBwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T14:39:18.434Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "queueing.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs",
               "RelativeDocumentMoniker": "server-app\\games\\queueing.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\queueing.cs",
               "RelativeToolTip": "server-app\\games\\queueing.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAaAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T14:30:13.882Z"
+              "WhenOpened": "2025-05-21T14:30:13.882Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -171,39 +186,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "games.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\games.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\games.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\games.cs",
               "RelativeToolTip": "server-app\\connections\\games.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAABQAAAAAAAAAA==",
+              "ViewState": "AgIAACUAAAAAAAAAAAAowE4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-21T14:28:19.434Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "queueing.cs",
               "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\queueing.cs",
               "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\queueing.cs",
               "RelativeToolTip": "server-app\\connections\\queueing.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAABAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T14:30:19.413Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "accounts.cs",
-              "DocumentMoniker": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs",
-              "RelativeDocumentMoniker": "server-app\\connections\\accounts.cs",
-              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\accounts.cs",
-              "RelativeToolTip": "server-app\\connections\\accounts.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBkAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T14:43:37.699Z"
+              "WhenOpened": "2025-05-21T14:30:19.413Z",
+              "EditorCaption": ""
             }
           ]
         },

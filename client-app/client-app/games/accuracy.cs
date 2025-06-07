@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 using System.Windows.Forms;
 
 namespace client_app.games
@@ -13,9 +6,10 @@ namespace client_app.games
     // accuracy
     public partial class accuracy : Form // change to main once completed
     {
-        public void queueAccuracy()
+        public async void queueAccuracy()
         {
-            connection.SendAsync("queueGame", "accuracy", userData.userID);
+            await main.connection.InvokeAsync("queueGame", "accuracy", main.userData.userID);
+            join_accuracy();
         }
         public void join_accuracy()
         {

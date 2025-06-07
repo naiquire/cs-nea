@@ -9,8 +9,9 @@ namespace server_app.games
         {
             public static List<accuracy> accuracy = [];
             public static List<_1v1> _1v1 = [];
+            public static List<knockout> knockout = [];
         }
-        public static currentGames games;
+
         public static void queue_accuracy(string userID)
         {
             foreach (var game in currentGames.accuracy)
@@ -43,6 +44,23 @@ namespace server_app.games
                 }
             }
         }
+        public static void queue_knockout(string userID)
+        {
+            foreach (var game in currentGames.knockout)
+            {
+                if (game.getPlayerCount() < game.getMaxPlayers())
+                {
+                    game.queueUser(userID);
+                    if (game.getPlayerCount() == game.getMaxPlayers())
+                    {
+                        game.startGame("knockout");
+                    }
+                    break;
+                }
+            }
+        }
+
+
         public static void loadSubmission(string gameID, string userID, double[] input)
         {
             // there's probably a neat way of doing this however i am stupid
@@ -55,6 +73,14 @@ namespace server_app.games
                 }
             }
             foreach (var game in currentGames._1v1)
+            {
+                if (game.gameID == gameID)
+                {
+                    game.loadResponse(userID, input);
+                    return;
+                }
+            }
+            foreach (var game in currentGames.knockout)
             {
                 if (game.gameID == gameID)
                 {
