@@ -31,13 +31,13 @@ namespace server_app.connections
                 }
             }
         }
-        public async Task sendLetter(List<string> userIDs, char letter)
+        public async Task sendLetter(string gameID, List<string> userIDs, char letter)
         {
             foreach (string userID in userIDs)
             {
                 if (map.TryGetValue(userID, out string? connectionID))
                 {
-                    await Clients.Client(connectionID).SendAsync("receiveLetter", letter);
+                    await Clients.Client(connectionID).SendAsync("receiveLetter", gameID, letter);
                 }
                 else
                 {

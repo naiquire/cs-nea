@@ -4,14 +4,14 @@ using System.Windows.Forms;
 namespace client_app.games
 {
     // accuracy
-    public partial class accuracy : Form // change to main once completed
+    public partial class accuracy : Form
     {
-        public async void queueAccuracy()
+        public static async void queueAccuracy()
         {
             await main.connection.InvokeAsync("queueGame", "accuracy", main.userData.userID);
             join_accuracy();
         }
-        public void join_accuracy()
+        public static void join_accuracy()
         {
             // load lobby or something idk its offline
         }
@@ -20,9 +20,12 @@ namespace client_app.games
             // load game
             InitializeComponent(); // initialiseAccuracy
         }
-        public void round(char letter)
+        public static async void round_accuracy(char letter)
         {
+            // load input class and return the array drawn
+            double[] input = null;
 
+            await main.connection.InvokeAsync("receiveSubmission", "accuracy", main.userData.userID, input);
         }
     }
 }

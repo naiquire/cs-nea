@@ -5,6 +5,11 @@ namespace server_app
 {
     public class @accounts : Hub
     {
+        public override Task OnConnectedAsync()
+        {
+            Console.WriteLine("connected");
+            return base.OnConnectedAsync();
+        }
         public async void loginRequest(string userID, string password)
         {
             int success = database.loginRequest(userID, password);

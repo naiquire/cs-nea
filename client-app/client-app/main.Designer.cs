@@ -46,15 +46,16 @@ namespace client_app
             this.panel_appLogo = new System.Windows.Forms.Panel();
             this.panel_friends = new System.Windows.Forms.Panel();
             this.panel_friendList = new System.Windows.Forms.Panel();
+            this.seperator = new System.Windows.Forms.PictureBox();
             this.txt_friendsLabel = new System.Windows.Forms.TextBox();
             this.panel_user = new System.Windows.Forms.Panel();
             this.panel_main = new System.Windows.Forms.Panel();
-            this.seperator = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_queueAccuracy = new System.Windows.Forms.Button();
             this.panel_topBorder.SuspendLayout();
             this.panel_friends.SuspendLayout();
-            this.panel_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
+            this.panel_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,6 +108,17 @@ namespace client_app
             this.panel_friendList.Size = new System.Drawing.Size(260, 384);
             this.panel_friendList.TabIndex = 2;
             // 
+            // seperator
+            // 
+            this.seperator.Image = global::client_app.Properties.Resources.seperator;
+            this.seperator.InitialImage = null;
+            this.seperator.Location = new System.Drawing.Point(50, 60);
+            this.seperator.Name = "seperator";
+            this.seperator.Size = new System.Drawing.Size(200, 5);
+            this.seperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.seperator.TabIndex = 1;
+            this.seperator.TabStop = false;
+            // 
             // txt_friendsLabel
             // 
             this.txt_friendsLabel.BackColor = this.panel_friends.BackColor;
@@ -131,22 +143,12 @@ namespace client_app
             // panel_main
             // 
             this.panel_main.BackColor = System.Drawing.Color.Transparent;
+            this.panel_main.Controls.Add(this.btn_queueAccuracy);
             this.panel_main.Controls.Add(this.pictureBox1);
             this.panel_main.Location = new System.Drawing.Point(300, 30);
             this.panel_main.Name = "panel_main";
             this.panel_main.Size = new System.Drawing.Size(1120, 1050);
             this.panel_main.TabIndex = 4;
-            // 
-            // seperator
-            // 
-            this.seperator.Image = global::client_app.Properties.Resources.seperator;
-            this.seperator.InitialImage = null;
-            this.seperator.Location = new System.Drawing.Point(50, 60);
-            this.seperator.Name = "seperator";
-            this.seperator.Size = new System.Drawing.Size(200, 5);
-            this.seperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.seperator.TabIndex = 1;
-            this.seperator.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -157,6 +159,16 @@ namespace client_app
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // btn_queueAccuracy
+            // 
+            this.btn_queueAccuracy.Location = new System.Drawing.Point(292, 302);
+            this.btn_queueAccuracy.Name = "btn_queueAccuracy";
+            this.btn_queueAccuracy.Size = new System.Drawing.Size(75, 23);
+            this.btn_queueAccuracy.TabIndex = 1;
+            this.btn_queueAccuracy.Text = "accuracy";
+            this.btn_queueAccuracy.UseVisualStyleBackColor = true;
+            this.btn_queueAccuracy.Click += new System.EventHandler(this.btn_queueAccuracy_Click);
             // 
             // main
             // 
@@ -173,8 +185,8 @@ namespace client_app
             this.panel_topBorder.PerformLayout();
             this.panel_friends.ResumeLayout(false);
             this.panel_friends.PerformLayout();
-            this.panel_main.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
+            this.panel_main.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -326,6 +338,7 @@ namespace client_app
         private Panel panel_main;
         private PictureBox pictureBox1;
         private Panel panel_input;
+        private Button btn_queueAccuracy;
     }
 }
 

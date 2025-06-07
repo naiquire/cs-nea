@@ -9,17 +9,10 @@ namespace server_app.connections
         private static Dictionary<string, string> map = [];
         public userData clientConnected(string userID)
         {
-            map.TryAdd(userID, Context.ConnectionId);
+            map.Add(userID, Context.ConnectionId);
 
-            if (map.TryGetValue(userID, out string? connectionID))
-            {
-                userData userData = database.loadUserData(userID) ?? throw new Exception($"userID <{userID}> does not exist");
-                return userData;
-            }
-            else
-            {
-                throw new Exception($"Client <{userID}> disconnected");
-            }
+            userData userData = database.loadUserData(userID) ?? throw new Exception($"userID <{userID}> does not exist");
+            return userData;
         }
         public void clientDisconnected(string userID)
         {

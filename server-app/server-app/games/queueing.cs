@@ -1,15 +1,16 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace server_app.games
 {
     // contains all instances of running MULTIPLAYER games
     public static class @queueing
     {
-        public struct currentGames
+        public readonly struct currentGames
         {
-            public static List<accuracy> accuracy = [];
-            public static List<_1v1> _1v1 = [];
-            public static List<knockout> knockout = [];
+            public static readonly List<accuracy> accuracy = [];
+            public static readonly List<_1v1> _1v1 = [];
+            public static readonly List<knockout> knockout = [];
         }
 
         public static void queue_accuracy(string userID)

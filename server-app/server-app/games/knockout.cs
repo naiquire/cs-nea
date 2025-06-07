@@ -4,13 +4,9 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class @knockout : abstractGame
+    public class @knockout(string userID) : abstractGame(userID, 12)
     {
-        private List<string> aliveUsers;
-        public knockout(string userID) : base(userID, 12)
-        {
-            // tungsten cube
-        }
+        private List<string> aliveUsers = [];
         public async override void startGame(string gameID)
         {
             base.startGame(gameID);
@@ -28,7 +24,7 @@ namespace server_app.games
                 // send letter to all
 
                 startTime = DateTime.UtcNow;
-                await new connection().sendLetter(aliveUsers, letter);
+                await new connection().sendLetter("knockout", aliveUsers, letter);
 
                 bool receivedAll = false;
                 while (!receivedAll)

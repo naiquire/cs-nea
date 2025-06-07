@@ -25,16 +25,16 @@ namespace client_app
         private void initialiseConnection()
         {
             connection = hub_connection.configConnection(main.address + "/accounts");
-            connection = hub_connection.startConnection(connection);
             connection = hub_connection.addHandles(connection);
+            connection = hub_connection.startConnection(connection);
         }
 
-        private void btn_login_Click(object sender, EventArgs e)
+        private async void btn_login_Click(object sender, EventArgs e)
         {
             string userID = txt_userID.Text.Trim();
             string password = txt_password.Text;
 
-            connection.InvokeAsync("loginRequest", userID, password);
+            await connection.InvokeAsync("loginRequest", userID, password);
         }
 
         private void btn_createAccount_Click(object sender, EventArgs e)
@@ -47,12 +47,12 @@ namespace client_app
             btn_requestAccount.Enabled = true;
             btn_requestAccount.Visible = true;
         }
-        private void btn_requestAccount_Click(object sender, EventArgs e)
+        private async void btn_requestAccount_Click(object sender, EventArgs e)
         {
             string userID = txt_userID.Text.Trim();
             string password = txt_password.Text;
 
-            connection.InvokeAsync("accountRequest", userID, password);
+            await connection.InvokeAsync("accountRequest", userID, password);
         }
     }
 }

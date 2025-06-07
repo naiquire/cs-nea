@@ -1,17 +1,12 @@
 ﻿using server_app.connections;
 using server_app.neuralNetwork;
-using System.Numerics;
 
 namespace server_app.games
 {
-    public class _1v1 : abstractGame
+    public class _1v1(string userID) : abstractGame(userID, 2)
     {
         public const bool online = true;
 
-        public _1v1(string userID) : base(userID, 2)
-        {
-            // notify client of wait
-        }
         public override async void startGame(string gameID)
         {
             base.startGame(gameID);
@@ -27,7 +22,8 @@ namespace server_app.games
             // for each letter send to client
             for (int letter = 0; letter < letters.Count; letter++)
             {
-                await new connection().sendLetter(userIDs, letters[letter]);
+                startTime = DateTime.UtcNow;
+                await new connection().sendLetter("1v1", userIDs, letters[letter]);
 
                 bool receivedAll = false;
                 while (!receivedAll)
@@ -41,21 +37,21 @@ namespace server_app.games
                 evaluate[] evaluates = new evaluate[getPlayerCount()];
                 for (int i = 0; i < userIDs.Count; i++)
                 {
-                    evaluates[i] = new evaluate(currentResponses[userIDs[i]]);
+                    evaluates[i] = new evaluate(currentResponses[userIDs[i]].submission);
 
                     if (stats.TryGetValue(userIDs[i], out stats currentStats))
                     {
                         currentStats.accuracy[i] = evaluates[i].activatedValues[evaluate.layerCount - 1][letter - 65];
                         currentStats.epochs++;
-                        currentStats.correct += evaluates[i].result == letter + 65 ? 1 : 0;
-                        currentStats.time[i] = TimeSpan.Zero; // temp
+                        currentStats.correct += evaluates[i].result == letter - 65 ? 1 : 0;
+                        currentStats.time[i] = currentResponses[userIDs[i]].time - startTime;
                     }
                     stats[userIDs[i]] = currentStats;
 
-                    await new connection().sendResults(userIDs[i], stats[userIDs[i]], evaluates[i].result == letter + 65);
-
-                    // figure out time later
+                    await new connection().sendResults(userIDs[i], stats[userIDs[i]], evaluates[i].result == letter - 65);
                 }
+
+                // kill whoever got it wrong as well TODO                                                 ---------------------------------------------------------
                 // who was first
                 (string user, TimeSpan time) lowest = ("", TimeSpan.MaxValue);
                 foreach (string userID in userIDs)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using client_app.games;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace client_app
@@ -45,7 +46,6 @@ namespace client_app
             };
 
 
-
             /// <summary>
             /// this is a possible way of implementing localisation efficiently
             Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
@@ -77,6 +77,11 @@ namespace client_app
         private async Task requestProfile(string userID)
         {
             userData profile = await connection.InvokeAsync<userData>("requestProfile", userID);
+        }
+
+        private void btn_queueAccuracy_Click(object sender, EventArgs e)
+        {
+            accuracy.queueAccuracy();
         }
     }
 }

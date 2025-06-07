@@ -66,3 +66,4 @@ C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\client-app\client-app\o
 C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.csproj.Up2Date
 C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.exe
 C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.pdb
+C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.main.resources

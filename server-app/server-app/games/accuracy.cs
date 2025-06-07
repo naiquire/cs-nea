@@ -7,14 +7,10 @@ namespace server_app.games
 {
     // 1 player game
     // measures time and accuracy only, basically training???
-    public class @accuracy : abstractGame
+    public class @accuracy(string userID) : abstractGame(userID, 1)
     {
         public const bool online = false;
 
-        public accuracy(string userID) : base(userID, 1)
-        {
-            // tungsten cube
-        }
         public override async void startGame(string gameID)
         {
             base.startGame(gameID);
@@ -31,7 +27,7 @@ namespace server_app.games
             foreach (var letter in letters)
             {
                 startTime = DateTime.UtcNow;
-                await new connection().sendLetter(userIDs, letter);
+                await new connection().sendLetter("accuracy", userIDs, letter);
 
                 bool receivedAll = false;
                 while (!receivedAll)

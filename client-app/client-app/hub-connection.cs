@@ -14,7 +14,12 @@ namespace client_app
         public static HubConnection configConnection(string address)
         {
             HubConnection connection = new HubConnectionBuilder()
-                .WithUrl(address)
+                .WithUrl(address, options =>
+                {
+                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets |
+                                         Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents |
+                                         Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
+                })
                 .Build();
             return connection;
         }
@@ -70,6 +75,12 @@ namespace client_app
             connection.On<string>("startGame", (gameID) =>
             {
                 MethodInfo methodInfo = typeof(main).GetMethod($"start_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
+                methodInfo.Invoke(methodInfo, null);
+            });
+
+            connection.On<string, char>("receiveLetter", (gameID, letter) =>
+            {
+                MethodInfo methodInfo = typeof(main).GetMethod($"round_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
                 methodInfo.Invoke(methodInfo, null);
             });
 
