@@ -7,8 +7,9 @@ namespace server_app
     {
         static void Main(string[] args)
         {
-            //startNginx();
-            configServer(args).Run();
+            startNginx();
+            //configServer(args).Run();
+            CreateHostBuilder(args).Build().Run();
         }
         private static WebApplication configServer(string[] args)
         {
@@ -47,7 +48,7 @@ namespace server_app
             app.Urls.Add("http://0.0.0.0:3900");
 
             return app;
-        }
+        } // DOESNT WORK BUT NO CHATGPT SO MAYBE LIKE GET IT WORKING PERHAPS
         private static void startNginx()
         {
             ProcessStartInfo startInfo = new()
@@ -76,7 +77,6 @@ namespace server_app
                 Thread.Sleep(1000);
             };
         }
-
         private static void killNginx(object? sender, EventArgs e)
         {
             var processes = Process.GetProcessesByName("nginx.exe");
@@ -85,5 +85,58 @@ namespace server_app
                 process.Kill();
             }
         }
+
+
+        static IHostBuilder CreateHostBuilder(string[] args) => // WORKS YAYAYAYAYA BUT CHATGPT
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureServices(services =>
+                    {
+                        services.AddSignalR();
+                        services.AddEndpointsApiExplorer();
+                        services.AddSwaggerGen();
+
+                        services.AddCors(options =>
+                        {
+                            options.AddPolicy("AllowAll", policy =>
+                            {
+                                policy.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader();
+                            });
+                        });
+                    })
+
+
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseCors("AllowAll");
+                        app.Use(async (context, next) =>
+                        {
+                            //Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
+                            await next.Invoke();
+                        });
+                        //app.UseAuthentication();
+                        //app.UseAuthorization();
+                        app.UseEndpoints(endpoints =>
+                        {
+                            // subdomain specifies the application required for the request (automatically handled by NGINX)
+                            // class specifies the type of request to the application
+                            // subclass specifies any further details
+
+                            endpoints.MapHub<connections.connection>("/cs-nea/connections");
+                            endpoints.MapHub<accounts>("/cs-nea/accounts");
+
+                        });
+                    })
+
+                    // ensure port is not used elsewhere
+                    // port number is linked to the subdomain such that only requests to :5252/subdomain are forwarded to :5200
+
+                    .UseUrls("http://0.0.0.0:3900");
+
+                });
     }
 }
