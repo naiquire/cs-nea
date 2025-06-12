@@ -27,7 +27,7 @@ namespace server_app.games
             foreach (var letter in letters)
             {
                 startTime = DateTime.UtcNow;
-                await new connection().sendLetter("accuracy", userIDs, letter);
+                await new connection().sendLetter(userIDs, letter);
 
                 bool receivedAll = false;
                 while (!receivedAll)

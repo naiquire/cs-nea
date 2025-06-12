@@ -6,7 +6,7 @@ namespace client_app.components
 {
     public class input : Form
     {
-        private main form;
+        private readonly main form;
 
         private Panel panel_input;
         private Bitmap drawing;
@@ -14,9 +14,11 @@ namespace client_app.components
         private bool draw = false;
         private (int x, int y) pos = (-1, -1);
 
-        public input(main main)
+        public input(main main, (int, int) pos, (int, int) size)
         {
             form = main;
+            loadPanel(pos, size);
+            enablePanel();
         }
 
         public void enablePanel()

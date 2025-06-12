@@ -24,7 +24,7 @@ namespace server_app.games
                 // send letter to all
 
                 startTime = DateTime.UtcNow;
-                await new connection().sendLetter("knockout", aliveUsers, letter);
+                await new connection().sendLetter(aliveUsers, letter);
 
                 bool receivedAll = false;
                 while (!receivedAll)
@@ -35,6 +35,7 @@ namespace server_app.games
                     }
                     Thread.Sleep(500); // this is probably a bad way of doing it but oh well
                 }
+                bool allCorrect = true;
                 evaluate[] evaluates = new evaluate[getPlayerCount()];
                 for (int i = 0; i < aliveUsers.Count; i++)
                 {
@@ -55,7 +56,14 @@ namespace server_app.games
                     if (!correct)
                     {
                         aliveUsers.RemoveAt(i);
+                        allCorrect = false;
                     }
+                    if (allCorrect)
+                    {
+                        // remove slowest user
+                    }
+
+                    //await new connection(). did user make it through current round
                 }
             }
             

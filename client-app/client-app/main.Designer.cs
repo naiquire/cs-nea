@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -191,8 +192,10 @@ namespace client_app
             this.ResumeLayout(false);
 
         }
-        public void closeApp(object sender, EventArgs e)
+        public async void closeApp(object sender, EventArgs e)
         {
+            Hide();
+            await connection.InvokeAsync("clientDisconnected", userData.userID);
             Close();
         }
 
@@ -316,13 +319,6 @@ namespace client_app
                 panel_friendList.Controls.Add(user);
             }
         }
-
-
-
-        
-
-
-        
 
 
         #endregion

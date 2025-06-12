@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
+using server_app.connections;
 using System.Diagnostics;
 
 namespace server_app
@@ -9,9 +10,10 @@ namespace server_app
         {
             startNginx();
             //configServer(args).Run();
-            CreateHostBuilder(args).Build().Run();
+            //CreateHostBuilder(args).Build().Run();
+            hostBuilder(args).Build().Run();
         }
-        private static WebApplication configServer(string[] args)
+        private static WebApplication configServer(string[] args)  // DOESNT WORK BUT NO CHATGPT SO MAYBE LIKE GET IT WORKING PERHAPS
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +50,7 @@ namespace server_app
             app.Urls.Add("http://0.0.0.0:3900");
 
             return app;
-        } // DOESNT WORK BUT NO CHATGPT SO MAYBE LIKE GET IT WORKING PERHAPS
+        }
         private static void startNginx()
         {
             ProcessStartInfo startInfo = new()
@@ -86,6 +88,39 @@ namespace server_app
             }
         }
 
+
+        private static IHostBuilder hostBuilder(string[] args)
+        {
+            var host = Host.CreateDefaultBuilder(args);
+            host.ConfigureWebHostDefaults(config =>
+            {
+                config.ConfigureServices(services =>
+                {
+                    services.AddSignalR();
+                    services.AddCors(setup =>
+                    {
+                        setup.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin());
+                    });
+                });
+                config.Configure(setup =>
+                {
+                    setup.UseRouting();
+                    setup.Use(async (context, next) =>
+                    {
+                        Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
+                        await next.Invoke();
+                    });
+                    setup.UseEndpoints(endpoints =>
+                    {
+                        endpoints.MapHub<connection>("/cs-nea/connections");
+                        endpoints.MapHub<accounts>("/cs-nea/accounts");
+                    });
+                });
+                config.UseUrls("http://0.0.0.0:3900");
+            });
+
+            return host;
+        }
 
         static IHostBuilder CreateHostBuilder(string[] args) => // WORKS YAYAYAYAYA BUT CHATGPT
             Host.CreateDefaultBuilder(args)

@@ -5,14 +5,14 @@
         public static double epochs = 0;
         public static double correct = 0;
 
-        private double[][] neuronErrors = new double[5][];
-        private double learningRate = 0.05;
+        private readonly double[][] neuronErrors = new double[5][];
+        private readonly double learningRate = 0.05;
         public backpropagation(List<double[]> input, List<int> expected)
         {
-            List<double[][,]> weightAdjustments = new List<double[][,]>();
-            List<double[][]> biasAdjustments = new List<double[][]>();
+            List<double[][,]> weightAdjustments = [];
+            List<double[][]> biasAdjustments = [];
 
-            List<double> loss = new List<double>();
+            List<double> loss = [];
 
             // load weights and biases
             var weights = data.loadWeights();
@@ -64,7 +64,7 @@
         private (double[][,], double[][], double) backpropagate(double[] inputValues, int expectedResult, double[][,] weights, double[][] biases)
         {
             // evaluate network
-            evaluate network = new evaluate(inputValues, weights, biases);
+            evaluate network = new(inputValues, weights, biases);
 
             if (network.result == expectedResult - 1) { correct++; }
             epochs++;

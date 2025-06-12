@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj": {}
+    "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj": {}
   },
   "projects": {
-    "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj": {
+    "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
+        "projectUniqueName": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj",
         "projectName": "server-app",
-        "projectPath": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
-        "packagesPath": "C:\\Users\\boyss\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\obj\\",
+        "projectPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj",
+        "packagesPath": "C:\\Users\\24ns2144\\.nuget\\packages\\",
+        "outputPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\boyss\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\24ns2144\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -85,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

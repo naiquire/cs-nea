@@ -71,18 +71,25 @@ namespace client_app
                 }
             });
 
-
-            connection.On<string>("startGame", (gameID) =>
+            connection.On<string>("receiveJoinConfirm", (gameID) =>
             {
-                MethodInfo methodInfo = typeof(main).GetMethod($"start_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
+                game.gameID = gameID;
+            });
+            connection.On<List<string>>("startGame", (users) =>
+            {
+                game.users = users;
+
+                MethodInfo methodInfo = typeof(main).GetMethod($"start_{game.type}") ?? throw new Exception($"GameID <{game.type}> could not be found");
                 methodInfo.Invoke(methodInfo, null);
             });
 
-            connection.On<string, char>("receiveLetter", (gameID, letter) =>
+            connection.On<char>("receiveLetter", (letter) =>
             {
-                MethodInfo methodInfo = typeof(main).GetMethod($"round_{gameID}") ?? throw new Exception($"GameID <{gameID}> could not be found");
-                methodInfo.Invoke(methodInfo, null);
+                MethodInfo methodInfo = typeof(main).GetMethod($"round_{game.type}") ?? throw new Exception($"GameID <{game.type}> could not be found");
+                methodInfo.Invoke(methodInfo, new object[letter]);
             });
+
+
 
 
             return connection;

@@ -44,7 +44,7 @@ namespace server_app.games
             {
                 stats.Add(user, new stats());
             }
-            await new connection().sendStartRequest(gameID, userIDs);
+            await new connection().sendStartRequest(userIDs);
         }
         public int getMaxPlayers() => maxPlayers;
         public int getPlayerCount() => userIDs.Count;

@@ -23,7 +23,7 @@ namespace server_app.games
             for (int letter = 0; letter < letters.Count; letter++)
             {
                 startTime = DateTime.UtcNow;
-                await new connection().sendLetter("1v1", userIDs, letters[letter]);
+                await new connection().sendLetter(userIDs, letters[letter]);
 
                 bool receivedAll = false;
                 while (!receivedAll)

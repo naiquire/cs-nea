@@ -30,14 +30,19 @@ namespace client_app
         public int rank;
         public double accuracy;
     }
+    public struct game
+    {
+        public static string gameID;
+        public static string type;
+        public static List<string> users;
+    }
     public partial class main : Form
     {
         public static HubConnection connection;
         public static userData userData;
         public static readonly string address = "http://86.11.15.228:5252/cs-nea";
-        //public static readonly string address = "http://192.168.0.251:3900/cs-nea";
 
-        private Bitmap drawing;
+        //private Bitmap drawing;
         public main(string userID)
         {
             userData = new userData()
@@ -77,6 +82,8 @@ namespace client_app
         private async Task requestProfile(string userID)
         {
             userData profile = await connection.InvokeAsync<userData>("requestProfile", userID);
+
+            new menus.profile(profile); // temp, will eventually overwrite current form
         }
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)

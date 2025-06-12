@@ -17,13 +17,13 @@ namespace server_app.connections
                 throw new Exception($"Client <{userID}> disconnected");
             }
         }
-        public async Task sendStartRequest(string gameID, List<string> userIDs)
+        public async Task sendStartRequest(List<string> userIDs)
         {
             foreach (string userID in userIDs)
             {
                 if (map.TryGetValue(userID, out string? connectionID))
                 {
-                    await Clients.Client(connectionID).SendAsync("startGame", gameID);
+                    await Clients.Client(connectionID).SendAsync("startGame", userIDs);
                 }
                 else
                 {
@@ -31,13 +31,13 @@ namespace server_app.connections
                 }
             }
         }
-        public async Task sendLetter(string gameID, List<string> userIDs, char letter)
+        public async Task sendLetter( List<string> userIDs, char letter)
         {
             foreach (string userID in userIDs)
             {
                 if (map.TryGetValue(userID, out string? connectionID))
                 {
-                    await Clients.Client(connectionID).SendAsync("receiveLetter", gameID, letter);
+                    await Clients.Client(connectionID).SendAsync("receiveLetter", letter);
                 }
                 else
                 {
