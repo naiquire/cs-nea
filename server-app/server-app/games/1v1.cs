@@ -25,15 +25,9 @@ namespace server_app.games
                 startTime = DateTime.UtcNow;
                 await new connection().sendLetter(userIDs, letters[letter]);
 
-                bool receivedAll = false;
-                while (!receivedAll)
-                {
-                    if (currentResponses.Count == getPlayerCount())
-                    {
-                        receivedAll = true;
-                    }
-                    Thread.Sleep(500); // this is probably a bad way of doing it but oh well
-                }
+                TaskCompletionSource<bool> receivedAll = new();
+                await awaitResponses(receivedAll);
+
                 evaluate[] evaluates = new evaluate[getPlayerCount()];
                 for (int i = 0; i < userIDs.Count; i++)
                 {

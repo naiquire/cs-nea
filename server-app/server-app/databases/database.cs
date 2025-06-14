@@ -78,8 +78,13 @@ namespace server_app.databases
                 return false;
             }
         }
-        public static userData loadUserData(string userID)
+        public static userData? loadUserData(string userID)
         {
+            if (!userExists(userID))
+            {
+                return null;
+            }
+
             userData userData = new();
             Dictionary<char, (double, TimeSpan)> statistics = [];
 

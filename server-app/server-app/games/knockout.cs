@@ -19,22 +19,18 @@ namespace server_app.games
             {
                 letters.Add((char)(rnd.Next(0, 26) + 65));
             }
-            foreach (var letter in letters)
+            while (aliveUsers.Count > 1)
             {
                 // send letter to all
+                letters.Add((char)(rnd.Next(0, 26) + 65));
+                char letter = letters[^1];
 
                 startTime = DateTime.UtcNow;
                 await new connection().sendLetter(aliveUsers, letter);
 
-                bool receivedAll = false;
-                while (!receivedAll)
-                {
-                    if (currentResponses.Count == getPlayerCount())
-                    {
-                        receivedAll = true;
-                    }
-                    Thread.Sleep(500); // this is probably a bad way of doing it but oh well
-                }
+                TaskCompletionSource<bool> receivedAll = new();
+                await awaitResponses(receivedAll);
+
                 bool allCorrect = true;
                 evaluate[] evaluates = new evaluate[getPlayerCount()];
                 for (int i = 0; i < aliveUsers.Count; i++)
@@ -58,13 +54,14 @@ namespace server_app.games
                         aliveUsers.RemoveAt(i);
                         allCorrect = false;
                     }
-                    if (allCorrect)
-                    {
-                        // remove slowest user
-                    }
+                }
+
+                if (allCorrect)
+                {
+                    // remove slowest user
+                }
 
                     //await new connection(). did user make it through current round
-                }
             }
             
         }

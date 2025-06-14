@@ -28,6 +28,16 @@ namespace server_app.games
             gameID = userID + DateTime.UtcNow.ToString();
             queueUser(userID);                       
         }
+        public async Task<TaskCompletionSource<bool>> awaitResponses(TaskCompletionSource<bool> receivedAll)
+        {
+            if (currentResponses.Count == getPlayerCount())
+            {
+                receivedAll.TrySetResult(true);
+            }
+
+            await receivedAll.Task;
+            return receivedAll;
+        }
         public async void queueUser(string userID)
         {
             userIDs.Add(userID);
@@ -36,6 +46,10 @@ namespace server_app.games
         public void loadResponse(string userID, double[] input)
         {
             currentResponses.Add(userID, (input, DateTime.UtcNow));
+            if (currentResponses.Count == getPlayerCount())
+            {
+                receivedAll.TrySetResult(true);
+            }
         }
         public virtual async void startGame(string gameID)
         {
