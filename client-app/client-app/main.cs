@@ -88,7 +88,7 @@ namespace client_app
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)
         {
-            accuracy.queueAccuracy();
+            accuracy.queue_accuracy();
         }
     }
 }

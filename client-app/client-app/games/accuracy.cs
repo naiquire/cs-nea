@@ -6,7 +6,7 @@ namespace client_app.games
     // accuracy
     public partial class accuracy : Form
     {
-        public static async void queueAccuracy()
+        public static async void queue_accuracy()
         {
             await main.connection.InvokeAsync("queueGame", "accuracy", main.userData.userID);
             join_accuracy();

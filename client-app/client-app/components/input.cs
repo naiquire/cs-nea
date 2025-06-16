@@ -19,6 +19,8 @@ namespace client_app.components
             form = main;
             loadPanel(pos, size);
             enablePanel();
+
+            
         }
 
         public void enablePanel()

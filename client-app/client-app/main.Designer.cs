@@ -51,8 +51,8 @@ namespace client_app
             this.txt_friendsLabel = new System.Windows.Forms.TextBox();
             this.panel_user = new System.Windows.Forms.Panel();
             this.panel_main = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_queueAccuracy = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel_topBorder.SuspendLayout();
             this.panel_friends.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
@@ -151,6 +151,16 @@ namespace client_app
             this.panel_main.Size = new System.Drawing.Size(1120, 1050);
             this.panel_main.TabIndex = 4;
             // 
+            // btn_queueAccuracy
+            // 
+            this.btn_queueAccuracy.Location = new System.Drawing.Point(236, 288);
+            this.btn_queueAccuracy.Name = "btn_queueAccuracy";
+            this.btn_queueAccuracy.Size = new System.Drawing.Size(75, 23);
+            this.btn_queueAccuracy.TabIndex = 1;
+            this.btn_queueAccuracy.Text = "accuracy";
+            this.btn_queueAccuracy.UseVisualStyleBackColor = true;
+            this.btn_queueAccuracy.Click += new System.EventHandler(this.btn_queueAccuracy_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::client_app.Properties.Resources.play;
@@ -160,16 +170,6 @@ namespace client_app
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // btn_queueAccuracy
-            // 
-            this.btn_queueAccuracy.Location = new System.Drawing.Point(292, 302);
-            this.btn_queueAccuracy.Name = "btn_queueAccuracy";
-            this.btn_queueAccuracy.Size = new System.Drawing.Size(75, 23);
-            this.btn_queueAccuracy.TabIndex = 1;
-            this.btn_queueAccuracy.Text = "accuracy";
-            this.btn_queueAccuracy.UseVisualStyleBackColor = true;
-            this.btn_queueAccuracy.Click += new System.EventHandler(this.btn_queueAccuracy_Click);
             // 
             // main
             // 
