@@ -7,12 +7,15 @@ namespace server_app.connections
     public partial class @connection : Hub
     {
         private static Dictionary<string, string> map = [];
-        public userData clientConnected(string userID)
+        public userData? clientConnected(string userID)
         {
             map.Add(userID, Context.ConnectionId);
 
-            userData userData = database.loadUserData(userID) ?? throw new Exception($"userID <{userID}> does not exist");
-            return userData;
+            if (database.loadUserData(userID, out userData userData))
+            {
+                return userData;
+            }
+            return null;
         }
         public void clientDisconnected(string userID)
         {

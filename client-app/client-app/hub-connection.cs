@@ -44,9 +44,13 @@ namespace client_app
                         login.ActiveForm.Hide();
                         main.ShowDialog();
                         break;
-                    case -1:
+                    case 2:
                         // account does not exist
                         MessageBox.Show("account does not exist");
+                        break;
+                    case -1:
+                        // error occured
+                        MessageBox.Show("an error occurred try again");
                         break;
                     default:
                         throw new Exception($"Unrecognised login success code < {success} >");
@@ -62,9 +66,13 @@ namespace client_app
                         login.ActiveForm.Hide();
                         main.ShowDialog();
                         break;
-                    case -1:
+                    case 0:
                         // userID already exists
                         MessageBox.Show("user already exists");
+                        break;
+                    case -1:
+                        // error occured
+                        MessageBox.Show("an error occurred try again");
                         break;
                     default:
                         throw new Exception($"Unrecognised account success code < {success} >");

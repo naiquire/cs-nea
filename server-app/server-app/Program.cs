@@ -43,7 +43,7 @@ namespace server_app
             });
 
             app.MapHub<connections.connection>("/cs-nea/connections");
-            app.MapHub<accounts>("/cs-nea/accounts");
+            app.MapHub<Accounts>("/cs-nea/accounts");
 
 
             // binds to all address on port 3900
@@ -113,7 +113,7 @@ namespace server_app
                     setup.UseEndpoints(endpoints =>
                     {
                         endpoints.MapHub<connection>("/cs-nea/connections");
-                        endpoints.MapHub<accounts>("/cs-nea/accounts");
+                        endpoints.MapHub<Accounts>("/cs-nea/accounts");
                     });
                 });
                 config.UseUrls("http://0.0.0.0:3900");
@@ -162,7 +162,7 @@ namespace server_app
                             // subclass specifies any further details
 
                             endpoints.MapHub<connections.connection>("/cs-nea/connections");
-                            endpoints.MapHub<accounts>("/cs-nea/accounts");
+                            endpoints.MapHub<Accounts>("/cs-nea/accounts");
 
                         });
                     })
