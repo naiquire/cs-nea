@@ -9,7 +9,6 @@ namespace server_app
     {
         public override Task OnConnectedAsync()
         {
-            Console.WriteLine("connected");
             return base.OnConnectedAsync();
         }
         public async void loginRequest(string userID, string password)

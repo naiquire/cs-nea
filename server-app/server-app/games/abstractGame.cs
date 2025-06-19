@@ -51,7 +51,7 @@ namespace server_app.games
                 receivedAll.TrySetResult(true);
             }
         }
-        public virtual async void startGame(string gameID)
+        public virtual async void startGame()
         {
             // generic stuff for any game
             foreach (string user in userIDs)

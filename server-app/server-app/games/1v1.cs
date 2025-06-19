@@ -7,9 +7,9 @@ namespace server_app.games
     {
         public const bool online = true;
 
-        public override async void startGame(string gameID)
+        public override async void startGame()
         {
-            base.startGame(gameID);
+            base.startGame();
 
             List<char> letters = [];
 

@@ -7,23 +7,20 @@ namespace server_app.games
     public class @knockout(string userID) : abstractGame(userID, 12)
     {
         private List<string> aliveUsers = [];
-        public async override void startGame(string gameID)
+        public async override void startGame()
         {
-            base.startGame(gameID);
+            base.startGame();
             aliveUsers = [.. userIDs];
 
             List<char> letters = [];
 
             Random rnd = new();
-            for (int i = 0; i < 10; i++)
-            {
-                letters.Add((char)(rnd.Next(0, 26) + 65));
-            }
+
             while (aliveUsers.Count > 1)
             {
                 // send letter to all
-                letters.Add((char)(rnd.Next(0, 26) + 65));
-                char letter = letters[^1];
+                char letter = (char)(rnd.Next(0, 26) + 65);
+                letters.Add(letter);
 
                 startTime = DateTime.UtcNow;
                 await new connection().sendLetter(aliveUsers, letter);

@@ -11,9 +11,9 @@ namespace server_app.games
     {
         public const bool online = false;
 
-        public override async void startGame(string gameID)
+        public override async void startGame()
         {
-            base.startGame(gameID);
+            base.startGame();
 
             List<char> letters = [];
 

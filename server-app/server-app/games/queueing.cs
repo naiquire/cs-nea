@@ -22,7 +22,7 @@ namespace server_app.games
                     game.queueUser(userID);
                     if (game.getPlayerCount() == game.getMaxPlayers())
                     {
-                        game.startGame("accuracy");
+                        game.startGame();
                     }
                     break;
                 }
@@ -39,7 +39,7 @@ namespace server_app.games
                     game.queueUser(userID);
                     if (game.getPlayerCount() == game.getMaxPlayers())
                     {
-                        game.startGame("1v1");
+                        game.startGame();
                     }
                     break;
                 }
@@ -54,7 +54,7 @@ namespace server_app.games
                     game.queueUser(userID);
                     if (game.getPlayerCount() == game.getMaxPlayers())
                     {
-                        game.startGame("knockout");
+                        game.startGame();
                     }
                     break;
                 }

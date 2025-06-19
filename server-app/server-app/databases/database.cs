@@ -10,16 +10,25 @@ namespace server_app.databases
         public string aboutMe;
         public DateTime dateCreated;
         public int rank;
+
+
     }
     public static class @database
     {
         private static readonly string dbPath = @"Data Source=C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\databases\maindb.sqlite";
         private static readonly SqliteConnection connection = new(dbPath);
-        private static void outputException(Exception ex)
+        public static void outputException(Exception ex)
         {
             // if exception occurs then log the message and allow the client to try again
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(ex.ToString());
+            Console.ResetColor();
+        }
+        public static void outputException(string ex)
+        {
+            // if exception occurs then log the message and allow the client to try again
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(ex);
             Console.ResetColor();
         }
 
