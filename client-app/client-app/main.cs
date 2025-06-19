@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using client_app.games;
+using client_app.menus;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace client_app
@@ -81,9 +82,10 @@ namespace client_app
 
         private async Task requestProfile(string userID)
         {
-            userData profile = await connection.InvokeAsync<userData>("requestProfile", userID);
+            userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 
-            new menus.profile(profile); // temp, will eventually overwrite current form
+            profile profile = new profile(panel_main);
+            panel_main = profile.applyControls(user);
         }
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)

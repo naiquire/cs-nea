@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|h:\\subjects\\computer science\\git\\cs-nea\\client-app\\client-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\components\\input.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\components\\input.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|h:\\subjects\\computer science\\git\\cs-nea\\client-app\\client-app\\menus\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\games\\accuracy.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,22 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\components\\input.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\components\\input.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\menus\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -85,111 +85,120 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "main.cs [Design]",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.cs",
               "RelativeDocumentMoniker": "client-app\\main.cs",
-              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\main.cs [Design]",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.cs [Design]",
+              "RelativeToolTip": "client-app\\main.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-30T13:47:46.043Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "main.Designer.cs",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.Designer.cs",
               "RelativeDocumentMoniker": "client-app\\main.Designer.cs",
               "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.Designer.cs",
               "RelativeToolTip": "client-app\\main.Designer.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAiwIYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-29T16:10:17.929Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "main.cs",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.cs",
               "RelativeDocumentMoniker": "client-app\\main.cs",
               "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\main.cs",
               "RelativeToolTip": "client-app\\main.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAQwBkAAAAFAAAAAAAAAA==",
+              "ViewState": "AQIAADYAAAAAAAAAAAAIwFYAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-05T13:19:17.095Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
+              "Title": "profile.cs",
+              "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\menus\\profile.cs",
+              "RelativeDocumentMoniker": "client-app\\menus\\profile.cs",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\menus\\profile.cs",
+              "RelativeToolTip": "client-app\\menus\\profile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T14:30:35.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "input.cs",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\components\\input.cs",
               "RelativeDocumentMoniker": "client-app\\components\\input.cs",
               "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\components\\input.cs",
               "RelativeToolTip": "client-app\\components\\input.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T18:44:37.816Z"
+              "WhenOpened": "2025-06-05T18:44:37.816Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "hub-connection.cs",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\hub-connection.cs",
               "RelativeDocumentMoniker": "client-app\\hub-connection.cs",
               "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\hub-connection.cs",
               "RelativeToolTip": "client-app\\hub-connection.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
+              "ViewState": "AQIAABAAAAAAAAAAAAAgwB8AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T13:20:43.13Z"
+              "WhenOpened": "2025-05-05T13:20:43.13Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "accuracy.cs",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.cs",
               "RelativeDocumentMoniker": "client-app\\games\\accuracy.cs",
               "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.cs",
               "RelativeToolTip": "client-app\\games\\accuracy.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-22T14:31:34.709Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "accuracy.cs [Design]",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.cs",
               "RelativeDocumentMoniker": "client-app\\games\\accuracy.cs",
-              "ToolTip": "C:\\Users\\boyss\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\games\\accuracy.cs [Design]",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.cs [Design]",
+              "RelativeToolTip": "client-app\\games\\accuracy.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T14:24:55.346Z"
+              "WhenOpened": "2025-05-22T14:24:55.346Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "profile.cs",
-              "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\menus\\profile.cs",
-              "RelativeDocumentMoniker": "client-app\\menus\\profile.cs",
-              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\menus\\profile.cs",
-              "RelativeToolTip": "client-app\\menus\\profile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-12T10:34:51.368Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "accuracy.Designer.cs",
               "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.Designer.cs",
               "RelativeDocumentMoniker": "client-app\\games\\accuracy.Designer.cs",
               "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\client-app\\client-app\\games\\accuracy.Designer.cs",
               "RelativeToolTip": "client-app\\games\\accuracy.Designer.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAABgAAAAsAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAH8AAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T14:33:30.179Z"
+              "WhenOpened": "2025-05-22T14:33:30.179Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

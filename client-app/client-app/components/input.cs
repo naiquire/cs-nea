@@ -45,8 +45,8 @@ namespace client_app.components
         {
             panel_input = new Panel()
             {
-                Location = new System.Drawing.Point(coords.x, coords.y),
-                Size = new System.Drawing.Size(size.x, size.y),
+                Location = new Point(coords.x, coords.y),
+                Size = new Size(size.x, size.y),
                 Name = "panel_input",
                 TabIndex = 0,
             };

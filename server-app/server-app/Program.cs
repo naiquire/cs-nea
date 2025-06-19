@@ -113,7 +113,7 @@ namespace server_app
                     setup.UseEndpoints(endpoints =>
                     {
                         endpoints.MapHub<connection>("/cs-nea/connections");
-                        endpoints.MapHub<Accounts>("/cs-nea/accounts");
+                        endpoints.MapHub<accounts>("/cs-nea/accounts");
                     });
                 });
                 config.UseUrls("http://0.0.0.0:3900");
