@@ -16,7 +16,7 @@ namespace client_app
         HubConnection connection;
         public login()
         {
-            initialiseComponent();
+            InitializeComponent();
             initialiseConnection();
 
             btn_requestAccount.Enabled = false;

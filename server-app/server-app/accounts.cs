@@ -9,6 +9,7 @@ namespace server_app
     {
         public override Task OnConnectedAsync()
         {
+            Console.WriteLine("bazinga");
             return base.OnConnectedAsync();
         }
         public async void loginRequest(string userID, string password)
@@ -20,7 +21,7 @@ namespace server_app
         }
         public async void accountRequest(string userID, string password)
         {
-            if (database.accountRequest(userID, hashPassword(password), out int success))
+            if (database.accountRequest(userID, hashPassword(password), "en-gb", out int success))
             {
                 await Clients.Caller.SendAsync("accountSuccess", success);
             }

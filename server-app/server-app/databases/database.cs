@@ -10,13 +10,23 @@ namespace server_app.databases
         public string aboutMe;
         public DateTime dateCreated;
         public int rank;
-
-
+        public string localisation;
     }
     public static class @database
     {
         private static readonly string dbPath = @"Data Source=C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\databases\maindb.sqlite";
         private static readonly SqliteConnection connection = new(dbPath);
+        public static void toggleConnection(bool open)
+        {
+            if (open)
+            {
+                connection.Open();
+            }
+            else
+            {
+                connection.Close();
+            }
+        }
         public static void outputException(Exception ex)
         {
             // if exception occurs then log the message and allow the client to try again
@@ -65,37 +75,45 @@ namespace server_app.databases
                 return false;
             }
         }
-        public static bool accountRequest(string userID, string password, out int success)
+        public static bool accountRequest(string userID, string password, string localisation, out int success)
         {
-            try
+            if (userExists(userID, out bool exists))
             {
-                if (userExists(userID, out bool exists) && !exists)
+                if (exists)
                 {
-                    string query = "INSERT INTO userData VALUES(@userID, @password, @aboutMe, @dateCreated, @rank)";
-                    using (var command = new SqliteCommand(query, connection))
+                    try
                     {
-                        command.Parameters.AddWithValue("@userID", userID);
-                        command.Parameters.AddWithValue("@password", password);
-                        command.Parameters.AddWithValue("@aboutMe", "");
-                        command.Parameters.AddWithValue("@dateCreated", DateTime.UtcNow);
-                        command.Parameters.AddWithValue("@rank", 300);
+                        string query = "INSERT INTO userData VALUES(@userID, @password, @aboutMe, @dateCreated, @rank)";
+                        using (var command = new SqliteCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@userID", userID);
+                            command.Parameters.AddWithValue("@password", password);
+                            command.Parameters.AddWithValue("@aboutMe", "");
+                            command.Parameters.AddWithValue("@dateCreated", DateTime.UtcNow);
+                            command.Parameters.AddWithValue("@rank", 300);
+                            command.Parameters.AddWithValue("@localisation", localisation);
 
-                        command.ExecuteNonQuery();
+                            command.ExecuteNonQuery();
+                        }
+                        success = 1;
                     }
-                    success = 1;
+                    catch (SqliteException ex)
+                    {
+                        outputException(ex);
+                        success = -1;
+                        return false;
+                    }
                 }
                 else
                 {
                     success = 0;
                 }
-                return true;
             }
-            catch (SqliteException ex)
+            else
             {
-                outputException(ex);
                 success = -1;
-                return false;
             }
+            return true;            
         }
         public static bool userExists(string userID, out bool exists)
         {
@@ -139,6 +157,7 @@ namespace server_app.databases
                         userData.aboutMe = reader.GetString(0);
                         userData.dateCreated = reader.GetDateTime(2);
                         userData.rank = reader.GetInt32(3);
+                        userData.localisation = reader.GetString(4);
                     }
                 }
             }

@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void initialiseComponent()
+        private void InitializeComponent()
         {
             this.txt_userID = new System.Windows.Forms.TextBox();
             this.txt_password = new System.Windows.Forms.TextBox();

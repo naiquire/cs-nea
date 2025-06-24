@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
-using server_app.connections;
+using server_app.databases;
 using System.Diagnostics;
 
 namespace server_app
@@ -12,6 +12,7 @@ namespace server_app
             //configServer(args).Run();
             //CreateHostBuilder(args).Build().Run();
             hostBuilder(args).Build().Run();
+            database.toggleConnection(true);
         }
         private static WebApplication configServer(string[] args)  // DOESNT WORK BUT NO CHATGPT SO MAYBE LIKE GET IT WORKING PERHAPS
         {
@@ -43,7 +44,7 @@ namespace server_app
             });
 
             app.MapHub<connections.connection>("/cs-nea/connections");
-            app.MapHub<Accounts>("/cs-nea/accounts");
+            app.MapHub<accounts>("/cs-nea/accounts");
 
 
             // binds to all address on port 3900
@@ -81,6 +82,7 @@ namespace server_app
         }
         private static void killNginx(object? sender, EventArgs e)
         {
+            database.toggleConnection(false);
             var processes = Process.GetProcessesByName("nginx.exe");
             foreach (var process in processes)
             {
@@ -112,7 +114,7 @@ namespace server_app
                     });
                     setup.UseEndpoints(endpoints =>
                     {
-                        endpoints.MapHub<connection>("/cs-nea/connections");
+                        endpoints.MapHub<connections.connection>("/cs-nea/connections");
                         endpoints.MapHub<accounts>("/cs-nea/accounts");
                     });
                 });
@@ -162,7 +164,7 @@ namespace server_app
                             // subclass specifies any further details
 
                             endpoints.MapHub<connections.connection>("/cs-nea/connections");
-                            endpoints.MapHub<Accounts>("/cs-nea/accounts");
+                            endpoints.MapHub<accounts>("/cs-nea/accounts");
 
                         });
                     })
