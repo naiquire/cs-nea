@@ -8,17 +8,17 @@ namespace server_app.connections
     // handles requests for queueing games
     public partial class @connection : Hub
     {
-        public void queueGame(string gameID, string userID)
+        public void queueGame(string gameType, string userID)
         {
             // convert gameID to method name
             try
             {
-                MethodInfo methodInfo = typeof(queueing).GetMethod($"queue_{gameID}") ?? throw new();
-                methodInfo.Invoke(methodInfo, [userID]);
+                MethodInfo? methodInfo = typeof(queueing).GetMethod($"queue_{gameType}");
+                methodInfo?.Invoke(methodInfo, [userID]);
             }
             catch (ArgumentNullException ex)
             {
-                database.outputException($"GameID <{gameID}> could not be found");
+                database.outputException($"Game <{gameType}> could not be found");
                 database.outputException(ex);
             }
             

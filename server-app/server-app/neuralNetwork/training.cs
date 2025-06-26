@@ -10,7 +10,7 @@ namespace server_app.neuralNetwork
             (List<double[]> images, List<int> results) = loadImages();
 
             // random sample of 50 images
-            Random rnd = new Random();
+            Random rnd = new();
             for (int i = 0; i < images.Count / 50; i++)
             {
                 // load sample index
@@ -26,7 +26,7 @@ namespace server_app.neuralNetwork
         }
         public static (List<double[]>, List<int>) loadImages()
         {
-            FileStream fs = new FileStream($@"{data.location}training\images.gz", FileMode.Open, FileAccess.ReadWrite);
+            FileStream fs = new($@"{data.location}training\images.gz", FileMode.Open, FileAccess.ReadWrite);
             CompressionMode cm = CompressionMode.Decompress;
 
             List<double[]> images = [];
@@ -58,7 +58,7 @@ namespace server_app.neuralNetwork
                 }
             }
 
-            fs = new FileStream($@"{data.location}training\labels.gz", FileMode.Open, FileAccess.ReadWrite);
+            fs = new($@"{data.location}training\labels.gz", FileMode.Open, FileAccess.ReadWrite);
 
             using (GZipStream gz = new(fs, cm))
             {

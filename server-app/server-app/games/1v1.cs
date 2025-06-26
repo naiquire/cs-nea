@@ -7,9 +7,9 @@ namespace server_app.games
     {
         public const bool online = true;
 
-        public override async void startGame()
+        public override async void runGame()
         {
-            base.startGame();
+            base.runGame();
 
             List<char> letters = [];
 
@@ -20,7 +20,7 @@ namespace server_app.games
             }
 
             // for each letter send to client
-            for (int letter = 0; letter < letters.Count; letter++)
+            foreach (var letter in letters)
             {
                 startTime = DateTime.UtcNow;
                 await new connection().sendLetter(userIDs, letters[letter]);
@@ -31,18 +31,8 @@ namespace server_app.games
                 evaluate[] evaluates = new evaluate[getPlayerCount()];
                 for (int i = 0; i < userIDs.Count; i++)
                 {
-                    evaluates[i] = new evaluate(currentResponses[userIDs[i]].submission);
-
-                    if (stats.TryGetValue(userIDs[i], out stats currentStats))
-                    {
-                        currentStats.accuracy[i] = evaluates[i].activatedValues[evaluate.layerCount - 1][letter - 65];
-                        currentStats.epochs++;
-                        currentStats.correct += evaluates[i].result == letter - 65 ? 1 : 0;
-                        currentStats.time[i] = currentResponses[userIDs[i]].time - startTime;
-                    }
-                    stats[userIDs[i]] = currentStats;
-
-                    await new connection().sendResults(userIDs[i], stats[userIDs[i]], evaluates[i].result == letter - 65);
+                    bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
+                    await new connection().sendResults(userIDs[i], stats[userIDs[i]], correct);
                 }
 
                 // kill whoever got it wrong as well TODO                                                 ---------------------------------------------------------

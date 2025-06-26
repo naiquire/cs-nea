@@ -6,10 +6,11 @@ namespace server_app.games
 {
     public class @knockout(string userID) : abstractGame(userID, 12)
     {
+        public const bool online = true;
         private List<string> aliveUsers = [];
-        public async override void startGame()
+        public async override void runGame()
         {
-            base.startGame();
+            base.runGame();
             aliveUsers = [.. userIDs];
 
             List<char> letters = [];
@@ -32,19 +33,7 @@ namespace server_app.games
                 evaluate[] evaluates = new evaluate[getPlayerCount()];
                 for (int i = 0; i < aliveUsers.Count; i++)
                 {
-                    evaluates[i] = new evaluate(currentResponses[aliveUsers[i]].submission);
-                    bool correct = evaluates[i].result == letter - 65;
-
-                    if (stats.TryGetValue(aliveUsers[i], out stats currentStats))
-                    {
-                        currentStats.accuracy[i] = evaluates[i].activatedValues[evaluate.layerCount - 1][letter - 65];
-                        currentStats.epochs++;
-                        currentStats.correct += correct ? 1 : 0;
-                        currentStats.time[i] = currentResponses[aliveUsers[i]].time - startTime;
-                    }
-                    stats[userIDs[i]] = currentStats;
-
-                    await new connection().sendResults(aliveUsers[i], stats[aliveUsers[i]], correct);
+                    bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
 
                     if (!correct)
                     {

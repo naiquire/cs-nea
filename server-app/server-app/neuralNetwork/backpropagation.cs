@@ -2,8 +2,8 @@
 {
     public class @backpropagation
     {
-        public static double epochs = 0;
-        public static double correct = 0;
+        public static int epochs = 0;
+        public static int correct = 0;
 
         private readonly double[][] neuronErrors = new double[5][];
         private readonly double learningRate = 0.05;
@@ -59,7 +59,7 @@
             data.saveBiases(biases);
 
             // log cumulative percentage and average loss
-            Console.WriteLine($"{((double)(correct / epochs)) * (double)(100)}%\t{loss.Sum() / loss.Count}");
+            Console.WriteLine($"{correct / epochs * 100.0}%\t{loss.Sum() / loss.Count}");
         }
         private (double[][,], double[][], double) backpropagate(double[] inputValues, int expectedResult, double[][,] weights, double[][] biases)
         {
@@ -92,7 +92,7 @@
                         sum += weights[layer][i, j] * neuronErrors[layer + 1][j];
                     }
                     // sigmoid error function
-                    neuronErrors[layer][i] = sum * dx_sigmoid(network.neuronValues[layer][i]);
+                    neuronErrors[layer][i] = sum * data.dx_sigmoid(network.neuronValues[layer][i]);
                 }
             }
 
@@ -114,8 +114,6 @@
             
             // bias gradients are equal to the neuron errors
             return (weightGradients, neuronErrors, loss); 
-        }
-        private static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
-        private static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));
+        }       
     }
 }

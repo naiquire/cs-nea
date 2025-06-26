@@ -31,7 +31,7 @@ namespace server_app.connections
                 }
             }
         }
-        public async Task sendLetter( List<string> userIDs, char letter)
+        public async Task sendLetter(List<string> userIDs, char letter)
         {
             foreach (string userID in userIDs)
             {

@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Reflection.Metadata;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.Text;
 
 namespace server_app.neuralNetwork
 {
@@ -12,6 +6,23 @@ namespace server_app.neuralNetwork
     {
         public static readonly string location = @"C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\";
         //public static readonly string location = @"H:\Subjects\Computer Science\git\CS-NEA\server-app\server-app\neuralNetwork\data\";
+        public static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
+        public static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));
+        public static double[] softmax(double[] input)
+        {
+            double[] output = new double[input.Length];
+            double sum = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                output[i] = Math.Exp(input[i]);
+                sum += output[i];
+            }
+            for (int i = 0; i < output.Length; i++)
+            {
+                output[i] /= sum;
+            }
+            return output;
+        }
         public static void initialiseParameters()
         {
             // initialise weights
@@ -107,7 +118,7 @@ namespace server_app.neuralNetwork
                 {
                     build.Append($"{biases[i][j]},");
                 }
-                build.Append($"{biases[i][biases[i].Length - 1]}");
+                build.Append($"{biases[i][^1]}");
                 using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
                 {
                     sw.Write(build);
