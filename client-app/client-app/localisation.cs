@@ -19,7 +19,7 @@ namespace client_app
         };
         public static Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
 
-        public static void addWords()
+        public static void addWords() // convert to a text file or something idk
         {
             localisation.Add("Friends", new Dictionary<string, string>()
             {

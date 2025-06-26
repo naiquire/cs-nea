@@ -37,7 +37,7 @@ namespace client_app
         public static string type;
         public static List<string> users;
     }
-    public partial class main : Form
+    public partial class main : abstractMenu
     {
         public static HubConnection connection;
         public static userData userData;

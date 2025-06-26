@@ -1,0 +1,41 @@
+﻿
+using System.Linq.Expressions;
+
+namespace client_app.games
+{
+    partial class accuracy // change to main once completed
+    {
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        protected override void InitializeComponent()
+        {
+            this.txt_letter = new System.Windows.Forms.TextBox();
+            this.panel_main.Controls.Add(this.txt_letter);
+            // 
+            // txt_letter
+            // 
+            this.txt_letter.Font = new System.Drawing.Font("Calibri", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_letter.Location = new System.Drawing.Point(550, 115);
+            this.txt_letter.Name = "txt_letter";
+            this.txt_letter.ReadOnly = true;
+            this.txt_letter.Size = new System.Drawing.Size(92, 86);
+            this.txt_letter.TabIndex = 0;
+            this.txt_letter.Text = "K";
+            this.txt_letter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // accuracy
+            // 
+            this.panel_main.Controls.Add(txt_appName);
+
+            base.InitializeComponent();
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TextBox txt_letter;
+    }
+}

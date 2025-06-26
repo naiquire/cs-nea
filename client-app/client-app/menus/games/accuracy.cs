@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using client_app.menus;
+using Microsoft.AspNetCore.SignalR.Client;
 using System.Windows.Forms;
 
 namespace client_app.games
 {
     // accuracy
-    public partial class accuracy : Form
+    public partial class accuracy : abstractMenu
     {
         public static async void queue_accuracy()
         {
