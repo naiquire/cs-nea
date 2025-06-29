@@ -44,14 +44,14 @@ namespace client_app
         {
             this.panel_friendList = new System.Windows.Forms.Panel();
             this.seperator = new System.Windows.Forms.PictureBox();
-            this.txt_friendsLabel = new System.Windows.Forms.TextBox();
+            this.lbl_friendsLabel = new System.Windows.Forms.Label();
             this.btn_queueAccuracy = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pic_play = new System.Windows.Forms.PictureBox();
 
             this.panel_topBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
             this.panel_main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_play)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_friendList
@@ -76,16 +76,16 @@ namespace client_app
             // 
             // txt_friendsLabel
             // 
-            this.txt_friendsLabel.BackColor = this.panel_left.BackColor;
-            this.txt_friendsLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_friendsLabel.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_friendsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
-            this.txt_friendsLabel.Location = new System.Drawing.Point(100, 20);
-            this.txt_friendsLabel.Name = "txt_friendsLabel";
-            this.txt_friendsLabel.Size = new System.Drawing.Size(100, 33);
-            this.txt_friendsLabel.TabIndex = 0;
-            this.txt_friendsLabel.Text = "Friends";
-            this.txt_friendsLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lbl_friendsLabel.BackColor = this.panel_left.BackColor;
+            this.lbl_friendsLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_friendsLabel.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_friendsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+            this.lbl_friendsLabel.Location = new System.Drawing.Point(100, 20);
+            this.lbl_friendsLabel.Name = "txt_friendsLabel";
+            this.lbl_friendsLabel.Size = new System.Drawing.Size(100, 33);
+            this.lbl_friendsLabel.TabIndex = 0;
+            this.lbl_friendsLabel.Text = "Friends";
+            this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_queueAccuracy
             // 
@@ -99,25 +99,25 @@ namespace client_app
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::client_app.Properties.Resources.play;
-            this.pictureBox1.Location = new System.Drawing.Point(360, 20);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 131);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pic_play.Image = global::client_app.Properties.Resources.play;
+            this.pic_play.Location = new System.Drawing.Point(360, 20);
+            this.pic_play.Name = "pictureBox1";
+            this.pic_play.Size = new System.Drawing.Size(400, 131);
+            this.pic_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_play.TabIndex = 0;
+            this.pic_play.TabStop = false;
             //
             // main
             //
-            this.panel_main.Controls.Add(pictureBox1);
+            this.panel_main.Controls.Add(pic_play);
             this.panel_main.Controls.Add(btn_queueAccuracy);
             this.panel_left.Controls.Add(panel_friendList);
             this.panel_left.Controls.Add(seperator);
-            this.panel_left.Controls.Add(txt_friendsLabel);
+            this.panel_left.Controls.Add(lbl_friendsLabel);
 
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
             this.panel_main.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_play)).EndInit();
             this.ResumeLayout(false);
 
             base.InitializeComponent();
@@ -252,8 +252,8 @@ namespace client_app
 
         private Panel panel_friendList;
         private PictureBox seperator;
-        private PictureBox pictureBox1;
-        private TextBox txt_friendsLabel;
+        private PictureBox pic_play;
+        private Label lbl_friendsLabel;
         private Button btn_queueAccuracy;
 
         #endregion

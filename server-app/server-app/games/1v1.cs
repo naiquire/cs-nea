@@ -11,13 +11,7 @@ namespace server_app.games
         {
             base.runGame();
 
-            List<char> letters = [];
-
-            Random rnd = new();
-            for (int i = 0; i < 10; i++)
-            {
-                letters.Add((char)(rnd.Next(0, 26) + 65));
-            }
+            var letters = generateLetters(10);
 
             // for each letter send to client
             foreach (var letter in letters)

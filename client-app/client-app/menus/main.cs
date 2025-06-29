@@ -84,8 +84,7 @@ namespace client_app
         {
             userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 
-            profile profile = new profile(panel_main);
-            panel_main = profile.applyControls(user);
+            profile profile = new profile(user);
         }
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)

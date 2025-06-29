@@ -11,7 +11,7 @@ namespace client_app.menus
     {
         protected Panel panel_topBorder;
         protected Button btn_close;
-        protected TextBox txt_appName;
+        protected Label lbl_appName;
         protected Panel panel_left;
         protected Panel panel_topLeft;
         protected Panel panel_main;
@@ -22,7 +22,7 @@ namespace client_app.menus
             Controls.Clear();
 
             panel_topBorder = new Panel();
-            txt_appName = new TextBox();
+            lbl_appName = new Label();
             btn_close = new Button();
             panel_left = new Panel();
             panel_topLeft = new Panel();
@@ -36,7 +36,7 @@ namespace client_app.menus
             // panel_topBorder
             // 
             panel_topBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-            panel_topBorder.Controls.Add(txt_appName);
+            panel_topBorder.Controls.Add(lbl_appName);
             panel_topBorder.Controls.Add(btn_close);
             panel_topBorder.Location = new System.Drawing.Point(0, 0);
             panel_topBorder.Name = "panel_topBorder";
@@ -45,14 +45,14 @@ namespace client_app.menus
             // 
             // txt_appName
             // 
-            txt_appName.BackColor = panel_topBorder.BackColor;
-            txt_appName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txt_appName.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            txt_appName.Location = new System.Drawing.Point(10, 7);
-            txt_appName.Name = "txt_appName";
-            txt_appName.Size = new System.Drawing.Size(100, 16);
-            txt_appName.TabIndex = 0;
-            txt_appName.Text = "appName";
+            lbl_appName.BackColor = panel_topBorder.BackColor;
+            lbl_appName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            lbl_appName.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lbl_appName.Location = new System.Drawing.Point(10, 7);
+            lbl_appName.Name = "txt_appName";
+            lbl_appName.Size = new System.Drawing.Size(100, 16);
+            lbl_appName.TabIndex = 0;
+            lbl_appName.Text = "appName";
             // 
             // btn_close
             // 

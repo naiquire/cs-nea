@@ -1,23 +1,23 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace client_app.menus
 {
-    public class profile : Form
+    public partial class profile : abstractMenu
     {
-        private Panel panel;
-        public profile(Panel main)
+        private readonly userData userData;
+        public profile(userData user)
         {
-            panel = main;
-        }
-        public Panel applyControls(userData userData)
-        {
-            panel.SuspendLayout();
+            userData = user;
 
-            panel.Controls.Clear();
-            // add profile control stuff here
-
-            panel.ResumeLayout();
-            return panel;
+            InitializeComponent();
         }
     }
 }

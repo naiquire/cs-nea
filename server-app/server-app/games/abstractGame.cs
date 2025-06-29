@@ -38,7 +38,7 @@ namespace server_app.games
             gameID = userID + DateTime.UtcNow.ToString();
             queueUser(userID);                       
         }
-        public async Task<TaskCompletionSource<bool>> awaitResponses(TaskCompletionSource<bool> receivedAll)
+        protected async Task<TaskCompletionSource<bool>> awaitResponses(TaskCompletionSource<bool> receivedAll)
         {
             if (currentResponses.Count == getPlayerCount())
             {
@@ -63,6 +63,17 @@ namespace server_app.games
 
             return correct;
         }
+        protected List<char> generateLetters(int count)
+        {
+            List<char> letters = [];
+
+            Random rnd = new();
+            for (int i = 0; i < count; i++)
+            {
+                letters.Add((char)(rnd.Next(0, 26) + 65));
+            }
+            return letters;
+        }
         public async void queueUser(string userID)
         {
             userIDs.Add(userID);
@@ -78,7 +89,7 @@ namespace server_app.games
             foreach (string user in userIDs)
             {
                 stats.Add(user, new stats());
-            }9
+            }
             await new connection().sendStartRequest(userIDs);
         }
         public int getMaxPlayers() => maxPlayers;

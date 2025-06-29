@@ -1,10 +1,29 @@
 ﻿
+using client_app.menus;
 using System.Linq.Expressions;
 
 namespace client_app.games
 {
-    partial class accuracy // change to main once completed
+    partial class accuracy : abstractMenu // change to main once completed
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -13,7 +32,7 @@ namespace client_app.games
         /// </summary>
         protected override void InitializeComponent()
         {
-            this.txt_letter = new System.Windows.Forms.TextBox();
+            this.txt_letter = new System.Windows.Forms.Label();
             this.panel_main.Controls.Add(this.txt_letter);
             // 
             // txt_letter
@@ -21,21 +40,20 @@ namespace client_app.games
             this.txt_letter.Font = new System.Drawing.Font("Calibri", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_letter.Location = new System.Drawing.Point(550, 115);
             this.txt_letter.Name = "txt_letter";
-            this.txt_letter.ReadOnly = true;
             this.txt_letter.Size = new System.Drawing.Size(92, 86);
             this.txt_letter.TabIndex = 0;
             this.txt_letter.Text = "K";
-            this.txt_letter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_letter.TextAlign = (System.Drawing.ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // accuracy
             // 
-            this.panel_main.Controls.Add(txt_appName);
+            this.panel_main.Controls.Add(lbl_appName);
 
             base.InitializeComponent();
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox txt_letter;
+        private System.Windows.Forms.Label txt_letter;
     }
 }
