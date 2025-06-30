@@ -14,8 +14,6 @@ namespace client_app
             "en",
             "fr",
             "es",
-
-            "jp",
         };
         public static Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
 
@@ -26,8 +24,6 @@ namespace client_app
                 {"en", "Friends" },
                 {"fr", "Amis" },
                 {"es", "Amigos" },
-
-                {"jp", "友達" },
             });
         }
     }

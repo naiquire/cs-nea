@@ -1,26 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\",
+  "WorkspaceRootPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|h:\\subjects\\computer science\\git\\cs-nea\\server-app\\server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\1v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\1v1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|h:\\subjects\\computer science\\git\\cs-nea\\server-app\\server-app\\neuralnetwork\\training.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\training.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\games\\knockout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\games\\knockout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|h:\\subjects\\computer science\\git\\cs-nea\\server-app\\server-app\\neuralnetwork\\evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\evaluate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\connections\\games.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|h:\\subjects\\computer science\\git\\cs-nea\\server-app\\server-app\\neuralnetwork\\backpropagation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\backpropagation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|h:\\subjects\\computer science\\git\\cs-nea\\server-app\\server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\neuralnetwork\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,68 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "knockout.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\knockout.cs",
-              "RelativeDocumentMoniker": "server-app\\games\\knockout.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\knockout.cs",
-              "RelativeToolTip": "server-app\\games\\knockout.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T15:00:36.401Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "accuracy.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
-              "RelativeDocumentMoniker": "server-app\\games\\accuracy.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\accuracy.cs",
-              "RelativeToolTip": "server-app\\games\\accuracy.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
+              "Title": "abstractGame.cs",
+              "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\games\\abstractGame.cs",
+              "RelativeDocumentMoniker": "server-app\\games\\abstractGame.cs",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\games\\abstractGame.cs",
+              "RelativeToolTip": "server-app\\games\\abstractGame.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAwwC4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T15:00:31.454Z",
+              "WhenOpened": "2025-06-30T12:40:41.235Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "abstractGame.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractGame.cs",
-              "RelativeDocumentMoniker": "server-app\\games\\abstractGame.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\abstractGame.cs",
-              "RelativeToolTip": "server-app\\games\\abstractGame.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwEkAAAANAAAAAAAAAA==",
+              "Title": "training.cs",
+              "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\training.cs",
+              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\training.cs",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\training.cs",
+              "RelativeToolTip": "server-app\\neuralNetwork\\training.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAQwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T14:56:06.526Z"
+              "WhenOpened": "2025-06-30T12:38:51.543Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "1v1.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\1v1.cs",
-              "RelativeDocumentMoniker": "server-app\\games\\1v1.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\games\\1v1.cs",
-              "RelativeToolTip": "server-app\\games\\1v1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAArAAAAAAAAAA==",
+              "Title": "evaluate.cs",
+              "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\evaluate.cs",
+              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\evaluate.cs",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\evaluate.cs",
+              "RelativeToolTip": "server-app\\neuralNetwork\\evaluate.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T14:55:39.677Z"
+              "WhenOpened": "2025-06-30T12:38:50.867Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "games.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\games.cs",
-              "RelativeDocumentMoniker": "server-app\\connections\\games.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\connections\\games.cs",
-              "RelativeToolTip": "server-app\\connections\\games.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "data.cs",
+              "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\data.cs",
+              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\data.cs",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\data.cs",
+              "RelativeToolTip": "server-app\\neuralNetwork\\data.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T14:55:36.012Z"
+              "WhenOpened": "2025-06-30T12:38:50.298Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "backpropagation.cs",
+              "DocumentMoniker": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
+              "RelativeDocumentMoniker": "server-app\\neuralNetwork\\backpropagation.cs",
+              "ToolTip": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
+              "RelativeToolTip": "server-app\\neuralNetwork\\backpropagation.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T12:38:49.761Z"
             }
           ]
         }
