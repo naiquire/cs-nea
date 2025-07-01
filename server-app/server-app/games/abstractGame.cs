@@ -23,7 +23,7 @@ namespace server_app.games
     {
         protected List<string> userIDs;
         public string gameID;
-        protected int maxPlayers { get; }
+        protected int maxPlayers;
         protected DateTime startTime;
 
         protected Dictionary<string, stats> stats;

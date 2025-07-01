@@ -7,11 +7,6 @@ namespace server_app
 {
     public class @accounts : Hub
     {
-        public override Task OnConnectedAsync()
-        {
-            Console.WriteLine("bazinga");
-            return base.OnConnectedAsync();
-        }
         public async void loginRequest(string userID, string password)
         {
             if (database.loginRequest(userID, hashPassword(password), out int success))
