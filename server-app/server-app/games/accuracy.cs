@@ -5,12 +5,13 @@ using System.Reflection;
 
 namespace server_app.games
 {
-    // 1 player game
-    // measures time and accuracy only, basically training???
     public class @accuracy(string userID) : abstractGame(userID, 1)
     {
         public const bool online = false;
 
+        /// <summary>
+        /// Sets up and starts the current game.
+        /// </summary>
         public override async void runGame()
         {
             base.runGame();
@@ -30,7 +31,7 @@ namespace server_app.games
                 for (int i = 0; i < userIDs.Count; i++)
                 {
                     bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
-                    await new connection().sendResults(userIDs[i], stats[userIDs[i]], correct);
+                    await new connection().sendResults(userIDs[i], stats[userIDs[i]]);
                 }
             }            
         }

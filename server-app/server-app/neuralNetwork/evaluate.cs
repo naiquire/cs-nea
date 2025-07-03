@@ -17,7 +17,7 @@ namespace server_app.neuralNetwork
         public int? result;
         public evaluate(double[] input)
         {
-            // initialise input layer6
+            // initialise input layer
             neuronValues[0] = input;
             activatedValues[0] = input;
 

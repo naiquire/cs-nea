@@ -7,16 +7,30 @@ namespace server_app
 {
     public class @accounts : Hub
     {
+        /// <summary>
+        /// Handles a login request from a client, and returns a success code.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="password"></param>
         public async void loginRequest(string userID, string password)
         {
             if (database.loginRequest(userID, hashPassword(password), out int success))
             {
                 await Clients.Caller.SendAsync("loginSuccess", success); 
             }
+            else
+            {
+                database.outputException($"Login failed for user <{userID}>");
+            }
         }
-        public async void accountRequest(string userID, string password)
+        /// <summary>
+        /// Handles an account creation request from a client, and returns a success code.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="password"></param>
+        public async void accountRequest(string userID, string password, string localisation)
         {
-            if (database.accountRequest(userID, hashPassword(password), "en-gb", out int success))
+            if (database.accountRequest(userID, hashPassword(password), localisation, out int success))
             {
                 await Clients.Caller.SendAsync("accountSuccess", success);
             }

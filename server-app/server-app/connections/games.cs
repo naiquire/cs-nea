@@ -45,18 +45,18 @@ namespace server_app.connections
                 }
             }
         }
-        public async Task sendResults(string userID, stats stats, bool correct)
+        public async Task sendResults(string userID, stats stats)
         {
             if (map.TryGetValue(userID, out string? connectionID))
             {
-                await Clients.Client(connectionID).SendAsync("receiveResults", stats, correct);
+                await Clients.Client(connectionID).SendAsync("receiveResults", stats);
             }
             else
             {
                 throw new Exception($"Client <{userID}> disconnected");
             }
         }
-        public async Task send1v1Result(List<string> userIDs, string winner)
+        public async Task send1v1Result(List<string> userIDs, string? winner)
         {
             foreach (string userID in userIDs)
             {

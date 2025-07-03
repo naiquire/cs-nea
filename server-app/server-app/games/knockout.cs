@@ -8,6 +8,9 @@ namespace server_app.games
     {
         public const bool online = true;
         private List<string> aliveUsers = [];
+        /// <summary>
+        /// Sets up and starts the current game.
+        /// </summary>
         public async override void runGame()
         {
             base.runGame();
