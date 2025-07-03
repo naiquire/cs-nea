@@ -1,39 +1,49 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.neuralNetwork;
+using System.Diagnostics.Metrics;
 using System.Reflection;
 
 namespace server_app.games
 {
-    public class @accuracy(string userID) : abstractGame(userID, 1)
+    public class @accuracy(string userID) : abstractGame(userID, 1), IPlayable
     {
         public const bool online = false;
-
-        /// <summary>
-        /// Sets up and starts the current game.
-        /// </summary>
-        public override async void runGame()
+        private int count = 0;
+        public override void startGame()
         {
-            base.runGame();
+            base.startGame();
+            submissionPhase();
+        }
+        public async void submissionPhase()
+        {
+            char letter = (char)(rnd.Next(0, 26) + 65);
+            letters.Add(letter);
 
-            var letters = generateLetters(10);
-
-            // for each letter send to client
-            foreach (var letter in letters)
+            startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
+            await new connection().sendLetter(userIDs, letters[count]);
+        }
+        public void loadResponse(string userID, double[] input)
+        {
+            currentResponses.Add(userID, (input, DateTime.UtcNow));
+            if (currentResponses.Count == getPlayerCount())
             {
-                startTime = DateTime.UtcNow;
-                await new connection().sendLetter(userIDs, letter);
+                evaluationPhase(letters[count]);
+            }
+        }
+        public async void evaluationPhase(char letter)
+        {
+            evaluate[] evaluates = new evaluate[getPlayerCount()];
+            for (int i = 0; i < userIDs.Count; i++)
+            {
+                evaluateSubmission(ref evaluates, i, userIDs, letter);
+                await new connection().sendResults(userIDs[i], stats[userIDs[i]]);
+            }
 
-                TaskCompletionSource<bool> receivedAll = new();
-                await awaitResponses(receivedAll);
-
-                evaluate[] evaluates = new evaluate[getPlayerCount()];
-                for (int i = 0; i < userIDs.Count; i++)
-                {
-                    bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
-                    await new connection().sendResults(userIDs[i], stats[userIDs[i]]);
-                }
-            }            
+            if (count++ < 10)
+            {
+                submissionPhase();
+            }
         }
     }
 }

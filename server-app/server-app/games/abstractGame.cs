@@ -23,12 +23,35 @@ namespace server_app.games
             this.time.Add(time);
         }
     }
+    public interface IPlayable
+    {
+        void startGame();
+        /// <summary>
+        /// Calls for the next iteration of the game.
+        /// </summary>
+        /// <param name="letter"></param>
+        void submissionPhase();
+        /// <summary>
+        /// Loads a submission into the game class and ends the submission phase if all responses are present.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="input"></param>
+        void loadResponse(string userID, double[] input);
+        /// <summary>
+        /// Evaluates responses and sends statistics to clients. Calls the next submission phase if available.
+        /// </summary>
+        /// <param name="letter"></param>
+        void evaluationPhase(char letter);
+    }
     public abstract class abstractGame
     {
         protected List<string> userIDs;
         public string gameID;
         protected int maxPlayers;
         protected DateTime startTime;
+
+        protected List<char> letters;
+        protected Random rnd;
 
         protected Dictionary<string, stats> stats;
         protected Dictionary<string, (double[] submission, DateTime time)> currentResponses = [];
@@ -43,6 +66,8 @@ namespace server_app.games
             userIDs = [];
             this.maxPlayers = maxPlayers;
             stats = [];
+            letters = [];
+            rnd = new();
 
             gameID = userID + DateTime.UtcNow.ToString();
             queueUser(userID);                       
@@ -56,8 +81,7 @@ namespace server_app.games
         /// <param name="i"></param>
         /// <param name="userIDs"></param>
         /// <param name="character"></param>
-        /// <returns>A boolean value representing if the submission is correct.</returns>
-        protected bool evaluateSubmission(ref evaluate[] evaluates, int i, List<string> userIDs, int character)
+        protected void evaluateSubmission(ref evaluate[] evaluates, int i, List<string> userIDs, int character)
         {
             // evaluate the submission
             int letter = character - 65;
@@ -71,8 +95,6 @@ namespace server_app.games
                 currentStats.update(evaluates[i], letter, endTime - startTime,  correct);
             }
             stats[userIDs[i]] = currentStats;
-
-            return correct;
         }
         /// <summary>
         /// Generates a fixed number of random characters from A-Z.
@@ -100,18 +122,9 @@ namespace server_app.games
             await new connection().sendJoinConfirm(userID, gameID);
         }
         /// <summary>
-        /// Loads a submission into the game class.
+        /// Starts the current game and initialises values for statistics for each user.
         /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="input"></param>
-        public void loadResponse(string userID, double[] input)
-        {
-            currentResponses.Add(userID, (input, DateTime.UtcNow));
-        }
-        /// <summary>
-        /// Base function for starting a game. Initialises values for statistics for each user.
-        /// </summary>
-        public virtual async void runGame()
+        public virtual async void startGame()
         {
             foreach (string user in userIDs)
             {

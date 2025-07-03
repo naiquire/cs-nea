@@ -4,55 +4,47 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class @knockout(string userID) : abstractGame(userID, 12)
+    public class @knockout(string userID) : abstractGame(userID, 12), IPlayable
     {
         public const bool online = true;
+
         private List<string> aliveUsers = [];
-        /// <summary>
-        /// Sets up and starts the current game.
-        /// </summary>
-        public async override void runGame()
+        public override void startGame()
         {
-            base.runGame();
             aliveUsers = [.. userIDs];
 
-            List<char> letters = [];
+            base.startGame();
+            submissionPhase();          
+        }
 
-            Random rnd = new();
+        public async void submissionPhase()
+        {
+            char letter = (char)(rnd.Next(0, 26) + 65);
+            letters.Add(letter);
 
-            while (aliveUsers.Count > 1)
+            startTime = DateTime.UtcNow;
+            await new connection().sendLetter(aliveUsers, letter);
+        }
+        public void loadResponse(string userID, double[] input)
+        {
+            currentResponses.Add(userID, (input, DateTime.UtcNow));
+            if (currentResponses.Count == aliveUsers.Count)
             {
-                // send letter to all
-                char letter = (char)(rnd.Next(0, 26) + 65);
-                letters.Add(letter);
-
-                startTime = DateTime.UtcNow;
-                await new connection().sendLetter(aliveUsers, letter);
-
-                TaskCompletionSource<bool> receivedAll = new();
-                await awaitResponses(receivedAll);
-
-                bool allCorrect = true;
-                evaluate[] evaluates = new evaluate[getPlayerCount()];
-                for (int i = 0; i < aliveUsers.Count; i++)
-                {
-                    bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
-
-                    if (!correct)
-                    {
-                        aliveUsers.RemoveAt(i);
-                        allCorrect = false;
-                    }
-                }
-
-                if (allCorrect)
-                {
-                    // remove slowest user
-                }
-
-                    //await new connection(). did user make it through current round
+                evaluationPhase(letters[^1]);
             }
-            
+        }
+        public void evaluationPhase(char letter)
+        {
+            evaluate[] evaluates = new evaluate[getPlayerCount()];
+            for (int i = 0; i < aliveUsers.Count; i++)
+            {
+                evaluateSubmission(ref evaluates, i, userIDs, letter);
+            }
+
+            if (aliveUsers.Count > 1)
+            {
+                submissionPhase();
+            }
         }
     }
 }

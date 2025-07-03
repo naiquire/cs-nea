@@ -27,7 +27,7 @@ namespace server_app.games
                 if (game.getPlayerCount() == game.getMaxPlayers())
                 {
                     // async method
-                    game.runGame();
+                    game.startGame();
                 }
                 return true;
             }
