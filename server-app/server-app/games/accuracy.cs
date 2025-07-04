@@ -37,7 +37,7 @@ namespace server_app.games
             for (int i = 0; i < userIDs.Count; i++)
             {
                 evaluateSubmission(ref evaluates, i, userIDs, letter);
-                await new connection().sendResults(userIDs[i], stats[userIDs[i]]);
+                await new connection().sendResult(userIDs[i], stats[userIDs[i]]);
             }
 
             if (count++ < 10)

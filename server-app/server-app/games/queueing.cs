@@ -13,6 +13,7 @@ namespace server_app.games
 
             public static readonly List<abstractGame> test = []; // maybe get this working somehow
         }
+
         /// <summary>
         /// Attempts to queue a user into the current game, and starts the game if the lobby is full.
         /// </summary>
@@ -33,6 +34,7 @@ namespace server_app.games
             }
             return false;
         }
+
         /// <summary>
         /// Queues a user for the Accuracy game type.
         /// </summary>
@@ -50,6 +52,7 @@ namespace server_app.games
             // no game found
             currentGames.accuracy.Add(new accuracy(userID));
         }
+
         /// <summary>
         /// Queues a user for the 1v1 game type.
         /// </summary>
@@ -67,6 +70,7 @@ namespace server_app.games
             // no game found
             currentGames._1v1.Add(new _1v1(userID));
         }
+
         /// <summary>
         /// Queues a user for the Knockout game type.
         /// </summary>

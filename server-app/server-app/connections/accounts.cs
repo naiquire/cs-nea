@@ -1,9 +1,17 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.SignalR;
 using server_app.databases;
 
 namespace server_app.connections
 {
     // handles login and account requests
+    public class DisconnectException : Exception
+    {
+        public DisconnectException(string userID)
+        {
+            database.outputException($"Client has disconnected : <{userID}>");
+        }
+    }
     public partial class @connection : Hub
     {
         private static Dictionary<string, string> map = [];

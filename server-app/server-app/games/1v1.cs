@@ -35,7 +35,7 @@ namespace server_app.games
             for (int i = 0; i < userIDs.Count; i++)
             {
                 evaluateSubmission(ref evaluates, i, userIDs, letter);
-                await new connection().sendResults(userIDs[i], stats[userIDs[i]]);
+                await new connection().sendResult(userIDs[i], stats[userIDs[i]]);
             }
 
 
@@ -55,10 +55,12 @@ namespace server_app.games
 
             if (correctUsers.Count == 0)
             {
-                await new connection().send1v1Result(userIDs, null);
+                // if none correct then a winner is not determined
+                await new connection().send1v1Results(userIDs, null);
             }
             else
             {
+                // otherwise the user with the lowest time who is also correct is the winner
                 (string user, TimeSpan time) lowest = ("", TimeSpan.MaxValue);
                 foreach (string userID in correctUsers)
                 {
@@ -69,9 +71,8 @@ namespace server_app.games
                     }
                 }
 
-                await new connection().send1v1Result(userIDs, lowest.user);
+                await new connection().send1v1Results(userIDs, lowest.user);
             }
-
 
             // call next submission phase
             if (count++ < 10)

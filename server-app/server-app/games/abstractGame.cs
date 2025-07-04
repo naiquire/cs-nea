@@ -9,6 +9,7 @@ namespace server_app.games
         public List<bool> correct;
         public List<double> accuracy;
         public List<TimeSpan> time;
+
         /// <summary>
         /// Updates the current statistics for the user.
         /// </summary>
@@ -72,7 +73,45 @@ namespace server_app.games
             gameID = userID + DateTime.UtcNow.ToString();
             queueUser(userID);                       
         }
-        
+
+        /// <summary>
+        /// Queues a user into the current game and sends a confirmation to the user.
+        /// </summary>
+        /// <param name="userID"></param>
+        public async void queueUser(string userID)
+        {
+            userIDs.Add(userID);
+            await new connection().sendJoinConfirm(userID, gameID);
+        }
+
+        /// <summary>
+        /// Starts the current game and initialises values for statistics for each user.
+        /// </summary>
+        public virtual async void startGame()
+        {
+            foreach (string user in userIDs)
+            {
+                stats.Add(user, new stats());
+            }
+            await new connection().sendStartRequest(userIDs);
+        }
+
+        /// <summary>
+        /// Generates a fixed number of random characters from A-Z.
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns>A list of random characters.</returns>
+        protected List<char> generateLetters(int count)
+        {
+            List<char> letters = [];
+
+            Random rnd = new();
+            for (int i = 0; i < count; i++)
+            {
+                letters.Add((char)(rnd.Next(0, 26) + 65));
+            }
+            return letters;
+        }
 
         /// <summary>
         /// Evaluates a user's submission and updates their current statistics.
@@ -96,53 +135,16 @@ namespace server_app.games
             }
             stats[userIDs[i]] = currentStats;
         }
-        /// <summary>
-        /// Generates a fixed number of random characters from A-Z.
-        /// </summary>
-        /// <param name="count"></param>
-        /// <returns>A list of random characters.</returns>
-        protected List<char> generateLetters(int count)
-        {
-            List<char> letters = [];
 
-            Random rnd = new();
-            for (int i = 0; i < count; i++)
-            {
-                letters.Add((char)(rnd.Next(0, 26) + 65));
-            }
-            return letters;
-        }
-        /// <summary>
-        /// Queues a user into the current game and sends a confirmation to the user.
-        /// </summary>
-        /// <param name="userID"></param>
-        public async void queueUser(string userID)
-        {
-            userIDs.Add(userID);
-            await new connection().sendJoinConfirm(userID, gameID);
-        }
-        /// <summary>
-        /// Starts the current game and initialises values for statistics for each user.
-        /// </summary>
-        public virtual async void startGame()
-        {
-            foreach (string user in userIDs)
-            {
-                stats.Add(user, new stats());
-            }
-            await new connection().sendStartRequest(userIDs);
-        }
         /// <summary>
         /// Gets the maximum number of players that can join the game.
         /// </summary>
         public int getMaxPlayers() => maxPlayers;
+
         /// <summary>
         /// Gets the number of players currently in the game
         /// </summary>
         public int getPlayerCount() => userIDs.Count;
-
-
-
     }
     
 }
