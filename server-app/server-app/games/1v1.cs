@@ -1,10 +1,11 @@
-﻿using server_app.connections;
+﻿using Microsoft.AspNetCore.SignalR;
+using server_app.connections;
 using server_app.neuralNetwork;
 using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class _1v1(string userID) : abstractGame(userID, 2), IPlayable
+    public class _1v1(string userID, IHubContext<connection> context) : abstractGame(context, userID, 2), IPlayable
     {
         public const bool online = true;
         private int count = 0;
@@ -19,7 +20,7 @@ namespace server_app.games
             letters.Add(letter);
 
             startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
-            await new connection().sendLetter(userIDs, letters[count]);
+            await sendLetter(userIDs, letters[count]);
         }
         public void loadResponse(string userID, double[] input)
         {
@@ -35,14 +36,8 @@ namespace server_app.games
             for (int i = 0; i < userIDs.Count; i++)
             {
                 evaluateSubmission(ref evaluates, i, userIDs, letter);
-                await new connection().sendResult(userIDs[i], stats[userIDs[i]]);
+                await sendResult(userIDs[i], stats[userIDs[i]]);
             }
-
-
-            /// <summary>
-            /// currently this is NEARLY generalized for any amount of players so could be used for knockout. only problem is send1v1Result which needs to be reworked somehow
-            /// could also pass the game type as a parameter if this was to be abstracted 
-            /// </summary>
 
             List<string> correctUsers = [];
             foreach (string user in stats.Keys)
@@ -56,7 +51,7 @@ namespace server_app.games
             if (correctUsers.Count == 0)
             {
                 // if none correct then a winner is not determined
-                await new connection().send1v1Results(userIDs, null);
+                await send1v1Results(userIDs, null);
             }
             else
             {
@@ -71,13 +66,35 @@ namespace server_app.games
                     }
                 }
 
-                await new connection().send1v1Results(userIDs, lowest.user);
+                await send1v1Results(userIDs, lowest.user);
             }
 
             // call next submission phase
             if (count++ < 10)
             {
                 submissionPhase();
+            }
+        }
+
+        /// <summary>
+        /// Sends the unique results to users for the 1v1 game type.
+        /// </summary>
+        /// <param name="userIDs"></param>
+        /// <param name="winner"></param>
+        /// <returns></returns>
+        /// <exception cref="DisconnectException"></exception>
+        public async Task send1v1Results(List<string> userIDs, string? winner)
+        {
+            foreach (string userID in userIDs)
+            {
+                if (connection.map.TryGetValue(userID, out string? connectionID))
+                {
+                    await hubContext.Clients.Client(connectionID).SendAsync("receive1v1Result", winner);
+                }
+                else
+                {
+                    throw new DisconnectException(userID);
+                }
             }
         }
     }

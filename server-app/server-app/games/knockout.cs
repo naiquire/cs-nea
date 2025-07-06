@@ -1,10 +1,11 @@
-﻿using server_app.connections;
+﻿using Microsoft.AspNetCore.SignalR;
+using server_app.connections;
 using server_app.neuralNetwork;
 using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class @knockout(string userID) : abstractGame(userID, 12), IPlayable
+    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, userID, 12), IPlayable
     {
         public const bool online = true;
         private List<string> aliveUsers = [];
@@ -21,7 +22,7 @@ namespace server_app.games
             letters.Add(letter);
 
             startTime = DateTime.UtcNow;
-            await new connection().sendLetter(aliveUsers, letter);
+            await sendLetter(aliveUsers, letter);
         }
         public void loadResponse(string userID, double[] input)
         {
@@ -37,7 +38,7 @@ namespace server_app.games
             for (int i = 0; i < aliveUsers.Count; i++)
             {
                 evaluateSubmission(ref evaluates, i, userIDs, letter);
-                await new connection().sendResult(userIDs[i], stats[userIDs[i]]);
+                await sendResult(userIDs[i], stats[userIDs[i]]);
             }
 
             List<string> incorrectUsers = [];
@@ -73,11 +74,33 @@ namespace server_app.games
                 }
             }
 
-            await new connection().sendKnockoutResults(userIDs, aliveUsers);
+            await sendKnockoutResults(userIDs, aliveUsers);
 
             if (aliveUsers.Count > 1)
             {
                 submissionPhase();
+            }
+        }
+
+        /// <summary>
+        /// Sends the unique results to users for the knockout game type.
+        /// </summary>
+        /// <param name="userIDs"></param>
+        /// <param name="aliveUsers"></param>
+        /// <returns></returns>
+        /// <exception cref="DisconnectException"></exception>
+        public async Task sendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
+        {
+            foreach (string userID in userIDs)
+            {
+                if (connection.map.TryGetValue(userID, out string? connectionID))
+                {
+                    await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers.Contains(userID));
+                }
+                else
+                {
+                    throw new DisconnectException(userID);
+                }
             }
         }
     }

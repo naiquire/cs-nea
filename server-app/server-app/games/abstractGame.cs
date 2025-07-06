@@ -1,4 +1,5 @@
-﻿using server_app.connections;
+﻿using Microsoft.AspNetCore.SignalR;
+using server_app.connections;
 using server_app.neuralNetwork;
 using System.Diagnostics.Metrics;
 
@@ -46,29 +47,33 @@ namespace server_app.games
     }
     public abstract class abstractGame
     {
+        public IHubContext<connection> hubContext;
+
         protected List<string> userIDs;
         public string gameID;
         protected int maxPlayers;
-        protected DateTime startTime;
 
         protected List<char> letters;
         protected Random rnd;
 
+        protected DateTime startTime;
         protected Dictionary<string, stats> stats;
-        protected Dictionary<string, (double[] submission, DateTime time)> currentResponses = [];
+        protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
 
         /// <summary>
         /// Base initialisation for the game classes. Automatically queues the user into the respective game.
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="maxPlayers"></param>
-        public abstractGame(string userID, int maxPlayers)
+        public abstractGame(IHubContext<connection> context, string userID, int maxPlayers)
         {
             userIDs = [];
             this.maxPlayers = maxPlayers;
             stats = [];
             letters = [];
             rnd = new();
+            hubContext = context;
+            currentResponses = [];
 
             gameID = userID + DateTime.UtcNow.ToString();
             queueUser(userID);                       
@@ -78,22 +83,43 @@ namespace server_app.games
         /// Queues a user into the current game and sends a confirmation to the user.
         /// </summary>
         /// <param name="userID"></param>
+        /// <exception cref="DisconnectException"></exception>
         public async void queueUser(string userID)
         {
             userIDs.Add(userID);
-            await new connection().sendJoinConfirm(userID, gameID);
+
+            if (connection.map.TryGetValue(userID, out string? connectionID))
+            {
+                await hubContext.Clients.Client(connectionID).SendAsync("receiveJoinConfirm", gameID);
+            }
+            else
+            {
+                throw new DisconnectException(userID);
+            }
         }
 
         /// <summary>
         /// Starts the current game and initialises values for statistics for each user.
         /// </summary>
+        /// <exception cref="DisconnectException"></exception>
         public virtual async void startGame()
         {
             foreach (string user in userIDs)
             {
                 stats.Add(user, new stats());
             }
-            await new connection().sendStartRequest(userIDs);
+
+            foreach (string userID in userIDs)
+            {
+                if (connection.map.TryGetValue(userID, out string? connectionID))
+                {
+                    await hubContext.Clients.Client(connectionID).SendAsync("startGame", userIDs);
+                }
+                else
+                {
+                    throw new DisconnectException(userID);
+                }
+            }
         }
 
         /// <summary>
@@ -111,6 +137,28 @@ namespace server_app.games
                 letters.Add((char)(rnd.Next(0, 26) + 65));
             }
             return letters;
+        }
+
+        /// <summary>
+        /// Sends a character to the given users.
+        /// </summary>
+        /// <param name="userIDs"></param>
+        /// <param name="letter"></param>
+        /// <returns></returns>
+        /// <exception cref="DisconnectException"></exception>
+        protected async Task sendLetter(List<string> userIDs, char letter)
+        {
+            foreach (string userID in userIDs)
+            {
+                if (connection.map.TryGetValue(userID, out string? connectionID))
+                {
+                    await hubContext.Clients.Client(connectionID).SendAsync("receiveLetter", letter);
+                }
+                else
+                {
+                    throw new DisconnectException(userID);
+                }
+            }
         }
 
         /// <summary>
@@ -134,6 +182,25 @@ namespace server_app.games
                 currentStats.update(evaluates[i], letter, endTime - startTime,  correct);
             }
             stats[userIDs[i]] = currentStats;
+        }
+
+        /// <summary>
+        /// Sends a user their result for the current character.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="stats"></param>
+        /// <returns></returns>
+        /// <exception cref="DisconnectException"></exception>
+        protected async Task sendResult(string userID, stats stats)
+        {
+            if (connection.map.TryGetValue(userID, out string? connectionID))
+            {
+                await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", stats);
+            }
+            else
+            {
+                throw new DisconnectException(userID);
+            }
         }
 
         /// <summary>

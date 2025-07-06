@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Microsoft.AspNetCore.SignalR;
+using server_app.connections;
+using System.Runtime.CompilerServices;
 
 namespace server_app.games
 {
@@ -39,7 +41,7 @@ namespace server_app.games
         /// Queues a user for the Accuracy game type.
         /// </summary>
         /// <param name="userID"></param>
-        public static void queue_accuracy(string userID)
+        public static void queue_accuracy(string userID, IHubContext<connection> context)
         {
             foreach (var game in currentGames.accuracy)
             {
@@ -50,14 +52,14 @@ namespace server_app.games
                 }
             }
             // no game found
-            currentGames.accuracy.Add(new accuracy(userID));
+            currentGames.accuracy.Add(new accuracy(userID, context));
         }
 
         /// <summary>
         /// Queues a user for the 1v1 game type.
         /// </summary>
         /// <param name="userID"></param>
-        public static void queue_1v1(string userID)
+        public static void queue_1v1(string userID, IHubContext<connection> context)
         {
             foreach (var game in currentGames._1v1)
             {
@@ -68,14 +70,14 @@ namespace server_app.games
                 }
             }
             // no game found
-            currentGames._1v1.Add(new _1v1(userID));
+            currentGames._1v1.Add(new _1v1(userID, context));
         }
 
         /// <summary>
         /// Queues a user for the Knockout game type.
         /// </summary>
         /// <param name="userID"></param>
-        public static void queue_knockout(string userID)
+        public static void queue_knockout(string userID, IHubContext<connection> context)
         {
             foreach (var game in currentGames.knockout)
             {
@@ -86,7 +88,7 @@ namespace server_app.games
                 }
             }
             // no game found
-            currentGames.knockout.Add(new knockout(userID));
+            currentGames.knockout.Add(new knockout(userID, context));
         }
 
         /// <summary>
