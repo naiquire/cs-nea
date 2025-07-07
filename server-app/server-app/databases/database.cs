@@ -6,7 +6,7 @@ namespace server_app.databases
     public struct userData
     {
         public string userID;
-        public Dictionary<char, (double, TimeSpan)> statistics;
+        public Dictionary<char, (double, TimeSpan, int)> statistics;
         public string aboutMe;
         public DateTime dateCreated;
         public int rank;
@@ -16,17 +16,6 @@ namespace server_app.databases
     {
         private static readonly string dbPath = @"Data Source=C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\databases\maindb.sqlite";
         private static readonly SqliteConnection connection = new(dbPath);
-        public static void toggleConnection(bool open)
-        {
-            if (open)
-            {
-                connection.Open();
-            }
-            else
-            {
-                connection.Close();
-            }
-        }
         public static void outputException(Exception ex)
         {
             // if exception occurs then log the message and allow the client to try again
@@ -77,13 +66,15 @@ namespace server_app.databases
         }
         public static bool accountRequest(string userID, string password, string localisation, out int success)
         {
+            connection.Open();
             if (userExists(userID, out bool exists))
             {
-                if (exists)
+                if (!exists)
                 {
                     try
                     {
-                        string query = "INSERT INTO userData VALUES(@userID, @password, @aboutMe, @dateCreated, @rank)";
+                        string query = @"INSERT INTO userData
+                            VALUES(@userID, @password, @aboutMe, @dateCreated, @rank, @localisation)";
                         using (var command = new SqliteCommand(query, connection))
                         {
                             command.Parameters.AddWithValue("@userID", userID);
@@ -95,6 +86,24 @@ namespace server_app.databases
 
                             command.ExecuteNonQuery();
                         }
+
+                        for (int i = 0; i < 26; i++)
+                        {
+                            query = $@"INSERT INTO statistics
+                                VALUES(@userID, @letter, @accuracy, @time, @total)";
+
+                            using (var command = new SqliteCommand(query, connection))
+                            {
+                                command.Parameters.AddWithValue("@userID", userID);
+                                command.Parameters.AddWithValue("@letter", ((char)i + 65).ToString());
+                                command.Parameters.AddWithValue("@accuracy", 0);
+                                command.Parameters.AddWithValue("@time", TimeSpan.Zero);
+                                command.Parameters.AddWithValue("@total", 0);
+
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
                         success = 1;
                     }
                     catch (SqliteException ex)
@@ -113,10 +122,11 @@ namespace server_app.databases
             {
                 success = -1;
             }
-            return true;            
+            return true;
         }
         public static bool userExists(string userID, out bool exists)
         {
+            connection.Open();
             string query = "SELECT userData.userID FROM userData WHERE userData.userID = @userID";
             try
             {
@@ -143,7 +153,7 @@ namespace server_app.databases
         public static bool loadUserData(string userID, out userData userData)
         {
             userData = new();
-            Dictionary<char, (double, TimeSpan)> statistics = [];
+            Dictionary<char, (double, TimeSpan, int)> statistics = [];
 
             string query = "SELECT aboutMe, dateCreated, rank, localisation FROM userData WHERE userData.userID = @userID";
             try
@@ -167,7 +177,7 @@ namespace server_app.databases
                 return false;
             }
 
-            query = "SELECT letter, accuracy, time FROM statistics WHERE userID = @userID";
+            query = "SELECT letter, accuracy, time, total FROM statistics WHERE userID = @userID";
             try
             {
                 using (var command = new SqliteCommand(query, connection))
@@ -179,8 +189,9 @@ namespace server_app.databases
                         char letter = reader.GetChar(0);
                         double accuracy = reader.GetDouble(1);
                         TimeSpan time = reader.GetTimeSpan(2);
+                        int total = reader.GetInt32(3);
 
-                        statistics[letter] = (accuracy, time);
+                        statistics[letter] = (accuracy, time, total);
                     }
                 }
             }

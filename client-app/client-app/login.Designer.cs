@@ -34,6 +34,7 @@
             this.pic_logo = new System.Windows.Forms.PictureBox();
             this.btn_createAccount = new System.Windows.Forms.Button();
             this.btn_requestAccount = new System.Windows.Forms.Button();
+            this.list_languages = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic_logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,12 +91,23 @@
             this.btn_requestAccount.UseVisualStyleBackColor = true;
             this.btn_requestAccount.Click += new System.EventHandler(this.btn_requestAccount_Click);
             // 
+            // list_languages
+            // 
+            this.list_languages.Enabled = false;
+            this.list_languages.FormattingEnabled = true;
+            this.list_languages.Location = new System.Drawing.Point(587, 69);
+            this.list_languages.Name = "list_languages";
+            this.list_languages.Size = new System.Drawing.Size(201, 21);
+            this.list_languages.TabIndex = 6;
+            this.list_languages.Visible = false;
+            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.list_languages);
             this.Controls.Add(this.btn_requestAccount);
             this.Controls.Add(this.btn_createAccount);
             this.Controls.Add(this.pic_logo);
@@ -119,5 +131,6 @@
         private System.Windows.Forms.PictureBox pic_logo;
         private System.Windows.Forms.Button btn_createAccount;
         private System.Windows.Forms.Button btn_requestAccount;
+        private System.Windows.Forms.ComboBox list_languages;
     }
 }

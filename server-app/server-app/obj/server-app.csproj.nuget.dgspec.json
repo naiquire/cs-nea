@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj": {}
+    "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj": {}
   },
   "projects": {
-    "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj": {
+    "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj",
+        "projectUniqueName": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
         "projectName": "server-app",
-        "projectPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\server-app.csproj",
-        "packagesPath": "C:\\Users\\24ns2144\\.nuget\\packages\\",
-        "outputPath": "H:\\Subjects\\Computer Science\\git\\CS-NEA\\server-app\\server-app\\obj\\",
+        "projectPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
+        "packagesPath": "C:\\Users\\naiquire\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\24ns2144\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\naiquire\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -17,6 +17,9 @@ namespace client_app
         public login()
         {
             InitializeComponent();
+
+            list_languages.Items.AddRange(new object[] { "en", "fr", "es", "pt", "de" });
+
             initialiseConnection();
 
             btn_requestAccount.Enabled = false;
@@ -46,13 +49,16 @@ namespace client_app
 
             btn_requestAccount.Enabled = true;
             btn_requestAccount.Visible = true;
+            list_languages.Enabled = true;
+            list_languages.Visible = true;
         }
         private async void btn_requestAccount_Click(object sender, EventArgs e)
         {
             string userID = txt_userID.Text.Trim();
             string password = txt_password.Text;
+            string localisation = list_languages.SelectedItem.ToString();
 
-            await connection.InvokeAsync("accountRequest", userID, password);
+            await connection.InvokeAsync("accountRequest", userID, password, localisation);
         }
     }
 }

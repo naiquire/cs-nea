@@ -14,7 +14,7 @@ namespace server_app.connections
     }
     public partial class @connection : Hub
     {
-        public static Dictionary<string, string> map = [];
+        public static readonly Dictionary<string, string> map = [];
         public userData? clientConnected(string userID)
         {
             map.Add(userID, Context.ConnectionId);

@@ -21,7 +21,7 @@ namespace client_app
         public string localisation;
 
         public int rank;
-        public double accuracy;
+        public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
     }
     public struct friendData
     {
@@ -29,7 +29,7 @@ namespace client_app
         public bool online;
 
         public int rank;
-        public double accuracy;
+        public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
     }
     public struct game
     {

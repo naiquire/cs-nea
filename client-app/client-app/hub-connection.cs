@@ -14,9 +14,13 @@ namespace client_app
         public static HubConnection configConnection(string address)
         {
             HubConnection connection = new HubConnectionBuilder()
-                .WithUrl(address + @"\connections")
+                .WithUrl(address, options =>
+                {
+                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets |
+                                         Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents |
+                                         Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
+                })
                 .Build();
-            
             return connection;
         }
         public static HubConnection startConnection(HubConnection connection)

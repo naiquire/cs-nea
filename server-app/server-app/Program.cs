@@ -12,7 +12,7 @@ namespace server_app
             //configServer(args).Run();
             //CreateHostBuilder(args).Build().Run();
             hostBuilder(args).Build().Run();
-            database.toggleConnection(true);
+            //database.toggleConnection(true);
         }
         private static WebApplication configServer(string[] args)  // DOESNT WORK BUT NO CHATGPT SO MAYBE LIKE GET IT WORKING PERHAPS
         {
@@ -82,7 +82,7 @@ namespace server_app
         }
         private static void killNginx(object? sender, EventArgs e)
         {
-            database.toggleConnection(false);
+            //database.toggleConnection(false);
             var processes = Process.GetProcessesByName("nginx.exe");
             foreach (var process in processes)
             {
@@ -152,7 +152,7 @@ namespace server_app
                         app.UseCors("AllowAll");
                         app.Use(async (context, next) =>
                         {
-                            //Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
+                            Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
                             await next.Invoke();
                         });
                         //app.UseAuthentication();
