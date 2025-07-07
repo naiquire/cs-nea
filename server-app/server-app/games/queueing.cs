@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace server_app.games
@@ -13,7 +14,7 @@ namespace server_app.games
             public static readonly List<_1v1> _1v1 = [];
             public static readonly List<knockout> knockout = [];
 
-            public static readonly List<abstractGame> test = []; // maybe get this working somehow
+            public static readonly List<IPlayable> test = []; // maybe get this working somehow
         }
 
         /// <summary>
@@ -53,6 +54,11 @@ namespace server_app.games
             }
             // no game found
             currentGames.accuracy.Add(new accuracy(userID, context));
+
+
+            Type typey = currentGames.test[0].GetType();
+            ConstructorInfo[] e = typey.GetConstructors();
+            e[0].Invoke(typey, []);
         }
 
         /// <summary>

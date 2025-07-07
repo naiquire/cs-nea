@@ -84,7 +84,7 @@ namespace client_app
             this.lbl_friendsLabel.Name = "txt_friendsLabel";
             this.lbl_friendsLabel.Size = new System.Drawing.Size(100, 33);
             this.lbl_friendsLabel.TabIndex = 0;
-            this.lbl_friendsLabel.Text = "Friends";
+            this.lbl_friendsLabel.Text = localisation["Friends"][userData.localisation];
             this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_queueAccuracy
@@ -93,7 +93,7 @@ namespace client_app
             this.btn_queueAccuracy.Name = "btn_queueAccuracy";
             this.btn_queueAccuracy.Size = new System.Drawing.Size(75, 23);
             this.btn_queueAccuracy.TabIndex = 1;
-            this.btn_queueAccuracy.Text = "accuracy";
+            this.btn_queueAccuracy.Text = localisation["Accuracy"][userData.localisation];
             this.btn_queueAccuracy.UseVisualStyleBackColor = true;
             this.btn_queueAccuracy.Click += new System.EventHandler(this.btn_queueAccuracy_Click);
             // 
@@ -158,7 +158,7 @@ namespace client_app
                 Name = "txt_online",
                 Size = new System.Drawing.Size(100, 16),
                 TabIndex = 0,
-                Text = "ONLINE",
+                Text = localisation["ONLINE"][userData.localisation],
             };
             panel_friendList.Controls.Add(online);
 
@@ -209,7 +209,7 @@ namespace client_app
                 Name = "txt_appName",
                 Size = new System.Drawing.Size(100, 16),
                 TabIndex = 0,
-                Text = "OFFLINE",
+                Text = localisation["OFFLINE"][userData.localisation],
             };
             panel_friendList.Controls.Add(offline);
 

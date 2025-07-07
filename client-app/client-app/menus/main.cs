@@ -42,6 +42,7 @@ namespace client_app
         public static HubConnection connection;
         public static userData userData;
         public static readonly string address = "http://86.11.15.228:5252/cs-nea";
+        public static Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
 
         //private Bitmap drawing;
         public main(string userID)
@@ -54,7 +55,7 @@ namespace client_app
 
             /// <summary>
             /// this is a possible way of implementing localisation efficiently
-            Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
+            
             /// 
             /// first string is the word in english
             /// the second dictionary stores the translations in the form (language, translation)

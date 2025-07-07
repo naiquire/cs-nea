@@ -43,13 +43,13 @@ namespace client_app.menus
             panel_topBorder.Size = new System.Drawing.Size(1920, 30);
             panel_topBorder.TabIndex = 0;
             // 
-            // txt_appName
+            // lbl_appName
             // 
             lbl_appName.BackColor = panel_topBorder.BackColor;
             lbl_appName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             lbl_appName.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             lbl_appName.Location = new System.Drawing.Point(10, 7);
-            lbl_appName.Name = "txt_appName";
+            lbl_appName.Name = "lbl_appName";
             lbl_appName.Size = new System.Drawing.Size(100, 16);
             lbl_appName.TabIndex = 0;
             lbl_appName.Text = "appName";

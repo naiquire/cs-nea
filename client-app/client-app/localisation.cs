@@ -14,6 +14,8 @@ namespace client_app
             "en",
             "fr",
             "es",
+            "pt",
+            "de",
         };
         public static Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
 
@@ -24,6 +26,24 @@ namespace client_app
                 {"en", "Friends" },
                 {"fr", "Amis" },
                 {"es", "Amigos" },
+                {"pt", "Amigos" },
+                {"de", "Freunde" },
+            });
+            localisation.Add("ONLINE", new Dictionary<string, string>()
+            {
+                {"en", "ONLINE" },
+                {"fr", "EN LIGNE" },
+                {"es", "EN LÍNEA" },
+                {"pt", "ON-LINE" },
+                {"de", "ONLINE" },
+            });
+            localisation.Add("OFFLINE", new Dictionary<string, string>()
+            {
+                {"en", "OFFLINE" },
+                {"fr", "HORS LIGNE" },
+                {"es", "DESCONECTADO" },
+                {"pt", "OFF-LINE" },
+                {"de", "OFFLINE" },
             });
         }
     }

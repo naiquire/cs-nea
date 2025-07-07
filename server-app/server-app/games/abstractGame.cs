@@ -47,7 +47,7 @@ namespace server_app.games
     }
     public abstract class abstractGame
     {
-        public IHubContext<connection> hubContext;
+        protected IHubContext<connection> hubContext;
 
         protected List<string> userIDs;
         public string gameID;
@@ -96,6 +96,7 @@ namespace server_app.games
             {
                 throw new DisconnectException(userID);
             }
+
         }
 
         /// <summary>
