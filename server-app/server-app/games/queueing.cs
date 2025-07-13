@@ -13,8 +13,8 @@ namespace server_app.games
             public static readonly List<accuracy> accuracy = [];
             public static readonly List<_1v1> _1v1 = [];
             public static readonly List<knockout> knockout = [];
-
-            public static readonly List<IPlayable> test = []; // maybe get this working somehow
+            // maybe get this working somehow
+            public static readonly List<IPlayable> test = [];
         }
 
         /// <summary>

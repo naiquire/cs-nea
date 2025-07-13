@@ -202,3 +202,4 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.pdb
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.genruntimeconfig.cache
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\ref\server-app.dll
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\rpswa.dswa.cache.json

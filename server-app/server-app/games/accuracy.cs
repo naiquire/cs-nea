@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authentication.OAuth.Claims;
+using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.neuralNetwork;
 using System.Diagnostics.Metrics;
@@ -9,17 +10,17 @@ namespace server_app.games
     public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, userID, 1), IPlayable
     {
         public const bool online = false;
+        private const int rounds = 10;
         private int count = 0;
         public override void startGame()
         {
             base.startGame();
+
+            letters = generateLetters(rounds);
             submissionPhase();
         }
         public async void submissionPhase()
         {
-            char letter = (char)(rnd.Next(0, 26) + 65);
-            letters.Add(letter);
-
             startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
             await sendLetter(userIDs, letters[count]);
         }
@@ -40,10 +41,26 @@ namespace server_app.games
                 await sendResult(userIDs[i], stats[userIDs[i]]);
             }
 
-            if (count++ < 10)
+            if (count++ < rounds)
             {
                 submissionPhase();
             }
         }
+		public async override void endGame()
+		{
+			foreach (string userID in userIDs)
+			{
+				if (connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("endAccuracy");
+				}
+				else
+				{
+					throw new DisconnectException(userID);
+				}
+			}
+
+			base.endGame();
+		}
     }
 }
