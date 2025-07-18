@@ -42,35 +42,52 @@ namespace client_app
         public static HubConnection connection;
         public static userData userData;
         public static readonly string address = "http://86.11.15.228:5252/cs-nea";
-        public static Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
+        public static Dictionary<string, Dictionary<string, string>> localisation;
 
         //private Bitmap drawing;
         public main(string userID)
         {
             userData = new userData()
             {
-                userID = userID
+                userID = userID,
+                localisation = "en",
+                rank = 1200,
+                friends = new List<friendData>()
+                {
+                    new friendData()
+                    {
+                        userID = "beetel",
+                        online = true,
+                    },
+                    new friendData()
+                    {
+                        userID = "papp",
+                        online = false,
+                    }
+                }
             };
 
 
-            /// <summary>
-            /// this is a possible way of implementing localisation efficiently
+			/// <summary>
+			/// this is a possible way of implementing localisation efficiently
+
+			/// 
+			/// first string is the word in english
+			/// the second dictionary stores the translations in the form (language, translation)
+			/// 
+			/// for example if the localisation is set to french:
+			/// <code>
+			/// localisation["friends"]["french"]
+			/// </code>
+			/// "amis" would be outputted
+			/// 
+			/// </summary>
+
+			localisation = languages.localisation;
+			InitializeComponent();
+            //initialiseConnection();
             
-            /// 
-            /// first string is the word in english
-            /// the second dictionary stores the translations in the form (language, translation)
-            /// 
-            /// for example if the localisation is set to french:
-            /// <code>
-            /// localisation["friends"]["french"]
-            /// </code>
-            /// "amis" would be outputted
-            /// 
-            /// </summary>
-
-
-            InitializeComponent();
-            initialiseConnection();
+            configFriendsPanel();
         }
         private async void initialiseConnection()
         {
@@ -85,7 +102,7 @@ namespace client_app
         {
             userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 
-            profile profile = new profile(user);
+            profile profile = new profile(this, user);
         }
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)

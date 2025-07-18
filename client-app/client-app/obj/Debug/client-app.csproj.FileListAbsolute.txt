@@ -136,3 +136,4 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.csproj.Up2Date
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.exe
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.pdb
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.exe.config

@@ -7,45 +7,46 @@ using System.Reflection;
 
 namespace server_app.games
 {
-    public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, userID, 1), IPlayable
-    {
-        public const bool online = false;
-        private const int rounds = 10;
-        private int count = 0;
-        public override void startGame()
-        {
-            base.startGame();
+	public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, userID, 1), IPlayable
+	{
+		public const bool online = false;
+		private const int rounds = 10;
+		private int count = 0;
+		public override void startGame()
+		{
+			base.startGame();
 
-            letters = generateLetters(rounds);
-            submissionPhase();
-        }
-        public async void submissionPhase()
-        {
-            startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
-            await sendLetter(userIDs, letters[count]);
-        }
-        public void loadResponse(string userID, double[] input)
-        {
-            currentResponses.Add(userID, (input, DateTime.UtcNow));
-            if (currentResponses.Count == getPlayerCount())
-            {
-                evaluationPhase(letters[count]);
-            }
-        }
-        public async void evaluationPhase(char letter)
-        {
-            evaluate[] evaluates = new evaluate[getPlayerCount()];
-            for (int i = 0; i < userIDs.Count; i++)
-            {
-                evaluateSubmission(ref evaluates, i, userIDs, letter);
-                await sendResult(userIDs[i], stats[userIDs[i]]);
-            }
+			letters = generateLetters(rounds);
+			submissionPhase();
+		}
+		public async void submissionPhase()
+		{
+			startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
+			currentResponses.Clear();
+			await sendLetter(userIDs, letters[count]);
+		}
+		public void loadResponse(string userID, double[] input)
+		{
+			currentResponses.Add(userID, (input, DateTime.UtcNow));
+			if (currentResponses.Count == getPlayerCount())
+			{
+				evaluationPhase(letters[count]);
+			}
+		}
+		public async void evaluationPhase(char letter)
+		{
+			evaluate[] evaluates = new evaluate[getPlayerCount()];
+			for (int i = 0; i < userIDs.Count; i++)
+			{
+				evaluateSubmission(ref evaluates, i, userIDs, letter);
+				await sendResult(userIDs[i], stats[userIDs[i]]);
+			}
 
-            if (count++ < rounds)
-            {
-                submissionPhase();
-            }
-        }
+			if (count++ < rounds)
+			{
+				submissionPhase();
+			}
+		}
 		public async override void endGame()
 		{
 			foreach (string userID in userIDs)
@@ -62,5 +63,5 @@ namespace server_app.games
 
 			base.endGame();
 		}
-    }
+	}
 }

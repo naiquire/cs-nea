@@ -27,6 +27,7 @@ namespace server_app.games
 		public async void submissionPhase()
 		{
 			startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
+			currentResponses.Clear();
 			await sendLetter(userIDs, letters[count]);
 		}
 		public void loadResponse(string userID, double[] input)
@@ -122,13 +123,13 @@ namespace server_app.games
 
 				if (database.updateRank(userIDs[i], rank))
 				{
-					if (connection.map.TryGetValue(userID, out string? connectionID))
+					if (connection.map.TryGetValue(userIDs[i], out string? connectionID))
 					{
 						await hubContext.Clients.Client(connectionID).SendAsync("end1v1", rank);
 					}
 					else
 					{
-						throw new DisconnectException(userID);
+						throw new DisconnectException(userIDs[i]);
 					}
 				}
 				else

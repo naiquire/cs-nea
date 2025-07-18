@@ -18,7 +18,7 @@ namespace client_app
         {
             InitializeComponent();
 
-            list_languages.Items.AddRange(new object[] { "en", "fr", "es", "pt", "de" });
+            list_languages.Items.AddRange(languages.supportedLanguages.ToArray());
 
             initialiseConnection();
 

@@ -10,7 +10,6 @@ namespace client_app.games
         public static async void queue_accuracy()
         {
             await main.connection.InvokeAsync("queueGame", "accuracy", main.userData.userID);
-            join_accuracy();
         }
         public static void join_accuracy()
         {

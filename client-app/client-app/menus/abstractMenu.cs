@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-    public abstract class abstractMenu : Form
+    public class abstractMenu : Form
     {
         protected Panel panel_topBorder;
         protected Button btn_close;

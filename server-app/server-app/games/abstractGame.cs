@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
-using SQLitePCL;
-using System.Diagnostics.Metrics;
-using System.Security.Cryptography.X509Certificates;
 
 namespace server_app.games
 {
@@ -81,7 +77,7 @@ namespace server_app.games
 			currentResponses = [];
 
 			gameID = userID + DateTime.UtcNow.ToString();
-			queueUser(userID);                       
+			queueUser(userID);
 		}
 
 		/// <summary>
@@ -185,7 +181,7 @@ namespace server_app.games
 			if (stats.TryGetValue(userIDs[i], out stats currentStats))
 			{
 				DateTime endTime = currentResponses[userIDs[i]].time;
-				currentStats.update(evaluates[i], letter, endTime - startTime,  correct);
+				currentStats.update(evaluates[i], letter, endTime - startTime, correct);
 			}
 			stats[userIDs[i]] = currentStats;
 		}
@@ -281,5 +277,5 @@ namespace server_app.games
 		/// </summary>
 		public int getPlayerCount() => userIDs.Count;
 	}
-	
+
 }

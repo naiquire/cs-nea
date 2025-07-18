@@ -22,6 +22,7 @@ namespace server_app.games
             letters.Add(letter);
 
             startTime = DateTime.UtcNow;
+            currentResponses.Clear();
             await sendLetter(aliveUsers, letter);
         }
         public void loadResponse(string userID, double[] input)

@@ -81,7 +81,7 @@ namespace server_app.databases
 							command.Parameters.AddWithValue("@password", password);
 							command.Parameters.AddWithValue("@aboutMe", "");
 							command.Parameters.AddWithValue("@dateCreated", DateTime.UtcNow);
-							command.Parameters.AddWithValue("@rank", 300);
+							command.Parameters.AddWithValue("@rank", 400);
 							command.Parameters.AddWithValue("@localisation", localisation);
 
 							command.ExecuteNonQuery();
@@ -127,7 +127,7 @@ namespace server_app.databases
 		public static bool userExists(string userID, out bool exists)
 		{
 			connection.Open();
-			string query = "SELECT userData.userID FROM userData WHERE userData.userID = @userID";
+			string query = "SELECT userID FROM userData WHERE userID = @userID";
 			try
 			{
 				using (var command = new SqliteCommand(query, connection))
@@ -136,7 +136,7 @@ namespace server_app.databases
 
 					var reader = command.ExecuteReader();
 
-					while (reader.Read())
+					if (reader.HasRows)
 					{
 						exists = true;
 					}

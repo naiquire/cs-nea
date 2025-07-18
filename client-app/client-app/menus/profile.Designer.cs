@@ -37,7 +37,11 @@ namespace client_app.menus
             lbl_rank = new Label();
             pic_language = new PictureBox();
             panel_stats = new Panel();
-
+            ///
+            ///
+            /// 
+            panel_stats.BackColor = panel_left.BackColor;
+            
             ///
             /// lbl_username
             ///
@@ -75,6 +79,7 @@ namespace client_app.menus
             panel_main.Controls.Add(lbl_username);
             panel_main.Controls.Add(lbl_rank);
             panel_main.Controls.Add(pic_language);
+            panel_main.Controls.Add(panel_stats);
         }
 
         private Label lbl_username;

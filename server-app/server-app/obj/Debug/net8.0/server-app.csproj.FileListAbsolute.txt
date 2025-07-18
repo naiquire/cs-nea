@@ -190,11 +190,6 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.sourcelink.json
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets\msbuild.server-app.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets\msbuild.build.server-app.props
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.server-app.props
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.server-app.props
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\scopedcss\bundle\server-app.styles.css
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.csproj.Up2Date
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.dll
@@ -203,3 +198,10 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.genruntimeconfig.cache
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\ref\server-app.dll
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\bin\Debug\net8.0\server-app.staticwebassets.endpoints.json
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
