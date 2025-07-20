@@ -5,7 +5,7 @@
         public static int epochs = 0;
         public static int correct = 0;
 
-        private readonly double[][] neuronErrors = new double[5][];
+        private readonly double[][] neuronErrors = new double[evaluate.layerCount][];
         private readonly double learningRate = 0.05;
         public backpropagation(List<double[]> input, List<int> expected)
         {
@@ -76,8 +76,10 @@
             for (int i = 0; i < evaluate.layerSizes[layer]; i++)
             {
                 // softmax error function
-                loss += Math.Pow(network.activatedValues[layer][i] - (expectedResult - 1 == i ? 1 : 0), 2);
-                neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - (expectedResult - 1 == i ? 1 : 0));
+                int y = expectedResult - 1 == i ? 1 : 0;
+
+				loss += Math.Pow(network.activatedValues[layer][i] - y, 2);
+                neuronErrors[layer][i] = 2 * (network.activatedValues[layer][i] - y);
             }
 
             // for each remaining layer

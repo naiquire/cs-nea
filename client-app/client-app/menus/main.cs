@@ -50,7 +50,7 @@ namespace client_app
             userData = new userData()
             {
                 userID = userID,
-                localisation = "en",
+                localisation = "fr",
                 rank = 1200,
                 friends = new List<friendData>()
                 {

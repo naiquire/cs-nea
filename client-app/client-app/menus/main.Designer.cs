@@ -82,9 +82,9 @@ namespace client_app
             this.lbl_friendsLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_friendsLabel.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_friendsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
-            this.lbl_friendsLabel.Location = new System.Drawing.Point(50, 20);
+            this.lbl_friendsLabel.Location = new System.Drawing.Point(0, 20);
             this.lbl_friendsLabel.Name = "txt_friendsLabel";
-            this.lbl_friendsLabel.Size = new System.Drawing.Size(200, 33);
+            this.lbl_friendsLabel.Size = new System.Drawing.Size(300, 33);
             this.lbl_friendsLabel.TabIndex = 0;
             this.lbl_friendsLabel.Text = localisation["Friends"][userData.localisation];
             this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
@@ -162,7 +162,7 @@ namespace client_app
                 Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 Location = new System.Drawing.Point(10, y_offset),
                 Name = "txt_online",
-                Size = new System.Drawing.Size(100, buttonY),
+                Size = new System.Drawing.Size(200, buttonY),
                 TabIndex = 0,
                 Text = localisation["ONLINE"][userData.localisation],
             };
@@ -215,7 +215,7 @@ namespace client_app
                 Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 Location = new System.Drawing.Point(10, y_offset),
                 Name = "txt_appName",
-                Size = new System.Drawing.Size(100, buttonY),
+                Size = new System.Drawing.Size(200, buttonY),
                 TabIndex = 0,
                 Text = localisation["OFFLINE"][userData.localisation],
             };

@@ -170,7 +170,8 @@ namespace server_app.games
 		/// <param name="i"></param>
 		/// <param name="userIDs"></param>
 		/// <param name="character"></param>
-		protected void evaluateSubmission(ref evaluate[] evaluates, int i, List<string> userIDs, int character)
+		/// <returns>A boolean value representing if the submission was correct.</returns>
+		protected bool evaluateSubmission(ref evaluate[] evaluates, int i, List<string> userIDs, int character)
 		{
 			// evaluate the submission
 			int letter = character - 65;
@@ -184,6 +185,7 @@ namespace server_app.games
 				currentStats.update(evaluates[i], letter, endTime - startTime, correct);
 			}
 			stats[userIDs[i]] = currentStats;
+			return correct;
 		}
 
 		/// <summary>
@@ -214,47 +216,47 @@ namespace server_app.games
 		{
 			// child classes handle different ways of displaying results
 
-			async Task update(userData userData)
+			async Task update(string userID)
 			{
 				for (int i = 0; i < letters.Count; i++)
 				{
 					char letter = letters[i];
 
-					double accuracy = userData.statistics[letter].accuracy;
-					TimeSpan time = userData.statistics[letter].time;
-					int total = userData.statistics[letter].total;
-
-					double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[i]) / (total + 1);
-					TimeSpan updatedTime = (time * total + stats[userData.userID].time[i]) / (total + 1);
-
-					if (database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
+					if (database.loadUserData(userID, out userData userData))
 					{
-						if (connection.map.TryGetValue(userData.userID, out string? connectionID))
+						double accuracy = userData.statistics[letter].accuracy;
+						TimeSpan time = userData.statistics[letter].time;
+						int total = userData.statistics[letter].total;
+
+						double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[i]) / (total + 1);
+						TimeSpan updatedTime = (time * total + stats[userData.userID].time[i]) / (total + 1);
+
+						if (database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 						{
-							await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updatedAccuracy, updatedTime, total + 1);
+							if (connection.map.TryGetValue(userData.userID, out string? connectionID))
+							{
+								await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updatedAccuracy, updatedTime, total + 1);
+							}
+							else
+							{
+								throw new DisconnectException(userData.userID);
+							}
 						}
 						else
 						{
-							throw new DisconnectException(userData.userID);
+							database.outputException("Failed to update statistics");
 						}
 					}
 					else
 					{
-						database.outputException("Failed to update statistics");
+						database.outputException("Failed to retrieve statistics");
 					}
 				}
 			}
 
 			foreach (string userID in userIDs)
 			{
-				if (database.loadUserData(userID, out userData userData))
-				{
-					await update(userData);
-				}
-				else
-				{
-					database.outputException("Failed to get userData for updating statistics");
-				}
+				await update(userID);
 
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{

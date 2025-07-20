@@ -35,20 +35,16 @@ namespace server_app.games
         }
         public async void evaluationPhase(char letter)
         {
-            evaluate[] evaluates = new evaluate[getPlayerCount()];
+			List<string> incorrectUsers = [];
+			evaluate[] evaluates = new evaluate[getPlayerCount()];
             for (int i = 0; i < aliveUsers.Count; i++)
             {
-                evaluateSubmission(ref evaluates, i, userIDs, letter);
-                await sendResult(userIDs[i], stats[userIDs[i]]);
-            }
-
-            List<string> incorrectUsers = [];
-            foreach (string user in stats.Keys)
-            {
-                if (!stats[user].correct[^1])
+                bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
+                if (!correct)
                 {
-                    incorrectUsers.Add(user);
-                }
+                    incorrectUsers.Add(userIDs[i]);
+				}
+                await sendResult(userIDs[i], stats[userIDs[i]]);
             }
 
             if (incorrectUsers.Count == 0)

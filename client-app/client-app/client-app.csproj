@@ -211,6 +211,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="menus\abstractMenu.resx">
+      <DependentUpon>abstractMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menus\games\accuracy.resx">
       <DependentUpon>accuracy.cs</DependentUpon>
     </EmbeddedResource>

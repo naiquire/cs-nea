@@ -1,4 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
+using server_app.games;
+using System.Diagnostics.Metrics;
+using System.Threading.Tasks;
 
 namespace server_app.databases
 {
@@ -36,6 +39,7 @@ namespace server_app.databases
 			string query = "SELECT userData.password FROM userData WHERE userData.userID = @userID";
 			try
 			{
+				connection.Open();
 				using (var command = new SqliteCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@userID", userID);
@@ -54,8 +58,9 @@ namespace server_app.databases
 					}
 					// account does not exist
 					success = -1;
-					return true;
 				}
+				connection.Close();
+				return true;
 			}
 			catch (SqliteException ex)
 			{
@@ -66,15 +71,15 @@ namespace server_app.databases
 		}
 		public static bool accountRequest(string userID, string password, string localisation, out int success)
 		{
-			connection.Open();
 			if (userExists(userID, out bool exists))
 			{
 				if (!exists)
 				{
+					string query = @"INSERT INTO userData
+							VALUES(@userID, @password, @aboutMe, @dateCreated, @rank, @localisation)";
 					try
 					{
-						string query = @"INSERT INTO userData
-							VALUES(@userID, @password, @aboutMe, @dateCreated, @rank, @localisation)";
+						connection.Open();
 						using (var command = new SqliteCommand(query, connection))
 						{
 							command.Parameters.AddWithValue("@userID", userID);
@@ -86,6 +91,7 @@ namespace server_app.databases
 
 							command.ExecuteNonQuery();
 						}
+						connection.Close();
 
 						for (int i = 0; i < 26; i++)
 						{
@@ -126,10 +132,10 @@ namespace server_app.databases
 		}
 		public static bool userExists(string userID, out bool exists)
 		{
-			connection.Open();
 			string query = "SELECT userID FROM userData WHERE userID = @userID";
 			try
 			{
+				connection.Open();
 				using (var command = new SqliteCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@userID", userID);
@@ -142,10 +148,12 @@ namespace server_app.databases
 					}
 					exists = false;
 				}
+				connection.Close();
 				return true;
 			}
-			catch
+			catch (SqliteException ex)
 			{
+				outputException(ex);
 				exists = false;
 				return false;
 			}
@@ -155,9 +163,12 @@ namespace server_app.databases
 			userData = new();
 			Dictionary<char, (double, TimeSpan, int)> statistics = [];
 
-			string query = "SELECT aboutMe, dateCreated, rank, localisation FROM userData WHERE userData.userID = @userID";
+			string query = @"SELECT aboutMe, dateCreated, rank, localisation
+				FROM userData
+				WHERE userData.userID = @userID";
 			try
 			{
+				connection.Open();
 				using (var command = new SqliteCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@userID", userID);
@@ -170,6 +181,7 @@ namespace server_app.databases
 						userData.localisation = reader.GetString(4);
 					}
 				}
+				connection.Close();
 			}
 			catch (SqliteException ex)
 			{
@@ -207,11 +219,54 @@ namespace server_app.databases
 		}
 		public static bool updateStatistics(string userID, char letter, double accuracy, TimeSpan time, int total)
 		{
-			return true;
+			string query = @"UPDATE statistics
+				SET (statistics.accuracy = @accuracy, statistics.time = @time, statistics.total = @total)
+				WHERE statistics.userID = @userID AND statistics.letter = @letter";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					command.Parameters.AddWithValue("@letter", letter);
+					command.Parameters.AddWithValue("@accuracy", accuracy);
+					command.Parameters.AddWithValue("@time", time);
+					command.Parameters.AddWithValue("@total", total);
+
+					command.ExecuteNonQuery();
+				}
+				connection.Close();
+				return true;
+			}
+			catch (SqliteException ex)
+			{
+				outputException(ex);
+				return false;
+			}
 		}
 		public static bool updateRank(string userID, int rank)
 		{
-			return true;
+			string query = @"UPDATE userData
+				SET (userData.rank = rank)
+				WHERE userData.userID = @userID";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					command.Parameters.AddWithValue("@rank", rank);
+
+					command.ExecuteNonQuery();
+				}
+				connection.Close();
+				return true;
+			}
+			catch (SqliteException ex)
+			{
+				outputException(ex);
+				return false;
+			}
 		}
 	}
 }

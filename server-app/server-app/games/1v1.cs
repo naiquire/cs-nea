@@ -40,20 +40,17 @@ namespace server_app.games
 		}
 		public async void evaluationPhase(char letter)
 		{
+			List<string> correctUsers = [];
+
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				evaluateSubmission(ref evaluates, i, userIDs, letter);
-				await sendResult(userIDs[i], stats[userIDs[i]]);
-			}
-
-			List<string> correctUsers = [];
-			foreach (string user in stats.Keys)
-			{
-				if (stats[user].correct[^1])
+				bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
+				if (correct)
 				{
-					correctUsers.Add(user);
+					correctUsers.Add(userIDs[i]);
 				}
+				await sendResult(userIDs[i], stats[userIDs[i]]);
 			}
 
 			if (correctUsers.Count == 0)
@@ -73,7 +70,7 @@ namespace server_app.games
 				(string user, TimeSpan time) lowest = ("", TimeSpan.MaxValue);
 				foreach (string userID in correctUsers)
 				{
-					var time = stats[userID].time[letter];
+					var time = stats[userID].time[count];
 					if (time < lowest.time)
 					{
 						lowest = (userID, time);
