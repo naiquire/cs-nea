@@ -32,8 +32,9 @@ namespace client_app.games
         /// </summary>
         protected override void InitializeComponent()
         {
-            this.txt_letter = new System.Windows.Forms.Label();
-            this.panel_main.Controls.Add(this.txt_letter);
+			base.InitializeComponent(main);
+
+			this.txt_letter = new System.Windows.Forms.Label();
             // 
             // txt_letter
             // 
@@ -44,13 +45,11 @@ namespace client_app.games
             this.txt_letter.TabIndex = 0;
             this.txt_letter.Text = "K";
             this.txt_letter.TextAlign = (System.Drawing.ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // accuracy
-            // 
-            this.panel_main.Controls.Add(lbl_appName);
-
-            base.InitializeComponent();
-        }
+			// 
+			// accuracy
+			// 
+			main.panel_main.Controls.Add(this.txt_letter);
+		}
 
         #endregion
 

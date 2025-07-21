@@ -6,7 +6,7 @@ namespace client_app.components
 {
     public class input : Form
     {
-        private readonly main form;
+        private readonly Panel main;
 
         private Panel panel_input;
         private Bitmap drawing;
@@ -14,13 +14,11 @@ namespace client_app.components
         private bool draw = false;
         private (int x, int y) pos = (-1, -1);
 
-        public input(main main, (int, int) pos, (int, int) size)
+        public input(Panel main, (int, int) pos, (int, int) size)
         {
-            form = main;
+            this.main = main;
             loadPanel(pos, size);
             enablePanel();
-
-            
         }
 
         public void enablePanel()
@@ -51,7 +49,7 @@ namespace client_app.components
                 TabIndex = 0,
             };
 
-            form.Controls.Add(panel_input);
+            main.Controls.Add(panel_input);
         }
 
         private void panel_MouseDown(object sender, MouseEventArgs e)

@@ -50,7 +50,7 @@ namespace client_app
             userData = new userData()
             {
                 userID = userID,
-                localisation = "fr",
+                localisation = "en",
                 rank = 1200,
                 friends = new List<friendData>()
                 {
@@ -63,6 +63,11 @@ namespace client_app
                     {
                         userID = "papp",
                         online = false,
+                    },
+                    new friendData()
+                    {
+                        userID = "andrew",
+                        online = true,
                     }
                 }
             };
@@ -107,7 +112,7 @@ namespace client_app
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)
         {
-            accuracy.queue_accuracy();
+            new accuracy().start_accuracy(this);
         }
     }
 }

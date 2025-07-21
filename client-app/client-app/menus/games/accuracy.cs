@@ -7,6 +7,8 @@ namespace client_app.games
     // accuracy
     public partial class accuracy : abstractMenu
     {
+        private main main;
+        private abstractMenu menu;
         public static async void queue_accuracy()
         {
             await main.connection.InvokeAsync("queueGame", "accuracy", main.userData.userID);
@@ -15,9 +17,11 @@ namespace client_app.games
         {
             // load lobby or something idk its offline
         }
-        public void start_accuracy()
+        public void start_accuracy(main main)
         {
             // load game
+            this.main = main;
+            this.menu = main;
             InitializeComponent(); // initialiseAccuracy
         }
         public static async void round_accuracy(char letter)

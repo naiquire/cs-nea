@@ -117,20 +117,11 @@ namespace client_app
             this.panel_left.Controls.Add(seperator);
             this.panel_left.Controls.Add(lbl_friendsLabel);
 
-            btn_close.Click += closeApp;
-
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
             this.panel_main.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic_play)).EndInit();
             this.ResumeLayout(false);
         }
-        public async void closeApp(object sender, EventArgs e)
-        {
-            Hide();
-            //await connection.InvokeAsync("clientDisconnected", userData.userID);
-            Close();
-        }
-
 
         private void configFriendsPanel()
         {
@@ -140,6 +131,7 @@ namespace client_app
 
             const int buttonX = 200;
             const int buttonY = 30;
+            const int padding = 5;
 
             foreach (var friend in userData.friends)
             {
@@ -185,7 +177,7 @@ namespace client_app
 			y_offset += 30;
 
 			// add online friends
-			for (int i = 0; i < onlineList.Count; i++, y_offset += buttonY)
+			for (int i = 0; i < onlineList.Count; i++, y_offset += buttonY + padding)
             {
                 Button user = new Button()
                 {
@@ -231,14 +223,14 @@ namespace client_app
                 Name = "txt_offlineCount",
                 Size = new System.Drawing.Size(30, 16),
                 TabIndex = 0,
-                Text = onlineList.Count.ToString(),
+                Text = offlineList.Count.ToString(),
 				TextAlign = ContentAlignment.MiddleRight,
 			};
 			panel_friendList.Controls.Add(offlineCount);
 			y_offset += 30;
 
 			// add offline friends
-			for (int i = 0; i < offlineList.Count; i++, y_offset += buttonY)
+			for (int i = 0; i < offlineList.Count; i++, y_offset += buttonY + padding)
             {
                 Button user = new Button()
                 {

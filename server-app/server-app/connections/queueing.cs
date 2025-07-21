@@ -20,9 +20,7 @@ namespace server_app.connections
             {
                 database.outputException($"Game <{gameType}> could not be found");
                 database.outputException(ex);
-            }
-            
-            
+            }            
         }
     }
 }
