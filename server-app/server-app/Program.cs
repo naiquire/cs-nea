@@ -12,6 +12,8 @@ namespace server_app
             //configServer(args).Run();
             //CreateHostBuilder(args).Build().Run();
             hostBuilder(args).Build().Run();
+
+            WebApplication
             //database.toggleConnection(true);
         }
         private static WebApplication configServer(string[] args)  // DOESNT WORK BUT NO CHATGPT SO MAYBE LIKE GET IT WORKING PERHAPS
