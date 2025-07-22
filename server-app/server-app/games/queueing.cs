@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
+using server_app.databases;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -8,22 +9,15 @@ namespace server_app.games
     // contains all instances of running games
     public static class @queueing
     {
-        public readonly struct currentGames
-        {
-            public static readonly List<accuracy> accuracy = [];
-            public static readonly List<_1v1> _1v1 = [];
-            public static readonly List<knockout> knockout = [];
-            // maybe get this working somehow
-            public static readonly List<IPlayable> test = [];
-        }
+		public static readonly List<IPlayable> currentGames = [];
 
-        /// <summary>
-        /// Attempts to queue a user into the current game, and starts the game if the lobby is full.
-        /// </summary>
-        /// <param name="game"></param>
-        /// <param name="userID"></param>
-        /// <returns>A boolean value representing if the user was queued into the game</returns>
-        private static bool tryQueueGame(abstractGame game, string userID)
+		/// <summary>
+		/// Attempts to queue a user into the current game, and starts the game if the lobby is full.
+		/// </summary>
+		/// <param name="game"></param>
+		/// <param name="userID"></param>
+		/// <returns>A boolean value representing if the user was queued into the game</returns>
+		private static bool tryQueueGame(IPlayable game, string userID)
         {
             if (game.getPlayerCount() < game.getMaxPlayers())
             {
@@ -39,65 +33,6 @@ namespace server_app.games
         }
 
         /// <summary>
-        /// Queues a user for the Accuracy game type.
-        /// </summary>
-        /// <param name="userID"></param>
-        public static void queue_accuracy(string userID, IHubContext<connection> context)
-        {
-            foreach (var game in currentGames.accuracy)
-            {
-                if (tryQueueGame(game, userID))
-                {
-                    // user has been successfully queued into a game
-                    break;
-                }
-            }
-            // no game found
-            currentGames.accuracy.Add(new accuracy(userID, context));
-
-
-            Type typey = currentGames.test[0].GetType();
-            ConstructorInfo[] e = typey.GetConstructors();
-            e[0].Invoke(typey, []);
-        }
-
-        /// <summary>
-        /// Queues a user for the 1v1 game type.
-        /// </summary>
-        /// <param name="userID"></param>
-        public static void queue_1v1(string userID, IHubContext<connection> context)
-        {
-            foreach (var game in currentGames._1v1)
-            {
-                if (tryQueueGame(game, userID))
-                {
-                    // user has been successfully queued into a game
-                    break;
-                }
-            }
-            // no game found
-            currentGames._1v1.Add(new _1v1(userID, context));
-        }
-
-        /// <summary>
-        /// Queues a user for the Knockout game type.
-        /// </summary>
-        /// <param name="userID"></param>
-        public static void queue_knockout(string userID, IHubContext<connection> context)
-        {
-            foreach (var game in currentGames.knockout)
-            {
-                if (tryQueueGame(game, userID))
-                {
-                    // user has been successfully queued into a game
-                    break;
-                }
-            }
-            // no game found
-            currentGames.knockout.Add(new knockout(userID, context));
-        }
-
-        /// <summary>
         /// Sends the user's submission to the associated game class
         /// </summary>
         /// <param name="gameID"></param>
@@ -105,29 +40,47 @@ namespace server_app.games
         /// <param name="input"></param>
         public static void loadSubmission(string gameID, string userID, double[] input)
         {
-            // there's probably a neat way of doing this however i am stupid
-            foreach (var game in currentGames.accuracy)
+            foreach (var game in currentGames)
             {
-                if (game.gameID == gameID)
+                if (game.getGameID() == gameID)
                 {
                     game.loadResponse(userID, input);
                     return;
                 }
             }
-            foreach (var game in currentGames._1v1)
+        }
+
+        /// <summary>
+        /// Queues a user into a game.
+        /// </summary>
+        /// <param name="gameType"></param>
+        /// <param name="userID"></param>
+        /// <param name="context"></param>
+        public static void queueGame(string gameType, string userID, IHubContext<connection> context)
+        {
+            bool queued = false;
+            foreach (IPlayable game in currentGames)
             {
-                if (game.gameID == gameID)
+                if (game.getType() == gameType)
                 {
-                    game.loadResponse(userID, input);
-                    return;
+                    if (tryQueueGame(game, userID))
+                    {
+                        queued = true;
+                        break;
+                    }
                 }
             }
-            foreach (var game in currentGames.knockout)
+            if (!queued)
             {
-                if (game.gameID == gameID)
+                Type? type = Type.GetType(gameType);
+                if (type != null)
                 {
-                    game.loadResponse(userID, input);
-                    return;
+                    ConstructorInfo[] c = type.GetConstructors();
+                    c[0].Invoke([userID, context]);
+                }
+                else
+                {
+                    database.outputException($"Could not find game with type {gameType}");
                 }
             }
         }

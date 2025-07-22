@@ -5,7 +5,7 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, userID, 12), IPlayable
+    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
     {
         public const bool online = true;
         private List<string> aliveUsers = [];
@@ -16,7 +16,7 @@ namespace server_app.games
             base.startGame();
             submissionPhase();          
         }
-        public async void submissionPhase()
+        public async override void submissionPhase()
         {
             char letter = (char)(rnd.Next(0, 26) + 65);
             letters.Add(letter);
@@ -25,7 +25,7 @@ namespace server_app.games
             currentResponses.Clear();
             await sendLetter(aliveUsers, letter);
         }
-        public void loadResponse(string userID, double[] input)
+        public override void loadResponse(string userID, double[] input)
         {
             currentResponses.Add(userID, (input, DateTime.UtcNow));
             if (currentResponses.Count == aliveUsers.Count)
@@ -33,14 +33,13 @@ namespace server_app.games
                 evaluationPhase(letters[^1]);
             }
         }
-        public async void evaluationPhase(char letter)
+        public async override void evaluationPhase(char letter)
         {
 			List<string> incorrectUsers = [];
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
             for (int i = 0; i < aliveUsers.Count; i++)
             {
-                bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
-                if (!correct)
+                if (!evaluateSubmission(ref evaluates, i, userIDs, letter))
                 {
                     incorrectUsers.Add(userIDs[i]);
 				}
@@ -73,6 +72,7 @@ namespace server_app.games
 
             await sendKnockoutResults(userIDs, aliveUsers);
 
+            count++;
             if (aliveUsers.Count > 1)
             {
                 submissionPhase();

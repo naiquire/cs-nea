@@ -1,6 +1,6 @@
-@server_app_HostAddress = http://localhost:3701
+@server_app_HostAddress = http://localhost:3900
 
-GET {{server_app_HostAddress}}/weatherforecast/
+GET {{server_app_HostAddress}}/cs-nea/accounts
 Accept: application/json
 
 ###

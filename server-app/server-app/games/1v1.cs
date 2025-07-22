@@ -6,11 +6,10 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-	public class _1v1(string userID, IHubContext<connection> context) : abstractGame(context, userID, 2), IPlayable
+	public class _1v1(string userID, IHubContext<connection> context) : abstractGame(context, "1v1", userID, 2), IPlayable
 	{
 		public const bool online = true;
 		private const int rounds = 10;
-		private int count = 0;
 		private Dictionary<string, double> scores = [];
 		public override void startGame()
 		{
@@ -24,13 +23,13 @@ namespace server_app.games
 			letters = generateLetters(rounds);
 			submissionPhase();
 		}
-		public async void submissionPhase()
+		public async override void submissionPhase()
 		{
 			startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
 			currentResponses.Clear();
 			await sendLetter(userIDs, letters[count]);
 		}
-		public void loadResponse(string userID, double[] input)
+		public override void loadResponse(string userID, double[] input)
 		{
 			currentResponses.Add(userID, (input, DateTime.UtcNow));
 			if (currentResponses.Count == getPlayerCount())
@@ -38,15 +37,14 @@ namespace server_app.games
 				evaluationPhase(letters[count]);
 			}
 		}
-		public async void evaluationPhase(char letter)
+		public async override void evaluationPhase(char letter)
 		{
 			List<string> correctUsers = [];
 
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				bool correct = evaluateSubmission(ref evaluates, i, userIDs, letter);
-				if (correct)
+				if (evaluateSubmission(ref evaluates, i, userIDs, letter))
 				{
 					correctUsers.Add(userIDs[i]);
 				}
@@ -82,7 +80,8 @@ namespace server_app.games
 			}
 
 			// call next submission phase
-			if (count++ < rounds)
+			count++;
+			if (count < rounds)
 			{
 				submissionPhase();
 			}

@@ -84,3 +84,9 @@ ehthumbs.db
 # Windows shortcuts
 *.lnk
 
+server-app/.vs/server-app/v17/DocumentLayout.json
+server-app/.vs/server-app/v17/DocumentLayout.json
+server-app/.vs/server-app/v17/DocumentLayout.backup.json
+server-app/.vs/server-app/v17/.suo
+server-app/.vs/server-app/CopilotIndices/17.14.827.52834/SemanticSymbols.db
+server-app/.vs/server-app/CopilotIndices/17.14.827.52834/CodeChunks.db

@@ -5,22 +5,20 @@ using System.Reflection;
 
 namespace server_app.connections
 {
-    // handles requests for queueing games
-    public partial class @connection : Hub
-    {
-        public void queueGame(string gameType, string userID)
-        {
-            // convert gameID to method name
-            try
-            {
-                MethodInfo? methodInfo = typeof(queueing).GetMethod($"queue_{gameType}");
-                methodInfo?.Invoke(methodInfo, [userID]);
-            }
-            catch (ArgumentNullException ex)
-            {
-                database.outputException($"Game <{gameType}> could not be found");
-                database.outputException(ex);
-            }            
-        }
-    }
+	// handles requests for queueing games
+	public partial class @connection : Hub
+	{
+		public void queueGame(string gameType, string userID)
+		{
+			if (Program.hubContext != null)
+			{
+				queueing.queueGame(gameType, userID, Program.hubContext);
+			}
+			else
+			{
+				database.outputException("IHubContext was null when attempting to queue a user");
+				throw new Exception("[FATAL] IHubContext was null when attempting to queue a user");
+			}
+		}
+	}
 }

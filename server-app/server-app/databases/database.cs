@@ -23,7 +23,7 @@ namespace server_app.databases
 		{
 			// if exception occurs then log the message and allow the client to try again
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine(ex.ToString());
+			Console.WriteLine($"[ERROR] {ex}");
 			Console.ResetColor();
 		}
 		public static void outputException(string ex)

@@ -7,11 +7,10 @@ using System.Reflection;
 
 namespace server_app.games
 {
-	public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, userID, 1), IPlayable
+	public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, "accuracy", userID, 1), IPlayable
 	{
 		public const bool online = false;
 		private const int rounds = 10;
-		private int count = 0;
 		public override void startGame()
 		{
 			base.startGame();
@@ -19,13 +18,13 @@ namespace server_app.games
 			letters = generateLetters(rounds);
 			submissionPhase();
 		}
-		public async void submissionPhase()
+		public async override void submissionPhase()
 		{
 			startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
 			currentResponses.Clear();
 			await sendLetter(userIDs, letters[count]);
 		}
-		public void loadResponse(string userID, double[] input)
+		public override void loadResponse(string userID, double[] input)
 		{
 			currentResponses.Add(userID, (input, DateTime.UtcNow));
 			if (currentResponses.Count == getPlayerCount())
@@ -33,7 +32,7 @@ namespace server_app.games
 				evaluationPhase(letters[count]);
 			}
 		}
-		public async void evaluationPhase(char letter)
+		public async override void evaluationPhase(char letter)
 		{
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
 			for (int i = 0; i < userIDs.Count; i++)
@@ -42,7 +41,8 @@ namespace server_app.games
 				await sendResult(userIDs[i], stats[userIDs[i]]);
 			}
 
-			if (count++ < rounds)
+			count++;
+			if (count < rounds)
 			{
 				submissionPhase();
 			}

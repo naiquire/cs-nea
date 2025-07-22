@@ -27,6 +27,7 @@ namespace server_app.games
 	}
 	public interface IPlayable
 	{
+		void queueUser(string userID);
 		void startGame();
 		/// <summary>
 		/// Calls for the next iteration of the game.
@@ -45,10 +46,15 @@ namespace server_app.games
 		/// <param name="letter"></param>
 		void evaluationPhase(char letter);
 		void endGame();
+		string getType();
+		string getGameID();
+		int getPlayerCount();
+		int getMaxPlayers();
 	}
-	public abstract class abstractGame
+	public abstract class abstractGame : IPlayable
 	{
 		protected IHubContext<connection> hubContext;
+		public string type;
 
 		protected List<string> userIDs;
 		public string gameID;
@@ -56,6 +62,7 @@ namespace server_app.games
 
 		protected List<char> letters;
 		protected Random rnd;
+		protected int count = 0;
 
 		protected DateTime startTime;
 		protected Dictionary<string, stats> stats;
@@ -66,7 +73,7 @@ namespace server_app.games
 		/// </summary>
 		/// <param name="userID"></param>
 		/// <param name="maxPlayers"></param>
-		public abstractGame(IHubContext<connection> context, string userID, int maxPlayers)
+		public abstractGame(IHubContext<connection> context, string type, string userID, int maxPlayers)
 		{
 			userIDs = [];
 			this.maxPlayers = maxPlayers;
@@ -75,6 +82,7 @@ namespace server_app.games
 			rnd = new();
 			hubContext = context;
 			currentResponses = [];
+			this.type = type;
 
 			gameID = userID + DateTime.UtcNow.ToString();
 			queueUser(userID);
@@ -140,6 +148,7 @@ namespace server_app.games
 			}
 			return letters;
 		}
+		public abstract void submissionPhase();
 
 		/// <summary>
 		/// Sends a character to the given users.
@@ -162,6 +171,8 @@ namespace server_app.games
 				}
 			}
 		}
+		public abstract void loadResponse(string userID, double[] input);
+		public abstract void evaluationPhase(char letter);
 
 		/// <summary>
 		/// Evaluates a user's submission and updates their current statistics.
@@ -268,6 +279,17 @@ namespace server_app.games
 				}
 			}
 		}
+
+		/// <summary>
+		/// Gets the type of game.
+		/// </summary>
+		/// <returns></returns>
+		public string getType() => type;
+		/// <summary>
+		/// Gets the ID of the game.
+		/// </summary>
+		/// <returns></returns>
+		public string getGameID() => gameID;
 
 		/// <summary>
 		/// Gets the maximum number of players that can join the game.

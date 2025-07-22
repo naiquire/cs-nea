@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
+using server_app.connections;
 using server_app.databases;
 using System.Diagnostics;
 
@@ -6,53 +7,11 @@ namespace server_app
 {
     internal class Program : Hub
     {
+        public static IHubContext<connection>? hubContext;
         static void Main(string[] args)
         {
             startNginx();
-            //configServer(args).Run();
-            //CreateHostBuilder(args).Build().Run();
             hostBuilder(args).Build().Run();
-
-            WebApplication
-            //database.toggleConnection(true);
-        }
-        private static WebApplication configServer(string[] args)  // DOESNT WORK BUT NO CHATGPT SO MAYBE LIKE GET IT WORKING PERHAPS
-        {
-            var builder = WebApplication.CreateBuilder(args);
-
-            builder.Services.AddSignalR();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", policy =>
-                {
-                    policy.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
-                });
-            });
-
-            var app = builder.Build();
-
-            app.UseRouting();
-            app.UseCors("AllowAll");
-            app.Use(async (context, next) =>
-            {
-                Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
-                await next.Invoke();
-            });
-
-            app.MapHub<connections.connection>("/cs-nea/connections");
-            app.MapHub<accounts>("/cs-nea/accounts");
-
-
-            // binds to all address on port 3900
-            app.Urls.Add("http://0.0.0.0:3900");
-
-            return app;
         }
         private static void startNginx()
         {
@@ -91,8 +50,6 @@ namespace server_app
                 process.Kill();
             }
         }
-
-
         private static IHostBuilder hostBuilder(string[] args)
         {
             var host = Host.CreateDefaultBuilder(args);
@@ -111,6 +68,7 @@ namespace server_app
                     setup.UseRouting();
                     setup.Use(async (context, next) =>
                     {
+                        hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
                         Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
                         await next.Invoke();
                     });
@@ -125,57 +83,5 @@ namespace server_app
 
             return host;
         }
-
-        static IHostBuilder CreateHostBuilder(string[] args) => // WORKS YAYAYAYAYA BUT CHATGPT
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.ConfigureServices(services =>
-                    {
-                        services.AddSignalR();
-                        services.AddEndpointsApiExplorer();
-                        services.AddSwaggerGen();
-
-                        services.AddCors(options =>
-                        {
-                            options.AddPolicy("AllowAll", policy =>
-                            {
-                                policy.AllowAnyOrigin()
-                                      .AllowAnyMethod()
-                                      .AllowAnyHeader();
-                            });
-                        });
-                    })
-
-
-                    .Configure(app =>
-                    {
-                        app.UseRouting();
-                        app.UseCors("AllowAll");
-                        app.Use(async (context, next) =>
-                        {
-                            Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
-                            await next.Invoke();
-                        });
-                        //app.UseAuthentication();
-                        //app.UseAuthorization();
-                        app.UseEndpoints(endpoints =>
-                        {
-                            // subdomain specifies the application required for the request (automatically handled by NGINX)
-                            // class specifies the type of request to the application
-                            // subclass specifies any further details
-
-                            endpoints.MapHub<connections.connection>("/cs-nea/connections");
-                            endpoints.MapHub<accounts>("/cs-nea/accounts");
-
-                        });
-                    })
-
-                    // ensure port is not used elsewhere
-                    // port number is linked to the subdomain such that only requests to :5252/subdomain are forwarded to :5200
-
-                    .UseUrls("http://0.0.0.0:3900");
-
-                });
     }
 }
