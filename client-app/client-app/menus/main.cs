@@ -112,7 +112,7 @@ namespace client_app
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)
         {
-            new accuracy().start_accuracy(this);
+            accuracy.queue_accuracy();
         }
     }
 }
