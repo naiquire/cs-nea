@@ -5,7 +5,7 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
+    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12)
     {
         public const bool online = true;
         private List<string> aliveUsers = [];
