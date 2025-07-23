@@ -8,11 +8,11 @@ namespace server_app.connections
 	// handles requests for queueing games
 	public partial class @connection : Hub
 	{
-		public void queueGame(string gameType, string userID)
+		public bool queueGame(string gameType, string userID)
 		{
 			if (Program.hubContext != null)
 			{
-				queueing.queueGame(gameType, userID, Program.hubContext);
+				return queueing.queueGame(gameType, userID, Program.hubContext);
 			}
 			else
 			{

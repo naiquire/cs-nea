@@ -57,6 +57,7 @@ namespace server_app.games
 		public string type;
 
 		protected List<string> userIDs;
+		protected List<friendData> userDatas;
 		public string gameID;
 		protected int maxPlayers;
 
@@ -82,6 +83,7 @@ namespace server_app.games
 			rnd = new();
 			hubContext = context;
 			currentResponses = [];
+			userDatas = [];
 			this.type = type;
 
 			gameID = userID + DateTime.UtcNow.ToString();
@@ -95,11 +97,14 @@ namespace server_app.games
 		/// <exception cref="DisconnectException"></exception>
 		public async void queueUser(string userID)
 		{
-			userIDs.Add(userID);
+			if (database.loadFriendData(userID, out friendData data))
+			{
+				userDatas.Add(data);
+			}
 
 			if (connection.map.TryGetValue(userID, out string? connectionID))
 			{
-				await hubContext.Clients.Client(connectionID).SendAsync("receiveJoinConfirm", gameID);
+				await hubContext.Clients.Client(connectionID).SendAsync("receiveJoinConfirm", gameID, getType(), userDatas);
 			}
 			else
 			{

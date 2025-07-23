@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using MathNet.Numerics.Statistics;
+using Microsoft.Data.Sqlite;
+using server_app.connections;
 using server_app.games;
 using System.Diagnostics.Metrics;
 using System.Threading.Tasks;
@@ -9,11 +11,26 @@ namespace server_app.databases
 	public struct userData
 	{
 		public string userID;
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
 		public string aboutMe;
-		public DateTime dateCreated;
-		public int rank;
+		public List<friendData> friends;
+
 		public string localisation;
+		public DateTime dateCreated;
+
+		public int rank;
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
+	}
+	public struct friendData
+	{
+		public string userID;
+		public string aboutMe;
+		public bool online;
+
+		public string localisation;
+		public DateTime dateCreated;
+
+		public int rank;
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
 	}
 	public static class @database
 	{
@@ -161,7 +178,6 @@ namespace server_app.databases
 		public static bool loadUserData(string userID, out userData userData)
 		{
 			userData = new();
-			Dictionary<char, (double, TimeSpan, int)> statistics = [];
 
 			string query = @"SELECT aboutMe, dateCreated, rank, localisation
 				FROM userData
@@ -189,7 +205,37 @@ namespace server_app.databases
 				return false;
 			}
 
-			query = "SELECT letter, accuracy, time, total FROM statistics WHERE userID = @userID";
+			userData.userID = userID;
+
+			if (!loadStatistics(userID, out userData.statistics))
+			{
+				return false;
+			}
+
+			List<friendData> friendData = [];
+			if (loadFriends(userID, out List<string> friends))
+			{
+				foreach (var friend in friends)
+				{
+					if (loadFriendData(friend, out friendData data))
+					{
+						friendData.Add(data);
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+		public static bool loadStatistics(string userID, out Dictionary<char, (double, TimeSpan, int)> statistics)
+		{
+			statistics = [];
+			string query = @"SELECT letter, accuracy, time, total
+				FROM statistics
+				WHERE userID = @userID";
 			try
 			{
 				using (var command = new SqliteCommand(query, connection))
@@ -206,6 +252,69 @@ namespace server_app.databases
 						statistics[letter] = (accuracy, time, total);
 					}
 				}
+				return true;
+			}
+			catch (SqliteException ex)
+			{
+				outputException(ex);
+				return false;
+			}
+		}
+		public static bool loadFriends(string userID, out List<string> friends)
+		{
+			friends = [];
+			string query = @"SELECT user1, user2
+				FROM friends
+				WHERE user1 = @userID OR user2 = @userID";
+			try
+			{
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					var reader = command.ExecuteReader();
+					while (reader.Read())
+					{
+						string u1 = reader.GetString(0);
+						string u2 = reader.GetString(1);
+
+						if (u1 == userID)
+						{
+							friends.Add(u2);
+						}
+						if (u2 == userID)
+						{
+							friends.Add(u1);
+						}
+					}
+				}
+				return true;
+			}
+			catch (SqliteException ex)
+			{
+				outputException(ex);
+				return false;
+			}
+		}
+		public static bool loadFriendData(string userID, out friendData friendData)
+		{
+			friendData = new();
+			string query = @"SELECT aboutMe, dateCreated, localisation, rank
+				FROM userData
+				WHERE userID = @userID";
+			try
+			{
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					var reader = command.ExecuteReader();
+					while (reader.Read())
+					{
+						friendData.aboutMe = reader.GetString(0);
+						friendData.dateCreated = reader.GetDateTime(1);
+						friendData.localisation = reader.GetString(2);
+						friendData.rank = reader.GetInt32(3);
+					}
+				}
 			}
 			catch (SqliteException ex)
 			{
@@ -213,8 +322,12 @@ namespace server_app.databases
 				return false;
 			}
 
-			userData.userID = userID;
-			userData.statistics = statistics;
+			if (!loadStatistics(userID, out friendData.statistics))
+			{
+				return false;
+			}
+
+			friendData.online = connections.connection.map.ContainsKey(userID);
 			return true;
 		}
 		public static bool updateStatistics(string userID, char letter, double accuracy, TimeSpan time, int total)

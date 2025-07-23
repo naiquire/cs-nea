@@ -1,27 +1,22 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace client_app.menus
 {
-    public class abstractMenu : Form
-    {
-        protected Panel panel_topBorder;
-        protected Button btn_close;
-        protected Label lbl_appName;
-        protected Panel panel_left;
-        protected Panel panel_topLeft;
-        public Panel panel_main;
-        protected Panel panel_right;
+	public class abstractMenu : Form
+	{
+		protected Panel panel_topBorder;
+		protected Button btn_close;
+		protected Label lbl_appName;
+		protected Panel panel_left;
+		protected Panel panel_topLeft;
+		public Panel panel_main;
+		protected Panel panel_right;
 
 
 		protected virtual void InitializeComponent()
-        {
+		{
 			this.Controls.Clear();
 
 			this.panel_topBorder = new System.Windows.Forms.Panel();
@@ -63,7 +58,7 @@ namespace client_app.menus
 			this.btn_close.TabIndex = 0;
 			this.btn_close.Text = "X";
 			this.btn_close.UseVisualStyleBackColor = true;
-			this.btn_close.Click += closeApp;
+			this.btn_close.Click += new EventHandler(closeApp);
 			// 
 			// panel_left
 			// 
@@ -112,7 +107,7 @@ namespace client_app.menus
 			this.panel_topBorder.ResumeLayout(false);
 			this.panel_left.ResumeLayout(false);
 			this.ResumeLayout(false);
-        }
+		}
 		protected virtual void InitializeComponent(main main)
 		{
 			main.Controls.Clear();
@@ -156,7 +151,7 @@ namespace client_app.menus
 			main.btn_close.TabIndex = 0;
 			main.btn_close.Text = "X";
 			main.btn_close.UseVisualStyleBackColor = true;
-			main.btn_close.Click += closeApp;
+			main.btn_close.Click += new EventHandler(closeApp);
 			// 
 			// panel_left
 			// 
@@ -207,10 +202,120 @@ namespace client_app.menus
 			main.ResumeLayout(false);
 		}
 
+		/// <summary>
+		/// Configures the right panel with userData
+		/// </summary>
+		protected void configPanel_right_userData(main main, userData userData)
+		{
+
+		}
+
+		/// <summary>
+		/// Loads the Lobby menu.
+		/// </summary>
+		/// <param name="main"></param>
+		/// <param name="users"></param>
+		protected void initialiseLobby(main main, List<friendData> users)
+		{
+			InitializeComponent(main);
+
+			Label lbl_header = new Label
+			{
+				BackColor = main.panel_main.BackColor,
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				Location = new System.Drawing.Point(10, 10),
+				Name = "lbl_header",
+				Size = new System.Drawing.Size(300, 30),
+				TabIndex = 0,
+				Text = $"Lobby <{game.type}>"
+			};
+
+			main.panel_main.Controls.Add(lbl_header);
+
+			configPanel_main_lobby(main, users);
+		}
+
+		/// <summary>
+		/// Configures a Panel to display the current users in the queued game.
+		/// </summary>
+		/// <param name="main"></param>
+		/// <param name="users"></param>
+		protected void configPanel_main_lobby(main main, List<friendData> users)
+		{
+			#region temp
+			users = main.userData.friends;
+			users.Add(new friendData()
+			{
+				userID = main.userData.userID,
+				rank = main.userData.rank,
+			});
+			#endregion
+
+			Panel panel_users = new Panel()
+			{
+				Name = "panel_users",
+				BackColor = main.panel_main.BackColor,
+				BorderStyle = BorderStyle.FixedSingle,
+				Location = new System.Drawing.Point(50, 150),
+				Size = new System.Drawing.Size(main.panel_main.Width - 100, main.panel_main.Height - 100 - 100)
+			};
+
+			int X = 10;
+			int Y = 10;
+			const int userX = 400;
+			const int userY = 50;
+			const int userB = 5;
+
+			foreach (friendData user in users)
+			{
+				Panel panel_user = new Panel()
+				{
+					Name = user.userID,
+					BackColor = panel_users.BackColor,
+					BorderStyle = BorderStyle.FixedSingle,
+					Location = new System.Drawing.Point(X, Y),
+					Size = new System.Drawing.Size(userX, userY),
+				};
+
+				Label userID = new Label()
+				{
+					BackColor = main.panel_main.BackColor,
+					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+					Location = new System.Drawing.Point(userB, userB),
+					Name = user.userID,
+					Size = new System.Drawing.Size(userX - userY - 2 * userB, userY - 2 * userB),
+					TabIndex = 0,
+					Text = user.userID,
+					BorderStyle = BorderStyle.FixedSingle,
+					TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+				};
+				Label rank = new Label()
+				{
+					BackColor = main.panel_main.BackColor,
+					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+					Location = new System.Drawing.Point(userID.Width + 2 * userB, userB),
+					Name = "rank",
+					Size = new System.Drawing.Size(userY - userB, userY - 2 * userB),
+					TabIndex = 0,
+					Text = user.rank.ToString(),
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+
+				panel_user.Controls.Add(userID);
+				panel_user.Controls.Add(rank);
+				panel_users.Controls.Add(panel_user);
+
+				Y = Y + userY + 10;
+			}
+
+			main.panel_main.Controls.Add(panel_users);
+		}
+
 		public async void closeApp(object sender, EventArgs e)
 		{
 			Hide();
-			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			//await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
 			Close();
 		}
 	}

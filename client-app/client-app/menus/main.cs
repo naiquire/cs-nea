@@ -23,19 +23,23 @@ namespace client_app
         public int rank;
         public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
     }
-    public struct friendData
-    {
-        public string userID;
-        public bool online;
+	public struct friendData
+	{
+		public string userID;
+		public string aboutMe;
+		public bool online;
 
-        public int rank;
-        public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
-    }
-    public struct game
+		public string localisation;
+		public DateTime dateCreated;
+
+		public int rank;
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
+	}
+	public struct game
     {
         public static string gameID;
         public static string type;
-        public static List<string> users;
+        public static List<friendData> users;
     }
     public partial class main : abstractMenu
     {
@@ -112,7 +116,8 @@ namespace client_app
 
         private void btn_queueAccuracy_Click(object sender, EventArgs e)
         {
-            accuracy.queue_accuracy();
+            accuracy.queue_accuracy(this);
+            new accuracy().join_accuracy();
         }
     }
 }

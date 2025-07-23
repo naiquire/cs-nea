@@ -2,6 +2,7 @@
 using server_app.connections;
 using server_app.databases;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 
 namespace server_app.games
@@ -56,7 +57,7 @@ namespace server_app.games
         /// <param name="gameType"></param>
         /// <param name="userID"></param>
         /// <param name="context"></param>
-        public static void queueGame(string gameType, string userID, IHubContext<connection> context)
+        public static bool queueGame(string gameType, string userID, IHubContext<connection> context)
         {
             bool queued = false;
             foreach (IPlayable game in currentGames)
@@ -66,7 +67,7 @@ namespace server_app.games
                     if (tryQueueGame(game, userID))
                     {
                         queued = true;
-                        break;
+                        return true;
                     }
                 }
             }
@@ -77,12 +78,15 @@ namespace server_app.games
                 {
                     ConstructorInfo[] c = type.GetConstructors();
                     c[0].Invoke([userID, context]);
+                    return true;
                 }
                 else
                 {
                     database.outputException($"Could not find game with type {gameType}");
+                    return false;
                 }
             }
+            return false;
         }
     }
 }

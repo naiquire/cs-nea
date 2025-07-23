@@ -1,5 +1,7 @@
-﻿using System;
+﻿using client_app.games;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,58 +11,66 @@ namespace client_app.components
 {
 	public class queueing : Form
 	{
+		private Button okButton;
+		private Button cancelButton;
+		private string text;
 		public queueing(string text)
 		{
+			ClientSize = new Size(600, 300);
+			StartPosition = FormStartPosition.CenterScreen;
+			BackColor = ColorTranslator.FromHtml("#2e2e2e");
+			FormBorderStyle = FormBorderStyle.None;
+			ShowInTaskbar = false;
+			BringToFront();
 
-			lbl_header = new Label();
-			pic_loading = new PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.pic_loading)).BeginInit();
-			this.SuspendLayout();
-			///
-			/// lbl_header
-			///
-			this.lbl_header.BackColor = this.BackColor;
-			this.lbl_header.Font = new System.Drawing.Font("Bahnschrift SemiBold", 16.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_header.Location = new System.Drawing.Point(10, 10);
-			this.lbl_header.Name = "lbl_header";
-			this.lbl_header.Size = new System.Drawing.Size(172, 30);
-			this.lbl_header.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.lbl_header.TabIndex = 0;
-			this.lbl_header.Text = text;
-			///
-			/// pic_loading
-			///
-			this.pic_loading.Image = global::client_app.Properties.Resources.loading;
-			this.pic_loading.Location = new System.Drawing.Point(200, 20);
-			this.pic_loading.Name = "loading";
-			this.pic_loading.Size = new System.Drawing.Size(100, 100);
-			this.pic_loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pic_loading.TabIndex = 0;
-			this.pic_loading.TabStop = false;
-			///
-			/// queueing
-			/// 
-			this.BackColor = System.Drawing.Color.Gray;
-			this.ClientSize = new System.Drawing.Size(384, 216);
-			this.Controls.Add(this.lbl_header);
-			this.Controls.Add(this.pic_loading);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Name = "abstractMenu";
-			this.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pic_loading)).EndInit();
+			lbl_header = new Label
+			{
+				Text = text,
+				Font = new Font("Bahnschrift", 12, FontStyle.Bold),
+				AutoSize = false,
+				Size = new Size(380, 30),
+				Location = new Point(10, 20),
+				TextAlign = ContentAlignment.MiddleCenter
+			};
 
-			this.CenterToScreen();
-			this.ShowInTaskbar = false;
-			this.ShowDialog();
-		}
+			pic_loading = new PictureBox()
+			{
+				Image = global::client_app.Properties.Resources.loading,
+				Location = new System.Drawing.Point(200, 100),
+				Name = "pic_loading",
+				Size = new System.Drawing.Size(100, 100),
+				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				TabIndex = 0,
+				TabStop = false,
+			};
 
-		public void close()
-		{
-			this.Hide();
-			this.Close();
+			btn_confirm = new Button()
+			{
+				BackColor = this.BackColor,
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				Location = new System.Drawing.Point(100, 100),
+				Name = "btn_confirm",
+				Size = new System.Drawing.Size(50, 30),
+				TabIndex = 0,
+				Text = "join",
+				FlatStyle = FlatStyle.Flat,
+			};
+
+			btn_confirm.Click += (sender, e) =>
+			{
+				this.Close();
+			};
+
+			Controls.Add(lbl_header);
+			Controls.Add(pic_loading);
+
+			
+
+			ShowDialog();
 		}
 
 		private Label lbl_header;
 		private PictureBox pic_loading;
+		public Button btn_confirm;
 	}
 }
