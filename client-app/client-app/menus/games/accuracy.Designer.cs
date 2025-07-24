@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace client_app.games
 {
-    partial class accuracy : abstractMenu // change to main once completed
+    partial class accuracy : abstractMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -31,9 +31,9 @@ namespace client_app.games
         /// the contents of this method with the code editor.
         /// </summary>
         
-        private void initialiseGame()
+        public override void InitializeComponent()
         {
-			InitializeComponent(main);
+            resetLayout(main);
 
 			this.txt_letter = new System.Windows.Forms.Label();
             // 

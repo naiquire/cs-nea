@@ -86,17 +86,16 @@ namespace client_app
 			/// 
 			/// for example if the localisation is set to french:
 			/// <code>
-			/// localisation["friends"]["french"]
+			/// localisation["friends"]["fr"]
 			/// </code>
 			/// "amis" would be outputted
 			/// 
 			/// </summary>
 
 			localisation = languages.localisation;
+			base.InitializeComponent();
 			InitializeComponent();
             //initialiseConnection();
-            
-            configFriendsPanel();
         }
         private async void initialiseConnection()
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using client_app.Properties;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,20 +41,26 @@ namespace client_app
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        protected override void InitializeComponent()
+        public override void InitializeComponent()
         {
-			base.InitializeComponent();
+            resetLayout(this);
 
 			this.panel_friendList = new System.Windows.Forms.Panel();
             this.seperator = new System.Windows.Forms.PictureBox();
             this.lbl_friendsLabel = new System.Windows.Forms.Label();
             this.btn_queueAccuracy = new System.Windows.Forms.Button();
             this.pic_play = new System.Windows.Forms.PictureBox();
+			this.accuracy_seperator = new System.Windows.Forms.PictureBox();
+			this.btn_queueAccuracy = new System.Windows.Forms.Button();
+			this.panel_accuracy = new System.Windows.Forms.Panel();
+			this.lbl_accuracy = new System.Windows.Forms.Label();
 
-            this.panel_topBorder.SuspendLayout();
+			this.panel_topBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
             this.panel_main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_play)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pic_play)).BeginInit();
+			this.panel_accuracy.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.accuracy_seperator)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_friendList
@@ -87,43 +94,87 @@ namespace client_app
             this.lbl_friendsLabel.Size = new System.Drawing.Size(300, 33);
             this.lbl_friendsLabel.TabIndex = 0;
             this.lbl_friendsLabel.Text = localisation["Friends"][userData.localisation];
-            this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btn_queueAccuracy
-            // 
-            this.btn_queueAccuracy.Location = new System.Drawing.Point(236, 288);
-            this.btn_queueAccuracy.Name = "btn_queueAccuracy";
-            this.btn_queueAccuracy.Size = new System.Drawing.Size(75, 23);
-            this.btn_queueAccuracy.TabIndex = 1;
-            this.btn_queueAccuracy.Text = "Accuracy";
-            this.btn_queueAccuracy.UseVisualStyleBackColor = true;
-            this.btn_queueAccuracy.Click += new System.EventHandler(this.btn_queueAccuracy_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pic_play.Image = global::client_app.Properties.Resources.play;
+            this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;            
+			// 
+			// pic_play
+			// 
+			this.pic_play.Image = global::client_app.Properties.Resources.play;
             this.pic_play.Location = new System.Drawing.Point(360, 20);
             this.pic_play.Name = "pictureBox1";
             this.pic_play.Size = new System.Drawing.Size(400, 131);
             this.pic_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pic_play.TabIndex = 0;
             this.pic_play.TabStop = false;
-            //
-            // main
-            //
-            this.panel_main.Controls.Add(pic_play);
-            this.panel_main.Controls.Add(btn_queueAccuracy);
-            this.panel_left.Controls.Add(panel_friendList);
+			// 
+			// accuracy_seperator
+			// 
+			this.accuracy_seperator.Image = global::client_app.Properties.Resources.seperator;
+			this.accuracy_seperator.Location = new System.Drawing.Point(10, 40);
+			this.accuracy_seperator.Name = "accuracy_seperator";
+			this.accuracy_seperator.Size = new System.Drawing.Size(180, 10);
+			this.accuracy_seperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.accuracy_seperator.TabIndex = 1;
+			this.accuracy_seperator.TabStop = false;
+			// 
+			// btn_queueAccuracy
+			// 
+			this.btn_queueAccuracy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_queueAccuracy.ForeColor = System.Drawing.Color.Transparent;
+			this.btn_queueAccuracy.Location = new System.Drawing.Point(55, 80);
+			this.btn_queueAccuracy.Name = "btn_queueAccuracy";
+			this.btn_queueAccuracy.Size = new System.Drawing.Size(90, 90);
+			this.btn_queueAccuracy.TabIndex = 2;
+			this.btn_queueAccuracy.UseVisualStyleBackColor = true;
+			this.btn_queueAccuracy.Click += new System.EventHandler(this.btn_queueAccuracy_Click);
+			// 
+			// lbl_accuracy
+			// 
+			this.lbl_accuracy.AutoSize = true;
+			this.lbl_accuracy.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbl_accuracy.ForeColor = System.Drawing.Color.White;
+			this.lbl_accuracy.Location = new System.Drawing.Point(51, 10);
+			this.lbl_accuracy.Name = "lbl_accuracy";
+			this.lbl_accuracy.Size = new System.Drawing.Size(98, 25);
+			this.lbl_accuracy.TabIndex = 0;
+			this.lbl_accuracy.Text = "Accuracy";
+			// 
+			// panel_accuracy
+			// 
+			this.panel_accuracy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+			this.panel_accuracy.Controls.Add(this.btn_queueAccuracy);
+			this.panel_accuracy.Controls.Add(this.accuracy_seperator);
+			this.panel_accuracy.Controls.Add(this.lbl_accuracy);
+			this.panel_accuracy.Location = new System.Drawing.Point(230, 177);
+			this.panel_accuracy.Name = "panel_accuracy";
+			this.panel_accuracy.Size = new System.Drawing.Size(200, 400);
+			this.panel_accuracy.TabIndex = 0;
+			//
+			// main
+			//
+			this.panel_main.Controls.Add(pic_play);
+			this.panel_main.Controls.Add(this.panel_accuracy);
+			this.panel_left.Controls.Add(panel_friendList);
             this.panel_left.Controls.Add(seperator);
             this.panel_left.Controls.Add(lbl_friendsLabel);
 
-            ((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
             this.panel_main.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pic_play)).EndInit();
-            this.ResumeLayout(false);
-        }
+			this.panel_accuracy.ResumeLayout(false);
+			this.panel_accuracy.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pic_play)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.accuracy_seperator)).EndInit();
+			this.ResumeLayout(false);
 
-        private void configFriendsPanel()
+
+            configFriendsPanel();
+            configPanel_right_userData(this, userData);
+        }
+		public void btn_home_Click(object sender, EventArgs e)
+		{
+			InitializeComponent();
+		}
+
+		private void configFriendsPanel()
         {
             // seperate friends into online/offline
             List<friendData> onlineList = new List<friendData>();
@@ -256,10 +307,13 @@ namespace client_app
         private PictureBox seperator;
         private PictureBox pic_play;
         private Label lbl_friendsLabel;
-        private Button btn_queueAccuracy;
+		private Panel panel_accuracy;
+		private Label lbl_accuracy;
+		private PictureBox accuracy_seperator;
+		private Button btn_queueAccuracy;
 
-        #endregion
+		#endregion
 
-    }
+	}
 }
 
