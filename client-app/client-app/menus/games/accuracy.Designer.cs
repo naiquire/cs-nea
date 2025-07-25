@@ -31,7 +31,7 @@ namespace client_app.games
         /// the contents of this method with the code editor.
         /// </summary>
         
-        public override void InitializeComponent()
+        public void initialiseGame()
         {
             resetLayout(main);
 

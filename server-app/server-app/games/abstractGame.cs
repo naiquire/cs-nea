@@ -54,11 +54,11 @@ namespace server_app.games
 	public abstract class abstractGame : IPlayable
 	{
 		protected IHubContext<connection> hubContext;
-		public string type;
+		protected string type;
 
 		protected List<string> userIDs;
 		protected List<friendData> userDatas;
-		public string gameID;
+		protected string gameID;
 		protected int maxPlayers;
 
 		protected List<char> letters;
@@ -110,7 +110,6 @@ namespace server_app.games
 			{
 				throw new DisconnectException(userID);
 			}
-
 		}
 
 		/// <summary>
@@ -119,6 +118,7 @@ namespace server_app.games
 		/// <exception cref="DisconnectException"></exception>
 		public virtual async void startGame()
 		{
+			// define new stats object for each user
 			foreach (string user in userIDs)
 			{
 				stats.Add(user, new stats());
@@ -187,20 +187,20 @@ namespace server_app.games
 		/// <param name="userIDs"></param>
 		/// <param name="character"></param>
 		/// <returns>A boolean value representing if the submission was correct.</returns>
-		protected bool evaluateSubmission(ref evaluate[] evaluates, int i, List<string> userIDs, int character)
+		protected bool evaluateSubmission(ref evaluate evaluate, string userID, int character)
 		{
 			// evaluate the submission
 			int letter = character - 65;
-			evaluates[i] = new evaluate(currentResponses[userIDs[i]].submission);
-			bool correct = evaluates[i].result == letter;
+			evaluate = new evaluate(currentResponses[userID].submission);
+			bool correct = evaluate.result == letter;
 
 			// update the statistics for the current game
-			if (stats.TryGetValue(userIDs[i], out stats currentStats))
+			if (stats.TryGetValue(userID, out stats currentStats))
 			{
-				DateTime endTime = currentResponses[userIDs[i]].time;
-				currentStats.update(evaluates[i], letter, endTime - startTime, correct);
+				DateTime endTime = currentResponses[userID].time;
+				currentStats.update(evaluate, letter, endTime - startTime, correct);
 			}
-			stats[userIDs[i]] = currentStats;
+			stats[userID] = currentStats;
 			return correct;
 		}
 
@@ -230,8 +230,6 @@ namespace server_app.games
 		/// <exception cref="DisconnectException"></exception>
 		public virtual async void endGame()
 		{
-			// child classes handle different ways of displaying results
-
 			async Task update(string userID)
 			{
 				for (int i = 0; i < letters.Count; i++)

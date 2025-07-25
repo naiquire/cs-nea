@@ -39,8 +39,8 @@ namespace server_app.games
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
             for (int i = 0; i < aliveUsers.Count; i++)
             {
-                if (!evaluateSubmission(ref evaluates, i, userIDs, letter))
-                {
+				if (!evaluateSubmission(ref evaluates[i], userIDs[i], letter))
+				{
                     incorrectUsers.Add(userIDs[i]);
 				}
                 await sendResult(userIDs[i], stats[userIDs[i]]);

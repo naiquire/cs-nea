@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace client_app.menus
@@ -17,6 +18,8 @@ namespace client_app.menus
 
 		public virtual void InitializeComponent()
 		{
+			// OPENING DESIGNER WILL BREAK THIS MODULE
+
 			this.Controls.Clear();
 
 			this.panel_topBorder = new System.Windows.Forms.Panel();
@@ -34,94 +37,98 @@ namespace client_app.menus
 			// 
 			// panel_topBorder
 			// 
-			this.panel_topBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+			this.panel_topBorder.BackColor = Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
 			this.panel_topBorder.Controls.Add(this.lbl_appName);
 			this.panel_topBorder.Controls.Add(this.btn_close);
-			this.panel_topBorder.Location = new System.Drawing.Point(0, 0);
+			this.panel_topBorder.Location = new Point(0, 0);
 			this.panel_topBorder.Name = "panel_topBorder";
-			this.panel_topBorder.Size = new System.Drawing.Size(1920, 30);
+			this.panel_topBorder.Size = new Size(1920, 30);
 			this.panel_topBorder.TabIndex = 0;
 			// 
 			// lbl_appName
 			// 
 			this.lbl_appName.BackColor = this.panel_topBorder.BackColor;
-			this.lbl_appName.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_appName.Location = new System.Drawing.Point(10, 7);
+			this.lbl_appName.Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+			this.lbl_appName.Location = new Point(10, 7);
 			this.lbl_appName.Name = "lbl_appName";
-			this.lbl_appName.Size = new System.Drawing.Size(100, 16);
+			this.lbl_appName.Size = new Size(100, 16);
 			this.lbl_appName.TabIndex = 0;
 			this.lbl_appName.Text = "appName";
 			// 
 			// btn_close
 			// 
-			this.btn_close.Location = new System.Drawing.Point(1890, 0);
+			this.btn_close.Location = new Point(1890, 0);
 			this.btn_close.Name = "btn_close";
-			this.btn_close.Size = new System.Drawing.Size(30, 30);
+			this.btn_close.Size = new Size(30, 30);
 			this.btn_close.TabIndex = 0;
 			this.btn_close.Text = "X";
 			this.btn_close.UseVisualStyleBackColor = true;
-			this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+			this.btn_close.Click += new EventHandler(this.btn_close_Click);
 			// 
 			// btn_home
 			// 
-			this.btn_home.Location = new System.Drawing.Point(50, 910);
+			this.btn_home.Location = new Point(50, 910);
 			this.btn_home.Name = "btn_home";
-			this.btn_home.Size = new System.Drawing.Size(200, 30);
+			this.btn_home.Size = new Size(200, 30);
 			this.btn_home.TabIndex = 0;
 			this.btn_home.Text = "HOME";
-			this.btn_home.UseMnemonic = false;
 			this.btn_home.UseVisualStyleBackColor = true;
 			// 
 			// panel_left
 			// 
 			this.panel_left.AutoScroll = true;
-			this.panel_left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+			this.panel_left.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
 			this.panel_left.Controls.Add(this.btn_home);
-			this.panel_left.Location = new System.Drawing.Point(0, 130);
+			this.panel_left.Location = new Point(0, 130);
 			this.panel_left.Name = "panel_left";
-			this.panel_left.Size = new System.Drawing.Size(300, 950);
+			this.panel_left.Size = new Size(300, 950);
 			this.panel_left.TabIndex = 2;
 			// 
 			// panel_topLeft
 			// 
-			this.panel_topLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-			this.panel_topLeft.Location = new System.Drawing.Point(0, 30);
+			this.panel_topLeft.BackColor = Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+			this.panel_topLeft.Location = new Point(0, 30);
 			this.panel_topLeft.Name = "panel_topLeft";
-			this.panel_topLeft.Size = new System.Drawing.Size(300, 100);
+			this.panel_topLeft.Size = new Size(300, 100);
 			this.panel_topLeft.TabIndex = 1;
 			// 
 			// panel_main
 			// 
-			this.panel_main.BackColor = System.Drawing.Color.Transparent;
-			this.panel_main.Location = new System.Drawing.Point(300, 30);
+			this.panel_main.BackColor = Color.Transparent;
+			this.panel_main.Location = new Point(300, 30);
 			this.panel_main.Name = "panel_main";
-			this.panel_main.Size = new System.Drawing.Size(1120, 1050);
+			this.panel_main.Size = new Size(1120, 1050);
 			this.panel_main.TabIndex = 4;
 			// 
 			// panel_right
 			// 
-			this.panel_right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			this.panel_right.Location = new System.Drawing.Point(1420, 30);
+			this.panel_right.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+			this.panel_right.Location = new Point(1420, 30);
 			this.panel_right.Name = "panel_right";
-			this.panel_right.Size = new System.Drawing.Size(500, 1050);
+			this.panel_right.Size = new Size(500, 1050);
 			this.panel_right.TabIndex = 3;
 			// 
 			// abstractMenu
 			// 
-			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(1920, 1080);
+			this.BackColor = Color.White;
+			this.ClientSize = new Size(1920, 1080);
 			this.Controls.Add(this.panel_topLeft);
 			this.Controls.Add(this.panel_topBorder);
 			this.Controls.Add(this.panel_left);
 			this.Controls.Add(this.panel_main);
 			this.Controls.Add(this.panel_right);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.FormBorderStyle = FormBorderStyle.None;
 			this.Name = "abstractMenu";
 			this.panel_topBorder.ResumeLayout(false);
 			this.panel_left.ResumeLayout(false);
 			this.panel_main.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+
+		/// <summary>
+		/// Resets the current window to the base UI.
+		/// </summary>
+		/// <param name="main"></param>
 		protected void resetLayout(main main)
 		{
 			main.panel_main?.Controls.Clear();
@@ -238,14 +245,14 @@ namespace client_app.menus
 			main.panel_left.ResumeLayout(false);
 			main.ResumeLayout(false);
 
-		}
+		} // no references, unlikely needed in final
 
 		/// <summary>
 		/// Configures the right panel with userData.
 		/// </summary>
 		protected void configPanel_right_userData(main main, userData userData)
 		{
-
+			//throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -359,111 +366,6 @@ namespace client_app.menus
 			//await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
 			Close();
 		}
-		
+
 	}
 }
-
-/*
- *			this.Controls.Clear();
-
-			this.panel_topBorder = new System.Windows.Forms.Panel();
-			this.lbl_appName = new System.Windows.Forms.Label();
-			this.btn_close = new System.Windows.Forms.Button();
-			this.btn_home = new System.Windows.Forms.Button();
-			this.panel_left = new System.Windows.Forms.Panel();
-			this.panel_topLeft = new System.Windows.Forms.Panel();
-			this.panel_main = new System.Windows.Forms.Panel();
-			this.panel_right = new System.Windows.Forms.Panel();
-			this.panel_topBorder.SuspendLayout();
-			this.panel_left.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// panel_topBorder
-			// 
-			this.panel_topBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-			this.panel_topBorder.Controls.Add(this.lbl_appName);
-			this.panel_topBorder.Controls.Add(this.btn_close);
-			this.panel_topBorder.Location = new System.Drawing.Point(0, 0);
-			this.panel_topBorder.Name = "panel_topBorder";
-			this.panel_topBorder.Size = new System.Drawing.Size(1920, 30);
-			this.panel_topBorder.TabIndex = 0;
-			// 
-			// lbl_appName
-			// 
-			this.lbl_appName.BackColor = this.panel_topBorder.BackColor;
-			this.lbl_appName.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_appName.Location = new System.Drawing.Point(10, 7);
-			this.lbl_appName.Name = "lbl_appName";
-			this.lbl_appName.Size = new System.Drawing.Size(100, 16);
-			this.lbl_appName.TabIndex = 0;
-			this.lbl_appName.Text = "appName";
-			// 
-			// btn_close
-			// 
-			this.btn_close.Location = new System.Drawing.Point(1890, 0);
-			this.btn_close.Name = "btn_close";
-			this.btn_close.Size = new System.Drawing.Size(30, 30);
-			this.btn_close.TabIndex = 0;
-			this.btn_close.Text = "X";
-			this.btn_close.UseVisualStyleBackColor = true;
-			this.btn_close.Click += new System.EventHandler(btn_close_Click);
-			// 
-			// btn_home
-			// 
-			this.btn_home.Location = new System.Drawing.Point(50, 910);
-			this.btn_home.Name = "btn_home";
-			this.btn_home.Size = new System.Drawing.Size(200, 30);
-			this.btn_home.TabIndex = 0;
-			this.btn_home.Text = "HOME";
-			this.btn_home.UseMnemonic = false;
-			this.btn_home.UseVisualStyleBackColor = true;
-			// 
-			// panel_left
-			// 
-			this.panel_left.AutoScroll = true;
-			this.panel_left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			this.panel_left.Controls.Add(this.btn_home);
-			this.panel_left.Location = new System.Drawing.Point(0, 130);
-			this.panel_left.Name = "panel_left";
-			this.panel_left.Size = new System.Drawing.Size(300, 950);
-			this.panel_left.TabIndex = 2;
-			// 
-			// panel_topLeft
-			// 
-			this.panel_topLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-			this.panel_topLeft.Location = new System.Drawing.Point(0, 30);
-			this.panel_topLeft.Name = "panel_topLeft";
-			this.panel_topLeft.Size = new System.Drawing.Size(300, 100);
-			this.panel_topLeft.TabIndex = 1;
-			// 
-			// panel_main
-			// 
-			this.panel_main.BackColor = System.Drawing.Color.Transparent;
-			this.panel_main.Location = new System.Drawing.Point(300, 30);
-			this.panel_main.Name = "panel_main";
-			this.panel_main.Size = new System.Drawing.Size(1120, 1050);
-			this.panel_main.TabIndex = 4;
-			// 
-			// panel_right
-			// 
-			this.panel_right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			this.panel_right.Location = new System.Drawing.Point(1420, 30);
-			this.panel_right.Name = "panel_right";
-			this.panel_right.Size = new System.Drawing.Size(500, 1050);
-			this.panel_right.TabIndex = 3;
-			// 
-			// abstractMenu
-			// 
-			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(1920, 1080);
-			this.Controls.Add(this.panel_topLeft);
-			this.Controls.Add(this.panel_topBorder);
-			this.Controls.Add(this.panel_left);
-			this.Controls.Add(this.panel_main);
-			this.Controls.Add(this.panel_right);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Name = "abstractMenu";
-			this.panel_topBorder.ResumeLayout(false);
-			this.panel_left.ResumeLayout(false);
-			this.ResumeLayout(false);
- */

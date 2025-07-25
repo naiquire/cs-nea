@@ -12,11 +12,11 @@ namespace client_app.menus
 {
     public partial class profile : abstractMenu
     {
-        private main form;
+        private readonly main main;
         private readonly userData userData;
-        public profile(main form, userData user)
+        public profile(main main, userData user)
         {
-            this.form = form;
+            this.main = main;
             userData = user;
 
             InitializeComponent();

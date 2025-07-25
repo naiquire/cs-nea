@@ -171,6 +171,15 @@ namespace client_app
         }
 		public void btn_home_Click(object sender, EventArgs e)
 		{
+            //if (game.gameID != null)
+            //{
+            //    connection.InvokeAsync("leaveGame", game.gameID, userData.userID); // no server functionality
+            //}
+
+            // dispose all other classes
+            menu.profile = null;
+            menu.accuracy = null;
+
 			InitializeComponent();
 		}
 

@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using client_app.games;
 using client_app.menus;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace client_app
 {
-    public struct userData
-    {
-        public string userID;
-        public List<friendData> friends;
+	public struct userData
+	{
+		public string userID;
+		public List<friendData> friends;
 
-        public string localisation;
+		public string localisation;
 
-        public int rank;
-        public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
-    }
+		public int rank;
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
+	}
 	public struct friendData
 	{
 		public string userID;
@@ -36,45 +30,54 @@ namespace client_app
 		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
 	}
 	public struct game
-    {
-        public static string gameID;
-        public static string type;
-        public static List<friendData> users;
-    }
-    public partial class main : abstractMenu
-    {
-        public static HubConnection connection;
-        public static userData userData;
-        public static readonly string address = "http://86.11.15.228:5252/cs-nea";
-        public static Dictionary<string, Dictionary<string, string>> localisation;
+	{
+		public static string gameID;
+		public static string type;
+		public static List<friendData> users;
+	}
+	public struct menu
+	{
+		public static main main;
+		public static profile profile;
 
-        //private Bitmap drawing;
-        public main(string userID)
-        {
-            userData = new userData()
-            {
-                userID = userID,
-                localisation = "en",
-                rank = 1200,
-                friends = new List<friendData>()
-                {
-                    new friendData()
-                    {
-                        userID = "beetel",
-                        online = true,
-                    },
-                    new friendData()
-                    {
-                        userID = "papp",
-                        online = false,
-                    },
-                    new friendData()
-                    {
-                        userID = "andrew",
-                        online = true,
-                    }
-                }
-            };
+		public static accuracy accuracy;
+	}
+
+	public partial class main : abstractMenu
+	{
+		public static HubConnection connection;
+		public static userData userData;
+		public static readonly string address = "http://86.11.15.228:5252/cs-nea";
+		public static Dictionary<string, Dictionary<string, string>> localisation;
+
+		public main(string userID)
+		{
+			#region temp
+			userData = new userData()
+			{
+				userID = userID,
+				localisation = "en",
+				rank = 1200,
+				friends = new List<friendData>()
+				{
+					new friendData()
+					{
+						userID = "beetel",
+						online = true,
+					},
+					new friendData()
+					{
+						userID = "papp",
+						online = false,
+					},
+					new friendData()
+					{
+						userID = "andrew",
+						online = true,
+					}
+				}
+			};
+			#endregion
 
 
 			/// <summary>
@@ -94,29 +97,31 @@ namespace client_app
 
 			localisation = languages.localisation;
 			base.InitializeComponent();
-			InitializeComponent();
-            //initialiseConnection();
-        }
-        private async void initialiseConnection()
-        {
-            connection = hub_connection.configConnection(address + "/connections");
-            connection = hub_connection.addHandles(connection);
-            connection = hub_connection.startConnection(connection);
+			//initialiseConnection();
+			InitializeComponent(); // move to after userData loaded etc
+			
+		}
+		private async void initialiseConnection()
+		{
+			connection = hub_connection.configConnection(address + "/connections");
+			connection = hub_connection.addHandles(connection);
+			connection = hub_connection.startConnection(connection);
 
-            userData = await connection.InvokeAsync<userData>("clientConnected", userData.userID);
-        }
+			userData = await connection.InvokeAsync<userData>("clientConnected", userData.userID);
+		}
 
-        private async Task requestProfile(string userID)
-        {
-            userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
+		private async Task requestProfile(string userID)
+		{
+			//userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 
-            profile profile = new profile(this, user);
-        }
+			menu.profile = new profile(this, userData);
+		}
 
-        private void btn_queueAccuracy_Click(object sender, EventArgs e)
-        {
-            accuracy.queue_accuracy(this);
-            new accuracy().join_accuracy();
-        }
-    }
+		private void btn_queueAccuracy_Click(object sender, EventArgs e)
+		{
+			accuracy.queue_accuracy(this);
+			menu.accuracy = new accuracy();
+			menu.accuracy.join_accuracy();
+		}
+	}
 }
