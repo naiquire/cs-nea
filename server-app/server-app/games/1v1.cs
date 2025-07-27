@@ -6,9 +6,8 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-	public class _1v1(string userID, IHubContext<connection> context) : abstractGame(context, "1v1", userID, 2)
+	public class _1v1(string userID, IHubContext<connection> context) : abstractGame(context, "1v1", userID, 2), IPlayable
 	{
-		public const bool online = true;
 		private const int rounds = 10;
 		private Dictionary<string, double> scores = [];
 		public override void startGame()

@@ -7,9 +7,8 @@ using System.Reflection;
 
 namespace server_app.games
 {
-	public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, "accuracy", userID, 1)
+	public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, "accuracy", userID, 1), IPlayable
 	{
-		public const bool online = false;
 		private const int rounds = 10;
 		public override void startGame()
 		{

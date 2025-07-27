@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
@@ -28,6 +28,7 @@ namespace server_app.games
 	public interface IPlayable
 	{
 		void queueUser(string userID);
+		void dequeueUser(string userID);
 		void startGame();
 		/// <summary>
 		/// Calls for the next iteration of the game.
@@ -48,13 +49,15 @@ namespace server_app.games
 		void endGame();
 		string getType();
 		string getGameID();
+		bool hasStarted();
 		int getPlayerCount();
 		int getMaxPlayers();
 	}
-	public abstract class abstractGame : IPlayable
+	public abstract class abstractGame
 	{
 		protected IHubContext<connection> hubContext;
 		protected string type;
+		private bool started;
 
 		protected List<string> userIDs;
 		protected List<friendData> userDatas;
@@ -85,6 +88,7 @@ namespace server_app.games
 			currentResponses = [];
 			userDatas = [];
 			this.type = type;
+			started = false;
 
 			gameID = userID + DateTime.UtcNow.ToString();
 			queueUser(userID);
@@ -110,6 +114,47 @@ namespace server_app.games
 			{
 				throw new DisconnectException(userID);
 			}
+
+			await updateUsers();
+		}
+		
+		/// <summary>
+		/// Dequeues a user from a game regardless of current state.
+		/// </summary>
+		/// <param name="userID"></param>
+		public async virtual void dequeueUser(string userID)
+		{
+			userIDs.Remove(userID);
+
+			foreach (var user in userDatas)
+			{
+				if (user.userID == userID)
+				{
+					userDatas.Remove(user);
+				}
+			}
+
+			await updateUsers();
+		}
+		
+		/// <summary>
+		/// Updates the clients with a list of users.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="DisconnectException"></exception>
+		private async Task updateUsers()
+		{	
+			foreach (var user in userIDs)
+			{
+				if (connection.map.TryGetValue(user, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("updateUsers", userDatas);
+				}
+				else
+				{
+					throw new DisconnectException(user);
+				}
+			}
 		}
 
 		/// <summary>
@@ -118,6 +163,7 @@ namespace server_app.games
 		/// <exception cref="DisconnectException"></exception>
 		public virtual async void startGame()
 		{
+			started = true;
 			// define new stats object for each user
 			foreach (string user in userIDs)
 			{
@@ -295,6 +341,12 @@ namespace server_app.games
 		public string getGameID() => gameID;
 
 		/// <summary>
+		/// Returns whether the game has started.
+		/// </summary>
+		/// <returns><see langword="true"/> if the game has started; otherwise, <see langword="false"/>.</returns>
+		public bool hasStarted() => started;
+
+		/// <summary>
 		/// Gets the maximum number of players that can join the game.
 		/// </summary>
 		public int getMaxPlayers() => maxPlayers;
@@ -304,5 +356,4 @@ namespace server_app.games
 		/// </summary>
 		public int getPlayerCount() => userIDs.Count;
 	}
-
 }

@@ -23,26 +23,34 @@ namespace client_app
                 .Build();
             return connection;
         }
-        public static HubConnection startConnection(HubConnection connection)
+        public async static Task<HubConnection> startConnection(HubConnection connection)
         {
-            connection.StartAsync();
+            await connection.StartAsync();
             return connection;
         }
         public static HubConnection addHandles(HubConnection connection)
         {
             connection.On<int, string>("loginSuccess", (success, userID) =>
             {
-                switch (success)
-                {
-                    case 0:
-                        // incorrect password
-                        MessageBox.Show("incorrect password");
-                        break;
-                    case 1:
-                        // login user
-                        main main = new main(userID);
-                        login.ActiveForm.Hide();
-                        main.ShowDialog();
+            switch (success)
+            {
+                case 0:
+                    // incorrect password
+                    MessageBox.Show("incorrect password");
+                    break;
+                case 1:
+                    // login user
+
+                    //var login = Application.OpenForms.OfType<login>().GetEnumerator();
+                    //login.Current.Close();
+                    var form = Application.OpenForms.OfType<login>().FirstOrDefault();
+                    form.Invoke(new Action(() => {
+                        form.Hide();                    
+                    }));
+
+						Application.Run(new main(userID));
+                        
+						//login.ActiveForm.Hide();
                         break;
                     case 2:
                         // account does not exist

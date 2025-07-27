@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.SignalR;
 using server_app.databases;
+using server_app.games;
 
 namespace server_app.connections
 {
@@ -25,9 +26,20 @@ namespace server_app.connections
             }
             return null;
         }
-        public void clientDisconnected(string userID)
+        public void clientDisconnected(string userID, string? gameID)
         {
             map.Remove(userID);
+			
+			if (gameID != null)
+			{
+				foreach (var game in queueing.currentGames)
+				{
+					if (game.getGameID() == gameID)
+					{
+						game.dequeueUser(userID);
+					}
+				}
+			}
         }
     }
 }

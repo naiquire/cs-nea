@@ -25,11 +25,11 @@ namespace client_app
             btn_requestAccount.Enabled = false;
             btn_requestAccount.Visible = false;
         }
-        private void initialiseConnection()
+        private async void initialiseConnection()
         {
             connection = hub_connection.configConnection(main.address + "/accounts");
             connection = hub_connection.addHandles(connection);
-            connection = hub_connection.startConnection(connection);
+            connection = await hub_connection.startConnection(connection);
         }
 
         private async void btn_login_Click(object sender, EventArgs e)

@@ -52,32 +52,32 @@ namespace client_app
 
 		public main(string userID)
 		{
-			#region temp
-			userData = new userData()
-			{
-				userID = userID,
-				localisation = "en",
-				rank = 1200,
-				friends = new List<friendData>()
-				{
-					new friendData()
-					{
-						userID = "beetel",
-						online = true,
-					},
-					new friendData()
-					{
-						userID = "papp",
-						online = false,
-					},
-					new friendData()
-					{
-						userID = "andrew",
-						online = true,
-					}
-				}
-			};
-			#endregion
+			//#region temp
+			//userData = new userData()
+			//{
+			//	userID = userID,
+			//	localisation = "en",
+			//	rank = 1200,
+			//	friends = new List<friendData>()
+			//	{
+			//		new friendData()
+			//		{
+			//			userID = "beetel",
+			//			online = true,
+			//		},
+			//		new friendData()
+			//		{
+			//			userID = "papp",
+			//			online = false,
+			//		},
+			//		new friendData()
+			//		{
+			//			userID = "andrew",
+			//			online = true,
+			//		}
+			//	}
+			//};
+			//#endregion
 
 
 			/// <summary>
@@ -97,24 +97,25 @@ namespace client_app
 
 			localisation = languages.localisation;
 			base.InitializeComponent();
-			//initialiseConnection();
-			InitializeComponent(); // move to after userData loaded etc
+			initialiseConnection(userID);
+			
 			
 		}
-		private async void initialiseConnection()
+		private async void initialiseConnection(string userID)
 		{
 			connection = hub_connection.configConnection(address + "/connections");
 			connection = hub_connection.addHandles(connection);
-			connection = hub_connection.startConnection(connection);
+			connection = await hub_connection.startConnection(connection);
 
-			userData = await connection.InvokeAsync<userData>("clientConnected", userData.userID);
+			userData = await connection.InvokeAsync<userData>("clientConnected", userID);
+			InitializeComponent();
 		}
 
 		private async Task requestProfile(string userID)
 		{
-			//userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
+			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 
-			menu.profile = new profile(this, userData);
+			menu.profile = new profile(this, user);
 		}
 
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)

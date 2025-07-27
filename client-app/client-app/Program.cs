@@ -17,7 +17,7 @@ namespace client_app
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             languages.loadWords();
-            Application.Run(new main("naiquire"));
+            Application.Run(new login());
         }
     }
 }

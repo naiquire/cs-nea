@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace server_app.connections
 {
-	// handles requests for queueing games
 	public partial class @connection : Hub
 	{
 		public bool queueGame(string gameType, string userID)

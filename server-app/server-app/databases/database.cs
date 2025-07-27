@@ -34,7 +34,7 @@ namespace server_app.databases
 	}
 	public static class @database
 	{
-		private static readonly string dbPath = @"Data Source=C:\Users\boyss\Documents\General\Relay\github\cs-nea-app\server-app\server-app\databases\maindb.sqlite";
+		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server")}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
 		public static void outputException(Exception ex)
 		{
@@ -61,20 +61,22 @@ namespace server_app.databases
 				{
 					command.Parameters.AddWithValue("@userID", userID);
 
-					var reader = command.ExecuteReader();
-					while (reader.Read())
+					using (var reader = command.ExecuteReader())
 					{
-						if (reader.GetString(0) == password)
+						success = -1;
+
+						while (reader.Read())
 						{
-							success = 1;
-						}
-						else
-						{
-							success = 0;
+							if (reader.GetString(0) == password)
+							{
+								success = 1;
+							}
+							else
+							{
+								success = 0;
+							}
 						}
 					}
-					// account does not exist
-					success = -1;
 				}
 				connection.Close();
 				return true;
@@ -108,7 +110,6 @@ namespace server_app.databases
 
 							command.ExecuteNonQuery();
 						}
-						connection.Close();
 
 						for (int i = 0; i < 26; i++)
 						{
@@ -127,6 +128,7 @@ namespace server_app.databases
 							}
 						}
 
+						connection.Close();
 						success = 1;
 					}
 					catch (SqliteException ex)
@@ -159,11 +161,7 @@ namespace server_app.databases
 
 					var reader = command.ExecuteReader();
 
-					if (reader.HasRows)
-					{
-						exists = true;
-					}
-					exists = false;
+					exists = reader.HasRows;
 				}
 				connection.Close();
 				return true;

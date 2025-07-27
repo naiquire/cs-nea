@@ -16,7 +16,7 @@ namespace server_app
         {
             if (database.loginRequest(userID, hashPassword(password), out int success))
             {
-                await Clients.Caller.SendAsync("loginSuccess", success); 
+                await Clients.Caller.SendAsync("loginSuccess", success, userID); 
             }
             else
             {

@@ -1,26 +1,23 @@
-﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
 
 namespace server_app.games
 {
-    // contains all instances of running games
     public static class @queueing
     {
-		public static readonly List<IPlayable> currentGames = [];
+	    public static readonly List<IPlayable> currentGames = [];
 
-		/// <summary>
-		/// Attempts to queue a user into the current game, and starts the game if the lobby is full.
-		/// </summary>
-		/// <param name="game"></param>
-		/// <param name="userID"></param>
-		/// <returns>A boolean value representing if the user was queued into the game</returns>
-		private static bool tryQueueGame(IPlayable game, string userID)
+	    /// <summary>
+	/// Attempts to queue a user into the current game, and starts the game if the lobby is full.
+	/// </summary>
+	/// <param name="game"></param>
+	/// <param name="userID"></param>
+	/// <returns>A boolean value representing if the user was queued into the game</returns>
+	    private static bool tryQueueGame(IPlayable game, string userID)
         {
-            if (game.getPlayerCount() < game.getMaxPlayers())
+            if (game.getPlayerCount() < game.getMaxPlayers() && !game.hasStarted())
             {
                 game.queueUser(userID);
                 if (game.getPlayerCount() == game.getMaxPlayers())
@@ -52,41 +49,37 @@ namespace server_app.games
         }
 
         /// <summary>
-        /// Queues a user into a game.
+        /// Queues a user into a game of the specified type.
         /// </summary>
         /// <param name="gameType"></param>
         /// <param name="userID"></param>
         /// <param name="context"></param>
+        /// <returns><see langword="true"/> if the user was successfully queued; otherwise <see langword="false"/></returns>
         public static bool queueGame(string gameType, string userID, IHubContext<connection> context)
         {
-            bool queued = false;
             foreach (IPlayable game in currentGames)
             {
                 if (game.getType() == gameType)
                 {
                     if (tryQueueGame(game, userID))
                     {
-                        queued = true;
                         return true;
                     }
                 }
             }
-            if (!queued)
-            {
-                Type? type = Type.GetType(gameType);
-                if (type != null)
-                {
-                    ConstructorInfo[] c = type.GetConstructors();
-                    c[0].Invoke([userID, context]);
-                    return true;
-                }
-                else
-                {
-                    database.outputException($"Could not find game with type {gameType}");
-                    return false;
-                }
-            }
-            return false;
-        }
+
+			Type? type = Type.GetType(gameType);
+			if (type != null)
+			{
+				ConstructorInfo[] c = type.GetConstructors();
+				c[0].Invoke([userID, context]);
+				return true;
+			}
+			else
+			{
+				database.outputException($"Could not find game with type {gameType}");
+				return false;
+			}
+		}
     }
 }

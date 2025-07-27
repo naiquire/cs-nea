@@ -5,17 +5,20 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12)
+    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
     {
-        public const bool online = true;
         private List<string> aliveUsers = [];
         public override void startGame()
         {
             aliveUsers = [.. userIDs];
 
             base.startGame();
-            submissionPhase();          
-        }
+            submissionPhase();
+	    }
+	    public override void dequeueUser(string userID)
+	    {
+		    aliveUsers.Remove(userID);
+	    }
         public async override void submissionPhase()
         {
             char letter = (char)(rnd.Next(0, 26) + 65);
