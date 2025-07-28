@@ -122,7 +122,7 @@
     <value>Bahnschrift SemiBold, 11.25pt, style=Bold</value>
   </data>
   <data name="btn_login.Location" type="System.Drawing.Point, System.Drawing">
-    <value>600, 350</value>
+    <value>600, 315</value>
   </data>
   <data name="btn_login.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 30</value>
@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btn_login.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="btn_createAccount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiLight, 9pt</value>
@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="btn_createAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>655, 385</value>
+    <value>655, 350</value>
   </data>
   <data name="btn_createAccount.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 20</value>
@@ -175,43 +175,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btn_createAccount.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="btn_requestAccount.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="btn_requestAccount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_requestAccount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 160</value>
-  </data>
-  <data name="btn_requestAccount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 30</value>
-  </data>
-  <data name="btn_requestAccount.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="btn_requestAccount.Text" xml:space="preserve">
-    <value>Request Account</value>
-  </data>
-  <data name="&gt;&gt;btn_requestAccount.Name" xml:space="preserve">
-    <value>btn_requestAccount</value>
-  </data>
-  <data name="&gt;&gt;btn_requestAccount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_requestAccount.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btn_requestAccount.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="lbl_header.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift, 27.75pt, style=Bold</value>
   </data>
   <data name="lbl_header.Location" type="System.Drawing.Point, System.Drawing">
-    <value>600, 160</value>
+    <value>600, 120</value>
   </data>
   <data name="lbl_header.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -232,13 +202,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbl_header.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="txt_password.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiBold, 9.75pt, style=Bold</value>
   </data>
   <data name="txt_password.Location" type="System.Drawing.Point, System.Drawing">
-    <value>560, 290</value>
+    <value>560, 250</value>
   </data>
   <data name="txt_password.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 40</value>
@@ -256,13 +226,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txt_password.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="txt_userID.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiBold, 9.75pt, style=Bold</value>
   </data>
   <data name="txt_userID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>560, 240</value>
+    <value>560, 200</value>
   </data>
   <data name="txt_userID.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 40</value>
@@ -280,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txt_userID.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="btn_language.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift, 9.75pt</value>
@@ -307,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btn_language.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="pic_language.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 460</value>
@@ -331,7 +301,124 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pic_language.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btn_requestAccount.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Bahnschrift SemiBold, 11.25pt, style=Bold</value>
+  </data>
+  <data name="btn_requestAccount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btn_requestAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>600, 375</value>
+  </data>
+  <data name="btn_requestAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 30</value>
+  </data>
+  <data name="btn_requestAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="btn_requestAccount.Text" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="&gt;&gt;btn_requestAccount.Name" xml:space="preserve">
+    <value>btn_requestAccount</value>
+  </data>
+  <data name="&gt;&gt;btn_requestAccount.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2GradientButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="txt_passwordconfirm.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Bahnschrift SemiBold, 9.75pt, style=Bold</value>
+  </data>
+  <data name="txt_passwordconfirm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>560, 310</value>
+  </data>
+  <data name="txt_passwordconfirm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 40</value>
+  </data>
+  <data name="txt_passwordconfirm.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;txt_passwordconfirm.Name" xml:space="preserve">
+    <value>txt_passwordconfirm</value>
+  </data>
+  <data name="&gt;&gt;txt_passwordconfirm.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2TextBox, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="guna2CustomRadioButton1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="guna2CustomRadioButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="guna2CustomRadioButton1.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;guna2CustomRadioButton1.Name" xml:space="preserve">
+    <value>guna2CustomRadioButton1</value>
+  </data>
+  <data name="&gt;&gt;guna2CustomRadioButton1.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2CustomRadioButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2CustomRadioButton1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;guna2CustomRadioButton1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pic_connecting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="pic_connecting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="pic_connecting.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;pic_connecting.Name" xml:space="preserve">
+    <value>pic_connecting</value>
+  </data>
+  <data name="&gt;&gt;pic_connecting.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2ProgressIndicator, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;pic_connecting.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pic_connecting.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="txt_connection.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Bahnschrift SemiLight, 9pt</value>
+  </data>
+  <data name="txt_connection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="txt_connection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 10</value>
+  </data>
+  <data name="txt_connection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="txt_connection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="txt_connection.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="txt_connection.Text" xml:space="preserve">
+    <value>Connecting</value>
+  </data>
+  <data name="&gt;&gt;txt_connection.Name" xml:space="preserve">
+    <value>txt_connection</value>
+  </data>
+  <data name="&gt;&gt;txt_connection.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2Button, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;txt_connection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txt_connection.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

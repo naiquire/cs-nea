@@ -31,12 +31,16 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
 			this.btn_login = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.btn_createAccount = new Guna.UI2.WinForms.Guna2Button();
-			this.btn_requestAccount = new System.Windows.Forms.Button();
 			this.lbl_header = new Guna.UI2.WinForms.Guna2TextBox();
 			this.txt_password = new Guna.UI2.WinForms.Guna2TextBox();
 			this.txt_userID = new Guna.UI2.WinForms.Guna2TextBox();
 			this.btn_language = new Guna.UI2.WinForms.Guna2Button();
 			this.pic_language = new Guna.UI2.WinForms.Guna2PictureBox();
+			this.btn_requestAccount = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.txt_passwordconfirm = new Guna.UI2.WinForms.Guna2TextBox();
+			this.guna2CustomRadioButton1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
+			this.pic_connecting = new Guna.UI2.WinForms.Guna2ProgressIndicator();
+			this.txt_connection = new Guna.UI2.WinForms.Guna2Button();
 			((System.ComponentModel.ISupportInitialize)(this.pic_language)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -59,13 +63,6 @@
 			this.btn_createAccount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.btn_createAccount.Name = "btn_createAccount";
 			this.btn_createAccount.Click += new System.EventHandler(this.btn_createAccount_Click);
-			// 
-			// btn_requestAccount
-			// 
-			resources.ApplyResources(this.btn_requestAccount, "btn_requestAccount");
-			this.btn_requestAccount.Name = "btn_requestAccount";
-			this.btn_requestAccount.UseVisualStyleBackColor = true;
-			this.btn_requestAccount.Click += new System.EventHandler(this.btn_requestAccount_Click);
 			// 
 			// lbl_header
 			// 
@@ -162,19 +159,82 @@
 			this.pic_language.Name = "pic_language";
 			this.pic_language.TabStop = false;
 			// 
+			// btn_requestAccount
+			// 
+			this.btn_requestAccount.AutoRoundedCorners = true;
+			this.btn_requestAccount.BorderRadius = 14;
+			this.btn_requestAccount.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+			this.btn_requestAccount.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247)))));
+			resources.ApplyResources(this.btn_requestAccount, "btn_requestAccount");
+			this.btn_requestAccount.ForeColor = System.Drawing.Color.White;
+			this.btn_requestAccount.Name = "btn_requestAccount";
+			this.btn_requestAccount.Click += new System.EventHandler(this.btn_requestAccount_Click);
+			// 
+			// txt_passwordconfirm
+			// 
+			this.txt_passwordconfirm.BorderRadius = 8;
+			this.txt_passwordconfirm.BorderThickness = 0;
+			this.txt_passwordconfirm.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.txt_passwordconfirm.DefaultText = "";
+			this.txt_passwordconfirm.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.txt_passwordconfirm.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.txt_passwordconfirm.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.txt_passwordconfirm.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.txt_passwordconfirm.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.txt_passwordconfirm.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			resources.ApplyResources(this.txt_passwordconfirm, "txt_passwordconfirm");
+			this.txt_passwordconfirm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+			this.txt_passwordconfirm.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.txt_passwordconfirm.IconLeft = global::client_app.Properties.Resources.password;
+			this.txt_passwordconfirm.IconLeftOffset = new System.Drawing.Point(5, 0);
+			this.txt_passwordconfirm.IconLeftSize = new System.Drawing.Size(17, 20);
+			this.txt_passwordconfirm.MaxLength = 32;
+			this.txt_passwordconfirm.Name = "txt_passwordconfirm";
+			this.txt_passwordconfirm.PasswordChar = '*';
+			this.txt_passwordconfirm.PlaceholderForeColor = System.Drawing.Color.Gray;
+			this.txt_passwordconfirm.PlaceholderText = "Confirm Password";
+			this.txt_passwordconfirm.SelectedText = "";
+			this.txt_passwordconfirm.TextOffset = new System.Drawing.Point(5, 0);
+			// 
+			// guna2CustomRadioButton1
+			// 
+			this.guna2CustomRadioButton1.CheckedState.BorderThickness = 0;
+			resources.ApplyResources(this.guna2CustomRadioButton1, "guna2CustomRadioButton1");
+			this.guna2CustomRadioButton1.Name = "guna2CustomRadioButton1";
+			this.guna2CustomRadioButton1.UncheckedState.BorderThickness = 0;
+			// 
+			// pic_connecting
+			// 
+			this.pic_connecting.AutoStart = true;
+			this.pic_connecting.BackColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.pic_connecting, "pic_connecting");
+			this.pic_connecting.Name = "pic_connecting";
+			this.pic_connecting.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+			// 
+			// txt_connection
+			// 
+			this.txt_connection.BackColor = System.Drawing.Color.Transparent;
+			this.txt_connection.FillColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.txt_connection, "txt_connection");
+			this.txt_connection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.txt_connection.Name = "txt_connection";
+			this.txt_connection.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+			// 
 			// login
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+			this.Controls.Add(this.pic_connecting);
+			this.Controls.Add(this.txt_connection);
+			this.Controls.Add(this.guna2CustomRadioButton1);
 			this.Controls.Add(this.pic_language);
 			this.Controls.Add(this.btn_language);
 			this.Controls.Add(this.lbl_header);
-			this.Controls.Add(this.txt_password);
 			this.Controls.Add(this.txt_userID);
-			this.Controls.Add(this.btn_requestAccount);
-			this.Controls.Add(this.btn_createAccount);
+			this.Controls.Add(this.txt_password);
 			this.Controls.Add(this.btn_login);
+			this.Controls.Add(this.btn_createAccount);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "login";
 			((System.ComponentModel.ISupportInitialize)(this.pic_language)).EndInit();
@@ -182,14 +242,33 @@
 
         }
 
+		private void controlEventConfigs()
+		{
+			this.btn_createAccount.MouseEnter += (sender, e) =>
+			{
+				this.btn_createAccount.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+				this.btn_createAccount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+			};
+			this.btn_createAccount.MouseLeave += (sender, e) =>
+			{
+				this.btn_createAccount.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+				this.btn_createAccount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+				
+			};
+		}
+
         #endregion
         private Guna.UI2.WinForms.Guna2GradientButton btn_login;
         private Guna.UI2.WinForms.Guna2Button btn_createAccount;
-        private System.Windows.Forms.Button btn_requestAccount;
 		private Guna.UI2.WinForms.Guna2TextBox txt_userID;
 		private Guna.UI2.WinForms.Guna2TextBox txt_password;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_header;
 		private Guna.UI2.WinForms.Guna2Button btn_language;
 		private Guna.UI2.WinForms.Guna2PictureBox pic_language;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_requestAccount;
+		private Guna.UI2.WinForms.Guna2TextBox txt_passwordconfirm;
+		private Guna.UI2.WinForms.Guna2CustomRadioButton guna2CustomRadioButton1;
+		private Guna.UI2.WinForms.Guna2ProgressIndicator pic_connecting;
+		private Guna.UI2.WinForms.Guna2Button txt_connection;
 	}
 }

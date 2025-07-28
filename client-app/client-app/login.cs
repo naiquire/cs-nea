@@ -18,17 +18,18 @@ namespace client_app
         public login()
         {
             InitializeComponent();
+            controlEventConfigs();
 			btn_language.Text = languages.supportedLanguages[languageIndex];
 			initialiseConnection();
-
-            btn_requestAccount.Enabled = false;
-            btn_requestAccount.Visible = false;
         }
         private async void initialiseConnection()
         {
             connection = hub_connection.configConnection(main.address + "/accounts");
             connection = hub_connection.addHandles(connection);
             connection = await hub_connection.startConnection(connection);
+
+            this.txt_connection.Text = "Connected";
+            pic_connecting.Stop();
         }
 
         private async void btn_login_Click(object sender, EventArgs e)
@@ -41,7 +42,13 @@ namespace client_app
 
         private void btn_createAccount_Click(object sender, EventArgs e)
         {
-            
+            this.Controls.Remove(btn_login);
+            this.Controls.Remove(btn_createAccount);
+
+            this.txt_password.Location = new Point(560, 260);
+
+            this.Controls.Add(txt_passwordconfirm);
+            this.Controls.Add(btn_requestAccount);
         }
         private async void btn_requestAccount_Click(object sender, EventArgs e)
         {
