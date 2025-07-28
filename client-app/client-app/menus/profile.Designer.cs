@@ -83,7 +83,7 @@ namespace client_app.menus
 
 			main.panel_main.Controls.Add(lbl_username);
 			main.panel_main.Controls.Add(lbl_rank);
-			main.panel_main.Controls.Add(pic_language);
+			//main.panel_main.Controls.Add(pic_language);
 			main.panel_main.Controls.Add(panel_stats);
 
             configStats();
@@ -106,6 +106,8 @@ namespace client_app.menus
                 double accuracy = stat.Value.accuracy;
                 TimeSpan time = stat.Value.time;
 
+                (int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+
 				Label lbl_letter = new System.Windows.Forms.Label()
                 {
                     Location = new System.Drawing.Point(0 + padding, 0 + padding),
@@ -114,7 +116,8 @@ namespace client_app.menus
                     TabIndex = 0,
                     Text = letter,
                     TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                };
+					BorderStyle = BorderStyle.FixedSingle,
+				};
                 Label lbl_total = new System.Windows.Forms.Label()
                 {
                     Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
@@ -123,7 +126,8 @@ namespace client_app.menus
                     TabIndex = 1,
                     Text = total.ToString(),
                     TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                };
+					BorderStyle = BorderStyle.FixedSingle,
+				};
                 Label lbl_time = new System.Windows.Forms.Label()
                 {
 					Location = new System.Drawing.Point(lbl_total.Location.X - 2 * defaultSize - padding, padding),
@@ -131,6 +135,8 @@ namespace client_app.menus
 					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
 					TabIndex = 2,
 					Text = $"{time.TotalSeconds}",
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					BorderStyle = BorderStyle.FixedSingle,
 				};
                 Label lbl_percentage = new System.Windows.Forms.Label()
                 {
@@ -139,22 +145,26 @@ namespace client_app.menus
 					Size = new System.Drawing.Size(defaultSize, defaultSize),
 					TabIndex = 3,
 					Text = $"{100 * accuracy}%",
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					BorderStyle = BorderStyle.FixedSingle,
 				};
                 Panel bar_base = new System.Windows.Forms.Panel()
                 {
 					BackColor = System.Drawing.SystemColors.ControlLight,
 					Location = new System.Drawing.Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
 					Name = "bar_base",
-					Size = new System.Drawing.Size(lbl_percentage.Location.X - padding - Location.X, defaultSize - 2 * padding),
+					Size = new System.Drawing.Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
 					TabIndex = 4,
+					BorderStyle = BorderStyle.FixedSingle,
 				};
-				Panel panel_fill = new System.Windows.Forms.Panel()
+				Panel bar_fill = new System.Windows.Forms.Panel()
                 {
-					BackColor = System.Drawing.SystemColors.ActiveCaption,
+					BackColor = System.Drawing.ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
 					Location = new System.Drawing.Point(bar_base.Location.X, bar_base.Location.Y),
 					Name = "panel_fill",
-					Size = new System.Drawing.Size((int) accuracy * bar_base.Size.Width, bar_base.Size.Height),
+					Size = new System.Drawing.Size(((int)(accuracy * bar_base.Size.Width)), bar_base.Size.Height),
 					TabIndex = 5,
+					BorderStyle = BorderStyle.FixedSingle,
 				};
                 
 				Panel panel_char = new System.Windows.Forms.Panel()
@@ -164,15 +174,17 @@ namespace client_app.menus
 					Name = "panel_char",
 					Size = new System.Drawing.Size(panelX, panelY),
 					TabIndex = 0,
+					BorderStyle = BorderStyle.FixedSingle,
 				};
 
-
-				panel_char.Controls.Add(panel_fill);
+				panel_char.Controls.Add(bar_fill);
 				panel_char.Controls.Add(bar_base);
 				panel_char.Controls.Add(lbl_percentage);
 				panel_char.Controls.Add(lbl_time);
 				panel_char.Controls.Add(lbl_total);
 				panel_char.Controls.Add(lbl_letter);
+
+                bar_fill.BringToFront();
 
                 panel_stats.Controls.Add(panel_char);
 

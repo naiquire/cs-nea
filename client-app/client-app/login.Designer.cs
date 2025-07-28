@@ -28,109 +28,168 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txt_userID = new System.Windows.Forms.TextBox();
-            this.txt_password = new System.Windows.Forms.TextBox();
-            this.btn_login = new System.Windows.Forms.Button();
-            this.pic_logo = new System.Windows.Forms.PictureBox();
-            this.btn_createAccount = new System.Windows.Forms.Button();
-            this.btn_requestAccount = new System.Windows.Forms.Button();
-            this.list_languages = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_logo)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // txt_userID
-            // 
-            this.txt_userID.Location = new System.Drawing.Point(250, 250);
-            this.txt_userID.Name = "txt_userID";
-            this.txt_userID.Size = new System.Drawing.Size(300, 20);
-            this.txt_userID.TabIndex = 0;
-            // 
-            // txt_password
-            // 
-            this.txt_password.Location = new System.Drawing.Point(250, 280);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(300, 20);
-            this.txt_password.TabIndex = 1;
-            // 
-            // btn_login
-            // 
-            this.btn_login.Location = new System.Drawing.Point(350, 310);
-            this.btn_login.Name = "btn_login";
-            this.btn_login.Size = new System.Drawing.Size(100, 30);
-            this.btn_login.TabIndex = 2;
-            this.btn_login.Text = "Login";
-            this.btn_login.UseVisualStyleBackColor = true;
-            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
-            // 
-            // pic_logo
-            // 
-            this.pic_logo.Location = new System.Drawing.Point(300, 69);
-            this.pic_logo.Name = "pic_logo";
-            this.pic_logo.Size = new System.Drawing.Size(200, 126);
-            this.pic_logo.TabIndex = 3;
-            this.pic_logo.TabStop = false;
-            // 
-            // btn_createAccount
-            // 
-            this.btn_createAccount.Location = new System.Drawing.Point(350, 408);
-            this.btn_createAccount.Name = "btn_createAccount";
-            this.btn_createAccount.Size = new System.Drawing.Size(100, 30);
-            this.btn_createAccount.TabIndex = 4;
-            this.btn_createAccount.Text = "Create Account";
-            this.btn_createAccount.UseVisualStyleBackColor = true;
-            this.btn_createAccount.Click += new System.EventHandler(this.btn_createAccount_Click);
-            // 
-            // btn_requestAccount
-            // 
-            this.btn_requestAccount.Enabled = false;
-            this.btn_requestAccount.Location = new System.Drawing.Point(350, 310);
-            this.btn_requestAccount.Name = "btn_requestAccount";
-            this.btn_requestAccount.Size = new System.Drawing.Size(100, 30);
-            this.btn_requestAccount.TabIndex = 5;
-            this.btn_requestAccount.Text = "Request Account";
-            this.btn_requestAccount.UseVisualStyleBackColor = true;
-            this.btn_requestAccount.Click += new System.EventHandler(this.btn_requestAccount_Click);
-            // 
-            // list_languages
-            // 
-            this.list_languages.Enabled = false;
-            this.list_languages.FormattingEnabled = true;
-            this.list_languages.Location = new System.Drawing.Point(587, 69);
-            this.list_languages.Name = "list_languages";
-            this.list_languages.Size = new System.Drawing.Size(201, 21);
-            this.list_languages.TabIndex = 6;
-            this.list_languages.Visible = false;
-            // 
-            // login
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.list_languages);
-            this.Controls.Add(this.btn_requestAccount);
-            this.Controls.Add(this.btn_createAccount);
-            this.Controls.Add(this.pic_logo);
-            this.Controls.Add(this.btn_login);
-            this.Controls.Add(this.txt_password);
-            this.Controls.Add(this.txt_userID);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "login";
-            this.Text = "login";
-            ((System.ComponentModel.ISupportInitialize)(this.pic_logo)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
+			this.btn_login = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.btn_createAccount = new Guna.UI2.WinForms.Guna2Button();
+			this.btn_requestAccount = new System.Windows.Forms.Button();
+			this.lbl_header = new Guna.UI2.WinForms.Guna2TextBox();
+			this.txt_password = new Guna.UI2.WinForms.Guna2TextBox();
+			this.txt_userID = new Guna.UI2.WinForms.Guna2TextBox();
+			this.btn_language = new Guna.UI2.WinForms.Guna2Button();
+			this.pic_language = new Guna.UI2.WinForms.Guna2PictureBox();
+			((System.ComponentModel.ISupportInitialize)(this.pic_language)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// btn_login
+			// 
+			this.btn_login.AutoRoundedCorners = true;
+			this.btn_login.BorderRadius = 14;
+			this.btn_login.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+			this.btn_login.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247)))));
+			resources.ApplyResources(this.btn_login, "btn_login");
+			this.btn_login.ForeColor = System.Drawing.Color.White;
+			this.btn_login.Name = "btn_login";
+			this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
+			// 
+			// btn_createAccount
+			// 
+			this.btn_createAccount.BackColor = System.Drawing.Color.Transparent;
+			this.btn_createAccount.FillColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.btn_createAccount, "btn_createAccount");
+			this.btn_createAccount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.btn_createAccount.Name = "btn_createAccount";
+			this.btn_createAccount.Click += new System.EventHandler(this.btn_createAccount_Click);
+			// 
+			// btn_requestAccount
+			// 
+			resources.ApplyResources(this.btn_requestAccount, "btn_requestAccount");
+			this.btn_requestAccount.Name = "btn_requestAccount";
+			this.btn_requestAccount.UseVisualStyleBackColor = true;
+			this.btn_requestAccount.Click += new System.EventHandler(this.btn_requestAccount_Click);
+			// 
+			// lbl_header
+			// 
+			this.lbl_header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+			this.lbl_header.BorderThickness = 0;
+			this.lbl_header.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.lbl_header.DefaultText = "Account";
+			this.lbl_header.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.lbl_header.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.lbl_header.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_header.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_header.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+			this.lbl_header.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			resources.ApplyResources(this.lbl_header, "lbl_header");
+			this.lbl_header.ForeColor = System.Drawing.Color.White;
+			this.lbl_header.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_header.Name = "lbl_header";
+			this.lbl_header.PlaceholderForeColor = System.Drawing.Color.Transparent;
+			this.lbl_header.PlaceholderText = "";
+			this.lbl_header.ReadOnly = true;
+			this.lbl_header.SelectedText = "";
+			this.lbl_header.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// txt_password
+			// 
+			this.txt_password.BorderRadius = 8;
+			this.txt_password.BorderThickness = 0;
+			this.txt_password.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.txt_password.DefaultText = "";
+			this.txt_password.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.txt_password.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.txt_password.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.txt_password.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.txt_password.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.txt_password.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			resources.ApplyResources(this.txt_password, "txt_password");
+			this.txt_password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+			this.txt_password.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.txt_password.IconLeft = global::client_app.Properties.Resources.password;
+			this.txt_password.IconLeftOffset = new System.Drawing.Point(5, 0);
+			this.txt_password.IconLeftSize = new System.Drawing.Size(17, 20);
+			this.txt_password.MaxLength = 32;
+			this.txt_password.Name = "txt_password";
+			this.txt_password.PasswordChar = '*';
+			this.txt_password.PlaceholderForeColor = System.Drawing.Color.Gray;
+			this.txt_password.PlaceholderText = "Password";
+			this.txt_password.SelectedText = "";
+			this.txt_password.TextOffset = new System.Drawing.Point(5, 0);
+			// 
+			// txt_userID
+			// 
+			this.txt_userID.BorderRadius = 8;
+			this.txt_userID.BorderThickness = 0;
+			this.txt_userID.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.txt_userID.DefaultText = "";
+			this.txt_userID.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.txt_userID.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.txt_userID.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.txt_userID.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.txt_userID.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.txt_userID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			resources.ApplyResources(this.txt_userID, "txt_userID");
+			this.txt_userID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+			this.txt_userID.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.txt_userID.IconLeft = global::client_app.Properties.Resources.account;
+			this.txt_userID.IconLeftOffset = new System.Drawing.Point(5, 0);
+			this.txt_userID.IconLeftSize = new System.Drawing.Size(17, 20);
+			this.txt_userID.MaxLength = 32;
+			this.txt_userID.Name = "txt_userID";
+			this.txt_userID.PlaceholderForeColor = System.Drawing.Color.Gray;
+			this.txt_userID.PlaceholderText = "Username";
+			this.txt_userID.SelectedText = "";
+			this.txt_userID.TextOffset = new System.Drawing.Point(5, 0);
+			// 
+			// btn_language
+			// 
+			this.btn_language.AutoRoundedCorners = true;
+			this.btn_language.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+			this.btn_language.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+			this.btn_language.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+			this.btn_language.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+			this.btn_language.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
+			resources.ApplyResources(this.btn_language, "btn_language");
+			this.btn_language.ForeColor = System.Drawing.Color.Gainsboro;
+			this.btn_language.Name = "btn_language";
+			this.btn_language.Click += new System.EventHandler(this.btn_language_Click);
+			// 
+			// pic_language
+			// 
+			this.pic_language.FillColor = System.Drawing.Color.Transparent;
+			this.pic_language.Image = global::client_app.Properties.Resources.language;
+			this.pic_language.ImageRotate = 0F;
+			resources.ApplyResources(this.pic_language, "pic_language");
+			this.pic_language.Name = "pic_language";
+			this.pic_language.TabStop = false;
+			// 
+			// login
+			// 
+			resources.ApplyResources(this, "$this");
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+			this.Controls.Add(this.pic_language);
+			this.Controls.Add(this.btn_language);
+			this.Controls.Add(this.lbl_header);
+			this.Controls.Add(this.txt_password);
+			this.Controls.Add(this.txt_userID);
+			this.Controls.Add(this.btn_requestAccount);
+			this.Controls.Add(this.btn_createAccount);
+			this.Controls.Add(this.btn_login);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Name = "login";
+			((System.ComponentModel.ISupportInitialize)(this.pic_language)).EndInit();
+			this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txt_userID;
-        private System.Windows.Forms.TextBox txt_password;
-        private System.Windows.Forms.Button btn_login;
-        private System.Windows.Forms.PictureBox pic_logo;
-        private System.Windows.Forms.Button btn_createAccount;
+        private Guna.UI2.WinForms.Guna2GradientButton btn_login;
+        private Guna.UI2.WinForms.Guna2Button btn_createAccount;
         private System.Windows.Forms.Button btn_requestAccount;
-        private System.Windows.Forms.ComboBox list_languages;
-    }
+		private Guna.UI2.WinForms.Guna2TextBox txt_userID;
+		private Guna.UI2.WinForms.Guna2TextBox txt_password;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_header;
+		private Guna.UI2.WinForms.Guna2Button btn_language;
+		private Guna.UI2.WinForms.Guna2PictureBox pic_language;
+	}
 }

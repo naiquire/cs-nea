@@ -52,32 +52,39 @@ namespace client_app
 
 		public main(string userID)
 		{
-			//#region temp
-			//userData = new userData()
-			//{
-			//	userID = userID,
-			//	localisation = "en",
-			//	rank = 1200,
-			//	friends = new List<friendData>()
-			//	{
-			//		new friendData()
-			//		{
-			//			userID = "beetel",
-			//			online = true,
-			//		},
-			//		new friendData()
-			//		{
-			//			userID = "papp",
-			//			online = false,
-			//		},
-			//		new friendData()
-			//		{
-			//			userID = "andrew",
-			//			online = true,
-			//		}
-			//	}
-			//};
-			//#endregion
+			#region temp
+			userData = new userData()
+			{
+				userID = userID,
+				localisation = "en",
+				rank = 1200,
+				friends = new List<friendData>()
+				{
+					new friendData()
+					{
+						userID = "beetel",
+						online = true,
+					},
+					new friendData()
+					{
+						userID = "papp",
+						online = false,
+					},
+					new friendData()
+					{
+						userID = "andrew",
+						online = true,
+					}
+				},
+				statistics = new Dictionary<char, (double accuracy, TimeSpan time, int total)>()
+				{
+					{ 'A', (0.54, TimeSpan.Parse("0:05:34"), 471)},
+					{ 'B', (0.24, TimeSpan.Parse("0:08:34"), 536)},
+					{ 'C', (0.94, TimeSpan.Parse("0:03:34"), 298)},
+				}
+
+			};
+			#endregion
 
 
 			/// <summary>
@@ -95,11 +102,13 @@ namespace client_app
 			/// 
 			/// </summary>
 
+			// NOTE FOR ME YAYAY DO CONNECTION STUFF AFTER DRIVING OKAY? ---------------------------------------------------------------------------------------------
+
 			localisation = languages.localisation;
 			base.InitializeComponent();
 			initialiseConnection(userID);
 			
-			
+
 		}
 		private async void initialiseConnection(string userID)
 		{
@@ -108,6 +117,7 @@ namespace client_app
 			connection = await hub_connection.startConnection(connection);
 
 			userData = await connection.InvokeAsync<userData>("clientConnected", userID);
+
 			InitializeComponent();
 		}
 

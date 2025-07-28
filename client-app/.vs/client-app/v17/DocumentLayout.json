@@ -3,6 +3,41 @@
   "WorkspaceRootPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\login.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\login.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\localisation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\localisation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|client-app||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\abstractmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\abstractmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,32 +50,8 @@
       "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\games\\accuracy.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\properties\\resources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\properties\\resources.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,17 +61,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "profile.Designer.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\profile.Designer.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\profile.Designer.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\profile.Designer.cs",
               "RelativeToolTip": "client-app\\menus\\profile.Designer.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAswLQAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAE8AAAAAAAAAAADwv14AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-07T12:28:01.269Z",
               "IsPinned": true,
@@ -68,15 +79,69 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "abstractMenu.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\abstractMenu.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\abstractMenu.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\abstractMenu.cs",
               "RelativeToolTip": "client-app\\menus\\abstractMenu.cs",
-              "ViewState": "AgIAAHQBAAAAAAAAAAAqwHkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwGMBAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-07T12:52:52.807Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "client-app",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\client-app.csproj",
+              "RelativeDocumentMoniker": "client-app\\client-app.csproj",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\client-app.csproj",
+              "RelativeToolTip": "client-app\\client-app.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-07-28T13:50:54.261Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "login.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs",
+              "RelativeDocumentMoniker": "client-app\\login.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs [Design]",
+              "RelativeToolTip": "client-app\\login.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T13:28:31.053Z",
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "login.cs",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs",
+              "RelativeDocumentMoniker": "client-app\\login.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs",
+              "RelativeToolTip": "client-app\\login.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAswEIAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T11:34:20.443Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "login.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.Designer.cs",
+              "RelativeDocumentMoniker": "client-app\\login.Designer.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.Designer.cs",
+              "RelativeToolTip": "client-app\\login.Designer.cs",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAowI4AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T13:37:17.901Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -94,13 +159,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "hub-connection.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs",
               "RelativeDocumentMoniker": "client-app\\hub-connection.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs",
               "RelativeToolTip": "client-app\\hub-connection.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAswCQAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAIA8wCEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-27T13:01:26.76Z",
               "EditorCaption": ""
@@ -108,66 +173,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "login.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs",
-              "RelativeDocumentMoniker": "client-app\\login.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs",
-              "RelativeToolTip": "client-app\\login.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAWwBkAAAAvAAAAAAAAAA==",
+              "Title": "localisation.cs",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\localisation.cs",
+              "RelativeDocumentMoniker": "client-app\\localisation.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\localisation.cs",
+              "RelativeToolTip": "client-app\\localisation.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAgwDUAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:34:20.443Z"
+              "WhenOpened": "2025-07-28T15:01:36.819Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\Program.cs",
-              "RelativeDocumentMoniker": "client-app\\Program.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\Program.cs",
-              "RelativeToolTip": "client-app\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:30:55.855Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "profile.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\profile.cs",
-              "RelativeDocumentMoniker": "client-app\\menus\\profile.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\profile.cs",
-              "RelativeToolTip": "client-app\\menus\\profile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T16:22:16.044Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "main.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs",
-              "RelativeDocumentMoniker": "client-app\\menus\\main.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs",
-              "RelativeToolTip": "client-app\\menus\\main.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAnwDUAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:56:50.011Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "main.Designer.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.Designer.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\main.Designer.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.Designer.cs",
               "RelativeToolTip": "client-app\\menus\\main.Designer.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAEwFYAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCEAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T13:11:51.855Z"
+              "WhenOpened": "2025-06-30T13:11:51.855Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\Program.cs",
+              "RelativeDocumentMoniker": "client-app\\Program.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\Program.cs",
+              "RelativeToolTip": "client-app\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T11:30:55.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "main.cs",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs",
+              "RelativeDocumentMoniker": "client-app\\menus\\main.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs",
+              "RelativeToolTip": "client-app\\menus\\main.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwEIAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T12:56:50.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "accuracy.Designer.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\accuracy.Designer.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\games\\accuracy.Designer.cs",
@@ -177,18 +234,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T15:29:05.726Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "accuracy.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\accuracy.cs",
-              "RelativeDocumentMoniker": "client-app\\menus\\games\\accuracy.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\accuracy.cs",
-              "RelativeToolTip": "client-app\\menus\\games\\accuracy.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAADwvyUAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-18T10:25:50.649Z"
             }
           ]
         },

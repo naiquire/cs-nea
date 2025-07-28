@@ -23,15 +23,15 @@ namespace client_app.menus
 		private Panel panel_fill;
 		protected Button btn_home;
 
-		public void temp()
+		public void tempInitializeComponent()
 		{
 			this.panel_char = new System.Windows.Forms.Panel();
-			this.lbl_letter = new System.Windows.Forms.TextBox();
-			this.lbl_total = new System.Windows.Forms.TextBox();
-			this.lbl_time = new System.Windows.Forms.TextBox();
-			this.lbl_percentage = new System.Windows.Forms.TextBox();
-			this.bar_base = new System.Windows.Forms.Panel();
 			this.panel_fill = new System.Windows.Forms.Panel();
+			this.bar_base = new System.Windows.Forms.Panel();
+			this.lbl_percentage = new System.Windows.Forms.TextBox();
+			this.lbl_time = new System.Windows.Forms.TextBox();
+			this.lbl_total = new System.Windows.Forms.TextBox();
+			this.lbl_letter = new System.Windows.Forms.TextBox();
 			this.panel_char.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -49,35 +49,21 @@ namespace client_app.menus
 			this.panel_char.Size = new System.Drawing.Size(800, 50);
 			this.panel_char.TabIndex = 0;
 			// 
-			// lbl_letter
+			// panel_fill
 			// 
-			this.lbl_letter.Location = new System.Drawing.Point(5, 5);
-			this.lbl_letter.Multiline = true;
-			this.lbl_letter.Name = "lbl_letter";
-			this.lbl_letter.ReadOnly = true;
-			this.lbl_letter.Size = new System.Drawing.Size(40, 40);
-			this.lbl_letter.TabIndex = 0;
-			this.lbl_letter.Text = "char";
+			this.panel_fill.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.panel_fill.Location = new System.Drawing.Point(50, 10);
+			this.panel_fill.Name = "panel_fill";
+			this.panel_fill.Size = new System.Drawing.Size(283, 30);
+			this.panel_fill.TabIndex = 5;
 			// 
-			// lbl_total
+			// bar_base
 			// 
-			this.lbl_total.Location = new System.Drawing.Point(715, 5);
-			this.lbl_total.Multiline = true;
-			this.lbl_total.Name = "lbl_total";
-			this.lbl_total.ReadOnly = true;
-			this.lbl_total.Size = new System.Drawing.Size(80, 40);
-			this.lbl_total.TabIndex = 1;
-			this.lbl_total.Text = "total";
-			// 
-			// lbl_time
-			// 
-			this.lbl_time.Location = new System.Drawing.Point(630, 5);
-			this.lbl_time.Multiline = true;
-			this.lbl_time.Name = "lbl_time";
-			this.lbl_time.ReadOnly = true;
-			this.lbl_time.Size = new System.Drawing.Size(80, 40);
-			this.lbl_time.TabIndex = 2;
-			this.lbl_time.Text = "00:00";
+			this.bar_base.BackColor = System.Drawing.SystemColors.ControlLight;
+			this.bar_base.Location = new System.Drawing.Point(50, 10);
+			this.bar_base.Name = "bar_base";
+			this.bar_base.Size = new System.Drawing.Size(530, 30);
+			this.bar_base.TabIndex = 4;
 			// 
 			// lbl_percentage
 			// 
@@ -89,21 +75,35 @@ namespace client_app.menus
 			this.lbl_percentage.TabIndex = 3;
 			this.lbl_percentage.Text = "97%";
 			// 
-			// bar_base
+			// lbl_time
 			// 
-			this.bar_base.BackColor = System.Drawing.SystemColors.ControlLight;
-			this.bar_base.Location = new System.Drawing.Point(50, 10);
-			this.bar_base.Name = "bar_base";
-			this.bar_base.Size = new System.Drawing.Size(530, 30);
-			this.bar_base.TabIndex = 4;
+			this.lbl_time.Location = new System.Drawing.Point(630, 5);
+			this.lbl_time.Multiline = true;
+			this.lbl_time.Name = "lbl_time";
+			this.lbl_time.ReadOnly = true;
+			this.lbl_time.Size = new System.Drawing.Size(80, 40);
+			this.lbl_time.TabIndex = 2;
+			this.lbl_time.Text = "00:00";
 			// 
-			// panel_fill
+			// lbl_total
 			// 
-			this.panel_fill.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.panel_fill.Location = new System.Drawing.Point(50, 10);
-			this.panel_fill.Name = "panel_fill";
-			this.panel_fill.Size = new System.Drawing.Size(283, 30);
-			this.panel_fill.TabIndex = 5;
+			this.lbl_total.Location = new System.Drawing.Point(715, 5);
+			this.lbl_total.Multiline = true;
+			this.lbl_total.Name = "lbl_total";
+			this.lbl_total.ReadOnly = true;
+			this.lbl_total.Size = new System.Drawing.Size(80, 40);
+			this.lbl_total.TabIndex = 1;
+			this.lbl_total.Text = "total";
+			// 
+			// lbl_letter
+			// 
+			this.lbl_letter.Location = new System.Drawing.Point(5, 5);
+			this.lbl_letter.Multiline = true;
+			this.lbl_letter.Name = "lbl_letter";
+			this.lbl_letter.ReadOnly = true;
+			this.lbl_letter.Size = new System.Drawing.Size(40, 40);
+			this.lbl_letter.TabIndex = 0;
+			this.lbl_letter.Text = "char";
 			// 
 			// abstractMenu
 			// 
@@ -239,7 +239,7 @@ namespace client_app.menus
 			main.panel_left.Controls.Add(main.btn_home);
 			main.btn_home.Click += main.btn_home_Click;
 		}
-		protected virtual void InitializeComponent(main main)
+		protected virtual void aInitializeComponent(main main)
 		{
 			resetLayout(main);
 

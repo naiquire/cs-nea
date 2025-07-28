@@ -14,13 +14,12 @@ namespace client_app
     public partial class login : Form
     {
         HubConnection connection;
+        private int languageIndex = 0;
         public login()
         {
             InitializeComponent();
-
-            list_languages.Items.AddRange(languages.supportedLanguages.ToArray());
-
-            initialiseConnection();
+			btn_language.Text = languages.supportedLanguages[languageIndex];
+			initialiseConnection();
 
             btn_requestAccount.Enabled = false;
             btn_requestAccount.Visible = false;
@@ -42,23 +41,29 @@ namespace client_app
 
         private void btn_createAccount_Click(object sender, EventArgs e)
         {
-            btn_login.Enabled = false;
-            btn_login.Visible = false;
-            btn_createAccount.Enabled = false;
-            btn_createAccount.Visible = false;
-
-            btn_requestAccount.Enabled = true;
-            btn_requestAccount.Visible = true;
-            list_languages.Enabled = true;
-            list_languages.Visible = true;
+            
         }
         private async void btn_requestAccount_Click(object sender, EventArgs e)
         {
             string userID = txt_userID.Text.Trim();
             string password = txt_password.Text;
-            string localisation = list_languages.SelectedItem.ToString();
+            string localisation = languages.supportedLanguages[languageIndex];
 
             await connection.InvokeAsync("accountRequest", userID, password, localisation);
         }
-    }
+
+		private void btn_language_Click(object sender, EventArgs e)
+		{
+            languageIndex++;
+            if (languageIndex == languages.supportedLanguages.Count)
+            {
+                languageIndex = 0;
+            }
+			btn_language.Text = languages.supportedLanguages[languageIndex];
+
+            txt_userID.PlaceholderText = languages.localisation["Username"][languages.languageCodes[languageIndex]];
+            txt_password.PlaceholderText = languages.localisation["Password"][languages.languageCodes[languageIndex]];
+            lbl_header.Text = languages.localisation["Account"][languages.languageCodes[languageIndex]];
+		}
+	}
 }

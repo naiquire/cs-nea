@@ -11,6 +11,14 @@ namespace client_app
     {
         public static List<string> supportedLanguages = new List<string>()
         {
+            "English",
+			"Française",
+			"Español",
+			"Português",
+			"Deutsch",
+        };
+        public static List<string> languageCodes = new List<string>()
+        {
             "en",
             "fr",
             "es",
@@ -45,6 +53,30 @@ namespace client_app
                 {"pt", "OFF-LINE" },
                 {"de", "OFFLINE" },
             });
-        }
+			localisation.Add("Account", new Dictionary<string, string>()
+			{
+				{"en", "Account" },
+				{"fr", "Compte" },
+				{"es", "Cuenta" },
+				{"pt", "Conta" },
+				{"de", "Konto" },
+			});
+			localisation.Add("Username", new Dictionary<string, string>()
+			{
+				{"en", "Username" },
+				{"fr", "Nom d'utilisateur" },
+				{"es", "Nombre de usuario" },
+				{"pt", "Nome de usuário" },
+				{"de", "Benutzername" },
+			});
+			localisation.Add("Password", new Dictionary<string, string>()
+			{
+				{"en", "Password" },
+				{"fr", "Mot de passe" },
+				{"es", "Contraseña" },
+				{"pt", "Senha" },
+				{"de", "Passwort" },
+			});
+		}
     }
 }
