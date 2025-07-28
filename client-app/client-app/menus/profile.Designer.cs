@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace client_app.menus
@@ -36,7 +37,7 @@ namespace client_app.menus
             lbl_username = new Label();
             lbl_rank = new Label();
             pic_language = new PictureBox();
-            
+            panel_stats = new Panel();
             ///
             /// lbl_username
             ///
@@ -70,16 +71,119 @@ namespace client_app.menus
             pic_language.TabIndex = 0;
             pic_language.TabStop = false;
 			pic_language.BackColor = main.panel_left.BackColor;
+			///
+			/// panel_stats
+			/// 
+			panel_stats.Name = "panel_stats";
+			panel_stats.BackColor = main.panel_main.BackColor;
+			panel_stats.BorderStyle = BorderStyle.FixedSingle;
+			panel_stats.Location = new System.Drawing.Point(50, 150);
+			panel_stats.Size = new System.Drawing.Size(main.panel_main.Width - 100, main.panel_main.Height - 100 - 100);
 
 
 			main.panel_main.Controls.Add(lbl_username);
 			main.panel_main.Controls.Add(lbl_rank);
 			main.panel_main.Controls.Add(pic_language);
+			main.panel_main.Controls.Add(panel_stats);
+
+            configStats();
+        }
+
+        private void configStats()
+        {
+            const int X = 10;
+            int y = 10;
+
+            const int panelX = 800;
+            const int panelY = 50;
+            const int padding = 5;
+            const int defaultSize = panelY - 2 * padding;
+
+            foreach (var stat in userData.statistics)
+            {
+                string letter = stat.Key.ToString();
+                int total = stat.Value.total;
+                double accuracy = stat.Value.accuracy;
+                TimeSpan time = stat.Value.time;
+
+				Label lbl_letter = new System.Windows.Forms.Label()
+                {
+                    Location = new System.Drawing.Point(0 + padding, 0 + padding),
+                    Name = "lbl_letter",
+                    Size = new System.Drawing.Size(defaultSize, defaultSize),
+                    TabIndex = 0,
+                    Text = letter,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                };
+                Label lbl_total = new System.Windows.Forms.Label()
+                {
+                    Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
+                    Name = "lbl_total",
+                    Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+                    TabIndex = 1,
+                    Text = total.ToString(),
+                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                };
+                Label lbl_time = new System.Windows.Forms.Label()
+                {
+					Location = new System.Drawing.Point(lbl_total.Location.X - 2 * defaultSize - padding, padding),
+					Name = "lbl_time",
+					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+					TabIndex = 2,
+					Text = $"{time.TotalSeconds}",
+				};
+                Label lbl_percentage = new System.Windows.Forms.Label()
+                {
+					Location = new System.Drawing.Point(lbl_time.Location.X - defaultSize - padding, padding),
+                    Name = "lbl_percentage",
+					Size = new System.Drawing.Size(defaultSize, defaultSize),
+					TabIndex = 3,
+					Text = $"{100 * accuracy}%",
+				};
+                Panel bar_base = new System.Windows.Forms.Panel()
+                {
+					BackColor = System.Drawing.SystemColors.ControlLight,
+					Location = new System.Drawing.Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
+					Name = "bar_base",
+					Size = new System.Drawing.Size(lbl_percentage.Location.X - padding - Location.X, defaultSize - 2 * padding),
+					TabIndex = 4,
+				};
+				Panel panel_fill = new System.Windows.Forms.Panel()
+                {
+					BackColor = System.Drawing.SystemColors.ActiveCaption,
+					Location = new System.Drawing.Point(bar_base.Location.X, bar_base.Location.Y),
+					Name = "panel_fill",
+					Size = new System.Drawing.Size((int) accuracy * bar_base.Size.Width, bar_base.Size.Height),
+					TabIndex = 5,
+				};
+                
+				Panel panel_char = new System.Windows.Forms.Panel()
+                {
+					BackColor = System.Drawing.SystemColors.ControlDark,
+					Location = new System.Drawing.Point(X, y),
+					Name = "panel_char",
+					Size = new System.Drawing.Size(panelX, panelY),
+					TabIndex = 0,
+				};
+
+
+				panel_char.Controls.Add(panel_fill);
+				panel_char.Controls.Add(bar_base);
+				panel_char.Controls.Add(lbl_percentage);
+				panel_char.Controls.Add(lbl_time);
+				panel_char.Controls.Add(lbl_total);
+				panel_char.Controls.Add(lbl_letter);
+
+                panel_stats.Controls.Add(panel_char);
+
+                y += panelY + 2 * padding;
+			}
         }
 
         private Label lbl_username;
         private Label lbl_rank;
         private PictureBox pic_language;
+        private Panel panel_stats;
 
         #endregion
     }
