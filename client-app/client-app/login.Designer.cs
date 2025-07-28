@@ -38,9 +38,9 @@
 			this.pic_language = new Guna.UI2.WinForms.Guna2PictureBox();
 			this.btn_requestAccount = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.txt_passwordconfirm = new Guna.UI2.WinForms.Guna2TextBox();
-			this.guna2CustomRadioButton1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
 			this.pic_connecting = new Guna.UI2.WinForms.Guna2ProgressIndicator();
-			this.txt_connection = new Guna.UI2.WinForms.Guna2Button();
+			this.lbl_connection = new Guna.UI2.WinForms.Guna2Button();
+			this.lbl_information = new Guna.UI2.WinForms.Guna2Button();
 			((System.ComponentModel.ISupportInitialize)(this.pic_language)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -196,13 +196,6 @@
 			this.txt_passwordconfirm.SelectedText = "";
 			this.txt_passwordconfirm.TextOffset = new System.Drawing.Point(5, 0);
 			// 
-			// guna2CustomRadioButton1
-			// 
-			this.guna2CustomRadioButton1.CheckedState.BorderThickness = 0;
-			resources.ApplyResources(this.guna2CustomRadioButton1, "guna2CustomRadioButton1");
-			this.guna2CustomRadioButton1.Name = "guna2CustomRadioButton1";
-			this.guna2CustomRadioButton1.UncheckedState.BorderThickness = 0;
-			// 
 			// pic_connecting
 			// 
 			this.pic_connecting.AutoStart = true;
@@ -211,23 +204,32 @@
 			this.pic_connecting.Name = "pic_connecting";
 			this.pic_connecting.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
 			// 
-			// txt_connection
+			// lbl_connection
 			// 
-			this.txt_connection.BackColor = System.Drawing.Color.Transparent;
-			this.txt_connection.FillColor = System.Drawing.Color.Transparent;
-			resources.ApplyResources(this.txt_connection, "txt_connection");
-			this.txt_connection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-			this.txt_connection.Name = "txt_connection";
-			this.txt_connection.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+			this.lbl_connection.BackColor = System.Drawing.Color.Transparent;
+			this.lbl_connection.FillColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.lbl_connection, "lbl_connection");
+			this.lbl_connection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.lbl_connection.Name = "lbl_connection";
+			this.lbl_connection.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+			// 
+			// lbl_information
+			// 
+			this.lbl_information.BackColor = System.Drawing.Color.Transparent;
+			this.lbl_information.FillColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.lbl_information, "lbl_information");
+			this.lbl_information.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+			this.lbl_information.Name = "lbl_information";
+			this.lbl_information.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
 			// 
 			// login
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+			this.Controls.Add(this.lbl_information);
 			this.Controls.Add(this.pic_connecting);
-			this.Controls.Add(this.txt_connection);
-			this.Controls.Add(this.guna2CustomRadioButton1);
+			this.Controls.Add(this.lbl_connection);
 			this.Controls.Add(this.pic_language);
 			this.Controls.Add(this.btn_language);
 			this.Controls.Add(this.lbl_header);
@@ -267,8 +269,8 @@
 		private Guna.UI2.WinForms.Guna2PictureBox pic_language;
 		private Guna.UI2.WinForms.Guna2GradientButton btn_requestAccount;
 		private Guna.UI2.WinForms.Guna2TextBox txt_passwordconfirm;
-		private Guna.UI2.WinForms.Guna2CustomRadioButton guna2CustomRadioButton1;
 		private Guna.UI2.WinForms.Guna2ProgressIndicator pic_connecting;
-		private Guna.UI2.WinForms.Guna2Button txt_connection;
+		private Guna.UI2.WinForms.Guna2Button lbl_connection;
+		public Guna.UI2.WinForms.Guna2Button lbl_information;
 	}
 }

@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btn_login.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="btn_createAccount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiLight, 9pt</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btn_createAccount.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="lbl_header.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift, 27.75pt, style=Bold</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbl_header.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="txt_password.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiBold, 9.75pt, style=Bold</value>
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txt_password.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="txt_userID.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiBold, 9.75pt, style=Bold</value>
@@ -250,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txt_userID.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="btn_language.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift, 9.75pt</value>
@@ -277,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btn_language.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="pic_language.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 460</value>
@@ -301,7 +301,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pic_language.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btn_requestAccount.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiBold, 11.25pt, style=Bold</value>
@@ -352,7 +352,7 @@
     <value>20, 20</value>
   </data>
   <data name="guna2CustomRadioButton1.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;guna2CustomRadioButton1.Name" xml:space="preserve">
     <value>guna2CustomRadioButton1</value>
@@ -364,7 +364,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;guna2CustomRadioButton1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="pic_connecting.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -385,40 +385,70 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pic_connecting.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
-  <data name="txt_connection.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lbl_connection.Font" type="System.Drawing.Font, System.Drawing">
     <value>Bahnschrift SemiLight, 9pt</value>
   </data>
-  <data name="txt_connection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lbl_connection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="txt_connection.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lbl_connection.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 10</value>
   </data>
-  <data name="txt_connection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lbl_connection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="txt_connection.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lbl_connection.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 20</value>
   </data>
-  <data name="txt_connection.TabIndex" type="System.Int32, mscorlib">
+  <data name="lbl_connection.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="txt_connection.Text" xml:space="preserve">
+  <data name="lbl_connection.Text" xml:space="preserve">
     <value>Connecting</value>
   </data>
-  <data name="&gt;&gt;txt_connection.Name" xml:space="preserve">
-    <value>txt_connection</value>
+  <data name="&gt;&gt;lbl_connection.Name" xml:space="preserve">
+    <value>lbl_connection</value>
   </data>
-  <data name="&gt;&gt;txt_connection.Type" xml:space="preserve">
+  <data name="&gt;&gt;lbl_connection.Type" xml:space="preserve">
     <value>Guna.UI2.WinForms.Guna2Button, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
   </data>
-  <data name="&gt;&gt;txt_connection.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lbl_connection.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;txt_connection.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;lbl_connection.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lbl_information.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Bahnschrift SemiLight, 9pt</value>
+  </data>
+  <data name="lbl_information.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbl_information.Location" type="System.Drawing.Point, System.Drawing">
+    <value>560, 290</value>
+  </data>
+  <data name="lbl_information.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lbl_information.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 20</value>
+  </data>
+  <data name="lbl_information.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;lbl_information.Name" xml:space="preserve">
+    <value>lbl_information</value>
+  </data>
+  <data name="&gt;&gt;lbl_information.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2Button, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lbl_information.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbl_information.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

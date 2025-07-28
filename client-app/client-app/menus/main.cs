@@ -9,25 +9,27 @@ namespace client_app
 {
 	public struct userData
 	{
-		public string userID;
-		public List<friendData> friends;
+		public string userID { get; set; }
+		public string aboutMe { get; set; }
+		public List<friendData> friends { get; set; }
 
-		public string localisation;
+		public string localisation { get; set; }
+		public DateTime dateCreated { get; set; }
 
-		public int rank;
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
+		public int rank { get; set; }
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
 	}
 	public struct friendData
 	{
-		public string userID;
-		public string aboutMe;
-		public bool online;
+		public string userID { get; set; }
+		public string aboutMe { get; set; }
+		public bool online { get; set; }
 
-		public string localisation;
-		public DateTime dateCreated;
+		public string localisation { get; set; }
+		public DateTime dateCreated { get; set; }
 
-		public int rank;
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
+		public int rank { get; set; }
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
 	}
 	public struct game
 	{
@@ -52,40 +54,7 @@ namespace client_app
 
 		public main(string userID)
 		{
-			#region temp
-			userData = new userData()
-			{
-				userID = userID,
-				localisation = "en",
-				rank = 1200,
-				friends = new List<friendData>()
-				{
-					new friendData()
-					{
-						userID = "beetel",
-						online = true,
-					},
-					new friendData()
-					{
-						userID = "papp",
-						online = false,
-					},
-					new friendData()
-					{
-						userID = "andrew",
-						online = true,
-					}
-				},
-				statistics = new Dictionary<char, (double accuracy, TimeSpan time, int total)>()
-				{
-					{ 'A', (0.54, TimeSpan.Parse("0:05:34"), 471)},
-					{ 'B', (0.24, TimeSpan.Parse("0:08:34"), 536)},
-					{ 'C', (0.94, TimeSpan.Parse("0:03:34"), 298)},
-				}
-
-			};
-			#endregion
-
+			hub_connection.injectForm(null, this);
 
 			/// <summary>
 			/// this is a possible way of implementing localisation efficiently
@@ -102,12 +71,9 @@ namespace client_app
 			/// 
 			/// </summary>
 
-			// NOTE FOR ME YAYAY DO CONNECTION STUFF AFTER DRIVING OKAY? ---------------------------------------------------------------------------------------------
-
 			localisation = languages.localisation;
 			base.InitializeComponent();
 			initialiseConnection(userID);
-			
 
 		}
 		private async void initialiseConnection(string userID)
@@ -116,7 +82,32 @@ namespace client_app
 			connection = hub_connection.addHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
-			userData = await connection.InvokeAsync<userData>("clientConnected", userID);
+			await connection.InvokeAsync("clientConnected", userID);
+		}
+		public void clientConnected(userData userData)
+		{
+			main.userData = userData;
+
+			#region temp
+			main.userData.friends = new List<friendData>()
+			{
+				new friendData()
+				{
+					userID = "beetel",
+					online = true,
+				},
+				new friendData()
+				{
+					userID = "papp",
+					online = false,
+				},
+				new friendData()
+				{
+					userID = "andrew",
+					online = true,
+				}
+			};
+			#endregion
 
 			InitializeComponent();
 		}

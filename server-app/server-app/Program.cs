@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
-using server_app.databases;
 using System.Diagnostics;
 
 namespace server_app
@@ -74,7 +73,7 @@ namespace server_app
                     });
                     setup.UseEndpoints(endpoints =>
                     {
-                        endpoints.MapHub<connections.connection>("/cs-nea/connections");
+                        endpoints.MapHub<connection>("/cs-nea/connections");
                         endpoints.MapHub<accounts>("/cs-nea/accounts");
                     });
                 });

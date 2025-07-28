@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,6 +12,13 @@ namespace client_app
 {
     public static class hub_connection
     {
+        private static login login;
+        private static main main;
+        public static void injectForm(login l, main m)
+        {
+            main = m;
+            login = l;
+        }
         public static HubConnection configConnection(string address)
         {
             HubConnection connection = new HubConnectionBuilder()
@@ -32,59 +40,15 @@ namespace client_app
         {
             connection.On<int, string>("loginSuccess", (success, userID) =>
             {
-            switch (success)
-            {
-                case 0:
-                    // incorrect password
-                    MessageBox.Show("incorrect password");
-                    break;
-                case 1:
-                    // login user
-
-                    //var login = Application.OpenForms.OfType<login>().GetEnumerator();
-                    //login.Current.Close();
-                    var form = Application.OpenForms.OfType<login>().FirstOrDefault();
-                    form.Invoke(new Action(() => {
-                        form.Hide();                    
-                    }));
-
-						Application.Run(new main(userID));
-                        
-						//login.ActiveForm.Hide();
-                        break;
-                    case 2:
-                        // account does not exist
-                        MessageBox.Show("account does not exist");
-                        break;
-                    case -1:
-                        // error occured
-                        MessageBox.Show("an error occurred try again");
-                        break;
-                    default:
-                        throw new Exception($"Unrecognised login success code < {success} >");
-                }
+                login.lbl_information.Invoke(new Action(() => { login.handleLoginSuccess(success, userID); }));
             });
             connection.On<int, string>("accountSuccess", (success, userID) =>
             {
-                switch (success)
-                {
-                    case 1:
-                        // login user
-                        main main = new main(userID);
-                        login.ActiveForm.Hide();
-                        main.ShowDialog();
-                        break;
-                    case 0:
-                        // userID already exists
-                        MessageBox.Show("user already exists");
-                        break;
-                    case -1:
-                        // error occured
-                        MessageBox.Show("an error occurred try again");
-                        break;
-                    default:
-                        throw new Exception($"Unrecognised account success code < {success} >");
-                }
+				login.lbl_information.Invoke(new Action(() => { login.handleAccountCreationSuccess(success, userID); }));
+			});
+            connection.On<userData>("receiveUserData", (userData) =>
+            {
+                main.Invoke(new Action(() => { main.clientConnected(userData); }));
             });
 
             connection.On<string, string, List<friendData>>("receiveJoinConfirm", (gameID, type, users) =>

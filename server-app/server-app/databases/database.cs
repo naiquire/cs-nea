@@ -10,27 +10,27 @@ namespace server_app.databases
 	// handles all requests to the SQL database
 	public struct userData
 	{
-		public string userID;
-		public string aboutMe;
-		public List<friendData> friends;
+		public string userID { get; set; }
+		public string aboutMe { get; set; }
+		public List<friendData> friends { get; set; }
 
-		public string localisation;
-		public DateTime dateCreated;
+		public string localisation { get; set; }
+		public DateTime dateCreated { get; set; }
 
-		public int rank;
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
+		public int rank { get; set; }
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
 	}
 	public struct friendData
 	{
-		public string userID;
-		public string aboutMe;
-		public bool online;
+		public string userID { get; set; }
+		public string aboutMe { get; set; }
+		public bool online { get; set; }
 
-		public string localisation;
-		public DateTime dateCreated;
+		public string localisation { get; set; }
+		public DateTime dateCreated { get; set; }
 
-		public int rank;
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics;
+		public int rank { get; set; }
+		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
 	}
 	public static class @database
 	{
@@ -40,14 +40,14 @@ namespace server_app.databases
 		{
 			// if exception occurs then log the message and allow the client to try again
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"[ERROR] {ex}");
+			Console.WriteLine($"\n[ERROR] {ex}\n");
 			Console.ResetColor();
 		}
 		public static void outputException(string ex)
 		{
 			// if exception occurs then log the message and allow the client to try again
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"[ERROR] {ex}");
+			Console.WriteLine($"\n[ERROR] {ex}\n");
 			Console.ResetColor();
 		}
 
@@ -63,7 +63,7 @@ namespace server_app.databases
 
 					using (var reader = command.ExecuteReader())
 					{
-						success = -1;
+						success = 2;
 
 						while (reader.Read())
 						{
@@ -81,10 +81,11 @@ namespace server_app.databases
 				connection.Close();
 				return true;
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
 				success = -1;
+				connection.Close();
 				return false;
 			}
 		}
@@ -119,7 +120,7 @@ namespace server_app.databases
 							using (var command = new SqliteCommand(query, connection))
 							{
 								command.Parameters.AddWithValue("@userID", userID);
-								command.Parameters.AddWithValue("@letter", ((char)i + 65).ToString());
+								command.Parameters.AddWithValue("@letter", ((char)(i + 65)).ToString());
 								command.Parameters.AddWithValue("@accuracy", 0);
 								command.Parameters.AddWithValue("@time", TimeSpan.Zero);
 								command.Parameters.AddWithValue("@total", 0);
@@ -130,24 +131,27 @@ namespace server_app.databases
 
 						connection.Close();
 						success = 1;
+						return true;
 					}
-					catch (SqliteException ex)
+					catch (Exception ex)
 					{
 						outputException(ex);
 						success = -1;
+						connection.Close();
 						return false;
 					}
 				}
 				else
 				{
 					success = 0;
+					return true;
 				}
 			}
 			else
 			{
 				success = -1;
+				return false;
 			}
-			return true;
 		}
 		public static bool userExists(string userID, out bool exists)
 		{
@@ -166,10 +170,11 @@ namespace server_app.databases
 				connection.Close();
 				return true;
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
 				exists = false;
+				connection.Close();
 				return false;
 			}
 		}
@@ -190,27 +195,32 @@ namespace server_app.databases
 					while (reader.Read())
 					{
 						userData.aboutMe = reader.GetString(0);
-						userData.dateCreated = reader.GetDateTime(2);
-						userData.rank = reader.GetInt32(3);
-						userData.localisation = reader.GetString(4);
+						userData.dateCreated = reader.GetDateTime(1);
+						userData.rank = reader.GetInt32(2);
+						userData.localisation = reader.GetString(3);
 					}
 				}
 				connection.Close();
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
+				connection.Close();
 				return false;
 			}
 
 			userData.userID = userID;
 
-			if (!loadStatistics(userID, out userData.statistics))
+			if (loadStatistics(userID, out var stats))
+			{
+				userData.statistics = stats;
+			}
+			else
 			{
 				return false;
 			}
 
-			List<friendData> friendData = [];
+				List<friendData> friendData = [];
 			if (loadFriends(userID, out List<string> friends))
 			{
 				foreach (var friend in friends)
@@ -236,6 +246,7 @@ namespace server_app.databases
 				WHERE userID = @userID";
 			try
 			{
+				connection.Open();
 				using (var command = new SqliteCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@userID", userID);
@@ -250,11 +261,13 @@ namespace server_app.databases
 						statistics[letter] = (accuracy, time, total);
 					}
 				}
+				connection.Close();
 				return true;
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
+				connection.Close();
 				return false;
 			}
 		}
@@ -266,6 +279,7 @@ namespace server_app.databases
 				WHERE user1 = @userID OR user2 = @userID";
 			try
 			{
+				connection.Open();
 				using (var command = new SqliteCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@userID", userID);
@@ -285,11 +299,13 @@ namespace server_app.databases
 						}
 					}
 				}
+				connection.Close();
 				return true;
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
+				connection.Close();
 				return false;
 			}
 		}
@@ -301,6 +317,7 @@ namespace server_app.databases
 				WHERE userID = @userID";
 			try
 			{
+				connection.Open();
 				using (var command = new SqliteCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@userID", userID);
@@ -313,14 +330,20 @@ namespace server_app.databases
 						friendData.rank = reader.GetInt32(3);
 					}
 				}
+				connection.Close();
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
+				connection.Close();
 				return false;
 			}
 
-			if (!loadStatistics(userID, out friendData.statistics))
+			if (loadStatistics(userID, out var stats))
+			{
+				friendData.statistics = stats;
+			}
+			else
 			{
 				return false;
 			}
@@ -349,9 +372,10 @@ namespace server_app.databases
 				connection.Close();
 				return true;
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
+				connection.Close();
 				return false;
 			}
 		}
@@ -373,9 +397,10 @@ namespace server_app.databases
 				connection.Close();
 				return true;
 			}
-			catch (SqliteException ex)
+			catch (Exception ex)
 			{
 				outputException(ex);
+				connection.Close();
 				return false;
 			}
 		}

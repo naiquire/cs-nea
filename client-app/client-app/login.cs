@@ -13,13 +13,14 @@ namespace client_app
 {
     public partial class login : Form
     {
-        HubConnection connection;
+        private HubConnection connection;
         private int languageIndex = 0;
         public login()
         {
             InitializeComponent();
             controlEventConfigs();
 			btn_language.Text = languages.supportedLanguages[languageIndex];
+			hub_connection.injectForm(this, null);
 			initialiseConnection();
         }
         private async void initialiseConnection()
@@ -28,18 +29,63 @@ namespace client_app
             connection = hub_connection.addHandles(connection);
             connection = await hub_connection.startConnection(connection);
 
-            this.txt_connection.Text = "Connected";
+            this.lbl_connection.Text = "Connected";
             pic_connecting.Stop();
         }
 
-        private async void btn_login_Click(object sender, EventArgs e)
+		public void handleLoginSuccess(int success, string userID)
+        {
+			switch (success)
+			{
+				case 0:
+                    // incorrect password
+                    this.lbl_information.Text = "Incorrect Password";
+					break;
+				case 1:
+					// login user
+					new main(userID).Show();
+					break;
+				case 2:
+					// account does not exist
+					this.lbl_information.Text = "Account does not exist";
+					break;
+				case -1:
+					// error occured
+					this.lbl_information.Text = "An error occurred. Please wait and try again";
+					break;
+				default:
+					throw new Exception($"Unrecognised login success code < {success} >");
+			}
+		}
+		public void handleAccountCreationSuccess(int success, string userID)
+        {
+			switch (success)
+			{
+				case 1:
+					// login user
+					new main(userID).Show();
+					break;
+				case 0:
+					// userID already exists
+					this.lbl_information.Text = "Username is not available";
+					break;
+				case -1:
+					// error occured
+					this.lbl_information.Text = "An error occurred. Please wait and try again";
+					break;
+				default:
+					throw new Exception($"Unrecognised account success code < {success} >");
+			}
+		}
+
+		#region Button logic
+		private async void btn_login_Click(object sender, EventArgs e)
         {
             string userID = txt_userID.Text.Trim();
             string password = txt_password.Text;
-
-            await connection.InvokeAsync("loginRequest", userID, password);
+			this.lbl_information.ResetText();
+			await connection.InvokeAsync("loginRequest", userID, password);
         }
-
         private void btn_createAccount_Click(object sender, EventArgs e)
         {
             this.Controls.Remove(btn_login);
@@ -54,11 +100,10 @@ namespace client_app
         {
             string userID = txt_userID.Text.Trim();
             string password = txt_password.Text;
-            string localisation = languages.supportedLanguages[languageIndex];
-
-            await connection.InvokeAsync("accountRequest", userID, password, localisation);
+            string localisation = languages.languageCodes[languageIndex];
+			this.lbl_information.ResetText();
+			await connection.InvokeAsync("accountRequest", userID, password, localisation);
         }
-
 		private void btn_language_Click(object sender, EventArgs e)
 		{
             languageIndex++;
@@ -72,5 +117,7 @@ namespace client_app
             txt_password.PlaceholderText = languages.localisation["Password"][languages.languageCodes[languageIndex]];
             lbl_header.Text = languages.localisation["Account"][languages.languageCodes[languageIndex]];
 		}
+		#endregion
+
 	}
 }
