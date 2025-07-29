@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using client_app.components;
 using client_app.games;
 using client_app.menus;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -70,25 +71,12 @@ namespace client_app
 			/// "amis" would be outputted
 			/// 
 			/// </summary>
-
-			localisation = languages.localisation;
-			base.InitializeComponent();
-			initialiseConnection(userID);
-
-		}
-		private async void initialiseConnection(string userID)
-		{
-			connection = hub_connection.configConnection(address + "/connections");
-			connection = hub_connection.addHandles(connection);
-			connection = await hub_connection.startConnection(connection);
-
-			await connection.InvokeAsync("clientConnected", userID);
-		}
-		public void clientConnected(userData userData)
-		{
-			main.userData = userData;
+			/// 
 
 			#region temp
+			userData.userID = userID;
+			userData.rank = 1200;
+			userData.localisation = "en";
 			main.userData.friends = new List<friendData>()
 			{
 				new friendData()
@@ -107,14 +95,45 @@ namespace client_app
 					online = true,
 				}
 			};
+			main.userData.statistics = new Dictionary<char, (double accuracy, TimeSpan time, int total)>()
+			{
+				{'A', (0.54, TimeSpan.Parse("00:00:05.34"), 36) },
+				{'B', (0.24, TimeSpan.Parse("00:00:03.17"), 89) },
+				{'C', (0.94, TimeSpan.Parse("00:00:04.95"), 62) },
+			};
 			#endregion
+
+			localisation = languages.localisation;
+			base.InitializeComponent();
+			//initialiseConnection(userID);
+			InitializeComponent(); // temp
+
+		}
+		private async void initialiseConnection(string userID)
+		{
+			connection = hub_connection.configConnection(address + "/connections");
+			connection = hub_connection.addHandles(connection);
+			connection = await hub_connection.startConnection(connection);
+
+			await connection.InvokeAsync("clientConnected", userID);
+		}
+		public void clientConnected(userData userData)
+		{
+			main.userData = userData;
+
+			
 
 			InitializeComponent();
 		}
-		public void handleInvites(List<string> invites)
+		public async void handleInvites(List<string> invites)
 		{
-			// pop up message box or something idk
-			// if yes then await create friendship
+			foreach (string invite in invites)
+			{
+				if (new confirm($"Received a friend invite from {invite}").DialogResult == System.Windows.Forms.DialogResult.OK)
+				{
+					await connection.InvokeAsync("addFriends", invite, userData.userID);
+				}
+			}
 		}
 		private async Task requestProfile(string userID)
 		{

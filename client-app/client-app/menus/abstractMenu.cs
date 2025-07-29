@@ -1,7 +1,10 @@
-﻿using System;
+﻿using client_app.Properties;
+using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace client_app.menus
 {
@@ -14,20 +17,40 @@ namespace client_app.menus
 		protected Panel panel_topLeft;
 		public Panel panel_main;
 		public Panel panel_right;
+		private Guna.UI2.WinForms.Guna2TextBox header;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_accept;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_cancel;
 		protected Button btn_home;
 
-		public void tempInitializeComponent()
+		public void InitializeComponent()
 		{
+			this.header = new Guna.UI2.WinForms.Guna2TextBox();
+			this.btn_accept = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.btn_cancel = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.SuspendLayout();
+			// 
+			// header
+			// 
+			
+			// 
+			// btn_accept
+			// 
+			
+			// 
+			// btn_cancel
+			// 
+			
 			// 
 			// abstractMenu
 			// 
-			this.ClientSize = new System.Drawing.Size(1119, 558);
-			this.Name = "abstractMenu";
-			this.ResumeLayout(false);
+			
+
 		}
 
-		public virtual void InitializeComponent()
+		/// <summary>
+		/// Initialises the base UI when the client application is launched.
+		/// </summary>
+		public virtual void aInitializeComponent()
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
 
@@ -105,7 +128,7 @@ namespace client_app.menus
 			// 
 			// panel_main
 			// 
-			this.panel_main.BackColor = Color.Transparent;
+			this.panel_main.BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))); ;
 			this.panel_main.Location = new Point(300, 30);
 			this.panel_main.Name = "panel_main";
 			this.panel_main.Size = new Size(1120, 1050);
@@ -150,118 +173,11 @@ namespace client_app.menus
 			main.panel_left.Controls.Add(main.btn_home);
 			main.btn_home.Click += main.btn_home_Click;
 		}
-		protected virtual void InitializeComponent(main main)
-		{
-			resetLayout(main);
-
-			main.panel_topBorder = new System.Windows.Forms.Panel();
-			main.lbl_appName = new System.Windows.Forms.Label();
-			main.btn_close = new System.Windows.Forms.Button();
-			main.btn_home = new System.Windows.Forms.Button();
-			main.panel_left = new System.Windows.Forms.Panel();
-			main.panel_topLeft = new System.Windows.Forms.Panel();
-			main.panel_main = new System.Windows.Forms.Panel();
-			main.panel_right = new System.Windows.Forms.Panel();
-			main.panel_topBorder.SuspendLayout();
-			main.panel_left.SuspendLayout();
-			main.SuspendLayout();
-			// 
-			// panel_topBorder
-			// 
-			main.panel_topBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-			main.panel_topBorder.Controls.Add(main.lbl_appName);
-			main.panel_topBorder.Controls.Add(main.btn_close);
-			main.panel_topBorder.Location = new System.Drawing.Point(0, 0);
-			main.panel_topBorder.Name = "panel_topBorder";
-			main.panel_topBorder.Size = new System.Drawing.Size(1920, 30);
-			main.panel_topBorder.TabIndex = 0;
-			// 
-			// lbl_appName
-			// 
-			main.lbl_appName.BackColor = main.panel_topBorder.BackColor;
-			main.lbl_appName.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			main.lbl_appName.Location = new System.Drawing.Point(10, 7);
-			main.lbl_appName.Name = "lbl_appName";
-			main.lbl_appName.Size = new System.Drawing.Size(100, 16);
-			main.lbl_appName.TabIndex = 0;
-			main.lbl_appName.Text = "appName";
-			// 
-			// btn_close
-			// 
-			main.btn_close.Location = new System.Drawing.Point(1890, 0);
-			main.btn_close.Name = "btn_close";
-			main.btn_close.Size = new System.Drawing.Size(30, 30);
-			main.btn_close.TabIndex = 0;
-			main.btn_close.Text = "X";
-			main.btn_close.UseVisualStyleBackColor = true;
-			main.btn_close.Click += new System.EventHandler(main.btn_close_Click);
-			// 
-			// btn_home
-			// 
-			main.btn_home.Location = new System.Drawing.Point(50, 910);
-			main.btn_home.Name = "btn_home";
-			main.btn_home.Size = new System.Drawing.Size(200, 30);
-			main.btn_home.TabIndex = 0;
-			main.btn_home.Text = "HOME";
-			main.btn_home.UseMnemonic = false;
-			main.btn_home.UseVisualStyleBackColor = true;
-			//main.btn_home.Click += (sender, e) => { btn_home_Click(sender, e, main); };
-			// 
-			// panel_left
-			// 
-			main.panel_left.AutoScroll = true;
-			main.panel_left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			main.panel_left.Controls.Add(main.btn_home);
-			main.panel_left.Location = new System.Drawing.Point(0, 130);
-			main.panel_left.Name = "panel_left";
-			main.panel_left.Size = new System.Drawing.Size(300, 950);
-			main.panel_left.TabIndex = 2;
-			// 
-			// panel_topLeft
-			// 
-			main.panel_topLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-			main.panel_topLeft.Location = new System.Drawing.Point(0, 30);
-			main.panel_topLeft.Name = "panel_topLeft";
-			main.panel_topLeft.Size = new System.Drawing.Size(300, 100);
-			main.panel_topLeft.TabIndex = 1;
-			// 
-			// panel_main
-			// 
-			main.panel_main.BackColor = System.Drawing.Color.Transparent;
-			main.panel_main.Location = new System.Drawing.Point(300, 30);
-			main.panel_main.Name = "panel_main";
-			main.panel_main.Size = new System.Drawing.Size(1120, 1050);
-			main.panel_main.TabIndex = 4;
-			// 
-			// panel_right
-			// 
-			main.panel_right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			main.panel_right.Location = new System.Drawing.Point(1420, 30);
-			main.panel_right.Name = "panel_right";
-			main.panel_right.Size = new System.Drawing.Size(500, 1050);
-			main.panel_right.TabIndex = 3;
-			// 
-			// abstractMenu
-			// 
-			main.BackColor = System.Drawing.Color.White;
-			main.ClientSize = new System.Drawing.Size(1920, 1080);
-			main.Controls.Add(main.panel_topLeft);
-			main.Controls.Add(main.panel_topBorder);
-			main.Controls.Add(main.panel_left);
-			main.Controls.Add(main.panel_main);
-			main.Controls.Add(main.panel_right);
-			main.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			main.Name = "abstractMenu";
-			main.panel_topBorder.ResumeLayout(false);
-			main.panel_left.ResumeLayout(false);
-			main.ResumeLayout(false);
-
-		} // no references, unlikely needed in final
 
 		/// <summary>
 		/// Configures the right panel with userData.
 		/// </summary>
-		protected void configPanel_right_userData(main main, userData userData)
+		protected void configUserDataPanel(main main, userData userData)
 		{
 			//throw new NotImplementedException();
 		}
@@ -360,12 +276,15 @@ namespace client_app.menus
 			main.panel_main.Controls.Add(panel_users);
 		}
 
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+		/// <summary>
+		/// Handles the click event for the close button, disconnecting the client and closing the application.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		public async void btn_close_Click(object sender, EventArgs e)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 		{
 			Hide();
-			//await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
 			Close();
 		}
 

@@ -27,7 +27,7 @@ namespace server_app.games
 	}
 	public interface IPlayable
 	{
-		void queueUser(string userID);
+		Task queueUser(string userID);
 		void dequeueUser(string userID);
 		void startGame();
 		/// <summary>
@@ -91,7 +91,6 @@ namespace server_app.games
 			started = false;
 
 			gameID = userID + DateTime.UtcNow.ToString();
-			queueUser(userID);
 		}
 
 		/// <summary>
@@ -99,7 +98,7 @@ namespace server_app.games
 		/// </summary>
 		/// <param name="userID"></param>
 		/// <exception cref="DisconnectException"></exception>
-		public async void queueUser(string userID)
+		public async Task queueUser(string userID)
 		{
 			if (database.loadFriendData(userID, out friendData data))
 			{

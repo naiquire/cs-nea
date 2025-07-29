@@ -7,11 +7,11 @@ namespace server_app.connections
 {
 	public partial class @connection : Hub
 	{
-		public bool queueGame(string gameType, string userID)
+		public async Task<bool> queueGame(string gameType, string userID)
 		{
 			if (Program.hubContext != null)
 			{
-				return queueing.queueGame(gameType, userID, Program.hubContext);
+				return await queueing.queueGame(gameType, userID, Program.hubContext);
 			}
 			else
 			{

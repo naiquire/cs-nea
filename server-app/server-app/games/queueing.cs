@@ -15,11 +15,11 @@ namespace server_app.games
 	/// <param name="game"></param>
 	/// <param name="userID"></param>
 	/// <returns>A boolean value representing if the user was queued into the game</returns>
-	    private static bool tryQueueGame(IPlayable game, string userID)
+	    private static async Task<bool> tryQueueGame(IPlayable game, string userID)
         {
             if (game.getPlayerCount() < game.getMaxPlayers() && !game.hasStarted())
             {
-                game.queueUser(userID);
+                await game.queueUser(userID);
                 if (game.getPlayerCount() == game.getMaxPlayers())
                 {
                     // async method
@@ -55,13 +55,13 @@ namespace server_app.games
         /// <param name="userID"></param>
         /// <param name="context"></param>
         /// <returns><see langword="true"/> if the user was successfully queued; otherwise <see langword="false"/></returns>
-        public static bool queueGame(string gameType, string userID, IHubContext<connection> context)
+        public static async Task<bool> queueGame(string gameType, string userID, IHubContext<connection> context)
         {
             foreach (IPlayable game in currentGames)
             {
                 if (game.getType() == gameType)
                 {
-                    if (tryQueueGame(game, userID))
+                    if (await tryQueueGame(game, userID))
                     {
                         return true;
                     }
@@ -71,11 +71,11 @@ namespace server_app.games
             switch (gameType)
             {
                 case "accuracy":
-					return tryQueueGame(new accuracy(userID, context), userID);
+					return await tryQueueGame(new accuracy(userID, context), userID);
 				case "versus":
-					return tryQueueGame(new versus(userID, context), userID);
+					return await tryQueueGame(new versus(userID, context), userID);
                 case "knockout":
-					return tryQueueGame(new knockout(userID, context), userID);
+					return await tryQueueGame(new knockout(userID, context), userID);
                 default:
 					database.outputException($"Could not find game with type {gameType}");
 					return false;                

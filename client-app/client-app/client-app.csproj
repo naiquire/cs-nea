@@ -183,6 +183,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="components\confirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="components\input.cs">
       <SubType>Form</SubType>
     </Compile>

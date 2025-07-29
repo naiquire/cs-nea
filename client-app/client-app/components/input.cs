@@ -12,7 +12,7 @@ namespace client_app.components
         private Bitmap drawing;
 
         private bool draw = false;
-        private (int x, int y) pos = (-1, -1);
+        private (int x, int y) pos;
 
         public input(Panel main, (int, int) pos, (int, int) size)
         {
@@ -21,6 +21,9 @@ namespace client_app.components
             enablePanel();
         }
 
+        /// <summary>
+        /// Enables the input panel for drawing and attaches mouse event handlers.
+        /// </summary>
         public void enablePanel()
         {
             drawing = new Bitmap(panel_input.Width, panel_input.Height, panel_input.CreateGraphics());
@@ -30,6 +33,11 @@ namespace client_app.components
             panel_input.MouseUp += panel_MouseUp;
             panel_input.MouseMove += panel_MouseMove;
         }
+
+        /// <summary>
+        /// Disables user interaction with the input panel and returns the current drawing.
+        /// </summary>
+        /// <returns>A <see cref="Bitmap"/> representing the current drawing on the panel.</returns>
         public Bitmap disablePanel()
         {
             panel_input.MouseDown -= panel_MouseDown;
@@ -39,19 +47,29 @@ namespace client_app.components
             return drawing;
         }
 
-        public void loadPanel((int x, int y) coords, (int x, int y) size)
+		/// <summary>
+		/// Creates and adds a new panel to the main container at the specified location and size.
+		/// </summary>
+		/// <param name="coords"></param>
+		/// <param name="size"></param>
+		public void loadPanel((int x, int y) coords, (int x, int y) size)
         {
             panel_input = new Panel()
             {
                 Location = new Point(coords.x, coords.y),
                 Size = new Size(size.x, size.y),
                 Name = "panel_input",
-                TabIndex = 0,
             };
 
             main.Controls.Add(panel_input);
         }
 
+
+        /// <summary>
+        /// Handles the <see cref="Control.MouseDown"></see> event for the drawing panel./>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panel_MouseDown(object sender, MouseEventArgs e)
         {
             draw = true;
@@ -59,8 +77,23 @@ namespace client_app.components
             pos.x = e.X;
             pos.y = e.Y;
         }
-        private void panel_MouseUp(object sender, MouseEventArgs e) => draw = false;
-        private void panel_MouseMove(object sender, MouseEventArgs e)
+
+        /// <summary>
+        /// Handles the <see cref="Control.MouseUp"></see> event for the drawing panel./>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panel_MouseUp(object sender, MouseEventArgs e)
+        {
+            draw = false;
+        }
+
+		/// <summary>
+		/// Handles the <see cref="Control.MouseMove"></see> event for the drawing panel./>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void panel_MouseMove(object sender, MouseEventArgs e)
         {
             if (draw)
             {
