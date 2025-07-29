@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,7 +19,6 @@ namespace client_app
         public login()
         {
             InitializeComponent();
-            controlEventConfigs();
 			btn_language.Text = languages.supportedLanguages[languageIndex];
 			hub_connection.injectForm(this, null);
 			initialiseConnection();
@@ -31,6 +31,7 @@ namespace client_app
 
             this.lbl_connection.Text = "Connected";
             pic_connecting.Stop();
+			
         }
 
 		public void handleLoginSuccess(int success, string userID)
@@ -92,16 +93,23 @@ namespace client_app
             this.Controls.Remove(btn_createAccount);
 
             this.txt_password.Location = new Point(560, 260);
+			this.lbl_information.Location = new Point(this.lbl_information.Location.X, this.txt_passwordconfirm.Location.Y + this.txt_passwordconfirm.Size.Height);
 
             this.Controls.Add(txt_passwordconfirm);
             this.Controls.Add(btn_requestAccount);
         }
         private async void btn_requestAccount_Click(object sender, EventArgs e)
         {
+			lbl_information.ResetText();
+			if (txt_password.Text != txt_passwordconfirm.Text)
+			{
+				lbl_information.Text = "Passwords do not match";
+				return;
+			}
+
             string userID = txt_userID.Text.Trim();
             string password = txt_password.Text;
             string localisation = languages.languageCodes[languageIndex];
-			this.lbl_information.ResetText();
 			await connection.InvokeAsync("accountRequest", userID, password, localisation);
         }
 		private void btn_language_Click(object sender, EventArgs e)

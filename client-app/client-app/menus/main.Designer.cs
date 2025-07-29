@@ -27,13 +27,21 @@ namespace client_app
             base.Dispose(disposing);
         }
 
-        /// <summary>
-        /// hex codes for graphics
-        /// 
-        /// f771a3
-        /// c571f7
-        /// 
-        /// </summary>
+		/// <summary>
+		/// hex codes for graphics
+		/// 
+		/// f771a3
+		/// c571f7
+		/// 
+		/// </summary>
+
+		const int gamePanelX = 20;
+		const int gamePanelY = 100;
+		const int gamePanelSizeX = 800;
+		const int gamePanelSizeY = 90;
+		const int gamePanelSpacing = 50;
+
+
 
         #region Windows Form Designer generated code
 
@@ -48,20 +56,12 @@ namespace client_app
 			this.panel_friendList = new System.Windows.Forms.Panel();
             this.seperator = new System.Windows.Forms.PictureBox();
             this.lbl_friendsLabel = new System.Windows.Forms.Label();
-            this.btn_queueAccuracy = new System.Windows.Forms.Button();
-            this.pic_play = new System.Windows.Forms.PictureBox();
-			this.accuracy_seperator = new System.Windows.Forms.PictureBox();
-			this.btn_queueAccuracy = new System.Windows.Forms.Button();
-			this.panel_accuracy = new System.Windows.Forms.Panel();
-			this.lbl_accuracy = new System.Windows.Forms.Label();
 
 			this.panel_topBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
             this.panel_main.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pic_play)).BeginInit();
-			this.panel_accuracy.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.accuracy_seperator)).BeginInit();
-            this.SuspendLayout();
+
+			this.SuspendLayout();
             // 
             // panel_friendList
             // 
@@ -94,93 +94,265 @@ namespace client_app
             this.lbl_friendsLabel.Size = new System.Drawing.Size(300, 33);
             this.lbl_friendsLabel.TabIndex = 0;
             this.lbl_friendsLabel.Text = localisation["Friends"][userData.localisation];
-            this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;            
-			// 
-			// pic_play
-			// 
-			this.pic_play.Image = global::client_app.Properties.Resources.play;
-            this.pic_play.Location = new System.Drawing.Point(360, 20);
-            this.pic_play.Name = "pictureBox1";
-            this.pic_play.Size = new System.Drawing.Size(400, 131);
-            this.pic_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_play.TabIndex = 0;
-            this.pic_play.TabStop = false;
-			// 
-			// accuracy_seperator
-			// 
-			this.accuracy_seperator.Image = global::client_app.Properties.Resources.seperator;
-			this.accuracy_seperator.Location = new System.Drawing.Point(10, 40);
-			this.accuracy_seperator.Name = "accuracy_seperator";
-			this.accuracy_seperator.Size = new System.Drawing.Size(180, 10);
-			this.accuracy_seperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.accuracy_seperator.TabIndex = 1;
-			this.accuracy_seperator.TabStop = false;
-			// 
-			// btn_queueAccuracy
-			// 
-			this.btn_queueAccuracy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_queueAccuracy.ForeColor = System.Drawing.Color.Transparent;
-			this.btn_queueAccuracy.Location = new System.Drawing.Point(55, 80);
-			this.btn_queueAccuracy.Name = "btn_queueAccuracy";
-			this.btn_queueAccuracy.Size = new System.Drawing.Size(90, 90);
-			this.btn_queueAccuracy.TabIndex = 2;
-			this.btn_queueAccuracy.UseVisualStyleBackColor = true;
-			this.btn_queueAccuracy.Click += new System.EventHandler(this.btn_queueAccuracy_Click);
-			// 
-			// lbl_accuracy
-			// 
-			this.lbl_accuracy.AutoSize = true;
-			this.lbl_accuracy.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_accuracy.ForeColor = System.Drawing.Color.White;
-			this.lbl_accuracy.Location = new System.Drawing.Point(51, 10);
-			this.lbl_accuracy.Name = "lbl_accuracy";
-			this.lbl_accuracy.Size = new System.Drawing.Size(98, 25);
-			this.lbl_accuracy.TabIndex = 0;
-			this.lbl_accuracy.Text = "Accuracy";
-			// 
-			// panel_accuracy
-			// 
-			this.panel_accuracy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-			this.panel_accuracy.Controls.Add(this.btn_queueAccuracy);
-			this.panel_accuracy.Controls.Add(this.accuracy_seperator);
-			this.panel_accuracy.Controls.Add(this.lbl_accuracy);
-			this.panel_accuracy.Location = new System.Drawing.Point(230, 177);
-			this.panel_accuracy.Name = "panel_accuracy";
-			this.panel_accuracy.Size = new System.Drawing.Size(200, 400);
-			this.panel_accuracy.TabIndex = 0;
+            this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
 			//
 			// main
 			//
-			this.panel_main.Controls.Add(pic_play);
-			this.panel_main.Controls.Add(this.panel_accuracy);
+			//this.panel_main.Controls.Add(pic_play);
 			this.panel_left.Controls.Add(panel_friendList);
             this.panel_left.Controls.Add(seperator);
             this.panel_left.Controls.Add(lbl_friendsLabel);
 
+
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
             this.panel_main.ResumeLayout(false);
-			this.panel_accuracy.ResumeLayout(false);
-			this.panel_accuracy.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pic_play)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.accuracy_seperator)).EndInit();
 			this.ResumeLayout(false);
 
 
             configFriendsPanel();
-            configPanel_right_userData(this, userData);
+			configGamePanels();
+
+			configPanel_right_userData(this, userData);
         }
 		public void btn_home_Click(object sender, EventArgs e)
 		{
-            //if (game.gameID != null)
-            //{
-            //    connection.InvokeAsync("leaveGame", game.gameID, userData.userID); // no server functionality
-            //}
+			/// <no server functionality>
+			//if (game.gameID != null)
+			//{
+			//    connection.InvokeAsync("leaveGame", game.gameID, userData.userID);
+			//}
 
-            // dispose all other classes
-            menu.profile = null;
+			// dispose all other classes
+			menu.profile = null;
             menu.accuracy = null;
 
 			InitializeComponent();
+		}
+
+        public void configGamePanels()
+        {
+			this.panel_accuracy = new Guna.UI2.WinForms.Guna2GradientPanel()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderRadius = 20,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Location = new System.Drawing.Point(gamePanelX, gamePanelY),
+				Name = "panel_accuracy",
+				Size = new System.Drawing.Size(gamePanelSizeX, gamePanelSizeY),
+				TabIndex = 0,
+				UseTransparentBackground = true,
+			};
+			this.lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.IBeam,
+				DefaultText = "Accuracy",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(20, 10),
+				Margin = new System.Windows.Forms.Padding(6),
+				Name = "lbl_accuracy",
+				PlaceholderForeColor = System.Drawing.Color.Transparent,
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(180, 70),
+				TabIndex = 13,
+				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+				TextOffset = new System.Drawing.Point(0, -2),
+			};
+			this.txt_accuracy = new Guna.UI2.WinForms.Guna2TextBox() 
+			{
+				BorderRadius = 10,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = "PLAYERS  :  1         |         ROUNDS : 10         |         UNRANKED",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				Font = new System.Drawing.Font("Bahnschrift", 9.75F),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(220, 10),
+				Multiline = true,
+				Name = "txt_accuracy",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(380, 69),
+				TabIndex = 15,
+				TabStop = false,
+				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+				TextOffset = new System.Drawing.Point(0, 19),
+			};
+			this.btn_queueAccuracy = new Guna.UI2.WinForms.Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 24,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(620, 20),
+				Name = "btn_queueAccuracy",
+				Size = new System.Drawing.Size(160, 50),
+				TabIndex = 3,
+				Text = "Queue",
+			};
+
+			this.panel_1v1 = new Guna.UI2.WinForms.Guna2GradientPanel()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderRadius = 20,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Location = new System.Drawing.Point(gamePanelX, gamePanelY + gamePanelSizeY + gamePanelSpacing),
+				Name = "panel_1v1",
+				Size = new System.Drawing.Size(gamePanelSizeX, gamePanelSizeY),
+				TabIndex = 16,
+				UseTransparentBackground = true,
+			};
+			this.btn_queue1v1 = new Guna.UI2.WinForms.Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 24,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(620, 20),
+				Name = "btn_queue1v1",
+				Size = new System.Drawing.Size(160, 50),
+				TabIndex = 3,
+				Text = "Queue",
+			};
+			this.txt_1v1 = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderRadius = 10,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				Font = new System.Drawing.Font("Bahnschrift", 9.75F),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(220, 10),
+				Multiline = true,
+				Name = "txt_1v1",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(380, 69),
+				TabIndex = 15,
+				TabStop = false,
+				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+				TextOffset = new System.Drawing.Point(0, 19),
+			};
+			this.lbl_1v1 = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.IBeam,
+				DefaultText = "1v1",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(20, 10),
+				Margin = new System.Windows.Forms.Padding(6),
+				Name = "lbl_1v1",
+				PlaceholderForeColor = System.Drawing.Color.Transparent,
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(180, 70),
+				TabIndex = 13,
+				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+				TextOffset = new System.Drawing.Point(0, -2),
+			};
+
+			this.panel_knockout = new Guna.UI2.WinForms.Guna2GradientPanel()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderRadius = 20,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Location = new System.Drawing.Point(gamePanelX, gamePanelY + 2 * (gamePanelSizeY + gamePanelSpacing)),
+				Name = "panel_knockout",
+				Size = new System.Drawing.Size(gamePanelSizeX, gamePanelSizeY),
+				TabIndex = 17,
+				UseTransparentBackground = true,
+			};
+			this.btn_queueKnockout = new Guna.UI2.WinForms.Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 24,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(620, 20),
+				Name = "btn_queueKnockout",
+				Size = new System.Drawing.Size(160, 50),
+				TabIndex = 3,
+				Text = "Queue",
+			};
+			this.txt_knockout = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderRadius = 10,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = "PLAYERS  :  12         |         ELIMINATION         |         UNRANKED",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				Font = new System.Drawing.Font("Bahnschrift", 9.75F),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(220, 10),
+				Multiline = true,
+				Name = "txt_knockout",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(380, 69),
+				TabIndex = 15,
+				TabStop = false,
+				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+				TextOffset = new System.Drawing.Point(0, 19),
+			};
+			this.lbl_knockout = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.IBeam,
+				DefaultText = "Knockout",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(20, 10),
+				Margin = new System.Windows.Forms.Padding(6),
+				Name = "lbl_knockout",
+				PlaceholderForeColor = System.Drawing.Color.Transparent,
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(180, 70),
+				TabIndex = 13,
+				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+				TextOffset = new System.Drawing.Point(0, -2),
+			};
+
+			this.panel_accuracy.Controls.Add(this.btn_queueAccuracy);
+			this.panel_accuracy.Controls.Add(this.txt_accuracy);
+			this.panel_accuracy.Controls.Add(this.lbl_accuracy);
+
+			this.panel_1v1.Controls.Add(this.btn_queue1v1);
+			this.panel_1v1.Controls.Add(this.txt_1v1);
+			this.panel_1v1.Controls.Add(this.lbl_1v1);
+
+			this.panel_knockout.Controls.Add(this.btn_queueKnockout);
+			this.panel_knockout.Controls.Add(this.txt_knockout);
+			this.panel_knockout.Controls.Add(this.lbl_knockout);
+
+			this.btn_queueAccuracy.Click += btn_queueAccuracy_Click;
+			this.btn_queue1v1.Click += btn_queue1v1_Click;
+			this.btn_queueKnockout.Click += btn_queueKnockout_Click;
+
+			this.panel_main.Controls.Add(this.panel_knockout);
+			this.panel_main.Controls.Add(this.panel_1v1);
+			this.panel_main.Controls.Add(this.panel_accuracy);
 		}
 
 		private void configFriendsPanel()
@@ -314,12 +486,19 @@ namespace client_app
 
         private Panel panel_friendList;
         private PictureBox seperator;
-        private PictureBox pic_play;
         private Label lbl_friendsLabel;
-		private Panel panel_accuracy;
-		private Label lbl_accuracy;
-		private PictureBox accuracy_seperator;
-		private Button btn_queueAccuracy;
+		private Guna.UI2.WinForms.Guna2GradientPanel panel_accuracy;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
+		private Guna.UI2.WinForms.Guna2TextBox txt_accuracy;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_queueAccuracy;
+		private Guna.UI2.WinForms.Guna2GradientPanel panel_1v1;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_queue1v1;
+		private Guna.UI2.WinForms.Guna2TextBox txt_1v1;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_1v1;
+		private Guna.UI2.WinForms.Guna2GradientPanel panel_knockout;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_queueKnockout;
+		private Guna.UI2.WinForms.Guna2TextBox txt_knockout;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_knockout;
 
 		#endregion
 

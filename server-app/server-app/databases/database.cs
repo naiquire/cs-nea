@@ -220,7 +220,7 @@ namespace server_app.databases
 				return false;
 			}
 
-				List<friendData> friendData = [];
+			List<friendData> friendData = [];
 			if (loadFriends(userID, out List<string> friends))
 			{
 				foreach (var friend in friends)
@@ -348,8 +348,38 @@ namespace server_app.databases
 				return false;
 			}
 
+			friendData.userID = userID;
 			friendData.online = connections.connection.map.ContainsKey(userID);
 			return true;
+		}
+		public static bool loadInvites(string userID, out List<string> senderIDs)
+		{
+			senderIDs = [];
+			string query = @"SELECT senderID
+				FROM friendInvites
+				WHERE userID = @userID";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					var reader = command.ExecuteReader();
+					while (reader.Read())
+					{
+						string sender = reader.GetString(0);
+						senderIDs.Add(sender);
+					}
+				}
+				connection.Close();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				outputException(ex);
+				connection.Close();
+				return false;
+			}
 		}
 		public static bool updateStatistics(string userID, char letter, double accuracy, TimeSpan time, int total)
 		{

@@ -50,24 +50,30 @@ namespace client_app
             {
                 main.Invoke(new Action(() => { main.clientConnected(userData); }));
             });
+            connection.On<List<string>>("receiveInvites", (invites) =>
+            {
+                main.Invoke(new Action(() => { main.handleInvites(invites); }));
+            });
 
             connection.On<string, string, List<friendData>>("receiveJoinConfirm", (gameID, type, users) =>
             {
                 game.gameID = gameID;
                 game.type = type;
-                game.users = users;
-
-				MethodInfo methodInfo = typeof(main).GetMethod($"join_{game.type}") ?? throw new Exception($"GameID <{game.type}> could not be found");
-				methodInfo.Invoke(methodInfo, null);
 			});
+            connection.On<List<friendData>>("updateUsers", (datas) =>
+            {
+                game.users = datas;
+            });
             connection.On<string>("startGame", (aaa) =>
             {
+                // no work
                 MethodInfo methodInfo = typeof(main).GetMethod($"start_{game.type}") ?? throw new Exception($"GameID <{game.type}> could not be found");
                 methodInfo.Invoke(methodInfo, null);
             });
 
             connection.On<char>("receiveLetter", (letter) =>
             {
+                // no work either
                 MethodInfo methodInfo = typeof(main).GetMethod($"round_{game.type}") ?? throw new Exception($"GameID <{game.type}> could not be found");
                 methodInfo.Invoke(methodInfo, new object[letter]);
             });

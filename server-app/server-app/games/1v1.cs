@@ -6,7 +6,7 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-	public class _1v1(string userID, IHubContext<connection> context) : abstractGame(context, "1v1", userID, 2), IPlayable
+	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "1v1", userID, 2), IPlayable
 	{
 		private const int rounds = 10;
 		private Dictionary<string, double> scores = [];

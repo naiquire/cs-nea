@@ -14,106 +14,17 @@ namespace client_app.menus
 		protected Panel panel_topLeft;
 		public Panel panel_main;
 		public Panel panel_right;
-		private Panel panel_char;
-		private TextBox lbl_letter;
-		private TextBox lbl_total;
-		private TextBox lbl_time;
-		private TextBox lbl_percentage;
-		private Panel bar_base;
-		private Panel panel_fill;
 		protected Button btn_home;
 
 		public void tempInitializeComponent()
 		{
-			this.panel_char = new System.Windows.Forms.Panel();
-			this.panel_fill = new System.Windows.Forms.Panel();
-			this.bar_base = new System.Windows.Forms.Panel();
-			this.lbl_percentage = new System.Windows.Forms.TextBox();
-			this.lbl_time = new System.Windows.Forms.TextBox();
-			this.lbl_total = new System.Windows.Forms.TextBox();
-			this.lbl_letter = new System.Windows.Forms.TextBox();
-			this.panel_char.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// panel_char
-			// 
-			this.panel_char.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.panel_char.Controls.Add(this.panel_fill);
-			this.panel_char.Controls.Add(this.bar_base);
-			this.panel_char.Controls.Add(this.lbl_percentage);
-			this.panel_char.Controls.Add(this.lbl_time);
-			this.panel_char.Controls.Add(this.lbl_total);
-			this.panel_char.Controls.Add(this.lbl_letter);
-			this.panel_char.Location = new System.Drawing.Point(159, 138);
-			this.panel_char.Name = "panel_char";
-			this.panel_char.Size = new System.Drawing.Size(800, 50);
-			this.panel_char.TabIndex = 0;
-			// 
-			// panel_fill
-			// 
-			this.panel_fill.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.panel_fill.Location = new System.Drawing.Point(50, 10);
-			this.panel_fill.Name = "panel_fill";
-			this.panel_fill.Size = new System.Drawing.Size(283, 30);
-			this.panel_fill.TabIndex = 5;
-			// 
-			// bar_base
-			// 
-			this.bar_base.BackColor = System.Drawing.SystemColors.ControlLight;
-			this.bar_base.Location = new System.Drawing.Point(50, 10);
-			this.bar_base.Name = "bar_base";
-			this.bar_base.Size = new System.Drawing.Size(530, 30);
-			this.bar_base.TabIndex = 4;
-			// 
-			// lbl_percentage
-			// 
-			this.lbl_percentage.Location = new System.Drawing.Point(585, 5);
-			this.lbl_percentage.Multiline = true;
-			this.lbl_percentage.Name = "lbl_percentage";
-			this.lbl_percentage.ReadOnly = true;
-			this.lbl_percentage.Size = new System.Drawing.Size(40, 40);
-			this.lbl_percentage.TabIndex = 3;
-			this.lbl_percentage.Text = "97%";
-			// 
-			// lbl_time
-			// 
-			this.lbl_time.Location = new System.Drawing.Point(630, 5);
-			this.lbl_time.Multiline = true;
-			this.lbl_time.Name = "lbl_time";
-			this.lbl_time.ReadOnly = true;
-			this.lbl_time.Size = new System.Drawing.Size(80, 40);
-			this.lbl_time.TabIndex = 2;
-			this.lbl_time.Text = "00:00";
-			// 
-			// lbl_total
-			// 
-			this.lbl_total.Location = new System.Drawing.Point(715, 5);
-			this.lbl_total.Multiline = true;
-			this.lbl_total.Name = "lbl_total";
-			this.lbl_total.ReadOnly = true;
-			this.lbl_total.Size = new System.Drawing.Size(80, 40);
-			this.lbl_total.TabIndex = 1;
-			this.lbl_total.Text = "total";
-			// 
-			// lbl_letter
-			// 
-			this.lbl_letter.Location = new System.Drawing.Point(5, 5);
-			this.lbl_letter.Multiline = true;
-			this.lbl_letter.Name = "lbl_letter";
-			this.lbl_letter.ReadOnly = true;
-			this.lbl_letter.Size = new System.Drawing.Size(40, 40);
-			this.lbl_letter.TabIndex = 0;
-			this.lbl_letter.Text = "char";
 			// 
 			// abstractMenu
 			// 
-			this.ClientSize = new System.Drawing.Size(1119, 504);
-			this.Controls.Add(this.panel_char);
+			this.ClientSize = new System.Drawing.Size(1119, 558);
 			this.Name = "abstractMenu";
-			this.panel_char.ResumeLayout(false);
-			this.panel_char.PerformLayout();
 			this.ResumeLayout(false);
-
 		}
 
 		public virtual void InitializeComponent()
@@ -239,7 +150,7 @@ namespace client_app.menus
 			main.panel_left.Controls.Add(main.btn_home);
 			main.btn_home.Click += main.btn_home_Click;
 		}
-		protected virtual void aInitializeComponent(main main)
+		protected virtual void InitializeComponent(main main)
 		{
 			resetLayout(main);
 
@@ -387,15 +298,6 @@ namespace client_app.menus
 		/// <param name="users"></param>
 		protected void configPanel_main_lobby(main main, List<friendData> users)
 		{
-			#region temp
-			users = main.userData.friends;
-			users.Add(new friendData()
-			{
-				userID = main.userData.userID,
-				rank = main.userData.rank,
-			});
-			#endregion
-
 			Panel panel_users = new Panel()
 			{
 				Name = "panel_users",

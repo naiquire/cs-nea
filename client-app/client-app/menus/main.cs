@@ -111,19 +111,28 @@ namespace client_app
 
 			InitializeComponent();
 		}
-
+		public void handleInvites(List<string> invites)
+		{
+			// pop up message box or something idk
+			// if yes then await create friendship
+		}
 		private async Task requestProfile(string userID)
 		{
 			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
-
 			menu.profile = new profile(this, user);
 		}
 
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)
 		{
 			accuracy.queue_accuracy(this);
-			menu.accuracy = new accuracy();
-			menu.accuracy.join_accuracy();
+		}
+		private void btn_queue1v1_Click(object sender, EventArgs e)
+		{
+			
+		}
+		private void btn_queueKnockout_Click(object sender, EventArgs e)
+		{
+			
 		}
 	}
 }

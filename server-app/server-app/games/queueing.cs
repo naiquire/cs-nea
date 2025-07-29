@@ -68,17 +68,17 @@ namespace server_app.games
                 }
             }
 
-			Type? type = Type.GetType(gameType);
-			if (type != null)
-			{
-				ConstructorInfo[] c = type.GetConstructors();
-				c[0].Invoke([userID, context]);
-				return true;
-			}
-			else
-			{
-				database.outputException($"Could not find game with type {gameType}");
-				return false;
+            switch (gameType)
+            {
+                case "accuracy":
+					return tryQueueGame(new accuracy(userID, context), userID);
+				case "versus":
+					return tryQueueGame(new versus(userID, context), userID);
+                case "knockout":
+					return tryQueueGame(new knockout(userID, context), userID);
+                default:
+					database.outputException($"Could not find game with type {gameType}");
+					return false;                
 			}
 		}
     }

@@ -14,5 +14,19 @@ namespace server_app.connections
             }
             return null;
         }
+        public async void loadInvites(string userID)
+        {
+            if (database.loadInvites(userID, out List<string> invites))
+            {
+                if (map.TryGetValue(userID, out string? connectionID))
+                {
+                    await Clients.Client(connectionID).SendAsync("receiveInvites", invites);
+                }
+                else
+                {
+                    throw new DisconnectException(userID);
+                }
+            }
+        }
     }
 }

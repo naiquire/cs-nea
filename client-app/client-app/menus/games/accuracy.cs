@@ -20,7 +20,6 @@ namespace client_app.games
 		public static async void queue_accuracy(main main)
 		{
 			accuracy.main = main;
-			return;
 			if (await main.connection.InvokeAsync<bool>("queueGame", "accuracy", main.userData.userID))
 			{
 				// show loading or something idk
@@ -47,8 +46,7 @@ namespace client_app.games
 		public void start_accuracy()
 		{
 			// load game
-			
-			InitializeComponent(); // initialiseAccuracy
+			InitializeComponent();
 		}
 
 		public static async void round_accuracy(char letter)

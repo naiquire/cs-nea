@@ -13,7 +13,7 @@ namespace server_app.games
 		public override void startGame()
 		{
 			base.startGame();
-
+			 
 			letters = generateLetters(rounds);
 			submissionPhase();
 		}
