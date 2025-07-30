@@ -54,6 +54,18 @@ namespace client_app
             {
                 main.Invoke(new Action(() => { main.handleInvites(invites); }));
             });
+            connection.On<friendData>("updateFriendData", (data) =>
+            {
+                for (int i = 0; i < main.userData.friends.Count; i++)
+                {
+                    if (main.userData.friends[i].userID == data.userID)
+                    {
+                        main.userData.friends[i] = data;
+                        return;
+                    }
+                }
+				main.userData.friends.Add(data);
+			});
 
             connection.On<string, string, List<friendData>>("receiveJoinConfirm", (gameID, type, users) =>
             {

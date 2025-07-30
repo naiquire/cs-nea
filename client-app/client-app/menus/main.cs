@@ -125,6 +125,7 @@ namespace client_app
 
 			InitializeComponent();
 		}
+
 		public async void handleInvites(List<string> invites)
 		{
 			foreach (string invite in invites)

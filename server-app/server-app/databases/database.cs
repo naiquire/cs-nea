@@ -40,14 +40,14 @@ namespace server_app.databases
 		{
 			// if exception occurs then log the message and allow the client to try again
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"\n[ERROR] {ex}\n");
+			Console.WriteLine($"[ERROR] {ex}");
 			Console.ResetColor();
 		}
 		public static void outputException(string ex)
 		{
 			// if exception occurs then log the message and allow the client to try again
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"\n[ERROR] {ex}\n");
+			Console.WriteLine($"[ERROR] {ex}");
 			Console.ResetColor();
 		}
 
@@ -351,6 +351,34 @@ namespace server_app.databases
 			friendData.userID = userID;
 			friendData.online = connections.connection.map.ContainsKey(userID);
 			return true;
+		}
+		public static bool addFriends(string user1, string user2)
+		{
+			return true;
+		}
+		public static bool saveInvite(string userID, string senderID)
+		{
+			string query = @"INSERT INTO friendInvites
+				VALUES = (@userID, @senderID)";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					command.Parameters.AddWithValue("@senderID", senderID);
+
+					command.ExecuteNonQuery();
+				}
+				connection.Close();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				outputException(ex);
+				connection.Close();
+				return false;
+			}
 		}
 		public static bool loadInvites(string userID, out List<string> senderIDs)
 		{
