@@ -1,4 +1,5 @@
-﻿using client_app.Properties;
+﻿using client_app.menus;
+using client_app.Properties;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -49,9 +50,9 @@ namespace client_app
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        public override void InitializeComponent()
+        public void InitializeComponent()
         {
-            resetLayout(this);
+            abstractMenu.resetLayout(this);
 
 			this.panel_friendList = new System.Windows.Forms.Panel();
             this.seperator = new System.Windows.Forms.PictureBox();
@@ -111,7 +112,7 @@ namespace client_app
             configFriendsPanel();
 			configGamePanels();
 
-			configUserDataPanel(this, userData);
+			abstractMenu.configUserDataPanel(this, userData);
         }
 
 		/// <summary>
@@ -129,7 +130,7 @@ namespace client_app
 
 			// dispose all other classes
 			menu.profile = null;
-            menu.accuracy = null;
+            menu.game = null;
 
 			InitializeComponent();
 		}
@@ -500,8 +501,23 @@ namespace client_app
                 panel_friendList.Controls.Add(user);
             }
         }
+		public async void btn_close_Click(object sender, EventArgs e)
+		{
+			Hide();
+			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			Close();
+		}
 
-        private Panel panel_friendList;
+		public Panel panel_topBorder;
+		public Button btn_close;
+		public Label lbl_appName;
+		public Panel panel_left;
+		public Panel panel_topLeft;
+		public Panel panel_main;
+		public Panel panel_right;
+		public Button btn_home;
+
+		private Panel panel_friendList;
         private PictureBox seperator;
         private Label lbl_friendsLabel;
 		private Guna.UI2.WinForms.Guna2GradientPanel panel_accuracy;

@@ -1,4 +1,7 @@
-﻿using client_app.Properties;
+﻿using client_app.components;
+using client_app.menus.games;
+using client_app.Properties;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,135 +10,175 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-	public class abstractMenu : Form
+	public abstract class abstractMenu : Form // can be made static in final build, maybe rename
 	{
-		protected Panel panel_topBorder;
-		protected Button btn_close;
-		protected Label lbl_appName;
-		public Panel panel_left;
-		protected Panel panel_topLeft;
-		public Panel panel_main;
-		public Panel panel_right;
-		protected Button btn_home;
+		
+		private Guna.UI2.WinForms.Guna2TextBox lbl_timer;
+		
 
 		/// <summary>
 		/// Used to create control elements with the visual designer.
 		/// </summary>
 		public void tempInitializeComponent()
 		{
+			this.lbl_timer = new Guna.UI2.WinForms.Guna2TextBox();
+			this.SuspendLayout();
+			// 
+			// lbl_timer
+			// 
+			this.lbl_timer.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
+			this.lbl_timer.BorderRadius = 10;
+			this.lbl_timer.BorderThickness = 4;
+			this.lbl_timer.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.lbl_timer.DefaultText = "00:00.0";
+			this.lbl_timer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.lbl_timer.Font = new System.Drawing.Font("Bahnschrift SemiBold", 39.75F, System.Drawing.FontStyle.Bold);
+			this.lbl_timer.ForeColor = System.Drawing.Color.White;
+			this.lbl_timer.Location = new System.Drawing.Point(310, 900);
+			this.lbl_timer.Margin = new System.Windows.Forms.Padding(5);
+			this.lbl_timer.Multiline = true;
+			this.lbl_timer.Name = "lbl_timer";
+			this.lbl_timer.PlaceholderText = "";
+			this.lbl_timer.ReadOnly = true;
+			this.lbl_timer.SelectedText = "";
+			this.lbl_timer.Size = new System.Drawing.Size(500, 100);
+			this.lbl_timer.TabIndex = 0;
+			this.lbl_timer.TabStop = false;
+			this.lbl_timer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.lbl_timer.TextOffset = new System.Drawing.Point(0, 4);
+			// 
+			// panel_outline
+			// 
 			
+			// 
+			// lbl_letter
+			// 
+			
+			// 
+			// btn_submit
+			// 
+			
+			// 
+			// btn_clearDrawing
+			// 
+			
+			// 
+			// abstractMenu
+			// 
+
+
 		}
 
 		/// <summary>
 		/// Initialises the base UI when the client application is launched.
 		/// </summary>
-		public virtual void InitializeComponent()
+		public static void InitializeComponent(main main)
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
 
-			this.Controls.Clear();
+			main.Controls.Clear();
 
-			this.panel_topBorder = new System.Windows.Forms.Panel();
-			this.lbl_appName = new System.Windows.Forms.Label();
-			this.btn_close = new System.Windows.Forms.Button();
-			this.btn_home = new System.Windows.Forms.Button();
-			this.panel_left = new System.Windows.Forms.Panel();
-			this.panel_topLeft = new System.Windows.Forms.Panel();
-			this.panel_main = new System.Windows.Forms.Panel();
-			this.panel_right = new System.Windows.Forms.Panel();
-			this.panel_topBorder.SuspendLayout();
-			this.panel_left.SuspendLayout();
-			this.panel_main.SuspendLayout();
-			this.SuspendLayout();
+			main.panel_topBorder = new System.Windows.Forms.Panel();
+			main.lbl_appName = new System.Windows.Forms.Label();
+			main.btn_close = new System.Windows.Forms.Button();
+			main.btn_home = new System.Windows.Forms.Button();
+			main.panel_left = new System.Windows.Forms.Panel();
+			main.panel_topLeft = new System.Windows.Forms.Panel();
+			main.panel_main = new System.Windows.Forms.Panel();
+			main.panel_right = new System.Windows.Forms.Panel();
+			main.panel_topBorder.SuspendLayout();
+			main.panel_left.SuspendLayout();
+			main.panel_main.SuspendLayout();
+			main.SuspendLayout();
 			// 
 			// panel_topBorder
 			// 
-			this.panel_topBorder.BackColor = Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-			this.panel_topBorder.Controls.Add(this.lbl_appName);
-			this.panel_topBorder.Controls.Add(this.btn_close);
-			this.panel_topBorder.Location = new Point(0, 0);
-			this.panel_topBorder.Name = "panel_topBorder";
-			this.panel_topBorder.Size = new Size(1920, 30);
-			this.panel_topBorder.TabIndex = 0;
+			main.panel_topBorder.BackColor = Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+			main.panel_topBorder.Controls.Add(main.lbl_appName);
+			main.panel_topBorder.Controls.Add(main.btn_close);
+			main.panel_topBorder.Location = new Point(0, 0);
+			main.panel_topBorder.Name = "panel_topBorder";
+			main.panel_topBorder.Size = new Size(1920, 30);
+			main.panel_topBorder.TabIndex = 0;
 			// 
 			// lbl_appName
 			// 
-			this.lbl_appName.BackColor = this.panel_topBorder.BackColor;
-			this.lbl_appName.Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_appName.Location = new Point(10, 7);
-			this.lbl_appName.Name = "lbl_appName";
-			this.lbl_appName.Size = new Size(100, 16);
-			this.lbl_appName.TabIndex = 0;
-			this.lbl_appName.Text = "appName";
+			main.lbl_appName.BackColor = main.panel_topBorder.BackColor;
+			main.lbl_appName.Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+			main.lbl_appName.Location = new Point(10, 7);
+			main.lbl_appName.Name = "lbl_appName";
+			main.lbl_appName.Size = new Size(100, 16);
+			main.lbl_appName.TabIndex = 0;
+			main.lbl_appName.Text = "appName";
 			// 
 			// btn_close
 			// 
-			this.btn_close.Location = new Point(1890, 0);
-			this.btn_close.Name = "btn_close";
-			this.btn_close.Size = new Size(30, 30);
-			this.btn_close.TabIndex = 0;
-			this.btn_close.Text = "X";
-			this.btn_close.UseVisualStyleBackColor = true;
-			this.btn_close.Click += new EventHandler(this.btn_close_Click);
+			main.btn_close.Location = new Point(1890, 0);
+			main.btn_close.Name = "btn_close";
+			main.btn_close.Size = new Size(30, 30);
+			main.btn_close.TabIndex = 0;
+			main.btn_close.Text = "X";
+			main.btn_close.UseVisualStyleBackColor = true;
+			main.btn_close.Click += new EventHandler(main.btn_close_Click);
 			// 
 			// btn_home
 			// 
-			this.btn_home.Location = new Point(50, 910);
-			this.btn_home.Name = "btn_home";
-			this.btn_home.Size = new Size(200, 30);
-			this.btn_home.TabIndex = 0;
-			this.btn_home.Text = "HOME";
-			this.btn_home.UseVisualStyleBackColor = true;
+			main.btn_home.Location = new Point(50, 910);
+			main.btn_home.Name = "btn_home";
+			main.btn_home.Size = new Size(200, 30);
+			main.btn_home.TabIndex = 0;
+			main.btn_home.Text = "HOME";
+			main.btn_home.UseVisualStyleBackColor = true;
 			// 
 			// panel_left
 			// 
-			this.panel_left.AutoScroll = true;
-			this.panel_left.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			this.panel_left.Controls.Add(this.btn_home);
-			this.panel_left.Location = new Point(0, 130);
-			this.panel_left.Name = "panel_left";
-			this.panel_left.Size = new Size(300, 950);
-			this.panel_left.TabIndex = 2;
+			main.panel_left.AutoScroll = true;
+			main.panel_left.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+			main.panel_left.Controls.Add(main.btn_home);
+			main.panel_left.Location = new Point(0, 130);
+			main.panel_left.Name = "panel_left";
+			main.panel_left.Size = new Size(300, 950);
+			main.panel_left.TabIndex = 2;
 			// 
 			// panel_topLeft
 			// 
-			this.panel_topLeft.BackColor = Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-			this.panel_topLeft.Location = new Point(0, 30);
-			this.panel_topLeft.Name = "panel_topLeft";
-			this.panel_topLeft.Size = new Size(300, 100);
-			this.panel_topLeft.TabIndex = 1;
+			main.panel_topLeft.BackColor = Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+			main.panel_topLeft.Location = new Point(0, 30);
+			main.panel_topLeft.Name = "panel_topLeft";
+			main.panel_topLeft.Size = new Size(300, 100);
+			main.panel_topLeft.TabIndex = 1;
 			// 
 			// panel_main
 			// 
-			this.panel_main.BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))); ;
-			this.panel_main.Location = new Point(300, 30);
-			this.panel_main.Name = "panel_main";
-			this.panel_main.Size = new Size(1120, 1050);
-			this.panel_main.TabIndex = 4;
+			main.panel_main.BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))); ;
+			main.panel_main.Location = new Point(300, 30);
+			main.panel_main.Name = "panel_main";
+			main.panel_main.Size = new Size(1120, 1050);
+			main.panel_main.TabIndex = 4;
 			// 
 			// panel_right
 			// 
-			this.panel_right.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			this.panel_right.Location = new Point(1420, 30);
-			this.panel_right.Name = "panel_right";
-			this.panel_right.Size = new Size(500, 1050);
-			this.panel_right.TabIndex = 3;
+			main.panel_right.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+			main.panel_right.Location = new Point(1420, 30);
+			main.panel_right.Name = "panel_right";
+			main.panel_right.Size = new Size(500, 1050);
+			main.panel_right.TabIndex = 3;
 			// 
 			// abstractMenu
 			// 
-			this.BackColor = Color.White;
-			this.ClientSize = new Size(1920, 1080);
-			this.Controls.Add(this.panel_topLeft);
-			this.Controls.Add(this.panel_topBorder);
-			this.Controls.Add(this.panel_left);
-			this.Controls.Add(this.panel_main);
-			this.Controls.Add(this.panel_right);
-			this.FormBorderStyle = FormBorderStyle.None;
-			this.Name = "abstractMenu";
-			this.panel_topBorder.ResumeLayout(false);
-			this.panel_left.ResumeLayout(false);
-			this.panel_main.ResumeLayout(false);
-			this.ResumeLayout(false);
+			main.BackColor = Color.White;
+			main.ClientSize = new Size(1920, 1080);
+			main.Controls.Add(main.panel_topLeft);
+			main.Controls.Add(main.panel_topBorder);
+			main.Controls.Add(main.panel_left);
+			main.Controls.Add(main.panel_main);
+			main.Controls.Add(main.panel_right);
+			main.FormBorderStyle = FormBorderStyle.None;
+			main.Name = "abstractMenu";
+			main.panel_topBorder.ResumeLayout(false);
+			main.panel_left.ResumeLayout(false);
+			main.panel_main.ResumeLayout(false);
+			main.ResumeLayout(false);
 
 		}
 
@@ -143,7 +186,7 @@ namespace client_app.menus
 		/// Resets the current window to the base UI.
 		/// </summary>
 		/// <param name="main"></param>
-		protected void resetLayout(main main)
+		public static void resetLayout(main main)
 		{
 			main.panel_main?.Controls.Clear();
 			main.panel_left?.Controls.Clear();
@@ -155,9 +198,87 @@ namespace client_app.menus
 		}
 
 		/// <summary>
+		/// Configures the specified game panel by adding visual elements such as shapes, text, and buttons.
+		/// </summary>
+		/// <param name="panel"></param>
+		/// <returns>An <see cref="input"/> object containing the created drawing panel.</returns>
+		public static input configGamePanel(abstractGame game)
+		{
+			game.panel_outline = new Guna.UI2.WinForms.Guna2Shapes()
+			{
+				BorderColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+				BorderThickness = 10,
+				FillColor = Color.White,
+				Location = new Point(260, 250),
+				Name = "panel_outline",
+				PolygonSkip = 1,
+				Rotate = 0F,
+				Shape = Guna.UI2.WinForms.Enums.ShapeType.Rounded,
+				Size = new Size(600, 600),
+				TabIndex = 1,
+				Text = "panel_outline",
+				Zoom = 100,
+			};
+			game.lbl_letter = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				DefaultText = "K",
+				FillColor = Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new Font("Calibri", 144F),
+				ForeColor = Color.Black,
+				Location = new Point(380, 50),
+				Margin = new Padding(42, 47, 42, 47),
+				Name = "lbl_letter",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new Size(360, 150),
+				TabIndex = 2,
+				TextAlign = HorizontalAlignment.Center,
+			};
+			game.btn_submit = new Guna.UI2.WinForms.Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 49,
+				FillColor = Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor2 = Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
+				ForeColor = Color.White,
+				Location = new Point(460, 900),
+				Name = "btn_submit",
+				Size = new Size(440, 100),
+				TabIndex = 3,
+				Text = "Submit",
+			};
+			game.btn_clear = new Guna.UI2.WinForms.Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 49,
+				FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				FillColor2 = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
+				ForeColor = Color.White,
+				Location = new Point(220, 900),
+				Name = "btn_clearDrawing",
+				Size = new Size(225, 100),
+				TabIndex = 4,
+				Text = "Clear",
+			};
+
+			var input = new input(game.main.panel_main, (260, 250), (600, 600));
+
+			game.main.panel_main.Controls.Add(game.panel_outline);
+			game.main.panel_main.Controls.Add(game.lbl_letter);
+			game.main.panel_main.Controls.Add(game.btn_submit);
+			game.main.panel_main.Controls.Add(game.btn_clear);
+			return input;
+		}
+
+		/// <summary>
 		/// Configures the right panel with userData.
 		/// </summary>
-		protected void configUserDataPanel(main main, userData userData)
+		public static void configUserDataPanel(main main, userData userData)
 		{
 			Guna.UI2.WinForms.Guna2PictureBox pic_account = new Guna.UI2.WinForms.Guna2PictureBox()
 			{
@@ -226,6 +347,11 @@ namespace client_app.menus
 				TabStop = false,
 			};
 
+			btn_profile.Click += (sender, e) =>
+			{
+				menu.profile = new profile(main, userData);
+			};
+
 			main.panel_right.Controls.Add(lbl_userID);
 			main.panel_right.Controls.Add(lbl_aboutMe);
 			main.panel_right.Controls.Add(btn_profile);
@@ -240,7 +366,7 @@ namespace client_app.menus
 		/// <param name="panel"></param>
 		/// <param name="pos"></param>
 		/// <param name="user"></param>
-		public void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
+		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
 		{
 			string rank = user.rank.ToString();
 
@@ -578,7 +704,7 @@ namespace client_app.menus
 		/// </summary>
 		/// <param name="main"></param>
 		/// <param name="users"></param>
-		protected void initialiseLobby(main main, List<friendData> users)
+		public static void initialiseLobby(main main, List<friendData> users)
 		{
 			resetLayout(main);
 
@@ -603,7 +729,7 @@ namespace client_app.menus
 		/// </summary>
 		/// <param name="main"></param>
 		/// <param name="users"></param>
-		protected void configPanel_main_lobby(main main, List<friendData> users)
+		public static void configPanel_main_lobby(main main, List<friendData> users)
 		{
 			Panel panel_users = new Panel()
 			{
@@ -672,11 +798,6 @@ namespace client_app.menus
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public async void btn_close_Click(object sender, EventArgs e)
-		{
-			Hide();
-			//await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
-			Close();
-		}
+
 	}
 }

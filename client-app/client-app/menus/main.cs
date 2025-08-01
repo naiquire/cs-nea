@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using client_app.components;
 using client_app.games;
 using client_app.menus;
+using client_app.menus.games;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace client_app
@@ -43,10 +47,10 @@ namespace client_app
 		public static main main;
 		public static profile profile;
 
-		public static accuracy accuracy;
+		public static IPlayable game;
 	}
 
-	public partial class main : abstractMenu
+	public partial class main : Form
 	{
 		public static HubConnection connection;
 		public static userData userData;
@@ -80,7 +84,7 @@ namespace client_app
 			#endregion
 
 			localisation = languages.localisation;
-			base.InitializeComponent();
+			abstractMenu.InitializeComponent(this);
 			initialiseConnection(userID);
 			//InitializeComponent(); // temp
 
@@ -137,7 +141,7 @@ namespace client_app
 				}
 			}
 		}
-		private async Task requestProfile(string userID)
+		public async Task requestProfile(string userID)
 		{
 			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 			menu.profile = new profile(this, user);
@@ -145,8 +149,8 @@ namespace client_app
 
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)
 		{
-			new confirm("kill yourself?");
-			accuracy.queue_accuracy(this);
+			menu.game = new accuracy();
+			menu.game.queueGame(this);
 		}
 		private void btn_queue1v1_Click(object sender, EventArgs e)
 		{

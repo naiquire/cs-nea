@@ -173,7 +173,21 @@ namespace server_app.games
 			{
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("startGame", userIDs);
+					await hubContext.Clients.Client(connectionID).SendAsync("awaitingStartGame");
+				}
+				else
+				{
+					throw new DisconnectException(userID);
+				}
+			}
+
+			Thread.Sleep(5000); // 5 sec countdown
+
+			foreach (string userID in userIDs)
+			{
+				if (connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("startGame");
 				}
 				else
 				{

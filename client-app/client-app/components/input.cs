@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -6,7 +7,7 @@ namespace client_app.components
 {
     public class input : Form
     {
-        private readonly Panel main;
+        private readonly Panel panel;
 
         private Panel panel_input;
         private Bitmap drawing;
@@ -14,11 +15,10 @@ namespace client_app.components
         private bool draw = false;
         private (int x, int y) pos;
 
-        public input(Panel main, (int, int) pos, (int, int) size)
+        public input(Panel panel, (int, int) pos, (int, int) size)
         {
-            this.main = main;
+            this.panel = panel;
             loadPanel(pos, size);
-            enablePanel();
         }
 
         /// <summary>
@@ -61,9 +61,8 @@ namespace client_app.components
                 Name = "panel_input",
             };
 
-            main.Controls.Add(panel_input);
+            panel.Controls.Add(panel_input);
         }
-
 
         /// <summary>
         /// Handles the <see cref="Control.MouseDown"></see> event for the drawing panel./>
