@@ -44,7 +44,9 @@ namespace client_app
 					break;
 				case 1:
 					// login user
+					Hide();
 					new main(userID).Show();
+					Close();
 					break;
 				case 2:
 					// account does not exist
@@ -64,7 +66,9 @@ namespace client_app
 			{
 				case 1:
 					// login user
+					Hide();
 					new main(userID).Show();
+					Close();
 					break;
 				case 0:
 					// userID already exists

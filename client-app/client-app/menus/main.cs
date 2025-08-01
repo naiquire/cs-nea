@@ -74,9 +74,31 @@ namespace client_app
 			/// 
 
 			#region temp
-			userData.userID = userID;
-			userData.rank = 1200;
-			userData.localisation = "en";
+			//userData.userID = userID;
+			//userData.rank = 1200;
+			//userData.localisation = "en";
+			#endregion
+
+			localisation = languages.localisation;
+			base.InitializeComponent();
+			initialiseConnection(userID);
+			//InitializeComponent(); // temp
+
+			
+
+		}
+		private async void initialiseConnection(string userID)
+		{
+			connection = hub_connection.configConnection(address + "/connections");
+			connection = hub_connection.addHandles(connection);
+			connection = await hub_connection.startConnection(connection);
+
+			await connection.InvokeAsync("clientConnected", userID);
+		}
+		public void clientConnected(userData userData)
+		{
+			main.userData = userData;
+
 			main.userData.friends = new List<friendData>()
 			{
 				new friendData()
@@ -101,27 +123,6 @@ namespace client_app
 				{'B', (0.24, TimeSpan.Parse("00:00:03.17"), 89) },
 				{'C', (0.94, TimeSpan.Parse("00:00:04.95"), 62) },
 			};
-			#endregion
-
-			localisation = languages.localisation;
-			base.InitializeComponent();
-			//initialiseConnection(userID);
-			InitializeComponent(); // temp
-
-		}
-		private async void initialiseConnection(string userID)
-		{
-			connection = hub_connection.configConnection(address + "/connections");
-			connection = hub_connection.addHandles(connection);
-			connection = await hub_connection.startConnection(connection);
-
-			await connection.InvokeAsync("clientConnected", userID);
-		}
-		public void clientConnected(userData userData)
-		{
-			main.userData = userData;
-
-			
 
 			InitializeComponent();
 		}
@@ -144,6 +145,7 @@ namespace client_app
 
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)
 		{
+			new confirm("kill yourself?");
 			accuracy.queue_accuracy(this);
 		}
 		private void btn_queue1v1_Click(object sender, EventArgs e)

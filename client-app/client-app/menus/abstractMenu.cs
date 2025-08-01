@@ -1,10 +1,9 @@
 ﻿using client_app.Properties;
-using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Resources;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace client_app.menus
 {
@@ -17,40 +16,20 @@ namespace client_app.menus
 		protected Panel panel_topLeft;
 		public Panel panel_main;
 		public Panel panel_right;
-		private Guna.UI2.WinForms.Guna2TextBox header;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_accept;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_cancel;
 		protected Button btn_home;
 
-		public void InitializeComponent()
+		/// <summary>
+		/// Used to create control elements with the visual designer.
+		/// </summary>
+		public void tempInitializeComponent()
 		{
-			this.header = new Guna.UI2.WinForms.Guna2TextBox();
-			this.btn_accept = new Guna.UI2.WinForms.Guna2GradientButton();
-			this.btn_cancel = new Guna.UI2.WinForms.Guna2GradientButton();
-			this.SuspendLayout();
-			// 
-			// header
-			// 
 			
-			// 
-			// btn_accept
-			// 
-			
-			// 
-			// btn_cancel
-			// 
-			
-			// 
-			// abstractMenu
-			// 
-			
-
 		}
 
 		/// <summary>
 		/// Initialises the base UI when the client application is launched.
 		/// </summary>
-		public virtual void aInitializeComponent()
+		public virtual void InitializeComponent()
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
 
@@ -157,6 +136,7 @@ namespace client_app.menus
 			this.panel_left.ResumeLayout(false);
 			this.panel_main.ResumeLayout(false);
 			this.ResumeLayout(false);
+
 		}
 
 		/// <summary>
@@ -179,7 +159,418 @@ namespace client_app.menus
 		/// </summary>
 		protected void configUserDataPanel(main main, userData userData)
 		{
-			//throw new NotImplementedException();
+			Guna.UI2.WinForms.Guna2PictureBox pic_account = new Guna.UI2.WinForms.Guna2PictureBox()
+			{
+				Image = global::client_app.Properties.Resources.account,
+				ImageRotate = 0F,
+				Location = new System.Drawing.Point(150, 50),
+				Name = "pic_account",
+				Size = new System.Drawing.Size(200, 200),
+				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				TabIndex = 0,
+				TabStop = false
+			};
+			Guna.UI2.WinForms.Guna2GradientButton btn_profile = new Guna.UI2.WinForms.Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 24,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
+				Location = new System.Drawing.Point(140, 960),
+				Name = "btn_profile",
+				Size = new System.Drawing.Size(220, 50),
+				TabIndex = 3,
+				Text = "Profile",
+			};
+			Guna.UI2.WinForms.Guna2TextBox lbl_userID = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.IBeam,
+				DefaultText = userData.userID,
+				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
+				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(40, 265),
+				Margin = new System.Windows.Forms.Padding(6),
+				Name = "lbl_userID",
+				PlaceholderForeColor = System.Drawing.Color.Transparent,
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(420, 50),
+				TabIndex = 13,
+				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+			};
+			Guna.UI2.WinForms.Guna2TextBox lbl_aboutMe = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				BorderRadius = 10,
+				BorderThickness = 4,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = userData.aboutMe,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(40, 330),
+				Margin = new System.Windows.Forms.Padding(5, 5, 5, 5),
+				Multiline = true,
+				Name = "header",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(420, 200),
+				TabIndex = 0,
+				TabStop = false,
+			};
+
+			main.panel_right.Controls.Add(lbl_userID);
+			main.panel_right.Controls.Add(lbl_aboutMe);
+			main.panel_right.Controls.Add(btn_profile);
+			main.panel_right.Controls.Add(pic_account);
+
+			configStatsPanel(main.panel_right, (40, 570), userData);
+		}
+
+		/// <summary>
+		/// Configures the panel containing summary statistics for a user at a given position in a Panel.
+		/// </summary>
+		/// <param name="panel"></param>
+		/// <param name="pos"></param>
+		/// <param name="user"></param>
+		public void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
+		{
+			string rank = user.rank.ToString();
+
+			int sum = 0;
+			foreach (var letter in user.statistics.Keys)
+			{
+				sum += user.statistics[letter].total;
+			}
+			string total = sum.ToString();
+
+			double mean = 0;
+			foreach (var letter in user.statistics.Keys)
+			{
+				mean += user.statistics[letter].accuracy;
+			}
+			mean /= user.statistics.Count;
+			string accuracy = ((int)(100 * mean)).ToString();
+
+			Guna.UI2.WinForms.Guna2Panel panel_statsOverview = new Guna.UI2.WinForms.Guna2Panel()
+			{
+				BorderRadius = 20,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				Location = new System.Drawing.Point(pos.X, pos.Y),
+				Name = "panel_statsOverview",
+				Size = new System.Drawing.Size(420, 230),
+				TabIndex = 0,
+			};
+			Guna.UI2.WinForms.Guna2Panel panel_rank = new Guna.UI2.WinForms.Guna2Panel()
+			{
+
+				BackColor = System.Drawing.Color.Transparent,
+				BorderRadius = 20,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Location = new System.Drawing.Point(20, 20),
+				Name = "panel_rank",
+				Size = new System.Drawing.Size(380, 50),
+				TabIndex = 0,
+			};
+			Guna.UI2.WinForms.Guna2Shapes circle_total = new Guna.UI2.WinForms.Guna2Shapes()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderColor = System.Drawing.Color.White,
+				BorderThickness = 5,
+				FillColor = System.Drawing.Color.Transparent,
+				Location = new System.Drawing.Point(31, 80),
+				Name = "circle_total",
+				PolygonSides = 3,
+				PolygonSkip = 1,
+				Rotate = 9F,
+				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
+				Size = new System.Drawing.Size(70, 70),
+				TabIndex = 1,
+				UseTransparentBackground = true,
+				Zoom = 80,
+			};
+			Guna.UI2.WinForms.Guna2Shapes line_stats = new Guna.UI2.WinForms.Guna2Shapes()
+			{
+				BorderThickness = 0,
+				FillColor = System.Drawing.Color.White,
+				LineThickness = 1,
+				Location = new System.Drawing.Point(63, 0),
+				Name = "line_stats",
+				PolygonSkip = 1,
+				Rotate = 0F,
+				Shape = Guna.UI2.WinForms.Enums.ShapeType.Rectangle,
+				Size = new System.Drawing.Size(5, 230),
+				TabIndex = 2,
+				Text = "guna2Shapes2",
+				Zoom = 100,
+			};
+			Guna.UI2.WinForms.Guna2Shapes circle_rank = new Guna.UI2.WinForms.Guna2Shapes()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderColor = System.Drawing.Color.White,
+				BorderThickness = 5,
+				FillColor = System.Drawing.Color.Transparent,
+				Location = new System.Drawing.Point(31, 10),
+				Name = "circle_rank",
+				PolygonSides = 3,
+				PolygonSkip = 1,
+				Rotate = 9F,
+				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
+				Size = new System.Drawing.Size(70, 70),
+				TabIndex = 3,
+				Text = "guna2Shapes3",
+				UseTransparentBackground = true,
+				Zoom = 80,
+			};
+			Guna.UI2.WinForms.Guna2Panel panel_total = new Guna.UI2.WinForms.Guna2Panel()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderRadius = 20,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Location = new System.Drawing.Point(20, 90),
+				Name = "panel_total",
+				Size = new System.Drawing.Size(380, 50),
+				TabIndex = 2,
+			};
+			Guna.UI2.WinForms.Guna2PictureBox pic_rank = new Guna.UI2.WinForms.Guna2PictureBox()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				FillColor = System.Drawing.Color.Transparent,
+				Image = global::client_app.Properties.Resources.rank,
+				ImageRotate = 0F,
+				Location = new System.Drawing.Point(30, 10),
+				Name = "pic_rank",
+				Size = new System.Drawing.Size(30, 30),
+				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				TabIndex = 4,
+				TabStop = false,
+				UseTransparentBackground = true,
+			};
+			Guna.UI2.WinForms.Guna2PictureBox pic_total = new Guna.UI2.WinForms.Guna2PictureBox()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				FillColor = System.Drawing.Color.Transparent,
+				Image = global::client_app.Properties.Resources.total,
+				ImageRotate = 0F,
+				Location = new System.Drawing.Point(30, 10),
+				Name = "pic_total",
+				Size = new System.Drawing.Size(30, 30),
+				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				TabIndex = 5,
+				TabStop = false,
+				UseTransparentBackground = true,
+			};
+			Guna.UI2.WinForms.Guna2TextBox lbl_rank = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = "ELO",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+				Location = new System.Drawing.Point(90, 10),
+				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				Name = "lbl_rank",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(48, 30),
+				TabIndex = 5,
+			};
+			Guna.UI2.WinForms.Guna2TextBox lbl_total = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = "TOTAL",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+				Location = new System.Drawing.Point(90, 10),
+				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				Name = "lbl_total",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(62, 30),
+				TabIndex = 6,
+			};
+			Guna.UI2.WinForms.Guna2TextBox txt_rank = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = rank,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
+				Location = new System.Drawing.Point(300, 10),
+				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				Name = "txt_rank",
+				PlaceholderText = "",
+				ReadOnly = true,
+				RightToLeft = System.Windows.Forms.RightToLeft.Yes,
+				SelectedText = "",
+				Size = new System.Drawing.Size(60, 30),
+				TabIndex = 6,
+				TextOffset = new System.Drawing.Point(0, -1),
+			};
+			Guna.UI2.WinForms.Guna2TextBox txt_total = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = total,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
+				Location = new System.Drawing.Point(300, 10),
+				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				Name = "txt_total",
+				PlaceholderText = "",
+				ReadOnly = true,
+				RightToLeft = System.Windows.Forms.RightToLeft.Yes,
+				SelectedText = "",
+				Size = new System.Drawing.Size(60, 30),
+				TabIndex = 7,
+				TextOffset = new System.Drawing.Point(0, -1),
+			};
+			Guna.UI2.WinForms.Guna2Separator seperator_rank = new Guna.UI2.WinForms.Guna2Separator()
+			{
+
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillThickness = 2,
+				Location = new System.Drawing.Point(144, 20),
+				Name = "seperator_rank",
+				Size = new System.Drawing.Size(150, 10),
+				TabIndex = 7,
+			};
+			Guna.UI2.WinForms.Guna2Separator seperator_total = new Guna.UI2.WinForms.Guna2Separator()
+			{
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillThickness = 2,
+				Location = new System.Drawing.Point(158, 20),
+				Name = "seperator_total",
+				Size = new System.Drawing.Size(136, 10),
+				TabIndex = 8,
+			};
+			Guna.UI2.WinForms.Guna2Panel panel_accuracy = new Guna.UI2.WinForms.Guna2Panel()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderRadius = 20,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Location = new System.Drawing.Point(20, 160),
+				Name = "panel_accuracy",
+				Size = new System.Drawing.Size(380, 50),
+				TabIndex = 9,
+			};
+			Guna.UI2.WinForms.Guna2Separator seperator_accuracy = new Guna.UI2.WinForms.Guna2Separator()
+			{
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillThickness = 2,
+				Location = new System.Drawing.Point(189, 20),
+				Name = "seperator_accuracy",
+				Size = new System.Drawing.Size(96, 10),
+				TabIndex = 8,
+			};
+			Guna.UI2.WinForms.Guna2TextBox txt_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = $"{accuracy}%",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255))))),
+				Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
+				Location = new System.Drawing.Point(291, 10),
+				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				Name = "txt_accuracy",
+				PlaceholderText = "",
+				ReadOnly = true,
+				RightToLeft = System.Windows.Forms.RightToLeft.Yes,
+				SelectedText = "",
+				Size = new System.Drawing.Size(69, 30),
+				TabIndex = 7,
+				TextOffset = new System.Drawing.Point(0, -1),
+			};
+			Guna.UI2.WinForms.Guna2TextBox lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+
+				BorderThickness = 0,
+				Cursor = System.Windows.Forms.Cursors.Arrow,
+				DefaultText = "ACCURACY",
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+				Location = new System.Drawing.Point(90, 10),
+				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				Name = "lbl_accuracy",
+				PlaceholderText = "",
+				ReadOnly = true,
+				SelectedText = "",
+				Size = new System.Drawing.Size(93, 30),
+				TabIndex = 6,
+			};
+			Guna.UI2.WinForms.Guna2PictureBox pic_accuracy = new Guna.UI2.WinForms.Guna2PictureBox()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				FillColor = System.Drawing.Color.Transparent,
+				Image = global::client_app.Properties.Resources.accuracy,
+				ImageRotate = 0F,
+				Location = new System.Drawing.Point(27, 7),
+				Name = "pic_accuracy",
+				Size = new System.Drawing.Size(36, 36),
+				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				TabIndex = 5,
+				TabStop = false,
+				UseTransparentBackground = true,
+			};
+			Guna.UI2.WinForms.Guna2Shapes circle_accuracy = new Guna.UI2.WinForms.Guna2Shapes()
+			{
+				BackColor = System.Drawing.Color.Transparent,
+				BorderColor = System.Drawing.Color.White,
+				BorderThickness = 5,
+				FillColor = System.Drawing.Color.Transparent,
+				Location = new System.Drawing.Point(30, 150),
+				Name = "circle_accuracy",
+				PolygonSides = 3,
+				PolygonSkip = 1,
+				Rotate = 9F,
+				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
+				Size = new System.Drawing.Size(70, 70),
+				TabIndex = 10,
+				UseTransparentBackground = true,
+				Zoom = 80,
+			};
+
+			panel_rank.Controls.Add(seperator_rank);
+			panel_rank.Controls.Add(txt_rank);
+			panel_rank.Controls.Add(lbl_rank);
+			panel_rank.Controls.Add(pic_rank);
+
+			panel_total.Controls.Add(seperator_total);
+			panel_total.Controls.Add(txt_total);
+			panel_total.Controls.Add(lbl_total);
+			panel_total.Controls.Add(pic_total);
+
+			panel_accuracy.Controls.Add(seperator_accuracy);
+			panel_accuracy.Controls.Add(txt_accuracy);
+			panel_accuracy.Controls.Add(lbl_accuracy);
+			panel_accuracy.Controls.Add(pic_accuracy);
+
+			panel_statsOverview.Controls.Add(circle_accuracy);
+			panel_statsOverview.Controls.Add(panel_accuracy);
+			panel_statsOverview.Controls.Add(circle_rank);
+			panel_statsOverview.Controls.Add(panel_rank);
+			panel_statsOverview.Controls.Add(circle_total);
+			panel_statsOverview.Controls.Add(panel_total);
+			panel_statsOverview.Controls.Add(line_stats);
+
+			panel.Controls.Add(panel_statsOverview);
 		}
 
 		/// <summary>
@@ -284,9 +675,8 @@ namespace client_app.menus
 		public async void btn_close_Click(object sender, EventArgs e)
 		{
 			Hide();
-			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			//await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
 			Close();
 		}
-
 	}
 }

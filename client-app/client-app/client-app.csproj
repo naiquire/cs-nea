@@ -274,5 +274,14 @@
   <ItemGroup>
     <None Include="Resources\language.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\total.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\accuracy.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -68,14 +68,22 @@ namespace server_app.games
                 }
             }
 
-            switch (gameType)
+            IPlayable g;
+
+			switch (gameType)
             {
                 case "accuracy":
-					return await tryQueueGame(new accuracy(userID, context), userID);
-				case "versus":
-					return await tryQueueGame(new versus(userID, context), userID);
+                    g = new accuracy(userID, context);
+                    currentGames.Add(g);
+                    return await tryQueueGame(g, userID);
+		        case "versus":
+                    g = new versus(userID, context);
+                    currentGames.Add(g);
+                    return await tryQueueGame(g, userID);
                 case "knockout":
-					return await tryQueueGame(new knockout(userID, context), userID);
+                    g = new knockout(userID, context);
+                    currentGames.Add(g);
+                    return await tryQueueGame(g, userID);
                 default:
 					database.outputException($"Could not find game with type {gameType}");
 					return false;                

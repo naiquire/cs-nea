@@ -18,9 +18,9 @@ namespace server_app.games
 		/// <param name="letter"></param>
 		/// <param name="time"></param>
 		/// <param name="correct"></param>
-		public void update(evaluate evaluate, int letter, TimeSpan time, bool correct)
+		public void update(double accuracy, TimeSpan time, bool correct)
 		{
-			this.accuracy.Add(evaluate.activatedValues[evaluate.layerCount - 1][letter]);
+			this.accuracy.Add(accuracy);
 			this.correct.Add(correct);
 			this.time.Add(time);
 		}
@@ -243,7 +243,9 @@ namespace server_app.games
 			if (stats.TryGetValue(userID, out stats currentStats))
 			{
 				DateTime endTime = currentResponses[userID].time;
-				currentStats.update(evaluate, letter, endTime - startTime, correct);
+				double accuracy = evaluate.activatedValues[evaluate.layerCount - 1][letter];
+
+				currentStats.update(accuracy, endTime - startTime, correct);
 			}
 			stats[userID] = currentStats;
 			return correct;
