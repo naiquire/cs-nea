@@ -27,7 +27,7 @@ namespace client_app.components
         public void enablePanel()
         {
             drawing = new Bitmap(panel_input.Width, panel_input.Height, panel_input.CreateGraphics());
-            Graphics.FromImage(drawing).Clear(Color.White);
+            clearPanel();
 
             panel_input.MouseDown += panel_MouseDown;
             panel_input.MouseUp += panel_MouseUp;
@@ -44,8 +44,17 @@ namespace client_app.components
             panel_input.MouseUp -= panel_MouseUp;
             panel_input.MouseMove -= panel_MouseMove;
 
+            clearPanel();
             return drawing;
         }
+
+        /// <summary>
+        /// Clears the panel of any drawing.
+        /// </summary>
+        public void clearPanel()
+        {
+			Graphics.FromImage(drawing).Clear(Color.White);
+		}
 
 		/// <summary>
 		/// Creates and adds a new panel to the main container at the specified location and size.

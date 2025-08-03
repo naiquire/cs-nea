@@ -11,54 +11,39 @@ namespace client_app.games
 	// accuracy
 	public partial class accuracy : abstractGame, IPlayable
 	{
-
-		/// <summary>
-		/// Queues a user into the accuracy game type.
-		/// </summary>
-		/// <param name="main"></param>
-		public async void queueGame(main main)
+		public accuracy(main main) : base(main, "accuracy")
 		{
-			base.main = main;
-			if (await main.connection.InvokeAsync<bool>("queueGame", "accuracy", main.userData.userID))
-			{
-				// show loading or something idk
-			}
-			else
-			{
-				// queueing failed
-			}
-		   
+			
 		}
 
-		/// <summary>
-		/// Runs after a user has successfully queued into a game.
-		/// </summary>
-		public void joinGame()
+		public override void queueGame()
 		{
-			// lobby
-			abstractMenu.initialiseLobby(main, game.users);
+			base.queueGame();
 		}
 
-		public void awaitStart_accuracy()
+		public async override Task joinGame()
+		{
+			await base.joinGame();
+		}
+
+		public override void awaitStart()
 		{
 
 		}
 
-		/// <summary>
-		/// Runs after the server starts the game, and loads the game menu.
-		/// </summary>
-		public void startGame()
+		public override void startGame()
 		{
-			// load game
-			InitializeComponent();
+
 		}
 
-		public static async void round_accuracy(char letter)
+		public override void submissionPhase(char letter)
 		{
-			// load input class and return the array drawn
-			double[] input = null;
 
-			await main.connection.InvokeAsync("receiveSubmission", "accuracy", main.userData.userID, input); // likely incorrect
+		}
+
+		public override void evaluationPhase()
+		{
+
 		}
 	}
 }

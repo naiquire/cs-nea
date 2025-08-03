@@ -7,7 +7,7 @@ namespace server_app.connections
 {
 	public partial class @connection : Hub
 	{
-		public async Task<bool> queueGame(string gameType, string userID)
+		public async Task<string> queueGame(string gameType, string userID)
 		{
 			if (Program.hubContext != null)
 			{
@@ -18,6 +18,10 @@ namespace server_app.connections
 				database.outputException("IHubContext was null when attempting to queue a user");
 				throw new Exception("[FATAL] IHubContext was null when attempting to queue a user");
 			}
+		}
+		public void checkStart(string gameID)
+		{
+			queueing.checkGameStart(gameID);
 		}
 	}
 }

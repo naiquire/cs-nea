@@ -20,15 +20,24 @@ namespace server_app.games
             if (game.getPlayerCount() < game.getMaxPlayers() && !game.hasStarted())
             {
                 await game.queueUser(userID);
-                if (game.getPlayerCount() == game.getMaxPlayers())
-                {
-                    // async method
-                    game.startGame();
-                }
-                return true;
+				return true;
             }
             return false;
         }
+
+        public static void checkGameStart(string gameID)
+        {
+			foreach (IPlayable game in queueing.currentGames)
+			{
+				if (game.getGameID() == gameID)
+				{
+					if (game.getPlayerCount() == game.getMaxPlayers())
+					{
+						game.startGame();
+					}
+				}
+			}
+		}
 
         /// <summary>
         /// Sends the user's submission to the associated game class
@@ -55,7 +64,7 @@ namespace server_app.games
         /// <param name="userID"></param>
         /// <param name="context"></param>
         /// <returns><see langword="true"/> if the user was successfully queued; otherwise <see langword="false"/></returns>
-        public static async Task<bool> queueGame(string gameType, string userID, IHubContext<connection> context)
+        public static async Task<string> queueGame(string gameType, string userID, IHubContext<connection> context)
         {
             foreach (IPlayable game in currentGames)
             {
@@ -63,7 +72,7 @@ namespace server_app.games
                 {
                     if (await tryQueueGame(game, userID))
                     {
-                        return true;
+                        return game.getGameID();
                     }
                 }
             }
@@ -75,18 +84,21 @@ namespace server_app.games
                 case "accuracy":
                     g = new accuracy(userID, context);
                     currentGames.Add(g);
-                    return await tryQueueGame(g, userID);
+                    await tryQueueGame(g, userID);
+                    return g.getGameID();
 		        case "versus":
                     g = new versus(userID, context);
                     currentGames.Add(g);
-                    return await tryQueueGame(g, userID);
-                case "knockout":
+					await tryQueueGame(g, userID);
+					return g.getGameID();
+				case "knockout":
                     g = new knockout(userID, context);
                     currentGames.Add(g);
-                    return await tryQueueGame(g, userID);
+                    await tryQueueGame(g, userID);
+                    return g.getGameID();
                 default:
 					database.outputException($"Could not find game with type {gameType}");
-					return false;                
+					return "";                
 			}
 		}
     }

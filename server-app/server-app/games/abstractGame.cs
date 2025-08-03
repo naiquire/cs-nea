@@ -7,6 +7,13 @@ namespace server_app.games
 {
 	public struct @stats
 	{
+		public @stats()
+		{
+			correct = [];
+			accuracy = [];
+			time = [];
+		}
+
 		public List<bool> correct;
 		public List<double> accuracy;
 		public List<TimeSpan> time;
@@ -102,12 +109,13 @@ namespace server_app.games
 		{
 			if (database.loadFriendData(userID, out friendData data))
 			{
+				userIDs.Add(userID);
 				userDatas.Add(data);
 			}
 
 			if (connection.map.TryGetValue(userID, out string? connectionID))
 			{
-				await hubContext.Clients.Client(connectionID).SendAsync("receiveJoinConfirm", gameID, getType());
+				await hubContext.Clients.Client(connectionID).SendAsync("receiveJoinConfirm", gameID);
 			}
 			else
 			{
@@ -173,7 +181,7 @@ namespace server_app.games
 			{
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("awaitingStartGame");
+					await hubContext.Clients.Client(connectionID).SendAsync("awaitStart");
 				}
 				else
 				{
@@ -274,9 +282,13 @@ namespace server_app.games
 		/// <exception cref="DisconnectException"></exception>
 		protected async Task sendResult(string userID, stats stats)
 		{
+			bool correct = stats.correct[^1];
+			double accuracy = stats.accuracy[^1];
+			TimeSpan time = stats.time[^1];
+
 			if (connection.map.TryGetValue(userID, out string? connectionID))
 			{
-				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", stats);
+				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
 			}
 			else
 			{
@@ -289,9 +301,9 @@ namespace server_app.games
 		/// </summary>
 		/// <returns></returns>
 		/// <exception cref="DisconnectException"></exception>
-		public virtual async void endGame()
+		public virtual async void endGame() // possibly a faster way to implement this
 		{
-			async Task update(string userID)
+			foreach (string userID in userIDs)
 			{
 				for (int i = 0; i < letters.Count; i++)
 				{
@@ -328,20 +340,6 @@ namespace server_app.games
 					}
 				}
 			}
-
-			foreach (string userID in userIDs)
-			{
-				await update(userID);
-
-				if (connection.map.TryGetValue(userID, out string? connectionID))
-				{
-					await hubContext.Clients.Client(connectionID).SendAsync("receiveCurrentStatistics", stats);
-				}
-				else
-				{
-					throw new DisconnectException(userID);
-				}
-			}
 		}
 
 		/// <summary>
@@ -349,6 +347,7 @@ namespace server_app.games
 		/// </summary>
 		/// <returns></returns>
 		public string getType() => type;
+
 		/// <summary>
 		/// Gets the ID of the game.
 		/// </summary>

@@ -36,12 +36,6 @@ namespace client_app
 		public int rank { get; set; }
 		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
 	}
-	public struct game
-	{
-		public static string gameID;
-		public static string type;
-		public static List<friendData> users;
-	}
 	public struct menu
 	{
 		public static main main;
@@ -149,8 +143,8 @@ namespace client_app
 
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)
 		{
-			menu.game = new accuracy();
-			menu.game.queueGame(this);
+			menu.game = new accuracy(this);
+			menu.game.queueGame();
 		}
 		private void btn_queue1v1_Click(object sender, EventArgs e)
 		{

@@ -84,6 +84,10 @@ namespace server_app.games
 			{
 				submissionPhase();
 			}
+			else
+			{
+				endGame();
+			}
 		}
 		public async override void endGame()
 		{

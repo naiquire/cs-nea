@@ -26,7 +26,7 @@ namespace client_app
         private async void initialiseConnection()
         {
             connection = hub_connection.configConnection(main.address + "/accounts");
-            connection = hub_connection.addHandles(connection);
+            connection = hub_connection.addLoginHandles(connection);
             connection = await hub_connection.startConnection(connection);
 
             this.lbl_connection.Text = "Connected";
@@ -46,7 +46,7 @@ namespace client_app
 					// login user
 					Hide();
 					new main(userID).Show();
-					Close();
+					//Close();
 					break;
 				case 2:
 					// account does not exist
@@ -68,7 +68,7 @@ namespace client_app
 					// login user
 					Hide();
 					new main(userID).Show();
-					Close();
+					//Close();
 					break;
 				case 0:
 					// userID already exists

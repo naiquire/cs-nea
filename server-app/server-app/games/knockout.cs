@@ -80,7 +80,11 @@ namespace server_app.games
             {
                 submissionPhase();
             }
-        }
+			else
+			{
+				endGame();
+			}
+		}
 
         /// <summary>
         /// Sends the unique results to users for the knockout game type.

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using client_app.menus.games;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace client_app
             await connection.StartAsync();
             return connection;
         }
-        public static HubConnection addHandles(HubConnection connection)
+        public static HubConnection addLoginHandles(HubConnection connection)
         {
             connection.On<int, string>("loginSuccess", (success, userID) =>
             {
@@ -44,8 +45,13 @@ namespace client_app
             });
             connection.On<int, string>("accountSuccess", (success, userID) =>
             {
-				login.lbl_information.Invoke(new Action(() => { login.handleAccountCreationSuccess(success, userID); }));
-			});
+                login.lbl_information.Invoke(new Action(() => { login.handleAccountCreationSuccess(success, userID); }));
+            });
+
+            return connection;
+        }
+        public static HubConnection addHandles(HubConnection connection)
+        {
             connection.On<userData>("receiveUserData", (userData) =>
             {
                 main.Invoke(new Action(() => { main.clientConnected(userData); }));
@@ -66,30 +72,29 @@ namespace client_app
                 }
 				main.userData.friends.Add(data);
 			});
+            connection.On<char, double, TimeSpan, int>("updateStatistics", (letter, accuracy, time, total) =>
+            {
+                main.userData.statistics[letter] = (accuracy, time, total);
+            });
 
-            connection.On<string, string, List<friendData>>("receiveJoinConfirm", (gameID, type, users) =>
+            connection.On<List<friendData>>("updateUsers", (users) =>
             {
-                game.gameID = gameID;
-                game.type = type;
-			});
-            connection.On<List<friendData>>("updateUsers", (datas) =>
-            {
-                game.users = datas;
+                main.panel_main.Invoke(new Action(() => { menu.game.updateUsers(users); }));
             });
-            connection.On<string>("startGame", (aaa) =>
-            {
-                // no work
-                MethodInfo methodInfo = typeof(main).GetMethod($"start_{game.type}") ?? throw new Exception($"GameID <{game.type}> could not be found");
-                methodInfo.Invoke(methodInfo, null);
-            });
+
+            connection.On("awaitStart", () => menu.game.awaitStart());
+            connection.On("startGame", () => menu.game.startGame());
 
             connection.On<char>("receiveLetter", (letter) =>
             {
-                // no work either
-                MethodInfo methodInfo = typeof(main).GetMethod($"round_{game.type}") ?? throw new Exception($"GameID <{game.type}> could not be found");
-                methodInfo.Invoke(methodInfo, new object[letter]);
+                menu.game.submissionPhase(letter);
             });
 
+            connection.On<bool, double, TimeSpan>("receiveResults", (correct, accuracy, time) =>
+            {
+                menu.game.updateStats(correct, accuracy, time);
+                menu.game.evaluationPhase();
+            });
 
 
 

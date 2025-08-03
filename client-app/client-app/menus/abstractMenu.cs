@@ -198,7 +198,7 @@ namespace client_app.menus
 		}
 
 		/// <summary>
-		/// Configures the specified game panel by adding visual elements such as shapes, text, and buttons.
+		/// Configures the main panel with game objects. Does not clear the panel beforehand.
 		/// </summary>
 		/// <param name="panel"></param>
 		/// <returns>An <see cref="input"/> object containing the created drawing panel.</returns>
@@ -268,6 +268,8 @@ namespace client_app.menus
 
 			var input = new input(game.main.panel_main, (260, 250), (600, 600));
 
+			game.btn_clear.Click += (sender, e) => { input.clearPanel(); };
+
 			game.main.panel_main.Controls.Add(game.panel_outline);
 			game.main.panel_main.Controls.Add(game.lbl_letter);
 			game.main.panel_main.Controls.Add(game.btn_submit);
@@ -280,6 +282,8 @@ namespace client_app.menus
 		/// </summary>
 		public static void configUserDataPanel(main main, userData userData)
 		{
+			main.panel_right.Controls.Clear();
+
 			Guna.UI2.WinForms.Guna2PictureBox pic_account = new Guna.UI2.WinForms.Guna2PictureBox()
 			{
 				Image = global::client_app.Properties.Resources.account,
@@ -704,7 +708,7 @@ namespace client_app.menus
 		/// </summary>
 		/// <param name="main"></param>
 		/// <param name="users"></param>
-		public static void initialiseLobby(main main, List<friendData> users)
+		public static void initialiseLobby(main main)
 		{
 			resetLayout(main);
 
@@ -716,12 +720,10 @@ namespace client_app.menus
 				Name = "lbl_header",
 				Size = new System.Drawing.Size(300, 30),
 				TabIndex = 0,
-				Text = $"Lobby <{game.type}>"
+				Text = "Lobby",
 			};
 
 			main.panel_main.Controls.Add(lbl_header);
-
-			configPanel_main_lobby(main, users);
 		}
 
 		/// <summary>
@@ -729,15 +731,15 @@ namespace client_app.menus
 		/// </summary>
 		/// <param name="main"></param>
 		/// <param name="users"></param>
-		public static void configPanel_main_lobby(main main, List<friendData> users)
+		public static void configLobby(Panel panel, List<friendData> users)
 		{
 			Panel panel_users = new Panel()
 			{
 				Name = "panel_users",
-				BackColor = main.panel_main.BackColor,
+				BackColor = panel.BackColor,
 				BorderStyle = BorderStyle.FixedSingle,
 				Location = new System.Drawing.Point(50, 150),
-				Size = new System.Drawing.Size(main.panel_main.Width - 100, main.panel_main.Height - 100 - 100)
+				Size = new System.Drawing.Size(panel.Width - 100, panel.Height - 100 - 100)
 			};
 
 			int X = 10;
@@ -759,7 +761,7 @@ namespace client_app.menus
 
 				Label userID = new Label()
 				{
-					BackColor = main.panel_main.BackColor,
+					BackColor = panel.BackColor,
 					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 					Location = new System.Drawing.Point(padding, padding),
 					Name = user.userID,
@@ -771,7 +773,7 @@ namespace client_app.menus
 				};
 				Label rank = new Label()
 				{
-					BackColor = main.panel_main.BackColor,
+					BackColor = panel.BackColor,
 					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 					Location = new System.Drawing.Point(userID.Width + 2 * padding, padding),
 					Name = "rank",
@@ -790,7 +792,7 @@ namespace client_app.menus
 				Y = Y + userY + 10;
 			}
 
-			main.panel_main.Controls.Add(panel_users);
+			panel.Controls.Add(panel_users);
 		}
 
 		/// <summary>
