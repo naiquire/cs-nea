@@ -10,33 +10,36 @@ namespace server_app.games
 	    public static readonly List<IPlayable> currentGames = [];
 
 	    /// <summary>
-	/// Attempts to queue a user into the current game, and starts the game if the lobby is full.
-	/// </summary>
-	/// <param name="game"></param>
-	/// <param name="userID"></param>
-	/// <returns>A boolean value representing if the user was queued into the game</returns>
-	    private static async Task<bool> tryQueueGame(IPlayable game, string userID)
+	    /// Attempts to queue a user into the current game, and starts the game if the lobby is full.
+	    /// </summary>
+	    /// <param name="game"></param>
+	    /// <param name="userID"></param>
+	    /// <returns>A boolean value representing if the user was queued into the game</returns>
+	    private static bool tryQueueGame(IPlayable game, string userID)
         {
             if (game.getPlayerCount() < game.getMaxPlayers() && !game.hasStarted())
             {
-                await game.queueUser(userID);
+                game.queueUser(userID);
 				return true;
             }
             return false;
         }
 
-        public static void checkGameStart(string gameID)
+        public static bool userJoined(string gameID)
         {
-			foreach (IPlayable game in queueing.currentGames)
+			foreach (IPlayable game in currentGames)
 			{
 				if (game.getGameID() == gameID)
 				{
+                    game.updateUsers();
 					if (game.getPlayerCount() == game.getMaxPlayers())
 					{
 						game.startGame();
+                        return true;
 					}
 				}
 			}
+            return false;
 		}
 
         /// <summary>
@@ -64,41 +67,41 @@ namespace server_app.games
         /// <param name="userID"></param>
         /// <param name="context"></param>
         /// <returns><see langword="true"/> if the user was successfully queued; otherwise <see langword="false"/></returns>
-        public static async Task<string> queueGame(string gameType, string userID, IHubContext<connection> context)
+        public static string queueGame(string gameType, string userID, IHubContext<connection> context)
         {
             foreach (IPlayable game in currentGames)
             {
                 if (game.getType() == gameType)
                 {
-                    if (await tryQueueGame(game, userID))
+                    if (tryQueueGame(game, userID))
                     {
                         return game.getGameID();
                     }
                 }
             }
 
-            IPlayable g;
 
+			IPlayable newGame;
 			switch (gameType)
             {
-                case "accuracy":
-                    g = new accuracy(userID, context);
-                    currentGames.Add(g);
-                    await tryQueueGame(g, userID);
-                    return g.getGameID();
+				case "accuracy":
+					newGame = new accuracy(userID, context);
+                    currentGames.Add(newGame);
+                    tryQueueGame(newGame, userID);
+                    return newGame.getGameID();
 		        case "versus":
-                    g = new versus(userID, context);
-                    currentGames.Add(g);
-					await tryQueueGame(g, userID);
-					return g.getGameID();
+					newGame = new versus(userID, context);
+                    currentGames.Add(newGame);
+					tryQueueGame(newGame, userID);
+					return newGame.getGameID();
 				case "knockout":
-                    g = new knockout(userID, context);
-                    currentGames.Add(g);
-                    await tryQueueGame(g, userID);
-                    return g.getGameID();
+					newGame = new knockout(userID, context);
+                    currentGames.Add(newGame);
+                    tryQueueGame(newGame, userID);
+                    return newGame.getGameID();
                 default:
 					database.outputException($"Could not find game with type {gameType}");
-					return "";                
+					return "";
 			}
 		}
     }

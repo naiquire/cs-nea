@@ -42,8 +42,6 @@ namespace client_app
 		const int gamePanelSizeY = 90;
 		const int gamePanelSpacing = 50;
 
-
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -230,7 +228,7 @@ namespace client_app
 				BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
 				BorderThickness = 0,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
-				DefaultText = "1v1",
+				DefaultText = "Versus",
 				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
 				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
 				ForeColor = System.Drawing.Color.White,
@@ -520,6 +518,7 @@ namespace client_app
 		private Panel panel_friendList;
         private PictureBox seperator;
         private Label lbl_friendsLabel;
+
 		private Guna.UI2.WinForms.Guna2GradientPanel panel_accuracy;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
 		private Guna.UI2.WinForms.Guna2TextBox txt_accuracy;

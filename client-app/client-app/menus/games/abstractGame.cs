@@ -1,11 +1,8 @@
 ﻿using client_app.components;
-using Guna.UI2.WinForms.Suite;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,7 +20,7 @@ namespace client_app.menus.games
 		public List<double> accuracy;
 		public List<TimeSpan> time;
 	}
-		public interface IPlayable
+	public interface IPlayable
 	{
 		void queueGame();
 		Task joinGame();
@@ -47,7 +44,7 @@ namespace client_app.menus.games
 		private bool started;
 
 		protected stats stats;
-		
+
 
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
 		public Guna.UI2.WinForms.Guna2TextBox lbl_letter;
@@ -69,7 +66,6 @@ namespace client_app.menus.games
 
 			if (!started)
 			{
-				// this is hit before the gameID is returned and the base lobby initialised, need to delay updateUsers to AFTER the join confirmation has been sent
 				abstractMenu.configLobby(main.panel_main, users);
 			}
 			else
@@ -94,7 +90,10 @@ namespace client_app.menus.games
 		public virtual async Task joinGame()
 		{
 			abstractMenu.initialiseLobby(main);
-			await main.connection.InvokeAsync("checkStart", gameID);
+			if (!await main.connection.InvokeAsync<bool>("confirmJoin", gameID))
+			{
+				// something very bad happened
+			}
 		}
 		public virtual void awaitStart()
 		{

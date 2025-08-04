@@ -34,8 +34,9 @@ namespace server_app.games
 	}
 	public interface IPlayable
 	{
-		Task queueUser(string userID);
+		void queueUser(string userID);
 		void dequeueUser(string userID);
+		Task updateUsers();
 		void startGame();
 		/// <summary>
 		/// Calls for the next iteration of the game.
@@ -80,7 +81,7 @@ namespace server_app.games
 		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
 
 		/// <summary>
-		/// Base initialisation for the game classes. Automatically queues the user into the respective game.
+		/// Base initialisation for the game classes.
 		/// </summary>
 		/// <param name="userID"></param>
 		/// <param name="maxPlayers"></param>
@@ -101,28 +102,17 @@ namespace server_app.games
 		}
 
 		/// <summary>
-		/// Queues a user into the current game and sends a confirmation to the user.
+		/// Queues a user into the current game.
 		/// </summary>
 		/// <param name="userID"></param>
 		/// <exception cref="DisconnectException"></exception>
-		public async Task queueUser(string userID)
+		public void queueUser(string userID)
 		{
 			if (database.loadFriendData(userID, out friendData data))
 			{
 				userIDs.Add(userID);
 				userDatas.Add(data);
 			}
-
-			if (connection.map.TryGetValue(userID, out string? connectionID))
-			{
-				await hubContext.Clients.Client(connectionID).SendAsync("receiveJoinConfirm", gameID);
-			}
-			else
-			{
-				throw new DisconnectException(userID);
-			}
-
-			await updateUsers();
 		}
 		
 		/// <summary>
@@ -149,7 +139,7 @@ namespace server_app.games
 		/// </summary>
 		/// <returns></returns>
 		/// <exception cref="DisconnectException"></exception>
-		private async Task updateUsers()
+		public async Task updateUsers()
 		{	
 			foreach (var user in userIDs)
 			{

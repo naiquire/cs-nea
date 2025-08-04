@@ -7,11 +7,11 @@ namespace server_app.connections
 {
 	public partial class @connection : Hub
 	{
-		public async Task<string> queueGame(string gameType, string userID)
+		public string queueGame(string gameType, string userID)
 		{
 			if (Program.hubContext != null)
 			{
-				return await queueing.queueGame(gameType, userID, Program.hubContext);
+				return queueing.queueGame(gameType, userID, Program.hubContext);
 			}
 			else
 			{
@@ -19,9 +19,9 @@ namespace server_app.connections
 				throw new Exception("[FATAL] IHubContext was null when attempting to queue a user");
 			}
 		}
-		public void checkStart(string gameID)
+		public bool confirmJoin(string gameID)
 		{
-			queueing.checkGameStart(gameID);
+			return queueing.userJoined(gameID);
 		}
 	}
 }
