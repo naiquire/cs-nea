@@ -28,22 +28,22 @@ namespace client_app.games
 
 		public override void awaitStart()
 		{
-
+			base.awaitStart();
 		}
 
 		public override void startGame()
 		{
-
+			base.startGame();
 		}
 
 		public override void submissionPhase(char letter)
 		{
-
+			base.submissionPhase(letter);
 		}
 
 		public override void evaluationPhase()
 		{
-
+			base.evaluationPhase();
 		}
 	}
 }

@@ -57,7 +57,7 @@ namespace client_app.menus.games
 		{
 			this.main = main;
 			this.type = type;
-			stats = new stats();
+			stats = new stats("");
 			started = false;
 		}
 		public void updateUsers(List<friendData> users)
@@ -102,6 +102,7 @@ namespace client_app.menus.games
 		}
 		public virtual void startGame()
 		{
+			abstractMenu.resetLayout(main);
 			drawingPanel = abstractMenu.configGamePanel(this);
 		}
 		public void awaitRound()
@@ -113,9 +114,11 @@ namespace client_app.menus.games
 			lbl_letter.Text = letter.ToString();
 
 			drawingPanel.enablePanel();
+			btn_submit.Enabled = true;
 
 			btn_submit.Click += async (sender, e) =>
 			{
+				btn_submit.Enabled = false;
 				Bitmap drawing = drawingPanel.disablePanel();
 				var submission = convertBitmap(drawing);
 

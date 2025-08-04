@@ -106,7 +106,7 @@ namespace client_app.components
             if (draw)
             {
                 Graphics panel = Graphics.FromImage(drawing);
-                Pen pen = new Pen(Color.Black, 8)
+                Pen pen = new Pen(Color.Black, 32)
                 {
                     EndCap = LineCap.Round,
                     StartCap = LineCap.Round

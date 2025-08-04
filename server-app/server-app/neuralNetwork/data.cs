@@ -5,7 +5,7 @@ namespace server_app.neuralNetwork
 {
     public static class @data
     {
-        public static readonly string location = Environment.GetEnvironmentVariable("CS-NEA-FP") ?? throw new Exception("Environment variable not found");
+        public static readonly string location = Environment.GetEnvironmentVariable("cs-nea-neural-net-data") ?? throw new Exception("Environment variable not found");
         //public static readonly string location = @"H:\Subjects\Computer Science\git\CS-NEA\server-app\server-app\neuralNetwork\data\";
         public static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
         public static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));

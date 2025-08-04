@@ -82,18 +82,27 @@ namespace client_app
                 main.panel_main.Invoke(new Action(() => { menu.game.updateUsers(users); }));
             });
 
-            connection.On("awaitStart", () => menu.game.awaitStart());
-            connection.On("startGame", () => menu.game.startGame());
+            connection.On("awaitStart", () =>
+            {
+                main.Invoke(new Action(() => menu.game.awaitStart()));
+            });
+            connection.On("startGame", () =>
+            {
+				main.Invoke(new Action(() => menu.game.startGame()));
+			});
 
             connection.On<char>("receiveLetter", (letter) =>
             {
-                menu.game.submissionPhase(letter);
-            });
+				main.Invoke(new Action(() => menu.game.submissionPhase(letter)));
+			});
 
             connection.On<bool, double, TimeSpan>("receiveResults", (correct, accuracy, time) =>
             {
-                menu.game.updateStats(correct, accuracy, time);
-                menu.game.evaluationPhase();
+                main.Invoke(new Action(() =>
+                {
+                    menu.game.updateStats(correct, accuracy, time);
+                    menu.game.evaluationPhase();
+                }));
             });
 
 
