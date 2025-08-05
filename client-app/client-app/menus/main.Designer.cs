@@ -50,7 +50,7 @@ namespace client_app
         /// </summary>
         public void InitializeComponent()
         {
-            abstractMenu.resetLayout(this);
+            interfaces.resetLayout(this);
 
 			this.panel_friendList = new System.Windows.Forms.Panel();
             this.seperator = new System.Windows.Forms.PictureBox();
@@ -110,7 +110,7 @@ namespace client_app
             configFriendsPanel();
 			configGamePanels();
 
-			abstractMenu.configUserDataPanel(this, userData);
+			interfaces.configUserDataPanel(this, userData);
         }
 
 		/// <summary>
@@ -502,7 +502,7 @@ namespace client_app
 		public async void btn_close_Click(object sender, EventArgs e)
 		{
 			Hide();
-			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			//await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
 			Close();
 		}
 

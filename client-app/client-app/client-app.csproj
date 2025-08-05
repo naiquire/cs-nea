@@ -206,7 +206,7 @@
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
-    <Compile Include="menus\abstractMenu.cs">
+    <Compile Include="menus\interfaces.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="menus\main.cs">
@@ -223,8 +223,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="menus\abstractMenu.resx">
-      <DependentUpon>abstractMenu.cs</DependentUpon>
+    <EmbeddedResource Include="menus\interfaces.resx">
+      <DependentUpon>interfaces.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menus\games\accuracy.resx">
       <DependentUpon>accuracy.cs</DependentUpon>

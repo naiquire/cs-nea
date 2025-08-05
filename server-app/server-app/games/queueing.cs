@@ -104,5 +104,16 @@ namespace server_app.games
 					return "";
 			}
 		}
+
+        public static void callSubmission(string gameID, string userID)
+        {
+            foreach (IPlayable game in currentGames)
+            {
+                if (game.getGameID() == gameID && game.getHost() == userID)
+                {
+                    game.submissionPhase();
+                }
+            }
+        }
     }
 }

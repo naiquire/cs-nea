@@ -17,5 +17,15 @@ namespace server_app.connections
         {
             queueing.loadSubmission(gameID, userID, input);
         }
+
+        /// <summary>
+        /// Requests to start the next submission phase of the game.
+        /// </summary>
+        /// <param name="gameID"></param>
+        /// <param name="userID"></param>
+        public void requestRound(string gameID, string userID)
+        {
+            queueing.callSubmission(gameID, userID);
+        }
     }
 }

@@ -44,7 +44,6 @@ namespace client_app.components
             panel_input.MouseUp -= panel_MouseUp;
             panel_input.MouseMove -= panel_MouseMove;
 
-            clearPanel();
             return drawing;
         }
 
@@ -54,6 +53,7 @@ namespace client_app.components
         public void clearPanel()
         {
 			Graphics.FromImage(drawing).Clear(Color.White);
+			panel_input.CreateGraphics().DrawImageUnscaled(drawing, new Point(0, 0));
 		}
 
 		/// <summary>

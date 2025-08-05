@@ -24,7 +24,7 @@ namespace server_app.connections
 				map.Remove(userID); // temp fix
 			}
 			map.Add(userID, Context.ConnectionId);
-
+			
 			if (database.loadUserData(userID, out userData userData))
 			{
 				if (map.TryGetValue(userID, out string? connectionID))

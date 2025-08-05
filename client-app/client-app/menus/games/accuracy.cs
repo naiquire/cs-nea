@@ -41,9 +41,9 @@ namespace client_app.games
 			base.submissionPhase(letter);
 		}
 
-		public override void evaluationPhase()
+		public async override Task evaluationPhase()
 		{
-			base.evaluationPhase();
+			await base.evaluationPhase();
 		}
 	}
 }

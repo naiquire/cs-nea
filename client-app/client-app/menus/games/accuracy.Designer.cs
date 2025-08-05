@@ -36,13 +36,11 @@ namespace client_app.games
 		
 		public void InitializeComponent()
 		{
-			abstractMenu.resetLayout(main);
+			interfaces.resetLayout(main);
 
-			abstractMenu.configGamePanel(this);
+			interfaces.configGamePanel(this);
 		}
 
 		#endregion
-
-		private System.Windows.Forms.Label txt_letter;
 	}
 }

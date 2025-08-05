@@ -72,9 +72,9 @@ namespace client_app
                 }
 				main.userData.friends.Add(data);
 			});
-            connection.On<char, double, TimeSpan, int>("updateStatistics", (letter, accuracy, time, total) =>
+            connection.On<char, statistics>("updateStatistics", (letter, statistics) =>
             {
-                main.userData.statistics[letter] = (accuracy, time, total);
+                main.userData.statistics[letter] = statistics;
             });
 
             connection.On<List<friendData>>("updateUsers", (users) =>

@@ -22,7 +22,13 @@ namespace client_app
 		public DateTime dateCreated { get; set; }
 
 		public int rank { get; set; }
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
+		public Dictionary<char, statistics> statistics { get; set; }
+	}
+	public struct @statistics
+	{
+		public double accuracy { get; set; }
+		public TimeSpan time { get; set; }
+		public int total { get; set; }
 	}
 	public struct friendData
 	{
@@ -34,7 +40,7 @@ namespace client_app
 		public DateTime dateCreated { get; set; }
 
 		public int rank { get; set; }
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
+		public Dictionary<char, statistics> statistics { get; set; }
 	}
 	public struct menu
 	{
@@ -78,7 +84,7 @@ namespace client_app
 			#endregion
 
 			localisation = languages.localisation;
-			abstractMenu.InitializeComponent(this);
+			interfaces.InitializeComponent(this);
 			initialiseConnection(userID);
 			//InitializeComponent(); // temp
 
@@ -114,12 +120,6 @@ namespace client_app
 					userID = "andrew",
 					online = true,
 				}
-			};
-			main.userData.statistics = new Dictionary<char, (double accuracy, TimeSpan time, int total)>()
-			{
-				{'A', (0.54, TimeSpan.Parse("00:00:05.34"), 36) },
-				{'B', (0.24, TimeSpan.Parse("00:00:03.17"), 89) },
-				{'C', (0.94, TimeSpan.Parse("00:00:04.95"), 62) },
 			};
 
 			InitializeComponent();

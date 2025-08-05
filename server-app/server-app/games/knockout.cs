@@ -21,13 +21,21 @@ namespace server_app.games
 	    }
         public async override void submissionPhase()
         {
-            char letter = (char)(rnd.Next(0, 26) + 65);
-            letters.Add(letter);
+			if (aliveUsers.Count > 1)
+			{
+				char letter = (char)(rnd.Next(0, 26) + 65);
+				letters.Add(letter);
 
-            startTime = DateTime.UtcNow;
-            currentResponses.Clear();
-            await sendLetter(aliveUsers, letter);
-        }
+                count++;
+				startTime = DateTime.UtcNow;
+				currentResponses.Clear();
+				await sendLetter(aliveUsers, letter);
+			}
+			else
+			{
+				endGame();
+			}
+		}
         public override void loadResponse(string userID, double[] input)
         {
             currentResponses.Add(userID, (input, DateTime.UtcNow));
@@ -74,16 +82,6 @@ namespace server_app.games
             }
 
             await sendKnockoutResults(userIDs, aliveUsers);
-
-            count++;
-            if (aliveUsers.Count > 1)
-            {
-                submissionPhase();
-            }
-			else
-			{
-				endGame();
-			}
 		}
 
         /// <summary>

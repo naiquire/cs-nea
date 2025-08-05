@@ -86,6 +86,7 @@ namespace client_app
 			this.lbl_header.PlaceholderText = "";
 			this.lbl_header.ReadOnly = true;
 			this.lbl_header.SelectedText = "";
+			this.lbl_header.TabStop = false;
 			this.lbl_header.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// btn_language
@@ -119,6 +120,7 @@ namespace client_app
 			resources.ApplyResources(this.pic_connecting, "pic_connecting");
 			this.pic_connecting.Name = "pic_connecting";
 			this.pic_connecting.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+			this.pic_connecting.TabStop = false;
 			// 
 			// lbl_connection
 			// 
@@ -127,6 +129,7 @@ namespace client_app
 			resources.ApplyResources(this.lbl_connection, "lbl_connection");
 			this.lbl_connection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.lbl_connection.Name = "lbl_connection";
+			this.lbl_connection.TabStop = false;
 			this.lbl_connection.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
 			// 
 			// lbl_information
@@ -136,6 +139,7 @@ namespace client_app
 			resources.ApplyResources(this.lbl_information, "lbl_information");
 			this.lbl_information.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
 			this.lbl_information.Name = "lbl_information";
+			this.lbl_information.TabStop = false;
 			this.lbl_information.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
 			// 
 			// pic_language
@@ -224,6 +228,7 @@ namespace client_app
 			// 
 			// login
 			// 
+			this.AcceptButton = this.btn_login;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));

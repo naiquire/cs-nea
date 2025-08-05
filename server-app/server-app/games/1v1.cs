@@ -24,9 +24,17 @@ namespace server_app.games
 		}
 		public async override void submissionPhase()
 		{
-			startTime = DateTime.UtcNow; // might be better to handle timing on users end to reduce the effect of latency but that feels vulnerable to cheats
-			currentResponses.Clear();
-			await sendLetter(userIDs, letters[count]);
+			if (count < rounds)
+			{
+				startTime = DateTime.UtcNow;
+				currentResponses.Clear();
+				await sendLetter(userIDs, letters[count]);
+				count++;
+			}
+			else
+			{
+				endGame();
+			}
 		}
 		public override void loadResponse(string userID, double[] input)
 		{
@@ -76,17 +84,6 @@ namespace server_app.games
 
 				scores[lowest.user] += 1;
 				await send1v1Results(userIDs, lowest.user);
-			}
-
-			// call next submission phase
-			count++;
-			if (count < rounds)
-			{
-				submissionPhase();
-			}
-			else
-			{
-				endGame();
 			}
 		}
 		public async override void endGame()

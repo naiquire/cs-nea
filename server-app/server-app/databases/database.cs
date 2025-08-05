@@ -18,7 +18,13 @@ namespace server_app.databases
 		public DateTime dateCreated { get; set; }
 
 		public int rank { get; set; }
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
+		public Dictionary<char, statistics> statistics { get; set; }
+	}
+	public struct @statistics(double a, TimeSpan ts, int t)
+	{
+		public double accuracy { get; set; } = a;
+		public TimeSpan time { get; set; } = ts;
+		public int total { get; set; } = t;
 	}
 	public struct friendData
 	{
@@ -30,7 +36,7 @@ namespace server_app.databases
 		public DateTime dateCreated { get; set; }
 
 		public int rank { get; set; }
-		public Dictionary<char, (double accuracy, TimeSpan time, int total)> statistics { get; set; }
+		public Dictionary<char, statistics> statistics { get; set; }
 	}
 	public static class @database
 	{
@@ -238,7 +244,7 @@ namespace server_app.databases
 
 			return true;
 		}
-		public static bool loadStatistics(string userID, out Dictionary<char, (double, TimeSpan, int)> statistics)
+		public static bool loadStatistics(string userID, out Dictionary<char, statistics> statistics)
 		{
 			statistics = [];
 			string query = @"SELECT letter, accuracy, time, total
@@ -258,7 +264,7 @@ namespace server_app.databases
 						TimeSpan time = reader.GetTimeSpan(2);
 						int total = reader.GetInt32(3);
 
-						statistics[letter] = (accuracy, time, total);
+						statistics[letter] = new statistics(accuracy, time, total);
 					}
 				}
 				connection.Close();
@@ -412,8 +418,8 @@ namespace server_app.databases
 		public static bool updateStatistics(string userID, char letter, double accuracy, TimeSpan time, int total)
 		{
 			string query = @"UPDATE statistics
-				SET (statistics.accuracy = @accuracy, statistics.time = @time, statistics.total = @total)
-				WHERE statistics.userID = @userID AND statistics.letter = @letter";
+				SET accuracy = @accuracy, time = @time, total = @total
+				WHERE userID = @userID AND letter = @letter";
 			try
 			{
 				connection.Open();

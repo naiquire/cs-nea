@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
+using System.Reflection.Metadata;
 
 namespace server_app.games
 {
@@ -57,6 +58,7 @@ namespace server_app.games
 		void endGame();
 		string getType();
 		string getGameID();
+		string getHost();
 		bool hasStarted();
 		int getPlayerCount();
 		int getMaxPlayers();
@@ -312,7 +314,7 @@ namespace server_app.games
 						{
 							if (connection.map.TryGetValue(userData.userID, out string? connectionID))
 							{
-								await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updatedAccuracy, updatedTime, total + 1);
+								await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, new statistics(updatedAccuracy, updatedTime, total + 1));
 							}
 							else
 							{
@@ -343,6 +345,11 @@ namespace server_app.games
 		/// </summary>
 		/// <returns></returns>
 		public string getGameID() => gameID;
+		
+		/// <summary>
+		/// Gets the user who created the game.
+		/// </summary>
+		public string getHost() => userIDs[0];
 
 		/// <summary>
 		/// Returns whether the game has started.

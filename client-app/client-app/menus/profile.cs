@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-    public partial class profile : abstractMenu
+    public partial class profile : interfaces
     {
         private readonly main main;
         private readonly userData userData;

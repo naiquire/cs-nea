@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-	public abstract class abstractMenu : Form // can be made static in final build, maybe rename
+	public abstract class interfaces : Form // can be made static in final build, maybe rename
 	{
 		
 		private Guna.UI2.WinForms.Guna2TextBox lbl_timer;
@@ -267,8 +267,6 @@ namespace client_app.menus
 			};
 
 			var input = new input(game.main.panel_main, (260, 250), (600, 600));
-
-			game.btn_clear.Click += (sender, e) => input.clearPanel();
 
 			game.main.panel_main.Controls.Add(game.panel_outline);
 			game.main.panel_main.Controls.Add(game.lbl_letter);

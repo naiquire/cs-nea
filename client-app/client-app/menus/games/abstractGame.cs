@@ -28,7 +28,7 @@ namespace client_app.menus.games
 		void startGame();
 		void awaitRound();
 		void submissionPhase(char letter);
-		void evaluationPhase();
+		Task evaluationPhase();
 		void updateUsers(List<friendData> users);
 		void updateStats(bool correct, double accuracy, TimeSpan time);
 	}
@@ -66,7 +66,7 @@ namespace client_app.menus.games
 
 			if (!started)
 			{
-				abstractMenu.configLobby(main.panel_main, users);
+				interfaces.configLobby(main.panel_main, users);
 			}
 			else
 			{
@@ -74,7 +74,9 @@ namespace client_app.menus.games
 			}
 		}
 		public void updateStats(bool correct, double accuracy, TimeSpan time)
-		{
+		{;
+			MessageBox.Show($"{correct}, {accuracy}, {time}"); // temp
+
 			stats.correct.Add(correct);
 			stats.accuracy.Add(accuracy);
 			stats.time.Add(time);
@@ -89,7 +91,7 @@ namespace client_app.menus.games
 		}
 		public virtual async Task joinGame()
 		{
-			abstractMenu.initialiseLobby(main);
+			interfaces.initialiseLobby(main);
 			if (!await main.connection.InvokeAsync<bool>("confirmJoin", gameID))
 			{
 				// something very bad happened
@@ -102,25 +104,18 @@ namespace client_app.menus.games
 		}
 		public virtual void startGame()
 		{
-			abstractMenu.resetLayout(main);
-			drawingPanel = abstractMenu.configGamePanel(this);
-		}
-		public void awaitRound()
-		{
-			// display countdown to next round
-		}
-		public virtual void submissionPhase(char letter)
-		{
-			lbl_letter.Text = letter.ToString();
+			interfaces.resetLayout(main);
+			drawingPanel = interfaces.configGamePanel(this);
 
-			drawingPanel.enablePanel();
-			btn_submit.Enabled = true;
-
+			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
 			btn_submit.Click += async (sender, e) =>
 			{
 				btn_submit.Enabled = false;
 				Bitmap drawing = drawingPanel.disablePanel();
+				
 				var submission = convertBitmap(drawing);
+
+				drawingPanel.clearPanel();
 
 				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
 			};
@@ -128,7 +123,8 @@ namespace client_app.menus.games
 			double[] convertBitmap(Bitmap bitmap)
 			{
 				Bitmap resize = new Bitmap(bitmap, new Size(28, 28));
-
+				bitmap.Save("raw.png");
+				resize.Save("resize.png");
 				int width = resize.Width;
 				int height = resize.Height;
 				double[] pixels = new double[width * height];
@@ -146,9 +142,22 @@ namespace client_app.menus.games
 				return pixels;
 			}
 		}
-		public virtual void evaluationPhase()
+		public void awaitRound()
 		{
+			// display countdown to next round
+		}
+		public virtual void submissionPhase(char letter)
+		{
+			lbl_letter.Text = letter.ToString();
 
+			drawingPanel.enablePanel();
+			btn_submit.Enabled = true;
+
+			
+		}
+		public virtual async Task evaluationPhase()
+		{
+			await main.connection.InvokeAsync("requestRound", gameID, main.userData.userID);
 		}
 	}
 }

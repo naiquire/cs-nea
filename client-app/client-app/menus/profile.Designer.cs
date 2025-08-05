@@ -94,7 +94,7 @@ namespace client_app.menus
             const int X = 10;
             int y = 10;
 
-            const int panelX = 800;
+            const int panelX = 900;
             const int panelY = 50;
             const int padding = 5;
             const int defaultSize = panelY - 2 * padding;
