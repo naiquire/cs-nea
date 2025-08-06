@@ -5,23 +5,26 @@ using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
 
 namespace client_app.menus
 {
 	public abstract class interfaces : Form // can be made static in final build, maybe rename
 	{
-		
+		private Guna.UI2.WinForms.Guna2GradientButton btn_submit;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_timer;
 		
 
 		/// <summary>
 		/// Used to create control elements with the visual designer.
 		/// </summary>
-		public void tempInitializeComponent()
+		public void InitializeComponent()
 		{
 			this.lbl_timer = new Guna.UI2.WinForms.Guna2TextBox();
+			this.btn_submit = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.SuspendLayout();
 			// 
 			// lbl_timer
@@ -47,32 +50,23 @@ namespace client_app.menus
 			this.lbl_timer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.lbl_timer.TextOffset = new System.Drawing.Point(0, 4);
 			// 
-			// panel_outline
-			// 
-			
-			// 
-			// lbl_letter
-			// 
-			
-			// 
 			// btn_submit
 			// 
 			
 			// 
-			// btn_clearDrawing
+			// interfaces
 			// 
-			
-			// 
-			// abstractMenu
-			// 
-
+			this.ClientSize = new System.Drawing.Size(1120, 1050);
+			this.Controls.Add(this.btn_submit);
+			this.Name = "interfaces";
+			this.ResumeLayout(false);
 
 		}
 
 		/// <summary>
 		/// Initialises the base UI when the client application is launched.
 		/// </summary>
-		public static void InitializeComponent(main main)
+		public static void aInitializeComponent(main main)
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
 
@@ -198,12 +192,14 @@ namespace client_app.menus
 		}
 
 		/// <summary>
-		/// Configures the main panel with game objects. Does not clear the panel beforehand.
+		/// Configures the main panel with game objects.
 		/// </summary>
 		/// <param name="panel"></param>
 		/// <returns>An <see cref="input"/> object containing the created drawing panel.</returns>
 		public static input configGamePanel(abstractGame game)
 		{
+			resetLayout(game.main);
+
 			game.panel_outline = new Guna.UI2.WinForms.Guna2Shapes()
 			{
 				BorderColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
@@ -273,6 +269,122 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(game.btn_submit);
 			game.main.panel_main.Controls.Add(game.btn_clear);
 			return input;
+		}
+
+
+		public static void configResultsPanel(abstractGame game, char c, stats stats)
+		{
+			resetLayout(game.main);
+
+			const int X = 100;
+			int y = 100;
+
+			const int panelX = 900;
+			const int panelY = 50;
+			const int padding = 5;
+			const int defaultSize = panelY - 2 * padding;
+
+			string letter = c.ToString();
+			bool correct = stats.correct.Last();
+			double accuracy = stats.accuracy.Last();
+			TimeSpan time = stats.time.Last();
+
+			(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+
+			Label lbl_letter = new System.Windows.Forms.Label()
+			{
+				Location = new System.Drawing.Point(0 + padding, 0 + padding),
+				Name = "lbl_letter",
+				Size = new System.Drawing.Size(defaultSize, defaultSize),
+				TabIndex = 0,
+				Text = letter,
+				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				BorderStyle = BorderStyle.FixedSingle,
+			};
+			Label lbl_total = new System.Windows.Forms.Label()
+			{
+				Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
+				Name = "lbl_total",
+				Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+				TabIndex = 1,
+				Text = correct.ToString(),
+				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				BorderStyle = BorderStyle.FixedSingle,
+			};
+			Label lbl_time = new System.Windows.Forms.Label()
+			{
+				Location = new System.Drawing.Point(lbl_total.Location.X - 2 * defaultSize - padding, padding),
+				Name = "lbl_time",
+				Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+				TabIndex = 2,
+				Text = $"{time.TotalSeconds}",
+				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				BorderStyle = BorderStyle.FixedSingle,
+			};
+			Label lbl_percentage = new System.Windows.Forms.Label()
+			{
+				Location = new System.Drawing.Point(lbl_time.Location.X - defaultSize - padding, padding),
+				Name = "lbl_percentage",
+				Size = new System.Drawing.Size(defaultSize, defaultSize),
+				TabIndex = 3,
+				Text = $"{100 * accuracy}%",
+				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				BorderStyle = BorderStyle.FixedSingle,
+			};
+			Panel bar_base = new System.Windows.Forms.Panel()
+			{
+				BackColor = System.Drawing.SystemColors.ControlLight,
+				Location = new System.Drawing.Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
+				Name = "bar_base",
+				Size = new System.Drawing.Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
+				TabIndex = 4,
+				BorderStyle = BorderStyle.FixedSingle,
+			};
+			Panel bar_fill = new System.Windows.Forms.Panel()
+			{
+				BackColor = System.Drawing.ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
+				Location = new System.Drawing.Point(bar_base.Location.X, bar_base.Location.Y),
+				Name = "panel_fill",
+				Size = new System.Drawing.Size(((int)(accuracy * bar_base.Size.Width)), bar_base.Size.Height),
+				TabIndex = 5,
+				BorderStyle = BorderStyle.FixedSingle,
+			};
+
+			Panel panel_char = new System.Windows.Forms.Panel()
+			{
+				BackColor = System.Drawing.SystemColors.ControlDark,
+				Location = new System.Drawing.Point(X, y),
+				Name = "panel_char",
+				Size = new System.Drawing.Size(panelX, panelY),
+				TabIndex = 0,
+				BorderStyle = BorderStyle.FixedSingle,
+			};
+			game.btn_continue = new Guna.UI2.WinForms.Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 49,
+				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				Font = new System.Drawing.Font("Bahnschrift SemiBold", 31.75F, System.Drawing.FontStyle.Bold),
+				ForeColor = System.Drawing.Color.White,
+				Location = new System.Drawing.Point(220, 900),
+				Name = "btn_continue",
+				Size = new System.Drawing.Size(680, 100),
+				TabIndex = 3,
+				Text = "Continue",
+			};
+
+			panel_char.Controls.Add(bar_fill);
+			panel_char.Controls.Add(bar_base);
+			panel_char.Controls.Add(lbl_percentage);
+			panel_char.Controls.Add(lbl_time);
+			panel_char.Controls.Add(lbl_total);
+			panel_char.Controls.Add(lbl_letter);
+
+			bar_fill.BringToFront();
+
+			game.main.panel_main.Controls.Add(panel_char);
+			game.main.panel_main.Controls.Add(game.btn_continue);
 		}
 
 		/// <summary>

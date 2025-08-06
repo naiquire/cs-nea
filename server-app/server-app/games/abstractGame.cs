@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
+using System.Diagnostics.Metrics;
 using System.Reflection.Metadata;
 
 namespace server_app.games
@@ -55,10 +56,10 @@ namespace server_app.games
 		/// </summary>
 		/// <param name="letter"></param>
 		void evaluationPhase(char letter);
+		void continueRequest(string userID);
 		void endGame();
 		string getType();
 		string getGameID();
-		string getHost();
 		bool hasStarted();
 		int getPlayerCount();
 		int getMaxPlayers();
@@ -80,6 +81,7 @@ namespace server_app.games
 
 		protected DateTime startTime;
 		protected Dictionary<string, stats> stats;
+		protected List<string> continueRequests = [];
 		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
 
 		/// <summary>
@@ -215,6 +217,26 @@ namespace server_app.games
 		public abstract void submissionPhase();
 
 		/// <summary>
+		/// Configures a countdown on the clients before the next round.
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="DisconnectException"></exception>
+		protected async Task awaitRound()
+		{
+			foreach (string userID in userIDs)
+			{
+				if (connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
+				}
+				else
+				{
+					throw new DisconnectException(userID);
+				}
+			}
+		}
+
+		/// <summary>
 		/// Sends a character to the given users.
 		/// </summary>
 		/// <param name="userIDs"></param>
@@ -235,8 +257,6 @@ namespace server_app.games
 				}
 			}
 		}
-		public abstract void loadResponse(string userID, double[] input);
-		public abstract void evaluationPhase(char letter);
 
 		/// <summary>
 		/// Evaluates a user's submission and updates their current statistics.
@@ -345,11 +365,6 @@ namespace server_app.games
 		/// </summary>
 		/// <returns></returns>
 		public string getGameID() => gameID;
-		
-		/// <summary>
-		/// Gets the user who created the game.
-		/// </summary>
-		public string getHost() => userIDs[0];
 
 		/// <summary>
 		/// Returns whether the game has started.

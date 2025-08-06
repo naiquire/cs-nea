@@ -16,9 +16,17 @@ namespace client_app.menus.games
 			accuracy = new List<double>();
 			time = new List<TimeSpan>();
 		}
+
 		public List<bool> correct;
 		public List<double> accuracy;
 		public List<TimeSpan> time;
+
+		public void updateStats(bool correct, double accuracy, TimeSpan time)
+		{
+			this.correct.Add(correct);
+			this.accuracy.Add(accuracy);
+			this.time.Add(time);
+		}
 	}
 	public interface IPlayable
 	{
@@ -28,7 +36,7 @@ namespace client_app.menus.games
 		void startGame();
 		void awaitRound();
 		void submissionPhase(char letter);
-		Task evaluationPhase();
+		void evaluationPhase(bool correct, double accuracy, TimeSpan time);
 		void updateUsers(List<friendData> users);
 		void updateStats(bool correct, double accuracy, TimeSpan time);
 	}
@@ -44,12 +52,13 @@ namespace client_app.menus.games
 		private bool started;
 
 		protected stats stats;
-
+		protected char letter;
 
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
 		public Guna.UI2.WinForms.Guna2TextBox lbl_letter;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_submit;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_clear;
+		public Guna.UI2.WinForms.Guna2GradientButton btn_continue;
 
 		private input drawingPanel;
 
@@ -72,14 +81,6 @@ namespace client_app.menus.games
 			{
 
 			}
-		}
-		public void updateStats(bool correct, double accuracy, TimeSpan time)
-		{;
-			MessageBox.Show($"{correct}, {accuracy}, {time}"); // temp
-
-			stats.correct.Add(correct);
-			stats.accuracy.Add(accuracy);
-			stats.time.Add(time);
 		}
 		public async virtual void queueGame()
 		{
@@ -104,7 +105,6 @@ namespace client_app.menus.games
 		}
 		public virtual void startGame()
 		{
-			interfaces.resetLayout(main);
 			drawingPanel = interfaces.configGamePanel(this);
 
 			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
@@ -118,6 +118,10 @@ namespace client_app.menus.games
 				drawingPanel.clearPanel();
 
 				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
+			};
+			btn_continue.Click += async (sender, e) =>
+			{
+				await main.connection.InvokeAsync("requestRound", gameID, main.userData.userID);
 			};
 
 			double[] convertBitmap(Bitmap bitmap)
@@ -148,6 +152,7 @@ namespace client_app.menus.games
 		}
 		public virtual void submissionPhase(char letter)
 		{
+			this.letter = letter;
 			lbl_letter.Text = letter.ToString();
 
 			drawingPanel.enablePanel();
@@ -155,9 +160,10 @@ namespace client_app.menus.games
 
 			
 		}
-		public virtual async Task evaluationPhase()
+		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
-			await main.connection.InvokeAsync("requestRound", gameID, main.userData.userID);
+			stats.updateStats(correct, accuracy, time);
+			interfaces.configResultsPanel(this, letter, stats);
 		}
 	}
 }

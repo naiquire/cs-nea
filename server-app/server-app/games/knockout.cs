@@ -8,6 +8,7 @@ namespace server_app.games
     public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
     {
         private List<string> aliveUsers = [];
+        private List<string> continueRequests = [];
         public override void startGame()
         {
             aliveUsers = [.. userIDs];
@@ -21,22 +22,26 @@ namespace server_app.games
 	    }
         public async override void submissionPhase()
         {
+            continueRequests.Clear();
 			if (aliveUsers.Count > 1)
 			{
 				char letter = (char)(rnd.Next(0, 26) + 65);
 				letters.Add(letter);
 
-                count++;
+				await awaitRound();
+				Thread.Sleep(5000);
+
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
 				await sendLetter(aliveUsers, letter);
+				count++;
 			}
 			else
 			{
 				endGame();
 			}
 		}
-        public override void loadResponse(string userID, double[] input)
+        public void loadResponse(string userID, double[] input)
         {
             currentResponses.Add(userID, (input, DateTime.UtcNow));
             if (currentResponses.Count == aliveUsers.Count)
@@ -44,7 +49,7 @@ namespace server_app.games
                 evaluationPhase(letters[^1]);
             }
         }
-        public async override void evaluationPhase(char letter)
+        public async void evaluationPhase(char letter)
         {
 			List<string> incorrectUsers = [];
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
@@ -83,15 +88,23 @@ namespace server_app.games
 
             await sendKnockoutResults(userIDs, aliveUsers);
 		}
+		public void continueRequest(string userID)
+		{
+			continueRequests.Add(userID);
+			if (continueRequests.Count == aliveUsers.Count)
+			{
+				submissionPhase();
+			}
+		}
 
-        /// <summary>
-        /// Sends the unique results to users for the knockout game type.
-        /// </summary>
-        /// <param name="userIDs"></param>
-        /// <param name="aliveUsers"></param>
-        /// <returns></returns>
-        /// <exception cref="DisconnectException"></exception>
-        public async Task sendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
+		/// <summary>
+		/// Sends the unique results to users for the knockout game type.
+		/// </summary>
+		/// <param name="userIDs"></param>
+		/// <param name="aliveUsers"></param>
+		/// <returns></returns>
+		/// <exception cref="DisconnectException"></exception>
+		public async Task sendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
         {
             foreach (string userID in userIDs)
             {

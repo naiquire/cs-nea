@@ -25,7 +25,7 @@ namespace server_app.connections
         /// <param name="userID"></param>
         public void requestRound(string gameID, string userID)
         {
-            queueing.callSubmission(gameID, userID);
+            queueing.requestRound(gameID, userID);
         }
     }
 }

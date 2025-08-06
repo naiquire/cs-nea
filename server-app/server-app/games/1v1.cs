@@ -10,6 +10,7 @@ namespace server_app.games
 	{
 		private const int rounds = 10;
 		private Dictionary<string, double> scores = [];
+		
 		public override void startGame()
 		{
 			base.startGame();
@@ -24,8 +25,12 @@ namespace server_app.games
 		}
 		public async override void submissionPhase()
 		{
+			continueRequests.Clear();
 			if (count < rounds)
 			{
+				await awaitRound();
+				Thread.Sleep(5000);
+
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
 				await sendLetter(userIDs, letters[count]);
@@ -36,7 +41,7 @@ namespace server_app.games
 				endGame();
 			}
 		}
-		public override void loadResponse(string userID, double[] input)
+		public void loadResponse(string userID, double[] input)
 		{
 			currentResponses.Add(userID, (input, DateTime.UtcNow));
 			if (currentResponses.Count == getPlayerCount())
@@ -44,7 +49,7 @@ namespace server_app.games
 				evaluationPhase(letters[count]);
 			}
 		}
-		public async override void evaluationPhase(char letter)
+		public async void evaluationPhase(char letter)
 		{
 			List<string> correctUsers = [];
 
@@ -84,6 +89,14 @@ namespace server_app.games
 
 				scores[lowest.user] += 1;
 				await send1v1Results(userIDs, lowest.user);
+			}
+		}
+		public void continueRequest(string userID)
+		{
+			continueRequests.Add(userID);
+			if (continueRequests.Count == userIDs.Count)
+			{
+				submissionPhase();
 			}
 		}
 		public async override void endGame()

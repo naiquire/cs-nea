@@ -91,6 +91,10 @@ namespace client_app
 				main.Invoke(new Action(() => menu.game.startGame()));
 			});
 
+            connection.On("awaitRound", () =>
+            {
+                main.Invoke(new Action(() => menu.game.awaitRound()));
+            });
             connection.On<char>("receiveLetter", (letter) =>
             {
 				main.Invoke(new Action(() => menu.game.submissionPhase(letter)));
@@ -98,14 +102,8 @@ namespace client_app
 
             connection.On<bool, double, TimeSpan>("receiveResults", (correct, accuracy, time) =>
             {
-                main.Invoke(new Action(() =>
-                {
-                    menu.game.updateStats(correct, accuracy, time);
-                    menu.game.evaluationPhase();
-                }));
+                main.Invoke(new Action(() => menu.game.evaluationPhase(correct, accuracy, time)));
             });
-
-
 
             return connection;
         }

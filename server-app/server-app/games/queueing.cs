@@ -105,13 +105,13 @@ namespace server_app.games
 			}
 		}
 
-        public static void callSubmission(string gameID, string userID)
+        public static void requestRound(string gameID, string userID)
         {
             foreach (IPlayable game in currentGames)
             {
-                if (game.getGameID() == gameID && game.getHost() == userID)
+                if (game.getGameID() == gameID)
                 {
-                    game.submissionPhase();
+                    game.continueRequest(userID);
                 }
             }
         }

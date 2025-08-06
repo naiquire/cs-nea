@@ -21,6 +21,9 @@ namespace server_app.games
 		{
 			if (count < rounds)
 			{
+				await awaitRound();
+				Thread.Sleep(5000);
+
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
 				await sendLetter(userIDs, letters[count]);
@@ -31,7 +34,7 @@ namespace server_app.games
 				endGame();
 			}
 		}
-		public override void loadResponse(string userID, double[] input)
+		public void loadResponse(string userID, double[] input)
 		{
 			currentResponses.Add(userID, (input, DateTime.UtcNow));
 			if (currentResponses.Count == getPlayerCount())
@@ -39,13 +42,21 @@ namespace server_app.games
 				evaluationPhase(letters[count]);
 			}
 		}
-		public async override void evaluationPhase(char letter)
+		public async void evaluationPhase(char letter)
 		{
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
 			for (int i = 0; i < userIDs.Count; i++)
 			{
 				evaluateSubmission(ref evaluates[i], userIDs[i], letter);
 				await sendResult(userIDs[i], stats[userIDs[i]]);
+			}
+		}
+		public void continueRequest(string userID)
+		{
+			continueRequests.Add(userID);
+			if (continueRequests.Count == userIDs.Count)
+			{
+				submissionPhase();
 			}
 		}
 		public async override void endGame()
