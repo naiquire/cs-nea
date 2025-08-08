@@ -1,7 +1,9 @@
-﻿using client_app.menus.games;
+﻿using client_app.games;
+using client_app.menus.games;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -104,8 +106,38 @@ namespace client_app
             {
                 main.Invoke(new Action(() => menu.game.evaluationPhase(correct, accuracy, time)));
             });
+            connection.On<string>("receiveVersusResult", (winner) =>
+            {
+                if (menu.game.getType() == "versus")
+                {
+                    main.Invoke(new Action(() =>
+                    {
+                        versus game = (versus)menu.game;
+                        game.versusResults(winner);
+                    }));
+                }
+                else
+                {
+                    throw new Exception("unexpected game type");
+                }
+            });
+			connection.On<bool>("receiveKnockoutResult", (passed) =>
+			{
+				if (menu.game.getType() == "knockout")
+				{
+					main.Invoke(new Action(() =>
+					{
+						knockout game = (knockout)menu.game;
+						game.knockoutResults(passed);
+					}));
+				}
+				else
+				{
+					throw new Exception("unexpected game type");
+				}
+			});
 
-            return connection;
+			return connection;
         }
     }
 }

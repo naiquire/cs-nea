@@ -192,12 +192,6 @@
     <Compile Include="menus\games\abstractGame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menus\games\accuracy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="menus\games\accuracy.Designer.cs">
-      <DependentUpon>accuracy.cs</DependentUpon>
-    </Compile>
     <Compile Include="hub-connection.cs" />
     <Compile Include="localisation.cs" />
     <Compile Include="login.cs">
@@ -205,6 +199,15 @@
     </Compile>
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menus\games\accuracy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menus\games\knockout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menus\games\versus.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="menus\interfaces.cs">
       <SubType>Form</SubType>
@@ -225,9 +228,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="menus\interfaces.resx">
       <DependentUpon>interfaces.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="menus\games\accuracy.resx">
-      <DependentUpon>accuracy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>

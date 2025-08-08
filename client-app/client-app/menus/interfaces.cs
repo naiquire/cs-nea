@@ -21,7 +21,7 @@ namespace client_app.menus
 		/// <summary>
 		/// Used to create control elements with the visual designer.
 		/// </summary>
-		public void InitializeComponent()
+		public void tempInitializeComponent()
 		{
 			this.lbl_timer = new Guna.UI2.WinForms.Guna2TextBox();
 			this.btn_submit = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -66,7 +66,7 @@ namespace client_app.menus
 		/// <summary>
 		/// Initialises the base UI when the client application is launched.
 		/// </summary>
-		public static void aInitializeComponent(main main)
+		public static void InitializeComponent(main main)
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
 
@@ -219,7 +219,7 @@ namespace client_app.menus
 			{
 				BorderThickness = 0,
 				Cursor = Cursors.Arrow,
-				DefaultText = "K",
+				DefaultText = "",
 				FillColor = Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
 				Font = new Font("Calibri", 144F),
 				ForeColor = Color.Black,
@@ -274,13 +274,11 @@ namespace client_app.menus
 
 		public static void configResultsPanel(abstractGame game, char c, stats stats)
 		{
-			resetLayout(game.main);
-
 			const int X = 100;
-			int y = 100;
+			int y = 500;
 
 			const int panelX = 900;
-			const int panelY = 50;
+			const int panelY = 200;
 			const int padding = 5;
 			const int defaultSize = panelY - 2 * padding;
 
@@ -382,6 +380,11 @@ namespace client_app.menus
 			panel_char.Controls.Add(lbl_letter);
 
 			bar_fill.BringToFront();
+
+			game.btn_continue.Click += async (sender, e) =>
+			{
+				await main.connection.InvokeAsync("requestRound", game.gameID, main.userData.userID);
+			};
 
 			game.main.panel_main.Controls.Add(panel_char);
 			game.main.panel_main.Controls.Add(game.btn_continue);

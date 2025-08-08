@@ -38,7 +38,7 @@ namespace client_app.menus.games
 		void submissionPhase(char letter);
 		void evaluationPhase(bool correct, double accuracy, TimeSpan time);
 		void updateUsers(List<friendData> users);
-		void updateStats(bool correct, double accuracy, TimeSpan time);
+		string getType();
 	}
 
 	public abstract class abstractGame : Form
@@ -105,6 +105,15 @@ namespace client_app.menus.games
 		}
 		public virtual void startGame()
 		{
+			interfaces.resetLayout(main);
+
+			// config side panels
+		}
+		public void awaitRound()
+		{
+			// countdown timer of 5 sec
+			
+
 			drawingPanel = interfaces.configGamePanel(this);
 
 			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
@@ -112,16 +121,14 @@ namespace client_app.menus.games
 			{
 				btn_submit.Enabled = false;
 				Bitmap drawing = drawingPanel.disablePanel();
-				
+
 				var submission = convertBitmap(drawing);
 
-				drawingPanel.clearPanel();
+				
 
 				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
-			};
-			btn_continue.Click += async (sender, e) =>
-			{
-				await main.connection.InvokeAsync("requestRound", gameID, main.userData.userID);
+
+				drawingPanel.clearPanel();
 			};
 
 			double[] convertBitmap(Bitmap bitmap)
@@ -146,10 +153,6 @@ namespace client_app.menus.games
 				return pixels;
 			}
 		}
-		public void awaitRound()
-		{
-			// display countdown to next round
-		}
 		public virtual void submissionPhase(char letter)
 		{
 			this.letter = letter;
@@ -157,13 +160,13 @@ namespace client_app.menus.games
 
 			drawingPanel.enablePanel();
 			btn_submit.Enabled = true;
-
-			
 		}
 		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
 			stats.updateStats(correct, accuracy, time);
 			interfaces.configResultsPanel(this, letter, stats);
 		}
+
+		public string getType() => type;
 	}
 }

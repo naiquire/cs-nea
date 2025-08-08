@@ -223,6 +223,7 @@ namespace server_app.games
 		/// <exception cref="DisconnectException"></exception>
 		protected async Task awaitRound()
 		{
+			continueRequests.Clear();
 			foreach (string userID in userIDs)
 			{
 				if (connection.map.TryGetValue(userID, out string? connectionID))

@@ -8,7 +8,6 @@ namespace server_app.games
     public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
     {
         private List<string> aliveUsers = [];
-        private List<string> continueRequests = [];
         public override void startGame()
         {
             aliveUsers = [.. userIDs];

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace client_app.games
 {
-	public class accuracy : abstractGame, IPlayable
+	public class versus : abstractGame, IPlayable
 	{
-		public accuracy(main main) : base(main, "accuracy")
+		public versus(main main) : base(main, "versus")
 		{
 
 		}
@@ -39,6 +39,11 @@ namespace client_app.games
 		public override void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
 			base.evaluationPhase(correct, accuracy, time);
+		}
+
+		public void versusResults(string winner)
+		{
+			// add to results screen
 		}
 	}
 }

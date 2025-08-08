@@ -6,7 +6,7 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "1v1", userID, 2), IPlayable
+	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "versus", userID, 2), IPlayable
 	{
 		private const int rounds = 10;
 		private Dictionary<string, double> scores = [];
@@ -34,7 +34,6 @@ namespace server_app.games
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
 				await sendLetter(userIDs, letters[count]);
-				count++;
 			}
 			else
 			{
@@ -72,7 +71,7 @@ namespace server_app.games
 					scores[userID] += 0.5;
 				}
 
-				await send1v1Results(userIDs, null);
+				await sendVersusResults(userIDs, null);
 			}
 			else
 			{
@@ -88,8 +87,9 @@ namespace server_app.games
 				}
 
 				scores[lowest.user] += 1;
-				await send1v1Results(userIDs, lowest.user);
+				await sendVersusResults(userIDs, lowest.user);
 			}
+			count++;
 		}
 		public void continueRequest(string userID)
 		{
@@ -157,13 +157,13 @@ namespace server_app.games
 		/// <param name="winner"></param>
 		/// <returns></returns>
 		/// <exception cref="DisconnectException"></exception>
-		public async Task send1v1Results(List<string> userIDs, string? winner)
+		public async Task sendVersusResults(List<string> userIDs, string? winner)
 		{
 			foreach (string userID in userIDs)
 			{
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("receive1v1Result", winner);
+					await hubContext.Clients.Client(connectionID).SendAsync("receiveVersusResult", winner);
 				}
 				else
 				{

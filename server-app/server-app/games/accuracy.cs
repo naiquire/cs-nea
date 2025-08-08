@@ -27,7 +27,6 @@ namespace server_app.games
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
 				await sendLetter(userIDs, letters[count]);
-				count++;
 			}
 			else
 			{
@@ -50,6 +49,7 @@ namespace server_app.games
 				evaluateSubmission(ref evaluates[i], userIDs[i], letter);
 				await sendResult(userIDs[i], stats[userIDs[i]]);
 			}
+			count++;
 		}
 		public void continueRequest(string userID)
 		{

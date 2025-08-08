@@ -32,7 +32,7 @@ namespace client_app.menus
         /// </summary>
         public void InitializeComponent()
         {
-            resetLayout(main);
+            interfaces.resetLayout(main);
             
             lbl_username = new Label();
             lbl_rank = new Label();
