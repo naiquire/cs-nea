@@ -126,14 +126,34 @@ namespace client_app
                     throw new Exception("unexpected game type");
                 }
             });
-			connection.On<bool>("receiveKnockoutResult", (passed) =>
+			connection.On<List<string>>("receiveKnockoutResult", (aliveUsers) =>
 			{
 				if (menu.game.getType() == "knockout")
 				{
 					main.Invoke(new Action(() =>
 					{
 						knockout game = (knockout)menu.game;
-						game.knockoutResults(passed);
+						game.knockoutResults(aliveUsers);
+					}));
+				}
+				else
+				{
+					throw new Exception("unexpected game type");
+				}
+			});
+
+            connection.On("endGame", () =>
+            {
+                main.Invoke(new Action(() => menu.game.endGame()));
+            });
+            connection.On<int>("updateRank", (rank) =>
+            {
+				if (menu.game.getType() == "versus")
+				{
+					main.Invoke(new Action(() =>
+					{
+						versus game = (versus)menu.game;
+                        game.updateRank(rank);
 					}));
 				}
 				else

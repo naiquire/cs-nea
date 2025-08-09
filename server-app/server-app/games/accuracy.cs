@@ -60,21 +60,5 @@ namespace server_app.games
 				submissionPhase();
 			}
 		}
-		public async override void endGame()
-		{
-			foreach (string userID in userIDs)
-			{
-				if (connection.map.TryGetValue(userID, out string? connectionID))
-				{
-					await hubContext.Clients.Client(connectionID).SendAsync("endAccuracy");
-				}
-				else
-				{
-					throw new DisconnectException(userID);
-				}
-			}
-
-			base.endGame();
-		}
 	}
 }

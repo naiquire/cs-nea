@@ -189,6 +189,9 @@
     <Compile Include="components\input.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="components\summary.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="menus\games\abstractGame.cs">
       <SubType>Form</SubType>
     </Compile>

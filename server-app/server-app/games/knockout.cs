@@ -111,7 +111,7 @@ namespace server_app.games
             {
                 if (connection.map.TryGetValue(userID, out string? connectionID))
                 {
-                    await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers.Contains(userID));
+                    await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
                 }
                 else
                 {

@@ -16,9 +16,9 @@ namespace client_app.games
 			base.queueGame();
 		}
 
-		public async override Task joinGame()
+		public async override Task joinGameLobby()
 		{
-			await base.joinGame();
+			await base.joinGameLobby();
 		}
 
 		public override void awaitStart()
@@ -44,6 +44,21 @@ namespace client_app.games
 		public void versusResults(string winner)
 		{
 			// add to results screen
+		}
+
+		public override void endGame()
+		{
+			base.endGame();
+		}
+
+		public void updateRank(int currentRank)
+		{
+			int previousRank = main.userData.rank;
+			int change = currentRank - previousRank;
+
+			main.userData.rank = currentRank;
+
+			// display graphic showing change on endscreen
 		}
 	}
 }

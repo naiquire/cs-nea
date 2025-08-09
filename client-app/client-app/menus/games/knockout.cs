@@ -1,14 +1,18 @@
-﻿using client_app.menus.games;
+﻿using client_app.menus;
+using client_app.menus.games;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace client_app.games
 {
 	public class knockout : abstractGame, IPlayable
 	{
+		private List<string> aliveUsers;
 		public knockout(main main) : base(main, "knockout")
 		{
-
+			aliveUsers = new List<string>();
 		}
 
 		public override void queueGame()
@@ -16,13 +20,42 @@ namespace client_app.games
 			base.queueGame();
 		}
 
-		public async override Task joinGame()
+		public async override Task joinGameLobby()
 		{
-			await base.joinGame();
+			await base.joinGameLobby();
+		}
+
+		public override void updateUsers(List<friendData> users)
+		{
+			if (started)
+			{
+				// left panel should only display alive users
+				this.users = users;
+
+				List<friendData> alive = new List<friendData>();
+				foreach (var user in this.users)
+				{
+					if (aliveUsers.Contains(user.userID))
+					{
+						alive.Add(user);
+					}
+				}
+
+				interfaces.configLeftGamePanel(main.panel_left, alive);
+			}
+			else
+			{
+				base.updateUsers(users);
+			}
 		}
 
 		public override void awaitStart()
 		{
+			foreach (var user in users)
+			{
+				aliveUsers.Add(user.userID);
+			}
+
 			base.awaitStart();
 		}
 
@@ -41,9 +74,12 @@ namespace client_app.games
 			base.evaluationPhase(correct, accuracy, time);
 		}
 
-		public void knockoutResults(bool passed)
+		public void knockoutResults(List<string> aliveUsers)
 		{
-			if (passed)
+			this.aliveUsers = aliveUsers;
+			updateUsers(users);
+
+			if (aliveUsers.Contains(main.userData.userID))
 			{
 				// add to results screen
 			}

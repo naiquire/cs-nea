@@ -100,7 +100,7 @@ namespace client_app.menus
 			main.lbl_appName.Name = "lbl_appName";
 			main.lbl_appName.Size = new Size(100, 16);
 			main.lbl_appName.TabIndex = 0;
-			main.lbl_appName.Text = "appName";
+			main.lbl_appName.Text = "Glyph";
 			// 
 			// btn_close
 			// 
@@ -264,6 +264,28 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(game.btn_submit);
 			game.main.panel_main.Controls.Add(game.btn_clear);
 			return input;
+		}
+
+		public static void configRightGamePanel(abstractGame game)
+		{
+			///
+			/// so what do i want
+			/// 
+			/// round number definitely like Round 4 of 10 or something
+			/// and a stats panel i guess
+			/// correct, accuracy, and time detailed for each round done so far
+			/// 
+
+
+		}
+
+		public static void configLeftGamePanel(Panel panel, List<friendData> users)
+		{
+			///
+			/// kinda similar to home actually
+			/// 
+			/// basically a list of the current users in the game
+			/// yes useless for accuracy but i don't care lol
 		}
 
 
@@ -839,7 +861,7 @@ namespace client_app.menus
 		/// </summary>
 		/// <param name="main"></param>
 		/// <param name="users"></param>
-		public static void configLobby(Panel panel, List<friendData> users)
+		public static void configLobbyPanel(Panel panel, List<friendData> users)
 		{
 			panel.Controls.Clear();
 

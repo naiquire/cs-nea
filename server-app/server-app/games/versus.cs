@@ -102,40 +102,16 @@ namespace server_app.games
 		}
 		public async override void endGame()
 		{
-			userData[] userData = new userData[userIDs.Count];
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				if (!database.loadUserData(userIDs[i], out userData[i]))
-				{
-					database.outputException($"Failed to get userData for rank update: <{userIDs[i]}>");
-				}
-			}
-
-			for (int i = 0; i < userIDs.Count; i++)
-			{
-				double expScore = 1.0 / (1 + Math.Pow(10, (userData[i].rank - i == 0 ? userData[1].rank : userData[0].rank) / 400));
-
-				int k;
-				if (userData[i].rank < 2100)
-				{
-					k = 32;
-				}
-				else if (userData[i].rank > 2400)
-				{
-					k = 16;
-				}
-				else
-				{
-					k = 24;
-				}
-
-				int rank = (int)(userData[i].rank + k * (scores[userIDs[i]] - expScore));
+				double expScore = 1.0 / (1 + Math.Pow(10, (userDatas[i].rank - i == 0 ? userDatas[1].rank : userDatas[0].rank) / 400));
+				int rank = calculateRank(userDatas[i], expScore);
 
 				if (database.updateRank(userIDs[i], rank))
 				{
 					if (connection.map.TryGetValue(userIDs[i], out string? connectionID))
 					{
-						await hubContext.Clients.Client(connectionID).SendAsync("end1v1", rank);
+						await hubContext.Clients.Client(connectionID).SendAsync("updateRank", rank);
 					}
 					else
 					{
@@ -146,6 +122,25 @@ namespace server_app.games
 				{
 					database.outputException($"Failed to update user rank : <{userIDs[i]}>");
 				}
+			}
+
+			int calculateRank(friendData user, double expScore)
+			{
+				int k;
+				if (user.rank < 2100)
+				{
+					k = 32;
+				}
+				else if (user.rank > 2400)
+				{
+					k = 16;
+				}
+				else
+				{
+					k = 24;
+				}
+
+				return (int)(user.rank + k * (scores[user.userID] - expScore));
 			}
 
 			base.endGame();

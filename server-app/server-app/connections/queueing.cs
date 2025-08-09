@@ -19,7 +19,7 @@ namespace server_app.connections
 				throw new Exception("[FATAL] IHubContext was null when attempting to queue a user");
 			}
 		}
-		public bool confirmJoin(string gameID)
+		public bool userJoined(string gameID)
 		{
 			return queueing.userJoined(gameID);
 		}

@@ -318,39 +318,54 @@ namespace server_app.games
 		{
 			foreach (string userID in userIDs)
 			{
+				if (connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
+				}
+				else
+				{
+					throw new DisconnectException(userID);
+				}
+			}
+
+			foreach (string userID in userIDs)
+			{
 				for (int i = 0; i < letters.Count; i++)
 				{
-					char letter = letters[i];
-
 					if (database.loadUserData(userID, out userData userData))
 					{
-						double accuracy = userData.statistics[letter].accuracy;
-						TimeSpan time = userData.statistics[letter].time;
-						int total = userData.statistics[letter].total;
-
-						double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[i]) / (total + 1);
-						TimeSpan updatedTime = (time * total + stats[userData.userID].time[i]) / (total + 1);
-
-						if (database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
-						{
-							if (connection.map.TryGetValue(userData.userID, out string? connectionID))
-							{
-								await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, new statistics(updatedAccuracy, updatedTime, total + 1));
-							}
-							else
-							{
-								throw new DisconnectException(userData.userID);
-							}
-						}
-						else
-						{
-							database.outputException("Failed to update statistics");
-						}
+						await updateStatistics(userData, letters[i], i);
 					}
 					else
 					{
 						database.outputException("Failed to retrieve statistics");
 					}
+				}
+			}
+
+			async Task updateStatistics(userData userData, char letter, int i)
+			{
+				double accuracy = userData.statistics[letter].accuracy;
+				TimeSpan time = userData.statistics[letter].time;
+				int total = userData.statistics[letter].total;
+
+				double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[i]) / (total + 1);
+				TimeSpan updatedTime = (time * total + stats[userData.userID].time[i]) / (total + 1);
+
+				if (database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
+				{
+					if (connection.map.TryGetValue(userData.userID, out string? connectionID))
+					{
+						await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, new statistics(updatedAccuracy, updatedTime, total + 1));
+					}
+					else
+					{
+						throw new DisconnectException(userData.userID);
+					}
+				}
+				else
+				{
+					database.outputException("Failed to update statistics");
 				}
 			}
 		}

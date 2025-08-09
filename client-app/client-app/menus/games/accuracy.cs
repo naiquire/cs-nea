@@ -16,9 +16,9 @@ namespace client_app.games
 			base.queueGame();
 		}
 
-		public async override Task joinGame()
+		public async override Task joinGameLobby()
 		{
-			await base.joinGame();
+			await base.joinGameLobby();
 		}
 
 		public override void awaitStart()

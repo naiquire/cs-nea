@@ -31,12 +31,13 @@ namespace client_app.menus.games
 	public interface IPlayable
 	{
 		void queueGame();
-		Task joinGame();
+		Task joinGameLobby();
 		void awaitStart();
 		void startGame();
 		void awaitRound();
 		void submissionPhase(char letter);
 		void evaluationPhase(bool correct, double accuracy, TimeSpan time);
+		void endGame();
 		void updateUsers(List<friendData> users);
 		string getType();
 	}
@@ -49,7 +50,8 @@ namespace client_app.menus.games
 		protected readonly string type;
 		public List<friendData> users;
 
-		private bool started;
+		protected bool started;
+		private int rounds;
 
 		protected stats stats;
 		protected char letter;
@@ -68,34 +70,34 @@ namespace client_app.menus.games
 			this.type = type;
 			stats = new stats("");
 			started = false;
+			rounds = 0;
 		}
-		public void updateUsers(List<friendData> users)
+		public virtual void updateUsers(List<friendData> users)
 		{
 			this.users = users;
 
 			if (!started)
 			{
-				interfaces.configLobby(main.panel_main, users);
+				interfaces.configLobbyPanel(main.panel_main, users);
 			}
-			else
-			{
 
-			}
+			interfaces.configLeftGamePanel(main.panel_left, users);
 		}
 		public async virtual void queueGame()
 		{
 			gameID = await main.connection.InvokeAsync<string>("queueGame", type, main.userData.userID);
+			
 			if (!string.IsNullOrEmpty(gameID))
 			{
-				await joinGame();
+				await joinGameLobby();
 			}
 		}
-		public virtual async Task joinGame()
+		public virtual async Task joinGameLobby()
 		{
 			interfaces.initialiseLobby(main);
-			if (!await main.connection.InvokeAsync<bool>("confirmJoin", gameID))
+			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
-				// something very bad happened
+				// gameID couldn't be found, quit to menu
 			}
 		}
 		public virtual void awaitStart()
@@ -105,9 +107,7 @@ namespace client_app.menus.games
 		}
 		public virtual void startGame()
 		{
-			interfaces.resetLayout(main);
-
-			// config side panels
+			interfaces.configRightGamePanel(this);
 		}
 		public void awaitRound()
 		{
@@ -155,6 +155,8 @@ namespace client_app.menus.games
 		}
 		public virtual void submissionPhase(char letter)
 		{
+			rounds++;
+
 			this.letter = letter;
 			lbl_letter.Text = letter.ToString();
 
@@ -166,6 +168,11 @@ namespace client_app.menus.games
 			interfaces.resetLayout(main);
 			stats.updateStats(correct, accuracy, time);
 			interfaces.configResultsPanel(this, letter, stats);
+		}
+
+		public virtual void endGame()
+		{
+
 		}
 
 		public string getType() => type;
