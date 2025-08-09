@@ -61,34 +61,9 @@ namespace client_app
 		{
 			hub_connection.injectForm(null, this);
 
-			/// <summary>
-			/// this is a possible way of implementing localisation efficiently
-
-			/// 
-			/// first string is the word in english
-			/// the second dictionary stores the translations in the form (language, translation)
-			/// 
-			/// for example if the localisation is set to french:
-			/// <code>
-			/// localisation["friends"]["fr"]
-			/// </code>
-			/// "amis" would be outputted
-			/// 
-			/// </summary>
-			/// 
-
-			#region temp
-			//userData.userID = userID;
-			//userData.rank = 1200;
-			//userData.localisation = "en";
-			#endregion
-
 			localisation = languages.localisation;
 			interfaces.InitializeComponent(this);
-			initialiseConnection(userID);
-			//InitializeComponent(); // temp
-
-			
+			initialiseConnection(userID);			
 
 		}
 		private async void initialiseConnection(string userID)
@@ -124,6 +99,21 @@ namespace client_app
 
 			InitializeComponent();
 		}
+		public void updateOnline(string user, bool online)
+		{
+			int index = 0;
+			for (int i = 0; i < userData.friends.Count; i++)
+			{
+				if (userData.friends[i].userID == user)
+				{
+					index = i;
+					break;
+				}
+			}
+			var copy = userData.friends[index];
+			copy.online = online;
+			userData.friends[index] = copy;
+		}
 
 		public async void handleInvites(List<string> invites)
 		{
@@ -148,11 +138,13 @@ namespace client_app
 		}
 		private void btn_queue1v1_Click(object sender, EventArgs e)
 		{
-			
+			menu.game = new versus(this);
+			menu.game.queueGame();
 		}
 		private void btn_queueKnockout_Click(object sender, EventArgs e)
 		{
-			
+			menu.game = new knockout(this);
+			menu.game.queueGame();
 		}
 	}
 }

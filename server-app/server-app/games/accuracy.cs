@@ -21,6 +21,7 @@ namespace server_app.games
 		{
 			if (count < rounds)
 			{
+				continueRequests.Clear();
 				await awaitRound();
 				Thread.Sleep(5000);
 

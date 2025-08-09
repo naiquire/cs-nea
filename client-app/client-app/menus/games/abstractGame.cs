@@ -112,8 +112,8 @@ namespace client_app.menus.games
 		public void awaitRound()
 		{
 			// countdown timer of 5 sec
-			
 
+			interfaces.resetLayout(main);
 			drawingPanel = interfaces.configGamePanel(this);
 
 			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
@@ -163,6 +163,7 @@ namespace client_app.menus.games
 		}
 		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
+			interfaces.resetLayout(main);
 			stats.updateStats(correct, accuracy, time);
 			interfaces.configResultsPanel(this, letter, stats);
 		}

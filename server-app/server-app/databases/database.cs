@@ -215,8 +215,6 @@ namespace server_app.databases
 				return false;
 			}
 
-			userData.userID = userID;
-
 			if (loadStatistics(userID, out var stats))
 			{
 				userData.statistics = stats;
@@ -241,6 +239,9 @@ namespace server_app.databases
 					}
 				}
 			}
+
+			userData.userID = userID;
+			userData.friends = friendData;
 
 			return true;
 		}

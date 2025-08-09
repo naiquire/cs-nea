@@ -14,7 +14,6 @@ namespace client_app.menus
 {
 	public abstract class interfaces : Form // can be made static in final build, maybe rename
 	{
-		private Guna.UI2.WinForms.Guna2GradientButton btn_submit;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_timer;
 		
 
@@ -24,7 +23,6 @@ namespace client_app.menus
 		public void tempInitializeComponent()
 		{
 			this.lbl_timer = new Guna.UI2.WinForms.Guna2TextBox();
-			this.btn_submit = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.SuspendLayout();
 			// 
 			// lbl_timer
@@ -57,7 +55,6 @@ namespace client_app.menus
 			// interfaces
 			// 
 			this.ClientSize = new System.Drawing.Size(1120, 1050);
-			this.Controls.Add(this.btn_submit);
 			this.Name = "interfaces";
 			this.ResumeLayout(false);
 
@@ -198,8 +195,6 @@ namespace client_app.menus
 		/// <returns>An <see cref="input"/> object containing the created drawing panel.</returns>
 		public static input configGamePanel(abstractGame game)
 		{
-			resetLayout(game.main);
-
 			game.panel_outline = new Guna.UI2.WinForms.Guna2Shapes()
 			{
 				BorderColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
@@ -278,7 +273,7 @@ namespace client_app.menus
 			int y = 500;
 
 			const int panelX = 900;
-			const int panelY = 200;
+			const int panelY = 50;
 			const int padding = 5;
 			const int defaultSize = panelY - 2 * padding;
 
@@ -325,7 +320,7 @@ namespace client_app.menus
 				Name = "lbl_percentage",
 				Size = new System.Drawing.Size(defaultSize, defaultSize),
 				TabIndex = 3,
-				Text = $"{100 * accuracy}%",
+				Text = $"{Math.Round(100 * accuracy, 2)}%",
 				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
@@ -846,6 +841,8 @@ namespace client_app.menus
 		/// <param name="users"></param>
 		public static void configLobby(Panel panel, List<friendData> users)
 		{
+			panel.Controls.Clear();
+
 			Panel panel_users = new Panel()
 			{
 				Name = "panel_users",
@@ -907,12 +904,6 @@ namespace client_app.menus
 
 			panel.Controls.Add(panel_users);
 		}
-
-		/// <summary>
-		/// Handles the click event for the close button, disconnecting the client and closing the application.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 
 	}
 }

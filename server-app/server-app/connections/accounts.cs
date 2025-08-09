@@ -19,12 +19,14 @@ namespace server_app.connections
 		public static readonly Dictionary<string, string> map = [];
 		public async Task clientConnected(string userID)
 		{
+			// add user to connectionID map
 			if (map.ContainsKey(userID))
 			{
 				map.Remove(userID); // temp fix
 			}
 			map.Add(userID, Context.ConnectionId);
 			
+			// send userData to client
 			if (database.loadUserData(userID, out userData userData))
 			{
 				if (map.TryGetValue(userID, out string? connectionID))
@@ -36,7 +38,15 @@ namespace server_app.connections
 					throw new DisconnectException(userID);
 				}
 			}
-			// else logic
+
+			// update online status for friends
+			foreach (friendData friend in userData.friends)
+			{
+				if (map.TryGetValue(friend.userID, out string? connectionID))
+				{
+					await Clients.Client(connectionID).SendAsync("updateOnline", userID, true);
+				}
+			}
 		}
 		public void clientDisconnected(string userID, string? gameID)
 		{

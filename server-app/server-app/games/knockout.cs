@@ -21,9 +21,11 @@ namespace server_app.games
 	    }
         public async override void submissionPhase()
         {
-            continueRequests.Clear();
+            
 			if (aliveUsers.Count > 1)
 			{
+				continueRequests.Clear();
+
 				char letter = (char)(rnd.Next(0, 26) + 65);
 				letters.Add(letter);
 

@@ -25,9 +25,10 @@ namespace server_app.games
 		}
 		public async override void submissionPhase()
 		{
-			continueRequests.Clear();
+			
 			if (count < rounds)
 			{
+				continueRequests.Clear();
 				await awaitRound();
 				Thread.Sleep(5000);
 

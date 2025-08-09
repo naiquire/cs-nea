@@ -74,6 +74,11 @@ namespace client_app
                 }
 				main.userData.friends.Add(data);
 			});
+            connection.On<string, bool>("updateOnline", (user, online) =>
+            {
+                
+            });
+
             connection.On<char, statistics>("updateStatistics", (letter, statistics) =>
             {
                 main.userData.statistics[letter] = statistics;
