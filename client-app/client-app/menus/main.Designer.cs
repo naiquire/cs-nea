@@ -118,13 +118,12 @@ namespace client_app
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void btn_home_Click(object sender, EventArgs e)
+		public async void btn_home_Click(object sender, EventArgs e)
 		{
-			/// <no server functionality>
-			//if (game.gameID != null)
-			//{
-			//    connection.InvokeAsync("leaveGame", game.gameID, userData.userID);
-			//}
+			if (menu.game != null)
+			{
+				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
+			}
 
 			// dispose all other classes
 			menu.profile = null;
@@ -371,7 +370,7 @@ namespace client_app
 		/// <summary>
 		/// Configures the friends panel on the home screen.
 		/// </summary>
-		private void configFriendsPanel()
+		public void configFriendsPanel()
         {
             // seperate friends into online/offline
             List<friendData> onlineList = new List<friendData>();
@@ -502,7 +501,11 @@ namespace client_app
 		public async void btn_close_Click(object sender, EventArgs e)
 		{
 			Hide();
-			//await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			if (menu.game != null)
+			{
+				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
+			}
+			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
 			Close();
 		}
 

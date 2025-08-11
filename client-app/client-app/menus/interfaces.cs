@@ -14,6 +14,7 @@ namespace client_app.menus
 {
 	public abstract class interfaces : Form // can be made static in final build, maybe rename
 	{
+		
 		private Guna.UI2.WinForms.Guna2TextBox lbl_timer;
 		
 
@@ -22,40 +23,15 @@ namespace client_app.menus
 		/// </summary>
 		public void tempInitializeComponent()
 		{
-			this.lbl_timer = new Guna.UI2.WinForms.Guna2TextBox();
-			this.SuspendLayout();
-			// 
-			// lbl_timer
-			// 
-			this.lbl_timer.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156)))));
-			this.lbl_timer.BorderRadius = 10;
-			this.lbl_timer.BorderThickness = 4;
-			this.lbl_timer.Cursor = System.Windows.Forms.Cursors.Arrow;
-			this.lbl_timer.DefaultText = "00:00.0";
-			this.lbl_timer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-			this.lbl_timer.Font = new System.Drawing.Font("Bahnschrift SemiBold", 39.75F, System.Drawing.FontStyle.Bold);
-			this.lbl_timer.ForeColor = System.Drawing.Color.White;
-			this.lbl_timer.Location = new System.Drawing.Point(310, 900);
-			this.lbl_timer.Margin = new System.Windows.Forms.Padding(5);
-			this.lbl_timer.Multiline = true;
-			this.lbl_timer.Name = "lbl_timer";
-			this.lbl_timer.PlaceholderText = "";
-			this.lbl_timer.ReadOnly = true;
-			this.lbl_timer.SelectedText = "";
-			this.lbl_timer.Size = new System.Drawing.Size(500, 100);
-			this.lbl_timer.TabIndex = 0;
-			this.lbl_timer.TabStop = false;
-			this.lbl_timer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.lbl_timer.TextOffset = new System.Drawing.Point(0, 4);
-			// 
-			// btn_submit
-			// 
 			
 			// 
 			// interfaces
 			// 
 			this.ClientSize = new System.Drawing.Size(1120, 1050);
+			
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "interfaces";
+			
 			this.ResumeLayout(false);
 
 		}
@@ -455,7 +431,7 @@ namespace client_app.menus
 				PlaceholderText = "",
 				ReadOnly = true,
 				SelectedText = "",
-				Size = new System.Drawing.Size(420, 50),
+				Size = new System.Drawing.Size(420, 70),
 				TabIndex = 13,
 				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
 			};
@@ -469,14 +445,14 @@ namespace client_app.menus
 				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
 				Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 				ForeColor = System.Drawing.Color.White,
-				Location = new System.Drawing.Point(40, 330),
+				Location = new System.Drawing.Point(40, 350),
 				Margin = new System.Windows.Forms.Padding(5, 5, 5, 5),
 				Multiline = true,
 				Name = "header",
 				PlaceholderText = "",
 				ReadOnly = true,
 				SelectedText = "",
-				Size = new System.Drawing.Size(420, 200),
+				Size = new System.Drawing.Size(420, 180),
 				TabIndex = 0,
 				TabStop = false,
 			};
@@ -494,13 +470,7 @@ namespace client_app.menus
 			configStatsPanel(main.panel_right, (40, 570), userData);
 		}
 
-		/// <summary>
-		/// Configures the panel containing summary statistics for a user at a given position in a Panel.
-		/// </summary>
-		/// <param name="panel"></param>
-		/// <param name="pos"></param>
-		/// <param name="user"></param>
-		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
+		public static (string, string, string) calculateStatsOverview(userData user)
 		{
 			string rank = user.rank.ToString();
 
@@ -517,7 +487,20 @@ namespace client_app.menus
 				mean += user.statistics[letter].accuracy;
 			}
 			mean /= user.statistics.Count;
-			string accuracy = ((int)(100 * mean)).ToString();
+			string accuracy = (Math.Round((100 * mean), 2)).ToString();
+
+			return (rank, total, accuracy);
+		}
+
+		/// <summary>
+		/// Configures the panel containing summary statistics for a user at a given position in a Panel.
+		/// </summary>
+		/// <param name="panel"></param>
+		/// <param name="pos"></param>
+		/// <param name="user"></param>
+		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
+		{
+			(string rank, string total, string accuracy) = calculateStatsOverview(user);
 
 			Guna.UI2.WinForms.Guna2Panel panel_statsOverview = new Guna.UI2.WinForms.Guna2Panel()
 			{
@@ -734,7 +717,7 @@ namespace client_app.menus
 				FillThickness = 2,
 				Location = new System.Drawing.Point(189, 20),
 				Name = "seperator_accuracy",
-				Size = new System.Drawing.Size(96, 10),
+				Size = new System.Drawing.Size(86, 10),
 				TabIndex = 8,
 			};
 			Guna.UI2.WinForms.Guna2TextBox txt_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
@@ -746,14 +729,14 @@ namespace client_app.menus
 				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255))))),
 				Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
-				Location = new System.Drawing.Point(291, 10),
+				Location = new System.Drawing.Point(281, 10),
 				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
 				Name = "txt_accuracy",
 				PlaceholderText = "",
 				ReadOnly = true,
 				RightToLeft = System.Windows.Forms.RightToLeft.Yes,
 				SelectedText = "",
-				Size = new System.Drawing.Size(69, 30),
+				Size = new System.Drawing.Size(79, 30),
 				TabIndex = 7,
 				TextOffset = new System.Drawing.Point(0, -1),
 			};

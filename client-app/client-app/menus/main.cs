@@ -78,25 +78,6 @@ namespace client_app
 		{
 			main.userData = userData;
 
-			main.userData.friends = new List<friendData>()
-			{
-				new friendData()
-				{
-					userID = "beetel",
-					online = true,
-				},
-				new friendData()
-				{
-					userID = "papp",
-					online = false,
-				},
-				new friendData()
-				{
-					userID = "andrew",
-					online = true,
-				}
-			};
-
 			InitializeComponent();
 		}
 		public void updateOnline(string user, bool online)
@@ -113,13 +94,18 @@ namespace client_app
 			var copy = userData.friends[index];
 			copy.online = online;
 			userData.friends[index] = copy;
+
+			if (menu.profile == null && menu.game == null) // user is on home screen
+			{
+				configFriendsPanel();
+			}
 		}
 
 		public async void handleInvites(List<string> invites)
 		{
 			foreach (string invite in invites)
 			{
-				if (new confirm($"Received a friend invite from {invite}").DialogResult == System.Windows.Forms.DialogResult.OK)
+				if (new confirm($"Received a friend invite from {invite}").DialogResult == DialogResult.OK)
 				{
 					await connection.InvokeAsync("addFriends", invite, userData.userID);
 				}

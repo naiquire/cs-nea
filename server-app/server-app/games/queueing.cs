@@ -105,6 +105,17 @@ namespace server_app.games
 			}
 		}
 
+        public static void dequeueUser(string gameID, string userID)
+        {
+			foreach (IPlayable game in currentGames)
+			{
+				if (game.getGameID() == gameID)
+				{
+					game.dequeueUser(userID);
+				}
+			}
+		}
+
         public static void requestRound(string gameID, string userID)
         {
             foreach (IPlayable game in currentGames)

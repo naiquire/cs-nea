@@ -39,26 +39,23 @@ namespace server_app.connections
 				}
 			}
 
-			// update online status for friends
-			foreach (friendData friend in userData.friends)
-			{
-				if (map.TryGetValue(friend.userID, out string? connectionID))
-				{
-					await Clients.Client(connectionID).SendAsync("updateOnline", userID, true);
-				}
-			}
+			await updateOnline(userID, true);
 		}
-		public void clientDisconnected(string userID, string? gameID)
+		public async void clientDisconnected(string userID)
 		{
+			await updateOnline(userID, false);
 			map.Remove(userID);
-			
-			if (gameID != null)
+		}
+
+		public async Task updateOnline(string userID, bool online)
+		{
+			if (database.loadFriends(userID, out List<string> friends))
 			{
-				foreach (var game in queueing.currentGames)
+				foreach (string friend in friends)
 				{
-					if (game.getGameID() == gameID)
+					if (map.TryGetValue(friend, out string? connectionID))
 					{
-						game.dequeueUser(userID);
+						await Clients.Client(connectionID).SendAsync("updateOnline", userID, false);
 					}
 				}
 			}

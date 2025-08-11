@@ -33,60 +33,161 @@ namespace client_app.menus
         public void InitializeComponent()
         {
             interfaces.resetLayout(main);
-            
-            lbl_username = new Label();
-            lbl_rank = new Label();
-            pic_language = new PictureBox();
-            panel_stats = new Panel();
-            ///
-            /// lbl_username
-            ///
-            lbl_username.BackColor = main.panel_main.BackColor;
-            lbl_username.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            lbl_username.Font = new System.Drawing.Font("Bahnschrift SemiBold", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lbl_username.Location = new System.Drawing.Point(20, 20);
-            lbl_username.Name = "lbl_username";
-            lbl_username.Size = new System.Drawing.Size(200, 40);
-            lbl_username.TabIndex = 0;
-            lbl_username.Text = userData.userID;
-            ///
-            /// lbl_rank
-            ///
-            lbl_rank.BackColor = main.panel_main.BackColor;
-            lbl_rank.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            lbl_rank.Font = new System.Drawing.Font("Bahnschrift SemiBold", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lbl_rank.Location = new System.Drawing.Point(20, 80);
-            lbl_rank.Name = "lbl_rank";
-            lbl_rank.Size = new System.Drawing.Size(200, 40);
-            lbl_rank.TabIndex = 0;
-            lbl_rank.Text = userData.rank.ToString();
-            ///
-            /// pic_language
-            ///
-            //pic_language.Image = (System.Drawing.Image) global::client_app.Properties.Resources.ResourceManager.GetObject(userData.localisation); // may not work
-            pic_language.Location = new System.Drawing.Point(20, 150);
-            pic_language.Name = "pic_language";
-            pic_language.Size = new System.Drawing.Size(400, 200);
-            pic_language.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            pic_language.TabIndex = 0;
-            pic_language.TabStop = false;
-			pic_language.BackColor = main.panel_left.BackColor;
-			///
-			/// panel_stats
-			/// 
-			panel_stats.Name = "panel_stats";
-			panel_stats.BackColor = main.panel_main.BackColor;
-			panel_stats.BorderStyle = BorderStyle.FixedSingle;
-			panel_stats.Location = new System.Drawing.Point(50, 150);
-			panel_stats.Size = new System.Drawing.Size(main.panel_main.Width - 100, main.panel_main.Height - 100 - 100);
 
+			this.lbl_username = new Guna.UI2.WinForms.Guna2TextBox();
+			this.lbl_rank = new Guna.UI2.WinForms.Guna2TextBox();
+			this.lbl_total = new Guna.UI2.WinForms.Guna2TextBox();
+			this.lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox();
+			this.pic_seperator = new System.Windows.Forms.PictureBox();
+			this.panel_stats = new Guna.UI2.WinForms.Guna2Panel();
+			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// lbl_username
+			// 
+			this.lbl_username.BorderRadius = 20;
+			this.lbl_username.BorderThickness = 0;
+			this.lbl_username.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.lbl_username.DefaultText = "username";
+			this.lbl_username.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.lbl_username.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.lbl_username.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_username.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_username.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_username.Font = new System.Drawing.Font("Bahnschrift SemiBold", 31.75F, System.Drawing.FontStyle.Bold);
+			this.lbl_username.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+			this.lbl_username.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_username.IconLeft = global::client_app.Properties.Resources.account;
+			this.lbl_username.IconLeftOffset = new System.Drawing.Point(10, 0);
+			this.lbl_username.IconLeftSize = new System.Drawing.Size(45, 50);
+			this.lbl_username.Location = new System.Drawing.Point(20, 20);
+			this.lbl_username.Name = "lbl_username";
+			this.lbl_username.PlaceholderText = "";
+			this.lbl_username.ReadOnly = true;
+			this.lbl_username.SelectedText = "";
+			this.lbl_username.Size = new System.Drawing.Size(1080, 70);
+			this.lbl_username.TabIndex = 0;
+			this.lbl_username.TabStop = false;
+			this.lbl_username.TextOffset = new System.Drawing.Point(20, -3);
+			// 
+			// lbl_rank
+			// 
+			this.lbl_rank.BorderRadius = 10;
+			this.lbl_rank.BorderThickness = 0;
+			this.lbl_rank.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.lbl_rank.DefaultText = "rank";
+			this.lbl_rank.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.lbl_rank.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.lbl_rank.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_rank.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_rank.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_rank.Font = new System.Drawing.Font("Bahnschrift", 15.75F);
+			this.lbl_rank.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+			this.lbl_rank.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_rank.IconLeft = global::client_app.Properties.Resources.rank;
+			this.lbl_rank.IconLeftOffset = new System.Drawing.Point(10, 0);
+			this.lbl_rank.Location = new System.Drawing.Point(20, 100);
+			this.lbl_rank.Name = "lbl_rank";
+			this.lbl_rank.PlaceholderText = "";
+			this.lbl_rank.ReadOnly = true;
+			this.lbl_rank.SelectedText = "";
+			this.lbl_rank.Size = new System.Drawing.Size(350, 30);
+			this.lbl_rank.TabIndex = 1;
+			this.lbl_rank.TabStop = false;
+			this.lbl_rank.TextOffset = new System.Drawing.Point(10, -1);
+			// 
+			// lbl_total
+			// 
+			this.lbl_total.BorderRadius = 10;
+			this.lbl_total.BorderThickness = 0;
+			this.lbl_total.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.lbl_total.DefaultText = "total";
+			this.lbl_total.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.lbl_total.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.lbl_total.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_total.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_total.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_total.Font = new System.Drawing.Font("Bahnschrift", 15.75F);
+			this.lbl_total.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+			this.lbl_total.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_total.IconLeft = global::client_app.Properties.Resources.total;
+			this.lbl_total.IconLeftOffset = new System.Drawing.Point(10, 0);
+			this.lbl_total.Location = new System.Drawing.Point(385, 100);
+			this.lbl_total.Name = "lbl_total";
+			this.lbl_total.PlaceholderText = "";
+			this.lbl_total.ReadOnly = true;
+			this.lbl_total.SelectedText = "";
+			this.lbl_total.Size = new System.Drawing.Size(350, 30);
+			this.lbl_total.TabIndex = 2;
+			this.lbl_total.TabStop = false;
+			this.lbl_total.TextOffset = new System.Drawing.Point(10, -1);
+			// 
+			// lbl_accuracy
+			// 
+			this.lbl_accuracy.BorderRadius = 10;
+			this.lbl_accuracy.BorderThickness = 0;
+			this.lbl_accuracy.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.lbl_accuracy.DefaultText = "accuracy";
+			this.lbl_accuracy.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.lbl_accuracy.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+			this.lbl_accuracy.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_accuracy.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+			this.lbl_accuracy.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_accuracy.Font = new System.Drawing.Font("Bahnschrift", 15.75F);
+			this.lbl_accuracy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+			this.lbl_accuracy.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_accuracy.IconLeft = global::client_app.Properties.Resources.accuracy;
+			this.lbl_accuracy.IconLeftOffset = new System.Drawing.Point(10, 0);
+			this.lbl_accuracy.Location = new System.Drawing.Point(750, 100);
+			this.lbl_accuracy.Name = "lbl_accuracy";
+			this.lbl_accuracy.PlaceholderText = "";
+			this.lbl_accuracy.ReadOnly = true;
+			this.lbl_accuracy.SelectedText = "";
+			this.lbl_accuracy.Size = new System.Drawing.Size(350, 30);
+			this.lbl_accuracy.TabIndex = 3;
+			this.lbl_accuracy.TabStop = false;
+			this.lbl_accuracy.TextOffset = new System.Drawing.Point(10, -1);
+			// 
+			// pic_seperator
+			// 
+			this.pic_seperator.Image = global::client_app.Properties.Resources.seperator;
+			this.pic_seperator.Location = new System.Drawing.Point(305, 150);
+			this.pic_seperator.Name = "pic_seperator";
+			this.pic_seperator.Size = new System.Drawing.Size(510, 5);
+			this.pic_seperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pic_seperator.TabIndex = 4;
+			this.pic_seperator.TabStop = false;
+			// 
+			// panel_stats
+			// 
+			this.panel_stats.BorderRadius = 0;
+			this.panel_stats.FillColor = System.Drawing.Color.White;
+			this.panel_stats.Location = new System.Drawing.Point(40, 175);
+			this.panel_stats.Name = "panel_stats";
+			this.panel_stats.Size = new System.Drawing.Size(1040, 835);
+			this.panel_stats.TabIndex = 5;
+			this.panel_stats.AutoScroll = true;
 
-			main.panel_main.Controls.Add(lbl_username);
-			main.panel_main.Controls.Add(lbl_rank);
-			//main.panel_main.Controls.Add(pic_language);
-			main.panel_main.Controls.Add(panel_stats);
+			(string rank, string total, string accuracy) = interfaces.calculateStatsOverview(userData);
 
-            configStats();
+			this.lbl_username.Text = userData.userID;
+			this.lbl_rank.Text = rank;
+			this.lbl_total.Text = total;
+			this.lbl_accuracy.Text = accuracy + "%";
+
+			configStats();
+
+			main.panel_main.Controls.Add(this.panel_stats);
+			main.panel_main.Controls.Add(this.pic_seperator);
+			main.panel_main.Controls.Add(this.lbl_accuracy);
+			main.panel_main.Controls.Add(this.lbl_total);
+			main.panel_main.Controls.Add(this.lbl_rank);
+			main.panel_main.Controls.Add(this.lbl_username);
+
+			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).EndInit();
+
+            main.configFriendsPanel();
+            interfaces.configUserDataPanel(main, userData);
         }
 
         private void configStats()
@@ -192,11 +293,13 @@ namespace client_app.menus
 			}
         }
 
-        private Label lbl_username;
-        private Label lbl_rank;
-        private PictureBox pic_language;
-        private Panel panel_stats;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_username;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_rank;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_total;
+		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
+		private PictureBox pic_seperator;
+		private Guna.UI2.WinForms.Guna2Panel panel_stats;
 
-        #endregion
-    }
+		#endregion
+	}
 }

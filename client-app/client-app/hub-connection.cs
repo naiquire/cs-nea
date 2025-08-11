@@ -76,7 +76,7 @@ namespace client_app
 			});
             connection.On<string, bool>("updateOnline", (user, online) =>
             {
-                
+                main.Invoke(new Action(() => main.updateOnline(user, online)));
             });
 
             connection.On<char, statistics>("updateStatistics", (letter, statistics) =>

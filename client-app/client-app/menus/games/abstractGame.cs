@@ -40,6 +40,7 @@ namespace client_app.menus.games
 		void endGame();
 		void updateUsers(List<friendData> users);
 		string getType();
+		string getGameID();
 	}
 
 	public abstract class abstractGame : Form
@@ -175,6 +176,7 @@ namespace client_app.menus.games
 
 		}
 
+		public string getGameID() => gameID;
 		public string getType() => type;
 	}
 }
