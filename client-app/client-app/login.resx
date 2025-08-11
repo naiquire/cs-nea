@@ -160,7 +160,7 @@
     <value>110, 20</value>
   </data>
   <data name="btn_createAccount.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="btn_createAccount.Text" xml:space="preserve">
     <value>Create Account</value>
@@ -214,7 +214,7 @@
     <value>180, 30</value>
   </data>
   <data name="btn_language.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>4</value>
   </data>
   <data name="btn_language.Text" xml:space="preserve">
     <value>language</value>
@@ -376,7 +376,7 @@
     <value>300, 40</value>
   </data>
   <data name="txt_userID.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;txt_userID.Name" xml:space="preserve">
     <value>txt_userID</value>
@@ -400,7 +400,7 @@
     <value>300, 40</value>
   </data>
   <data name="txt_password.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;txt_password.Name" xml:space="preserve">
     <value>txt_password</value>

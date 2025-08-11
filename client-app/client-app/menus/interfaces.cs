@@ -134,18 +134,22 @@ namespace client_app.menus
 			// abstractMenu
 			// 
 			main.BackColor = Color.White;
-			main.ClientSize = new Size(1920, 1080);
+			main.ClientSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
 			main.Controls.Add(main.panel_topLeft);
 			main.Controls.Add(main.panel_topBorder);
 			main.Controls.Add(main.panel_left);
 			main.Controls.Add(main.panel_main);
 			main.Controls.Add(main.panel_right);
+			main.StartPosition = FormStartPosition.Manual;
+			main.Location = new Point(0, 0);
 			main.FormBorderStyle = FormBorderStyle.None;
 			main.Name = "abstractMenu";
 			main.panel_topBorder.ResumeLayout(false);
 			main.panel_left.ResumeLayout(false);
 			main.panel_main.ResumeLayout(false);
 			main.ResumeLayout(false);
+
+
 
 		}
 

@@ -22,8 +22,6 @@ namespace client_app
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -243,13 +241,13 @@ namespace client_app
 			this.Controls.Add(this.btn_login);
 			this.Controls.Add(this.btn_createAccount);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.StartPosition = FormStartPosition.CenterScreen;
 			this.Name = "login";
 			((System.ComponentModel.ISupportInitialize)(this.pic_language)).EndInit();
 			this.ResumeLayout(false);
 
         }
 
-        #endregion
         private Guna.UI2.WinForms.Guna2GradientButton btn_login;
         private Guna.UI2.WinForms.Guna2Button btn_createAccount;
 		private Guna.UI2.WinForms.Guna2TextBox txt_userID;

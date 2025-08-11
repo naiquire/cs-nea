@@ -200,6 +200,8 @@ namespace client_app.menus
             const int padding = 5;
             const int defaultSize = panelY - 2 * padding;
 
+			panel_stats.SuspendLayout();
+
             foreach (var stat in userData.statistics)
             {
                 string letter = stat.Key.ToString();

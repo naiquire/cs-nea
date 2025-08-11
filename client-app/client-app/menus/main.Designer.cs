@@ -55,10 +55,13 @@ namespace client_app
 			this.panel_friendList = new System.Windows.Forms.Panel();
             this.seperator = new System.Windows.Forms.PictureBox();
             this.lbl_friendsLabel = new System.Windows.Forms.Label();
+			this.appLogo = new PictureBox();
 
 			this.panel_topBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appLogo)).BeginInit();
             this.panel_main.SuspendLayout();
+            this.panel_left.SuspendLayout();
 
 			this.SuspendLayout();
             // 
@@ -95,20 +98,30 @@ namespace client_app
             this.lbl_friendsLabel.Text = localisation["Friends"][userData.localisation];
             this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
 			//
+			// appLogo
+			//
+			this.appLogo.Location = new Point(20, 20);
+			this.appLogo.Image = global::client_app.Properties.Resources.app_logo;
+			this.appLogo.Size = new Size(260, 60);
+			this.appLogo.SizeMode = PictureBoxSizeMode.Zoom;
+			this.appLogo.TabStop = false;
+			//
 			// main
 			//
 			this.panel_left.Controls.Add(panel_friendList);
             this.panel_left.Controls.Add(seperator);
             this.panel_left.Controls.Add(lbl_friendsLabel);
-
+			this.panel_topLeft.Controls.Add(appLogo);
 
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
-            this.panel_main.ResumeLayout(false);
-			this.ResumeLayout(false);
-
+			((System.ComponentModel.ISupportInitialize)(this.appLogo)).EndInit();
 
             configFriendsPanel();
 			configGamePanels();
+
+			this.panel_main.ResumeLayout(false);
+			this.panel_left.ResumeLayout(false);
+			this.ResumeLayout(false);
 
 			interfaces.configUserDataPanel(this, userData);
         }
@@ -521,6 +534,7 @@ namespace client_app
 		private Panel panel_friendList;
         private PictureBox seperator;
         private Label lbl_friendsLabel;
+		private PictureBox appLogo;
 
 		private Guna.UI2.WinForms.Guna2GradientPanel panel_accuracy;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
