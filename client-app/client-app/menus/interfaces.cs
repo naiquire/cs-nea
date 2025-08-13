@@ -1,4 +1,5 @@
 ﻿using client_app.components;
+using client_app.games;
 using client_app.menus.games;
 using client_app.Properties;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -8,12 +9,14 @@ using System.Drawing;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
+using TheArtOfDevHtmlRenderer.Adapters.Entities;
 using static System.Windows.Forms.AxHost;
 
 namespace client_app.menus
 {
 	public abstract class interfaces : Form // can be made static in final build, maybe rename
 	{
+		
 		
 		private Guna.UI2.WinForms.Guna2TextBox lbl_timer;
 		
@@ -23,15 +26,22 @@ namespace client_app.menus
 		/// </summary>
 		public void tempInitializeComponent()
 		{
+
+			this.SuspendLayout();
+			
+			// 
+			// panel_stat
+			// 
 			
 			// 
 			// interfaces
 			// 
-			this.ClientSize = new System.Drawing.Size(1120, 1050);
-			
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+			this.ClientSize = new System.Drawing.Size(500, 1050);
+
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "interfaces";
-			
+
 			this.ResumeLayout(false);
 
 		}
@@ -90,7 +100,7 @@ namespace client_app.menus
 			// 
 			// btn_home
 			// 
-			main.btn_home.Location = new Point(50, 910);
+			main.btn_home.Location = new Point(50, 880);
 			main.btn_home.Name = "btn_home";
 			main.btn_home.Size = new Size(200, 30);
 			main.btn_home.TabIndex = 0;
@@ -175,6 +185,8 @@ namespace client_app.menus
 		/// <returns>An <see cref="input"/> object containing the created drawing panel.</returns>
 		public static input configGamePanel(abstractGame game)
 		{
+			game.main.panel_main.Controls.Clear();
+
 			game.panel_outline = new Guna.UI2.WinForms.Guna2Shapes()
 			{
 				BorderColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
@@ -248,14 +260,125 @@ namespace client_app.menus
 
 		public static void configRightGamePanel(abstractGame game)
 		{
-			///
-			/// so what do i want
-			/// 
-			/// round number definitely like Round 4 of 10 or something
-			/// and a stats panel i guess
-			/// correct, accuracy, and time detailed for each round done so far
-			/// 
+			game.lbl_rounds = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				DefaultText = $"Round {game.getRounds()}",
+				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				Font = new Font("Bahnschrift SemiBold", 48F, FontStyle.Bold),
+				Location = new Point(40, 40),
+				Margin = new Padding(15, 15, 15, 15),
+				Name = "lbl_rounds",
+				Size = new Size(420, 80),
+				TabIndex = 0,
+				TextAlign = HorizontalAlignment.Center,
+			};
+			PictureBox seperator = new PictureBox()
+			{
+				Image = global::client_app.Properties.Resources.seperator,
+				Location = new System.Drawing.Point(30, 120),
+				Name = "seperator",
+				Size = new System.Drawing.Size(440, 7),
+				SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
+				TabIndex = 1,
+				TabStop = false,
+			};
+			game.panel_stats = new Guna.UI2.WinForms.Guna2Panel()
+			{
+				BorderRadius = 20,
+				FillColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
+				Location = new Point(40, 160),
+				Name = "panel_stats",
+				Size = new Size(420, 720),
+				TabIndex = 2,
+			};
 
+			game.main.panel_right.Controls.Add(game.lbl_rounds);
+			game.main.panel_right.Controls.Add(seperator);
+			game.main.panel_right.Controls.Add(game.panel_stats);
+		}
+		public static void configRightGamePanelStats(Panel panel, List<char> letters, List<double> accuracies, string type)
+		{
+			panel.Controls.Clear();
+
+			// only display last 10 rounds of knockout
+			int start = 0;
+			if (type == "knockout")
+			{
+				start = letters.Count - 10;
+			}
+
+			int y = 20;
+			for (int i = start; i < letters.Count; i++, y += 50 + 20)
+			{
+				panel.Controls.Add(configStatPanel(letters[i], accuracies[i]));
+			}
+
+			Guna.UI2.WinForms.Guna2Panel configStatPanel(char letter, double accuracy)
+			{
+				(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+
+				Guna.UI2.WinForms.Guna2Panel panel_stat = new Guna.UI2.WinForms.Guna2Panel()
+				{
+					BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
+					BorderRadius = 10,
+					FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+					Location = new Point(20, y),
+					Name = "panel_stat",
+					Size = new Size(380, 50),
+					TabIndex = 3,
+				};
+
+				Label lbl_letter = new Label()
+				{
+					AutoSize = true,
+					BackColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+					Font = new Font("Bahnschrift SemiBold", 27.75F, FontStyle.Bold),
+					Location = new Point(10, 2),
+					Name = "lbl_letter",
+					Size = new Size(43, 45),
+					TabIndex = 0,
+					Text = letter.ToString(),
+				};
+				Panel bar_base = new Panel()
+				{
+					BackColor = Color.White,
+					Location = new Point(60, 10),
+					Name = "bar_base",
+					Size = new Size(230, 30),
+					TabIndex = 1,
+				};
+				Guna.UI2.WinForms.Guna2TextBox lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+				{
+					BorderThickness = 0,
+					Cursor = Cursors.Arrow,
+					DefaultText = $"{Math.Round(accuracy * 100)}%",
+					FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+					Font = new Font("Bahnschrift", 19.75F),
+					ForeColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+					Location = new Point(290, 10),
+					Name = "lbl_accuracy",
+					Size = new Size(80, 30),
+					TabIndex = 2,
+					TextAlign = HorizontalAlignment.Right,
+				};
+				Guna.UI2.WinForms.Guna2Panel bar_fill = new Guna.UI2.WinForms.Guna2Panel()
+				{
+					BackColor = ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
+					Location = new Point(60, 10),
+					Name = "bar_fill",
+					Size = new Size((int)(accuracy * bar_base.Size.Width), bar_base.Size.Height),
+					TabIndex = 3,
+				};
+
+				panel_stat.Controls.Add(bar_fill);
+				panel_stat.Controls.Add(lbl_accuracy);
+				panel_stat.Controls.Add(bar_base);
+				panel_stat.Controls.Add(lbl_letter);
+
+				return panel_stat;
+			}
 
 		}
 
@@ -266,11 +389,16 @@ namespace client_app.menus
 			/// 
 			/// basically a list of the current users in the game
 			/// yes useless for accuracy but i don't care lol
+			/// 
+
+
 		}
 
 
 		public static void configResultsPanel(abstractGame game, char c, stats stats)
 		{
+			game.main.panel_main.Controls.Clear();
+
 			const int X = 100;
 			int y = 500;
 
@@ -286,71 +414,71 @@ namespace client_app.menus
 
 			(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
 
-			Label lbl_letter = new System.Windows.Forms.Label()
+			Label lbl_letter = new Label()
 			{
-				Location = new System.Drawing.Point(0 + padding, 0 + padding),
+				Location = new Point(0 + padding, 0 + padding),
 				Name = "lbl_letter",
-				Size = new System.Drawing.Size(defaultSize, defaultSize),
+				Size = new Size(defaultSize, defaultSize),
 				TabIndex = 0,
 				Text = letter,
-				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				TextAlign = ContentAlignment.MiddleCenter,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
-			Label lbl_total = new System.Windows.Forms.Label()
+			Label lbl_total = new Label()
 			{
-				Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
+				Location = new Point(panelX - 2 * defaultSize - padding, padding),
 				Name = "lbl_total",
-				Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+				Size = new Size(2 * defaultSize, defaultSize),
 				TabIndex = 1,
 				Text = correct.ToString(),
-				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				TextAlign = ContentAlignment.MiddleCenter,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
-			Label lbl_time = new System.Windows.Forms.Label()
+			Label lbl_time = new Label()
 			{
-				Location = new System.Drawing.Point(lbl_total.Location.X - 2 * defaultSize - padding, padding),
+				Location = new Point(lbl_total.Location.X - 2 * defaultSize - padding, padding),
 				Name = "lbl_time",
-				Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+				Size = new Size(2 * defaultSize, defaultSize),
 				TabIndex = 2,
 				Text = $"{time.TotalSeconds}",
-				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				TextAlign = ContentAlignment.MiddleCenter,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
 			Label lbl_percentage = new System.Windows.Forms.Label()
 			{
-				Location = new System.Drawing.Point(lbl_time.Location.X - defaultSize - padding, padding),
+				Location = new Point(lbl_time.Location.X - defaultSize - padding, padding),
 				Name = "lbl_percentage",
-				Size = new System.Drawing.Size(defaultSize, defaultSize),
+				Size = new Size(defaultSize, defaultSize),
 				TabIndex = 3,
 				Text = $"{Math.Round(100 * accuracy, 2)}%",
-				TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				TextAlign = ContentAlignment.MiddleCenter,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
 			Panel bar_base = new System.Windows.Forms.Panel()
 			{
-				BackColor = System.Drawing.SystemColors.ControlLight,
-				Location = new System.Drawing.Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
+				BackColor = SystemColors.ControlLight,
+				Location = new Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
 				Name = "bar_base",
-				Size = new System.Drawing.Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
+				Size = new Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
 				TabIndex = 4,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
 			Panel bar_fill = new System.Windows.Forms.Panel()
 			{
-				BackColor = System.Drawing.ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
-				Location = new System.Drawing.Point(bar_base.Location.X, bar_base.Location.Y),
+				BackColor = ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
+				Location = new Point(bar_base.Location.X, bar_base.Location.Y),
 				Name = "panel_fill",
-				Size = new System.Drawing.Size(((int)(accuracy * bar_base.Size.Width)), bar_base.Size.Height),
+				Size = new Size((int)(accuracy * bar_base.Size.Width), bar_base.Size.Height),
 				TabIndex = 5,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
 
 			Panel panel_char = new System.Windows.Forms.Panel()
 			{
-				BackColor = System.Drawing.SystemColors.ControlDark,
-				Location = new System.Drawing.Point(X, y),
+				BackColor = SystemColors.ControlDark,
+				Location = new Point(X, y),
 				Name = "panel_char",
-				Size = new System.Drawing.Size(panelX, panelY),
+				Size = new Size(panelX, panelY),
 				TabIndex = 0,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
@@ -358,13 +486,13 @@ namespace client_app.menus
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 49,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
-				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 31.75F, System.Drawing.FontStyle.Bold),
-				ForeColor = System.Drawing.Color.White,
-				Location = new System.Drawing.Point(220, 900),
+				FillColor = Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor2 = Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
+				ForeColor = Color.White,
+				Location = new Point(220, 900),
 				Name = "btn_continue",
-				Size = new System.Drawing.Size(680, 100),
+				Size = new Size(680, 100),
 				TabIndex = 3,
 				Text = "Continue",
 			};
@@ -412,7 +540,7 @@ namespace client_app.menus
 				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
 				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
 				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
-				Location = new System.Drawing.Point(140, 960),
+				Location = new System.Drawing.Point(140, 930),
 				Name = "btn_profile",
 				Size = new System.Drawing.Size(220, 50),
 				TabIndex = 3,
@@ -839,7 +967,6 @@ namespace client_app.menus
 				TabIndex = 0,
 				Text = "Lobby",
 			};
-
 			main.panel_main.Controls.Add(lbl_header);
 		}
 

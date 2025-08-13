@@ -127,13 +127,17 @@ namespace server_app.games
 		{
 			userIDs.Remove(userID);
 
-			foreach (var user in userDatas)
+			int index = 0;
+			for (int i = 0; i < userDatas.Count; i++)
 			{
-				if (user.userID == userID)
+				if (userDatas[i].userID == userID)
 				{
-					userDatas.Remove(user);
+					index = i;
+					break;
 				}
 			}
+
+			userDatas.RemoveAt(index);
 
 			await updateUsers();
 		}

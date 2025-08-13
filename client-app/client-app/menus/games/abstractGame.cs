@@ -54,14 +54,16 @@ namespace client_app.menus.games
 		protected bool started;
 		private int rounds;
 
-		protected stats stats;
-		protected char letter;
+		public stats stats;
+		public List<char> letters;
 
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
 		public Guna.UI2.WinForms.Guna2TextBox lbl_letter;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_submit;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_clear;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_continue;
+		public Panel panel_stats;
+		public Guna.UI2.WinForms.Guna2TextBox lbl_rounds;
 
 		private input drawingPanel;
 
@@ -72,6 +74,7 @@ namespace client_app.menus.games
 			stats = new stats("");
 			started = false;
 			rounds = 0;
+			letters = new List<char>();
 		}
 		public virtual void updateUsers(List<friendData> users)
 		{
@@ -114,7 +117,6 @@ namespace client_app.menus.games
 		{
 			// countdown timer of 5 sec
 
-			interfaces.resetLayout(main);
 			drawingPanel = interfaces.configGamePanel(this);
 
 			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
@@ -124,8 +126,6 @@ namespace client_app.menus.games
 				Bitmap drawing = drawingPanel.disablePanel();
 
 				var submission = convertBitmap(drawing);
-
-				
 
 				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
 
@@ -157,18 +157,21 @@ namespace client_app.menus.games
 		public virtual void submissionPhase(char letter)
 		{
 			rounds++;
+			lbl_rounds.Text = $"Round {rounds}";
 
-			this.letter = letter;
+			letters.Add(letter);
 			lbl_letter.Text = letter.ToString();
 
 			drawingPanel.enablePanel();
 			btn_submit.Enabled = true;
+			
 		}
 		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
-			interfaces.resetLayout(main);
 			stats.updateStats(correct, accuracy, time);
-			interfaces.configResultsPanel(this, letter, stats);
+			interfaces.configResultsPanel(this, letters[letters.Count - 1], stats);
+
+			interfaces.configRightGamePanelStats(panel_stats, letters, stats.accuracy, getType()); // idk
 		}
 
 		public virtual void endGame()
@@ -178,5 +181,6 @@ namespace client_app.menus.games
 
 		public string getGameID() => gameID;
 		public string getType() => type;
+		public int getRounds() => rounds;
 	}
 }

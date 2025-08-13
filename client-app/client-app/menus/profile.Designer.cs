@@ -166,7 +166,7 @@ namespace client_app.menus
 			this.panel_stats.Name = "panel_stats";
 			this.panel_stats.Size = new System.Drawing.Size(1040, 835);
 			this.panel_stats.TabIndex = 5;
-			this.panel_stats.AutoScroll = true;
+			this.panel_stats.VerticalScroll.Enabled = true;
 
 			(string rank, string total, string accuracy) = interfaces.calculateStatsOverview(userData);
 
