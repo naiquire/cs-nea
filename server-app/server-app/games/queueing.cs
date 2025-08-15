@@ -105,6 +105,11 @@ namespace server_app.games
 			}
 		}
 
+        /// <summary>
+        /// Dequeues a user from the specified game.
+        /// </summary>
+        /// <param name="gameID"></param>
+        /// <param name="userID"></param>
         public static void dequeueUser(string gameID, string userID)
         {
 			foreach (IPlayable game in currentGames)
@@ -112,6 +117,10 @@ namespace server_app.games
 				if (game.getGameID() == gameID)
 				{
 					game.dequeueUser(userID);
+				}
+                if (game.getPlayerCount() <= 0)
+                {
+                    currentGames.Remove(game);
 				}
 			}
 		}

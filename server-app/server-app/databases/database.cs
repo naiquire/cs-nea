@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace server_app.databases
 {
-	// handles all requests to the SQL database
 	public struct userData
 	{
 		public string userID { get; set; }
@@ -361,7 +360,27 @@ namespace server_app.databases
 		}
 		public static bool addFriends(string user1, string user2)
 		{
-			return true;
+			string query = @"INSERT INTO friends
+				VALUES = (@user1, @user2)";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@user1", user1);
+					command.Parameters.AddWithValue("@user2", user2);
+
+					command.ExecuteNonQuery();
+				}
+				connection.Close();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				outputException(ex);
+				connection.Close();
+				return false;
+			}
 		}
 		public static bool saveInvite(string userID, string senderID)
 		{
@@ -447,8 +466,8 @@ namespace server_app.databases
 		public static bool updateRank(string userID, int rank)
 		{
 			string query = @"UPDATE userData
-				SET (userData.rank = rank)
-				WHERE userData.userID = @userID";
+				SET rank = @rank
+				WHERE userID = @userID";
 			try
 			{
 				connection.Open();

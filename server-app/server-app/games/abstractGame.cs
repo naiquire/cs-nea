@@ -81,7 +81,7 @@ namespace server_app.games
 
 		protected DateTime startTime;
 		protected Dictionary<string, stats> stats;
-		protected List<string> continueRequests = [];
+		protected HashSet<string> continueRequests = [];
 		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
 
 		/// <summary>

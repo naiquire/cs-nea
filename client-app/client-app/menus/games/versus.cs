@@ -1,6 +1,8 @@
 ﻿using client_app.menus.games;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace client_app.games
 {
@@ -43,7 +45,14 @@ namespace client_app.games
 
 		public void versusResults(string winner)
 		{
-			// add to results screen
+			TextBox txt_winner = new TextBox()
+			{
+				Location = new Point(100, 100),
+				Size = new Size(300, 50),
+				Text = winner,
+			};
+
+			main.panel_main.Controls.Add(txt_winner);
 		}
 
 		public override void endGame()

@@ -8,7 +8,7 @@ namespace server_app.games
 {
 	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "versus", userID, 2), IPlayable
 	{
-		private const int rounds = 10;
+		private const int rounds = 5;
 		private Dictionary<string, double> scores = [];
 		
 		public override void startGame()
@@ -104,7 +104,22 @@ namespace server_app.games
 		{
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				double expScore = 1.0 / (1 + Math.Pow(10, (userDatas[i].rank - i == 0 ? userDatas[1].rank : userDatas[0].rank) / 400));
+				double expScore;
+				if (i == 0)
+				{
+					expScore = 1.0 / (1 + Math.Pow(10, (userDatas[0].rank - userDatas[1].rank) / 400));
+				}
+				else if (i == 1)
+				{
+					expScore = 1.0 / (1 + Math.Pow(10, (userDatas[1].rank - userDatas[0].rank) / 400));
+				}
+				else
+				{
+					expScore = 0;
+				}
+
+				expScore *= rounds;
+
 				int rank = calculateRank(userDatas[i], expScore);
 
 				if (database.updateRank(userIDs[i], rank))
