@@ -40,13 +40,11 @@ namespace client_app.components
         /// Disables user interaction with the input panel and returns the current drawing.
         /// </summary>
         /// <returns>A <see cref="Bitmap"/> representing the current drawing on the panel.</returns>
-        public Bitmap disablePanel()
+        public void disablePanel()
         {
             panel_input.MouseDown -= panel_MouseDown;
             panel_input.MouseUp -= panel_MouseUp;
             panel_input.MouseMove -= panel_MouseMove;
-
-            return drawing;
         }
 
         /// <summary>
@@ -122,5 +120,25 @@ namespace client_app.components
             pos.y = e.Y;
         }
 
-    }
+        public double[] convertToMNISTformat()
+		{
+			Bitmap resize = new Bitmap(drawing, new Size(28, 28));
+			int width = resize.Width;
+			int height = resize.Height;
+			double[] pixels = new double[width * height];
+
+			for (int y = 0; y < height; y++)
+			{
+				for (int x = 0; x < width; x++)
+				{
+					Color c = resize.GetPixel(x, y);
+					double gray = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B);
+					pixels[y * width + x] = 1.0 - (gray / 255.0);
+				}
+			}
+
+			return pixels;
+		}
+
+	}
 }

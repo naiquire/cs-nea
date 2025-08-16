@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
-using System.Diagnostics.Metrics;
-using System.Reflection.Metadata;
 
 namespace server_app.games
 {
@@ -20,13 +18,6 @@ namespace server_app.games
 		public List<double> accuracy;
 		public List<TimeSpan> time;
 
-		/// <summary>
-		/// Updates the current statistics for the user.
-		/// </summary>
-		/// <param name="evaluate"></param>
-		/// <param name="letter"></param>
-		/// <param name="time"></param>
-		/// <param name="correct"></param>
 		public void update(double accuracy, TimeSpan time, bool correct)
 		{
 			this.accuracy.Add(accuracy);
@@ -40,21 +31,8 @@ namespace server_app.games
 		void dequeueUser(string userID);
 		Task updateUsers();
 		void startGame();
-		/// <summary>
-		/// Calls for the next iteration of the game.
-		/// </summary>
-		/// <param name="letter"></param>
 		void submissionPhase();
-		/// <summary>
-		/// Loads a submission into the game class and ends the submission phase if all responses are present.
-		/// </summary>
-		/// <param name="userID"></param>
-		/// <param name="input"></param>
 		void loadResponse(string userID, double[] input);
-		/// <summary>
-		/// Evaluates responses and sends statistics to clients. Calls the next submission phase if available.
-		/// </summary>
-		/// <param name="letter"></param>
 		void evaluationPhase(char letter);
 		void continueRequest(string userID);
 		void endGame();
@@ -67,28 +45,25 @@ namespace server_app.games
 	public abstract class abstractGame
 	{
 		protected IHubContext<connection> hubContext;
+
+		protected string gameID;
+		protected int maxPlayers;
 		protected string type;
+
 		private bool started;
 
 		protected List<string> userIDs;
 		protected List<friendData> userDatas;
-		protected string gameID;
-		protected int maxPlayers;
+		protected Dictionary<string, stats> stats;
 
-		protected List<char> letters;
 		protected Random rnd;
-		protected int count = 0;
+		protected List<char> letters;
+		protected int roundCount = 0;
 
 		protected DateTime startTime;
-		protected Dictionary<string, stats> stats;
-		protected HashSet<string> continueRequests = [];
 		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
+		protected HashSet<string> continueRequests = [];
 
-		/// <summary>
-		/// Base initialisation for the game classes.
-		/// </summary>
-		/// <param name="userID"></param>
-		/// <param name="maxPlayers"></param>
 		public abstractGame(IHubContext<connection> context, string type, string userID, int maxPlayers)
 		{
 			userIDs = [];
@@ -105,11 +80,6 @@ namespace server_app.games
 			gameID = userID + DateTime.UtcNow.ToString();
 		}
 
-		/// <summary>
-		/// Queues a user into the current game.
-		/// </summary>
-		/// <param name="userID"></param>
-		/// <exception cref="DisconnectException"></exception>
 		public void queueUser(string userID)
 		{
 			if (database.loadFriendData(userID, out friendData data))
@@ -117,16 +87,16 @@ namespace server_app.games
 				userIDs.Add(userID);
 				userDatas.Add(data);
 			}
+			else
+			{
+				// failed to queue user, send error to client
+			}
 		}
-		
-		/// <summary>
-		/// Dequeues a user from a game regardless of current state.
-		/// </summary>
-		/// <param name="userID"></param>
 		public async virtual void dequeueUser(string userID)
 		{
 			userIDs.Remove(userID);
 
+			// remove userData
 			int index = 0;
 			for (int i = 0; i < userDatas.Count; i++)
 			{
@@ -136,19 +106,12 @@ namespace server_app.games
 					break;
 				}
 			}
-
 			userDatas.RemoveAt(index);
 
 			await updateUsers();
 		}
-		
-		/// <summary>
-		/// Updates the clients with a list of users.
-		/// </summary>
-		/// <returns></returns>
-		/// <exception cref="DisconnectException"></exception>
 		public async Task updateUsers()
-		{	
+		{
 			foreach (var user in userIDs)
 			{
 				if (connection.map.TryGetValue(user, out string? connectionID))
@@ -162,13 +125,10 @@ namespace server_app.games
 			}
 		}
 
-		/// <summary>
-		/// Starts the current game and initialises values for statistics for each user.
-		/// </summary>
-		/// <exception cref="DisconnectException"></exception>
 		public virtual async void startGame()
 		{
 			started = true;
+
 			// define new stats object for each user
 			foreach (string user in userIDs)
 			{
@@ -201,13 +161,7 @@ namespace server_app.games
 				}
 			}
 		}
-
-		/// <summary>
-		/// Generates a fixed number of random characters from A-Z.
-		/// </summary>
-		/// <param name="count"></param>
-		/// <returns>A list of random characters.</returns>
-		protected List<char> generateLetters(int count)
+		protected List<char> generateRandomLetters(int count)
 		{
 			List<char> letters = [];
 
@@ -218,13 +172,8 @@ namespace server_app.games
 			}
 			return letters;
 		}
-		public abstract void submissionPhase();
 
-		/// <summary>
-		/// Configures a countdown on the clients before the next round.
-		/// </summary>
-		/// <returns></returns>
-		/// <exception cref="DisconnectException"></exception>
+
 		protected async Task awaitRound()
 		{
 			continueRequests.Clear();
@@ -240,14 +189,7 @@ namespace server_app.games
 				}
 			}
 		}
-
-		/// <summary>
-		/// Sends a character to the given users.
-		/// </summary>
-		/// <param name="userIDs"></param>
-		/// <param name="letter"></param>
-		/// <returns></returns>
-		/// <exception cref="DisconnectException"></exception>
+		public abstract void submissionPhase();
 		protected async Task sendLetter(List<string> userIDs, char letter)
 		{
 			foreach (string userID in userIDs)
@@ -263,18 +205,10 @@ namespace server_app.games
 			}
 		}
 
-		/// <summary>
-		/// Evaluates a user's submission and updates their current statistics.
-		/// </summary>
-		/// <param name="evaluates"></param>
-		/// <param name="i"></param>
-		/// <param name="userIDs"></param>
-		/// <param name="character"></param>
-		/// <returns>A boolean value representing if the submission was correct.</returns>
 		protected bool evaluateSubmission(ref evaluate evaluate, string userID, int character)
 		{
-			// evaluate the submission
 			int letter = character - 65;
+
 			evaluate = new evaluate(currentResponses[userID].submission);
 			bool correct = evaluate.result == letter;
 
@@ -289,14 +223,6 @@ namespace server_app.games
 			stats[userID] = currentStats;
 			return correct;
 		}
-
-		/// <summary>
-		/// Sends a user their result for the current character.
-		/// </summary>
-		/// <param name="userID"></param>
-		/// <param name="stats"></param>
-		/// <returns></returns>
-		/// <exception cref="DisconnectException"></exception>
 		protected async Task sendResult(string userID, stats stats)
 		{
 			bool correct = stats.correct[^1];
@@ -312,12 +238,8 @@ namespace server_app.games
 				throw new DisconnectException(userID);
 			}
 		}
+		public abstract void continueRequest(string userID);
 
-		/// <summary>
-		/// Ends the current game and updates statistics.
-		/// </summary>
-		/// <returns></returns>
-		/// <exception cref="DisconnectException"></exception>
 		public virtual async void endGame() // possibly a faster way to implement this
 		{
 			foreach (string userID in userIDs)
@@ -374,32 +296,10 @@ namespace server_app.games
 			}
 		}
 
-		/// <summary>
-		/// Gets the type of game.
-		/// </summary>
-		/// <returns></returns>
 		public string getType() => type;
-
-		/// <summary>
-		/// Gets the ID of the game.
-		/// </summary>
-		/// <returns></returns>
 		public string getGameID() => gameID;
-
-		/// <summary>
-		/// Returns whether the game has started.
-		/// </summary>
-		/// <returns><see langword="true"/> if the game has started; otherwise, <see langword="false"/>.</returns>
 		public bool hasStarted() => started;
-
-		/// <summary>
-		/// Gets the maximum number of players that can join the game.
-		/// </summary>
-		public int getMaxPlayers() => maxPlayers;
-
-		/// <summary>
-		/// Gets the number of players currently in the game
-		/// </summary>
+		public int getMaxPlayers() => maxPlayers
 		public int getPlayerCount() => userIDs.Count;
 	}
 }

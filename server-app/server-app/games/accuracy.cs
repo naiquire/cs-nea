@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.OAuth.Claims;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.neuralNetwork;
-using System.Diagnostics.Metrics;
-using System.Reflection;
 
 namespace server_app.games
 {
@@ -13,13 +10,13 @@ namespace server_app.games
 		public override void startGame()
 		{
 			base.startGame();
-			 
-			letters = generateLetters(rounds);
+
+			letters = generateRandomLetters(rounds);
 			submissionPhase();
 		}
 		public async override void submissionPhase()
 		{
-			if (count < rounds)
+			if (roundCount < rounds)
 			{
 				continueRequests.Clear();
 				await awaitRound();
@@ -27,7 +24,7 @@ namespace server_app.games
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
-				await sendLetter(userIDs, letters[count]);
+				await sendLetter(userIDs, letters[roundCount]);
 			}
 			else
 			{
@@ -39,7 +36,7 @@ namespace server_app.games
 			currentResponses.Add(userID, (input, DateTime.UtcNow));
 			if (currentResponses.Count == getPlayerCount())
 			{
-				evaluationPhase(letters[count]);
+				evaluationPhase(letters[roundCount]);
 			}
 		}
 		public async void evaluationPhase(char letter)
@@ -50,9 +47,9 @@ namespace server_app.games
 				evaluateSubmission(ref evaluates[i], userIDs[i], letter);
 				await sendResult(userIDs[i], stats[userIDs[i]]);
 			}
-			count++;
+			roundCount++;
 		}
-		public void continueRequest(string userID)
+		public override void continueRequest(string userID)
 		{
 			continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)

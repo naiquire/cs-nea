@@ -832,6 +832,8 @@ namespace client_app.menus
 			Guna.UI2.WinForms.Guna2Panel panel_statsOverview = new Guna.UI2.WinForms.Guna2Panel()
 			{
 				BorderRadius = 20,
+				BorderThickness = 5,
+				BorderColor = Color.White,
 				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
 				Location = new System.Drawing.Point(pos.X, pos.Y),
 				Name = "panel_statsOverview",
@@ -1143,15 +1145,8 @@ namespace client_app.menus
 			panel.Controls.Add(panel_statsOverview);
 		}
 
-		/// <summary>
-		/// Loads the Lobby menu.
-		/// </summary>
-		/// <param name="main"></param>
-		/// <param name="users"></param>
 		public static void initialiseLobby(main main)
 		{
-			resetLayout(main);
-
 			Label lbl_header = new Label
 			{
 				BackColor = main.panel_main.BackColor,
@@ -1162,25 +1157,22 @@ namespace client_app.menus
 				TabIndex = 0,
 				Text = "Lobby",
 			};
+
 			main.panel_main.Controls.Add(lbl_header);
 		}
 
-		/// <summary>
-		/// Configures a Panel to display the current users in the queued game.
-		/// </summary>
-		/// <param name="main"></param>
-		/// <param name="users"></param>
-		public static void configLobbyPanel(Panel panel, List<friendData> users)
+		public static void configLobbyPanel(main main, List<friendData> users)
 		{
-			panel.Controls.Clear();
+			main.panel_main.Controls.Clear();
+			initialiseLobby(main);
 
 			Panel panel_users = new Panel()
 			{
 				Name = "panel_users",
-				BackColor = panel.BackColor,
+				BackColor = main.panel_main.BackColor,
 				BorderStyle = BorderStyle.FixedSingle,
 				Location = new System.Drawing.Point(50, 150),
-				Size = new System.Drawing.Size(panel.Width - 100, panel.Height - 100 - 100)
+				Size = new System.Drawing.Size(main.panel_main.Width - 100, main.panel_main.Height - 100 - 100)
 			};
 
 			int X = 10;
@@ -1202,7 +1194,7 @@ namespace client_app.menus
 
 				Label userID = new Label()
 				{
-					BackColor = panel.BackColor,
+					BackColor = main.panel_main.BackColor,
 					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 					Location = new System.Drawing.Point(padding, padding),
 					Name = user.userID,
@@ -1214,7 +1206,7 @@ namespace client_app.menus
 				};
 				Label rank = new Label()
 				{
-					BackColor = panel.BackColor,
+					BackColor = main.panel_main.BackColor,
 					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 					Location = new System.Drawing.Point(userID.Width + 2 * padding, padding),
 					Name = "rank",
@@ -1233,7 +1225,12 @@ namespace client_app.menus
 				Y = Y + userY + 10;
 			}
 
-			panel.Controls.Add(panel_users);
+			main.panel_main.Controls.Add(panel_users);
+		}
+
+		public static void configEndGamePanel(abstractGame game)
+		{
+
 		}
 
 	}

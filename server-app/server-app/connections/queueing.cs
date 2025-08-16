@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.databases;
 using server_app.games;
-using System.Reflection;
 
 namespace server_app.connections
 {

@@ -18,6 +18,7 @@ namespace server_app.games
 	    public override void dequeueUser(string userID)
 	    {
 		    aliveUsers.Remove(userID);
+            base.dequeueUser(userID);
 	    }
         public async override void submissionPhase()
         {
@@ -35,7 +36,7 @@ namespace server_app.games
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
 				await sendLetter(aliveUsers, letter);
-				count++;
+				roundCount++;
 			}
 			else
 			{
@@ -89,7 +90,7 @@ namespace server_app.games
 
             await sendKnockoutResults(userIDs, aliveUsers);
 		}
-		public void continueRequest(string userID)
+		public override void continueRequest(string userID)
 		{
 			continueRequests.Add(userID);
 			if (continueRequests.Count == aliveUsers.Count)
@@ -98,13 +99,6 @@ namespace server_app.games
 			}
 		}
 
-		/// <summary>
-		/// Sends the unique results to users for the knockout game type.
-		/// </summary>
-		/// <param name="userIDs"></param>
-		/// <param name="aliveUsers"></param>
-		/// <returns></returns>
-		/// <exception cref="DisconnectException"></exception>
 		public async Task sendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
         {
             foreach (string userID in userIDs)

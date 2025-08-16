@@ -2,7 +2,6 @@
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
-using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
@@ -10,7 +9,7 @@ namespace server_app.games
 	{
 		private const int rounds = 5;
 		private Dictionary<string, double> scores = [];
-		
+
 		public override void startGame()
 		{
 			base.startGame();
@@ -20,13 +19,13 @@ namespace server_app.games
 				scores[userID] = 0;
 			}
 
-			letters = generateLetters(rounds);
+			letters = generateRandomLetters(rounds);
 			submissionPhase();
 		}
 		public async override void submissionPhase()
 		{
-			
-			if (count < rounds)
+
+			if (roundCount < rounds)
 			{
 				continueRequests.Clear();
 				await awaitRound();
@@ -34,7 +33,7 @@ namespace server_app.games
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
-				await sendLetter(userIDs, letters[count]);
+				await sendLetter(userIDs, letters[roundCount]);
 			}
 			else
 			{
@@ -46,7 +45,7 @@ namespace server_app.games
 			currentResponses.Add(userID, (input, DateTime.UtcNow));
 			if (currentResponses.Count == getPlayerCount())
 			{
-				evaluationPhase(letters[count]);
+				evaluationPhase(letters[roundCount]);
 			}
 		}
 		public async void evaluationPhase(char letter)
@@ -66,7 +65,7 @@ namespace server_app.games
 			if (correctUsers.Count == 0)
 			{
 				// if none correct then a winner is not determined
-				
+
 				foreach (string userID in userIDs)
 				{
 					scores[userID] += 0.5;
@@ -80,7 +79,7 @@ namespace server_app.games
 				(string user, TimeSpan time) lowest = ("", TimeSpan.MaxValue);
 				foreach (string userID in correctUsers)
 				{
-					var time = stats[userID].time[count];
+					var time = stats[userID].time[roundCount];
 					if (time < lowest.time)
 					{
 						lowest = (userID, time);
@@ -90,9 +89,9 @@ namespace server_app.games
 				scores[lowest.user] += 1;
 				await sendVersusResults(userIDs, lowest.user);
 			}
-			count++;
+			roundCount++;
 		}
-		public void continueRequest(string userID)
+		public override void continueRequest(string userID)
 		{
 			continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)

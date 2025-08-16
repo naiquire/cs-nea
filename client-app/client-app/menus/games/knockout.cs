@@ -40,9 +40,14 @@ namespace client_app.games
 					{
 						alive.Add(user);
 					}
+					else
+					{
+						dead.Add(user);
+					}
 				}
 
 				interfaces.configLeftGamePanel(main.panel_left, alive, dead);
+				main.panel_left.Controls.Add(main.btn_home);
 			}
 			else
 			{

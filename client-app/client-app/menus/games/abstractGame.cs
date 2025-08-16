@@ -82,10 +82,11 @@ namespace client_app.menus.games
 
 			if (!started)
 			{
-				interfaces.configLobbyPanel(main.panel_main, users);
+				interfaces.configLobbyPanel(main, users);
 			}
 
 			interfaces.configLeftGamePanel(main.panel_left, users);
+			main.panel_left.Controls.Add(main.btn_home);
 
 		}
 		public async virtual void queueGame()
@@ -99,6 +100,7 @@ namespace client_app.menus.games
 		}
 		public virtual async Task joinGameLobby()
 		{
+			interfaces.resetLayout(main);
 			interfaces.initialiseLobby(main);
 			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
@@ -116,7 +118,7 @@ namespace client_app.menus.games
 		}
 		public void awaitRound()
 		{
-			// countdown timer of 5 sec
+			// countdown timer of 3 sec
 
 			drawingPanel = interfaces.configGamePanel(this);
 
@@ -124,36 +126,14 @@ namespace client_app.menus.games
 			btn_submit.Click += async (sender, e) =>
 			{
 				btn_submit.Enabled = false;
-				Bitmap drawing = drawingPanel.disablePanel();
+				drawingPanel.disablePanel();
 
-				var submission = convertBitmap(drawing);
+				var submission = drawingPanel.convertToMNISTformat();
 
 				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
 
 				drawingPanel.clearPanel();
-			};
-
-			double[] convertBitmap(Bitmap bitmap)
-			{
-				Bitmap resize = new Bitmap(bitmap, new Size(28, 28));
-				bitmap.Save("raw.png");
-				resize.Save("resize.png");
-				int width = resize.Width;
-				int height = resize.Height;
-				double[] pixels = new double[width * height];
-
-				for (int y = 0; y < height; y++)
-				{
-					for (int x = 0; x < width; x++)
-					{
-						Color c = resize.GetPixel(x, y);
-						double gray = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B);
-						pixels[y * width + x] = 1.0 - (gray / 255.0);
-					}
-				}
-
-				return pixels;
-			}
+			};			
 		}
 		public virtual void submissionPhase(char letter)
 		{
@@ -177,7 +157,7 @@ namespace client_app.menus.games
 
 		public virtual void endGame()
 		{
-
+			interfaces.configEndGamePanel(this);
 		}
 
 		public string getGameID() => gameID;
