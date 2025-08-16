@@ -86,6 +86,7 @@ namespace client_app.menus.games
 			}
 
 			interfaces.configLeftGamePanel(main.panel_left, users);
+
 		}
 		public async virtual void queueGame()
 		{

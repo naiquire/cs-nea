@@ -33,6 +33,7 @@ namespace client_app.games
 				this.users = users;
 
 				List<friendData> alive = new List<friendData>();
+				List<friendData> dead = new List<friendData>();
 				foreach (var user in this.users)
 				{
 					if (aliveUsers.Contains(user.userID))
@@ -41,7 +42,7 @@ namespace client_app.games
 					}
 				}
 
-				interfaces.configLeftGamePanel(main.panel_left, alive);
+				interfaces.configLeftGamePanel(main.panel_left, alive, dead);
 			}
 			else
 			{

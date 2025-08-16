@@ -23,7 +23,7 @@ namespace server_app.games
 			{
 				continueRequests.Clear();
 				await awaitRound();
-				Thread.Sleep(5000);
+				Thread.Sleep(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();

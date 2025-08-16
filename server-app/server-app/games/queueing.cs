@@ -117,10 +117,11 @@ namespace server_app.games
 				if (game.getGameID() == gameID)
 				{
 					game.dequeueUser(userID);
-				}
-                if (game.getPlayerCount() <= 0)
-                {
-                    currentGames.Remove(game);
+					if (game.getPlayerCount() <= 0)
+					{
+						currentGames.Remove(game);
+					}
+                    break;
 				}
 			}
 		}

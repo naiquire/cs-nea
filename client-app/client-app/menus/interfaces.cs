@@ -384,6 +384,8 @@ namespace client_app.menus
 
 		public static void configLeftGamePanel(Panel panel, List<friendData> users)
 		{
+			panel.Controls.Clear();
+
 			Panel panel_players = new Panel()
 			{
 				AutoScroll = true,
@@ -446,6 +448,138 @@ namespace client_app.menus
 
 				panel_players.Controls.Add(user);
 				panel_players.Controls.Add(rank);
+			}
+
+			panel.Controls.Add(panel_players);
+			panel.Controls.Add(seperator);
+			panel.Controls.Add(lbl_players);
+
+		}
+		public static void configLeftGamePanel(Panel panel, List<friendData> alive, List<friendData> dead)
+		{
+			panel.Controls.Clear();
+
+			Panel panel_players = new Panel()
+			{
+				AutoScroll = true,
+				BackColor = Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46))))),
+				Location = new Point(20, 90),
+				Name = "panel_friendList",
+				Size = new Size(260, 384),
+				TabIndex = 2,
+			};
+			PictureBox seperator = new PictureBox()
+			{
+				Image = Resources.seperator,
+				InitialImage = null,
+				Location = new Point(50, 60),
+				Name = "seperator",
+				Size = new Size(200, 5),
+				SizeMode = PictureBoxSizeMode.StretchImage,
+				TabIndex = 1,
+				TabStop = false,
+			};
+			Label lbl_players = new Label()
+			{
+				BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				BorderStyle = BorderStyle.None,
+				Font = new Font("Bahnschrift", 20.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				ForeColor = Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				Location = new Point(0, 20),
+				Name = "txt_friendsLabel",
+				Size = new Size(300, 33),
+				TabIndex = 0,
+				Text = "Players",
+				TextAlign = (ContentAlignment)HorizontalAlignment.Center,
+			};
+
+			const int labelX = 200;
+			const int labelY = 30;
+			const int padding = 5;
+
+			int y_offset = 10;
+
+			Label lbl_alive = new Label()
+			{
+				BackColor = panel_players.BackColor,
+				BorderStyle = BorderStyle.None,
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				Location = new System.Drawing.Point(10, y_offset),
+				Size = new Size(200, labelY),
+				TabIndex = 0,
+				Text = "Alive"
+			};
+			panel_players.Controls.Add(lbl_alive);
+
+			Label aliveCount = new Label()
+			{
+				BackColor = panel_players.BackColor,
+				BorderStyle = BorderStyle.None,
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				Location = new Point(230, 10),
+				Size = new Size(30, 20),
+				TabIndex = 0,
+				Text = alive.Count.ToString(),
+				TextAlign = ContentAlignment.MiddleRight,
+			};
+			panel_players.Controls.Add(aliveCount);
+			y_offset += 30;
+
+			for (int i = 0; i < alive.Count; i++, y_offset += labelY + padding)
+			{
+				Label user = new Label()
+				{
+					BackColor = panel_players.BackColor,
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+					Location = new Point(10, y_offset),
+					Size = new Size(labelX, labelY),
+					TabIndex = 0,
+					Text = alive[i].userID,
+					FlatStyle = FlatStyle.Flat,
+				};
+				panel_players.Controls.Add(user);
+			}
+
+			y_offset += 30;
+			Label lbl_dead = new Label()
+			{
+				BackColor = panel_players.BackColor,
+				BorderStyle = BorderStyle.None,
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				Location = new Point(10, y_offset),
+				Size = new Size(200, labelY),
+				TabIndex = 0,
+				Text = "Eliminated",
+			};
+			panel_players.Controls.Add(lbl_dead);
+
+			Label offlineCount = new Label()
+			{
+				BackColor = panel_players.BackColor,
+				BorderStyle = BorderStyle.None,
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				Location = new Point(230, y_offset),
+				Size = new Size(30, 20),
+				TabIndex = 0,
+				Text = dead.Count.ToString(),
+				TextAlign = ContentAlignment.MiddleRight,
+			};
+			panel_players.Controls.Add(offlineCount);
+			y_offset += 30;
+
+			for (int i = 0; i < dead.Count; i++, y_offset += labelY + padding)
+			{
+				Label user = new Label()
+				{
+					BackColor = panel_players.BackColor,
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+					Location = new Point(10, y_offset),
+					Size = new Size(labelX, labelY),
+					TabIndex = 0,
+					Text = dead[i].userID,
+					FlatStyle = FlatStyle.Flat,
+				};
+				panel_players.Controls.Add(user);
 			}
 
 			panel.Controls.Add(panel_players);

@@ -30,7 +30,7 @@ namespace server_app.games
 				letters.Add(letter);
 
 				await awaitRound();
-				Thread.Sleep(5000);
+				Thread.Sleep(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();

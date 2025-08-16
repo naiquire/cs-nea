@@ -15,6 +15,8 @@ namespace client_app.components
         private bool draw = false;
         private (int x, int y) pos;
 
+        const int PEN_THICKNESS = 40;
+
         public input(Panel panel, (int, int) pos, (int, int) size)
         {
             this.panel = panel;
@@ -106,7 +108,7 @@ namespace client_app.components
             if (draw)
             {
                 Graphics panel = Graphics.FromImage(drawing);
-                Pen pen = new Pen(Color.Black, 32)
+                Pen pen = new Pen(Color.Black, PEN_THICKNESS)
                 {
                     EndCap = LineCap.Round,
                     StartCap = LineCap.Round

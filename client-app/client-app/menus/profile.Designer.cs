@@ -4,35 +4,35 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-    partial class profile
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class profile
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        public void InitializeComponent()
-        {
-            interfaces.resetLayout(main);
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		public void InitializeComponent()
+		{
+			interfaces.resetLayout(main);
 
 			this.lbl_username = new Guna.UI2.WinForms.Guna2TextBox();
 			this.lbl_rank = new Guna.UI2.WinForms.Guna2TextBox();
@@ -186,53 +186,53 @@ namespace client_app.menus
 
 			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).EndInit();
 
-            main.configFriendsPanel();
-            interfaces.configUserDataPanel(main, userData);
-        }
+			main.configFriendsPanel();
+			interfaces.configUserDataPanel(main, userData);
+		}
 
-        private void configStats()
-        {
-            const int X = 10;
-            int y = 10;
+		private void configStats()
+		{
+			const int X = 10;
+			int y = 10;
 
-            const int panelX = 900;
-            const int panelY = 50;
-            const int padding = 5;
-            const int defaultSize = panelY - 2 * padding;
+			const int panelX = 900;
+			const int panelY = 50;
+			const int padding = 5;
+			const int defaultSize = panelY - 2 * padding;
 
 			panel_stats.SuspendLayout();
 
-            foreach (var stat in userData.statistics)
-            {
-                string letter = stat.Key.ToString();
-                int total = stat.Value.total;
-                double accuracy = stat.Value.accuracy;
-                TimeSpan time = stat.Value.time;
+			foreach (var stat in userData.statistics)
+			{
+				string letter = stat.Key.ToString();
+				int total = stat.Value.total;
+				double accuracy = stat.Value.accuracy;
+				TimeSpan time = stat.Value.time;
 
-                (int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+				(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
 
 				Label lbl_letter = new System.Windows.Forms.Label()
-                {
-                    Location = new System.Drawing.Point(0 + padding, 0 + padding),
-                    Name = "lbl_letter",
-                    Size = new System.Drawing.Size(defaultSize, defaultSize),
-                    TabIndex = 0,
-                    Text = letter,
-                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				{
+					Location = new System.Drawing.Point(0 + padding, 0 + padding),
+					Name = "lbl_letter",
+					Size = new System.Drawing.Size(defaultSize, defaultSize),
+					TabIndex = 0,
+					Text = letter,
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-                Label lbl_total = new System.Windows.Forms.Label()
-                {
-                    Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
-                    Name = "lbl_total",
-                    Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
-                    TabIndex = 1,
-                    Text = total.ToString(),
-                    TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+				Label lbl_total = new System.Windows.Forms.Label()
+				{
+					Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
+					Name = "lbl_total",
+					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+					TabIndex = 1,
+					Text = total.ToString(),
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-                Label lbl_time = new System.Windows.Forms.Label()
-                {
+				Label lbl_time = new System.Windows.Forms.Label()
+				{
 					Location = new System.Drawing.Point(lbl_total.Location.X - 2 * defaultSize - padding, padding),
 					Name = "lbl_time",
 					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
@@ -241,18 +241,18 @@ namespace client_app.menus
 					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-                Label lbl_percentage = new System.Windows.Forms.Label()
-                {
+				Label lbl_percentage = new System.Windows.Forms.Label()
+				{
 					Location = new System.Drawing.Point(lbl_time.Location.X - defaultSize - padding, padding),
-                    Name = "lbl_percentage",
+					Name = "lbl_percentage",
 					Size = new System.Drawing.Size(defaultSize, defaultSize),
 					TabIndex = 3,
 					Text = $"{100 * accuracy}%",
 					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-                Panel bar_base = new System.Windows.Forms.Panel()
-                {
+				Panel bar_base = new System.Windows.Forms.Panel()
+				{
 					BackColor = System.Drawing.SystemColors.ControlLight,
 					Location = new System.Drawing.Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
 					Name = "bar_base",
@@ -261,7 +261,7 @@ namespace client_app.menus
 					BorderStyle = BorderStyle.FixedSingle,
 				};
 				Panel bar_fill = new System.Windows.Forms.Panel()
-                {
+				{
 					BackColor = System.Drawing.ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
 					Location = new System.Drawing.Point(bar_base.Location.X, bar_base.Location.Y),
 					Name = "panel_fill",
@@ -269,9 +269,9 @@ namespace client_app.menus
 					TabIndex = 5,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-                
+				
 				Panel panel_char = new System.Windows.Forms.Panel()
-                {
+				{
 					BackColor = System.Drawing.SystemColors.ControlDark,
 					Location = new System.Drawing.Point(X, y),
 					Name = "panel_char",
@@ -287,13 +287,13 @@ namespace client_app.menus
 				panel_char.Controls.Add(lbl_total);
 				panel_char.Controls.Add(lbl_letter);
 
-                bar_fill.BringToFront();
+				bar_fill.BringToFront();
 
-                panel_stats.Controls.Add(panel_char);
+				panel_stats.Controls.Add(panel_char);
 
-                y += panelY + 2 * padding;
+				y += panelY + 2 * padding;
 			}
-        }
+		}
 
 		private Guna.UI2.WinForms.Guna2TextBox lbl_username;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_rank;

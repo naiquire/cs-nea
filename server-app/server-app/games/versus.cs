@@ -30,7 +30,7 @@ namespace server_app.games
 			{
 				continueRequests.Clear();
 				await awaitRound();
-				Thread.Sleep(5000);
+				Thread.Sleep(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
@@ -115,7 +115,7 @@ namespace server_app.games
 				}
 				else
 				{
-					expScore = 0;
+					expScore = scores[userIDs[i]] / rounds; // ensures rank change of 0 if much goes wrong
 				}
 
 				expScore *= rounds;

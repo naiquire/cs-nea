@@ -40,5 +40,10 @@ namespace client_app.games
 		{
 			base.evaluationPhase(correct, accuracy, time);
 		}
+
+		public override void endGame()
+		{
+			base.endGame();
+		}
 	}
 }
