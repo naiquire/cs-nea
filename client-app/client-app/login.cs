@@ -16,7 +16,14 @@ namespace client_app
     {
         private HubConnection connection;
         private int languageIndex = 0;
-        public login()
+
+		const int VALID = 1;
+		const int INCORRECT_PASSWORD = 0;
+		const int USERID_TAKEN = 0;
+		const int USER_DOES_NOT_EXIST = 2;
+		const int ERROR_OCCURED = -1;
+
+		public login()
         {
             InitializeComponent();
 			btn_language.Text = languages.supportedLanguages[languageIndex];
@@ -38,23 +45,19 @@ namespace client_app
         {
 			switch (success)
 			{
-				case 0:
-                    // incorrect password
-                    this.lbl_information.Text = "Incorrect Password";
+				case INCORRECT_PASSWORD:
+                    lbl_information.Text = "Incorrect Password";
 					break;
-				case 1:
-					// login user
+				case VALID:
 					Hide();
 					new main(userID).ShowDialog();
 					Close();
 					break;
-				case 2:
-					// account does not exist
-					this.lbl_information.Text = "Account does not exist";
+				case USER_DOES_NOT_EXIST:
+					lbl_information.Text = "Account does not exist";
 					break;
-				case -1:
-					// error occured
-					this.lbl_information.Text = "An error occurred. Please wait and try again";
+				case ERROR_OCCURED:
+					lbl_information.Text = "An error occurred. Please wait and try again";
 					break;
 				default:
 					throw new Exception($"Unrecognised login success code < {success} >");
@@ -64,19 +67,16 @@ namespace client_app
         {
 			switch (success)
 			{
-				case 1:
-					// login user
+				case VALID:
 					Hide();
 					new main(userID).ShowDialog();
 					Close();
 					break;
-				case 0:
-					// userID already exists
-					this.lbl_information.Text = "Username is not available";
+				case USERID_TAKEN:
+					lbl_information.Text = "Username is not available";
 					break;
-				case -1:
-					// error occured
-					this.lbl_information.Text = "An error occurred. Please wait and try again";
+				case ERROR_OCCURED:
+					lbl_information.Text = "An error occurred. Please wait and try again";
 					break;
 				default:
 					throw new Exception($"Unrecognised account success code < {success} >");
@@ -97,7 +97,7 @@ namespace client_app
             this.Controls.Remove(btn_createAccount);
 
             this.txt_password.Location = new Point(560, 260);
-			this.lbl_information.Location = new Point(this.lbl_information.Location.X, this.txt_passwordconfirm.Location.Y + this.txt_passwordconfirm.Size.Height);
+			this.lbl_information.Location = new Point(lbl_information.Location.X, txt_passwordconfirm.Location.Y + txt_passwordconfirm.Size.Height);
 
             this.Controls.Add(txt_passwordconfirm);
             this.Controls.Add(btn_requestAccount);

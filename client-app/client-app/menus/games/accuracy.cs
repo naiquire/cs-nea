@@ -6,7 +6,7 @@ namespace client_app.games
 {
 	public class accuracy : abstractGame, IPlayable
 	{
-		public accuracy(main main) : base(main, "accuracy")
+		public accuracy(main main) : base(main, "accuracy", 1)
 		{
 
 		}

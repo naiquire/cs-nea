@@ -8,7 +8,7 @@ namespace client_app.games
 {
 	public class versus : abstractGame, IPlayable
 	{
-		public versus(main main) : base(main, "versus")
+		public versus(main main) : base(main, "versus", 2)
 		{
 
 		}

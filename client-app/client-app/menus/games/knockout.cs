@@ -10,7 +10,7 @@ namespace client_app.games
 	public class knockout : abstractGame, IPlayable
 	{
 		private List<string> aliveUsers;
-		public knockout(main main) : base(main, "knockout")
+		public knockout(main main) : base(main, "knockout", 12)
 		{
 			aliveUsers = new List<string>();
 		}
@@ -91,7 +91,21 @@ namespace client_app.games
 			}
 			else
 			{
-				// show exit screen
+				endGame();
+			}
+		}
+
+		public override void endGame()
+		{
+			base.endGame();
+
+			if (aliveUsers.Count > 1)
+			{
+				// did not win
+			}
+			else
+			{
+				// yay
 			}
 		}
 	}

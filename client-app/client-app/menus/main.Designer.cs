@@ -95,7 +95,7 @@ namespace client_app
 			this.lbl_friendsLabel.Name = "txt_friendsLabel";
 			this.lbl_friendsLabel.Size = new System.Drawing.Size(300, 33);
 			this.lbl_friendsLabel.TabIndex = 0;
-			this.lbl_friendsLabel.Text = localisation["Friends"][userData.localisation];
+			this.lbl_friendsLabel.Text = languages.localisation["Friends"][userData.localisation];
 			this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
 			//
 			// appLogo
@@ -416,7 +416,7 @@ namespace client_app
 				Name = "txt_online",
 				Size = new System.Drawing.Size(200, buttonY),
 				TabIndex = 0,
-				Text = localisation["ONLINE"][userData.localisation],
+				Text = languages.localisation["ONLINE"][userData.localisation],
 			};
 			panel_friendList.Controls.Add(online);
 
@@ -469,7 +469,7 @@ namespace client_app
 				Name = "txt_appName",
 				Size = new System.Drawing.Size(200, buttonY),
 				TabIndex = 0,
-				Text = localisation["OFFLINE"][userData.localisation],
+				Text = languages.localisation["OFFLINE"][userData.localisation],
 			};
 			panel_friendList.Controls.Add(offline);
 

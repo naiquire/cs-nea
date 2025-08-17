@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Resources;
+using System.Threading;
 using System.Windows.Forms;
 using TheArtOfDevHtmlRenderer.Adapters.Entities;
 using static System.Windows.Forms.AxHost;
@@ -271,7 +272,7 @@ namespace client_app.menus
 				Margin = new Padding(15, 15, 15, 15),
 				Name = "lbl_rounds",
 				Size = new Size(420, 80),
-				TabIndex = 0,
+				TabStop = false,
 				TextAlign = HorizontalAlignment.Center,
 			};
 			PictureBox seperator = new PictureBox()
@@ -293,10 +294,25 @@ namespace client_app.menus
 				Size = new Size(420, 720),
 				TabIndex = 2,
 			};
+			game.lbl_countdown = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				DefaultText = "0",
+				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				Font = new Font("Bahnschrift SemiBold", 48F, FontStyle.Bold),
+				Location = new Point(190, 900),
+				Margin = new Padding(15, 15, 15, 15),
+				Name = "lbl_rounds",
+				Size = new Size(120, 120),
+				TabStop = false,
+				TextAlign = HorizontalAlignment.Center,
+			};
 
 			game.main.panel_right.Controls.Add(game.lbl_rounds);
 			game.main.panel_right.Controls.Add(seperator);
 			game.main.panel_right.Controls.Add(game.panel_stats);
+			game.main.panel_right.Controls.Add(game.lbl_countdown);
 		}
 		public static void configRightGamePanelStats(Panel panel, List<char> letters, List<double> accuracies, string type)
 		{
@@ -797,28 +813,6 @@ namespace client_app.menus
 			configStatsPanel(main.panel_right, (40, 570), userData);
 		}
 
-		public static (string, string, string) calculateStatsOverview(userData user)
-		{
-			string rank = user.rank.ToString();
-
-			int sum = 0;
-			foreach (var letter in user.statistics.Keys)
-			{
-				sum += user.statistics[letter].total;
-			}
-			string total = sum.ToString();
-
-			double mean = 0;
-			foreach (var letter in user.statistics.Keys)
-			{
-				mean += user.statistics[letter].accuracy;
-			}
-			mean /= user.statistics.Count;
-			string accuracy = (Math.Round((100 * mean), 2)).ToString();
-
-			return (rank, total, accuracy);
-		}
-
 		/// <summary>
 		/// Configures the panel containing summary statistics for a user at a given position in a Panel.
 		/// </summary>
@@ -827,7 +821,7 @@ namespace client_app.menus
 		/// <param name="user"></param>
 		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
 		{
-			(string rank, string total, string accuracy) = calculateStatsOverview(user);
+			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
 
 			Guna.UI2.WinForms.Guna2Panel panel_statsOverview = new Guna.UI2.WinForms.Guna2Panel()
 			{
@@ -1161,18 +1155,23 @@ namespace client_app.menus
 			main.panel_main.Controls.Add(lbl_header);
 		}
 
-		public static void configLobbyPanel(main main, List<friendData> users)
+		public static void configLobbyPanel(abstractGame game, List<friendData> users)
 		{
-			main.panel_main.Controls.Clear();
-			initialiseLobby(main);
+			game.main.panel_main.Controls.Clear();
+			initialiseLobby(game.main);
 
 			Panel panel_users = new Panel()
 			{
 				Name = "panel_users",
-				BackColor = main.panel_main.BackColor,
+				BackColor = game.main.panel_main.BackColor,
 				BorderStyle = BorderStyle.FixedSingle,
 				Location = new System.Drawing.Point(50, 150),
-				Size = new System.Drawing.Size(main.panel_main.Width - 100, main.panel_main.Height - 100 - 100)
+				Size = new System.Drawing.Size(game.main.panel_main.Width - 100, game.main.panel_main.Height - 100 - 100)
+			};
+			Guna.UI2.WinForms.Guna2TextBox lbl_remainingPlayers = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				// needs finishing ----------------------------------------------------------------------------------------------------------------------------------
+				Text = $"{users.Count}/{game.getMaxPlayers()} players",
 			};
 
 			int X = 10;
@@ -1194,7 +1193,7 @@ namespace client_app.menus
 
 				Label userID = new Label()
 				{
-					BackColor = main.panel_main.BackColor,
+					BackColor = game.main.panel_main.BackColor,
 					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 					Location = new System.Drawing.Point(padding, padding),
 					Name = user.userID,
@@ -1206,7 +1205,7 @@ namespace client_app.menus
 				};
 				Label rank = new Label()
 				{
-					BackColor = main.panel_main.BackColor,
+					BackColor = game.main.panel_main.BackColor,
 					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
 					Location = new System.Drawing.Point(userID.Width + 2 * padding, padding),
 					Name = "rank",
@@ -1225,11 +1224,23 @@ namespace client_app.menus
 				Y = Y + userY + 10;
 			}
 
-			main.panel_main.Controls.Add(panel_users);
+			game.main.panel_main.Controls.Add(panel_users);
+		}
+
+		public static void countdown(Guna.UI2.WinForms.Guna2TextBox lbl_countdown, int num)
+		{
+			for (int i = num; i > 0; i--)
+			{
+				lbl_countdown.Text = num.ToString();
+				Thread.Sleep(1000);
+			}
+			lbl_countdown.ResetText();
 		}
 
 		public static void configEndGamePanel(abstractGame game)
 		{
+			game.main.panel_main.Controls.Clear();
+
 
 		}
 

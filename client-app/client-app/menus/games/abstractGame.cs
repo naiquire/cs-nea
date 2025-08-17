@@ -53,6 +53,7 @@ namespace client_app.menus.games
 
 		protected bool started;
 		private int rounds;
+		protected readonly int maxPlayers;
 
 		public stats stats;
 		public List<char> letters;
@@ -64,10 +65,11 @@ namespace client_app.menus.games
 		public Guna.UI2.WinForms.Guna2GradientButton btn_continue;
 		public Panel panel_stats;
 		public Guna.UI2.WinForms.Guna2TextBox lbl_rounds;
+		public Guna.UI2.WinForms.Guna2TextBox lbl_countdown;
 
 		private input drawingPanel;
 
-		protected abstractGame(main main, string type)
+		protected abstractGame(main main, string type, int maxPlayers)
 		{
 			this.main = main;
 			this.type = type;
@@ -75,6 +77,7 @@ namespace client_app.menus.games
 			started = false;
 			rounds = 0;
 			letters = new List<char>();
+			this.maxPlayers = maxPlayers;
 		}
 		public virtual void updateUsers(List<friendData> users)
 		{
@@ -82,7 +85,7 @@ namespace client_app.menus.games
 
 			if (!started)
 			{
-				interfaces.configLobbyPanel(main, users);
+				interfaces.configLobbyPanel(this, users);
 			}
 
 			interfaces.configLeftGamePanel(main.panel_left, users);
@@ -104,13 +107,16 @@ namespace client_app.menus.games
 			interfaces.initialiseLobby(main);
 			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
-				// gameID couldn't be found, quit to menu
+				new alert("An error occured joining the game. Please try again.");
+				main.btn_home.PerformClick();
 			}
 		}
 		public virtual void awaitStart()
 		{
 			started = true;
-			// display countdown to game start
+			// label not present on lobby screen yet
+			// also need to add a progress textbox at bottom for number of queues required
+			interfaces.countdown(lbl_countdown, 5);
 		}
 		public virtual void startGame()
 		{
@@ -118,7 +124,7 @@ namespace client_app.menus.games
 		}
 		public void awaitRound()
 		{
-			// countdown timer of 3 sec
+			interfaces.countdown(lbl_countdown, 3);
 
 			drawingPanel = interfaces.configGamePanel(this);
 
@@ -128,7 +134,7 @@ namespace client_app.menus.games
 				btn_submit.Enabled = false;
 				drawingPanel.disablePanel();
 
-				var submission = drawingPanel.convertToMNISTformat();
+				var submission = drawingPanel.ImageToArray();
 
 				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
 
@@ -160,6 +166,7 @@ namespace client_app.menus.games
 			interfaces.configEndGamePanel(this);
 		}
 
+		public int getMaxPlayers() => maxPlayers;
 		public string getGameID() => gameID;
 		public string getType() => type;
 		public int getRounds() => rounds;

@@ -54,14 +54,12 @@ namespace client_app
 	{
 		public static HubConnection connection;
 		public static userData userData;
-		public static readonly string address = "http://86.11.15.228:5252/cs-nea";
-		public static Dictionary<string, Dictionary<string, string>> localisation;
+		public const string address = "http://86.11.15.228:5252/cs-nea";
 
 		public main(string userID)
 		{
 			hub_connection.injectForm(null, this);
 
-			localisation = languages.localisation;
 			interfaces.InitializeComponent(this);
 			initialiseConnection(userID);			
 
@@ -111,6 +109,29 @@ namespace client_app
 				}
 			}
 		}
+
+		public static (string, string, string) calculateStatsOverview(userData user)
+		{
+			string rank = user.rank.ToString();
+
+			int sum = 0;
+			foreach (var letter in user.statistics.Keys)
+			{
+				sum += user.statistics[letter].total;
+			}
+			string total = sum.ToString();
+
+			double mean = 0;
+			foreach (var letter in user.statistics.Keys)
+			{
+				mean += user.statistics[letter].accuracy;
+			}
+			mean /= user.statistics.Count;
+			string accuracy = (Math.Round((100 * mean), 2)).ToString();
+
+			return (rank, total, accuracy);
+		}
+
 		public async Task requestProfile(string userID)
 		{
 			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);

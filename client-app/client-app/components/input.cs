@@ -120,7 +120,7 @@ namespace client_app.components
             pos.y = e.Y;
         }
 
-        public double[] convertToMNISTformat()
+        public double[] ImageToArray()
 		{
 			Bitmap resize = new Bitmap(drawing, new Size(28, 28));
 			int width = resize.Width;

@@ -16,7 +16,8 @@ namespace client_app
 	public static class hub_connection
 	{
 		private static login login;
-		private static main main;
+		private static main main;	
+
 		public static void injectForm(login l, main m)
 		{
 			main = m;
