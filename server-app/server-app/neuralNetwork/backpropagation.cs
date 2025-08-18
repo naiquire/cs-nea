@@ -2,11 +2,11 @@
 {
     public class @backpropagation
     {
-        public static int epochs = 0;
-        public static int correct = 0;
+        public static double epochs = 0;
+        public static double correct = 0;
 
         private readonly double[][] neuronErrors = new double[evaluate.layerCount][];
-        private readonly double learningRate = 0.05;
+        private readonly double learningRate = 0.01;
         public backpropagation(List<double[]> input, List<int> expected)
         {
             List<double[][,]> weightAdjustments = [];

@@ -299,7 +299,7 @@ namespace server_app.games
 		public string getType() => type;
 		public string getGameID() => gameID;
 		public bool hasStarted() => started;
-		public int getMaxPlayers() => maxPlayers
+		public int getMaxPlayers() => maxPlayers;
 		public int getPlayerCount() => userIDs.Count;
 	}
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
+using server_app.neuralNetwork;
 using System.Diagnostics;
 
 namespace server_app
@@ -9,8 +10,11 @@ namespace server_app
         public static IHubContext<connection>? hubContext;
         static void Main(string[] args)
         {
-            startNginx();
-            hostBuilder(args).Build().Run();
+            var t = new training();
+            Console.ReadKey();
+
+            //startNginx();
+            //hostBuilder(args).Build().Run();
         }
         private static void startNginx()
         {
