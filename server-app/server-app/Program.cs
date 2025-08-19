@@ -10,11 +10,8 @@ namespace server_app
         public static IHubContext<connection>? hubContext;
         static void Main(string[] args)
         {
-            var t = new training();
-            Console.ReadKey();
-
             //startNginx();
-            //hostBuilder(args).Build().Run();
+            hostBuilder(args).Build().Run();
         }
         private static void startNginx()
         {

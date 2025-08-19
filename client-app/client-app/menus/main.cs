@@ -54,7 +54,7 @@ namespace client_app
 	{
 		public static HubConnection connection;
 		public static userData userData;
-		public const string address = "http://86.11.15.228:5252/cs-nea";
+		public const string address = "http://[2a0e:cb01:184:e500:8c9:b6dd:4a72:f90e]:5252/cs-nea";
 
 		public main(string userID)
 		{

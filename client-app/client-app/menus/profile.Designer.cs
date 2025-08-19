@@ -168,7 +168,7 @@ namespace client_app.menus
 			this.panel_stats.TabIndex = 5;
 			this.panel_stats.VerticalScroll.Enabled = true;
 
-			(string rank, string total, string accuracy) = interfaces.calculateStatsOverview(userData);
+			(string rank, string total, string accuracy) = main.calculateStatsOverview(userData);
 
 			this.lbl_username.Text = userData.userID;
 			this.lbl_rank.Text = rank;
