@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace server_app.games
 {
-    public static class @queueing
-    {
-	    public static readonly List<IPlayable> currentGames = [];
+	public static class @queueing
+	{
+		public static readonly List<IPlayable> currentGames = [];
 
 		public static string queueGame(string gameType, string userID, IHubContext<connection> context)
 		{
@@ -45,29 +45,29 @@ namespace server_app.games
 			return newGame.getGameID();
 		}
 		private static bool tryQueueGame(IPlayable game, string userID)
-        {
-            if (game.getPlayerCount() < game.getMaxPlayers() && !game.hasStarted())
-            {
-                game.queueUser(userID);
+		{
+			if (game.getPlayerCount() < game.getMaxPlayers() && !game.hasStarted())
+			{
+				game.queueUser(userID);
 				return true;
-            }
-            return false;
-        }
-        public static bool userJoined(string gameID)
-        {
+			}
+			return false;
+		}
+		public static bool userJoined(string gameID)
+		{
 			foreach (IPlayable game in currentGames)
 			{
 				if (game.getGameID() == gameID)
 				{
-                    game.updateUsers();
+					game.updateUsers();
 					if (game.getPlayerCount() == game.getMaxPlayers())
 					{
 						game.startGame();
-                        return true;
 					}
+					return true;
 				}
 			}
-            return false;
+			return false;
 		}
 		public static void dequeueUser(string gameID, string userID)
 		{
@@ -97,14 +97,14 @@ namespace server_app.games
 			}
 		}
 		public static void requestRound(string gameID, string userID)
-        {
-            foreach (IPlayable game in currentGames)
-            {
-                if (game.getGameID() == gameID)
-                {
-                    game.continueRequest(userID);
-                }
-            }
-        }
-    }
+		{
+			foreach (IPlayable game in currentGames)
+			{
+				if (game.getGameID() == gameID)
+				{
+					game.continueRequest(userID);
+				}
+			}
+		}
+	}
 }

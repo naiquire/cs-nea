@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -88,7 +87,7 @@ namespace client_app.menus.games
 				interfaces.configLobbyPanel(this, users);
 			}
 
-			interfaces.configLeftGamePanel(main.panel_left, users);
+			interfaces.configLeftGamePanel(this, users);			
 			main.panel_left.Controls.Add(main.btn_home);
 
 		}
@@ -121,12 +120,12 @@ namespace client_app.menus.games
 		public virtual void startGame()
 		{
 			interfaces.configRightGamePanel(this);
+			//interfaces.configLeftGamePanel(main.panel_left, users);
+			//interfaces.configCountdown(this);
 		}
 		public void awaitRound()
 		{
-			interfaces.countdown(lbl_countdown, 3);
-
-			drawingPanel = interfaces.configGamePanel(this);
+			drawingPanel = interfaces.configGamePanel(this);			
 
 			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
 			btn_submit.Click += async (sender, e) =>
@@ -139,7 +138,9 @@ namespace client_app.menus.games
 				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
 
 				drawingPanel.clearPanel();
-			};			
+			};
+
+			interfaces.countdown(lbl_countdown, 3);
 		}
 		public virtual void submissionPhase(char letter)
 		{

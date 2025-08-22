@@ -5,10 +5,12 @@ using client_app.Properties;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Resources;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheArtOfDevHtmlRenderer.Adapters.Entities;
 using static System.Windows.Forms.AxHost;
@@ -294,33 +296,18 @@ namespace client_app.menus
 				Size = new Size(420, 720),
 				TabIndex = 2,
 			};
-			game.lbl_countdown = new Guna.UI2.WinForms.Guna2TextBox()
-			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = "0",
-				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
-				Font = new Font("Bahnschrift SemiBold", 48F, FontStyle.Bold),
-				Location = new Point(190, 900),
-				Margin = new Padding(15, 15, 15, 15),
-				Name = "lbl_rounds",
-				Size = new Size(120, 120),
-				TabStop = false,
-				TextAlign = HorizontalAlignment.Center,
-			};
 
 			game.main.panel_right.Controls.Add(game.lbl_rounds);
 			game.main.panel_right.Controls.Add(seperator);
 			game.main.panel_right.Controls.Add(game.panel_stats);
-			game.main.panel_right.Controls.Add(game.lbl_countdown);
 		}
 		public static void configRightGamePanelStats(Panel panel, List<char> letters, List<double> accuracies, string type)
 		{
 			panel.Controls.Clear();
 
-			// only display last 10 rounds of knockout
+			// only display last 10 rounds
 			int start = 0;
-			if (type == "knockout")
+			if (letters.Count > 10)
 			{
 				start = letters.Count - 10;
 			}
@@ -398,9 +385,9 @@ namespace client_app.menus
 
 		}
 
-		public static void configLeftGamePanel(Panel panel, List<friendData> users)
+		public static void configLeftGamePanel(abstractGame game, List<friendData> users)
 		{
-			panel.Controls.Clear();
+			game.main.panel_left.Controls.Clear();
 
 			Panel panel_players = new Panel()
 			{
@@ -466,14 +453,15 @@ namespace client_app.menus
 				panel_players.Controls.Add(rank);
 			}
 
-			panel.Controls.Add(panel_players);
-			panel.Controls.Add(seperator);
-			panel.Controls.Add(lbl_players);
+			game.main.panel_left.Controls.Add(panel_players);
+			game.main.panel_left.Controls.Add(seperator);
+			game.main.panel_left.Controls.Add(lbl_players);
 
+			configCountdown(game);
 		}
-		public static void configLeftGamePanel(Panel panel, List<friendData> alive, List<friendData> dead)
+		public static void configLeftGamePanel(abstractGame game, List<friendData> alive, List<friendData> dead)
 		{
-			panel.Controls.Clear();
+			game.main.panel_left.Controls.Clear();
 
 			Panel panel_players = new Panel()
 			{
@@ -598,10 +586,11 @@ namespace client_app.menus
 				panel_players.Controls.Add(user);
 			}
 
-			panel.Controls.Add(panel_players);
-			panel.Controls.Add(seperator);
-			panel.Controls.Add(lbl_players);
+			game.main.panel_left.Controls.Add(panel_players);
+			game.main.panel_left.Controls.Add(seperator);
+			game.main.panel_left.Controls.Add(lbl_players);
 
+			configCountdown(game);
 		}
 
 
@@ -1155,6 +1144,25 @@ namespace client_app.menus
 			main.panel_main.Controls.Add(lbl_header);
 		}
 
+		private static void configCountdown(abstractGame game)
+		{
+			game.lbl_countdown = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				DefaultText = "0",
+				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				Font = new Font("Bahnschrift SemiBold", 64F, FontStyle.Bold),
+				Location = new Point(20, 700),
+				Margin = new Padding(15, 15, 15, 15),
+				Size = new Size(260, 100),
+				TabStop = false,
+				TextAlign = HorizontalAlignment.Center,
+			};
+
+			game.main.panel_left.Controls.Add(game.lbl_countdown);
+		}
+
 		public static void configLobbyPanel(abstractGame game, List<friendData> users)
 		{
 			game.main.panel_main.Controls.Clear();
@@ -1225,14 +1233,15 @@ namespace client_app.menus
 			}
 
 			game.main.panel_main.Controls.Add(panel_users);
+			game.main.panel_main.Controls.Add(lbl_remainingPlayers);
 		}
 
-		public static void countdown(Guna.UI2.WinForms.Guna2TextBox lbl_countdown, int num)
+		public static async void countdown(Guna.UI2.WinForms.Guna2TextBox lbl_countdown, int num)
 		{
 			for (int i = num; i > 0; i--)
 			{
-				lbl_countdown.Text = num.ToString();
-				Thread.Sleep(1000);
+				lbl_countdown.Text = i.ToString();
+				await Task.Delay(1000);
 			}
 			lbl_countdown.ResetText();
 		}

@@ -10,8 +10,8 @@ namespace client_app.components
 {
 	public class alert : Form
 	{
-		private Guna.UI2.WinForms.Guna2TextBox header;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_close;
+		private readonly Guna.UI2.WinForms.Guna2TextBox header;
+		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_close;
 
 		public alert(string text)
 		{
@@ -21,7 +21,7 @@ namespace client_app.components
 			{
 				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
 				BorderRadius = 10,
-				BorderThickness = 4,
+				BorderThickness = 2,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
 				DefaultText = text,
 				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
@@ -47,10 +47,9 @@ namespace client_app.components
 				Font = new System.Drawing.Font("Bahnschrift", 9.75F),
 				ForeColor = System.Drawing.Color.White,
 				Location = new System.Drawing.Point(215, 145),
-				Name = "btn_accept",
 				Size = new System.Drawing.Size(160, 30),
 				TabIndex = 1,
-				Text = "Accept",
+				Text = "Close",
 			};
 
 			btn_close.Click += (sender, e) => Close();

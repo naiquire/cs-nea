@@ -5,24 +5,24 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-    public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
-    {
-        private List<string> aliveUsers = [];
-        public override void startGame()
-        {
-            aliveUsers = [.. userIDs];
+	public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 2), IPlayable
+	{
+		private List<string> aliveUsers = [];
+		public override void startGame()
+		{
+			aliveUsers = [.. userIDs];
 
-            base.startGame();
-            submissionPhase();
-	    }
-	    public override void dequeueUser(string userID)
-	    {
-		    aliveUsers.Remove(userID);
-            base.dequeueUser(userID);
-	    }
-        public async override void submissionPhase()
-        {
-            
+			base.startGame();
+			submissionPhase();
+		}
+		public override void dequeueUser(string userID)
+		{
+			aliveUsers.Remove(userID);
+			base.dequeueUser(userID);
+		}
+		public async override void submissionPhase()
+		{
+			
 			if (aliveUsers.Count > 1)
 			{
 				continueRequests.Clear();
@@ -43,52 +43,52 @@ namespace server_app.games
 				endGame();
 			}
 		}
-        public void loadResponse(string userID, double[] input)
-        {
-            currentResponses.Add(userID, (input, DateTime.UtcNow));
-            if (currentResponses.Count == aliveUsers.Count)
-            {
-                evaluationPhase(letters[^1]);
-            }
-        }
-        public async void evaluationPhase(char letter)
-        {
+		public void loadResponse(string userID, double[] input)
+		{
+			currentResponses.Add(userID, (input, DateTime.UtcNow));
+			if (currentResponses.Count == aliveUsers.Count)
+			{
+				evaluationPhase(letters[^1]);
+			}
+		}
+		public async void evaluationPhase(char letter)
+		{
 			List<string> incorrectUsers = [];
 			evaluate[] evaluates = new evaluate[getPlayerCount()];
-            for (int i = 0; i < aliveUsers.Count; i++)
-            {
+			for (int i = 0; i < aliveUsers.Count; i++)
+			{
 				if (!evaluateSubmission(ref evaluates[i], userIDs[i], letter))
 				{
-                    incorrectUsers.Add(userIDs[i]);
+					incorrectUsers.Add(userIDs[i]);
 				}
-                await sendResult(userIDs[i], stats[userIDs[i]]);
-            }
+				await sendResult(userIDs[i], stats[userIDs[i]]);
+			}
 
-            if (incorrectUsers.Count == 0)
-            {
-                // eliminate user with longest time
-                (string user, TimeSpan time) highest = ("", TimeSpan.MinValue);
-                foreach (string userID in aliveUsers)
-                {
-                    var time = stats[userID].time[letter];
-                    if (time > highest.time)
-                    {
-                        highest = (userID, time);
-                    }
-                }
+			if (incorrectUsers.Count == 0)
+			{
+				// eliminate user with longest time
+				(string user, TimeSpan time) highest = ("", TimeSpan.MinValue);
+				foreach (string userID in aliveUsers)
+				{
+					var time = stats[userID].time[letter];
+					if (time > highest.time)
+					{
+						highest = (userID, time);
+					}
+				}
 
-                aliveUsers.Remove(highest.user);
-            }
-            else if (incorrectUsers.Count < aliveUsers.Count)
-            {
-                // eliminate incorrect users
-                foreach (string user in incorrectUsers)
-                {
-                    aliveUsers.Remove(user);
-                }
-            }
+				aliveUsers.Remove(highest.user);
+			}
+			else if (incorrectUsers.Count < aliveUsers.Count)
+			{
+				// eliminate incorrect users
+				foreach (string user in incorrectUsers)
+				{
+					aliveUsers.Remove(user);
+				}
+			}
 
-            await sendKnockoutResults(userIDs, aliveUsers);
+			await sendKnockoutResults(userIDs, aliveUsers);
 		}
 		public override void continueRequest(string userID)
 		{
@@ -100,18 +100,18 @@ namespace server_app.games
 		}
 
 		public async Task sendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
-        {
-            foreach (string userID in userIDs)
-            {
-                if (connection.map.TryGetValue(userID, out string? connectionID))
-                {
-                    await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
-                }
-                else
-                {
-                    throw new DisconnectException(userID);
-                }
-            }
-        }
-    }
+		{
+			foreach (string userID in userIDs)
+			{
+				if (connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
+				}
+				else
+				{
+					throw new DisconnectException(userID);
+				}
+			}
+		}
+	}
 }

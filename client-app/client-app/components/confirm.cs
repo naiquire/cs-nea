@@ -22,7 +22,7 @@ namespace client_app.components
 			{
 				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
 				BorderRadius = 10,
-				BorderThickness = 4,
+				BorderThickness = 2,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
 				DefaultText = text,
 				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),

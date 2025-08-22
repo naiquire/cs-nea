@@ -46,7 +46,7 @@ namespace client_app.games
 					}
 				}
 
-				interfaces.configLeftGamePanel(main.panel_left, alive, dead);
+				interfaces.configLeftGamePanel(this, alive, dead);
 				main.panel_left.Controls.Add(main.btn_home);
 			}
 			else
