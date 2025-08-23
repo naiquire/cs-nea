@@ -10,9 +10,9 @@ namespace client_app.components
 {
 	public class confirm : Form
 	{
-		private Guna.UI2.WinForms.Guna2TextBox header;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_accept;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_cancel;
+		private readonly Guna.UI2.WinForms.Guna2TextBox header;
+		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_accept;
+		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_cancel;
 
 		public confirm(string text)
 		{

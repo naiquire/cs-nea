@@ -19,7 +19,7 @@ namespace server_app.games
 				scores[userID] = 0;
 			}
 
-			letters = generateRandomLetters(rounds);
+			letters = generateLetters(rounds);
 			submissionPhase();
 		}
 		public async override void submissionPhase()

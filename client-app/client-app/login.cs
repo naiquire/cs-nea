@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace client_app
         }
         private async void initialiseConnection()
         {
-            connection = hub_connection.configConnection(main.address + "/accounts");
+            connection = hub_connection.configConnection($"{main.address}/accounts");
             connection = hub_connection.addLoginHandles(connection);
             connection = await hub_connection.startConnection(connection);
 

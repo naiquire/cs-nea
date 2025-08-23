@@ -6,13 +6,13 @@ namespace server_app.connections
 {
 	public partial class @connection : Hub
 	{
-		public userData? requestProfile(string userID)
+		public userData requestProfile(string userID)
 		{
 			if (database.loadUserData(userID, out userData userData))
 			{
 				return userData;
 			}
-			return null;
+			return new userData();
 		}
 		public async Task updateFriendData(string userID, string friendID)
 		{

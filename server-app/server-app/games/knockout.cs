@@ -5,7 +5,7 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-	public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 2), IPlayable
+	public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
 	{
 		private List<string> aliveUsers = [];
 		public override void startGame()
@@ -31,7 +31,7 @@ namespace server_app.games
 				letters.Add(letter);
 
 				await awaitRound();
-				Thread.Sleep(3000);
+				await Task.Delay(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();

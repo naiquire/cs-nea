@@ -44,18 +44,18 @@ namespace client_app.menus.games
 
 	public abstract class abstractGame : Form
 	{
-		public main main;
+		public readonly main main;
 
-		public string gameID;
-		protected readonly string type;
-		public List<friendData> users;
+		private string gameID;
+		private readonly string type;
+		protected List<friendData> users;
 
-		protected bool started;
+		private bool started;
 		private int rounds;
-		protected readonly int maxPlayers;
+		private readonly int maxPlayers;
 
-		public stats stats;
-		public List<char> letters;
+		private stats stats;
+		private readonly List<char> letters;
 
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
 		public Guna.UI2.WinForms.Guna2TextBox lbl_letter;
@@ -65,6 +65,7 @@ namespace client_app.menus.games
 		public Panel panel_stats;
 		public Guna.UI2.WinForms.Guna2TextBox lbl_rounds;
 		public Guna.UI2.WinForms.Guna2TextBox lbl_countdown;
+		public Guna.UI2.WinForms.Guna2TextBox lbl_status;
 
 		private input drawingPanel;
 
@@ -110,20 +111,16 @@ namespace client_app.menus.games
 				main.btn_home.PerformClick();
 			}
 		}
-		public virtual void awaitStart()
+		public virtual async void awaitStart()
 		{
 			started = true;
-			// label not present on lobby screen yet
-			// also need to add a progress textbox at bottom for number of queues required
-			interfaces.countdown(lbl_countdown, 5);
+			await interfaces.countdown(lbl_countdown, 5, lbl_status, "Starting in");
 		}
 		public virtual void startGame()
 		{
 			interfaces.configRightGamePanel(this);
-			//interfaces.configLeftGamePanel(main.panel_left, users);
-			//interfaces.configCountdown(this);
 		}
-		public void awaitRound()
+		public async void awaitRound()
 		{
 			drawingPanel = interfaces.configGamePanel(this);			
 
@@ -140,7 +137,7 @@ namespace client_app.menus.games
 				drawingPanel.clearPanel();
 			};
 
-			interfaces.countdown(lbl_countdown, 3);
+			await interfaces.countdown(lbl_countdown, 3, lbl_status, "Next letter in");
 		}
 		public virtual void submissionPhase(char letter)
 		{
@@ -159,7 +156,7 @@ namespace client_app.menus.games
 			stats.updateStats(correct, accuracy, time);
 			interfaces.configResultsPanel(this, letters[letters.Count - 1], stats);
 
-			interfaces.configRightGamePanelStats(panel_stats, letters, stats.accuracy, getType()); // idk
+			interfaces.configRightGamePanelStats(panel_stats, letters, stats.accuracy);
 		}
 
 		public virtual void endGame()
@@ -170,6 +167,7 @@ namespace client_app.menus.games
 		public int getMaxPlayers() => maxPlayers;
 		public string getGameID() => gameID;
 		public string getType() => type;
+		public bool hasStarted() => started;
 		public int getRounds() => rounds;
 	}
 }

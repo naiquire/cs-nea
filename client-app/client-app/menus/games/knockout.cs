@@ -27,7 +27,7 @@ namespace client_app.games
 
 		public override void updateUsers(List<friendData> users)
 		{
-			if (started)
+			if (hasStarted())
 			{
 				// left panel should only display alive users
 				this.users = users;

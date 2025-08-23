@@ -32,7 +32,7 @@ namespace client_app.menus
 		/// </summary>
 		public void InitializeComponent()
 		{
-			interfaces.resetLayout(main);
+			main.panel_main.Controls.Clear();
 
 			this.lbl_username = new Guna.UI2.WinForms.Guna2TextBox();
 			this.lbl_rank = new Guna.UI2.WinForms.Guna2TextBox();
@@ -185,9 +185,6 @@ namespace client_app.menus
 			main.panel_main.Controls.Add(this.lbl_username);
 
 			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).EndInit();
-
-			main.configFriendsPanel();
-			interfaces.configUserDataPanel(main, userData);
 		}
 
 		private void configStats()

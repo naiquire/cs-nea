@@ -11,7 +11,7 @@ namespace server_app.games
 		{
 			base.startGame();
 
-			letters = generateRandomLetters(rounds);
+			letters = generateLetters(rounds);
 			submissionPhase();
 		}
 		public async override void submissionPhase()
@@ -20,7 +20,7 @@ namespace server_app.games
 			{
 				continueRequests.Clear();
 				await awaitRound();
-				Thread.Sleep(3000);
+				await Task.Delay(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();

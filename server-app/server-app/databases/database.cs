@@ -182,6 +182,16 @@ namespace server_app.databases
 		{
 			userData = new();
 
+			if (!userExists(userID, out bool exists))
+			{
+				return false;
+			}
+
+			if (!exists)
+			{
+				return true; // return empty userData
+			}
+
 			string query = @"SELECT aboutMe, dateCreated, rank, localisation
 				FROM userData
 				WHERE userData.userID = @userID";

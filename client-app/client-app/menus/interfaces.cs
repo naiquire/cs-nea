@@ -1,41 +1,27 @@
 ﻿using client_app.components;
-using client_app.games;
 using client_app.menus.games;
 using client_app.Properties;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Resources;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TheArtOfDevHtmlRenderer.Adapters.Entities;
-using static System.Windows.Forms.AxHost;
 
 namespace client_app.menus
 {
 	public abstract class interfaces : Form // can be made static in final build, maybe rename
 	{
-		
-		
-		private Guna.UI2.WinForms.Guna2TextBox lbl_timer;
-		
-
-		/// <summary>
-		/// Used to create control elements with the visual designer.
-		/// </summary>
 		public void tempInitializeComponent()
 		{
 
 			this.SuspendLayout();
-			
+
 			// 
 			// panel_stat
 			// 
-			
+
 			// 
 			// interfaces
 			// 
@@ -49,9 +35,6 @@ namespace client_app.menus
 
 		}
 
-		/// <summary>
-		/// Initialises the base UI when the client application is launched.
-		/// </summary>
 		public static void InitializeComponent(main main)
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
@@ -166,10 +149,6 @@ namespace client_app.menus
 
 		}
 
-		/// <summary>
-		/// Resets the current window to the base UI.
-		/// </summary>
-		/// <param name="main"></param>
 		public static void resetLayout(main main)
 		{
 			main.panel_main?.Controls.Clear();
@@ -181,11 +160,6 @@ namespace client_app.menus
 			main.btn_home.Click += main.btn_home_Click;
 		}
 
-		/// <summary>
-		/// Configures the main panel with game objects.
-		/// </summary>
-		/// <param name="panel"></param>
-		/// <returns>An <see cref="input"/> object containing the created drawing panel.</returns>
 		public static input configGamePanel(abstractGame game)
 		{
 			game.main.panel_main.Controls.Clear();
@@ -301,7 +275,7 @@ namespace client_app.menus
 			game.main.panel_right.Controls.Add(seperator);
 			game.main.panel_right.Controls.Add(game.panel_stats);
 		}
-		public static void configRightGamePanelStats(Panel panel, List<char> letters, List<double> accuracies, string type)
+		public static void configRightGamePanelStats(Panel panel, List<char> letters, List<double> accuracies)
 		{
 			panel.Controls.Clear();
 
@@ -312,24 +286,27 @@ namespace client_app.menus
 				start = letters.Count - 10;
 			}
 
+			const int panelY = 50;
+			const int padding = 20;
+
 			int y = 20;
-			for (int i = start; i < letters.Count; i++, y += 50 + 20)
+			for (int i = start; i < letters.Count; i++, y += panelY + padding)
 			{
 				panel.Controls.Add(configStatPanel(letters[i], accuracies[i]));
 			}
 
 			Guna.UI2.WinForms.Guna2Panel configStatPanel(char letter, double accuracy)
 			{
-				(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+				(int r, int g, int b) = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
 
 				Guna.UI2.WinForms.Guna2Panel panel_stat = new Guna.UI2.WinForms.Guna2Panel()
 				{
 					BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
 					BorderRadius = 10,
 					FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
-					Location = new Point(20, y),
+					Location = new Point(padding, y),
 					Name = "panel_stat",
-					Size = new Size(380, 50),
+					Size = new Size(420 - 2 * padding, panelY),
 					TabIndex = 3,
 				};
 
@@ -368,7 +345,7 @@ namespace client_app.menus
 				};
 				Guna.UI2.WinForms.Guna2Panel bar_fill = new Guna.UI2.WinForms.Guna2Panel()
 				{
-					BackColor = ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
+					BackColor = ColorTranslator.FromHtml($"{r}, {g}, {b}"),
 					Location = new Point(60, 10),
 					Name = "bar_fill",
 					Size = new Size((int)(accuracy * bar_base.Size.Width), bar_base.Size.Height),
@@ -593,7 +570,6 @@ namespace client_app.menus
 			configCountdown(game);
 		}
 
-
 		public static void configResultsPanel(abstractGame game, char c, stats stats)
 		{
 			game.main.panel_main.Controls.Clear();
@@ -611,7 +587,7 @@ namespace client_app.menus
 			double accuracy = stats.accuracy.Last();
 			TimeSpan time = stats.time.Last();
 
-			(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+			(int r, int g, int b) = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
 
 			Label lbl_letter = new Label()
 			{
@@ -664,7 +640,7 @@ namespace client_app.menus
 			};
 			Panel bar_fill = new System.Windows.Forms.Panel()
 			{
-				BackColor = ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
+				BackColor = ColorTranslator.FromHtml($"{r}, {g}, {b}"),
 				Location = new Point(bar_base.Location.X, bar_base.Location.Y),
 				Name = "panel_fill",
 				Size = new Size((int)(accuracy * bar_base.Size.Width), bar_base.Size.Height),
@@ -708,16 +684,13 @@ namespace client_app.menus
 			game.btn_continue.Click += async (sender, e) =>
 			{
 				game.btn_continue.Enabled = false;
-				await main.connection.InvokeAsync("requestRound", game.gameID, main.userData.userID);
+				await main.connection.InvokeAsync("requestRound", game.getGameID(), main.userData.userID);
 			};
 
 			game.main.panel_main.Controls.Add(panel_char);
 			game.main.panel_main.Controls.Add(game.btn_continue);
 		}
 
-		/// <summary>
-		/// Configures the right panel with userData.
-		/// </summary>
 		public static void configUserDataPanel(main main, userData userData)
 		{
 			main.panel_right.Controls.Clear();
@@ -801,13 +774,6 @@ namespace client_app.menus
 
 			configStatsPanel(main.panel_right, (40, 570), userData);
 		}
-
-		/// <summary>
-		/// Configures the panel containing summary statistics for a user at a given position in a Panel.
-		/// </summary>
-		/// <param name="panel"></param>
-		/// <param name="pos"></param>
-		/// <param name="user"></param>
 		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
 		{
 			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
@@ -1143,26 +1109,6 @@ namespace client_app.menus
 
 			main.panel_main.Controls.Add(lbl_header);
 		}
-
-		private static void configCountdown(abstractGame game)
-		{
-			game.lbl_countdown = new Guna.UI2.WinForms.Guna2TextBox()
-			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = "0",
-				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
-				Font = new Font("Bahnschrift SemiBold", 64F, FontStyle.Bold),
-				Location = new Point(20, 700),
-				Margin = new Padding(15, 15, 15, 15),
-				Size = new Size(260, 100),
-				TabStop = false,
-				TextAlign = HorizontalAlignment.Center,
-			};
-
-			game.main.panel_left.Controls.Add(game.lbl_countdown);
-		}
-
 		public static void configLobbyPanel(abstractGame game, List<friendData> users)
 		{
 			game.main.panel_main.Controls.Clear();
@@ -1173,13 +1119,22 @@ namespace client_app.menus
 				Name = "panel_users",
 				BackColor = game.main.panel_main.BackColor,
 				BorderStyle = BorderStyle.FixedSingle,
-				Location = new System.Drawing.Point(50, 150),
-				Size = new System.Drawing.Size(game.main.panel_main.Width - 100, game.main.panel_main.Height - 100 - 100)
+				Location = new Point(50, 150),
+				Size = new Size(game.main.panel_main.Width - 100, 500)
 			};
 			Guna.UI2.WinForms.Guna2TextBox lbl_remainingPlayers = new Guna.UI2.WinForms.Guna2TextBox()
 			{
-				// needs finishing ----------------------------------------------------------------------------------------------------------------------------------
+				BorderThickness = 0,
+				BorderRadius = 10,
+				Cursor = Cursors.Arrow,
+				FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				Font = new Font("Bahnschrift SemiBold", 32F, FontStyle.Bold),
+				Location = new Point(220, 700),
+				Size = new Size(680, 100),
+				TabStop = false,
+				ForeColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
 				Text = $"{users.Count}/{game.getMaxPlayers()} players",
+				TextAlign = HorizontalAlignment.Center,
 			};
 
 			int X = 10;
@@ -1236,14 +1191,47 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(lbl_remainingPlayers);
 		}
 
-		public static async void countdown(Guna.UI2.WinForms.Guna2TextBox lbl_countdown, int num)
+		private static void configCountdown(abstractGame game)
 		{
+			game.lbl_countdown = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				DefaultText = "",
+				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				Font = new Font("Bahnschrift SemiBold", 64F, FontStyle.Bold),
+				Location = new Point(20, 700),
+				Margin = new Padding(15, 15, 15, 15),
+				Size = new Size(260, 100),
+				TabStop = false,
+				TextAlign = HorizontalAlignment.Center,
+			};
+			game.lbl_status = new Guna.UI2.WinForms.Guna2TextBox()
+			{
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				Font = new Font("Bahnschrift SemiBold", 32F, FontStyle.Bold),
+				Location = new Point(20, 650),
+				Margin = new Padding(15, 15, 15, 15),
+				Size = new Size(260, 50),
+				TabStop = false,
+				TextAlign = HorizontalAlignment.Center,
+			};
+
+			game.main.panel_left.Controls.Add(game.lbl_countdown);
+			game.main.panel_left.Controls.Add(game.lbl_status);
+		}
+		public static async Task countdown(Guna.UI2.WinForms.Guna2TextBox lbl_countdown, int num, Guna.UI2.WinForms.Guna2TextBox lbl_status, string text)
+		{
+			lbl_status.Text = text;
 			for (int i = num; i > 0; i--)
 			{
 				lbl_countdown.Text = i.ToString();
 				await Task.Delay(1000);
 			}
 			lbl_countdown.ResetText();
+			lbl_status.ResetText();
 		}
 
 		public static void configEndGamePanel(abstractGame game)

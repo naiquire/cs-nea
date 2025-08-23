@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace client_app
@@ -56,6 +57,8 @@ namespace client_app
 			this.seperator = new System.Windows.Forms.PictureBox();
 			this.lbl_friendsLabel = new System.Windows.Forms.Label();
 			this.appLogo = new PictureBox();
+			this.txt_userSearch = new Guna.UI2.WinForms.Guna2TextBox();
+			this.btn_userSearch = new Guna.UI2.WinForms.Guna2CircleButton();
 
 			this.panel_topBorder.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
@@ -106,11 +109,38 @@ namespace client_app
 			this.appLogo.SizeMode = PictureBoxSizeMode.Zoom;
 			this.appLogo.TabStop = false;
 			//
+			// txt_userSearch
+			//
+			this.txt_userSearch.BorderRadius = 8;
+			this.txt_userSearch.BorderThickness = 0;
+			this.txt_userSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.txt_userSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.txt_userSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+			this.txt_userSearch.Location = new Point(20, 500);
+			this.txt_userSearch.Name = "txt_userSearch";
+			this.txt_userSearch.PlaceholderForeColor = System.Drawing.Color.Gray;
+			this.txt_userSearch.PlaceholderText = "Search players";
+			this.txt_userSearch.Size = new Size(200, 50);
+			//
+			// btn_userSearch
+			//
+			this.btn_userSearch.BorderThickness = 0;
+			this.btn_userSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.btn_userSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+			this.btn_userSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+			this.btn_userSearch.Name = "btn_userSearch";
+			this.btn_userSearch.Image = global::client_app.Properties.Resources.password;
+			this.btn_userSearch.Location = new Point(230, 500);
+			this.btn_userSearch.Size = new Size(50, 50);
+			this.btn_userSearch.Click += btn_userSearch_Click;
+			//
 			// main
 			//
 			this.panel_left.Controls.Add(panel_friendList);
 			this.panel_left.Controls.Add(seperator);
 			this.panel_left.Controls.Add(lbl_friendsLabel);
+			this.panel_left.Controls.Add(txt_userSearch);
+			this.panel_left.Controls.Add(btn_userSearch);
 			this.panel_topLeft.Controls.Add(appLogo);
 
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
@@ -548,6 +578,8 @@ namespace client_app
 		private Guna.UI2.WinForms.Guna2GradientButton btn_queueKnockout;
 		private Guna.UI2.WinForms.Guna2TextBox txt_knockout;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_knockout;
+		private Guna.UI2.WinForms.Guna2TextBox txt_userSearch;
+		private Guna.UI2.WinForms.Guna2CircleButton btn_userSearch;
 
 		#endregion
 

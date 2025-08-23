@@ -147,7 +147,7 @@ namespace server_app.games
 				}
 			}
 
-			Thread.Sleep(5000); // 5 sec countdown
+			await Task.Delay(5000); // 5 sec countdown
 
 			foreach (string userID in userIDs)
 			{
@@ -161,7 +161,7 @@ namespace server_app.games
 				}
 			}
 		}
-		protected List<char> generateRandomLetters(int count)
+		protected List<char> generateLetters(int count)
 		{
 			List<char> letters = [];
 

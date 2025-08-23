@@ -66,7 +66,7 @@ namespace client_app
 		}
 		private async void initialiseConnection(string userID)
 		{
-			connection = hub_connection.configConnection(address + "/connections");
+			connection = hub_connection.configConnection($"{address}/connections");
 			connection = hub_connection.addHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
@@ -132,10 +132,27 @@ namespace client_app
 			return (rank, total, accuracy);
 		}
 
+
+		private async void btn_userSearch_Click(object sender, EventArgs e)
+		{
+			string userID = txt_userSearch.Text;
+			if (!string.IsNullOrWhiteSpace(userID))
+			{
+				txt_userSearch.ResetText();
+				await requestProfile(userID);
+			}
+		}
 		public async Task requestProfile(string userID)
 		{
 			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
-			menu.profile = new profile(this, user);
+			if (user.userID != userID)
+			{
+				new alert($"Could not find user with username: {userID}");
+			}
+			else
+			{
+				menu.profile = new profile(this, user);
+			}
 		}
 
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)
