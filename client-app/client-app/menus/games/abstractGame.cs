@@ -161,7 +161,7 @@ namespace client_app.menus.games
 
 		public virtual void endGame()
 		{
-			interfaces.configEndGamePanel(this);
+			interfaces.configEndGamePanel(this, letters, stats);
 		}
 
 		public int getMaxPlayers() => maxPlayers;

@@ -10,7 +10,7 @@ namespace server_app
 		public static IHubContext<connection>? hubContext;
 		static void Main(string[] args)
 		{
-			//startNginx();
+			startNginx();
 			hostBuilder(args).Build().Run();
 		}
 		private static void startNginx()
@@ -18,7 +18,7 @@ namespace server_app
 			ProcessStartInfo startInfo = new()
 			{
 				FileName = "nginx.exe",
-				WorkingDirectory = @"C:\Users\boyss\Documents\General\Relay\nginx-1.26.2",
+				WorkingDirectory = @"C:\Users\naiquire\Documents\General\Relay\nginx-1.26.2",
 				UseShellExecute = true
 			};
 			Process.Start(startInfo);
@@ -60,7 +60,6 @@ namespace server_app
 					setup.Use(async (context, next) =>
 					{
 						hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
-						Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
 						await next.Invoke();
 					});
 					setup.UseEndpoints(endpoints =>

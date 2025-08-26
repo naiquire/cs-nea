@@ -8,19 +8,19 @@ namespace server_app.games
 	public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
 	{
 		private List<string> aliveUsers = [];
-		public override void startGame()
+		public override async Task startGame()
 		{
 			aliveUsers = [.. userIDs];
 
-			base.startGame();
-			submissionPhase();
+			await base.startGame();
+			await submissionPhase();
 		}
 		public override void dequeueUser(string userID)
 		{
 			aliveUsers.Remove(userID);
 			base.dequeueUser(userID);
 		}
-		public async override void submissionPhase()
+		public override async Task submissionPhase()
 		{
 			
 			if (aliveUsers.Count > 1)
@@ -90,12 +90,12 @@ namespace server_app.games
 
 			await sendKnockoutResults(userIDs, aliveUsers);
 		}
-		public override void continueRequest(string userID)
+		public override async Task continueRequest(string userID)
 		{
 			continueRequests.Add(userID);
 			if (continueRequests.Count == aliveUsers.Count)
 			{
-				submissionPhase();
+				await submissionPhase();
 			}
 		}
 

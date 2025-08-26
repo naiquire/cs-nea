@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
@@ -39,9 +41,8 @@ namespace client_app.menus
 			this.lbl_total = new Guna.UI2.WinForms.Guna2TextBox();
 			this.lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox();
 			this.pic_seperator = new System.Windows.Forms.PictureBox();
-			this.panel_stats = new Guna.UI2.WinForms.Guna2Panel();
+			this.panel_stats = new Panel();
 			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).BeginInit();
-			this.SuspendLayout();
 			// 
 			// lbl_username
 			// 
@@ -155,18 +156,18 @@ namespace client_app.menus
 			this.pic_seperator.Name = "pic_seperator";
 			this.pic_seperator.Size = new System.Drawing.Size(510, 5);
 			this.pic_seperator.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pic_seperator.TabIndex = 4;
 			this.pic_seperator.TabStop = false;
 			// 
 			// panel_stats
 			// 
-			this.panel_stats.BorderRadius = 0;
-			this.panel_stats.FillColor = System.Drawing.Color.White;
+			this.panel_stats.AutoScroll = true;
+			this.panel_stats.AutoSize = false;
+			this.panel_stats.BorderStyle = BorderStyle.Fixed3D;
+			this.panel_stats.BackColor = System.Drawing.Color.White;
 			this.panel_stats.Location = new System.Drawing.Point(40, 175);
 			this.panel_stats.Name = "panel_stats";
-			this.panel_stats.Size = new System.Drawing.Size(1040, 835);
-			this.panel_stats.TabIndex = 5;
-			this.panel_stats.VerticalScroll.Enabled = true;
+			this.panel_stats.Size = new System.Drawing.Size(1040, interfaces.clientY - 30 - 175 - 40);
+			this.panel_stats.TabStop = false;			
 
 			(string rank, string total, string accuracy) = main.calculateStatsOverview(userData);
 
@@ -176,6 +177,7 @@ namespace client_app.menus
 			this.lbl_accuracy.Text = accuracy + "%";
 
 			configStats();
+			panel_stats.ResumeLayout(false);
 
 			main.panel_main.Controls.Add(this.panel_stats);
 			main.panel_main.Controls.Add(this.pic_seperator);
@@ -297,7 +299,7 @@ namespace client_app.menus
 		private Guna.UI2.WinForms.Guna2TextBox lbl_total;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
 		private PictureBox pic_seperator;
-		private Guna.UI2.WinForms.Guna2Panel panel_stats;
+		private Panel panel_stats;
 
 		#endregion
 	}

@@ -30,11 +30,11 @@ namespace server_app.games
 		void queueUser(string userID);
 		void dequeueUser(string userID);
 		Task updateUsers();
-		void startGame();
-		void submissionPhase();
+		Task startGame();
+		Task submissionPhase();
 		void loadResponse(string userID, double[] input);
 		void evaluationPhase(char letter);
-		void continueRequest(string userID);
+		Task continueRequest(string userID);
 		void endGame();
 		string getType();
 		string getGameID();
@@ -125,7 +125,7 @@ namespace server_app.games
 			}
 		}
 
-		public virtual async void startGame()
+		public virtual async Task startGame()
 		{
 			started = true;
 
@@ -189,7 +189,7 @@ namespace server_app.games
 				}
 			}
 		}
-		public abstract void submissionPhase();
+		public abstract Task submissionPhase();
 		protected async Task sendLetter(List<string> userIDs, char letter)
 		{
 			foreach (string userID in userIDs)
@@ -238,7 +238,7 @@ namespace server_app.games
 				throw new DisconnectException(userID);
 			}
 		}
-		public abstract void continueRequest(string userID);
+		public abstract Task continueRequest(string userID);
 
 		public virtual async void endGame() // possibly a faster way to implement this
 		{

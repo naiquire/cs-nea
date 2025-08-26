@@ -13,6 +13,9 @@ namespace client_app.menus
 {
 	public abstract class interfaces : Form // can be made static in final build, maybe rename
 	{
+		public static int clientX = Screen.PrimaryScreen.WorkingArea.Width;
+		public static int clientY = Screen.PrimaryScreen.WorkingArea.Height;
+
 		public void tempInitializeComponent()
 		{
 
@@ -116,7 +119,7 @@ namespace client_app.menus
 			main.panel_main.BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))); ;
 			main.panel_main.Location = new Point(300, 30);
 			main.panel_main.Name = "panel_main";
-			main.panel_main.Size = new Size(1120, 1050);
+			main.panel_main.Size = new Size(1120, clientY - 30);
 			main.panel_main.TabIndex = 4;
 			// 
 			// panel_right
@@ -129,6 +132,7 @@ namespace client_app.menus
 			// 
 			// abstractMenu
 			// 
+			main.AutoScroll = false;
 			main.BackColor = Color.White;
 			main.ClientSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
 			main.Controls.Add(main.panel_topLeft);
@@ -1234,11 +1238,123 @@ namespace client_app.menus
 			lbl_status.ResetText();
 		}
 
-		public static void configEndGamePanel(abstractGame game)
+		public static void configEndGamePanel(abstractGame game, List<char> letters, stats statistics)
 		{
 			game.main.panel_main.Controls.Clear();
 
+			const int X = 10;
+			int y = 10;
 
+			const int panelX = 900;
+			const int panelY = 50;
+			const int padding = 5;
+			const int defaultSize = panelY - 2 * padding;
+
+			Guna.UI2.WinForms.Guna2Panel panel_stats = new Guna.UI2.WinForms.Guna2Panel()
+			{
+				AutoScroll = true,
+				BorderRadius = 0,
+				FillColor = Color.White,
+				Location = new Point(40, 175),
+				Name = "panel_stats",
+				Size = new Size(1040, 500),
+				TabIndex = 5,
+			};
+			panel_stats.VerticalScroll.Enabled = true;
+
+			for (int i = 0; i < statistics.accuracy.Count; i++)
+			{
+				string letter = letters[i].ToString();
+				bool correct = statistics.correct[i];
+				double accuracy = statistics.accuracy[i];
+				TimeSpan time = statistics.time[i];
+
+				(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+
+				Label lbl_letter = new System.Windows.Forms.Label()
+				{
+					Location = new System.Drawing.Point(0 + padding, 0 + padding),
+					Name = "lbl_letter",
+					Size = new System.Drawing.Size(defaultSize, defaultSize),
+					TabIndex = 0,
+					Text = letter,
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+				Label lbl_correct = new System.Windows.Forms.Label()
+				{
+					Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
+					Name = "lbl_correct",
+					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+					TabIndex = 1,
+					Text = correct.ToString(),
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+				Label lbl_time = new System.Windows.Forms.Label()
+				{
+					Location = new System.Drawing.Point(lbl_correct.Location.X - 2 * defaultSize - padding, padding),
+					Name = "lbl_time",
+					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+					TabIndex = 2,
+					Text = $"{time.TotalSeconds}",
+					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+				Label lbl_percentage = new Label()
+				{
+					Location = new Point(lbl_time.Location.X - defaultSize - padding, padding),
+					Name = "lbl_percentage",
+					Size = new Size(defaultSize, defaultSize),
+					TabIndex = 3,
+					Text = $"{100 * accuracy}%",
+					TextAlign = ContentAlignment.MiddleCenter,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+				Panel bar_base = new Panel()
+				{
+					BackColor = SystemColors.ControlLight,
+					Location = new Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
+					Name = "bar_base",
+					Size = new Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
+					TabIndex = 4,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+				Panel bar_fill = new Panel()
+				{
+					BackColor = ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
+					Location = new Point(bar_base.Location.X, bar_base.Location.Y),
+					Name = "panel_fill",
+					Size = new Size(((int)(accuracy * bar_base.Size.Width)), bar_base.Size.Height),
+					TabIndex = 5,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+
+				Panel panel_char = new Panel()
+				{
+					BackColor = SystemColors.ControlDark,
+					Location = new Point(X, y),
+					Name = "panel_char",
+					Size = new Size(panelX, panelY),
+					TabIndex = 0,
+					BorderStyle = BorderStyle.FixedSingle,
+				};
+
+				panel_char.Controls.Add(bar_fill);
+				panel_char.Controls.Add(bar_base);
+				panel_char.Controls.Add(lbl_percentage);
+				panel_char.Controls.Add(lbl_time);
+				panel_char.Controls.Add(lbl_correct);
+				panel_char.Controls.Add(lbl_letter);
+
+				bar_fill.BringToFront();
+
+				panel_stats.Controls.Add(panel_char);
+
+				y += panelY + 2 * padding;
+			}
+
+			game.main.panel_main.Controls.Add(panel_stats);
 		}
 
 	}

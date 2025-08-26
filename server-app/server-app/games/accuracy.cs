@@ -7,14 +7,14 @@ namespace server_app.games
 	public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, "accuracy", userID, 1), IPlayable
 	{
 		private const int rounds = 10;
-		public override void startGame()
+		public override async Task startGame()
 		{
-			base.startGame();
+			await base.startGame();
 
 			letters = generateLetters(rounds);
-			submissionPhase();
+			await submissionPhase();
 		}
-		public async override void submissionPhase()
+		public override async Task submissionPhase()
 		{
 			if (roundCount < rounds)
 			{
@@ -49,12 +49,12 @@ namespace server_app.games
 			}
 			roundCount++;
 		}
-		public override void continueRequest(string userID)
+		public override async Task continueRequest(string userID)
 		{
 			continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)
 			{
-				submissionPhase();
+				await submissionPhase();
 			}
 		}
 	}

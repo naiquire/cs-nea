@@ -37,7 +37,11 @@ namespace client_app
 		}
 		public async static Task<HubConnection> startConnection(HubConnection connection)
 		{
-			await connection.StartAsync();
+			while (connection.State == HubConnectionState.Disconnected)
+			{
+				await connection.StartAsync();
+			}
+			
 			return connection;
 		}
 		public static HubConnection addLoginHandles(HubConnection connection)

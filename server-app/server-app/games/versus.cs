@@ -10,9 +10,9 @@ namespace server_app.games
 		private const int rounds = 5;
 		private Dictionary<string, double> scores = [];
 
-		public override void startGame()
+		public override async Task startGame()
 		{
-			base.startGame();
+			await base.startGame();
 
 			foreach (string userID in userIDs)
 			{
@@ -20,9 +20,9 @@ namespace server_app.games
 			}
 
 			letters = generateLetters(rounds);
-			submissionPhase();
+			await submissionPhase();
 		}
-		public async override void submissionPhase()
+		public override async Task submissionPhase()
 		{
 
 			if (roundCount < rounds)
@@ -91,12 +91,12 @@ namespace server_app.games
 			}
 			roundCount++;
 		}
-		public override void continueRequest(string userID)
+		public override async Task continueRequest(string userID)
 		{
 			continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)
 			{
-				submissionPhase();
+				await submissionPhase();
 			}
 		}
 		public async override void endGame()
@@ -160,13 +160,6 @@ namespace server_app.games
 			base.endGame();
 		}
 
-		/// <summary>
-		/// Sends the unique results to users for the 1v1 game type.
-		/// </summary>
-		/// <param name="userIDs"></param>
-		/// <param name="winner"></param>
-		/// <returns></returns>
-		/// <exception cref="DisconnectException"></exception>
 		public async Task sendVersusResults(List<string> userIDs, string? winner)
 		{
 			foreach (string userID in userIDs)
