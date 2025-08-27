@@ -72,11 +72,12 @@ namespace client_app
 
 			await connection.InvokeAsync("clientConnected", userID);
 		}
-		public void clientConnected(userData userData)
+		public async void clientConnected(userData userData)
 		{
 			main.userData = userData;
 
 			InitializeComponent();
+			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
 		public void updateOnline(string user, bool online)
 		{

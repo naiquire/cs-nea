@@ -68,5 +68,17 @@ namespace server_app.connections
 				database.outputException($"Failed to add <{user1}> and <{user2}> as friends");
 			}
 		}
+		public async void removeFriends(string user1, string user2)
+		{
+			if (database.removeFriends(user1, user2))
+			{
+				await updateFriendData(user1, user2);
+				await updateFriendData(user2, user1);
+			}
+			else
+			{
+				database.outputException($"Failed to remove <{user1}> and <{user2}> as friends");
+			}
+		}
 	}
 }

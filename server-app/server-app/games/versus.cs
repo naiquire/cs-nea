@@ -140,7 +140,7 @@ namespace server_app.games
 
 			int calculateRank(friendData user, double expScore)
 			{
-				int k;
+				double k;
 				if (user.rank < 2100)
 				{
 					k = 32;
@@ -153,6 +153,8 @@ namespace server_app.games
 				{
 					k = 24;
 				}
+
+				k /= rounds;
 
 				return (int)(user.rank + k * (scores[user.userID] - expScore));
 			}

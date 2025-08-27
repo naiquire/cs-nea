@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,13 +14,26 @@ namespace client_app.menus
     public partial class profile : Form
     {
         private readonly main main;
-        private readonly userData userData;
+        private readonly userData user;
         public profile(main main, userData user)
         {
             this.main = main;
-            userData = user;
+            this.user = user;
 
             InitializeComponent();
+        }
+
+        private async void btn_addFriends_Click(object sender, EventArgs e)
+        {
+            btn_addFriends.Enabled = false;
+            await main.connection.InvokeAsync("sendInvite", user.userID, main.userData.userID);
+        }
+
+        private async void btn_removeFriends_Click(object sender, EventArgs e)
+        {
+            btn_removeFriends.Enabled = false;
+            await main.connection.InvokeAsync("removeFriends", user.userID, main.userData.userID);
+            btn_addFriends.Enabled = true;
         }
     }
 }

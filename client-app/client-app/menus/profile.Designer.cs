@@ -169,9 +169,9 @@ namespace client_app.menus
 			this.panel_stats.Size = new System.Drawing.Size(1040, interfaces.clientY - 30 - 175 - 40);
 			this.panel_stats.TabStop = false;			
 
-			(string rank, string total, string accuracy) = main.calculateStatsOverview(userData);
+			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
 
-			this.lbl_username.Text = userData.userID;
+			this.lbl_username.Text = user.userID;
 			this.lbl_rank.Text = rank;
 			this.lbl_total.Text = total;
 			this.lbl_accuracy.Text = accuracy + "%";
@@ -201,7 +201,7 @@ namespace client_app.menus
 
 			panel_stats.SuspendLayout();
 
-			foreach (var stat in userData.statistics)
+			foreach (var stat in user.statistics)
 			{
 				string letter = stat.Key.ToString();
 				int total = stat.Value.total;
@@ -298,6 +298,8 @@ namespace client_app.menus
 		private Guna.UI2.WinForms.Guna2TextBox lbl_rank;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_total;
 		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_addFriends;
+		private Guna.UI2.WinForms.Guna2GradientButton btn_removeFriends;
 		private PictureBox pic_seperator;
 		private Panel panel_stats;
 

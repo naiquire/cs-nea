@@ -415,6 +415,8 @@ namespace client_app
 		/// </summary>
 		public void configFriendsPanel()
 		{
+			panel_friendList.Controls.Clear();
+
 			// seperate friends into online/offline
 			List<friendData> onlineList = new List<friendData>();
 			List<friendData> offlineList = new List<friendData>();

@@ -387,6 +387,30 @@ namespace server_app.databases
 				return false;
 			}
 		}
+		public static bool removeFriends(string user1, string user2)
+		{
+			string query = @"DELETE FROM friends
+				WHERE (user1 = @user1 AND user2 = @user2) OR (user2 = @user1 AND user1 = @user2)";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@user1", user1);
+					command.Parameters.AddWithValue("@user2", user2);
+
+					command.ExecuteNonQuery();
+				}
+				connection.Close();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				outputException(ex);
+				connection.Close();
+				return false;
+			}
+		}
 		public static bool saveInvite(string userID, string senderID)
 		{
 			string query = @"INSERT INTO friendInvites
