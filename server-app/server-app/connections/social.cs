@@ -14,20 +14,31 @@ namespace server_app.connections
 			}
 			return new userData();
 		}
-		public async Task updateFriendData(string userID, string friendID)
+		public async Task updateFriendData(string userID, string friendID, bool delete)
 		{
-			if (database.loadFriendData(friendID, out friendData friendData))
+			if (delete)
 			{
 				if (map.TryGetValue(userID, out string? connectionID))
 				{
-					await Clients.Client(connectionID).SendAsync("updateFriendData", friendData);
+					await Clients.Client(connectionID).SendAsync("removeFriend", friendID);
 				}
 			}
 			else
 			{
-				database.outputException($"Failed to retrieve userData for <{friendID}>");
+				if (database.loadFriendData(friendID, out friendData friendData))
+				{
+					if (map.TryGetValue(userID, out string? connectionID))
+					{
+						await Clients.Client(connectionID).SendAsync("updateFriendData", friendData);
+					}
+				}
+				else
+				{
+					database.outputException($"Failed to retrieve userData for <{friendID}>");
+				}
 			}
 		}
+
 		public async void sendInvite(string userID, string senderID)
 		{
 			if (map.TryGetValue(userID, out string? connectionID))
@@ -60,8 +71,8 @@ namespace server_app.connections
 		{
 			if (database.addFriends(user1, user2))
 			{
-				await updateFriendData(user1, user2);
-				await updateFriendData(user2, user1);
+				await updateFriendData(user1, user2, false);
+				await updateFriendData(user2, user1, false);
 			}
 			else
 			{
@@ -72,8 +83,8 @@ namespace server_app.connections
 		{
 			if (database.removeFriends(user1, user2))
 			{
-				await updateFriendData(user1, user2);
-				await updateFriendData(user2, user1);
+				await updateFriendData(user1, user2, true);
+				await updateFriendData(user2, user1, true);
 			}
 			else
 			{

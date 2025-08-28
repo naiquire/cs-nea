@@ -34,7 +34,7 @@ namespace server_app.databases
 	}
 	public static class @database
 	{
-		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server")}\databases\maindb.sqlite";
+		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? @"H:\Subjects\Computer Science\git\CS-NEA\server-app\server-app"}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
 		public static void outputException(Exception ex)
 		{
@@ -96,7 +96,7 @@ namespace server_app.databases
 				if (!exists)
 				{
 					string query = @"INSERT INTO userData
-							VALUES(@userID, @password, @aboutMe, @dateCreated, @rank, @localisation)";
+						VALUES (@userID, @password, @aboutMe, @dateCreated, @rank, @localisation)";
 					try
 					{
 						connection.Open();
@@ -366,7 +366,7 @@ namespace server_app.databases
 		public static bool addFriends(string user1, string user2)
 		{
 			string query = @"INSERT INTO friends
-				VALUES = (@user1, @user2)";
+				VALUES (@user1, @user2)";
 			try
 			{
 				connection.Open();
@@ -414,7 +414,7 @@ namespace server_app.databases
 		public static bool saveInvite(string userID, string senderID)
 		{
 			string query = @"INSERT INTO friendInvites
-				VALUES = (@userID, @senderID)";
+				VALUES (@userID, @senderID)";
 			try
 			{
 				connection.Open();
@@ -453,6 +453,30 @@ namespace server_app.databases
 						string sender = reader.GetString(0);
 						senderIDs.Add(sender);
 					}
+				}
+				connection.Close();
+			}
+			catch (Exception ex)
+			{
+				outputException(ex);
+				connection.Close();
+				return false;
+			}
+
+			bool success = deleteInvites(userID);
+			return success;
+		}
+		private static bool deleteInvites(string userID)
+		{
+			string query = @"DELETE	FROM friendInvites
+				WHERE userID = @userID";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					command.ExecuteNonQuery();
 				}
 				connection.Close();
 				return true;

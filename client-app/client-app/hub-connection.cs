@@ -39,7 +39,15 @@ namespace client_app
 		{
 			while (connection.State == HubConnectionState.Disconnected)
 			{
-				await connection.StartAsync();
+				try
+				{
+					await connection.StartAsync();
+					login?.lbl_information.ResetText();
+				}
+				catch
+				{
+					login.lbl_information.Text = "An error occured while connecting to the server";
+				}
 			}
 			
 			return connection;
@@ -69,15 +77,11 @@ namespace client_app
 			});
 			connection.On<friendData>("updateFriendData", (data) =>
 			{
-				for (int i = 0; i < main.userData.friends.Count; i++)
-				{
-					if (main.userData.friends[i].userID == data.userID)
-					{
-						main.userData.friends[i] = data;
-						return;
-					}
-				}
-				main.userData.friends.Add(data);
+				main.Invoke(new Action(() => main.updateFriendData(data)));
+			});
+			connection.On<string>("removeFriend", (friendID) =>
+			{
+				main.Invoke(new Action(() => main.removeFriend(friendID)));
 			});
 			connection.On<string, bool>("updateOnline", (user, online) =>
 			{

@@ -27,6 +27,11 @@ namespace client_app
 		public login()
         {
             InitializeComponent();
+
+			txt_userID.TextChanged += (sender, e) => lbl_information.ResetText();
+			txt_password.TextChanged += (sender, e) => lbl_information.ResetText();
+			txt_passwordconfirm.TextChanged += (sender, e) => lbl_information.ResetText();
+
 			btn_language.Text = languages.supportedLanguages[languageIndex];
 			hub_connection.injectForm(this, null);
 			initialiseConnection();

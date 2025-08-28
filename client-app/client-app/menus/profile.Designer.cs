@@ -1,4 +1,5 @@
-﻿using System;
+﻿using client_app.Properties;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -42,6 +43,8 @@ namespace client_app.menus
 			this.lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox();
 			this.pic_seperator = new System.Windows.Forms.PictureBox();
 			this.panel_stats = new Panel();
+			this.btn_addFriends = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.btn_removeFriends = new Guna.UI2.WinForms.Guna2GradientButton();
 			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).BeginInit();
 			// 
 			// lbl_username
@@ -166,8 +169,34 @@ namespace client_app.menus
 			this.panel_stats.BackColor = System.Drawing.Color.White;
 			this.panel_stats.Location = new System.Drawing.Point(40, 175);
 			this.panel_stats.Name = "panel_stats";
-			this.panel_stats.Size = new System.Drawing.Size(1040, interfaces.clientY - 30 - 175 - 40);
-			this.panel_stats.TabStop = false;			
+			this.panel_stats.Size = new System.Drawing.Size(1040, interfaces.clientY - 30 - 175 - 40 - 70);
+			this.panel_stats.TabStop = false;
+			//
+			// btn_addFriends
+			//
+			this.btn_addFriends.AutoRoundedCorners = true;
+			this.btn_addFriends.BorderRadius = 14;
+			this.btn_addFriends.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+			this.btn_addFriends.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247)))));
+			this.btn_addFriends.ForeColor = System.Drawing.Color.White;
+			this.btn_addFriends.Location = new Point(40, 900);
+			this.btn_addFriends.Name = "btn_login";
+			this.btn_addFriends.Size = new Size(200, 40);
+			this.btn_addFriends.Text = "Add Friend";
+			this.btn_addFriends.Click += new System.EventHandler(this.btn_addFriends_Click);
+			//
+			// btn_removeFriends
+			//
+			this.btn_removeFriends.AutoRoundedCorners = true;
+			this.btn_removeFriends.BorderRadius = 14;
+			this.btn_removeFriends.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+			this.btn_removeFriends.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247)))));
+			this.btn_removeFriends.ForeColor = System.Drawing.Color.White;
+			this.btn_removeFriends.Location = new Point(240, 900);
+			this.btn_removeFriends.Name = "btn_login";
+			this.btn_removeFriends.Size = new Size(200, 40);
+			this.btn_removeFriends.Text = "Remove Friend";
+			this.btn_removeFriends.Click += new System.EventHandler(this.btn_removeFriends_Click);
 
 			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
 
@@ -185,6 +214,8 @@ namespace client_app.menus
 			main.panel_main.Controls.Add(this.lbl_total);
 			main.panel_main.Controls.Add(this.lbl_rank);
 			main.panel_main.Controls.Add(this.lbl_username);
+			main.panel_main.Controls.Add(this.btn_addFriends);
+			main.panel_main.Controls.Add(this.btn_removeFriends);
 
 			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).EndInit();
 		}

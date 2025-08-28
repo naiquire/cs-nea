@@ -94,7 +94,45 @@ namespace client_app
 			copy.online = online;
 			userData.friends[index] = copy;
 
-			if (menu.profile == null && menu.game == null) // user is on home screen
+			if (menu.game == null) // user is not in-game
+			{
+				configFriendsPanel();
+			}
+		}
+
+		public void updateFriendData(friendData data)
+		{
+			bool exists = false;
+			for (int i = 0; i < userData.friends.Count; i++)
+			{
+				if (userData.friends[i].userID == data.userID)
+				{
+					exists = true;
+					userData.friends[i] = data;
+				}
+			}
+			if (!exists)
+			{
+				userData.friends.Add(data);
+			}
+
+			if (menu.game == null) // user is not in-game
+			{
+				configFriendsPanel();
+			}
+		}
+		public void removeFriend(string friendID)
+		{
+			foreach (var friend in userData.friends)
+			{
+				if (friend.userID == friendID)
+				{
+					userData.friends.Remove(friend);
+					break;
+				}
+			}
+
+			if (menu.game == null) // user is not in-game
 			{
 				configFriendsPanel();
 			}
