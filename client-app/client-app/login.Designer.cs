@@ -31,12 +31,12 @@ namespace client_app
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
 			this.btn_login = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.btn_createAccount = new Guna.UI2.WinForms.Guna2Button();
-			this.lbl_header = new Guna.UI2.WinForms.Guna2TextBox();
+			this.lbl_header = new Guna.UI2.WinForms.Guna2HtmlLabel();
 			this.btn_language = new Guna.UI2.WinForms.Guna2Button();
 			this.btn_requestAccount = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.pic_connecting = new Guna.UI2.WinForms.Guna2ProgressIndicator();
-			this.lbl_connection = new Guna.UI2.WinForms.Guna2Button();
-			this.lbl_information = new Guna.UI2.WinForms.Guna2Button();
+			this.lbl_connection = new Guna.UI2.WinForms.Guna2HtmlLabel();
+			this.lbl_information = new Guna.UI2.WinForms.Guna2HtmlLabel();
 			this.pic_language = new Guna.UI2.WinForms.Guna2PictureBox();
 			this.txt_userID = new Guna.UI2.WinForms.Guna2TextBox();
 			this.txt_password = new Guna.UI2.WinForms.Guna2TextBox();
@@ -61,31 +61,20 @@ namespace client_app
 			this.btn_createAccount.FillColor = System.Drawing.Color.Transparent;
 			resources.ApplyResources(this.btn_createAccount, "btn_createAccount");
 			this.btn_createAccount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.btn_createAccount.HoverState.FillColor = System.Drawing.Color.Transparent;
+			this.btn_createAccount.HoverState.ForeColor = System.Drawing.Color.White;
 			this.btn_createAccount.Name = "btn_createAccount";
 			this.btn_createAccount.Click += new System.EventHandler(this.btn_createAccount_Click);
 			// 
 			// lbl_header
 			// 
-			this.lbl_header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
-			this.lbl_header.BorderThickness = 0;
-			this.lbl_header.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.lbl_header.DefaultText = "Account";
-			this.lbl_header.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-			this.lbl_header.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-			this.lbl_header.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_header.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_header.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
-			this.lbl_header.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
 			resources.ApplyResources(this.lbl_header, "lbl_header");
+			this.lbl_header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
+			this.lbl_header.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.lbl_header.ForeColor = System.Drawing.Color.White;
-			this.lbl_header.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
 			this.lbl_header.Name = "lbl_header";
-			this.lbl_header.PlaceholderForeColor = System.Drawing.Color.Transparent;
-			this.lbl_header.PlaceholderText = "";
-			this.lbl_header.ReadOnly = true;
-			this.lbl_header.SelectedText = "";
 			this.lbl_header.TabStop = false;
-			this.lbl_header.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.lbl_header.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// btn_language
 			// 
@@ -122,23 +111,21 @@ namespace client_app
 			// 
 			// lbl_connection
 			// 
-			this.lbl_connection.BackColor = System.Drawing.Color.Transparent;
-			this.lbl_connection.FillColor = System.Drawing.Color.Transparent;
 			resources.ApplyResources(this.lbl_connection, "lbl_connection");
+			this.lbl_connection.BackColor = System.Drawing.Color.Transparent;
 			this.lbl_connection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.lbl_connection.Name = "lbl_connection";
 			this.lbl_connection.TabStop = false;
-			this.lbl_connection.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+			this.lbl_connection.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// lbl_information
 			// 
 			this.lbl_information.BackColor = System.Drawing.Color.Transparent;
-			this.lbl_information.FillColor = System.Drawing.Color.Transparent;
 			resources.ApplyResources(this.lbl_information, "lbl_information");
 			this.lbl_information.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
 			this.lbl_information.Name = "lbl_information";
 			this.lbl_information.TabStop = false;
-			this.lbl_information.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+			this.lbl_information.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// pic_language
 			// 
@@ -241,10 +228,10 @@ namespace client_app
 			this.Controls.Add(this.btn_login);
 			this.Controls.Add(this.btn_createAccount);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.StartPosition = FormStartPosition.CenterScreen;
 			this.Name = "login";
 			((System.ComponentModel.ISupportInitialize)(this.pic_language)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -252,13 +239,13 @@ namespace client_app
         private Guna.UI2.WinForms.Guna2Button btn_createAccount;
 		private Guna.UI2.WinForms.Guna2TextBox txt_userID;
 		private Guna.UI2.WinForms.Guna2TextBox txt_password;
-		private Guna.UI2.WinForms.Guna2TextBox lbl_header;
+		private Guna.UI2.WinForms.Guna2HtmlLabel lbl_header;
 		private Guna.UI2.WinForms.Guna2Button btn_language;
 		private Guna.UI2.WinForms.Guna2PictureBox pic_language;
 		private Guna.UI2.WinForms.Guna2GradientButton btn_requestAccount;
 		private Guna.UI2.WinForms.Guna2TextBox txt_passwordconfirm;
 		private Guna.UI2.WinForms.Guna2ProgressIndicator pic_connecting;
-		private Guna.UI2.WinForms.Guna2Button lbl_connection;
-		public Guna.UI2.WinForms.Guna2Button lbl_information;
+		private Guna.UI2.WinForms.Guna2HtmlLabel lbl_connection;
+		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_information;
 	}
 }

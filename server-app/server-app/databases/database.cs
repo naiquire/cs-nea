@@ -2,6 +2,22 @@
 
 namespace server_app.databases
 {
+	/* the todo list of DOOM
+	 * 
+	 * controls highlighting on mouse hover
+	 * home -> panel_main ui
+	 * btn_home ui
+	 * account edit -> language and about me
+	 * game -> "next letter in" dissapears ONLY on round 1
+	 * game -> panel_drawing sometimes invisible until click
+	 * game -> submit/clear active while countdown
+	 * game -> round results screen especially v,k
+	 * lbl_letter font does not match mnist
+	 * endGame ui
+	 * 
+	 */
+
+
 	public struct userData
 	{
 		public string userID { get; set; }
