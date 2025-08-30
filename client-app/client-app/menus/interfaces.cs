@@ -150,8 +150,6 @@ namespace client_app.menus
 			main.panel_main.ResumeLayout(false);
 			main.ResumeLayout(false);
 
-
-
 		}
 
 		public static void resetLayout(main main)

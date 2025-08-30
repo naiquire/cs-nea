@@ -15,6 +15,7 @@ namespace server_app.connections
 		public static readonly Dictionary<string, string> map = [];
 		public async Task clientConnected(string userID)
 		{
+			map.Remove(userID);
 			map.Add(userID, Context.ConnectionId);
 
 			if (database.loadUserData(userID, out userData userData))

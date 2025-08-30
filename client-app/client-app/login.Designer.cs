@@ -64,6 +64,7 @@ namespace client_app
 			this.btn_createAccount.HoverState.FillColor = System.Drawing.Color.Transparent;
 			this.btn_createAccount.HoverState.ForeColor = System.Drawing.Color.White;
 			this.btn_createAccount.Name = "btn_createAccount";
+			this.btn_createAccount.PressedColor = System.Drawing.Color.Transparent;
 			this.btn_createAccount.Click += new System.EventHandler(this.btn_createAccount_Click);
 			// 
 			// lbl_header

@@ -79,6 +79,7 @@ namespace client_app
 			InitializeComponent();
 			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
+
 		public void updateOnline(string user, bool online)
 		{
 			int index = 0;
@@ -99,7 +100,6 @@ namespace client_app
 				configFriendsPanel();
 			}
 		}
-
 		public void updateFriendData(friendData data)
 		{
 			bool exists = false;
@@ -171,7 +171,6 @@ namespace client_app
 			return (rank, total, accuracy);
 		}
 
-
 		private async void btn_userSearch_Click(object sender, EventArgs e)
 		{
 			string userID = txt_userSearch.Text;
@@ -208,6 +207,30 @@ namespace client_app
 		{
 			menu.game = new knockout(this);
 			menu.game.queueGame();
+		}
+
+		public async void btn_home_Click(object sender, EventArgs e)
+		{
+			if (menu.game != null)
+			{
+				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
+			}
+
+			// dispose all other classes
+			menu.profile = null;
+			menu.game = null;
+
+			InitializeComponent();
+		}
+		public async void btn_close_Click(object sender, EventArgs e)
+		{
+			Hide();
+			if (menu.game != null)
+			{
+				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
+			}
+			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			Close();
 		}
 	}
 }
