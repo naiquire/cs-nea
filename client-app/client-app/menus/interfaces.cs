@@ -1,6 +1,7 @@
 ﻿using client_app.components;
 using client_app.menus.games;
 using client_app.Properties;
+using Guna.UI2.WinForms;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,10 @@ namespace client_app.menus
 			// 
 			// interfaces
 			// 
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-			this.ClientSize = new System.Drawing.Size(500, 1050);
+			this.BackColor = Color.FromArgb(35, 31, 32);
+			this.ClientSize = new Size(500, 1050);
 
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.FormBorderStyle = FormBorderStyle.None;
 			this.Name = "interfaces";
 
 			this.ResumeLayout(false);
@@ -44,14 +45,14 @@ namespace client_app.menus
 
 			main.Controls.Clear();
 
-			main.panel_topBorder = new System.Windows.Forms.Panel();
-			main.lbl_appName = new System.Windows.Forms.Label();
-			main.btn_close = new System.Windows.Forms.Button();
-			main.btn_home = new System.Windows.Forms.Button();
-			main.panel_left = new System.Windows.Forms.Panel();
-			main.panel_topLeft = new System.Windows.Forms.Panel();
-			main.panel_main = new System.Windows.Forms.Panel();
-			main.panel_right = new System.Windows.Forms.Panel();
+			main.panel_topBorder = new Panel();
+			main.lbl_appName = new Label();
+			main.btn_close = new Button();
+			main.btn_home = new Button();
+			main.panel_left = new Panel();
+			main.panel_topLeft = new Panel();
+			main.panel_main = new Panel();
+			main.panel_right = new Panel();
 			main.panel_topBorder.SuspendLayout();
 			main.panel_left.SuspendLayout();
 			main.panel_main.SuspendLayout();
@@ -59,7 +60,7 @@ namespace client_app.menus
 			// 
 			// panel_topBorder
 			// 
-			main.panel_topBorder.BackColor = Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+			main.panel_topBorder.BackColor = Color.FromArgb(26, 23, 24);
 			main.panel_topBorder.Controls.Add(main.lbl_appName);
 			main.panel_topBorder.Controls.Add(main.btn_close);
 			main.panel_topBorder.Location = new Point(0, 0);
@@ -70,7 +71,7 @@ namespace client_app.menus
 			// lbl_appName
 			// 
 			main.lbl_appName.BackColor = main.panel_topBorder.BackColor;
-			main.lbl_appName.Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+			main.lbl_appName.Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			main.lbl_appName.Location = new Point(10, 7);
 			main.lbl_appName.Name = "lbl_appName";
 			main.lbl_appName.Size = new Size(100, 16);
@@ -99,7 +100,7 @@ namespace client_app.menus
 			// panel_left
 			// 
 			main.panel_left.AutoScroll = true;
-			main.panel_left.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+			main.panel_left.BackColor = Color.FromArgb(35, 31, 32);
 			main.panel_left.Controls.Add(main.btn_home);
 			main.panel_left.Location = new Point(0, 130);
 			main.panel_left.Name = "panel_left";
@@ -108,7 +109,7 @@ namespace client_app.menus
 			// 
 			// panel_topLeft
 			// 
-			main.panel_topLeft.BackColor = Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+			main.panel_topLeft.BackColor = Color.FromArgb(46, 46, 46);
 			main.panel_topLeft.Location = new Point(0, 30);
 			main.panel_topLeft.Name = "panel_topLeft";
 			main.panel_topLeft.Size = new Size(300, 100);
@@ -116,7 +117,7 @@ namespace client_app.menus
 			// 
 			// panel_main
 			// 
-			main.panel_main.BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))); ;
+			main.panel_main.BackColor = Color.FromArgb(104, 104, 104); ;
 			main.panel_main.Location = new Point(300, 30);
 			main.panel_main.Name = "panel_main";
 			main.panel_main.Size = new Size(1120, clientY - 30);
@@ -124,7 +125,7 @@ namespace client_app.menus
 			// 
 			// panel_right
 			// 
-			main.panel_right.BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+			main.panel_right.BackColor = Color.FromArgb(35, 31, 32);
 			main.panel_right.Location = new Point(1420, 30);
 			main.panel_right.Name = "panel_right";
 			main.panel_right.Size = new Size(500, 1050);
@@ -168,9 +169,9 @@ namespace client_app.menus
 		{
 			game.main.panel_main.Controls.Clear();
 
-			game.panel_outline = new Guna.UI2.WinForms.Guna2Shapes()
+			game.panel_outline = new Guna2Shapes()
 			{
-				BorderColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+				BorderColor = Color.FromArgb(52, 52, 52),
 				BorderThickness = 10,
 				FillColor = Color.White,
 				Location = new Point(260, 250),
@@ -183,30 +184,25 @@ namespace client_app.menus
 				Text = "panel_outline",
 				Zoom = 100,
 			};
-			game.lbl_letter = new Guna.UI2.WinForms.Guna2TextBox()
+			game.lbl_letter = new Guna2HtmlLabel()
 			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = "",
-				FillColor = Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				AutoSize = false,
+				BackColor = Color.FromArgb(208, 208, 208),
 				Font = new Font("Calibri", 144F),
 				ForeColor = Color.Black,
 				Location = new Point(380, 50),
 				Margin = new Padding(42, 47, 42, 47),
 				Name = "lbl_letter",
-				PlaceholderText = "",
-				ReadOnly = true,
-				SelectedText = "",
 				Size = new Size(360, 150),
 				TabIndex = 2,
-				TextAlign = HorizontalAlignment.Center,
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
-			game.btn_submit = new Guna.UI2.WinForms.Guna2GradientButton()
+			game.btn_submit = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 49,
-				FillColor = Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
-				FillColor2 = Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				FillColor = Color.FromArgb(247, 113, 163),
+				FillColor2 = Color.FromArgb(197, 113, 247),
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
 				ForeColor = Color.White,
 				Location = new Point(460, 900),
@@ -215,12 +211,12 @@ namespace client_app.menus
 				TabIndex = 3,
 				Text = "Submit",
 			};
-			game.btn_clear = new Guna.UI2.WinForms.Guna2GradientButton()
+			game.btn_clear = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 49,
-				FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
-				FillColor2 = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				FillColor = Color.FromArgb(156, 156, 156),
+				FillColor2 = Color.FromArgb(156, 156, 156),
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
 				ForeColor = Color.White,
 				Location = new Point(220, 900),
@@ -241,34 +237,34 @@ namespace client_app.menus
 
 		public static void configRightGamePanel(abstractGame game)
 		{
-			game.lbl_rounds = new Guna.UI2.WinForms.Guna2TextBox()
+			game.lbl_rounds = new Guna2HtmlLabel()
 			{
-				BorderThickness = 0,
+				AutoSize = false,
+				BackColor = Color.FromArgb(35, 31, 32),
 				Cursor = Cursors.Arrow,
-				DefaultText = $"Round {game.getRounds()}",
-				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
 				Font = new Font("Bahnschrift SemiBold", 48F, FontStyle.Bold),
 				Location = new Point(40, 40),
 				Margin = new Padding(15, 15, 15, 15),
 				Name = "lbl_rounds",
 				Size = new Size(420, 80),
 				TabStop = false,
-				TextAlign = HorizontalAlignment.Center,
+				Text = $"Round {game.getRounds()}",
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			PictureBox seperator = new PictureBox()
 			{
-				Image = global::client_app.Properties.Resources.seperator,
-				Location = new System.Drawing.Point(30, 120),
+				Image = Resources.seperator,
+				Location = new Point(30, 120),
 				Name = "seperator",
-				Size = new System.Drawing.Size(440, 7),
-				SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage,
+				Size = new Size(440, 7),
+				SizeMode = PictureBoxSizeMode.StretchImage,
 				TabIndex = 1,
 				TabStop = false,
 			};
-			game.panel_stats = new Guna.UI2.WinForms.Guna2Panel()
+			game.panel_stats = new Guna2Panel()
 			{
 				BorderRadius = 20,
-				FillColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
+				FillColor = Color.FromArgb(104, 104, 104),
 				Location = new Point(40, 160),
 				Name = "panel_stats",
 				Size = new Size(420, 720),
@@ -299,15 +295,15 @@ namespace client_app.menus
 				panel.Controls.Add(configStatPanel(letters[i], accuracies[i]));
 			}
 
-			Guna.UI2.WinForms.Guna2Panel configStatPanel(char letter, double accuracy)
+			Guna2Panel configStatPanel(char letter, double accuracy)
 			{
 				(int r, int g, int b) = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
 
-				Guna.UI2.WinForms.Guna2Panel panel_stat = new Guna.UI2.WinForms.Guna2Panel()
+				Guna2Panel panel_stat = new Guna2Panel()
 				{
-					BackColor = Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
+					BackColor = Color.FromArgb(104, 104, 104),
 					BorderRadius = 10,
-					FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+					FillColor = Color.FromArgb(156, 156, 156),
 					Location = new Point(padding, y),
 					Name = "panel_stat",
 					Size = new Size(420 - 2 * padding, panelY),
@@ -317,7 +313,7 @@ namespace client_app.menus
 				Label lbl_letter = new Label()
 				{
 					AutoSize = true,
-					BackColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+					BackColor = Color.FromArgb(156, 156, 156),
 					Font = new Font("Bahnschrift SemiBold", 27.75F, FontStyle.Bold),
 					Location = new Point(10, 2),
 					Name = "lbl_letter",
@@ -333,21 +329,21 @@ namespace client_app.menus
 					Size = new Size(230, 30),
 					TabIndex = 1,
 				};
-				Guna.UI2.WinForms.Guna2TextBox lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+				Guna2TextBox lbl_accuracy = new Guna2TextBox()
 				{
 					BorderThickness = 0,
 					Cursor = Cursors.Arrow,
 					DefaultText = $"{Math.Round(accuracy * 100)}%",
-					FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+					FillColor = Color.FromArgb(156, 156, 156),
 					Font = new Font("Bahnschrift", 19.75F),
-					ForeColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+					ForeColor = Color.FromArgb(52, 52, 52),
 					Location = new Point(290, 10),
 					Name = "lbl_accuracy",
 					Size = new Size(80, 30),
 					TabIndex = 2,
 					TextAlign = HorizontalAlignment.Right,
 				};
-				Guna.UI2.WinForms.Guna2Panel bar_fill = new Guna.UI2.WinForms.Guna2Panel()
+				Guna2Panel bar_fill = new Guna2Panel()
 				{
 					BackColor = ColorTranslator.FromHtml($"{r}, {g}, {b}"),
 					Location = new Point(60, 10),
@@ -373,7 +369,7 @@ namespace client_app.menus
 			Panel panel_players = new Panel()
 			{
 				AutoScroll = true,
-				BackColor = Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46))))),
+				BackColor = Color.FromArgb(46, 46, 46),
 				Location = new Point(20, 90),
 				Name = "panel_friendList",
 				Size = new Size(260, 384),
@@ -392,10 +388,10 @@ namespace client_app.menus
 			};
 			Label lbl_players = new Label()
 			{
-				BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				BackColor = Color.FromArgb(35, 31, 32),
 				BorderStyle = BorderStyle.None,
-				Font = new Font("Bahnschrift", 20.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				Font = new Font("Bahnschrift", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(247, 113, 163),
 				Location = new Point(0, 20),
 				Name = "txt_friendsLabel",
 				Size = new Size(300, 33),
@@ -411,7 +407,7 @@ namespace client_app.menus
 				Label user = new Label()
 				{
 					BackColor = panel_players.BackColor,
-					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 					Location = new Point(10, y_offset),
 					Size = new Size(200, 30),
 					TabStop = false,
@@ -421,7 +417,7 @@ namespace client_app.menus
 				{
 					BackColor = panel_players.BackColor,
 					BorderStyle = BorderStyle.None,
-					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 					Location = new Point(210, y_offset),
 					Name = "txt_onlineCount",
 					Size = new Size(50, 20),
@@ -447,7 +443,7 @@ namespace client_app.menus
 			Panel panel_players = new Panel()
 			{
 				AutoScroll = true,
-				BackColor = Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46))))),
+				BackColor = Color.FromArgb(46, 46, 46),
 				Location = new Point(20, 90),
 				Name = "panel_friendList",
 				Size = new Size(260, 384),
@@ -466,10 +462,10 @@ namespace client_app.menus
 			};
 			Label lbl_players = new Label()
 			{
-				BackColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				BackColor = Color.FromArgb(35, 31, 32),
 				BorderStyle = BorderStyle.None,
-				Font = new Font("Bahnschrift", 20.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				Font = new Font("Bahnschrift", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(247, 113, 163),
 				Location = new Point(0, 20),
 				Name = "txt_friendsLabel",
 				Size = new Size(300, 33),
@@ -488,8 +484,8 @@ namespace client_app.menus
 			{
 				BackColor = panel_players.BackColor,
 				BorderStyle = BorderStyle.None,
-				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
-				Location = new System.Drawing.Point(10, y_offset),
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				Location = new Point(10, y_offset),
 				Size = new Size(200, labelY),
 				TabIndex = 0,
 				Text = "Alive"
@@ -500,7 +496,7 @@ namespace client_app.menus
 			{
 				BackColor = panel_players.BackColor,
 				BorderStyle = BorderStyle.None,
-				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				Location = new Point(230, 10),
 				Size = new Size(30, 20),
 				TabIndex = 0,
@@ -515,7 +511,7 @@ namespace client_app.menus
 				Label user = new Label()
 				{
 					BackColor = panel_players.BackColor,
-					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 					Location = new Point(10, y_offset),
 					Size = new Size(labelX, labelY),
 					TabIndex = 0,
@@ -530,7 +526,7 @@ namespace client_app.menus
 			{
 				BackColor = panel_players.BackColor,
 				BorderStyle = BorderStyle.None,
-				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				Location = new Point(10, y_offset),
 				Size = new Size(200, labelY),
 				TabIndex = 0,
@@ -542,7 +538,7 @@ namespace client_app.menus
 			{
 				BackColor = panel_players.BackColor,
 				BorderStyle = BorderStyle.None,
-				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				Location = new Point(230, y_offset),
 				Size = new Size(30, 20),
 				TabIndex = 0,
@@ -557,7 +553,7 @@ namespace client_app.menus
 				Label user = new Label()
 				{
 					BackColor = panel_players.BackColor,
-					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 					Location = new Point(10, y_offset),
 					Size = new Size(labelX, labelY),
 					TabIndex = 0,
@@ -623,7 +619,7 @@ namespace client_app.menus
 				TextAlign = ContentAlignment.MiddleCenter,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
-			Label lbl_percentage = new System.Windows.Forms.Label()
+			Label lbl_percentage = new Label()
 			{
 				Location = new Point(lbl_time.Location.X - defaultSize - padding, padding),
 				Name = "lbl_percentage",
@@ -633,7 +629,7 @@ namespace client_app.menus
 				TextAlign = ContentAlignment.MiddleCenter,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
-			Panel bar_base = new System.Windows.Forms.Panel()
+			Panel bar_base = new Panel()
 			{
 				BackColor = SystemColors.ControlLight,
 				Location = new Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
@@ -642,7 +638,7 @@ namespace client_app.menus
 				TabIndex = 4,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
-			Panel bar_fill = new System.Windows.Forms.Panel()
+			Panel bar_fill = new Panel()
 			{
 				BackColor = ColorTranslator.FromHtml($"{r}, {g}, {b}"),
 				Location = new Point(bar_base.Location.X, bar_base.Location.Y),
@@ -652,7 +648,7 @@ namespace client_app.menus
 				BorderStyle = BorderStyle.FixedSingle,
 			};
 
-			Panel panel_char = new System.Windows.Forms.Panel()
+			Panel panel_char = new Panel()
 			{
 				BackColor = SystemColors.ControlDark,
 				Location = new Point(X, y),
@@ -661,12 +657,12 @@ namespace client_app.menus
 				TabIndex = 0,
 				BorderStyle = BorderStyle.FixedSingle,
 			};
-			game.btn_continue = new Guna.UI2.WinForms.Guna2GradientButton()
+			game.btn_continue = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 49,
-				FillColor = Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
-				FillColor2 = Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
+				FillColor = Color.FromArgb(247, 113, 163),
+				FillColor2 = Color.FromArgb(197, 113, 247),
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
 				ForeColor = Color.White,
 				Location = new Point(220, 900),
@@ -699,69 +695,69 @@ namespace client_app.menus
 		{
 			main.panel_right.Controls.Clear();
 
-			Guna.UI2.WinForms.Guna2PictureBox pic_account = new Guna.UI2.WinForms.Guna2PictureBox()
+			Guna2PictureBox pic_account = new Guna2PictureBox()
 			{
-				Image = global::client_app.Properties.Resources.account,
+				Image = Resources.account,
 				ImageRotate = 0F,
-				Location = new System.Drawing.Point(150, 50),
+				Location = new Point(150, 50),
 				Name = "pic_account",
-				Size = new System.Drawing.Size(200, 200),
-				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				Size = new Size(200, 200),
+				SizeMode = PictureBoxSizeMode.Zoom,
 				TabIndex = 0,
 				TabStop = false
 			};
-			Guna.UI2.WinForms.Guna2GradientButton btn_profile = new Guna.UI2.WinForms.Guna2GradientButton()
+			Guna2GradientButton btn_profile = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 24,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
-				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
-				Location = new System.Drawing.Point(140, 930),
+				FillColor = Color.FromArgb(247, 113, 163),
+				FillColor2 = Color.FromArgb(197, 113, 247),
+				Font = new Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
+				Location = new Point(140, 930),
 				Name = "btn_profile",
-				Size = new System.Drawing.Size(220, 50),
+				Size = new Size(220, 50),
 				TabIndex = 3,
 				Text = "Profile",
 			};
-			Guna.UI2.WinForms.Guna2TextBox lbl_userID = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox lbl_userID = new Guna2TextBox()
 			{
-				BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
+				BackColor = Color.FromArgb(44, 39, 41),
 				BorderThickness = 0,
-				Cursor = System.Windows.Forms.Cursors.IBeam,
+				Cursor = Cursors.IBeam,
 				DefaultText = userData.userID,
-				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
-				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
-				ForeColor = System.Drawing.Color.White,
-				Location = new System.Drawing.Point(40, 265),
-				Margin = new System.Windows.Forms.Padding(6),
+				BorderColor = Color.FromArgb(208, 208, 208),
+				FillColor = Color.FromArgb(44, 39, 41),
+				Font = new Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
+				ForeColor = Color.White,
+				Location = new Point(40, 265),
+				Margin = new Padding(6),
 				Name = "lbl_userID",
-				PlaceholderForeColor = System.Drawing.Color.Transparent,
+				PlaceholderForeColor = Color.Transparent,
 				PlaceholderText = "",
 				ReadOnly = true,
 				SelectedText = "",
-				Size = new System.Drawing.Size(420, 70),
+				Size = new Size(420, 70),
 				TabIndex = 13,
-				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
+				TextAlign = HorizontalAlignment.Center,
 			};
-			Guna.UI2.WinForms.Guna2TextBox lbl_aboutMe = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox lbl_aboutMe = new Guna2TextBox()
 			{
-				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				BorderColor = Color.FromArgb(156, 156, 156),
 				BorderRadius = 10,
 				BorderThickness = 4,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = userData.aboutMe,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.White,
-				Location = new System.Drawing.Point(40, 350),
-				Margin = new System.Windows.Forms.Padding(5, 5, 5, 5),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.White,
+				Location = new Point(40, 350),
+				Margin = new Padding(5, 5, 5, 5),
 				Multiline = true,
 				Name = "header",
 				PlaceholderText = "",
 				ReadOnly = true,
 				SelectedText = "",
-				Size = new System.Drawing.Size(420, 180),
+				Size = new Size(420, 180),
 				TabIndex = 0,
 				TabStop = false,
 			};
@@ -782,291 +778,291 @@ namespace client_app.menus
 		{
 			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
 
-			Guna.UI2.WinForms.Guna2Panel panel_statsOverview = new Guna.UI2.WinForms.Guna2Panel()
+			Guna2Panel panel_statsOverview = new Guna2Panel()
 			{
 				BorderRadius = 20,
 				BorderThickness = 5,
 				BorderColor = Color.White,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
-				Location = new System.Drawing.Point(pos.X, pos.Y),
+				FillColor = Color.FromArgb(156, 156, 156),
+				Location = new Point(pos.X, pos.Y),
 				Name = "panel_statsOverview",
-				Size = new System.Drawing.Size(420, 230),
+				Size = new Size(420, 230),
 				TabIndex = 0,
 			};
-			Guna.UI2.WinForms.Guna2Panel panel_rank = new Guna.UI2.WinForms.Guna2Panel()
+			Guna2Panel panel_rank = new Guna2Panel()
 			{
 
-				BackColor = System.Drawing.Color.Transparent,
+				BackColor = Color.Transparent,
 				BorderRadius = 20,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Location = new System.Drawing.Point(20, 20),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Location = new Point(20, 20),
 				Name = "panel_rank",
-				Size = new System.Drawing.Size(380, 50),
+				Size = new Size(380, 50),
 				TabIndex = 0,
 			};
-			Guna.UI2.WinForms.Guna2Shapes circle_total = new Guna.UI2.WinForms.Guna2Shapes()
+			Guna2Shapes circle_total = new Guna2Shapes()
 			{
-				BackColor = System.Drawing.Color.Transparent,
-				BorderColor = System.Drawing.Color.White,
+				BackColor = Color.Transparent,
+				BorderColor = Color.White,
 				BorderThickness = 5,
-				FillColor = System.Drawing.Color.Transparent,
-				Location = new System.Drawing.Point(31, 80),
+				FillColor = Color.Transparent,
+				Location = new Point(31, 80),
 				Name = "circle_total",
 				PolygonSides = 3,
 				PolygonSkip = 1,
 				Rotate = 9F,
 				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
-				Size = new System.Drawing.Size(70, 70),
+				Size = new Size(70, 70),
 				TabIndex = 1,
 				UseTransparentBackground = true,
 				Zoom = 80,
 			};
-			Guna.UI2.WinForms.Guna2Shapes line_stats = new Guna.UI2.WinForms.Guna2Shapes()
+			Guna2Shapes line_stats = new Guna2Shapes()
 			{
 				BorderThickness = 0,
-				FillColor = System.Drawing.Color.White,
+				FillColor = Color.White,
 				LineThickness = 1,
-				Location = new System.Drawing.Point(63, 1),
+				Location = new Point(63, 1),
 				Name = "line_stats",
 				PolygonSkip = 1,
 				Rotate = 0F,
 				Shape = Guna.UI2.WinForms.Enums.ShapeType.Rectangle,
-				Size = new System.Drawing.Size(5, 228),
+				Size = new Size(5, 228),
 				TabIndex = 2,
 				Text = "guna2Shapes2",
 				Zoom = 100,
 			};
-			Guna.UI2.WinForms.Guna2Shapes circle_rank = new Guna.UI2.WinForms.Guna2Shapes()
+			Guna2Shapes circle_rank = new Guna2Shapes()
 			{
-				BackColor = System.Drawing.Color.Transparent,
-				BorderColor = System.Drawing.Color.White,
+				BackColor = Color.Transparent,
+				BorderColor = Color.White,
 				BorderThickness = 5,
-				FillColor = System.Drawing.Color.Transparent,
-				Location = new System.Drawing.Point(31, 10),
+				FillColor = Color.Transparent,
+				Location = new Point(31, 10),
 				Name = "circle_rank",
 				PolygonSides = 3,
 				PolygonSkip = 1,
 				Rotate = 9F,
 				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
-				Size = new System.Drawing.Size(70, 70),
+				Size = new Size(70, 70),
 				TabIndex = 3,
 				Text = "guna2Shapes3",
 				UseTransparentBackground = true,
 				Zoom = 80,
 			};
-			Guna.UI2.WinForms.Guna2Panel panel_total = new Guna.UI2.WinForms.Guna2Panel()
+			Guna2Panel panel_total = new Guna2Panel()
 			{
-				BackColor = System.Drawing.Color.Transparent,
+				BackColor = Color.Transparent,
 				BorderRadius = 20,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Location = new System.Drawing.Point(20, 90),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Location = new Point(20, 90),
 				Name = "panel_total",
-				Size = new System.Drawing.Size(380, 50),
+				Size = new Size(380, 50),
 				TabIndex = 2,
 			};
-			Guna.UI2.WinForms.Guna2PictureBox pic_rank = new Guna.UI2.WinForms.Guna2PictureBox()
+			Guna2PictureBox pic_rank = new Guna2PictureBox()
 			{
-				BackColor = System.Drawing.Color.Transparent,
-				FillColor = System.Drawing.Color.Transparent,
-				Image = global::client_app.Properties.Resources.rank,
+				BackColor = Color.Transparent,
+				FillColor = Color.Transparent,
+				Image = Resources.rank,
 				ImageRotate = 0F,
-				Location = new System.Drawing.Point(30, 10),
+				Location = new Point(30, 10),
 				Name = "pic_rank",
-				Size = new System.Drawing.Size(30, 30),
-				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				Size = new Size(30, 30),
+				SizeMode = PictureBoxSizeMode.Zoom,
 				TabIndex = 4,
 				TabStop = false,
 				UseTransparentBackground = true,
 			};
-			Guna.UI2.WinForms.Guna2PictureBox pic_total = new Guna.UI2.WinForms.Guna2PictureBox()
+			Guna2PictureBox pic_total = new Guna2PictureBox()
 			{
-				BackColor = System.Drawing.Color.Transparent,
-				FillColor = System.Drawing.Color.Transparent,
-				Image = global::client_app.Properties.Resources.total,
+				BackColor = Color.Transparent,
+				FillColor = Color.Transparent,
+				Image = Resources.total,
 				ImageRotate = 0F,
-				Location = new System.Drawing.Point(30, 10),
+				Location = new Point(30, 10),
 				Name = "pic_total",
-				Size = new System.Drawing.Size(30, 30),
-				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				Size = new Size(30, 30),
+				SizeMode = PictureBoxSizeMode.Zoom,
 				TabIndex = 5,
 				TabStop = false,
 				UseTransparentBackground = true,
 			};
-			Guna.UI2.WinForms.Guna2TextBox lbl_rank = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox lbl_rank = new Guna2TextBox()
 			{
 				BorderThickness = 0,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = "ELO",
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
-				Location = new System.Drawing.Point(90, 10),
-				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(52, 52, 52),
+				Location = new Point(90, 10),
+				Margin = new Padding(3, 4, 3, 4),
 				Name = "lbl_rank",
 				PlaceholderText = "",
 				ReadOnly = true,
 				SelectedText = "",
-				Size = new System.Drawing.Size(48, 30),
+				Size = new Size(48, 30),
 				TabIndex = 5,
 			};
-			Guna.UI2.WinForms.Guna2TextBox lbl_total = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox lbl_total = new Guna2TextBox()
 			{
 				BorderThickness = 0,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = "TOTAL",
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
-				Location = new System.Drawing.Point(90, 10),
-				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(52, 52, 52),
+				Location = new Point(90, 10),
+				Margin = new Padding(3, 4, 3, 4),
 				Name = "lbl_total",
 				PlaceholderText = "",
 				ReadOnly = true,
 				SelectedText = "",
-				Size = new System.Drawing.Size(62, 30),
+				Size = new Size(62, 30),
 				TabIndex = 6,
 			};
-			Guna.UI2.WinForms.Guna2TextBox txt_rank = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox txt_rank = new Guna2TextBox()
 			{
 				BorderThickness = 0,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = rank,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
-				Location = new System.Drawing.Point(300, 10),
-				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(104, 104, 104),
+				Location = new Point(300, 10),
+				Margin = new Padding(3, 4, 3, 4),
 				Name = "txt_rank",
 				PlaceholderText = "",
 				ReadOnly = true,
-				RightToLeft = System.Windows.Forms.RightToLeft.Yes,
+				RightToLeft = RightToLeft.Yes,
 				SelectedText = "",
-				Size = new System.Drawing.Size(60, 30),
+				Size = new Size(60, 30),
 				TabIndex = 6,
-				TextOffset = new System.Drawing.Point(0, -1),
+				TextOffset = new Point(0, -1),
 			};
-			Guna.UI2.WinForms.Guna2TextBox txt_total = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox txt_total = new Guna2TextBox()
 			{
 				BorderThickness = 0,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = total,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
-				Location = new System.Drawing.Point(300, 10),
-				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(104, 104, 104),
+				Location = new Point(300, 10),
+				Margin = new Padding(3, 4, 3, 4),
 				Name = "txt_total",
 				PlaceholderText = "",
 				ReadOnly = true,
-				RightToLeft = System.Windows.Forms.RightToLeft.Yes,
+				RightToLeft = RightToLeft.Yes,
 				SelectedText = "",
-				Size = new System.Drawing.Size(60, 30),
+				Size = new Size(60, 30),
 				TabIndex = 7,
-				TextOffset = new System.Drawing.Point(0, -1),
+				TextOffset = new Point(0, -1),
 			};
-			Guna.UI2.WinForms.Guna2Separator seperator_rank = new Guna.UI2.WinForms.Guna2Separator()
+			Guna2Separator seperator_rank = new Guna2Separator()
 			{
 
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor = Color.FromArgb(247, 113, 163),
 				FillThickness = 2,
-				Location = new System.Drawing.Point(144, 20),
+				Location = new Point(144, 20),
 				Name = "seperator_rank",
-				Size = new System.Drawing.Size(150, 10),
+				Size = new Size(150, 10),
 				TabIndex = 7,
 			};
-			Guna.UI2.WinForms.Guna2Separator seperator_total = new Guna.UI2.WinForms.Guna2Separator()
+			Guna2Separator seperator_total = new Guna2Separator()
 			{
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor = Color.FromArgb(247, 113, 163),
 				FillThickness = 2,
-				Location = new System.Drawing.Point(158, 20),
+				Location = new Point(158, 20),
 				Name = "seperator_total",
-				Size = new System.Drawing.Size(136, 10),
+				Size = new Size(136, 10),
 				TabIndex = 8,
 			};
-			Guna.UI2.WinForms.Guna2Panel panel_accuracy = new Guna.UI2.WinForms.Guna2Panel()
+			Guna2Panel panel_accuracy = new Guna2Panel()
 			{
-				BackColor = System.Drawing.Color.Transparent,
+				BackColor = Color.Transparent,
 				BorderRadius = 20,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Location = new System.Drawing.Point(20, 160),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Location = new Point(20, 160),
 				Name = "panel_accuracy",
-				Size = new System.Drawing.Size(380, 50),
+				Size = new Size(380, 50),
 				TabIndex = 9,
 			};
-			Guna.UI2.WinForms.Guna2Separator seperator_accuracy = new Guna.UI2.WinForms.Guna2Separator()
+			Guna2Separator seperator_accuracy = new Guna2Separator()
 			{
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
+				FillColor = Color.FromArgb(247, 113, 163),
 				FillThickness = 2,
-				Location = new System.Drawing.Point(189, 20),
+				Location = new Point(189, 20),
 				Name = "seperator_accuracy",
-				Size = new System.Drawing.Size(86, 10),
+				Size = new Size(86, 10),
 				TabIndex = 8,
 			};
-			Guna.UI2.WinForms.Guna2TextBox txt_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox txt_accuracy = new Guna2TextBox()
 			{
 				BorderThickness = 0,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = $"{accuracy}%",
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255))))),
-				Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(104)))), ((int)(((byte)(104))))),
-				Location = new System.Drawing.Point(281, 10),
-				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				FillColor = Color.FromArgb(208, 208, 208),
+				BorderColor = Color.FromArgb(94, 148, 255),
+				Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(104, 104, 104),
+				Location = new Point(281, 10),
+				Margin = new Padding(3, 4, 3, 4),
 				Name = "txt_accuracy",
 				PlaceholderText = "",
 				ReadOnly = true,
-				RightToLeft = System.Windows.Forms.RightToLeft.Yes,
+				RightToLeft = RightToLeft.Yes,
 				SelectedText = "",
-				Size = new System.Drawing.Size(79, 30),
+				Size = new Size(79, 30),
 				TabIndex = 7,
-				TextOffset = new System.Drawing.Point(0, -1),
+				TextOffset = new Point(0, -1),
 			};
-			Guna.UI2.WinForms.Guna2TextBox lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox lbl_accuracy = new Guna2TextBox()
 			{
 
 				BorderThickness = 0,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = "ACCURACY",
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
-				Location = new System.Drawing.Point(90, 10),
-				Margin = new System.Windows.Forms.Padding(3, 4, 3, 4),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(52, 52, 52),
+				Location = new Point(90, 10),
+				Margin = new Padding(3, 4, 3, 4),
 				Name = "lbl_accuracy",
 				PlaceholderText = "",
 				ReadOnly = true,
 				SelectedText = "",
-				Size = new System.Drawing.Size(93, 30),
+				Size = new Size(93, 30),
 				TabIndex = 6,
 			};
-			Guna.UI2.WinForms.Guna2PictureBox pic_accuracy = new Guna.UI2.WinForms.Guna2PictureBox()
+			Guna2PictureBox pic_accuracy = new Guna2PictureBox()
 			{
-				BackColor = System.Drawing.Color.Transparent,
-				FillColor = System.Drawing.Color.Transparent,
-				Image = global::client_app.Properties.Resources.accuracy,
+				BackColor = Color.Transparent,
+				FillColor = Color.Transparent,
+				Image = Resources.accuracy,
 				ImageRotate = 0F,
-				Location = new System.Drawing.Point(27, 7),
+				Location = new Point(27, 7),
 				Name = "pic_accuracy",
-				Size = new System.Drawing.Size(36, 36),
-				SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom,
+				Size = new Size(36, 36),
+				SizeMode = PictureBoxSizeMode.Zoom,
 				TabIndex = 5,
 				TabStop = false,
 				UseTransparentBackground = true,
 			};
-			Guna.UI2.WinForms.Guna2Shapes circle_accuracy = new Guna.UI2.WinForms.Guna2Shapes()
+			Guna2Shapes circle_accuracy = new Guna2Shapes()
 			{
-				BackColor = System.Drawing.Color.Transparent,
-				BorderColor = System.Drawing.Color.White,
+				BackColor = Color.Transparent,
+				BorderColor = Color.White,
 				BorderThickness = 5,
-				FillColor = System.Drawing.Color.Transparent,
-				Location = new System.Drawing.Point(30, 150),
+				FillColor = Color.Transparent,
+				Location = new Point(30, 150),
 				Name = "circle_accuracy",
 				PolygonSides = 3,
 				PolygonSkip = 1,
 				Rotate = 9F,
 				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
-				Size = new System.Drawing.Size(70, 70),
+				Size = new Size(70, 70),
 				TabIndex = 10,
 				UseTransparentBackground = true,
 				Zoom = 80,
@@ -1103,10 +1099,10 @@ namespace client_app.menus
 			Label lbl_header = new Label
 			{
 				BackColor = main.panel_main.BackColor,
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				Location = new System.Drawing.Point(10, 10),
+				Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				Location = new Point(10, 10),
 				Name = "lbl_header",
-				Size = new System.Drawing.Size(300, 30),
+				Size = new Size(300, 30),
 				TabIndex = 0,
 				Text = "Lobby",
 			};
@@ -1126,17 +1122,17 @@ namespace client_app.menus
 				Location = new Point(50, 150),
 				Size = new Size(game.main.panel_main.Width - 100, 500)
 			};
-			Guna.UI2.WinForms.Guna2TextBox lbl_remainingPlayers = new Guna.UI2.WinForms.Guna2TextBox()
+			Guna2TextBox lbl_remainingPlayers = new Guna2TextBox()
 			{
 				BorderThickness = 0,
 				BorderRadius = 10,
 				Cursor = Cursors.Arrow,
-				FillColor = Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				FillColor = Color.FromArgb(156, 156, 156),
 				Font = new Font("Bahnschrift SemiBold", 32F, FontStyle.Bold),
 				Location = new Point(220, 700),
 				Size = new Size(680, 100),
 				TabStop = false,
-				ForeColor = Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52))))),
+				ForeColor = Color.FromArgb(52, 52, 52),
 				Text = $"{users.Count}/{game.getMaxPlayers()} players",
 				TextAlign = HorizontalAlignment.Center,
 			};
@@ -1154,17 +1150,17 @@ namespace client_app.menus
 					Name = user.userID,
 					BackColor = panel_users.BackColor,
 					BorderStyle = BorderStyle.FixedSingle,
-					Location = new System.Drawing.Point(X, Y),
-					Size = new System.Drawing.Size(userX, userY),
+					Location = new Point(X, Y),
+					Size = new Size(userX, userY),
 				};
 
 				Label userID = new Label()
 				{
 					BackColor = game.main.panel_main.BackColor,
-					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-					Location = new System.Drawing.Point(padding, padding),
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
+					Location = new Point(padding, padding),
 					Name = user.userID,
-					Size = new System.Drawing.Size(userX - userY - 2 * padding, userY - 2 * padding),
+					Size = new Size(userX - userY - 2 * padding, userY - 2 * padding),
 					TabIndex = 0,
 					Text = user.userID,
 					BorderStyle = BorderStyle.FixedSingle,
@@ -1173,10 +1169,10 @@ namespace client_app.menus
 				Label rank = new Label()
 				{
 					BackColor = game.main.panel_main.BackColor,
-					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-					Location = new System.Drawing.Point(userID.Width + 2 * padding, padding),
+					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
+					Location = new Point(userID.Width + 2 * padding, padding),
 					Name = "rank",
-					Size = new System.Drawing.Size(userY - padding, userY - 2 * padding),
+					Size = new Size(userY - padding, userY - 2 * padding),
 					TabIndex = 0,
 					Text = user.rank.ToString(),
 					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
@@ -1197,36 +1193,33 @@ namespace client_app.menus
 
 		private static void configCountdown(abstractGame game)
 		{
-			game.lbl_countdown = new Guna.UI2.WinForms.Guna2TextBox()
+			game.lbl_countdown = new Guna2HtmlLabel()
 			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = "",
-				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				AutoSize = false,
+				BackColor = Color.FromArgb(35, 31, 32),
 				Font = new Font("Bahnschrift SemiBold", 64F, FontStyle.Bold),
 				Location = new Point(20, 700),
 				Margin = new Padding(15, 15, 15, 15),
 				Size = new Size(260, 100),
 				TabStop = false,
-				TextAlign = HorizontalAlignment.Center,
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
-			game.lbl_status = new Guna.UI2.WinForms.Guna2TextBox()
+			game.lbl_status = new Guna2HtmlLabel()
 			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				FillColor = Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32))))),
+				AutoSize = false,
+				BackColor = Color.FromArgb(35, 31, 32),
 				Font = new Font("Bahnschrift SemiBold", 32F, FontStyle.Bold),
 				Location = new Point(20, 650),
 				Margin = new Padding(15, 15, 15, 15),
 				Size = new Size(260, 50),
 				TabStop = false,
-				TextAlign = HorizontalAlignment.Center,
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 
 			game.main.panel_left.Controls.Add(game.lbl_countdown);
 			game.main.panel_left.Controls.Add(game.lbl_status);
 		}
-		public static async Task countdown(Guna.UI2.WinForms.Guna2TextBox lbl_countdown, int num, Guna.UI2.WinForms.Guna2TextBox lbl_status, string text)
+		public static async Task countdown(Guna2HtmlLabel lbl_countdown, int num, Guna2HtmlLabel lbl_status, string text)
 		{
 			lbl_status.Text = text;
 			for (int i = num; i > 0; i--)
@@ -1250,7 +1243,7 @@ namespace client_app.menus
 			const int padding = 5;
 			const int defaultSize = panelY - 2 * padding;
 
-			Guna.UI2.WinForms.Guna2Panel panel_stats = new Guna.UI2.WinForms.Guna2Panel()
+			Guna2Panel panel_stats = new Guna2Panel()
 			{
 				AutoScroll = true,
 				BorderRadius = 0,
@@ -1271,34 +1264,34 @@ namespace client_app.menus
 
 				(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
 
-				Label lbl_letter = new System.Windows.Forms.Label()
+				Label lbl_letter = new Label()
 				{
-					Location = new System.Drawing.Point(0 + padding, 0 + padding),
+					Location = new Point(0 + padding, 0 + padding),
 					Name = "lbl_letter",
-					Size = new System.Drawing.Size(defaultSize, defaultSize),
+					Size = new Size(defaultSize, defaultSize),
 					TabIndex = 0,
 					Text = letter,
 					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-				Label lbl_correct = new System.Windows.Forms.Label()
+				Label lbl_correct = new Label()
 				{
-					Location = new System.Drawing.Point(panelX - 2 * defaultSize - padding, padding),
+					Location = new Point(panelX - 2 * defaultSize - padding, padding),
 					Name = "lbl_correct",
-					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+					Size = new Size(2 * defaultSize, defaultSize),
 					TabIndex = 1,
 					Text = correct.ToString(),
-					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					TextAlign = ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-				Label lbl_time = new System.Windows.Forms.Label()
+				Label lbl_time = new Label()
 				{
-					Location = new System.Drawing.Point(lbl_correct.Location.X - 2 * defaultSize - padding, padding),
+					Location = new Point(lbl_correct.Location.X - 2 * defaultSize - padding, padding),
 					Name = "lbl_time",
-					Size = new System.Drawing.Size(2 * defaultSize, defaultSize),
+					Size = new Size(2 * defaultSize, defaultSize),
 					TabIndex = 2,
 					Text = $"{time.TotalSeconds}",
-					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					TextAlign = ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
 				Label lbl_percentage = new Label()

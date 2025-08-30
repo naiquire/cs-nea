@@ -1,5 +1,6 @@
 ﻿using client_app.menus;
 using client_app.Properties;
+using Guna.UI2.WinForms;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -53,12 +54,12 @@ namespace client_app
 		{
 			interfaces.resetLayout(this);
 
-			this.panel_friendList = new System.Windows.Forms.Panel();
-			this.seperator = new System.Windows.Forms.PictureBox();
-			this.lbl_friendsLabel = new System.Windows.Forms.Label();
+			this.panel_friendList = new Panel();
+			this.seperator = new PictureBox();
+			this.lbl_friendsLabel = new Guna2HtmlLabel();
 			this.appLogo = new PictureBox();
-			this.txt_userSearch = new Guna.UI2.WinForms.Guna2TextBox();
-			this.btn_userSearch = new Guna.UI2.WinForms.Guna2CircleButton();
+			this.txt_userSearch = new Guna2TextBox();
+			this.btn_userSearch = new Guna2CircleButton();
 
 			this.panel_topBorder.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
@@ -99,7 +100,7 @@ namespace client_app
 			this.lbl_friendsLabel.Size = new System.Drawing.Size(300, 33);
 			this.lbl_friendsLabel.TabIndex = 0;
 			this.lbl_friendsLabel.Text = languages.localisation["Friends"][userData.localisation];
-			this.lbl_friendsLabel.TextAlign = (ContentAlignment)System.Windows.Forms.HorizontalAlignment.Center;
+			this.lbl_friendsLabel.TextAlignment = ContentAlignment.MiddleCenter;
 			//
 			// appLogo
 			//
@@ -199,26 +200,19 @@ namespace client_app
 				TabIndex = 0,
 				UseTransparentBackground = true,
 			};
-			this.lbl_accuracy = new Guna.UI2.WinForms.Guna2TextBox()
+			this.lbl_accuracy = new Guna2HtmlLabel()
 			{
 				BackColor = System.Drawing.Color.Transparent,
-				BorderThickness = 0,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
-				DefaultText = "Accuracy",
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Text = "Accuracy",
 				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
 				ForeColor = System.Drawing.Color.White,
 				Location = new System.Drawing.Point(2 * padding, padding),
 				Margin = new System.Windows.Forms.Padding(6),
 				Name = "lbl_accuracy",
-				PlaceholderForeColor = System.Drawing.Color.Transparent,
-				PlaceholderText = "",
-				ReadOnly = true,
-				SelectedText = "",
 				Size = new System.Drawing.Size(lblSizeX, gamePanelSizeY - 2 * padding),
 				TabStop = false,
-				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
-				TextOffset = new System.Drawing.Point(0, -2),
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			this.btn_queueAccuracy = new Guna.UI2.WinForms.Guna2GradientButton()
 			{
@@ -267,28 +261,21 @@ namespace client_app
 				TabIndex = 16,
 				UseTransparentBackground = true,
 			};
-			this.lbl_1v1 = new Guna.UI2.WinForms.Guna2TextBox()
+			this.lbl_1v1 = new Guna2HtmlLabel()
 			{
-				BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
-				BorderThickness = 0,
+				BackColor = System.Drawing.Color.Transparent,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
-				DefaultText = "Versus",
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Text = "Versus",
 				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
 				ForeColor = System.Drawing.Color.White,
 				Location = new System.Drawing.Point(2 * padding, padding),
 				Margin = new System.Windows.Forms.Padding(6),
 				Name = "lbl_1v1",
-				PlaceholderForeColor = System.Drawing.Color.Transparent,
-				PlaceholderText = "",
-				ReadOnly = true,
-				SelectedText = "",
 				Size = new System.Drawing.Size(lblSizeX, gamePanelSizeY - 2 * padding),
 				TabIndex = 13,
-				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
-				TextOffset = new System.Drawing.Point(0, -2),
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
-			this.btn_queue1v1 = new Guna.UI2.WinForms.Guna2GradientButton()
+			this.btn_queue1v1 = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 24,
@@ -302,7 +289,7 @@ namespace client_app
 				TabIndex = 3,
 				Text = "Queue",
 			};
-			this.txt_1v1 = new Guna.UI2.WinForms.Guna2TextBox()
+			this.txt_1v1 = new Guna2TextBox()
 			{
 				BorderRadius = 10,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
@@ -323,7 +310,7 @@ namespace client_app
 				TextOffset = new System.Drawing.Point(0, 19),
 			};
 
-			this.panel_knockout = new Guna.UI2.WinForms.Guna2GradientPanel()
+			this.panel_knockout = new Guna2GradientPanel()
 			{
 				BackColor = System.Drawing.Color.Transparent,
 				BorderRadius = 20,
@@ -335,28 +322,21 @@ namespace client_app
 				TabIndex = 17,
 				UseTransparentBackground = true,
 			};
-			this.lbl_knockout = new Guna.UI2.WinForms.Guna2TextBox()
+			this.lbl_knockout = new Guna2HtmlLabel()
 			{
-				BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41))))),
-				BorderThickness = 0,
+				BackColor = System.Drawing.Color.Transparent,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
-				DefaultText = "Knockout",
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
+				Text = "Knockout",
 				Font = new System.Drawing.Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
 				ForeColor = System.Drawing.Color.White,
 				Location = new System.Drawing.Point(2 * padding, padding),
 				Margin = new System.Windows.Forms.Padding(6),
 				Name = "lbl_knockout",
-				PlaceholderForeColor = System.Drawing.Color.Transparent,
-				PlaceholderText = "",
-				ReadOnly = true,
-				SelectedText = "",
 				Size = new System.Drawing.Size(lblSizeX, gamePanelSizeY - 2 * padding),
 				TabIndex = 13,
-				TextAlign = System.Windows.Forms.HorizontalAlignment.Center,
-				TextOffset = new System.Drawing.Point(0, -2),
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
-			this.btn_queueKnockout = new Guna.UI2.WinForms.Guna2GradientButton()
+			this.btn_queueKnockout = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 24,
@@ -370,7 +350,7 @@ namespace client_app
 				TabIndex = 3,
 				Text = "Queue",
 			};
-			this.txt_knockout = new Guna.UI2.WinForms.Guna2TextBox()
+			this.txt_knockout = new Guna2TextBox()
 			{
 				BorderRadius = 10,
 				Cursor = System.Windows.Forms.Cursors.Arrow,
@@ -567,23 +547,23 @@ namespace client_app
 
 		private Panel panel_friendList;
 		private PictureBox seperator;
-		private Label lbl_friendsLabel;
+		private Guna2HtmlLabel lbl_friendsLabel;
 		private PictureBox appLogo;
 
-		private Guna.UI2.WinForms.Guna2GradientPanel panel_accuracy;
-		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
-		private Guna.UI2.WinForms.Guna2TextBox txt_accuracy;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_queueAccuracy;
-		private Guna.UI2.WinForms.Guna2GradientPanel panel_1v1;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_queue1v1;
-		private Guna.UI2.WinForms.Guna2TextBox txt_1v1;
-		private Guna.UI2.WinForms.Guna2TextBox lbl_1v1;
-		private Guna.UI2.WinForms.Guna2GradientPanel panel_knockout;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_queueKnockout;
-		private Guna.UI2.WinForms.Guna2TextBox txt_knockout;
-		private Guna.UI2.WinForms.Guna2TextBox lbl_knockout;
-		private Guna.UI2.WinForms.Guna2TextBox txt_userSearch;
-		private Guna.UI2.WinForms.Guna2CircleButton btn_userSearch;
+		private Guna2GradientPanel panel_accuracy;
+		private Guna2HtmlLabel lbl_accuracy;
+		private Guna2TextBox txt_accuracy;
+		private Guna2GradientButton btn_queueAccuracy;
+		private Guna2GradientPanel panel_1v1;
+		private Guna2GradientButton btn_queue1v1;
+		private Guna2TextBox txt_1v1;
+		private Guna2HtmlLabel lbl_1v1;
+		private Guna2GradientPanel panel_knockout;
+		private Guna2GradientButton btn_queueKnockout;
+		private Guna2TextBox txt_knockout;
+		private Guna2HtmlLabel lbl_knockout;
+		private Guna2TextBox txt_userSearch;
+		private Guna2CircleButton btn_userSearch;
 
 		#endregion
 

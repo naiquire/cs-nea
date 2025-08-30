@@ -58,14 +58,14 @@ namespace client_app.menus.games
 		private readonly List<char> letters;
 
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
-		public Guna.UI2.WinForms.Guna2TextBox lbl_letter;
+		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_letter;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_submit;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_clear;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_continue;
 		public Panel panel_stats;
-		public Guna.UI2.WinForms.Guna2TextBox lbl_rounds;
-		public Guna.UI2.WinForms.Guna2TextBox lbl_countdown;
-		public Guna.UI2.WinForms.Guna2TextBox lbl_status;
+		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_rounds;
+		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_countdown;
+		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_status;
 
 		private input drawingPanel;
 
