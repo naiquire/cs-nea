@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.databases;
-using System.Threading.Tasks;
 
 namespace server_app.connections
 {

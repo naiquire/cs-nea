@@ -79,7 +79,6 @@ namespace client_app
 			InitializeComponent();
 			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
-
 		public void updateUserData(string aboutMe, string localisation)
 		{
 			userData.aboutMe = aboutMe;

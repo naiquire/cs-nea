@@ -10,7 +10,6 @@ namespace server_app.databases
 	 *	
 	 * home -> panel_main ui
 	 * btn_home ui
-	 * account edit -> language and about me
 	 * game -> "next letter in" dissapears ONLY on round 1
 	 * game -> panel_drawing sometimes invisible until click
 	 * game -> submit/clear active while countdown
