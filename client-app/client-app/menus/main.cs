@@ -80,6 +80,24 @@ namespace client_app
 			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
 
+		public void updateUserData(string aboutMe, string localisation)
+		{
+			userData.aboutMe = aboutMe;
+			userData.localisation = localisation;
+
+			if (menu.game == null)
+			{
+				if (menu.profile == null)
+				{
+					btn_home.PerformClick();
+				}
+				else
+				{
+					menu.profile = new profile(this, userData);
+				}
+			}
+		}
+
 		public void updateOnline(string user, bool online)
 		{
 			int index = 0;

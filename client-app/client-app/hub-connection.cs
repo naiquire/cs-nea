@@ -71,6 +71,10 @@ namespace client_app
 			{
 				main.Invoke(new Action(() => { main.clientConnected(userData); }));
 			});
+			connection.On<string, string>("updateUserData", (aboutMe, localisation) =>
+			{
+				main.Invoke(new Action(() => main.updateUserData(aboutMe, localisation)));
+			});
 			connection.On<List<string>>("receiveInvites", (invites) =>
 			{
 				main.Invoke(new Action(() => { main.handleInvites(invites); }));

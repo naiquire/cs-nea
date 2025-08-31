@@ -138,3 +138,4 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.exe.config
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\bin\Debug\Guna.UI2.dll
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.menus.interfaces.resources
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.components.update.resources

@@ -192,6 +192,9 @@
     <Compile Include="components\input.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="components\update.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="menus\games\abstractGame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +232,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="components\update.resx">
+      <DependentUpon>update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menus\interfaces.resx">
       <DependentUpon>interfaces.cs</DependentUpon>
     </EmbeddedResource>

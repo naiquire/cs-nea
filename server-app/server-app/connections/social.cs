@@ -14,6 +14,21 @@ namespace server_app.connections
 			}
 			return new userData();
 		}
+
+		public async Task updateUserData(string userID, string aboutMe, string localisation)
+		{
+			if (database.updateUserData(userID, aboutMe, localisation))
+			{
+				if (map.TryGetValue(userID, out string? connectionID))
+				{
+					await Clients.Client(connectionID).SendAsync("updateUserData", aboutMe, localisation);
+				}
+			}
+			else
+			{
+				database.outputException($"Failed to update userData for <{userID}>");
+			}
+		}
 		public async Task updateFriendData(string userID, string friendID, bool delete)
 		{
 			if (delete)

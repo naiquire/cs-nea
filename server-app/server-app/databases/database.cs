@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
+using server_app.games;
+using System.Diagnostics.Metrics;
 
 namespace server_app.databases
 {
@@ -15,6 +17,7 @@ namespace server_app.databases
 	 * game -> round results screen especially v,k
 	 * lbl_letter font does not match mnist
 	 * endGame ui
+	 * profile -> about me
 	 * 
 	 */
 
@@ -265,6 +268,32 @@ namespace server_app.databases
 			userData.friends = friendData;
 
 			return true;
+		}
+		public static bool updateUserData(string userID, string aboutMe, string localisation)
+		{
+			string query = @"UPDATE userData
+				SET aboutMe = @aboutMe, localisation = @localisation
+				WHERE userID = @userID";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					command.Parameters.AddWithValue("@aboutMe", aboutMe);
+					command.Parameters.AddWithValue("@localisation", localisation);
+
+					command.ExecuteNonQuery();
+				}
+				connection.Close();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				outputException(ex);
+				connection.Close();
+				return false;
+			}
 		}
 		public static bool loadStatistics(string userID, out Dictionary<char, statistics> statistics)
 		{

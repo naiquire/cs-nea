@@ -688,7 +688,6 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(panel_char);
 			game.main.panel_main.Controls.Add(game.btn_continue);
 		}
-
 		public static void configUserDataPanel(main main, userData userData)
 		{
 			main.panel_right.Controls.Clear();
@@ -716,6 +715,19 @@ namespace client_app.menus
 				Size = new Size(220, 50),
 				TabIndex = 3,
 				Text = "Profile",
+			};
+			Guna2GradientButton btn_edit = new Guna2GradientButton()
+			{
+				AutoRoundedCorners = true,
+				BorderRadius = 24,
+				FillColor = Color.FromArgb(247, 113, 163),
+				FillColor2 = Color.FromArgb(197, 113, 247),
+				Font = new Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
+				Location = new Point(140, 850),
+				Name = "btn_profile",
+				Size = new Size(220, 50),
+				TabIndex = 3,
+				Text = "Edit",
 			};
 			Guna2TextBox lbl_userID = new Guna2TextBox()
 			{
@@ -764,10 +776,19 @@ namespace client_app.menus
 			{
 				menu.profile = new profile(main, userData);
 			};
+			btn_edit.Click += async (sender, e) =>
+			{
+				var update = new update(main.userData);
+				if (update.DialogResult == DialogResult.OK)
+				{
+					await main.connection.InvokeAsync("updateUserData", main.userData.userID, update.getAboutMe(), update.getLocalisation());
+				}
+			};
 
 			main.panel_right.Controls.Add(lbl_userID);
 			main.panel_right.Controls.Add(lbl_aboutMe);
 			main.panel_right.Controls.Add(btn_profile);
+			main.panel_right.Controls.Add(btn_edit);
 			main.panel_right.Controls.Add(pic_account);
 
 			configStatsPanel(main.panel_right, (40, 570), userData);
