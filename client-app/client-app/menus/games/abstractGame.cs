@@ -128,6 +128,7 @@ namespace client_app.menus.games
 			btn_submit.Click += async (sender, e) =>
 			{
 				btn_submit.Enabled = false;
+				btn_clear.Enabled = false;
 				drawingPanel.disablePanel();
 
 				var submission = drawingPanel.ImageToArray();
@@ -149,6 +150,7 @@ namespace client_app.menus.games
 
 			drawingPanel.enablePanel();
 			btn_submit.Enabled = true;
+			btn_clear.Enabled = true;
 			
 		}
 		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)

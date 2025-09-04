@@ -199,6 +199,7 @@ namespace client_app.menus
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 49,
+				Enabled = false,
 				FillColor = Color.FromArgb(247, 113, 163),
 				FillColor2 = Color.FromArgb(197, 113, 247),
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
@@ -213,6 +214,7 @@ namespace client_app.menus
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 49,
+				Enabled = false,
 				FillColor = Color.FromArgb(156, 156, 156),
 				FillColor2 = Color.FromArgb(156, 156, 156),
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
