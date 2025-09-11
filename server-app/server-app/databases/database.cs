@@ -52,7 +52,7 @@ namespace server_app.databases
 	}
 	public static class @database
 	{
-		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? @"H:\Subjects\Computer Science\git\CS-NEA\server-app\server-app"}\databases\maindb.sqlite";
+		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? @"H:\CompSci\cs-nea\server-app\server-app"}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
 		public static void outputException(Exception ex)
 		{

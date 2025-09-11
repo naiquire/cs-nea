@@ -5,7 +5,7 @@ using System.Diagnostics.Metrics;
 
 namespace server_app.games
 {
-	public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 12), IPlayable
+	public class @knockout(string userID, IHubContext<connection> context) : abstractGame(context, "knockout", userID, 2), IPlayable
 	{
 		private List<string> aliveUsers = [];
 		public override async Task startGame()
@@ -22,7 +22,6 @@ namespace server_app.games
 		}
 		public override async Task submissionPhase()
 		{
-			
 			if (aliveUsers.Count > 1)
 			{
 				continueRequests.Clear();
@@ -36,7 +35,6 @@ namespace server_app.games
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
 				await sendLetter(aliveUsers, letter);
-				roundCount++;
 			}
 			else
 			{
@@ -70,7 +68,7 @@ namespace server_app.games
 				(string user, TimeSpan time) highest = ("", TimeSpan.MinValue);
 				foreach (string userID in aliveUsers)
 				{
-					var time = stats[userID].time[letter];
+					var time = stats[userID].time[roundCount];
 					if (time > highest.time)
 					{
 						highest = (userID, time);
@@ -89,7 +87,8 @@ namespace server_app.games
 			}
 
 			await sendKnockoutResults(userIDs, aliveUsers);
-		}
+            roundCount++;
+        }
 		public override async Task continueRequest(string userID)
 		{
 			continueRequests.Add(userID);

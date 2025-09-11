@@ -22,8 +22,8 @@ namespace server_app.neuralNetwork
 			activatedValues[0] = input;
 
 			// load weights and biases
-			weights = data.loadWeights();
-			biases = data.loadBiases();
+			weights = data.weights ?? data.loadWeights();
+			biases = data.biases ?? data.loadBiases();
 
 			evaluateNetwork();
 		}

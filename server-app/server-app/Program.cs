@@ -12,6 +12,7 @@ namespace server_app
 		{
 			//startNginx();
 			hostBuilder(args).Build().Run();
+			data.preloadParameters();
 		}
 		private static void startNginx()
 		{

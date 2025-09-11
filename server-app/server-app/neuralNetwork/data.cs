@@ -5,7 +5,10 @@ namespace server_app.neuralNetwork
 {
     public static class @data
     {
-        public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? @"H:\CompSci\git\server-app\server-app"}\neuralNetwork\data\";
+        public static double[][,]? weights;
+        public static double[][]? biases;
+
+        public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? @"H:\CompSci\cs-nea\server-app\server-app"}\neuralNetwork\data\";
         public static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
         public static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));
         public static double[] softmax(double[] input)
@@ -52,6 +55,11 @@ namespace server_app.neuralNetwork
             // save weights and biases
             saveWeights(weights);
             saveBiases(biases);
+        }
+        public static void preloadParameters()
+        {
+            weights = loadWeights();
+            biases = loadBiases();
         }
         public static double[][,] loadWeights()
         {

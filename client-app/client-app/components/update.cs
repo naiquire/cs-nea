@@ -55,8 +55,6 @@ namespace client_app.components
 		}
 		private void InitializeComponent()
 		{
-			((System.ComponentModel.ISupportInitialize)pic_logo).BeginInit();
-			((System.ComponentModel.ISupportInitialize)pic_language).BeginInit();
 			SuspendLayout();
 
 			lbl_header = new Guna2HtmlLabel()
@@ -187,8 +185,6 @@ namespace client_app.components
 			ShowInTaskbar = false;
 			StartPosition = FormStartPosition.CenterScreen;
 			TopMost = true;
-			((System.ComponentModel.ISupportInitialize)pic_logo).EndInit();
-			((System.ComponentModel.ISupportInitialize)pic_language).EndInit();
 			ResumeLayout(false);
 		}
 

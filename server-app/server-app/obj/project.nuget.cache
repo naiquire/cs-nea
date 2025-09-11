@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "g/xnB9yKBPI=",
+  "dgSpecHash": "uLwyFgPjIVI=",
   "success": true,
-  "projectFilePath": "H:\\CompSci\\git\\server-app\\server-app\\server-app.csproj",
+  "projectFilePath": "H:\\CompSci\\cs-nea\\server-app\\server-app\\server-app.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\24ns2144\\.nuget\\packages\\mathnet.numerics\\5.0.0\\mathnet.numerics.5.0.0.nupkg.sha512",
     "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",
