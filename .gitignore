@@ -83,3 +83,7 @@ ehthumbs.db
 
 # Windows shortcuts
 *.lnk
+server-app/server-app/neuralNetwork/data/images.gz
+server-app/server-app/neuralNetwork/data/labels.gz
+server-app/server-app/neuralNetwork/data/training/images.gz
+server-app/server-app/neuralNetwork/data/training/labels.gz

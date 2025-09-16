@@ -1,13 +1,11 @@
-﻿using System.IO.Compression;
-
-namespace server_app.neuralNetwork
+﻿namespace server_app.neuralNetwork
 {
     public class @training
     {
         public training()
         {
             // load training data
-            (List<double[]> images, List<int> results) = data.loadImages();
+            (List<double[]> images, List<int> results) = data.filterImages(data.loadImages());
 
             // random sample of 50 images
             Random rnd = new();

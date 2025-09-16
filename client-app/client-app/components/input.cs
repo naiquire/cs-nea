@@ -112,5 +112,46 @@ namespace client_app.components
 			return pixels;
 		}
 
+
+        public void preprocess(Bitmap original)
+        {
+            /* crop image to actual drawing
+             * take largest dimension and add padding to other dimension such that square
+             * shift image either right or down by half the padding added to centre it
+             * scale to 24x24
+             * add 2 pixels padding all sides
+            */
+
+            Bitmap cropped = cropImage(original);
+
+            Bitmap cropImage(Bitmap image)
+            {
+                int left = image.Width + 1;
+                int top = image.Height + 1;
+                int right = -1;
+                int bottom = -1;
+
+                for (int y = 0; y < image.Height; y++)
+                {
+                    for (int x = 0; x < image.Width; x++)
+                    {
+                        if (image.GetPixel(y, x) != Color.White) // found a foreground pixel
+                        {
+                            if (y < top) top = y;
+                            if (y > bottom) bottom = y;
+                            if (x < left) left = x;
+                            if (x > right) right = x;
+                        }
+                    }
+                }
+
+                return image.Clone(new Rectangle(left, top, right - left, bottom - top), image.PixelFormat);
+            }
+
+            Bitmap squareCropImage(Bitmap image)
+            {
+                image.sele
+            }
+		}
 	}
 }

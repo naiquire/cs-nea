@@ -125,7 +125,6 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\bin\Debug\System.Text.Json.xml
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\bin\Debug\System.Threading.Channels.xml
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\bin\Debug\System.ValueTuple.xml
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.csproj.AssemblyReference.cache
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.login.resources
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.main.resources
