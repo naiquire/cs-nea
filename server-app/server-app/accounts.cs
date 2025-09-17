@@ -13,6 +13,7 @@ namespace server_app
             if (connection.map.ContainsKey(userID))
             {
 				await Clients.Caller.SendAsync("loginSuccess", 3, userID);
+                return;
 			}
 
             if (database.loginRequest(userID, hashPassword(password), out int success))

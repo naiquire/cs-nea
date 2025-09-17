@@ -10,7 +10,7 @@ namespace server_app
 		public static IHubContext<connection>? hubContext;
 		static void Main(string[] args)
 		{
-			startNginx();
+			//startNginx();
 			hostBuilder(args).Build().Run();
 			data.preloadParameters();
 		}
