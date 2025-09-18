@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
+using server_app.databases;
 using server_app.neuralNetwork;
+using System;
 using System.Diagnostics;
 
 namespace server_app
@@ -23,20 +25,21 @@ namespace server_app
 				UseShellExecute = true
 			};
 			Process.Start(startInfo);
+            Logger.Log("NGINX", ConsoleColor.White, $"Started process");
 
-			// kill nginx binded to server app close
-			AppDomain.CurrentDomain.ProcessExit += (sender, e) =>
+            // kill nginx binded to server app close
+            AppDomain.CurrentDomain.ProcessExit += (sender, e) =>
 			{
 				foreach (var process in Process.GetProcessesByName("nginx"))
 				{
 					try
 					{
 						process.Kill();
-						Console.WriteLine($"Killed process: {process.ProcessName} (ID: {process.Id})");
+						Logger.Log("NGINX", ConsoleColor.White, $"Killed process <{process.Id}>");
 					}
 					catch (Exception ex)
 					{
-						Console.WriteLine($"Error killing process: {ex.Message}");
+						database.outputException(ex);
 					}
 				}
 				Thread.Sleep(1000);

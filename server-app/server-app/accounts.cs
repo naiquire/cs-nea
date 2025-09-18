@@ -18,12 +18,12 @@ namespace server_app
 
             if (database.loginRequest(userID, hashPassword(password), out int success))
             {
-                Console.WriteLine($"User <{userID}> logged in with success <{success}>");
+                Logger.Log("LOGIN", ConsoleColor.Green, $"<{ userID}> logged in with success <{success}> ");
                 await Clients.Caller.SendAsync("loginSuccess", success, userID); 
             }
             else
             {
-                database.outputException($"Login failed for user <{userID}>");
+                Logger.Log("WARN", ConsoleColor.Yellow, $"Login failed for user <{userID}>");
             }
         }
 
@@ -31,12 +31,12 @@ namespace server_app
         {
             if (database.accountRequest(userID, hashPassword(password), localisation, out int success))
             {
-				Console.WriteLine($"User <{userID}> created account with success <{success}>");
+                Logger.Log("ACCOUNT", ConsoleColor.Green, $"<{userID}> created account with success <{success}>");
 				await Clients.Caller.SendAsync("accountSuccess", success, userID);
             }
 			else
 			{
-				database.outputException($"Account creation failed for user <{userID}>");
+                Logger.Log("WARN", ConsoleColor.Yellow, $"Account creation failed for user <{userID}>");
 			}
 		}
         private static string hashPassword(string input) => Encoding.UTF8.GetString(SHA512.HashData(Encoding.UTF8.GetBytes(input)));

@@ -18,7 +18,18 @@ namespace server_app.databases
 	 * maybe use dataset with only uppercase
 	 * 
 	 */
-
+	public static class Logger
+	{
+		public static void Log(string code, ConsoleColor codeColor, string message)
+		{
+			Console.ResetColor();
+			Console.Write($"[ ");
+            Console.ForegroundColor = codeColor;
+            Console.Write($"{code}");
+			Console.ResetColor();
+			Console.WriteLine($" ] {message}");
+		}
+	}
 
 	public struct userData
 	{
@@ -57,17 +68,13 @@ namespace server_app.databases
 		public static void outputException(Exception ex)
 		{
 			// if exception occurs then log the message and allow the client to try again
-			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"[ERROR] {ex}");
-			Console.ResetColor();
+			Logger.Log("ERROR", ConsoleColor.Red, ex.ToString());
 		}
 		public static void outputException(string ex)
 		{
-			// if exception occurs then log the message and allow the client to try again
-			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine($"[ERROR] {ex}");
-			Console.ResetColor();
-		}
+            // if exception occurs then log the message and allow the client to try again
+            Logger.Log("ERROR", ConsoleColor.Red, ex);
+        }
 
 		public static bool loginRequest(string userID, string password, out int success)
 		{
