@@ -18,6 +18,7 @@ namespace server_app.connections
 		{
 			if (database.updateUserData(userID, aboutMe, localisation))
 			{
+				Logger.Log("ACCOUNT", ConsoleColor.Magenta, $"<{userID}> has updated their profile");
 				if (map.TryGetValue(userID, out string? connectionID))
 				{
 					await Clients.Client(connectionID).SendAsync("updateUserData", aboutMe, localisation);
@@ -55,6 +56,7 @@ namespace server_app.connections
 
 		public async void sendInvite(string userID, string senderID)
 		{
+			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{senderID}> has sent a friend invite to <{userID}>");
 			if (map.TryGetValue(userID, out string? connectionID))
 			{
 				await Clients.Client(connectionID).SendAsync("receiveInvites", new List<string>() { senderID });
@@ -83,6 +85,7 @@ namespace server_app.connections
 		}
 		public async void addFriends(string user1, string user2)
 		{
+			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{user1}> has accepted a friend invite from <{user2}>");
 			if (database.addFriends(user1, user2))
 			{
 				await updateFriendData(user1, user2, false);
@@ -95,6 +98,7 @@ namespace server_app.connections
 		}
 		public async void removeFriends(string user1, string user2)
 		{
+			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{user1}> has removed <{user2}> from their friends list");
 			if (database.removeFriends(user1, user2))
 			{
 				await updateFriendData(user1, user2, true);

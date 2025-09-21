@@ -79,6 +79,7 @@ namespace client_app
 			main.userData = userData;
 
 			InitializeComponent();
+			Application.ApplicationExit += (sender, e) => btn_close_Click(sender, e);
 			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
 		public void updateUserData(string aboutMe, string localisation)

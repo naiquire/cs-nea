@@ -86,7 +86,7 @@ namespace client_app.menus
 			main.btn_close.TabIndex = 0;
 			main.btn_close.Text = "X";
 			main.btn_close.UseVisualStyleBackColor = true;
-			main.btn_close.Click += new EventHandler(main.btn_close_Click);
+			main.btn_close.Click += (sender, e) => main.Close();
 			// 
 			// btn_home
 			// 

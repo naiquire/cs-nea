@@ -18,7 +18,7 @@ namespace server_app
 
             if (database.loginRequest(userID, hashPassword(password), out int success))
             {
-                Logger.Log("LOGIN", ConsoleColor.Green, $"<{ userID}> logged in with success <{success}> ");
+                Logger.Log("LOGIN", ConsoleColor.Green, $"<{userID}> logged in with success <{success}> ");
                 await Clients.Caller.SendAsync("loginSuccess", success, userID); 
             }
             else
@@ -31,7 +31,7 @@ namespace server_app
         {
             if (database.accountRequest(userID, hashPassword(password), localisation, out int success))
             {
-                Logger.Log("ACCOUNT", ConsoleColor.Green, $"<{userID}> created account with success <{success}>");
+                Logger.Log("ACCOUNT", ConsoleColor.Magenta, $"<{userID}> created account with success <{success}>");
 				await Clients.Caller.SendAsync("accountSuccess", success, userID);
             }
 			else

@@ -10,16 +10,18 @@ namespace server_app.connections
 		{
 			if (Program.hubContext != null)
 			{
+				Logger.Log("QUEUE", ConsoleColor.Blue, $"<{userID}> has queued for <{gameType}>");
 				return queueing.queueGame(gameType, userID, Program.hubContext);
 			}
 			else
 			{
 				database.outputException("IHubContext was null when attempting to queue a user");
-				throw new Exception("[FATAL] IHubContext was null when attempting to queue a user");
+				throw new Exception("Fatal error has occured");
 			}
 		}
 		public void dequeueGame(string gameID, string userID)
 		{
+			Logger.Log("QUEUE", ConsoleColor.Blue, $"<{userID}> has dequeued");
 			queueing.dequeueUser(gameID, userID);
 		}
 		public bool userJoined(string gameID)

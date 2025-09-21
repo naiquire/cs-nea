@@ -138,8 +138,6 @@ namespace client_app
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.appLogo)).EndInit();
 
-			Application.ApplicationExit += (sender, e) => btn_close_Click(sender, e);
-
 			configFriendsPanel();
 			configGamePanels();
 

@@ -7,6 +7,7 @@ namespace server_app.connections
 	{
 		public DisconnectException(string userID)
 		{
+			// idk if this is useful
 			database.outputException($"Client has disconnected : <{userID}>");
 		}
 	}
@@ -36,6 +37,7 @@ namespace server_app.connections
 		{
 			await updateOnline(userID, false);
 			map.Remove(userID);
+			Logger.Log("LOGOUT", ConsoleColor.Green, $"<{userID}> has disconnected");
 		}
 
 		public async Task updateOnline(string userID, bool online)
