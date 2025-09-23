@@ -77,6 +77,78 @@ namespace client_app
 				{"pt", "Senha" },
 				{"de", "Passwort" },
 			});
-		}
+            localisation.Add("Accuracy", new Dictionary<string, string>()
+            {
+                {"en", "Accuracy" },
+                {"fr", "Précision" },
+                {"es", "Precisión" },
+                {"pt", "Precisão" },
+                {"de", "Genauigkeit" },
+            });
+            localisation.Add("Versus", new Dictionary<string, string>()
+            {
+                {"en", "Versus" },
+                {"fr", "Contre" },
+                {"es", "Versus" },
+                {"pt", "Versus" },
+                {"de", "Gegen" },
+            });
+            localisation.Add("Knockout", new Dictionary<string, string>()
+            {
+                {"en", "Knockout" },
+                {"fr", "Élimination" },
+                {"es", "Eliminación" },
+                {"pt", "Eliminação" },
+                {"de", "?" },
+            });
+            localisation.Add("Profile", new Dictionary<string, string>()
+            {
+                {"en", "Profile" },
+                {"fr", "Profil" },
+                {"es", "Perfil" },
+                {"pt", "Perfil" },
+                {"de", "Profil" },
+            });
+            localisation.Add("Edit", new Dictionary<string, string>()
+            {
+                {"en", "Edit" },
+                {"fr", "Éditer" },
+                {"es", "Editar" },
+                {"pt", "Editar" },
+                {"de", "Bearbeiten" },
+            });
+            localisation.Add("Continue", new Dictionary<string, string>()
+            {
+                {"en", "Continue" },
+                {"fr", "Continuer" },
+                {"es", "Continuar" },
+                {"pt", "Continuar" },
+                {"de", "Fortsetzen" },
+            });
+            localisation.Add("Login", new Dictionary<string, string>()
+            {
+                {"en", "Login" },
+                {"fr", "Connexion" },
+                {"es", "Iniciar sesión" },
+                {"pt", "Entrar" },
+                {"de", "Anmelden" },
+            });
+            localisation.Add("Create Account", new Dictionary<string, string>()
+            {
+                {"en", "Create Account" },
+                {"fr", "Créer un compte" },
+                {"es", "Crear cuenta" },
+                {"pt", "Criar conta" },
+                {"de", "Konto erstellen" },
+            });
+            localisation.Add("Queue", new Dictionary<string, string>()
+            {
+                {"en", "Queue" },
+                {"fr", "File d'attente" },
+                {"es", "Cola" },
+                {"pt", "Fila" },
+                {"de", "Warteschlange" },
+            });
+        }
     }
 }
