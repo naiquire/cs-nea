@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
+using System.Drawing;
 
 namespace server_app.games
 {
@@ -32,7 +33,7 @@ namespace server_app.games
 		Task updateUsers();
 		Task startGame();
 		Task submissionPhase();
-		void loadResponse(string userID, double[] input);
+		void loadResponse(string userID, byte[] input);
 		void evaluationPhase(char letter);
 		Task continueRequest(string userID);
 		void endGame();

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -131,9 +132,16 @@ namespace client_app.menus.games
 				btn_clear.Enabled = false;
 				drawingPanel.disablePanel();
 
-				var submission = drawingPanel.ImageToArray();
+				var submission = drawingPanel.getDrawing();
 
-				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, submission);
+				byte[] data;
+				using (var ms = new MemoryStream())
+				{
+					submission.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+					data = ms.ToArray();
+				}
+
+				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, data);
 
 				drawingPanel.clearPanel();
 			};

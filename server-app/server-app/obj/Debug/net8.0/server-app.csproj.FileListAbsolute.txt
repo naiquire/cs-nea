@@ -418,3 +418,7 @@ H:\CompSci\cs-nea\server-app\server-app\obj\Debug\net8.0\ref\server-app.dll
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\server-app\server-app\obj\Debug\net8.0\server-app.pdb
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\server-app\server-app\obj\Debug\net8.0\server-app.genruntimeconfig.cache
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\server-app\server-app\obj\Debug\net8.0\ref\server-app.dll
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\bin\Debug\net8.0\System.Private.Windows.Core.dll
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll

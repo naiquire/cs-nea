@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
+using System.Drawing;
 using System.Reflection;
 
 namespace server_app.games
@@ -85,7 +86,7 @@ namespace server_app.games
 			}
 		}
 
-		public static void loadSubmission(string gameID, string userID, double[] input)
+		public static void loadSubmission(string gameID, string userID, byte[] input)
 		{
 			foreach (var game in currentGames)
 			{

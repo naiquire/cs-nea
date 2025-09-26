@@ -2,6 +2,7 @@
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
+using System.Drawing;
 
 namespace server_app.games
 {
@@ -40,9 +41,13 @@ namespace server_app.games
 				endGame();
 			}
 		}
-		public void loadResponse(string userID, double[] input)
+		public void loadResponse(string userID, byte[] input)
 		{
-			currentResponses.Add(userID, (input, DateTime.UtcNow));
+			DateTime end = DateTime.UtcNow;
+			var ms = new MemoryStream(input);
+			var bmp = new Bitmap(ms);
+			double[] array = data.preprocessImage(bmp);
+			currentResponses.Add(userID, (array, end));
 			if (currentResponses.Count == getPlayerCount())
 			{
 				evaluationPhase(letters[roundCount]);

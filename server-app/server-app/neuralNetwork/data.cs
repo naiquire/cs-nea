@@ -1,5 +1,7 @@
-﻿using System.IO.Compression;
-using System.Numerics;
+﻿using System.Drawing;
+using System.IO.Compression;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 
 namespace server_app.neuralNetwork
@@ -61,6 +63,119 @@ namespace server_app.neuralNetwork
 		{
 			weights = loadWeights();
 			biases = loadBiases();
+		}
+		public static double[] preprocessImage(Bitmap original)
+		{
+			Bitmap cropped = cropImage(original);
+			Bitmap resized = squareCropImage(cropped);
+			Bitmap final = extendImage(resized);
+
+			int width = final.Width;
+			int height = final.Height;
+			double[] pixels = new double[width * height];
+
+			for (int y = 0; y < height; y++)
+			{
+				for (int x = 0; x < width; x++)
+				{
+					Color c = final.GetPixel(x, y);
+					double gray = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B);
+					pixels[y * width + x] = 1.0 - (gray / 255.0);
+				}
+			}
+
+			return pixels;
+
+			Bitmap cropImage(Bitmap image)
+			{
+				int left = image.Width + 1;
+				int top = image.Height + 1;
+				int right = -1;
+				int bottom = -1;
+
+				for (int y = 0; y < image.Height; y++)
+				{
+					for (int x = 0; x < image.Width; x++)
+					{
+						if (image.GetPixel(y, x).Name != "ffffffff")
+						{
+							if (y < top) top = y;
+							if (y > bottom) bottom = y;
+							if (x < left) left = x;
+							if (x > right) right = x;
+						}
+					}
+				}
+
+				return image.Clone(new Rectangle(top, left, bottom - top + 1, right - left + 1), image.PixelFormat);
+			}
+
+			Bitmap squareCropImage(Bitmap image)
+			{
+				if (image.Width == image.Height)
+				{
+					return image;
+				}
+				int largestDimension = Math.Max(image.Width, image.Height);
+				int offset = Math.Abs((image.Width - image.Height) / 2);
+				string extendDirection = largestDimension == image.Height ? "right" : "down";
+
+				var square = new Bitmap(largestDimension, largestDimension);
+
+				for (int x = 0; x < largestDimension; x++)
+				{
+					for (int y = 0; y < largestDimension; y++)
+					{
+						square.SetPixel(x, y, Color.White);
+					}
+				}
+
+				for (int i = 0; i < largestDimension; i++)
+				{
+					for (int j = 0; j < largestDimension; j++)
+					{
+						// check pixel is not out of bounds
+						if (i < image.Width && j < image.Height)
+						{
+							if (extendDirection == "right")
+							{
+								square.SetPixel(i + offset, j, image.GetPixel(i, j));
+							}
+							if (extendDirection == "down")
+							{
+								square.SetPixel(i, j + offset, image.GetPixel(i, j));
+							}
+						}
+					}
+				}
+				return new Bitmap(square, 24, 24);
+			}
+
+			Bitmap extendImage(Bitmap image)
+			{
+				var square = new Bitmap(28, 28);
+
+				for (int x = 0; x < 28; x++)
+				{
+					for (int y = 0; y < 28; y++)
+					{
+						square.SetPixel(x, y, Color.White);
+					}
+				}
+
+				for (int i = 0; i < 28; i++)
+				{
+					for (int j = 0; j < 28; j++)
+					{
+						// check pixel is not out of bounds
+						if (i < image.Width && j < image.Height)
+						{
+							square.SetPixel(i + 2, j + 2, image.GetPixel(i, j));
+						}
+					}
+				}
+				return square;
+			}
 		}
 		public static double[][,] loadWeights()
 		{
@@ -212,10 +327,8 @@ namespace server_app.neuralNetwork
 
 			return (images, labels);
 		}
-
 		public static (List<double[]>, List<int>) filterImages((List<double[]> images, List<int> labels) fullData)
 		{
-			//return (fullData.images, fullData.labels);
 			int length = fullData.labels.Count;
 
 			List<double[]> filteredImages = [];
@@ -228,8 +341,6 @@ namespace server_app.neuralNetwork
 				{
 					filteredImages.Add(fullData.images[i]);
 					filteredLabels.Add(fullData.labels[i] - 9);
-
-					
 				}
 			}
 
