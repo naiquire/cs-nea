@@ -169,7 +169,7 @@ namespace client_app.menus
 			this.panel_stats.BackColor = System.Drawing.Color.White;
 			this.panel_stats.Location = new System.Drawing.Point(40, 175);
 			this.panel_stats.Name = "panel_stats";
-			this.panel_stats.Size = new System.Drawing.Size(1040, interfaces.clientY - 30 - 175 - 40 - 70);
+			this.panel_stats.Size = new System.Drawing.Size(1040, UXelements.clientY - 30 - 175 - 40 - 70);
 			this.panel_stats.TabStop = false;
 			//
 			// btn_addFriends

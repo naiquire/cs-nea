@@ -62,7 +62,7 @@ namespace client_app
 		{
 			hub_connection.injectForm(null, this);
 
-			interfaces.InitializeComponent(this);
+			UXelements.InitializeComponent(this);
 			initialiseConnection(userID);			
 
 		}

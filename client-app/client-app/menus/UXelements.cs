@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-	public abstract class interfaces : Form // can be made static in final build, maybe rename
+	public abstract class UXelements : Form // can be made static in final build, maybe rename
 	{
 		public static int clientX = Screen.PrimaryScreen.WorkingArea.Width;
 		public static int clientY = Screen.PrimaryScreen.WorkingArea.Height;
@@ -1232,9 +1232,9 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 32F, FontStyle.Bold),
 				Location = new Point(20, 650),
 				Margin = new Padding(15, 15, 15, 15),
-				Size = new Size(260, 50),
+				Size = new Size(260, 70),
 				TabStop = false,
-				TextAlignment = ContentAlignment.MiddleCenter,
+				TextAlignment = ContentAlignment.TopCenter,
 			};
 
 			game.main.panel_left.Controls.Add(game.lbl_countdown);

@@ -42,7 +42,7 @@ namespace client_app
 
 		public void InitializeComponent()
 		{
-			interfaces.resetLayout(this);
+			UXelements.resetLayout(this);
 
 			this.panel_friendList = new Panel();
 			this.seperator = new PictureBox();
@@ -145,7 +145,7 @@ namespace client_app
 			this.panel_left.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-			interfaces.configUserDataPanel(this, userData);
+			UXelements.configUserDataPanel(this, userData);
 		}
 
 		public void configGamePanels()

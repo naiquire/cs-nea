@@ -206,6 +206,14 @@ namespace server_app.games
 			}
 		}
 
+		public virtual void loadResponse(string userID, byte[] input)
+		{
+            DateTime end = DateTime.UtcNow;
+            var ms = new MemoryStream(input);
+            var bmp = new Bitmap(ms);
+            double[] array = data.preprocessImage(bmp);
+            currentResponses.Add(userID, (array, end));
+        }
 		protected bool evaluateSubmission(ref evaluate evaluate, string userID, int character)
 		{
 			int letter = character - 65;

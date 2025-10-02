@@ -32,13 +32,9 @@ namespace server_app.games
 				endGame();
 			}
 		}
-		public void loadResponse(string userID, byte[] input)
+		public override void loadResponse(string userID, byte[] input)
 		{
-			DateTime end = DateTime.UtcNow;
-			var ms = new MemoryStream(input);
-			var bmp = new Bitmap(ms);
-			double[] array = data.preprocessImage(bmp);
-			currentResponses.Add(userID, (array, end));
+			base.loadResponse(userID, input);
 			if (currentResponses.Count == getPlayerCount())
 			{
 				evaluationPhase(letters[roundCount]);

@@ -86,10 +86,10 @@ namespace client_app.menus.games
 
 			if (!started)
 			{
-				interfaces.configLobbyPanel(this, users);
+				UXelements.configLobbyPanel(this, users);
 			}
 
-			interfaces.configLeftGamePanel(this, users);			
+			UXelements.configLeftGamePanel(this, users);			
 			main.panel_left.Controls.Add(main.btn_home);
 
 		}
@@ -104,8 +104,8 @@ namespace client_app.menus.games
 		}
 		public virtual async Task joinGameLobby()
 		{
-			interfaces.resetLayout(main);
-			interfaces.initialiseLobby(main);
+			UXelements.resetLayout(main);
+			UXelements.initialiseLobby(main);
 			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
 				new alert("An error occured joining the game. Please try again.");
@@ -115,15 +115,15 @@ namespace client_app.menus.games
 		public virtual async void awaitStart()
 		{
 			started = true;
-			await interfaces.countdown(lbl_countdown, 5, lbl_status, "Starting in");
+			await UXelements.countdown(lbl_countdown, 5, lbl_status, "Starting in");
 		}
 		public virtual void startGame()
 		{
-			interfaces.configRightGamePanel(this);
+			UXelements.configRightGamePanel(this);
 		}
 		public async void awaitRound()
 		{
-			drawingPanel = interfaces.configGamePanel(this);			
+			drawingPanel = UXelements.configGamePanel(this);			
 
 			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
 			btn_submit.Click += async (sender, e) =>
@@ -146,7 +146,7 @@ namespace client_app.menus.games
 				drawingPanel.clearPanel();
 			};
 
-			await interfaces.countdown(lbl_countdown, 3, lbl_status, "Next letter in");
+			await UXelements.countdown(lbl_countdown, 3, lbl_status, "Next letter in");
 		}
 		public virtual void submissionPhase(char letter)
 		{
@@ -164,14 +164,14 @@ namespace client_app.menus.games
 		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
 			stats.updateStats(correct, accuracy, time);
-			interfaces.configResultsPanel(this, letters[letters.Count - 1], stats);
+			UXelements.configResultsPanel(this, letters[letters.Count - 1], stats);
 
-			interfaces.configRightGamePanelStats(panel_stats, letters, stats.accuracy);
+			UXelements.configRightGamePanelStats(panel_stats, letters, stats.accuracy);
 		}
 
 		public virtual void endGame()
 		{
-			interfaces.configEndGamePanel(this, letters, stats);
+			UXelements.configEndGamePanel(this, letters, stats);
 		}
 
 		public int getMaxPlayers() => maxPlayers;
