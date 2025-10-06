@@ -19,22 +19,19 @@ namespace client_app.components
 
 			header = new Guna.UI2.WinForms.Guna2TextBox()
 			{
-				BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(156)))), ((int)(((byte)(156))))),
+				BorderColor = Color.FromArgb(156, 156, 156),
 				BorderRadius = 10,
 				BorderThickness = 2,
-				Cursor = System.Windows.Forms.Cursors.Arrow,
+				Cursor = Cursors.Arrow,
 				DefaultText = text,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208))))),
-				Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-				ForeColor = System.Drawing.Color.White,
-				Location = new System.Drawing.Point(20, 20),
-				Margin = new System.Windows.Forms.Padding(5, 5, 5, 5),
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.White,
+				Location = new Point(20, 20),
+				Margin = new Padding(5, 5, 5, 5),
 				Multiline = true,
-				Name = "header",
-				PlaceholderText = "",
 				ReadOnly = true,
-				SelectedText = "",
-				Size = new System.Drawing.Size(360, 100),
+				Size = new Size(720, 300),
 				TabIndex = 0,
 				TabStop = false,
 			};
@@ -42,12 +39,12 @@ namespace client_app.components
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 14,
-				FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163))))),
-				FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247))))),
-				Font = new System.Drawing.Font("Bahnschrift", 9.75F),
-				ForeColor = System.Drawing.Color.White,
-				Location = new System.Drawing.Point(215, 145),
-				Size = new System.Drawing.Size(160, 30),
+				FillColor = Color.FromArgb(247, 113, 163),
+				FillColor2 = Color.FromArgb(197, 113, 247),
+				Font = new Font("Bahnschrift", 9.75F),
+				ForeColor = Color.White,
+				Location = new Point(615, 345),
+				Size = new Size(160, 30),
 				TabIndex = 1,
 				Text = "Close",
 			};
@@ -55,8 +52,8 @@ namespace client_app.components
 			btn_close.Click += (sender, e) => Close();
 
 			AcceptButton = btn_close;
-			BackColor = Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-			ClientSize = new Size(400, 200);
+			BackColor = Color.FromArgb(208, 208, 208);
+			ClientSize = new Size(800, 400);
 			Controls.Add(header);
 			Controls.Add(btn_close);
 			FormBorderStyle = FormBorderStyle.None;

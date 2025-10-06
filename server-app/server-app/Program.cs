@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
-using System;
 using System.Diagnostics;
 
 namespace server_app
@@ -25,10 +25,10 @@ namespace server_app
 				UseShellExecute = true
 			};
 			Process.Start(startInfo);
-            Logger.Log("NGINX", ConsoleColor.White, $"Started process");
+			Logger.Log("NGINX", ConsoleColor.White, $"Started process");
 
-            // kill nginx binded to server app close
-            AppDomain.CurrentDomain.ProcessExit += (sender, e) =>
+			// kill nginx binded to server app close
+			AppDomain.CurrentDomain.ProcessExit += (sender, e) =>
 			{
 				foreach (var process in Process.GetProcessesByName("nginx"))
 				{
@@ -47,14 +47,16 @@ namespace server_app
 		}
 		private static IHostBuilder hostBuilder(string[] args)
 		{
-			var host = Host.CreateDefaultBuilder(args);
+			IHostBuilder host = Host.CreateDefaultBuilder(args);
 			host.ConfigureWebHostDefaults(config =>
 			{
 				config.ConfigureServices(services =>
 				{
+					// add required services
 					services.AddSignalR();
 					services.AddCors(setup =>
 					{
+						// allow any device to connect
 						setup.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin());
 					});
 				});
@@ -63,15 +65,19 @@ namespace server_app
 					setup.UseRouting();
 					setup.Use(async (context, next) =>
 					{
+						// load the hubContext
 						hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
 						await next.Invoke();
 					});
 					setup.UseEndpoints(endpoints =>
 					{
+						// map endpoints to a class
 						endpoints.MapHub<connection>("/cs-nea/connections");
 						endpoints.MapHub<accounts>("/cs-nea/accounts");
 					});
 				});
+
+				// all ip addresses using port 3900
 				config.UseUrls("http://0.0.0.0:3900");
 			});
 
@@ -79,3 +85,23 @@ namespace server_app
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		

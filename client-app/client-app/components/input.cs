@@ -1,14 +1,12 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 
 namespace client_app.components
 {
 	public class input : Form
 	{
-		private readonly Panel panel;
+		private readonly Panel panel_base;
 
 		private Panel panel_input;
 		private Bitmap drawing;
@@ -22,9 +20,9 @@ namespace client_app.components
 
 		public input(Panel panel, (int, int) pos, (int, int) size)
 		{
-			this.panel = panel;
+			this.panel_base = panel;
 			loadPanel(pos, size);
-			clearPanel(); // forces layout perform
+			clearPanel();
 		}
 
 		public void enablePanel()
@@ -58,7 +56,7 @@ namespace client_app.components
 				Name = "panel_input",
 			};
 
-			panel.Controls.Add(panel_input);
+			panel_base.Controls.Add(panel_input);
 
 			drawing = new Bitmap(panel_input.Width, panel_input.Height, panel_input.CreateGraphics());
 		}

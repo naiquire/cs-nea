@@ -3,14 +3,6 @@ using server_app.databases;
 
 namespace server_app.connections
 {
-	public class DisconnectException : Exception
-	{
-		public DisconnectException(string userID)
-		{
-			// idk if this is useful
-			database.outputException($"Client has disconnected : <{userID}>");
-		}
-	}
 	public partial class @connection : Hub
 	{
 		public static readonly Dictionary<string, string> map = [];
@@ -24,10 +16,6 @@ namespace server_app.connections
 				if (map.TryGetValue(userID, out string? connectionID))
 				{
 					await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
-				}
-				else
-				{
-					throw new DisconnectException(userID);
 				}
 			}
 

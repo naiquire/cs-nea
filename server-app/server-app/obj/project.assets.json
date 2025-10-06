@@ -2407,23 +2407,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\24ns2144\\.nuget\\packages\\": {},
+    "C:\\Users\\naiquire\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\server-app.csproj",
+      "projectUniqueName": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
       "projectName": "server-app",
-      "projectPath": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\server-app.csproj",
-      "packagesPath": "C:\\Users\\24ns2144\\.nuget\\packages\\",
-      "outputPath": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\obj\\",
+      "projectPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\server-app.csproj",
+      "packagesPath": "C:\\Users\\naiquire\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\24ns2144\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\naiquire\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2500,7 +2500,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

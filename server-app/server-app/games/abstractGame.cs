@@ -6,9 +6,9 @@ using System.Drawing;
 
 namespace server_app.games
 {
-	public struct @stats
+	public struct gameStats
 	{
-		public @stats()
+		public gameStats()
 		{
 			correct = [];
 			accuracy = [];
@@ -28,7 +28,7 @@ namespace server_app.games
 	}
 	public interface IPlayable
 	{
-		void queueUser(string userID);
+		bool queueUser(string userID);
 		void dequeueUser(string userID);
 		Task updateUsers();
 		Task startGame();
@@ -55,7 +55,7 @@ namespace server_app.games
 
 		protected List<string> userIDs;
 		protected List<friendData> userDatas;
-		protected Dictionary<string, stats> stats;
+		protected Dictionary<string, gameStats> stats;
 
 		protected Random rnd;
 		protected List<char> letters;
@@ -81,23 +81,20 @@ namespace server_app.games
 			gameID = userID + DateTime.UtcNow.ToString();
 		}
 
-		public void queueUser(string userID)
+		public bool queueUser(string userID)
 		{
 			if (database.loadFriendData(userID, out friendData data))
 			{
 				userIDs.Add(userID);
 				userDatas.Add(data);
+				return true;
 			}
-			else
-			{
-				// failed to queue user, send error to client
-			}
+			return false;
 		}
 		public async virtual void dequeueUser(string userID)
 		{
 			userIDs.Remove(userID);
 
-			// remove userData
 			int index = 0;
 			for (int i = 0; i < userDatas.Count; i++)
 			{
@@ -108,7 +105,6 @@ namespace server_app.games
 				}
 			}
 			userDatas.RemoveAt(index);
-
 			await updateUsers();
 		}
 		public async Task updateUsers()
@@ -119,10 +115,6 @@ namespace server_app.games
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("updateUsers", userDatas);
 				}
-				else
-				{
-					throw new DisconnectException(user);
-				}
 			}
 		}
 
@@ -130,10 +122,9 @@ namespace server_app.games
 		{
 			started = true;
 
-			// define new stats object for each user
 			foreach (string user in userIDs)
 			{
-				stats.Add(user, new stats());
+				stats.Add(user, new gameStats());
 			}
 
 			foreach (string userID in userIDs)
@@ -142,23 +133,15 @@ namespace server_app.games
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("awaitStart");
 				}
-				else
-				{
-					throw new DisconnectException(userID);
-				}
 			}
 
-			await Task.Delay(5000); // 5 sec countdown
+			await Task.Delay(5000); // 5 second countdown
 
 			foreach (string userID in userIDs)
 			{
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("startGame");
-				}
-				else
-				{
-					throw new DisconnectException(userID);
 				}
 			}
 		}
@@ -184,10 +167,6 @@ namespace server_app.games
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
 				}
-				else
-				{
-					throw new DisconnectException(userID);
-				}
 			}
 		}
 		public abstract Task submissionPhase();
@@ -198,10 +177,6 @@ namespace server_app.games
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("receiveLetter", letter);
-				}
-				else
-				{
-					throw new DisconnectException(userID);
 				}
 			}
 		}
@@ -214,15 +189,14 @@ namespace server_app.games
             double[] array = data.preprocessImage(bmp);
             currentResponses.Add(userID, (array, end));
         }
-		protected bool evaluateSubmission(ref evaluate evaluate, string userID, int character)
+		protected bool evaluateSubmission(ref evaluate evaluate, string userID, char character)
 		{
 			int letter = character - 65;
 
 			evaluate = new evaluate(currentResponses[userID].submission);
 			bool correct = evaluate.result == letter;
 
-			// update the statistics for the current game
-			if (stats.TryGetValue(userID, out stats currentStats))
+			if (stats.TryGetValue(userID, out gameStats currentStats))
 			{
 				DateTime endTime = currentResponses[userID].time;
 				double accuracy = evaluate.activatedValues[evaluate.layerCount - 1][letter];
@@ -232,7 +206,7 @@ namespace server_app.games
 			stats[userID] = currentStats;
 			return correct;
 		}
-		protected async Task sendResult(string userID, stats stats)
+		protected async Task sendResult(string userID, gameStats stats)
 		{
 			bool correct = stats.correct[^1];
 			double accuracy = stats.accuracy[^1];
@@ -242,24 +216,17 @@ namespace server_app.games
 			{
 				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
 			}
-			else
-			{
-				throw new DisconnectException(userID);
-			}
 		}
+
 		public abstract Task continueRequest(string userID);
 
-		public virtual async void endGame() // possibly a faster way to implement this
+		public virtual async void endGame()
 		{
 			foreach (string userID in userIDs)
 			{
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
-				}
-				else
-				{
-					throw new DisconnectException(userID);
 				}
 			}
 
@@ -292,10 +259,6 @@ namespace server_app.games
 					if (connection.map.TryGetValue(userData.userID, out string? connectionID))
 					{
 						await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, new statistics(updatedAccuracy, updatedTime, total + 1));
-					}
-					else
-					{
-						throw new DisconnectException(userData.userID);
 					}
 				}
 				else
