@@ -1,15 +1,13 @@
 ﻿using System.Drawing;
 using System.IO.Compression;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using System.Text;
 
 namespace server_app.neuralNetwork
 {
 	public static class @data
 	{
-		public static double[][,]? weights;
-		public static double[][]? biases;
+		public static readonly double[][,] weights = loadWeights();
+		public static readonly double[][] biases = loadBiases();
 
 		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? @"H:\CompSci\cs-nea\server-app\server-app"}\neuralNetwork\data\";
 		public static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
@@ -59,26 +57,24 @@ namespace server_app.neuralNetwork
 			saveWeights(weights);
 			saveBiases(biases);
 		}
-		public static void preloadParameters()
-		{
-			weights = loadWeights();
-			biases = loadBiases();
-		}
+
 		public static double[] preprocessImage(Bitmap original)
 		{
-			Bitmap cropped = cropImage(original);
-			Bitmap resized = squareCropImage(cropped);
-			Bitmap final = extendImage(resized);
+			Bitmap image = addPadding(
+				extendToSquare(
+					cropToContent(original)
+				)
+			);
 
-			int width = final.Width;
-			int height = final.Height;
+			int width = image.Width;
+			int height = image.Height;
 			double[] pixels = new double[width * height];
 
 			for (int y = 0; y < height; y++)
 			{
 				for (int x = 0; x < width; x++)
 				{
-					Color c = final.GetPixel(x, y);
+					Color c = image.GetPixel(x, y);
 					double gray = (0.299 * c.R + 0.587 * c.G + 0.114 * c.B);
 					pixels[y * width + x] = 1.0 - (gray / 255.0);
 				}
@@ -86,7 +82,7 @@ namespace server_app.neuralNetwork
 
 			return pixels;
 
-			Bitmap cropImage(Bitmap image)
+			Bitmap cropToContent(Bitmap image)
 			{
 				int left = image.Width + 1;
 				int top = image.Height + 1;
@@ -107,10 +103,11 @@ namespace server_app.neuralNetwork
 					}
 				}
 
+				// return clone of image with cropped dimensions and same pixel format
 				return image.Clone(new Rectangle(top, left, bottom - top + 1, right - left + 1), image.PixelFormat);
 			}
 
-			Bitmap squareCropImage(Bitmap image)
+			Bitmap extendToSquare(Bitmap image)
 			{
 				if (image.Width == image.Height)
 				{
@@ -151,7 +148,7 @@ namespace server_app.neuralNetwork
 				return new Bitmap(square, 24, 24);
 			}
 
-			Bitmap extendImage(Bitmap image)
+			Bitmap addPadding(Bitmap image)
 			{
 				var square = new Bitmap(28, 28);
 
@@ -185,9 +182,10 @@ namespace server_app.neuralNetwork
 				weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
 				using (StreamReader sr = new($@"{location}weights\{i}.txt"))
 				{
+					string[] lines = sr.ReadToEnd().Split('\n');
 					for (int j = 0; j < evaluate.layerSizes[i]; j++)
 					{
-						string[] s = sr.ReadLine().Split(',');
+						string[] s = lines[j].Split(',');
 						for (int k = 0; k < evaluate.layerSizes[i + 1]; k++)
 						{
 							weights[i][j, k] = double.Parse(s[k]);
@@ -205,7 +203,7 @@ namespace server_app.neuralNetwork
 				biases[i] = new double[evaluate.layerSizes[i + 1]];
 				using (StreamReader sr = new($@"{location}biases\{i}.txt"))
 				{
-					string[] s = sr.ReadLine().Split(',');
+					string[] s = sr.ReadToEnd().Split(',');
 					for (int j = 0; j < evaluate.layerSizes[i + 1]; j++)
 					{
 						biases[i][j] = double.Parse(s[j]);
@@ -237,21 +235,15 @@ namespace server_app.neuralNetwork
 		{
 			for (int i = 0; i < evaluate.layerCount - 1; i++)
 			{
-				StringBuilder build = new();
-				for (int j = 0; j < biases[i].GetLength(0); j++)
-				{
-					build.Append($"{biases[i][j]},");
-				}
-				build.Append($"{biases[i][^1]}");
 				using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
 				{
-					sw.Write(build);
+					sw.Write(string.Join(',', biases[i]));
 				}
 			}
 		}
 		public static (List<double[]>, List<int>) loadImages()
 		{
-			
+
 			int done = 0;
 			const int total = 500000;
 

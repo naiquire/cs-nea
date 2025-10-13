@@ -12,32 +12,10 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-	public abstract class UXelements : Form // can be made static in final build, maybe rename
+	public abstract class UXelements : Form
 	{
 		public static int clientX = Screen.PrimaryScreen.WorkingArea.Width;
 		public static int clientY = Screen.PrimaryScreen.WorkingArea.Height;
-
-		public void tempInitializeComponent()
-		{
-
-			this.SuspendLayout();
-
-			// 
-			// panel_stat
-			// 
-
-			// 
-			// interfaces
-			// 
-			this.BackColor = Color.FromArgb(35, 31, 32);
-			this.ClientSize = new Size(500, 1050);
-
-			this.FormBorderStyle = FormBorderStyle.None;
-			this.Name = "interfaces";
-
-			this.ResumeLayout(false);
-
-		}
 
 		public static void InitializeComponent(main main)
 		{
@@ -570,7 +548,7 @@ namespace client_app.menus
 			configCountdown(game);
 		}
 
-		public static void configResultsPanel(abstractGame game, char c, stats stats)
+		public static void configResultsPanel(abstractGame game, char c, gameStats stats)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -1252,7 +1230,7 @@ namespace client_app.menus
 			lbl_status.ResetText();
 		}
 
-		public static void configEndGamePanel(abstractGame game, List<char> letters, stats statistics)
+		public static void configEndGamePanel(abstractGame game, List<char> letters, gameStats statistics)
 		{
 			game.main.panel_main.Controls.Clear();
 

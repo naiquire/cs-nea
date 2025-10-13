@@ -94,7 +94,7 @@ namespace server_app.games
 		}
 		public override async Task continueRequest(string userID)
 		{
-			continueRequests.Add(userID);
+			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)
 			{
 				await submissionPhase();
@@ -127,10 +127,6 @@ namespace server_app.games
 					if (connection.map.TryGetValue(userIDs[i], out string? connectionID))
 					{
 						await hubContext.Clients.Client(connectionID).SendAsync("updateRank", rank);
-					}
-					else
-					{
-						throw new DisconnectException(userIDs[i]);
 					}
 				}
 				else
@@ -170,10 +166,6 @@ namespace server_app.games
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("receiveVersusResult", winner);
-				}
-				else
-				{
-					throw new DisconnectException(userID);
 				}
 			}
 		}

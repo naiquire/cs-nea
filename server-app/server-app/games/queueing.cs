@@ -39,7 +39,11 @@ namespace server_app.games
 			}
 
 			currentGames.Add(newGame);
-			tryQueueGame(newGame, userID);
+			if (tryQueueGame(newGame, userID))
+			{
+				return newGame.getGameID();
+			}
+			return string.Empty;
 
 			static bool tryQueueGame(IPlayable game, string userID)
 			{
@@ -49,8 +53,6 @@ namespace server_app.games
 				}
 				return false;
 			}
-
-			return newGame.getGameID();
 		}
 		
 		public static bool userJoined(string gameID)

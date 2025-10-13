@@ -77,10 +77,6 @@ namespace server_app.connections
 				{
 					await Clients.Client(connectionID).SendAsync("receiveInvites", invites);
 				}
-				else
-				{
-					throw new DisconnectException(userID);
-				}
 			}
 		}
 		public async void addFriends(string user1, string user2)
@@ -88,8 +84,9 @@ namespace server_app.connections
 			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{user1}> has accepted a friend invite from <{user2}>");
 			if (database.addFriends(user1, user2))
 			{
-				await updateFriendData(user1, user2, false);
-				await updateFriendData(user2, user1, false);
+				bool isRemoved = false;
+				await updateFriendData(user1, user2, isRemoved);
+				await updateFriendData(user2, user1, isRemoved);
 			}
 			else
 			{
@@ -101,8 +98,9 @@ namespace server_app.connections
 			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{user1}> has removed <{user2}> from their friends list");
 			if (database.removeFriends(user1, user2))
 			{
-				await updateFriendData(user1, user2, true);
-				await updateFriendData(user2, user1, true);
+				bool isRemoved = true;
+				await updateFriendData(user1, user2, isRemoved);
+				await updateFriendData(user2, user1, isRemoved);
 			}
 			else
 			{

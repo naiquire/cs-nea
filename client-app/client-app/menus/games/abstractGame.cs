@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace client_app.menus.games
 {
-	public struct @stats
+	public struct gameStats
 	{
-		public @stats(object arg) // requires argument for some reason
+		public gameStats(object arg) // requires argument for some reason
 		{
 			correct = new List<bool>();
 			accuracy = new List<double>();
@@ -55,7 +55,7 @@ namespace client_app.menus.games
 		private int rounds;
 		private readonly int maxPlayers;
 
-		private stats stats;
+		private gameStats stats;
 		private readonly List<char> letters;
 
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
@@ -74,7 +74,7 @@ namespace client_app.menus.games
 		{
 			this.main = main;
 			this.type = type;
-			stats = new stats("");
+			stats = new gameStats("");
 			started = false;
 			rounds = 0;
 			letters = new List<char>();

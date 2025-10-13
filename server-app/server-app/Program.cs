@@ -14,7 +14,6 @@ namespace server_app
 		{
 			startNginx();
 			hostBuilder(args).Build().Run();
-			data.preloadParameters();
 		}
 		private static void startNginx()
 		{
@@ -63,11 +62,11 @@ namespace server_app
 				config.Configure(setup =>
 				{
 					setup.UseRouting();
-					setup.Use(async (context, next) =>
+					setup.Use((context, next) =>
 					{
 						// load the hubContext
 						hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
-						await next.Invoke();
+						return next(context);
 					});
 					setup.UseEndpoints(endpoints =>
 					{

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace client_app.components
@@ -62,8 +57,8 @@ namespace client_app.components
 				Text = "Ignore",
 			};
 
-			btn_accept.Click += (sender, e) => 
-			{ 
+			btn_accept.Click += (sender, e) =>
+			{
 				DialogResult = DialogResult.OK;
 				Close();
 			};

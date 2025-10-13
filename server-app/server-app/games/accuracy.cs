@@ -52,7 +52,7 @@ namespace server_app.games
 		}
 		public override async Task continueRequest(string userID)
 		{
-			continueRequests.Add(userID);
+			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)
 			{
 				await submissionPhase();

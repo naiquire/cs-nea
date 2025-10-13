@@ -19,7 +19,7 @@ namespace server_app.games
 		public List<double> accuracy;
 		public List<TimeSpan> time;
 
-		public void update(double accuracy, TimeSpan time, bool correct)
+		public readonly void update(double accuracy, TimeSpan time, bool correct)
 		{
 			this.accuracy.Add(accuracy);
 			this.correct.Add(correct);
@@ -51,7 +51,7 @@ namespace server_app.games
 		protected int maxPlayers;
 		protected string type;
 
-		private bool started;
+		private bool started = false;
 
 		protected List<string> userIDs;
 		protected List<friendData> userDatas;
@@ -63,22 +63,24 @@ namespace server_app.games
 
 		protected DateTime startTime;
 		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
-		protected HashSet<string> continueRequests = [];
+		protected List<string> continueRequests = [];
 
 		public abstractGame(IHubContext<connection> context, string type, string userID, int maxPlayers)
 		{
-			userIDs = [];
-			this.maxPlayers = maxPlayers;
-			stats = [];
-			letters = [];
-			rnd = new();
 			hubContext = context;
-			currentResponses = [];
-			userDatas = [];
-			this.type = type;
-			started = false;
 
 			gameID = userID + DateTime.UtcNow.ToString();
+			this.maxPlayers = maxPlayers;
+			this.type = type;
+
+			userIDs = [];
+			userDatas = [];
+			stats = [];
+
+			rnd = new();
+			letters = [];
+			
+			currentResponses = [];			
 		}
 
 		public bool queueUser(string userID)

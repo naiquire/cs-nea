@@ -22,8 +22,8 @@ namespace server_app.neuralNetwork
 			activatedValues[0] = input;
 
 			// load weights and biases
-			weights = data.weights ?? data.loadWeights();
-			biases = data.biases ?? data.loadBiases();
+			weights = data.weights;
+			biases = data.biases;
 
 			evaluateNetwork();
 		}
@@ -67,6 +67,7 @@ namespace server_app.neuralNetwork
 					}
 				}
 			}
+
 			// output letter as integer from 0-25
 			result = activatedValues[layerCount - 1].ToList().IndexOf(activatedValues[layerCount - 1].Max());
 		}

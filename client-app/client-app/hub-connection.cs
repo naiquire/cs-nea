@@ -1,22 +1,15 @@
 ﻿using client_app.games;
-using client_app.menus.games;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace client_app
 {
 	public static class hub_connection
 	{
 		private static login login;
-		private static main main;	
+		private static main main;
 
 		public static void injectForm(login l, main m)
 		{
@@ -49,7 +42,7 @@ namespace client_app
 					login.lbl_information.Text = "An error occured while connecting to the server";
 				}
 			}
-			
+
 			return connection;
 		}
 		public static HubConnection addLoginHandles(HubConnection connection)

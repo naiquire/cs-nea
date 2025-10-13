@@ -1,31 +1,26 @@
 ﻿using Microsoft.Data.Sqlite;
-using server_app.games;
-using System.Diagnostics.Metrics;
 
 namespace server_app.databases
 {
 	/* the todo list of DOOM
 	 * 
-	 * controls highlighting on mouse hover
 	 * home -> panel_main ui
 	 * btn_home ui
 	 * game -> "next letter in" dissapears ONLY on round 1
 	 * game -> panel_drawing sometimes invisible until click
 	 * game -> round results screen especially v,k
-	 * lbl_letter font does not match mnist
 	 * endGame ui
 	 * profile -> about me
-	 * maybe use dataset with only uppercase
-	 * 
 	 */
+
 	public static class Logger
 	{
 		public static void Log(string code, ConsoleColor codeColor, string message)
 		{
 			Console.ResetColor();
 			Console.Write($"[ ");
-            Console.ForegroundColor = codeColor;
-            Console.Write($"{code}");
+			Console.ForegroundColor = codeColor;
+			Console.Write($"{code}");
 			Console.ResetColor();
 			Console.WriteLine($" ] {message}");
 		}
@@ -72,13 +67,15 @@ namespace server_app.databases
 		}
 		public static void outputException(string ex)
 		{
-            // if exception occurs then log the message and allow the client to try again
-            Logger.Log("ERROR", ConsoleColor.Red, ex);
-        }
+			// if exception occurs then log the message and allow the client to try again
+			Logger.Log("ERROR", ConsoleColor.Red, ex);
+		}
 
 		public static bool loginRequest(string userID, string password, out int success)
 		{
-			string query = "SELECT userData.password FROM userData WHERE userData.userID = @userID";
+			string query = @"SELECT userData.password
+				FROM userData
+				WHERE userData.userID = @userID";
 			try
 			{
 				connection.Open();
@@ -180,7 +177,9 @@ namespace server_app.databases
 		}
 		public static bool userExists(string userID, out bool exists)
 		{
-			string query = "SELECT userID FROM userData WHERE userID = @userID";
+			string query = @"SELECT userID
+				FROM userData
+				WHERE userID = @userID";
 			try
 			{
 				connection.Open();

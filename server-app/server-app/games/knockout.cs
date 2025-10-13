@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.neuralNetwork;
-using System.Diagnostics.Metrics;
-using System.Drawing;
 
 namespace server_app.games
 {
@@ -66,7 +64,7 @@ namespace server_app.games
 			if (incorrectUsers.Count == 0)
 			{
 				// eliminate user with longest time
-				(string user, TimeSpan time) highest = ("", TimeSpan.MinValue);
+				(string user, TimeSpan time) highest = (string.Empty, TimeSpan.MinValue);
 				foreach (string userID in aliveUsers)
 				{
 					var time = stats[userID].time[roundCount];
@@ -92,7 +90,7 @@ namespace server_app.games
         }
 		public override async Task continueRequest(string userID)
 		{
-			continueRequests.Add(userID);
+			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
 			if (continueRequests.Count == aliveUsers.Count)
 			{
 				await submissionPhase();
@@ -106,10 +104,6 @@ namespace server_app.games
 				if (connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
-				}
-				else
-				{
-					throw new DisconnectException(userID);
 				}
 			}
 		}
