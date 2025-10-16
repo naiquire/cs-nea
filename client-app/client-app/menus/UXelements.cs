@@ -777,7 +777,102 @@ namespace client_app.menus
 		{
 			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
 
-			Guna2Panel panel_statsOverview = new Guna2Panel()
+			Guna2Panel createPanel((int X, int Y) p)
+			{
+				return new Guna2Panel()
+				{
+                    BackColor = Color.Transparent,
+                    BorderRadius = 20,
+                    FillColor = Color.FromArgb(208, 208, 208),
+                    Location = new Point(p.X, p.Y),
+                    Size = new Size(380, 50),
+                    TabIndex = 0,
+                };
+			}
+			Guna2Shapes createCircle((int X, int Y) p)
+			{
+				return new Guna2Shapes()
+				{
+                    BackColor = Color.Transparent,
+                    BorderColor = Color.White,
+                    BorderThickness = 5,
+                    FillColor = Color.Transparent,
+                    Location = new Point(31, 80),
+                    PolygonSides = 3,
+                    PolygonSkip = 1,
+                    Rotate = 9F,
+                    Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
+                    Size = new Size(70, 70),
+                    TabIndex = 1,
+                    UseTransparentBackground = true,
+                    Zoom = 80,
+                };
+			}
+			Guna2PictureBox createPicture((int X, int Y) p, (int X, int Y) s, Bitmap image)
+			{
+				return new Guna2PictureBox()
+				{
+                    BackColor = Color.Transparent,
+                    FillColor = Color.Transparent,
+                    Image = image,
+                    ImageRotate = 0F,
+                    Location = new Point(p.X, p.Y),
+                    Size = new Size(s.X, s.Y),
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    TabStop = false,
+                    UseTransparentBackground = true,
+				};
+			}
+			Guna2TextBox createLabel((int X, int Y) p, (int X, int Y) s, string text)
+			{
+				return new Guna2TextBox()
+				{
+                    BorderThickness = 0,
+                    Cursor = Cursors.Arrow,
+                    DefaultText = text,
+                    FillColor = Color.FromArgb(208, 208, 208),
+                    Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+                    ForeColor = Color.FromArgb(52, 52, 52),
+                    Location = new Point(p.X, p.Y),
+                    //Margin = new Padding(3, 4, 3, 4),
+                    ReadOnly = true,
+                    Size = new Size(s.X, s.Y),
+					TabStop = false,
+                };
+			}
+			Guna2TextBox createTxt(string text)
+			{
+				return new Guna2TextBox()
+				{
+                    BorderThickness = 0,
+                    Cursor = Cursors.Arrow,
+                    DefaultText = text,
+                    FillColor = Color.FromArgb(208, 208, 208),
+                    Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                    ForeColor = Color.FromArgb(104, 104, 104),
+                    Location = new Point(280, 10),
+                    //Margin = new Padding(3, 4, 3, 4),
+                    ReadOnly = true,
+                    RightToLeft = RightToLeft.Yes,
+                    Size = new Size(80, 30),
+                    TabStop = false,
+                    TextOffset = new Point(0, -1),
+                };
+			}
+            Guna2Separator createSeperator((int X, int Y) p, (int X, int Y) s)
+            {
+                return new Guna2Separator()
+                {
+                    FillColor = Color.FromArgb(247, 113, 163),
+                    FillThickness = 2,
+                    Location = new Point(p.X, p.Y),
+                    Name = "seperator_rank",
+                    Size = new Size(s.X, s.Y),
+                    TabStop = false,
+                };
+            }
+
+            Guna2Panel panel_statsOverview = new Guna2Panel()
 			{
 				BorderRadius = 20,
 				BorderThickness = 5,
@@ -788,284 +883,42 @@ namespace client_app.menus
 				Size = new Size(420, 230),
 				TabIndex = 0,
 			};
-			Guna2Panel panel_rank = new Guna2Panel()
-			{
+            Guna2Shapes line_stats = new Guna2Shapes()
+            {
+                BorderThickness = 0,
+                FillColor = Color.White,
+                LineThickness = 1,
+                Location = new Point(63, 1),
+                Name = "line_stats",
+                PolygonSkip = 1,
+                Rotate = 0F,
+                Shape = Guna.UI2.WinForms.Enums.ShapeType.Rectangle,
+                Size = new Size(5, 228),
+                TabIndex = 2,
+                Text = "guna2Shapes2",
+                Zoom = 100,
+            };
 
-				BackColor = Color.Transparent,
-				BorderRadius = 20,
-				FillColor = Color.FromArgb(208, 208, 208),
-				Location = new Point(20, 20),
-				Name = "panel_rank",
-				Size = new Size(380, 50),
-				TabIndex = 0,
-			};
-			Guna2Shapes circle_total = new Guna2Shapes()
-			{
-				BackColor = Color.Transparent,
-				BorderColor = Color.White,
-				BorderThickness = 5,
-				FillColor = Color.Transparent,
-				Location = new Point(31, 80),
-				Name = "circle_total",
-				PolygonSides = 3,
-				PolygonSkip = 1,
-				Rotate = 9F,
-				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
-				Size = new Size(70, 70),
-				TabIndex = 1,
-				UseTransparentBackground = true,
-				Zoom = 80,
-			};
-			Guna2Shapes line_stats = new Guna2Shapes()
-			{
-				BorderThickness = 0,
-				FillColor = Color.White,
-				LineThickness = 1,
-				Location = new Point(63, 1),
-				Name = "line_stats",
-				PolygonSkip = 1,
-				Rotate = 0F,
-				Shape = Guna.UI2.WinForms.Enums.ShapeType.Rectangle,
-				Size = new Size(5, 228),
-				TabIndex = 2,
-				Text = "guna2Shapes2",
-				Zoom = 100,
-			};
-			Guna2Shapes circle_rank = new Guna2Shapes()
-			{
-				BackColor = Color.Transparent,
-				BorderColor = Color.White,
-				BorderThickness = 5,
-				FillColor = Color.Transparent,
-				Location = new Point(31, 10),
-				Name = "circle_rank",
-				PolygonSides = 3,
-				PolygonSkip = 1,
-				Rotate = 9F,
-				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
-				Size = new Size(70, 70),
-				TabIndex = 3,
-				Text = "guna2Shapes3",
-				UseTransparentBackground = true,
-				Zoom = 80,
-			};
-			Guna2Panel panel_total = new Guna2Panel()
-			{
-				BackColor = Color.Transparent,
-				BorderRadius = 20,
-				FillColor = Color.FromArgb(208, 208, 208),
-				Location = new Point(20, 90),
-				Name = "panel_total",
-				Size = new Size(380, 50),
-				TabIndex = 2,
-			};
-			Guna2PictureBox pic_rank = new Guna2PictureBox()
-			{
-				BackColor = Color.Transparent,
-				FillColor = Color.Transparent,
-				Image = Resources.rank,
-				ImageRotate = 0F,
-				Location = new Point(30, 10),
-				Name = "pic_rank",
-				Size = new Size(30, 30),
-				SizeMode = PictureBoxSizeMode.Zoom,
-				TabIndex = 4,
-				TabStop = false,
-				UseTransparentBackground = true,
-			};
-			Guna2PictureBox pic_total = new Guna2PictureBox()
-			{
-				BackColor = Color.Transparent,
-				FillColor = Color.Transparent,
-				Image = Resources.total,
-				ImageRotate = 0F,
-				Location = new Point(30, 10),
-				Name = "pic_total",
-				Size = new Size(30, 30),
-				SizeMode = PictureBoxSizeMode.Zoom,
-				TabIndex = 5,
-				TabStop = false,
-				UseTransparentBackground = true,
-			};
-			Guna2TextBox lbl_rank = new Guna2TextBox()
-			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = "ELO",
-				FillColor = Color.FromArgb(208, 208, 208),
-				Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
-				ForeColor = Color.FromArgb(52, 52, 52),
-				Location = new Point(90, 10),
-				Margin = new Padding(3, 4, 3, 4),
-				Name = "lbl_rank",
-				PlaceholderText = "",
-				ReadOnly = true,
-				SelectedText = "",
-				Size = new Size(48, 30),
-				TabIndex = 5,
-			};
-			Guna2TextBox lbl_total = new Guna2TextBox()
-			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = "TOTAL",
-				FillColor = Color.FromArgb(208, 208, 208),
-				Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
-				ForeColor = Color.FromArgb(52, 52, 52),
-				Location = new Point(90, 10),
-				Margin = new Padding(3, 4, 3, 4),
-				Name = "lbl_total",
-				PlaceholderText = "",
-				ReadOnly = true,
-				SelectedText = "",
-				Size = new Size(62, 30),
-				TabIndex = 6,
-			};
-			Guna2TextBox txt_rank = new Guna2TextBox()
-			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = rank,
-				FillColor = Color.FromArgb(208, 208, 208),
-				Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
-				ForeColor = Color.FromArgb(104, 104, 104),
-				Location = new Point(300, 10),
-				Margin = new Padding(3, 4, 3, 4),
-				Name = "txt_rank",
-				PlaceholderText = "",
-				ReadOnly = true,
-				RightToLeft = RightToLeft.Yes,
-				SelectedText = "",
-				Size = new Size(60, 30),
-				TabIndex = 6,
-				TextOffset = new Point(0, -1),
-			};
-			Guna2TextBox txt_total = new Guna2TextBox()
-			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = total,
-				FillColor = Color.FromArgb(208, 208, 208),
-				Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
-				ForeColor = Color.FromArgb(104, 104, 104),
-				Location = new Point(300, 10),
-				Margin = new Padding(3, 4, 3, 4),
-				Name = "txt_total",
-				PlaceholderText = "",
-				ReadOnly = true,
-				RightToLeft = RightToLeft.Yes,
-				SelectedText = "",
-				Size = new Size(60, 30),
-				TabIndex = 7,
-				TextOffset = new Point(0, -1),
-			};
-			Guna2Separator seperator_rank = new Guna2Separator()
-			{
+            Guna2Panel panel_rank = createPanel((20, 20));
+            Guna2TextBox lbl_rank = createLabel((90, 10), (48, 30), "ELO");
+            Guna2Shapes circle_rank = createCircle((31, 10));
+            Guna2PictureBox pic_rank = createPicture((30, 10), (30, 30), Resources.rank);
+            Guna2TextBox txt_rank = createTxt(rank);
+            Guna2Separator seperator_rank = createSeperator((144, 20), (150, 10));
 
-				FillColor = Color.FromArgb(247, 113, 163),
-				FillThickness = 2,
-				Location = new Point(144, 20),
-				Name = "seperator_rank",
-				Size = new Size(150, 10),
-				TabIndex = 7,
-			};
-			Guna2Separator seperator_total = new Guna2Separator()
-			{
-				FillColor = Color.FromArgb(247, 113, 163),
-				FillThickness = 2,
-				Location = new Point(158, 20),
-				Name = "seperator_total",
-				Size = new Size(136, 10),
-				TabIndex = 8,
-			};
-			Guna2Panel panel_accuracy = new Guna2Panel()
-			{
-				BackColor = Color.Transparent,
-				BorderRadius = 20,
-				FillColor = Color.FromArgb(208, 208, 208),
-				Location = new Point(20, 160),
-				Name = "panel_accuracy",
-				Size = new Size(380, 50),
-				TabIndex = 9,
-			};
-			Guna2Separator seperator_accuracy = new Guna2Separator()
-			{
-				FillColor = Color.FromArgb(247, 113, 163),
-				FillThickness = 2,
-				Location = new Point(189, 20),
-				Name = "seperator_accuracy",
-				Size = new Size(86, 10),
-				TabIndex = 8,
-			};
-			Guna2TextBox txt_accuracy = new Guna2TextBox()
-			{
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = $"{accuracy}%",
-				FillColor = Color.FromArgb(208, 208, 208),
-				BorderColor = Color.FromArgb(94, 148, 255),
-				Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
-				ForeColor = Color.FromArgb(104, 104, 104),
-				Location = new Point(281, 10),
-				Margin = new Padding(3, 4, 3, 4),
-				Name = "txt_accuracy",
-				PlaceholderText = "",
-				ReadOnly = true,
-				RightToLeft = RightToLeft.Yes,
-				SelectedText = "",
-				Size = new Size(79, 30),
-				TabIndex = 7,
-				TextOffset = new Point(0, -1),
-			};
-			Guna2TextBox lbl_accuracy = new Guna2TextBox()
-			{
+            Guna2Panel panel_accuracy = createPanel((20, 160));
+            Guna2TextBox lbl_accuracy = createLabel((90, 10), (93, 30), "ACCURACY");
+            Guna2TextBox txt_accuracy = createTxt($"{accuracy}%");
+            Guna2Shapes circle_accuracy = createCircle((31, 150));
+            Guna2PictureBox pic_accuracy = createPicture((27, 7), (36, 36), Resources.accuracy);
+            Guna2Separator seperator_accuracy = createSeperator((189, 20), (86, 10));
 
-				BorderThickness = 0,
-				Cursor = Cursors.Arrow,
-				DefaultText = "ACCURACY",
-				FillColor = Color.FromArgb(208, 208, 208),
-				Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
-				ForeColor = Color.FromArgb(52, 52, 52),
-				Location = new Point(90, 10),
-				Margin = new Padding(3, 4, 3, 4),
-				Name = "lbl_accuracy",
-				PlaceholderText = "",
-				ReadOnly = true,
-				SelectedText = "",
-				Size = new Size(93, 30),
-				TabIndex = 6,
-			};
-			Guna2PictureBox pic_accuracy = new Guna2PictureBox()
-			{
-				BackColor = Color.Transparent,
-				FillColor = Color.Transparent,
-				Image = Resources.accuracy,
-				ImageRotate = 0F,
-				Location = new Point(27, 7),
-				Name = "pic_accuracy",
-				Size = new Size(36, 36),
-				SizeMode = PictureBoxSizeMode.Zoom,
-				TabIndex = 5,
-				TabStop = false,
-				UseTransparentBackground = true,
-			};
-			Guna2Shapes circle_accuracy = new Guna2Shapes()
-			{
-				BackColor = Color.Transparent,
-				BorderColor = Color.White,
-				BorderThickness = 5,
-				FillColor = Color.Transparent,
-				Location = new Point(30, 150),
-				Name = "circle_accuracy",
-				PolygonSides = 3,
-				PolygonSkip = 1,
-				Rotate = 9F,
-				Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
-				Size = new Size(70, 70),
-				TabIndex = 10,
-				UseTransparentBackground = true,
-				Zoom = 80,
-			};
+            Guna2Panel panel_total = createPanel((20, 90));
+            Guna2TextBox lbl_total = createLabel((90, 10), (62, 30), "TOTAL");
+            Guna2TextBox txt_total = createTxt(total);
+            Guna2Shapes circle_total = createCircle((31, 80));
+            Guna2PictureBox pic_total = createPicture((30, 10), (30, 30), Resources.total);
+            Guna2Separator seperator_total = createSeperator((158, 20), (136, 10));
 
 			panel_rank.Controls.Add(seperator_rank);
 			panel_rank.Controls.Add(txt_rank);
@@ -1095,18 +948,18 @@ namespace client_app.menus
 
 		public static void initialiseLobby(main main)
 		{
-			Label lbl_header = new Label
-			{
-				BackColor = main.panel_main.BackColor,
-				Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
-				Location = new Point(10, 10),
-				Name = "lbl_header",
-				Size = new Size(300, 30),
-				TabIndex = 0,
-				Text = "Lobby",
-			};
+			//Label lbl_header = new Label
+			//{
+			//	BackColor = main.panel_main.BackColor,
+			//	Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
+			//	Location = new Point(10, 10),
+			//	Name = "lbl_header",
+			//	Size = new Size(300, 30),
+			//	TabIndex = 0,
+			//	Text = "Lobby",
+			//};
 
-			main.panel_main.Controls.Add(lbl_header);
+			//main.panel_main.Controls.Add(lbl_header);
 		}
 		public static void configLobbyPanel(abstractGame game, List<friendData> users)
 		{
@@ -1262,6 +1115,8 @@ namespace client_app.menus
 				TimeSpan time = statistics.time[i];
 
 				(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+
+				// update with better UI or something idk
 
 				Label lbl_letter = new Label()
 				{

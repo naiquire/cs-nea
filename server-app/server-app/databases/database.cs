@@ -11,6 +11,8 @@ namespace server_app.databases
 	 * game -> round results screen especially v,k
 	 * endGame ui
 	 * profile -> about me
+	 * cleanup ui code
+	 * ensure ALL server errors are handled by client in some way
 	 */
 
 	public static class Logger
