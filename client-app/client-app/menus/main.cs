@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using client_app.components;
@@ -10,7 +12,15 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace client_app
 {
-	public struct userData
+	interface IUser
+	{
+		string userID { get; set; }
+		string aboutMe { get; set; }
+		string localisation { get; set; }
+		int rank { get; set; }
+	}
+
+	public struct userData : IUser
 	{
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
@@ -28,17 +38,17 @@ namespace client_app
 		public TimeSpan time { get; set; }
 		public int total { get; set; }
 	}
-	public struct friendData
+	public struct friendData : IUser
 	{
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
 		public bool online { get; set; }
 
 		public string localisation { get; set; }
-		public DateTime dateCreated { get; set; }
+		//public DateTime dateCreated { get; set; }
 
 		public int rank { get; set; }
-		public Dictionary<char, statistics> statistics { get; set; }
+		//public Dictionary<char, statistics> statistics { get; set; }
 	}
 	public struct menu
 	{
@@ -56,7 +66,7 @@ namespace client_app
 		public const string address = "http://localhost:3900/cs-nea";
 
 
-        public main(string userID)
+		public main(string userID)
 		{
 			hub_connection.injectForm(null, this);
 
@@ -70,7 +80,16 @@ namespace client_app
 			connection = hub_connection.addHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
-			await connection.InvokeAsync("clientConnected", userID);
+			if (!await connection.InvokeAsync<bool>("clientConnected", userID))
+			{
+				new alert("Failed to connect to server. Quitting application.");
+				Application.Exit();
+			}
+		}
+
+		public void loadAlert(string message)
+		{
+			new alert(message);
 		}
 		public async void clientConnected(userData userData)
 		{
@@ -80,20 +99,53 @@ namespace client_app
 			Application.ApplicationExit += (sender, e) => btn_close_Click(sender, e);
 			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
-		public void updateUserData(string aboutMe, string localisation)
+		public void updateUserData(string userID, string aboutMe, string localisation)
 		{
-			userData.aboutMe = aboutMe;
-			userData.localisation = localisation;
-
-			if (menu.game == null)
+			if (userID == userData.userID)
 			{
-				if (menu.profile == null)
+				userData.aboutMe = aboutMe;
+				userData.localisation = localisation;
+			}
+			else
+			{
+				int index = -1;
+				for (int i = 0; i < userData.friends.Count; i++)
+				{
+					if (userData.friends[i].userID == userID)
+					{
+						index = i;
+						break;
+					}
+				}
+				if (index != -1)
+				{
+					var friend = userData.friends[index];
+					friend.aboutMe = aboutMe;
+					friend.localisation = localisation;
+					userData.friends[index] = friend;
+				}
+				new alert("Failed to update user data.");
+				return;
+			}
+			
+			bool isPlaying = menu.game != null;
+			bool isHome = menu.profile == null;
+			bool isSelfUpdate = userID == userData.userID;
+
+			if (!isPlaying)
+			{
+				if (isHome && isSelfUpdate)
 				{
 					btn_home.PerformClick();
 				}
-				else
+				else if (menu.profile.getUserID() == userID)
 				{
-					menu.profile = new profile(this, userData);
+					userData refresh = menu.profile.getUserData();
+					menu.profile = new profile(this, refresh);
+					if (userID == userData.userID)
+					{
+						UXelements.configUserDataPanel(this, refresh);
+					}
 				}
 			}
 		}
@@ -162,7 +214,10 @@ namespace client_app
 			{
 				if (new confirm($"Received a friend invite from {invite}").DialogResult == DialogResult.OK)
 				{
-					await connection.InvokeAsync("addFriends", invite, userData.userID);
+					if (!await connection.InvokeAsync<bool>("addFriends", invite, userData.userID))
+					{
+						new alert("Failed to accept friend invite.");
+					}
 				}
 			}
 		}

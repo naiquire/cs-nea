@@ -565,7 +565,7 @@ namespace client_app.menus
 			double accuracy = stats.accuracy.Last();
 			TimeSpan time = stats.time.Last();
 
-			(int r, int g, int b) = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
+			(int r, int g, int b) = ((int)(255 * (1 - accuracy)), (int)(255 * accuracy), 0);
 
 			Label lbl_letter = new Label()
 			{
@@ -761,7 +761,10 @@ namespace client_app.menus
 				var update = new update(main.userData);
 				if (update.DialogResult == DialogResult.OK)
 				{
-					await main.connection.InvokeAsync("updateUserData", main.userData.userID, update.getAboutMe(), update.getLocalisation());
+					if (!await main.connection.InvokeAsync<bool>("updateUserData", main.userData.userID, update.getAboutMe(), update.getLocalisation()))
+					{
+						new alert("Failed to update profile. Please try again.");
+					}
 				}
 			};
 

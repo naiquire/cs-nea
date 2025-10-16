@@ -16,7 +16,7 @@ namespace server_app.connections
 			else
 			{
 				database.outputException("IHubContext was null when attempting to queue a user");
-				throw new Exception("Fatal error has occured");
+				return string.Empty;
 			}
 		}
 		public void dequeueGame(string gameID, string userID)

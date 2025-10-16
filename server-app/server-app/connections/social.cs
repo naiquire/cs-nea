@@ -14,22 +14,36 @@ namespace server_app.connections
 			return new userData();
 		}
 
-		public async Task updateUserData(string userID, string aboutMe, string localisation)
+		public async Task<bool> updateUserData(string userID, string aboutMe, string localisation)
 		{
-			if (database.updateUserData(userID, aboutMe, localisation))
-			{
-				Logger.Log("ACCOUNT", ConsoleColor.Magenta, $"<{userID}> has updated their profile");
-				if (map.TryGetValue(userID, out string? connectionID))
-				{
-					await Clients.Client(connectionID).SendAsync("updateUserData", aboutMe, localisation);
-				}
-			}
-			else
+			if (!database.updateUserData(userID, aboutMe, localisation))
 			{
 				database.outputException($"Failed to update userData for <{userID}>");
+				return false;
 			}
+
+			Logger.Log("ACCOUNT", ConsoleColor.Magenta, $"<{userID}> has updated their profile");
+			if (map.TryGetValue(userID, out string? connectionID))
+			{
+				await Clients.Client(connectionID).SendAsync("updateUserData", userID, aboutMe, localisation);
+			}
+
+			if (!database.loadFriends(userID, out var friends))
+			{
+				database.outputException($"Failed to load friends for <{userID}>");
+			}
+
+			foreach (var friend in friends)
+			{
+				if (map.TryGetValue(friend, out connectionID))
+				{
+					await Clients.Client(connectionID).SendAsync("updateUserData", userID, aboutMe, localisation);
+				}
+			}
+
+			return true;
 		}
-		public async Task updateFriendData(string userID, string friendID, bool delete)
+		public async Task<bool> updateFriendData(string userID, string friendID, bool delete)
 		{
 			if (delete)
 			{
@@ -40,21 +54,21 @@ namespace server_app.connections
 			}
 			else
 			{
-				if (database.loadFriendData(friendID, out friendData friendData))
-				{
-					if (map.TryGetValue(userID, out string? connectionID))
-					{
-						await Clients.Client(connectionID).SendAsync("updateFriendData", friendData);
-					}
-				}
-				else
+				if (!database.loadFriendData(friendID, out friendData friendData))
 				{
 					database.outputException($"Failed to retrieve userData for <{friendID}>");
+					return false;
+				}
+
+				if (map.TryGetValue(userID, out string? connectionID))
+				{
+					await Clients.Client(connectionID).SendAsync("updateFriendData", friendData);
 				}
 			}
+			return true;
 		}
 
-		public async void sendInvite(string userID, string senderID)
+		public async Task<bool> sendInvite(string userID, string senderID)
 		{
 			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{senderID}> has sent a friend invite to <{userID}>");
 			if (map.TryGetValue(userID, out string? connectionID))
@@ -66,34 +80,49 @@ namespace server_app.connections
 				if (!database.saveInvite(userID, senderID))
 				{
 					database.outputException($"Failed to save invite for <{userID}> from <{senderID}>");
+					return false;
 				}
 			}
+			return true;
 		}
 		public async void loadInvites(string userID)
 		{
-			if (database.loadInvites(userID, out List<string> invites))
+			if (!database.loadInvites(userID, out List<string> invites))
 			{
-				if (map.TryGetValue(userID, out string? connectionID))
-				{
-					await Clients.Client(connectionID).SendAsync("receiveInvites", invites);
-				}
+				database.outputException($"Failed to load invites for user <{userID}>");
+				return;
+			}
+
+			if (map.TryGetValue(userID, out string? connectionID))
+			{
+				await Clients.Client(connectionID).SendAsync("receiveInvites", invites);
 			}
 		}
-		public async void addFriends(string user1, string user2)
+		public async Task<bool> addFriends(string user1, string user2)
 		{
 			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{user1}> has accepted a friend invite from <{user2}>");
 			if (database.addFriends(user1, user2))
 			{
-				bool isRemoved = false;
-				await updateFriendData(user1, user2, isRemoved);
-				await updateFriendData(user2, user1, isRemoved);
-			}
-			else
-			{
 				database.outputException($"Failed to add <{user1}> and <{user2}> as friends");
+				return false;
 			}
+
+			bool isRemoved = false;
+			if (!await updateFriendData(user2, user1, isRemoved))
+			{
+				if (map.TryGetValue(user2, out string? connectionID))
+				{
+					await Clients.Client(connectionID).SendAsync("alert", $"Failed to retrieve data for friend <{user1}>");
+				}
+			}
+			if (!await updateFriendData(user1, user2, isRemoved))
+			{
+				return false;
+			}
+
+			return true;
 		}
-		public async void removeFriends(string user1, string user2)
+		public async Task<bool> removeFriends(string user1, string user2)
 		{
 			Logger.Log("SOCIAL", ConsoleColor.Cyan, $"<{user1}> has removed <{user2}> from their friends list");
 			if (database.removeFriends(user1, user2))
@@ -101,10 +130,12 @@ namespace server_app.connections
 				bool isRemoved = true;
 				await updateFriendData(user1, user2, isRemoved);
 				await updateFriendData(user2, user1, isRemoved);
+				return true;
 			}
 			else
 			{
 				database.outputException($"Failed to remove <{user1}> and <{user2}> as friends");
+				return false;
 			}
 		}
 	}

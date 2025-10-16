@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using client_app.components;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,8 @@ namespace client_app.menus
             InitializeComponent();
             setupButtons();
         }
+        public string getUserID() => user.userID;
+        public userData getUserData() => user;
         private void setupButtons()
         {
             if (user.userID == main.userData.userID)
@@ -59,13 +62,19 @@ namespace client_app.menus
         private async void btn_addFriends_Click(object sender, EventArgs e)
         {
             btn_addFriends.Enabled = false;
-            await main.connection.InvokeAsync("sendInvite", user.userID, main.userData.userID);
+            if (!await main.connection.InvokeAsync<bool>("sendInvite", user.userID, main.userData.userID))
+            {
+                new alert("Failed to send friend invite. Please try again.");
+            }
         }
 
         private async void btn_removeFriends_Click(object sender, EventArgs e)
         {
             btn_removeFriends.Enabled = false;
-            await main.connection.InvokeAsync("removeFriends", user.userID, main.userData.userID);
+            if (!await main.connection.InvokeAsync<bool>("removeFriends", user.userID, main.userData.userID))
+            {
+                new alert("Failed to remove friend. Please try again");
+            }
         }
     }
 }

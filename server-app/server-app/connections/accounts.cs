@@ -6,20 +6,29 @@ namespace server_app.connections
 	public partial class @connection : Hub
 	{
 		public static readonly Dictionary<string, string> map = [];
-		public async Task clientConnected(string userID)
+		public async Task<bool> clientConnected(string userID)
 		{
 			map.Remove(userID);
 			map.Add(userID, Context.ConnectionId);
 
+			if (!await loadUserData(userID))
+			{
+				return false;
+			}
+			await updateOnline(userID, true);
+			return true;
+		}
+		public async Task<bool> loadUserData(string userID)
+		{
 			if (database.loadUserData(userID, out userData userData))
 			{
 				if (map.TryGetValue(userID, out string? connectionID))
 				{
 					await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
 				}
+				return true;
 			}
-
-			await updateOnline(userID, true);
+			return false;
 		}
 		public async void clientDisconnected(string userID)
 		{
@@ -40,6 +49,7 @@ namespace server_app.connections
 					}
 				}
 			}
+			// nothing can be done about this in terms of sending error message to client
 		}
 	}
 }

@@ -96,8 +96,13 @@ namespace client_app.menus.games
 		public async virtual void queueGame()
 		{
 			gameID = await main.connection.InvokeAsync<string>("queueGame", type, main.userData.userID);
-			
-			if (!string.IsNullOrEmpty(gameID))
+
+			if (string.IsNullOrEmpty(gameID))
+			{
+				new alert("An error occured queueing for a game. Please try again.");
+				main.btn_home.PerformClick();
+			}
+			else
 			{
 				await joinGameLobby();
 			}

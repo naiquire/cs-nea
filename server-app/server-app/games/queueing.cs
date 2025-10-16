@@ -12,13 +12,13 @@ namespace server_app.games
 		{
 			foreach (IPlayable game in currentGames)
 			{
-				if (game.getType() == gameType)
+				if (game.getType() != gameType) continue;
+				if (game.getPlayerCount() >= game.getMaxPlayers() || game.hasStarted()) continue;
+				if (game.queueUser(userID))
 				{
-					if (tryQueueGame(game, userID))
-					{
-						return game.getGameID();
-					}
+					return game.getGameID();
 				}
+				return string.Empty;
 			}
 
 			IPlayable newGame;
@@ -39,20 +39,11 @@ namespace server_app.games
 			}
 
 			currentGames.Add(newGame);
-			if (tryQueueGame(newGame, userID))
+			if (newGame.queueUser(userID))
 			{
 				return newGame.getGameID();
 			}
 			return string.Empty;
-
-			static bool tryQueueGame(IPlayable game, string userID)
-			{
-				if (game.getPlayerCount() < game.getMaxPlayers() && !game.hasStarted())
-				{
-					return game.queueUser(userID);
-				}
-				return false;
-			}
 		}
 		
 		public static bool userJoined(string gameID)

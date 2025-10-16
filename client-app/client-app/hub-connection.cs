@@ -62,15 +62,15 @@ namespace client_app
 		{
 			connection.On<userData>("receiveUserData", (userData) =>
 			{
-				main.Invoke(new Action(() => { main.clientConnected(userData); }));
+				main.Invoke(new Action(() => main.clientConnected(userData)));
 			});
-			connection.On<string, string>("updateUserData", (aboutMe, localisation) =>
+			connection.On<string, string, string>("updateUserData", (userID, aboutMe, localisation) =>
 			{
-				main.Invoke(new Action(() => main.updateUserData(aboutMe, localisation)));
+				main.Invoke(new Action(() => main.updateUserData(userID, aboutMe, localisation)));
 			});
 			connection.On<List<string>>("receiveInvites", (invites) =>
 			{
-				main.Invoke(new Action(() => { main.handleInvites(invites); }));
+				main.Invoke(new Action(() => main.handleInvites(invites)));
 			});
 			connection.On<friendData>("updateFriendData", (data) =>
 			{
@@ -92,7 +92,7 @@ namespace client_app
 
 			connection.On<List<friendData>>("updateUsers", (users) =>
 			{
-				main.panel_main.Invoke(new Action(() => { menu.game.updateUsers(users); }));
+				main.panel_main.Invoke(new Action(() => menu.game.updateUsers(users)));
 			});
 
 			connection.On("awaitStart", () =>
@@ -166,6 +166,11 @@ namespace client_app
 				{
 					throw new Exception("unexpected game type");
 				}
+			});
+
+			connection.On<string>("alert", (message) =>
+			{
+				main.Invoke(new Action(() => main.loadAlert(message)));
 			});
 
 			return connection;
