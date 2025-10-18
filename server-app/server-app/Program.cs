@@ -1,20 +1,34 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using server_app.connections;
 using server_app.databases;
-using server_app.neuralNetwork;
+using Spectre.Console;
+using Spectre.Console.Rendering;
+using System;
 using System.Diagnostics;
+using System.Threading.Channels;
 
 namespace server_app
 {
 	internal class Program : Hub
 	{
 		public static IHubContext<connection>? hubContext;
-		static void Main(string[] args)
+
+		static async Task Main(string[] args)
 		{
+			var logger = Logger.SetupAsync();
+			await Task.Delay(3000);
+			Logger.Log("aaaaaaaaa");
+
 			startNginx();
 			hostBuilder(args).Build().Run();
 		}
+
+
+
+
+
+
 		private static void startNginx()
 		{
 			ProcessStartInfo startInfo = new()
@@ -103,4 +117,3 @@ namespace server_app
 
 
 
-		

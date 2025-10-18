@@ -673,6 +673,19 @@
           }
         }
       },
+      "Spectre.Console/0.52.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
         "type": "package",
         "dependencies": {
@@ -1966,6 +1979,25 @@
         "newtonsoft.json.nuspec"
       ]
     },
+    "Spectre.Console/0.52.0": {
+      "sha512": "bVe6b8mizSB4QAlfvKGWHIZbzpxtkCnK6taFUgrxbzPseiBNENi/36RTnKwqPJCHPimU5QG2vK6jd+JASQDugg==",
+      "type": "package",
+      "path": "spectre.console/0.52.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net8.0/Spectre.Console.dll",
+        "lib/net8.0/Spectre.Console.xml",
+        "lib/net9.0/Spectre.Console.dll",
+        "lib/net9.0/Spectre.Console.xml",
+        "lib/netstandard2.0/Spectre.Console.dll",
+        "lib/netstandard2.0/Spectre.Console.xml",
+        "logo.png",
+        "spectre.console.0.52.0.nupkg.sha512",
+        "spectre.console.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
       "sha512": "UxWuisvZ3uVcVOLJQv7urM/JiQH+v3TmaJc1BLKl5Dxfm/nTzTUrqswCqg/INiYLi61AXnHo1M1JPmPqqLnAdg==",
       "type": "package",
@@ -2402,6 +2434,7 @@
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
       "Microsoft.AspNetCore.SignalR >= 1.2.0",
       "Microsoft.Data.Sqlite >= 9.0.5",
+      "Spectre.Console >= 0.52.0",
       "Swashbuckle.AspNetCore >= 6.4.0",
       "System.Drawing.Common >= 9.0.9"
     ]
@@ -2471,6 +2504,10 @@
           "Microsoft.Data.Sqlite": {
             "target": "Package",
             "version": "[9.0.5, )"
+          },
+          "Spectre.Console": {
+            "target": "Package",
+            "version": "[0.52.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

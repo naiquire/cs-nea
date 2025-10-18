@@ -15,18 +15,7 @@ namespace server_app.databases
 	 * ensure ALL server errors are handled by client in some way
 	 */
 
-	public static class Logger
-	{
-		public static void Log(string code, ConsoleColor codeColor, string message)
-		{
-			Console.ResetColor();
-			Console.Write($"[ ");
-			Console.ForegroundColor = codeColor;
-			Console.Write($"{code}");
-			Console.ResetColor();
-			Console.WriteLine($" ] {message}");
-		}
-	}
+	
 
 	public struct userData
 	{

@@ -12,6 +12,7 @@
           "Microsoft.AspNetCore.OpenApi": "8.0.8",
           "Microsoft.AspNetCore.SignalR": "1.2.0",
           "Microsoft.Data.Sqlite": "9.0.5",
+          "Spectre.Console": "0.52.0",
           "Swashbuckle.AspNetCore": "6.4.0",
           "System.Drawing.Common": "9.0.9"
         },
@@ -317,6 +318,14 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.0.2.21924"
+          }
+        }
+      },
+      "Spectre.Console/0.52.0": {
+        "runtime": {
+          "lib/net8.0/Spectre.Console.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.52.0.0"
           }
         }
       },
@@ -803,6 +812,13 @@
       "sha512": "sha512-IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
       "path": "newtonsoft.json/11.0.2",
       "hashPath": "newtonsoft.json.11.0.2.nupkg.sha512"
+    },
+    "Spectre.Console/0.52.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bVe6b8mizSB4QAlfvKGWHIZbzpxtkCnK6taFUgrxbzPseiBNENi/36RTnKwqPJCHPimU5QG2vK6jd+JASQDugg==",
+      "path": "spectre.console/0.52.0",
+      "hashPath": "spectre.console.0.52.0.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
       "type": "package",
