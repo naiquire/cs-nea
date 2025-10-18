@@ -302,7 +302,7 @@ namespace client_app
 			{
 				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
 			}
-			await main.connection.InvokeAsync("clientDisconnected", main.userData.userID);
+			await connection.InvokeAsync("clientDisconnected", main.userData.userID);
 			Close();
 		}
 	}

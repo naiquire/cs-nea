@@ -34,7 +34,7 @@ namespace server_app.connections
 		{
 			await updateOnline(userID, false);
 			map.Remove(userID);
-			Logger.Log("LOGOUT", ConsoleColor.Green, $"<{userID}> has disconnected");
+			Logger.Log("LOGOUT", "lime", $"<{userID}> has disconnected");
 		}
 
 		public async Task updateOnline(string userID, bool online)

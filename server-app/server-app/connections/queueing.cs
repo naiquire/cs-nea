@@ -10,7 +10,7 @@ namespace server_app.connections
 		{
 			if (Program.hubContext != null)
 			{
-				Logger.Log("QUEUE", ConsoleColor.Blue, $"<{userID}> has queued for <{gameType}>");
+				Logger.Log("QUEUE", "blue", $"<{userID}> has queued for <{gameType}>");
 				return queueing.queueGame(gameType, userID, Program.hubContext);
 			}
 			else
@@ -21,7 +21,7 @@ namespace server_app.connections
 		}
 		public void dequeueGame(string gameID, string userID)
 		{
-			Logger.Log("QUEUE", ConsoleColor.Blue, $"<{userID}> has dequeued");
+			Logger.Log("QUEUE", "blue", $"<{userID}> has dequeued");
 			queueing.dequeueUser(gameID, userID);
 		}
 		public bool userJoined(string gameID)

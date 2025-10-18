@@ -14,11 +14,9 @@ namespace server_app
 	{
 		public static IHubContext<connection>? hubContext;
 
-		static async Task Main(string[] args)
+		static void Main(string[] args)
 		{
-			var logger = Logger.SetupAsync();
-			await Task.Delay(3000);
-			Logger.Log("aaaaaaaaa");
+			Logger.SetupAsync();
 
 			startNginx();
 			hostBuilder(args).Build().Run();
@@ -38,7 +36,7 @@ namespace server_app
 				UseShellExecute = true
 			};
 			Process.Start(startInfo);
-			Logger.Log("NGINX", ConsoleColor.White, $"Started process");
+			Logger.Log("NGINX", "white", $"Started process");
 
 			// kill nginx binded to server app close
 			AppDomain.CurrentDomain.ProcessExit += (sender, e) =>
@@ -48,7 +46,7 @@ namespace server_app
 					try
 					{
 						process.Kill();
-						Logger.Log("NGINX", ConsoleColor.White, $"Killed process <{process.Id}>");
+						Logger.Log("NGINX", "white", $"Killed process <{process.Id}>");
 					}
 					catch (Exception ex)
 					{
@@ -63,32 +61,33 @@ namespace server_app
 			IHostBuilder host = Host.CreateDefaultBuilder(args);
 			host.ConfigureWebHostDefaults(config =>
 			{
-				config.ConfigureServices(services =>
+			config.ConfigureServices(services =>
+			{
+				// add required services
+				services.AddSignalR();
+				services.AddCors(setup =>
 				{
-					// add required services
-					services.AddSignalR();
-					services.AddCors(setup =>
-					{
-						// allow any device to connect
-						setup.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin());
-					});
+					// allow any device to connect
+					setup.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin());
 				});
-				config.Configure(setup =>
+			});
+			config.Configure(setup =>
+			{
+				setup.UseRouting();
+				setup.Use((context, next) =>
 				{
-					setup.UseRouting();
-					setup.Use((context, next) =>
-					{
-						// load the hubContext
-						hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
-						return next(context);
-					});
-					setup.UseEndpoints(endpoints =>
-					{
-						// map endpoints to a class
-						endpoints.MapHub<connection>("/cs-nea/connections");
-						endpoints.MapHub<accounts>("/cs-nea/accounts");
-					});
+					// load the hubContext
+					hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
+					return next(context);
 				});
+				setup.UseEndpoints(endpoints =>
+				{
+					// map endpoints to a class
+					endpoints.MapHub<connection>("/cs-nea/connections");
+					endpoints.MapHub<accounts>("/cs-nea/accounts");
+				});
+			});
+			config.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.None));
 
 				// all ip addresses using port 3900
 				config.UseUrls("http://0.0.0.0:3900");

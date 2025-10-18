@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 namespace server_app
 {
 	public static class Logger
-	{
-		private static readonly Layout layout = new();
-		private static readonly Table loggerTable = new();
+	{		
 		public static void Log(string code, ConsoleColor codeColor, string message)
 		{
 			Console.ResetColor();
@@ -21,20 +19,22 @@ namespace server_app
 			Console.WriteLine($" ] {message}");
 		}
 
-		private static readonly Channel<string> _channel = Channel.CreateUnbounded<string>();
+		private static readonly Channel<(string code, string colour, string message)> _channel = Channel.CreateUnbounded<(string, string, string)>();
 
-		public static async Task Log(string message)
+		public static async void Log(string code, string colour, string message)
 		{
-			await _channel.Writer.WriteAsync(message);
+			await _channel.Writer.WriteAsync((code, colour, message));
 		}
 
-		public static async Task SetupAsync()
+		public static async void SetupAsync()
 		{
-			loggerTable.Border(TableBorder.Rounded);
-			loggerTable.Expand();
-			loggerTable.AddColumn("items");
+			Table loggerTable = new Table()
+				.NoBorder()
+				.Expand()
+				.AddColumn("")
+				.AddColumn("");
 
-			var loggerPanel = new Panel(loggerTable).Header("Logger", Justify.Center).Expand();
+			var loggerPanel = new Panel(loggerTable).Header("Logger", Justify.Left).Expand();
 
 			// elsewhere in your layout setup
 			var layout = new Layout("Root");
@@ -56,109 +56,24 @@ namespace server_app
 
 
 			var tcs = new TaskCompletionSource();
+			await AnsiConsole.Live(layout).StartAsync(ctx =>
+			{
+				ctx.Refresh();
+				Task.Run(() => readChannel());
+				return tcs.Task;
 
-			await AnsiConsole.Live(layout)
-				.StartAsync(ctx =>
+				async void readChannel()
 				{
-					ctx.Refresh();
-					_ = Task.Run(async () =>
+					while (await _channel.Reader.WaitToReadAsync())
 					{
-						while (await _channel.Reader.WaitToReadAsync())
+						while (_channel.Reader.TryRead(out var item))
 						{
-							while (_channel.Reader.TryRead(out var item))
-							{
-								loggerTable.AddRow(item);
-								ctx.Refresh();
-							}
+							loggerTable.AddRow($@"[{item.colour}]{item.code}[/]", item.message);
+							ctx.Refresh();
 						}
-					});
-
-					return tcs.Task;
-				});
-
-
-
-			//// Live update only the loggerPanel
-			//await AnsiConsole.Live(layout)
-			//	.StartAsync(async ctx =>
-			//	{
-			//		loggerTable.AddRow("aaaaa");
-			//		ctx.Refresh();
-
-			//		// Simulate external producer
-			//		_ = Task.Run(async () =>
-			//		{
-			//			await Task.Delay(1000);
-			//			await _channel.Writer.WriteAsync("First item");
-			//			await Task.Delay(1000);
-			//			await _channel.Writer.WriteAsync("Second item");
-			//		});
-
-
-
-			//		var reader = _channel.Reader;
-			//		while (await reader.WaitToReadAsync())
-			//		{
-			//			string item = await reader.ReadAsync();
-			//			loggerTable.AddRow(item);
-			//			ctx.Refresh();
-			//		}
-			//	});
-
-		}
-
-
-		private static async Task function(LiveDisplayContext ctx)
-		{
-			
-		}
-
-
-		public static Layout createLayout()
-		{
-
-			//layout.SplitRows(
-			//	new Layout("Top")
-			//		.SplitColumns(
-			//			new Layout("Left")
-			//				.SplitRows(
-			//					new Layout("LeftTop"),
-			//					new Layout("LeftBottom")),
-			//			new Layout("Right").Ratio(2),
-			//			new Layout("RightRight").Ratio(3)),
-			//	new Layout("Bottom"));
-
-			//layout["LeftBottom"].Update(
-			//	new Panel("[blink]CTRL+C to kill processes[/]")
-			//		.Expand()
-			//		.BorderColor(Color.Yellow)
-			//		.Padding(0, 0));
-
-			//layout["Right"].Update(
-			//	new Panel(
-			//		new Table()
-			//			.AddColumns("[blue]Qux[/]", "[green]Corgi[/]")
-			//			.AddRow("9", "8")
-			//			.AddRow("7", "6")
-			//			.Expand())
-			//	.Header("connected users")
-			//	.Expand());
-
-			
-				
-
-
-
-
-			//layout["RightRight"].Update(new Panel(logger).Expand().Header("logger"));
-
-
-			//layout["Bottom"].Update(
-			//new Panel("")
-			//	.Header("errors")
-			//	.Expand());
-
-			return layout;
+					}
+				}
+			});
 		}
 	}
 }
