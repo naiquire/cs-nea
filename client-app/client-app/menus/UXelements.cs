@@ -1086,6 +1086,15 @@ namespace client_app.menus
 			lbl_status.ResetText();
 		}
 
+		public static void configVersusResults(Panel panel_main, string winner)
+		{
+
+		}
+		public static void configKnockoutResults(Panel panel_main)
+		{
+
+		}
+
 		public static void configEndGamePanel(abstractGame game, List<char> letters, gameStats statistics)
 		{
 			game.main.panel_main.Controls.Clear();

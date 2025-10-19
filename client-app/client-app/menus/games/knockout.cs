@@ -87,7 +87,7 @@ namespace client_app.games
 
 			if (aliveUsers.Contains(main.userData.userID))
 			{
-				// add to results screen
+				UXelements.configKnockoutResults(main.panel_main);
 			}
 			else
 			{

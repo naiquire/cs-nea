@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 
 namespace client_app.menus
 {
@@ -281,33 +282,36 @@ namespace client_app.menus
 					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
-				Panel bar_base = new System.Windows.Forms.Panel()
+				Guna2Panel bar_base = new Guna2Panel()
 				{
 					BackColor = System.Drawing.SystemColors.ControlLight,
+					BorderRadius = 3,
+					FillColor = System.Drawing.SystemColors.ControlLight,
 					Location = new System.Drawing.Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
 					Name = "bar_base",
 					Size = new System.Drawing.Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
-					TabIndex = 4,
-					BorderStyle = BorderStyle.FixedSingle,
+					TabStop = false,
 				};
-				Panel bar_fill = new System.Windows.Forms.Panel()
+				Guna2Panel bar_fill = new Guna2Panel()
 				{
 					BackColor = System.Drawing.ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
+					BorderRadius = 3,
+					FillColor = System.Drawing.ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
 					Location = new System.Drawing.Point(bar_base.Location.X, bar_base.Location.Y),
 					Name = "panel_fill",
 					Size = new System.Drawing.Size(((int)(accuracy * bar_base.Size.Width)), bar_base.Size.Height),
-					TabIndex = 5,
-					BorderStyle = BorderStyle.FixedSingle,
+					TabStop = false,
 				};
-				
-				Panel panel_char = new System.Windows.Forms.Panel()
+
+				Guna2Panel panel_char = new Guna2Panel()
 				{
 					BackColor = System.Drawing.SystemColors.ControlDark,
+					BorderRadius = 10,
+					FillColor = System.Drawing.SystemColors.ControlDark,
 					Location = new System.Drawing.Point(X, y),
 					Name = "panel_char",
 					Size = new System.Drawing.Size(panelX, panelY),
-					TabIndex = 0,
-					BorderStyle = BorderStyle.FixedSingle,
+					TabStop = false,
 				};
 
 				panel_char.Controls.Add(bar_fill);
@@ -325,12 +329,12 @@ namespace client_app.menus
 			}
 		}
 
-		private Guna.UI2.WinForms.Guna2TextBox lbl_username;
-		private Guna.UI2.WinForms.Guna2TextBox lbl_rank;
-		private Guna.UI2.WinForms.Guna2TextBox lbl_total;
-		private Guna.UI2.WinForms.Guna2TextBox lbl_accuracy;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_addFriends;
-		private Guna.UI2.WinForms.Guna2GradientButton btn_removeFriends;
+		private Guna2TextBox lbl_username;
+		private Guna2TextBox lbl_rank;
+		private Guna2TextBox lbl_total;
+		private Guna2TextBox lbl_accuracy;
+		private Guna2GradientButton btn_addFriends;
+		private Guna2GradientButton btn_removeFriends;
 		private PictureBox pic_seperator;
 		private Panel panel_stats;
 

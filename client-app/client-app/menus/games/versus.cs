@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using client_app.menus;
 
 namespace client_app.games
 {
@@ -45,14 +46,7 @@ namespace client_app.games
 
 		public void versusResults(string winner)
 		{
-			TextBox txt_winner = new TextBox()
-			{
-				Location = new Point(100, 100),
-				Size = new Size(300, 50),
-				Text = winner,
-			};
-
-			main.panel_main.Controls.Add(txt_winner);
+			UXelements.configVersusResults(main.panel_main, winner);
 		}
 
 		public override void endGame()
@@ -67,7 +61,7 @@ namespace client_app.games
 
 			main.userData.rank = currentRank;
 
-			// display graphic showing change on endscreen
+			
 		}
 	}
 }
