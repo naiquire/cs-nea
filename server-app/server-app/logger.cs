@@ -19,22 +19,37 @@ namespace server_app
 			Console.WriteLine($" ] {message}");
 		}
 
-		private static readonly Channel<(string code, string colour, string message)> _channel = Channel.CreateUnbounded<(string, string, string)>();
+		private static readonly Channel<(string code, string colour, string message)> _logChannel = Channel.CreateUnbounded<(string, string, string)>();
+		private static readonly Channel<string> _errorChannel = Channel.CreateUnbounded<string>();
 
 		public static async void Log(string code, string colour, string message)
 		{
-			await _channel.Writer.WriteAsync((code, colour, message));
+			await _logChannel.Writer.WriteAsync((code, colour, message));
+		}
+		public static async void ErrorLog(string message)
+		{
+			await _errorChannel.Writer.WriteAsync(message);
+		}
+		public static async void ErrorLog(Exception ex)
+		{
+			await _errorChannel.Writer.WriteAsync(ex.Message);
 		}
 
-		public static async void SetupAsync()
+		public static void SetupAsync()
 		{
 			Table loggerTable = new Table()
 				.NoBorder()
 				.Expand()
 				.AddColumn("")
 				.AddColumn("");
+            Table errorTable = new Table()
+                .NoBorder()
+                .Expand()
+                .AddColumn("")
+                .AddColumn("");
 
-			var loggerPanel = new Panel(loggerTable).Header("Logger", Justify.Left).Expand();
+            var loggerPanel = new Panel(loggerTable).Header("Logger", Justify.Left).Expand();
+            var errorPanel = new Panel(errorTable).Header("Errors", Justify.Left).Expand();
 
 			// elsewhere in your layout setup
 			var layout = new Layout("Root");
@@ -48,7 +63,7 @@ namespace server_app
 
 			topLeft.Update(new Panel("topleft").Expand().Header("topleft"));
 			topRight.Update(loggerPanel);
-			bottom.Update(new Panel("bottom").Expand().Header("bottom"));
+			bottom.Update(errorPanel);
 
 			top.SplitColumns(topLeft, topRight);
 
@@ -56,24 +71,36 @@ namespace server_app
 
 
 			var tcs = new TaskCompletionSource();
-			await AnsiConsole.Live(layout).StartAsync(ctx =>
+			_ = AnsiConsole.Live(layout).StartAsync(ctx =>
 			{
 				ctx.Refresh();
-				Task.Run(() => readChannel());
+				Task.Run(() => readLogChannel());
+				Task.Run(() => readErrorChannel());
 				return tcs.Task;
 
-				async void readChannel()
+				async void readLogChannel()
 				{
-					while (await _channel.Reader.WaitToReadAsync())
+					while (await _logChannel.Reader.WaitToReadAsync())
 					{
-						while (_channel.Reader.TryRead(out var item))
+						while (_logChannel.Reader.TryRead(out var item))
 						{
 							loggerTable.AddRow($@"[{item.colour}]{item.code}[/]", item.message);
 							ctx.Refresh();
 						}
 					}
 				}
-			});
+                async void readErrorChannel()
+                {
+                    while (await _errorChannel.Reader.WaitToReadAsync())
+                    {
+                        while (_errorChannel.Reader.TryRead(out var item))
+                        {
+                            errorTable.AddRow($@"[red]ERROR[/]", item);
+                            ctx.Refresh();
+                        }
+                    }
+                }
+            });
 		}
 	}
 }

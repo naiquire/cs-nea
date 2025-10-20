@@ -341,7 +341,6 @@ H:\CompSci\cs-nea\client-app\client-app\obj\Debug\client-app.pdb
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client-app.csproj.AssemblyReference.cache
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client-app.exe.config
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client_app.components.update.resources
-\\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client_app.menus.interfaces.resources
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client_app.login.resources
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client_app.main.resources
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client_app.Properties.Resources.resources
@@ -351,3 +350,4 @@ H:\CompSci\cs-nea\client-app\client-app\obj\Debug\client-app.pdb
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client-app.exe
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client-app.pdb
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.menus.UXelements.resources
+\\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\client_app.menus.UXelements.resources

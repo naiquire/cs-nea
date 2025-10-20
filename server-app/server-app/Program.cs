@@ -6,6 +6,7 @@ using Spectre.Console;
 using Spectre.Console.Rendering;
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 
 namespace server_app
@@ -18,8 +19,11 @@ namespace server_app
 		{
 			Logger.SetupAsync();
 
-			startNginx();
-			hostBuilder(args).Build().Run();
+            //startNginx();
+            hostBuilder(args).Build().Run();
+
+
+			
 		}
 
 
@@ -36,6 +40,7 @@ namespace server_app
 				UseShellExecute = true
 			};
 			Process.Start(startInfo);
+
 			Logger.Log("NGINX", "white", $"Started process");
 
 			// kill nginx binded to server app close

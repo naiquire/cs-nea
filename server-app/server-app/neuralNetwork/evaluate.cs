@@ -1,4 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
+using server_app.databases;
 
 namespace server_app.neuralNetwork
 {
@@ -22,8 +23,15 @@ namespace server_app.neuralNetwork
 			activatedValues[0] = input;
 
 			// load weights and biases
-			weights = data.weights;
-			biases = data.biases;
+			try
+			{
+				weights = data.weights;
+				biases = data.biases;
+			}
+			catch (Exception ex)
+			{
+				database.outputException(ex);
+			}
 
 			evaluateNetwork();
 		}

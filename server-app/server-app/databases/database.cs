@@ -54,12 +54,12 @@ namespace server_app.databases
 		public static void outputException(Exception ex)
 		{
 			// if exception occurs then log the message and allow the client to try again
-			Logger.Log("ERROR", "red", ex.ToString());
+			Logger.ErrorLog(ex);
 		}
 		public static void outputException(string ex)
 		{
 			// if exception occurs then log the message and allow the client to try again
-			Logger.Log("ERROR", "red", ex);
+			Logger.ErrorLog(ex);
 		}
 
 		public static bool loginRequest(string userID, string password, out int success)
