@@ -20,16 +20,17 @@ namespace server_app.connections
 		}
 		public async Task<bool> loadUserData(string userID)
 		{
-			if (database.loadUserData(userID, out userData userData))
+			if (!database.loadUserData(userID, out userData userData))
 			{
-				if (map.TryGetValue(userID, out string? connectionID))
-				{
-					await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
-				}
-				return true;
-			}
-			return false;
-		}
+                return false;
+            }
+			
+            if (map.TryGetValue(userID, out string? connectionID))
+            {
+                await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
+            }
+            return true;
+        }
 		public async void clientDisconnected(string userID)
 		{
 			await updateOnline(userID, false);
@@ -49,7 +50,6 @@ namespace server_app.connections
 					}
 				}
 			}
-			// nothing can be done about this in terms of sending error message to client
 		}
 	}
 }

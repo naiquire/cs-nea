@@ -31,6 +31,7 @@ namespace server_app.connections
 			if (!database.loadFriends(userID, out var friends))
 			{
 				database.outputException($"Failed to load friends for <{userID}>");
+				return false;
 			}
 
 			foreach (var friend in friends)
@@ -108,14 +109,14 @@ namespace server_app.connections
 			}
 
 			bool isRemoved = false;
-			if (!await updateFriendData(user2, user1, isRemoved))
+			if (!await updateFriendData(user1, user2, isRemoved))
 			{
-				if (map.TryGetValue(user2, out string? connectionID))
+				if (map.TryGetValue(user1, out string? connectionID))
 				{
-					await Clients.Client(connectionID).SendAsync("alert", $"Failed to retrieve data for friend <{user1}>");
+					await Clients.Client(connectionID).SendAsync("alert", $"Failed to retrieve data for friend <{user2}>");
 				}
 			}
-			if (!await updateFriendData(user1, user2, isRemoved))
+			if (!await updateFriendData(user2, user1, isRemoved))
 			{
 				return false;
 			}
