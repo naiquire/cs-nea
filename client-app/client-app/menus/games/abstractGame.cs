@@ -184,5 +184,6 @@ namespace client_app.menus.games
 		public string getType() => type;
 		public bool hasStarted() => started;
 		public int getRounds() => rounds;
+
 	}
 }

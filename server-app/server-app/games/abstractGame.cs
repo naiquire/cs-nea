@@ -185,11 +185,16 @@ namespace server_app.games
 
 		public virtual void loadResponse(string userID, byte[] input)
 		{
-            DateTime end = DateTime.UtcNow;
-            var ms = new MemoryStream(input);
-            var bmp = new Bitmap(ms);
-            double[] array = data.preprocessImage(bmp);
-            currentResponses.Add(userID, (array, end));
+            DateTime endTime = DateTime.UtcNow;
+			double[] array;
+
+            using (var ms = new MemoryStream(input))
+			{
+				var bmp = new Bitmap(ms);
+				array = data.preprocessImage(bmp);
+			}
+
+			currentResponses.Add(userID, (array, endTime));
         }
 		protected bool evaluateSubmission(ref evaluate evaluate, string userID, char character)
 		{
@@ -210,9 +215,9 @@ namespace server_app.games
 		}
 		protected async Task sendResult(string userID, gameStats stats)
 		{
-			bool correct = stats.correct[^1];
-			double accuracy = stats.accuracy[^1];
-			TimeSpan time = stats.time[^1];
+			bool correct = stats.correct[roundCount];
+			double accuracy = stats.accuracy[roundCount];
+			TimeSpan time = stats.time[roundCount];
 
 			if (connection.map.TryGetValue(userID, out string? connectionID))
 			{

@@ -15,16 +15,6 @@ namespace client_app.games
 			aliveUsers = new List<string>();
 		}
 
-		public override void queueGame()
-		{
-			base.queueGame();
-		}
-
-		public async override Task joinGameLobby()
-		{
-			await base.joinGameLobby();
-		}
-
 		public override void updateUsers(List<friendData> users)
 		{
 			if (hasStarted())
@@ -63,21 +53,6 @@ namespace client_app.games
 			}
 
 			base.awaitStart();
-		}
-
-		public override void startGame()
-		{
-			base.startGame();
-		}
-
-		public override void submissionPhase(char letter)
-		{
-			base.submissionPhase(letter);
-		}
-
-		public override void evaluationPhase(bool correct, double accuracy, TimeSpan time)
-		{
-			base.evaluationPhase(correct, accuracy, time);
 		}
 
 		public void knockoutResults(List<string> aliveUsers)

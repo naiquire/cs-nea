@@ -668,6 +668,7 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(panel_char);
 			game.main.panel_main.Controls.Add(game.btn_continue);
 		}
+
 		public static void configUserDataPanel(main main, userData userData)
 		{
 			main.panel_right.Controls.Clear();

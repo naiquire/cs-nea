@@ -117,16 +117,17 @@ namespace client_app
 						break;
 					}
 				}
-				if (index != -1)
+				if (index == -1)
 				{
-					var friend = userData.friends[index];
-					friend.aboutMe = aboutMe;
-					friend.localisation = localisation;
-					userData.friends[index] = friend;
-				}
-				new alert("Failed to update user data.");
-				return;
-			}
+                    new alert("Failed to update user data.");
+                    return;
+                }
+				
+                var friend = userData.friends[index];
+                friend.aboutMe = aboutMe;
+                friend.localisation = localisation;
+                userData.friends[index] = friend;
+            }
 			
 			bool isPlaying = menu.game != null;
 			bool isHome = menu.profile == null;

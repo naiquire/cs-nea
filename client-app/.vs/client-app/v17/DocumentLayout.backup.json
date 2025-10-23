@@ -3,7 +3,13 @@
   "WorkspaceRootPath": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\menus\\uxelements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\menus\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\versus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -12,19 +18,16 @@
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\knockout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\profile.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\menus\\games\\accuracy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\profile.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\abstractgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,36 +37,51 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "main.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\main.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\main.cs",
               "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\main.cs",
               "RelativeToolTip": "client-app\\menus\\main.cs",
-              "ViewState": "AgIAAB0BAAAAAAAAAAAhwDUBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAIwI4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-11T23:09:49.473Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
+              "Title": "accuracy.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\accuracy.cs",
+              "RelativeDocumentMoniker": "client-app\\menus\\games\\accuracy.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\accuracy.cs",
+              "RelativeToolTip": "client-app\\menus\\games\\accuracy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T14:23:51.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "knockout.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\knockout.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\games\\knockout.cs",
               "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\knockout.cs",
               "RelativeToolTip": "client-app\\menus\\games\\knockout.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAmwFkAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T16:10:32.32Z"
+              "WhenOpened": "2025-10-19T16:10:32.32Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "profile.Designer.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\profile.Designer.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\profile.Designer.cs",
@@ -75,7 +93,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "profile.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\profile.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\profile.cs",
@@ -87,32 +105,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "versus.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\versus.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\games\\versus.cs",
               "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\versus.cs",
               "RelativeToolTip": "client-app\\menus\\games\\versus.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAApwDAAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAWwBgAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T18:30:33.982Z"
+              "WhenOpened": "2025-10-16T18:30:33.982Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UXelements.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\UXelements.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\UXelements.cs",
               "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\UXelements.cs",
               "RelativeToolTip": "client-app\\menus\\UXelements.cs",
-              "ViewState": "AgIAAC0EAAAAAAAAAAAkwDwEAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAuwIwAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-12T17:45:58.205Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "hub-connection.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\hub-connection.cs",
               "RelativeDocumentMoniker": "client-app\\hub-connection.cs",
@@ -124,15 +143,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "abstractGame.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\abstractGame.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\games\\abstractGame.cs",
               "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\abstractGame.cs",
               "RelativeToolTip": "client-app\\menus\\games\\abstractGame.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAnwGwAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAiwKEAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-11T23:01:41.795Z"
+              "WhenOpened": "2025-10-11T23:01:41.795Z",
+              "EditorCaption": ""
             }
           ]
         }

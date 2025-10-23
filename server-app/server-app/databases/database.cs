@@ -5,6 +5,10 @@ namespace server_app.databases
 	/* the todo list of DOOM
 	 * 
 	 * home -> panel_main ui
+	 * client error handling on server crash
+	 * TRANSLATIONS
+	 * language not update when changed inside profile
+	 * can place cursor in home/aboutMe and other places
 	 * btn_home ui
 	 * game -> "next letter in" dissapears ONLY on round 1
 	 * game -> panel_drawing sometimes invisible until click

@@ -10,40 +10,5 @@ namespace client_app.games
 		{
 
 		}
-
-		public override void queueGame()
-		{
-			base.queueGame();
-		}
-
-		public async override Task joinGameLobby()
-		{
-			await base.joinGameLobby();
-		}
-
-		public override void awaitStart()
-		{
-			base.awaitStart();
-		}
-
-		public override void startGame()
-		{
-			base.startGame();
-		}
-
-		public override void submissionPhase(char letter)
-		{
-			base.submissionPhase(letter);
-		}
-
-		public override void evaluationPhase(bool correct, double accuracy, TimeSpan time)
-		{
-			base.evaluationPhase(correct, accuracy, time);
-		}
-
-		public override void endGame()
-		{
-			base.endGame();
-		}
 	}
 }
