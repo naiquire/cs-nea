@@ -647,7 +647,7 @@ namespace client_app.menus
 				Name = "btn_continue",
 				Size = new Size(680, 100),
 				TabIndex = 3,
-				Text = "Continue",
+				Text = languages.localisation["Continue"][main.userData.localisation],
 			};
 
 			panel_char.Controls.Add(bar_fill);
@@ -695,7 +695,7 @@ namespace client_app.menus
 				Name = "btn_profile",
 				Size = new Size(220, 50),
 				TabIndex = 3,
-				Text = "Profile",
+				Text = languages.localisation["Profile"][main.userData.localisation],
 			};
 			Guna2GradientButton btn_edit = new Guna2GradientButton()
 			{
@@ -708,7 +708,7 @@ namespace client_app.menus
 				Name = "btn_profile",
 				Size = new Size(220, 50),
 				TabIndex = 3,
-				Text = "Edit",
+				Text = languages.localisation["Edit"][main.userData.localisation],
 			};
 			Guna2TextBox lbl_userID = new Guna2TextBox()
 			{
