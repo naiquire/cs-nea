@@ -19,7 +19,7 @@ namespace server_app
 		{
 			Logger.SetupAsync();
 
-            //startNginx();
+            startNginx();
             hostBuilder(args).Build().Run();
 
 
