@@ -105,14 +105,16 @@ namespace server_app.neuralNetwork
 				}
 
 				// return clone of image with cropped dimensions and same pixel format
-				return image.Clone(new Rectangle(top, left, bottom - top + 1, right - left + 1), image.PixelFormat);
+				var aaa = image.Clone(new Rectangle(top, left, bottom - top + 1, right - left + 1), image.PixelFormat);
+				aaa.Save("aaa.png");
+				return aaa;
 			}
 
 			Bitmap extendToSquare(Bitmap image)
 			{
 				if (image.Width == image.Height)
 				{
-					return image;
+					return new Bitmap(image, 24, 24);
 				}
 				int largestDimension = Math.Max(image.Width, image.Height);
 				int offset = Math.Abs((image.Width - image.Height) / 2);

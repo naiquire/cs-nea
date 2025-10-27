@@ -188,7 +188,7 @@ namespace server_app.games
             DateTime endTime = DateTime.UtcNow;
 			double[] array;
 
-            using (var ms = new MemoryStream(input))
+			using (var ms = new MemoryStream(input))
 			{
 				var bmp = new Bitmap(ms);
 				array = data.preprocessImage(bmp);
