@@ -12,15 +12,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace client_app
 {
-	interface IUser
-	{
-		string userID { get; set; }
-		string aboutMe { get; set; }
-		string localisation { get; set; }
-		int rank { get; set; }
-	}
-
-	public struct userData : IUser
+	public struct userData
 	{
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
@@ -38,7 +30,7 @@ namespace client_app
 		public TimeSpan time { get; set; }
 		public int total { get; set; }
 	}
-	public struct friendData : IUser
+	public struct friendData
 	{
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
@@ -62,8 +54,8 @@ namespace client_app
 	{
 		public static HubConnection connection;
 		public static userData userData;
-		//public const string address = "http://[2a0e:cb01:184:e500:8c9:b6dd:4a72:f90e]:5252/cs-nea";
-		public const string address = "http://localhost:3900/cs-nea";
+		public const string address = "http://[2a0e:cb01:184:e500:8c9:b6dd:4a72:f90e]:5252/cs-nea";
+		//public const string address = "http://localhost:3900/cs-nea";
 
 
 		public main(string userID)
@@ -80,11 +72,24 @@ namespace client_app
 			connection = hub_connection.addHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
+			connection.Closed += connectionClosed;
+
 			if (!await connection.InvokeAsync<bool>("clientConnected", userID))
 			{
 				new alert("Failed to connect to server. Quitting application.");
 				Application.Exit();
 			}
+		}
+		private async Task connectionClosed(Exception arg)
+		{
+			var reconnectTask = hub_connection.startConnection(connection);
+			new alert("Disconnected from server. Attempting to reconnect...");
+			if (reconnectTask.Wait(30000))
+			{
+				await reconnectTask;
+				return;
+			}
+			Application.Exit();
 		}
 
 		public void loadAlert(string message)

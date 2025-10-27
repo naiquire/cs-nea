@@ -6,10 +6,11 @@ namespace server_app.neuralNetwork
 {
 	public static class @data
 	{
+		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? string.Empty}\neuralNetwork\data\";
+
 		public static readonly double[][,] weights = loadWeights();
 		public static readonly double[][] biases = loadBiases();
 
-		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? string.Empty}\neuralNetwork\data\";
 		public static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
 		public static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));
 		public static double[] softmax(double[] input)
@@ -180,7 +181,7 @@ namespace server_app.neuralNetwork
 			for (int i = 0; i < evaluate.layerCount - 1; i++)
 			{
 				weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
-				using (StreamReader sr = new($@"{location}weights\{i}.txt"))
+				using (StreamReader sr = new($@"C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\weights\{i}.txt"))
 				{
 					string[] lines = sr.ReadToEnd().Split('\n');
 					for (int j = 0; j < evaluate.layerSizes[i]; j++)

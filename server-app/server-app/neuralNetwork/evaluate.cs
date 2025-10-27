@@ -3,7 +3,6 @@ using server_app.databases;
 
 namespace server_app.neuralNetwork
 {
-	// neural network
 	public class @evaluate
 	{
 		public static readonly int[] layerSizes = [784, 144, 72, 26];
@@ -23,15 +22,8 @@ namespace server_app.neuralNetwork
 			activatedValues[0] = input;
 
 			// load weights and biases
-			try
-			{
-				weights = data.weights;
-				biases = data.biases;
-			}
-			catch (Exception ex)
-			{
-				database.outputException(ex);
-			}
+			weights = data.weights;
+			biases = data.biases;
 
 			evaluateNetwork();
 		}

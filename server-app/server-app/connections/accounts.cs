@@ -8,11 +8,12 @@ namespace server_app.connections
 		public static readonly Dictionary<string, string> map = [];
 		public async Task<bool> clientConnected(string userID)
 		{
-			map.Remove(userID);
+			map.Remove(userID); // failsafe for logouts on server crash
 			map.Add(userID, Context.ConnectionId);
 
 			if (!await loadUserData(userID))
 			{
+				map.Remove(userID);
 				return false;
 			}
 			await updateOnline(userID, true);

@@ -1,4 +1,5 @@
-﻿using client_app.games;
+﻿using client_app.components;
+using client_app.games;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,7 @@ namespace client_app
 
 			return connection;
 		}
+
 		public static HubConnection addLoginHandles(HubConnection connection)
 		{
 			connection.On<int, string>("loginSuccess", (success, userID) =>
@@ -58,6 +60,7 @@ namespace client_app
 
 			return connection;
 		}
+
 		public static HubConnection addHandles(HubConnection connection)
 		{
 			connection.On<userData>("receiveUserData", (userData) =>

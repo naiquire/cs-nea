@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -38,9 +39,19 @@ namespace client_app
 			connection = hub_connection.addLoginHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
-			this.lbl_connection.Text = "Connected";
-			pic_connecting.Stop();
+			connection.Closed += connectionClosed;
 
+			this.lbl_connection.Text = "Connected";
+			this.pic_connecting.Stop();
+		}
+
+		private async Task connectionClosed(Exception arg)
+		{
+			this.lbl_connection.Text = "Reconnecting";
+			this.pic_connecting.Start();
+			await hub_connection.startConnection(connection);
+			this.lbl_connection.Text = "Connected";
+			this.pic_connecting.Stop();
 		}
 
 		public void handleLoginSuccess(int success, string userID)
@@ -94,6 +105,7 @@ namespace client_app
 			string userID = txt_userID.Text.Trim();
 			string password = txt_password.Text;
 			this.lbl_information.ResetText();
+			
 			await connection.InvokeAsync("loginRequest", userID, password);
 		}
 		private void btn_createAccount_Click(object sender, EventArgs e)

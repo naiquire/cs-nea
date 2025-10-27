@@ -158,7 +158,7 @@ namespace client_app
             this.txt_userID.MaxLength = 32;
             this.txt_userID.Name = "txt_userID";
             this.txt_userID.PlaceholderForeColor = System.Drawing.Color.Gray;
-            this.txt_userID.PlaceholderText = languages.localisation[language]["Username"];
+            this.txt_userID.PlaceholderText = languages.localisation[main.userData.localisation]["Username"];
             this.txt_userID.SelectedText = "";
             this.txt_userID.TextOffset = new System.Drawing.Point(5, 0);
             // 
@@ -182,7 +182,7 @@ namespace client_app
             this.txt_password.IconLeftSize = new System.Drawing.Size(17, 20);
             this.txt_password.Name = "txt_password";
             this.txt_password.PlaceholderForeColor = System.Drawing.Color.Gray;
-            this.txt_password.PlaceholderText = languages.localisation[language]["Password"];
+            this.txt_password.PlaceholderText = languages.localisation[main.userData.localisation]["Password"];
             this.txt_password.SelectedText = "";
             this.txt_password.TextOffset = new System.Drawing.Point(5, 0);
             this.txt_password.UseSystemPasswordChar = true;

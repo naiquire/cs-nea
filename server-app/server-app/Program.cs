@@ -18,18 +18,10 @@ namespace server_app
 		static void Main(string[] args)
 		{
 			Logger.SetupAsync();
-
+			
             startNginx();
             hostBuilder(args).Build().Run();
-
-
-			
 		}
-
-
-
-
-
 
 		private static void startNginx()
 		{

@@ -5,7 +5,6 @@ namespace server_app.databases
 	/* the todo list of DOOM
 	 * 
 	 * home -> panel_main ui
-	 * client error handling on server crash
 	 * TRANSLATIONS
 	 * language not update when changed inside profile
 	 * can place cursor in home/aboutMe and other places
@@ -16,7 +15,6 @@ namespace server_app.databases
 	 * endGame ui
 	 * profile -> about me
 	 * cleanup ui code
-	 * ensure ALL server errors are handled by client in some way
 	 */
 
 	
