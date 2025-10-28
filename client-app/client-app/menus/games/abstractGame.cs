@@ -128,7 +128,7 @@ namespace client_app.menus.games
 		}
 		public async void awaitRound()
 		{
-			drawingPanel = UXelements.configGamePanel(this);			
+			drawingPanel = UXelements.configGamePanel(this);
 
 			btn_clear.Click += (sender, e) => drawingPanel.clearPanel();
 			btn_submit.Click += async (sender, e) =>

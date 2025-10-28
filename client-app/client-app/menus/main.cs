@@ -108,6 +108,7 @@ namespace client_app
 		{
 			if (userID == userData.userID)
 			{
+				// update userData
 				userData.aboutMe = aboutMe;
 				userData.localisation = localisation;
 			}
@@ -128,30 +129,33 @@ namespace client_app
                     return;
                 }
 				
+				// update friendData
                 var friend = userData.friends[index];
                 friend.aboutMe = aboutMe;
                 friend.localisation = localisation;
                 userData.friends[index] = friend;
+
+				return;
             }
 			
-			bool isPlaying = menu.game != null;
-			bool isHome = menu.profile == null;
-			bool isSelfUpdate = userID == userData.userID;
-
-			if (!isPlaying)
+			if (menu.game != null)
 			{
-				if (isHome && isSelfUpdate)
+				return;
+			}
+
+			if (menu.profile == null)
+			{
+				// if home then refresh all
+				btn_home.PerformClick();
+			}
+			else
+			{
+				configFriendsPanel();
+				UXelements.configUserDataPanel(this, userData);
+				if (menu.profile.getUserID() == userData.userID)
 				{
-					btn_home.PerformClick();
-				}
-				else if (menu.profile.getUserID() == userID)
-				{
-					userData refresh = menu.profile.getUserData();
-					menu.profile = new profile(this, refresh);
-					if (userID == userData.userID)
-					{
-						UXelements.configUserDataPanel(this, refresh);
-					}
+					// if viewing own profile then refresh
+					menu.profile = new profile(this, userData);
 				}
 			}
 		}

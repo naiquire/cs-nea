@@ -6,8 +6,7 @@ namespace server_app.databases
 	 * 
 	 * home -> panel_main ui
 	 * TRANSLATIONS
-	 * language not update when changed inside profile
-	 * can place cursor in home/aboutMe and other places
+	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
 	 * btn_home ui
 	 * game -> "next letter in" dissapears ONLY on round 1
 	 * game -> panel_drawing sometimes invisible until click
@@ -15,9 +14,11 @@ namespace server_app.databases
 	 * endGame ui
 	 * profile -> about me
 	 * cleanup ui code
+	 * profile -> language update not affecting some elements as they are defined in InitComp which cannot be called in profile
+	 * some langauge cause textboxes to break text position -> autosize?
 	 */
 
-	
+
 
 	public struct userData
 	{
@@ -106,67 +107,63 @@ namespace server_app.databases
 		}
 		public static bool accountRequest(string userID, string password, string localisation, out int success)
 		{
-			if (userExists(userID, out bool exists))
-			{
-				if (!exists)
-				{
-					string query = @"INSERT INTO userData
-						VALUES (@userID, @password, @aboutMe, @dateCreated, @rank, @localisation)";
-					try
-					{
-						connection.Open();
-						using (var command = new SqliteCommand(query, connection))
-						{
-							command.Parameters.AddWithValue("@userID", userID);
-							command.Parameters.AddWithValue("@password", password);
-							command.Parameters.AddWithValue("@aboutMe", "");
-							command.Parameters.AddWithValue("@dateCreated", DateTime.UtcNow);
-							command.Parameters.AddWithValue("@rank", 400);
-							command.Parameters.AddWithValue("@localisation", localisation);
-
-							command.ExecuteNonQuery();
-						}
-
-						for (int i = 0; i < 26; i++)
-						{
-							query = $@"INSERT INTO statistics
-								VALUES(@userID, @letter, @accuracy, @time, @total)";
-
-							using (var command = new SqliteCommand(query, connection))
-							{
-								command.Parameters.AddWithValue("@userID", userID);
-								command.Parameters.AddWithValue("@letter", ((char)(i + 65)).ToString());
-								command.Parameters.AddWithValue("@accuracy", 0);
-								command.Parameters.AddWithValue("@time", TimeSpan.Zero);
-								command.Parameters.AddWithValue("@total", 0);
-
-								command.ExecuteNonQuery();
-							}
-						}
-
-						connection.Close();
-						success = 1;
-						return true;
-					}
-					catch (Exception ex)
-					{
-						outputException(ex);
-						success = -1;
-						connection.Close();
-						return false;
-					}
-				}
-				else
-				{
-					success = 0;
-					return true;
-				}
-			}
-			else
+			if (!userExists(userID, out bool exists))
 			{
 				success = -1;
 				return false;
 			}
+			if (exists)
+			{
+				success = 0;
+				return true;
+			}
+
+			string query = @"INSERT INTO userData
+						VALUES (@userID, @password, @aboutMe, @dateCreated, @rank, @localisation)";
+			try
+			{
+				connection.Open();
+				using (var command = new SqliteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@userID", userID);
+					command.Parameters.AddWithValue("@password", password);
+					command.Parameters.AddWithValue("@aboutMe", "");
+					command.Parameters.AddWithValue("@dateCreated", DateTime.UtcNow);
+					command.Parameters.AddWithValue("@rank", 400);
+					command.Parameters.AddWithValue("@localisation", localisation);
+
+					command.ExecuteNonQuery();
+				}
+
+				for (int i = 0; i < 26; i++)
+				{
+					query = $@"INSERT INTO statistics
+								VALUES(@userID, @letter, @accuracy, @time, @total)";
+
+					using (var command = new SqliteCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@userID", userID);
+						command.Parameters.AddWithValue("@letter", ((char)(i + 65)).ToString());
+						command.Parameters.AddWithValue("@accuracy", 0);
+						command.Parameters.AddWithValue("@time", TimeSpan.Zero);
+						command.Parameters.AddWithValue("@total", 0);
+
+						command.ExecuteNonQuery();
+					}
+				}
+
+				connection.Close();
+				success = 1;
+				return true;
+			}
+			catch (Exception ex)
+			{
+				outputException(ex);
+				success = -1;
+				connection.Close();
+				return false;
+			}
+
 		}
 		public static bool userExists(string userID, out bool exists)
 		{

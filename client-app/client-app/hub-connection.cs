@@ -40,7 +40,10 @@ namespace client_app
 				}
 				catch
 				{
-					login.lbl_information.Text = "An error occured while connecting to the server";
+					if (login != null)
+					{
+						login.lbl_information.Text = "An error occured while connecting to the server";
+					}
 				}
 			}
 
