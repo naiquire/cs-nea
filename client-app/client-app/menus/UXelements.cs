@@ -17,6 +17,46 @@ namespace client_app.menus
 		public static int clientX = Screen.PrimaryScreen.WorkingArea.Width;
 		public static int clientY = Screen.PrimaryScreen.WorkingArea.Height;
 
+		static string letter = "K";
+		static bool correct = true;
+		static double accuracy = 97.48252623;
+		static TimeSpan time = TimeSpan.FromSeconds(6.763498);
+		private Guna2GradientButton btn_continue;
+		static (int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int) (255 * accuracy), 0);
+
+
+		public void aInitializeComponent()
+		{
+
+
+
+			this.btn_continue = new Guna.UI2.WinForms.Guna2GradientButton();
+			this.SuspendLayout();
+			// 
+			// btn_continue
+			// 
+			this.btn_continue.AutoRoundedCorners = true;
+			this.btn_continue.BorderRadius = 49;
+			this.btn_continue.FillColor = Color.FromArgb(247, 113, 163);
+			this.btn_continue.FillColor2 = Color.FromArgb(197, 113, 247);
+			this.btn_continue.Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold);
+			this.btn_continue.ForeColor = System.Drawing.Color.White;
+			this.btn_continue.Location = new Point(220, 900);
+			this.btn_continue.Name = "btn_continue";
+			this.btn_continue.Size = new Size(680, 100);
+			this.btn_continue.TabStop = false;
+			this.btn_continue.Text = "Continue";
+			// 
+			// UXelements
+			// 
+			this.ClientSize = new System.Drawing.Size(1120, 1061);
+			this.Controls.Add(this.btn_continue);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Name = "UXelements";
+			this.ResumeLayout(false);
+
+		}
+
 		public static void InitializeComponent(main main)
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
@@ -342,7 +382,7 @@ namespace client_app.menus
 
 		public static void configLeftGamePanel(abstractGame game, List<friendData> users)
 		{
-			game.main.panel_left.Controls.Clear();
+			game.main.panel_left.Controls.Clear(); // will clear countdown of its happening
 
 			Panel panel_players = new Panel()
 			{
@@ -761,7 +801,7 @@ namespace client_app.menus
 				{
 					if (!await main.connection.InvokeAsync<bool>("updateUserData", main.userData.userID, update.getAboutMe(), update.getLocalisation()))
 					{
-						new alert("Failed to update profile. Please try again.");
+						main.loadAlert("Failed to update profile. Please try again.");
 					}
 				}
 			};

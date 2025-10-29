@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.neuralNetwork;
-using System.Drawing;
 
 namespace server_app.games
 {

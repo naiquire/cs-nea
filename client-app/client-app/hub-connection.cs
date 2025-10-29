@@ -40,10 +40,7 @@ namespace client_app
 				}
 				catch
 				{
-					if (login != null)
-					{
-						login.lbl_information.Text = "An error occured while connecting to the server";
-					}
+					login?.Invoke(new Action(() => login.lbl_information.Text = "An error occured while connecting to the server"));
 				}
 			}
 

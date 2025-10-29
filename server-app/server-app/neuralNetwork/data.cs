@@ -90,12 +90,14 @@ namespace server_app.neuralNetwork
 				int right = -1;
 				int bottom = -1;
 
+				bool pixelExists = false;
 				for (int y = 0; y < image.Height; y++)
 				{
 					for (int x = 0; x < image.Width; x++)
 					{
 						if (image.GetPixel(y, x).Name != "ffffffff")
 						{
+							pixelExists = true;
 							if (y < top) top = y;
 							if (y > bottom) bottom = y;
 							if (x < left) left = x;
@@ -104,10 +106,14 @@ namespace server_app.neuralNetwork
 					}
 				}
 
+				if (!pixelExists)
+				{
+					// failsafe for empty image
+					return image;
+				}
+
 				// return clone of image with cropped dimensions and same pixel format
-				var aaa = image.Clone(new Rectangle(top, left, bottom - top + 1, right - left + 1), image.PixelFormat);
-				aaa.Save("aaa.png");
-				return aaa;
+				return image.Clone(new Rectangle(top, left, bottom - top + 1, right - left + 1), image.PixelFormat);
 			}
 
 			Bitmap extendToSquare(Bitmap image)

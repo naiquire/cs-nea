@@ -47,11 +47,17 @@ namespace client_app
 
 		private async Task connectionClosed(Exception arg)
 		{
-			this.lbl_connection.Text = "Reconnecting";
-			this.pic_connecting.Start();
+			this.Invoke(new Action(() =>
+			{
+				this.lbl_connection.Text = "Reconnecting";
+				this.pic_connecting.Start();
+			}));
 			await hub_connection.startConnection(connection);
-			this.lbl_connection.Text = "Connected";
-			this.pic_connecting.Stop();
+			this.Invoke(new Action(() =>
+			{
+				this.lbl_connection.Text = "Connected";
+				this.pic_connecting.Stop();
+			}));
 		}
 
 		public void handleLoginSuccess(int success, string userID)
@@ -64,7 +70,8 @@ namespace client_app
 				case VALID:
 					Hide();
 					new main(userID).ShowDialog();
-					Close();
+					Show();
+					//Close();
 					break;
 				case USER_DOES_NOT_EXIST:
 					lbl_information.Text = "Account does not exist";
@@ -86,7 +93,8 @@ namespace client_app
 				case VALID:
 					Hide();
 					new main(userID).ShowDialog();
-					Close();
+					Show();
+					//Close();
 					break;
 				case USERID_TAKEN:
 					lbl_information.Text = "Username is not available";

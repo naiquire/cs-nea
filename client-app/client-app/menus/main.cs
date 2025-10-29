@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using client_app.components;
@@ -63,7 +65,7 @@ namespace client_app
 			hub_connection.injectForm(null, this);
 
 			UXelements.InitializeComponent(this);
-			initialiseConnection(userID);			
+			initialiseConnection(userID);
 
 		}
 		private async void initialiseConnection(string userID)
@@ -76,25 +78,30 @@ namespace client_app
 
 			if (!await connection.InvokeAsync<bool>("clientConnected", userID))
 			{
-				new alert("Failed to connect to server. Quitting application.");
-				Application.Exit();
+				loadAlert("Failed to connect to server. Quitting application.");
+				Close();
 			}
 		}
 		private async Task connectionClosed(Exception arg)
 		{
-			var reconnectTask = hub_connection.startConnection(connection);
-			new alert("Disconnected from server. Attempting to reconnect...");
-			if (reconnectTask.Wait(30000))
+			var alert = Task.Run(() =>
 			{
-				await reconnectTask;
+				return loadAlert("Disconnected from server. Attempting to reconnect...", false);
+			});
+
+			var reconnectTask = hub_connection.startConnection(connection);
+			await Task.Delay(5000);
+			alert.Result.Close();
+			if (!reconnectTask.IsCompleted)
+			{
+				this.Invoke(new Action(() => this.Close()));
 				return;
 			}
-			Application.Exit();
 		}
 
-		public void loadAlert(string message)
+		public static alert loadAlert(string message, bool closeButton = true)
 		{
-			new alert(message);
+			return new alert(message, closeButton);
 		}
 		public async void clientConnected(userData userData)
 		{
@@ -125,10 +132,10 @@ namespace client_app
 				}
 				if (index == -1)
 				{
-                    new alert("Failed to update user data.");
+                    loadAlert("Failed to update user data.");
                     return;
                 }
-				
+
 				// update friendData
                 var friend = userData.friends[index];
                 friend.aboutMe = aboutMe;
@@ -137,7 +144,7 @@ namespace client_app
 
 				return;
             }
-			
+
 			if (menu.game != null)
 			{
 				return;
@@ -175,8 +182,9 @@ namespace client_app
 			copy.online = online;
 			userData.friends[index] = copy;
 
-			if (menu.game == null) // user is not in-game
+			if (menu.game == null)
 			{
+				// user is not in-game
 				configFriendsPanel();
 			}
 		}
@@ -196,8 +204,9 @@ namespace client_app
 				userData.friends.Add(data);
 			}
 
-			if (menu.game == null) // user is not in-game
+			if (menu.game == null)
 			{
+				// user is not in-game
 				configFriendsPanel();
 			}
 		}
@@ -212,8 +221,9 @@ namespace client_app
 				}
 			}
 
-			if (menu.game == null) // user is not in-game
+			if (menu.game == null)
 			{
+				// user is not in-game
 				configFriendsPanel();
 			}
 		}
@@ -226,7 +236,7 @@ namespace client_app
 				{
 					if (!await connection.InvokeAsync<bool>("addFriends", invite, userData.userID))
 					{
-						new alert("Failed to accept friend invite.");
+						loadAlert("Failed to accept friend invite.");
 					}
 				}
 			}
@@ -268,7 +278,7 @@ namespace client_app
 			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 			if (user.userID != userID)
 			{
-				new alert($"Could not find user with username: {userID}");
+				loadAlert($"Could not find user with username: {userID}");
 			}
 			else
 			{

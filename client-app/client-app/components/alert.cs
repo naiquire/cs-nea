@@ -8,7 +8,7 @@ namespace client_app.components
 		private readonly Guna.UI2.WinForms.Guna2TextBox header;
 		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_close;
 
-		public alert(string text)
+		public alert(string text, bool closeButton)
 		{
 			SuspendLayout();
 
@@ -50,7 +50,10 @@ namespace client_app.components
 			BackColor = Color.FromArgb(208, 208, 208);
 			ClientSize = new Size(800, 400);
 			Controls.Add(header);
-			Controls.Add(btn_close);
+			if (closeButton)
+			{
+				Controls.Add(btn_close);
+			}
 			FormBorderStyle = FormBorderStyle.None;
 			Name = "abstractMenu";
 			ShowIcon = false;

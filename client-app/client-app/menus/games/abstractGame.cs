@@ -89,7 +89,7 @@ namespace client_app.menus.games
 				UXelements.configLobbyPanel(this, users);
 			}
 
-			UXelements.configLeftGamePanel(this, users);			
+			UXelements.configLeftGamePanel(this, users);
 			main.panel_left.Controls.Add(main.btn_home);
 
 		}
@@ -99,7 +99,7 @@ namespace client_app.menus.games
 
 			if (string.IsNullOrEmpty(gameID))
 			{
-				new alert("An error occured queueing for a game. Please try again.");
+				main.loadAlert("An error occured queueing for a game. Please try again.");
 				main.btn_home.PerformClick();
 			}
 			else
@@ -113,7 +113,7 @@ namespace client_app.menus.games
 			UXelements.initialiseLobby(main);
 			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
-				new alert("An error occured joining the game. Please try again.");
+				main.loadAlert("An error occured joining the game. Please try again.");
 				main.btn_home.PerformClick();
 			}
 		}
@@ -164,7 +164,6 @@ namespace client_app.menus.games
 			drawingPanel.enablePanel();
 			btn_submit.Enabled = true;
 			btn_clear.Enabled = true;
-			
 		}
 		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{

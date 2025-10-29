@@ -64,7 +64,7 @@ namespace client_app.menus
             btn_addFriends.Enabled = false;
             if (!await main.connection.InvokeAsync<bool>("sendInvite", user.userID, main.userData.userID))
             {
-                new alert("Failed to send friend invite. Please try again.");
+                main.loadAlert("Failed to send friend invite. Please try again.");
             }
         }
 
@@ -73,7 +73,7 @@ namespace client_app.menus
             btn_removeFriends.Enabled = false;
             if (!await main.connection.InvokeAsync<bool>("removeFriends", user.userID, main.userData.userID))
             {
-                new alert("Failed to remove friend. Please try again");
+                main.loadAlert("Failed to remove friend. Please try again");
             }
         }
     }
