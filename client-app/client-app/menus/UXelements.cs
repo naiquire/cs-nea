@@ -18,43 +18,29 @@ namespace client_app.menus
 		public static int clientX = Screen.PrimaryScreen.WorkingArea.Width;
 		public static int clientY = Screen.PrimaryScreen.WorkingArea.Height;
 
-		static string letter = "K";
-		static bool correct = true;
-		static double accuracy = 97.48252623;
-		static TimeSpan time = TimeSpan.FromSeconds(6.763498);
 		private Guna2GradientButton btn_continue;
-		static (int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int) (255 * accuracy), 0);
+		private Guna2Panel panel_results;
+		private Guna2HtmlLabel lbl_letter;
+		private Guna2Shapes shape_letterOutline;
+		private Guna2PictureBox seperator;
+		private Guna2HtmlLabel guna2HtmlLabel1;
+		private Guna2ProgressBar bar_accuracy;
+		private Guna2HtmlLabel lbl_accuracy;
+		private Guna2TextBox txt_accuracyDiff;
+		private Guna2TextBox txt_timeDiff;
+		private Guna2HtmlLabel lbl_time;
+		private Guna2ProgressBar bar_time;
+		private Guna2HtmlLabel lbl_diff;
+		private Guna2HtmlLabel lbl_correct;
+		private Guna2HtmlLabel lbl_eliminated;
+		private Guna2HtmlLabel lbl_eliminateReason;
+		private Guna2HtmlLabel lbl_winner;
+		private Guna2ProgressBar bar_winner;
 
 
 		public void aInitializeComponent()
 		{
 
-
-
-			this.btn_continue = new Guna.UI2.WinForms.Guna2GradientButton();
-			this.SuspendLayout();
-			// 
-			// btn_continue
-			// 
-			this.btn_continue.AutoRoundedCorners = true;
-			this.btn_continue.BorderRadius = 49;
-			this.btn_continue.FillColor = Color.FromArgb(247, 113, 163);
-			this.btn_continue.FillColor2 = Color.FromArgb(197, 113, 247);
-			this.btn_continue.Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold);
-			this.btn_continue.ForeColor = System.Drawing.Color.White;
-			this.btn_continue.Location = new Point(220, 900);
-			this.btn_continue.Name = "btn_continue";
-			this.btn_continue.Size = new Size(680, 100);
-			this.btn_continue.TabStop = false;
-			this.btn_continue.Text = "Continue";
-			// 
-			// UXelements
-			// 
-			this.ClientSize = new System.Drawing.Size(1120, 1061);
-			this.Controls.Add(this.btn_continue);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Name = "UXelements";
-			this.ResumeLayout(false);
 
 		}
 
@@ -136,7 +122,7 @@ namespace client_app.menus
 			// 
 			// panel_main
 			// 
-			main.panel_main.BackColor = Color.FromArgb(104, 104, 104); ;
+			main.panel_main.BackColor = Color.FromArgb(104, 104, 104);
 			main.panel_main.Location = new Point(300, 30);
 			main.panel_main.Name = "panel_main";
 			main.panel_main.Size = new Size(1120, clientY - 30);
@@ -589,94 +575,24 @@ namespace client_app.menus
 			configCountdown(game);
 		}
 
-		public static void configResultsPanel(abstractGame game, char c, gameStats stats)
+		public static Guna2Panel configResultsPanel(abstractGame game, char c, gameStats stats)
 		{
 			game.main.panel_main.Controls.Clear();
-
-			const int X = 100;
-			int y = 500;
-
-			const int panelX = 900;
-			const int panelY = 50;
-			const int padding = 5;
-			const int defaultSize = panelY - 2 * padding;
 
 			string letter = c.ToString();
 			bool correct = stats.correct.Last();
 			double accuracy = stats.accuracy.Last();
 			TimeSpan time = stats.time.Last();
 
-			(int r, int g, int b) = ((int)(255 * (1 - accuracy)), (int)(255 * accuracy), 0);
+			double accuracyDelta = accuracy - main.userData.statistics[c].accuracy;
+			string accuracyDeltaText = $"{(accuracyDelta < 0 ? "" : "+")}{Math.Round(accuracyDelta * 100, 2)}";
+			Color accuracyColour = accuracyDelta < 0 ? Color.Red : Color.Lime;
 
-			Label lbl_letter = new Label()
-			{
-				Location = new Point(0 + padding, 0 + padding),
-				Name = "lbl_letter",
-				Size = new Size(defaultSize, defaultSize),
-				TabIndex = 0,
-				Text = letter,
-				TextAlign = ContentAlignment.MiddleCenter,
-				BorderStyle = BorderStyle.FixedSingle,
-			};
-			Label lbl_total = new Label()
-			{
-				Location = new Point(panelX - 2 * defaultSize - padding, padding),
-				Name = "lbl_total",
-				Size = new Size(2 * defaultSize, defaultSize),
-				TabIndex = 1,
-				Text = correct.ToString(),
-				TextAlign = ContentAlignment.MiddleCenter,
-				BorderStyle = BorderStyle.FixedSingle,
-			};
-			Label lbl_time = new Label()
-			{
-				Location = new Point(lbl_total.Location.X - 2 * defaultSize - padding, padding),
-				Name = "lbl_time",
-				Size = new Size(2 * defaultSize, defaultSize),
-				TabIndex = 2,
-				Text = $"{time.TotalSeconds}",
-				TextAlign = ContentAlignment.MiddleCenter,
-				BorderStyle = BorderStyle.FixedSingle,
-			};
-			Label lbl_percentage = new Label()
-			{
-				Location = new Point(lbl_time.Location.X - defaultSize - padding, padding),
-				Name = "lbl_percentage",
-				Size = new Size(defaultSize, defaultSize),
-				TabIndex = 3,
-				Text = $"{Math.Round(100 * accuracy, 2)}%",
-				TextAlign = ContentAlignment.MiddleCenter,
-				BorderStyle = BorderStyle.FixedSingle,
-			};
-			Panel bar_base = new Panel()
-			{
-				BackColor = SystemColors.ControlLight,
-				Location = new Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
-				Name = "bar_base",
-				Size = new Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
-				TabIndex = 4,
-				BorderStyle = BorderStyle.FixedSingle,
-			};
-			Panel bar_fill = new Panel()
-			{
-				BackColor = ColorTranslator.FromHtml($"{r}, {g}, {b}"),
-				Location = new Point(bar_base.Location.X, bar_base.Location.Y),
-				Name = "panel_fill",
-				Size = new Size((int)(accuracy * bar_base.Size.Width), bar_base.Size.Height),
-				TabIndex = 5,
-				BorderStyle = BorderStyle.FixedSingle,
-			};
+			double timeDelta = time.TotalSeconds - main.userData.statistics[c].time.TotalSeconds;
+			string timeDeltaText = $"{(timeDelta < 0 ? "" : "+")}{Math.Round(timeDelta, 2)}";
+			Color timeColour = timeDelta < 0 ? Color.Lime : Color.Red;
 
-			Panel panel_char = new Panel()
-			{
-				BackColor = SystemColors.ControlDark,
-				Location = new Point(X, y),
-				Name = "panel_char",
-				Size = new Size(panelX, panelY),
-				TabIndex = 0,
-				BorderStyle = BorderStyle.FixedSingle,
-			};
-			game.btn_continue = new Guna2GradientButton()
+			Guna2GradientButton btn_continue = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 49,
@@ -685,29 +601,226 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
 				ForeColor = Color.White,
 				Location = new Point(220, 900),
-				Name = "btn_continue",
 				Size = new Size(680, 100),
-				TabIndex = 3,
-				Text = languages.localisation["Continue"][main.userData.localisation],
+				TabStop = false,
+				Text = "Continue",
+			};
+			Guna2Panel panel_results = new Guna2Panel()
+			{
+				BorderRadius = 30,
+				FillColor = Color.FromArgb(62, 55, 55),
+				Location = new Point(110, 200),
+				Size = new Size(900, 500),
+				TabStop = false,
+			};
+			Guna2TextBox txt_timeDiff = new Guna2TextBox()
+			{
+				BackColor = Color.Transparent,
+				BorderColor = Color.Empty,
+				BorderRadius = 20,
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				FillColor = Color.FromArgb(82, 65, 65),
+				Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.Empty,
+				Location = new Point(740, 270),
+				PlaceholderForeColor = timeColour,
+				PlaceholderText = timeDeltaText,
+				ReadOnly = true,
+				Size = new Size(140, 40),
+				TabStop = false,
+				TextAlign = HorizontalAlignment.Center,
+				TextOffset = new Point(0, -1),
+			};
+			Guna2HtmlLabel lbl_time = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.White,
+				Location = new Point(40, 270),
+				Size = new Size(160, 40),
+				TabStop = false,
+				Text = "Time",
+				TextAlignment = ContentAlignment.TopRight,
+			};
+			Guna2ProgressBar bar_time = new Guna2ProgressBar()
+			{
+				BackColor = Color.Transparent,
+				BorderRadius = 15,
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift", 14.75F),
+				ForeColor = Color.Black,
+				Location = new Point(220, 275),
+				ProgressColor = Color.White,
+				ProgressColor2 = Color.FromArgb(208, 208, 208),
+				RightToLeft = RightToLeft.No,
+				ShowText = true,
+				Size = new Size(500, 30),
+				Style = ProgressBarStyle.Continuous,
+				TabStop = false,
+				Text = time.ToString(@"mm\:ss\:ff"),
+				TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Custom,
+				TextOffset = new Point(0, 2),
+				TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault,
+				UseTransparentBackground = true,
+				Value = 100,
+			};
+			Guna2TextBox txt_accuracyDiff = new Guna2TextBox()
+			{
+				BackColor = Color.Transparent,
+				BorderColor = Color.Empty,
+				BorderRadius = 20,
+				BorderThickness = 0,
+				Cursor = Cursors.Arrow,
+				FillColor = Color.FromArgb(82, 65, 65),
+				Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.Empty,
+				Location = new Point(740, 220),
+				PlaceholderForeColor = accuracyColour,
+				PlaceholderText = accuracyDeltaText,
+				ReadOnly = true,
+				Size = new Size(140, 40),
+				TabStop = false,
+				TextAlign = HorizontalAlignment.Center,
+				TextOffset = new Point(0, -1),
+			};
+			Guna2HtmlLabel lbl_accuracy = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.White,
+				Location = new Point(40, 220),
+				Size = new Size(160, 40),
+				TabStop = false,
+				Text = "Accuracy",
+				TextAlignment = ContentAlignment.TopRight,
+			};
+			Guna2ProgressBar bar_accuracy = new Guna2ProgressBar()
+			{
+				BackColor = Color.Transparent,
+				BorderRadius = 15,
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift", 14.75F),
+				ForeColor = Color.Black,
+				Location = new Point(220, 225),
+				ProgressColor = Color.PaleGreen,
+				ProgressColor2 = Color.SpringGreen,
+				RightToLeft = RightToLeft.No,
+				ShowText = true,
+				Size = new Size(500, 30),
+				Style = ProgressBarStyle.Continuous,
+				TabStop = false,
+				TextAlign = HorizontalAlignment.Right,
+				TextOffset = new Point(0, 2),
+				TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault,
+				UseTransparentBackground = true,
+				Value = (int)(accuracy * 100),
+			};
+			Guna2HtmlLabel lbl_letter = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift SemiBold", 96F, System.Drawing.FontStyle.Bold),
+				ForeColor = Color.Black,
+				ImeMode = ImeMode.NoControl,
+				Location = new Point(60, 63),
+				Name = "lbl_letter",
+				Size = new Size(120, 120),
+				TabStop = false,
+				Text = letter,
+				TextAlignment = System.Drawing.ContentAlignment.MiddleCenter,
+			};
+			Guna2Shapes shape_letterOutline = new Guna2Shapes()
+			{
+				BackColor = Color.Transparent,
+				BorderColor = Color.FromArgb(247, 113, 163),
+				BorderThickness = 5,
+				FillColor = Color.FromArgb(208, 208, 208),
+				Location = new Point(40, 40),
+				PolygonSides = 4,
+				PolygonSkip = 1,
+				Rotate = 0F,
+				Shape = Guna.UI2.WinForms.Enums.ShapeType.Rounded,
+				Size = new Size(160, 160),
+				TabStop = false,
+				UseTransparentBackground = true,
+				Zoom = 100,
+			};
+			Guna2PictureBox seperator = new Guna2PictureBox()
+			{
+				Image = Resources.seperator,
+				ImageRotate = 0F,
+				Location = new Point(50, 160),
+				Margin = new Padding(0),
+				Size = new Size(1020, 10),
+				SizeMode = PictureBoxSizeMode.StretchImage,
+				TabStop = false,
+			};
+			Guna2HtmlLabel lbl_results = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 72F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.White,
+				Location = new Point(50, 20),
+				Size = new Size(1020, 120),
+				TabStop = false,
+				Text = "RESULTS",
+				TextAlignment = ContentAlignment.MiddleCenter,
+			};
+			Guna2HtmlLabel lbl_diff = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 14.25F),
+				ForeColor = Color.White,
+				Location = new Point(740, 170),
+				Name = "lbl_diff",
+				Size = new Size(140, 40),
+				TabStop = false,
+				Text = "Delta",
+				TextAlignment = ContentAlignment.BottomCenter,
+			};
+			Guna2HtmlLabel lbl_correct = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 40.25F),
+				ForeColor = Color.White,
+				Location = new Point(220, 40),
+				Name = "lbl_correct",
+				Size = new Size(330, 70),
+				TabStop = false,
+				Text = correct ? "Correct" : "Incorrect",
 			};
 
-			panel_char.Controls.Add(bar_fill);
-			panel_char.Controls.Add(bar_base);
-			panel_char.Controls.Add(lbl_percentage);
-			panel_char.Controls.Add(lbl_time);
-			panel_char.Controls.Add(lbl_total);
-			panel_char.Controls.Add(lbl_letter);
+			
+			panel_results.Controls.Add(lbl_correct);
+			panel_results.Controls.Add(lbl_diff);
+			panel_results.Controls.Add(txt_timeDiff);
+			panel_results.Controls.Add(lbl_time);
+			panel_results.Controls.Add(bar_time);
+			panel_results.Controls.Add(txt_accuracyDiff);
+			panel_results.Controls.Add(lbl_accuracy);
+			panel_results.Controls.Add(bar_accuracy);
+			panel_results.Controls.Add(lbl_letter);
+			panel_results.Controls.Add(shape_letterOutline);
+			
 
-			bar_fill.BringToFront();
-
-			game.btn_continue.Click += async (sender, e) =>
+			btn_continue.Click += async (sender, e) =>
 			{
-				game.btn_continue.Enabled = false;
+				btn_continue.Enabled = false;
 				await main.connection.InvokeAsync("requestRound", game.getGameID(), main.userData.userID);
 			};
 
-			game.main.panel_main.Controls.Add(panel_char);
-			game.main.panel_main.Controls.Add(game.btn_continue);
+			game.main.panel_main.Controls.Add(lbl_results);
+			game.main.panel_main.Controls.Add(seperator);
+			game.main.panel_main.Controls.Add(panel_results);
+			game.main.panel_main.Controls.Add(btn_continue);
+
+			return panel_results;
 		}
 
 		public static void configUserDataPanel(main main, userData userData)
@@ -1128,17 +1241,82 @@ namespace client_app.menus
 			});
 		}
 
-		public static void configVersusResults(Panel panel_main, string winner)
+		public static void configVersusResults(Panel panel_results, string winner)
 		{
+			Guna2HtmlLabel lbl_winner = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+				ForeColor = Color.White,
+				Location = new Point(40, 360),
+				Size = new Size(160, 40),
+				TabStop = false,
+				Text = "Winner",
+				TextAlignment = ContentAlignment.TopRight,
+			};
+			Guna2ProgressBar bar_winner = new Guna2ProgressBar()
+			{
+				BackColor = Color.Transparent,
+				BorderRadius = 15,
+				FillColor = Color.FromArgb(208, 208, 208),
+				Font = new Font("Bahnschrift", 14.75F),
+				ForeColor = Color.Black,
+				Location = new Point(220, 365),
+				ProgressColor = Color.White,
+				ProgressColor2 = Color.FromArgb(208, 208, 208),
+				RightToLeft = RightToLeft.No,
+				ShowText = true,
+				Size = new Size(200, 30),
+				Style = ProgressBarStyle.Continuous,
+				TabIndex = 11,
+				TabStop = false,
+				Text = winner,
+				TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Custom,
+				TextOffset = new Point(0, 2),
+				TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault,
+				UseTransparentBackground = true,
+				Value = 100,
+			};
 
+			panel_results.Controls.Add(lbl_winner);
+			panel_results.Controls.Add(bar_winner);
 		}
-		public static void configKnockoutResults(Panel panel_main)
+		public static void configKnockoutResults(Panel panel_results, bool eliminated, bool correct)
 		{
+			Guna2HtmlLabel lbl_eliminated = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 30.25F),
+				ForeColor = Color.LightCoral,
+				Location = new Point(550, 40),
+				Size = new Size(330, 70),
+				TabStop = false,
+				Text = eliminated ? "Eliminated" : "Passed",
+				TextAlignment = ContentAlignment.TopRight,
+			};
+			Guna2HtmlLabel lbl_eliminateReason = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				Font = new Font("Bahnschrift", 16.25F),
+				ForeColor = Color.MistyRose,
+				Location = new Point(550, 90),
+				Size = new Size(330, 60),
+				TabStop = false,
+				Text = correct ? "by longest time elapsed" : "by incorrect submission",
+				TextAlignment = ContentAlignment.TopRight,
+			};
 
+			if (eliminated) panel_results.Controls.Add(lbl_eliminateReason);
+			panel_results.Controls.Add(lbl_eliminated);
 		}
 
 		public static void configEndGamePanel(abstractGame game, List<char> letters, gameStats statistics)
 		{
+			// maybe copy results panel and add scroll buttons
+
 			game.main.panel_main.Controls.Clear();
 
 			const int X = 10;
@@ -1169,8 +1347,6 @@ namespace client_app.menus
 				TimeSpan time = statistics.time[i];
 
 				(int r, int g, int b) colour = ((int)(255 * (1 - accuracy)), (int)(255 * (accuracy)), 0);
-
-				// update with better UI or something idk
 
 				Label lbl_letter = new Label()
 				{
@@ -1257,6 +1433,5 @@ namespace client_app.menus
 
 			game.main.panel_main.Controls.Add(panel_stats);
 		}
-
 	}
 }

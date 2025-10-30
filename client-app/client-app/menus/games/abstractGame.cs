@@ -55,14 +55,15 @@ namespace client_app.menus.games
 		private int rounds;
 		private readonly int maxPlayers;
 
-		private gameStats stats;
+		protected gameStats stats;
 		private readonly List<char> letters;
 
+		public Guna.UI2.WinForms.Guna2Panel panel_results;
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_letter;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_submit;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_clear;
-		public Guna.UI2.WinForms.Guna2GradientButton btn_continue;
+		//public Guna.UI2.WinForms.Guna2GradientButton btn_continue;
 		public Panel panel_stats;
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_rounds;
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_countdown;
@@ -168,7 +169,7 @@ namespace client_app.menus.games
 		public virtual void evaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
 			stats.updateStats(correct, accuracy, time);
-			UXelements.configResultsPanel(this, letters[letters.Count - 1], stats);
+			panel_results = UXelements.configResultsPanel(this, letters[letters.Count - 1], stats);
 
 			UXelements.configRightGamePanelStats(panel_stats, letters, stats.accuracy);
 		}

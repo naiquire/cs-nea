@@ -4,17 +4,19 @@ namespace server_app.databases
 {
 	/* the todo list of DOOM
 	 *
+	 * client needs try catches on all server calls
+	 * server CRASH on versus disconnect
 	 * home -> panel_main ui
 	 * TRANSLATIONS
 	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
 	 * btn_home ui
 	 * game -> "next letter in" dissapears ONLY on round 1
 	 * game -> panel_drawing sometimes invisible until click
-	 * game -> round results screen especially v,k
 	 * endGame ui
 	 * profile -> about me
 	 * cleanup ui code
 	 * some langauge cause textboxes to break text position -> autosize?
+	 * disconnect log appears twice
 	 */
 
 

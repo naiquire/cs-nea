@@ -16,7 +16,7 @@ namespace client_app.games
 
 		public void versusResults(string winner)
 		{
-			UXelements.configVersusResults(main.panel_main, winner);
+			UXelements.configVersusResults(panel_results, winner);
 		}
 
 		public void updateRank(int currentRank)
@@ -26,7 +26,7 @@ namespace client_app.games
 
 			main.userData.rank = currentRank;
 
-			
+
 		}
 	}
 }

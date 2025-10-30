@@ -9,10 +9,23 @@ namespace client_app.games
 {
 	public class knockout : abstractGame, IPlayable
 	{
+		private bool eliminated;
 		private List<string> aliveUsers;
 		public knockout(main main) : base(main, "knockout", 12)
 		{
 			aliveUsers = new List<string>();
+		}
+
+		public override void submissionPhase(char letter)
+		{
+			if (eliminated)
+			{
+				endGame();
+			}
+			else
+			{
+				base.submissionPhase(letter);
+			}
 		}
 
 		public override void updateUsers(List<friendData> users)
@@ -47,6 +60,7 @@ namespace client_app.games
 
 		public override void awaitStart()
 		{
+			eliminated = false;
 			foreach (var user in users)
 			{
 				aliveUsers.Add(user.userID);
@@ -60,14 +74,7 @@ namespace client_app.games
 			this.aliveUsers = aliveUsers;
 			updateUsers(users);
 
-			if (aliveUsers.Contains(main.userData.userID))
-			{
-				UXelements.configKnockoutResults(main.panel_main);
-			}
-			else
-			{
-				endGame();
-			}
+			UXelements.configKnockoutResults(panel_results, eliminated, stats.correct.Last());
 		}
 
 		public override void endGame()
