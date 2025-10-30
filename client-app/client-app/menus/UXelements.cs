@@ -796,7 +796,6 @@ namespace client_app.menus
 				Text = correct ? "Correct" : "Incorrect",
 			};
 
-			
 			panel_results.Controls.Add(lbl_correct);
 			panel_results.Controls.Add(lbl_diff);
 			panel_results.Controls.Add(txt_timeDiff);
@@ -807,7 +806,6 @@ namespace client_app.menus
 			panel_results.Controls.Add(bar_accuracy);
 			panel_results.Controls.Add(lbl_letter);
 			panel_results.Controls.Add(shape_letterOutline);
-			
 
 			btn_continue.Click += async (sender, e) =>
 			{

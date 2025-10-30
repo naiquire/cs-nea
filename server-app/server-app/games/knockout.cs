@@ -96,8 +96,7 @@ namespace server_app.games
 				await submissionPhase();
 			}
 		}
-
-		public async Task sendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
+		private async Task sendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
 		{
 			foreach (string userID in userIDs)
 			{

@@ -8,16 +8,15 @@ namespace server_app.games
 {
 	public struct gameStats
 	{
+		public List<bool> correct;
+		public List<double> accuracy;
+		public List<TimeSpan> time;
 		public gameStats()
 		{
 			correct = [];
 			accuracy = [];
 			time = [];
 		}
-
-		public List<bool> correct;
-		public List<double> accuracy;
-		public List<TimeSpan> time;
 
 		public readonly void update(double accuracy, TimeSpan time, bool correct)
 		{
@@ -65,6 +64,12 @@ namespace server_app.games
 		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
 		protected List<string> continueRequests = [];
 
+		public string getType() => type;
+		public string getGameID() => gameID;
+		public bool hasStarted() => started;
+		public int getMaxPlayers() => maxPlayers;
+		public int getPlayerCount() => userIDs.Count;
+
 		public abstractGame(IHubContext<connection> context, string type, string userID, int maxPlayers)
 		{
 			hubContext = context;
@@ -87,11 +92,12 @@ namespace server_app.games
 		{
 			if (database.loadFriendData(userID, out friendData data))
 			{
-				userIDs.Add(userID);
-				userDatas.Add(data);
-				return true;
+				return false;
 			}
-			return false;
+
+			userIDs.Add(userID);
+			userDatas.Add(data);
+			return true;
 		}
 		public async virtual void dequeueUser(string userID)
 		{
@@ -107,6 +113,7 @@ namespace server_app.games
 				}
 			}
 			userDatas.RemoveAt(index);
+
 			await updateUsers();
 		}
 		public async Task updateUsers()
@@ -137,7 +144,7 @@ namespace server_app.games
 				}
 			}
 
-			await Task.Delay(5000); // 5 second countdown
+			await Task.Delay(5000);
 
 			foreach (string userID in userIDs)
 			{
@@ -159,7 +166,6 @@ namespace server_app.games
 			return letters;
 		}
 
-
 		protected async Task awaitRound()
 		{
 			continueRequests.Clear();
@@ -171,7 +177,6 @@ namespace server_app.games
 				}
 			}
 		}
-		public abstract Task submissionPhase();
 		protected async Task sendLetter(List<string> userIDs, char letter)
 		{
 			foreach (string userID in userIDs)
@@ -182,7 +187,6 @@ namespace server_app.games
 				}
 			}
 		}
-
 		public virtual void loadResponse(string userID, byte[] input)
 		{
             DateTime endTime = DateTime.UtcNow;
@@ -196,6 +200,7 @@ namespace server_app.games
 
 			currentResponses.Add(userID, (array, endTime));
         }
+
 		protected bool evaluateSubmission(ref evaluate evaluate, string userID, char character)
 		{
 			int letter = character - 65;
@@ -224,7 +229,6 @@ namespace server_app.games
 				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
 			}
 		}
-
 		public abstract Task continueRequest(string userID);
 
 		public virtual async void endGame()
@@ -251,34 +255,27 @@ namespace server_app.games
 					}
 				}
 			}
+		}
+		private async Task updateStatistics(userData userData, char letter, int index)
+		{
+			double accuracy = userData.statistics[letter].accuracy;
+			TimeSpan time = userData.statistics[letter].time;
+			int total = userData.statistics[letter].total;
 
-			async Task updateStatistics(userData userData, char letter, int i)
+			double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[index]) / (total + 1);
+			TimeSpan updatedTime = (time * total + stats[userData.userID].time[index]) / (total + 1);
+
+			if (database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 			{
-				double accuracy = userData.statistics[letter].accuracy;
-				TimeSpan time = userData.statistics[letter].time;
-				int total = userData.statistics[letter].total;
+				database.outputException("Failed to update statistics");
+				return;
+			}
 
-				double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[i]) / (total + 1);
-				TimeSpan updatedTime = (time * total + stats[userData.userID].time[i]) / (total + 1);
-
-				if (database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
-				{
-					if (connection.map.TryGetValue(userData.userID, out string? connectionID))
-					{
-						await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, new statistics(updatedAccuracy, updatedTime, total + 1));
-					}
-				}
-				else
-				{
-					database.outputException("Failed to update statistics");
-				}
+			if (connection.map.TryGetValue(userData.userID, out string? connectionID))
+			{
+				statistics updated = new statistics(updatedAccuracy, updatedTime, total + 1);
+				await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);
 			}
 		}
-
-		public string getType() => type;
-		public string getGameID() => gameID;
-		public bool hasStarted() => started;
-		public int getMaxPlayers() => maxPlayers;
-		public int getPlayerCount() => userIDs.Count;
 	}
 }

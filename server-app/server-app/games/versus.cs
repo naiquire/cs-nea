@@ -8,29 +8,33 @@ namespace server_app.games
 {
 	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "versus", userID, 2), IPlayable
 	{
-		private const int rounds = 5;
+		private const int rounds = 10;
+		private List<friendData> userCache = [];
 		private readonly Dictionary<string, double> scores = [];
 
 		public override async Task startGame()
 		{
-			await base.startGame();
-
 			foreach (string userID in userIDs)
 			{
 				scores[userID] = 0;
 			}
+
+			// cache user data to allow for rank updates after dequeue
+			userCache.Add(userDatas[0]);
+			userCache.Add(userDatas[1]);
+
+			await base.startGame();
 
 			letters = generateLetters(rounds);
 			await submissionPhase();
 		}
 		public override async Task submissionPhase()
 		{
-
 			if (roundCount < rounds)
 			{
 				continueRequests.Clear();
 				await awaitRound();
-				Thread.Sleep(3000);
+				await Task.Delay(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
@@ -66,7 +70,6 @@ namespace server_app.games
 			if (correctUsers.Count == 0)
 			{
 				// if none correct then a winner is not determined
-
 				foreach (string userID in userIDs)
 				{
 					scores[userID] += 0.5;
@@ -77,7 +80,7 @@ namespace server_app.games
 			else
 			{
 				// otherwise the user with the lowest time who is also correct is the winner
-				(string user, TimeSpan time) lowest = ("", TimeSpan.MaxValue);
+				(string user, TimeSpan time) lowest = (string.Empty, TimeSpan.MaxValue);
 				foreach (string userID in correctUsers)
 				{
 					var time = stats[userID].time[roundCount];
@@ -104,23 +107,10 @@ namespace server_app.games
 		{
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				double expScore;
-				if (i == 0)
-				{
-					expScore = 1.0 / (1 + Math.Pow(10, (userDatas[0].rank - userDatas[1].rank) / 400));
-				}
-				else if (i == 1)
-				{
-					expScore = 1.0 / (1 + Math.Pow(10, (userDatas[1].rank - userDatas[0].rank) / 400));
-				}
-				else
-				{
-					expScore = scores[userIDs[i]] / rounds; // ensures rank change of 0 if much goes wrong
-				}
+				double expectedScore = 1.0 / 1 + Math.Pow(10, (i == 0 ? 1 : -1) * userCache[0].rank - userCache[1].rank) / 400;
+				expectedScore *= rounds;
 
-				expScore *= rounds;
-
-				int rank = calculateRank(userDatas[i], expScore);
+				int rank = calculateRank(userCache[i], expectedScore);
 
 				if (database.updateRank(userIDs[i], rank))
 				{
@@ -135,31 +125,31 @@ namespace server_app.games
 				}
 			}
 
-			int calculateRank(friendData user, double expScore)
-			{
-				double k;
-				if (user.rank < 2100)
-				{
-					k = 32;
-				}
-				else if (user.rank > 2400)
-				{
-					k = 16;
-				}
-				else
-				{
-					k = 24;
-				}
-
-				k /= rounds;
-
-				return (int)(user.rank + k * (scores[user.userID] - expScore));
-			}
-
 			base.endGame();
 		}
 
-		public async Task sendVersusResults(List<string> userIDs, string? winner)
+		private int calculateRank(friendData user, double expectedScore)
+		{
+			double k;
+			if (user.rank < 2100)
+			{
+				k = 32;
+			}
+			else if (user.rank > 2400)
+			{
+				k = 16;
+			}
+			else
+			{
+				k = 24;
+			}
+
+			k /= rounds;
+
+			return (int)(user.rank + k * (scores[user.userID] - expectedScore));
+		}
+
+		private async Task sendVersusResults(List<string> userIDs, string? winner)
 		{
 			foreach (string userID in userIDs)
 			{
