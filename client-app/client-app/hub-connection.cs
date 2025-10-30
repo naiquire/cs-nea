@@ -14,8 +14,8 @@ namespace client_app
 
 		public static void injectForm(login l, main m)
 		{
-			main = m;
-			login = l;
+			if (m != null) main = m;
+			if (l != null) login = l;
 		}
 		public static HubConnection configConnection(string address)
 		{

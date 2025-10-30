@@ -79,8 +79,8 @@ namespace server_app.games
 
 			rnd = new();
 			letters = [];
-			
-			currentResponses = [];			
+
+			currentResponses = [];
 		}
 
 		public bool queueUser(string userID)

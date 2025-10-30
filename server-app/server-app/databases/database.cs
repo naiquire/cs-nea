@@ -3,7 +3,7 @@
 namespace server_app.databases
 {
 	/* the todo list of DOOM
-	 * 
+	 *
 	 * home -> panel_main ui
 	 * TRANSLATIONS
 	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
@@ -14,7 +14,6 @@ namespace server_app.databases
 	 * endGame ui
 	 * profile -> about me
 	 * cleanup ui code
-	 * profile -> language update not affecting some elements as they are defined in InitComp which cannot be called in profile
 	 * some langauge cause textboxes to break text position -> autosize?
 	 */
 
@@ -45,23 +44,21 @@ namespace server_app.databases
 		public bool online { get; set; }
 
 		public string localisation { get; set; }
-		public DateTime dateCreated { get; set; }
+		//public DateTime dateCreated { get; set; }
 
 		public int rank { get; set; }
-		public Dictionary<char, statistics> statistics { get; set; }
+		//public Dictionary<char, statistics> statistics { get; set; }
 	}
 	public static class @database
 	{
-		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? @"H:\CompSci\cs-nea\server-app\server-app"}\databases\maindb.sqlite";
+		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? string.Empty}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
 		public static void outputException(Exception ex)
 		{
-			// if exception occurs then log the message and allow the client to try again
 			Logger.ErrorLog(ex);
 		}
 		public static void outputException(string ex)
 		{
-			// if exception occurs then log the message and allow the client to try again
 			Logger.ErrorLog(ex);
 		}
 
@@ -198,12 +195,14 @@ namespace server_app.databases
 
 			if (!userExists(userID, out bool exists))
 			{
+				// error checking if user exists
 				return false;
 			}
 
 			if (!exists)
 			{
-				return true; // return empty userData
+				// return empty userData
+				return true;
 			}
 
 			string query = @"SELECT aboutMe, dateCreated, rank, localisation
@@ -233,33 +232,32 @@ namespace server_app.databases
 				return false;
 			}
 
-			if (loadStatistics(userID, out var stats))
+			if (!loadStatistics(userID, out var stats))
 			{
-				userData.statistics = stats;
+				// error loading statistics
+				return false;
 			}
-			else
+
+			if (!loadFriends(userID, out List<string> friends))
 			{
+				// error loading friends
 				return false;
 			}
 
 			List<friendData> friendData = [];
-			if (loadFriends(userID, out List<string> friends))
+			foreach (var friend in friends)
 			{
-				foreach (var friend in friends)
+				if (!loadFriendData(friend, out friendData data))
 				{
-					if (loadFriendData(friend, out friendData data))
-					{
-						friendData.Add(data);
-					}
-					else
-					{
-						return false;
-					}
+					// error loading friend data
+					return false;
 				}
+				friendData.Add(data);
 			}
 
 			userData.userID = userID;
 			userData.friends = friendData;
+			userData.statistics = stats;
 
 			return true;
 		}
@@ -376,7 +374,7 @@ namespace server_app.databases
 					while (reader.Read())
 					{
 						friendData.aboutMe = reader.GetString(0);
-						friendData.dateCreated = reader.GetDateTime(1);
+						//friendData.dateCreated = reader.GetDateTime(1);
 						friendData.localisation = reader.GetString(2);
 						friendData.rank = reader.GetInt32(3);
 					}
@@ -390,14 +388,14 @@ namespace server_app.databases
 				return false;
 			}
 
-			if (loadStatistics(userID, out var stats))
-			{
-				friendData.statistics = stats;
-			}
-			else
-			{
-				return false;
-			}
+			//if (loadStatistics(userID, out var stats))
+			//{
+			//	friendData.statistics = stats;
+			//}
+			//else
+			//{
+			//	return false;
+			//}
 
 			friendData.userID = userID;
 			friendData.online = connections.connection.map.ContainsKey(userID);

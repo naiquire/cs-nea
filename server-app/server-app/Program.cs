@@ -58,33 +58,33 @@ namespace server_app
 			IHostBuilder host = Host.CreateDefaultBuilder(args);
 			host.ConfigureWebHostDefaults(config =>
 			{
-			config.ConfigureServices(services =>
-			{
-				// add required services
-				services.AddSignalR();
-				services.AddCors(setup =>
+				config.ConfigureServices(services =>
 				{
-					// allow any device to connect
-					setup.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin());
+					// add required services
+					services.AddSignalR();
+					services.AddCors(setup =>
+					{
+						// allow any device to connect
+						setup.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin());
+					});
 				});
-			});
-			config.Configure(setup =>
-			{
-				setup.UseRouting();
-				setup.Use((context, next) =>
+				config.Configure(setup =>
 				{
-					// load the hubContext
-					hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
-					return next(context);
+					setup.UseRouting();
+					setup.Use((context, next) =>
+					{
+						// load the hubContext
+						hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
+						return next(context);
+					});
+					setup.UseEndpoints(endpoints =>
+					{
+						// map endpoints to a class
+						endpoints.MapHub<connection>("/cs-nea/connections");
+						endpoints.MapHub<accounts>("/cs-nea/accounts");
+					});
 				});
-				setup.UseEndpoints(endpoints =>
-				{
-					// map endpoints to a class
-					endpoints.MapHub<connection>("/cs-nea/connections");
-					endpoints.MapHub<accounts>("/cs-nea/accounts");
-				});
-			});
-			config.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.None));
+				config.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.None));
 
 				// all ip addresses using port 3900
 				config.UseUrls("http://0.0.0.0:3900");

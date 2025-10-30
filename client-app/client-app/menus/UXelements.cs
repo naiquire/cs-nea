@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -104,7 +105,7 @@ namespace client_app.menus
 			main.btn_close.TabIndex = 0;
 			main.btn_close.Text = "X";
 			main.btn_close.UseVisualStyleBackColor = true;
-			main.btn_close.Click += (sender, e) => main.Close();
+			main.btn_close.Click += (sender, e) => main.btn_close_Click(sender, e);
 			// 
 			// btn_home
 			// 
@@ -1114,14 +1115,17 @@ namespace client_app.menus
 		}
 		public static async Task countdown(Guna2HtmlLabel lbl_countdown, int num, Guna2HtmlLabel lbl_status, string text)
 		{
-			lbl_status.Text = text;
-			for (int i = num; i > 0; i--)
+			await Task.Run(() =>
 			{
-				lbl_countdown.Text = i.ToString();
-				await Task.Delay(1000);
-			}
-			lbl_countdown.ResetText();
-			lbl_status.ResetText();
+				lbl_status.Text = text;
+				for (int i = num; i > 0; i--)
+				{
+					lbl_countdown.Text = i.ToString();
+					Thread.Sleep(1000);
+				}
+				lbl_countdown.ResetText();
+				lbl_status.ResetText();
+			});
 		}
 
 		public static void configVersusResults(Panel panel_main, string winner)

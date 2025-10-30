@@ -84,19 +84,20 @@ namespace client_app
 		}
 		private async Task connectionClosed(Exception arg)
 		{
-			var alert = Task.Run(() =>
+			Task<alert> notifyTask = Task.Run(() =>
 			{
 				return loadAlert("Disconnected from server. Attempting to reconnect...", false);
 			});
 
 			var reconnectTask = hub_connection.startConnection(connection);
 			await Task.Delay(5000);
-			alert.Result.Close();
 			if (!reconnectTask.IsCompleted)
 			{
+				notifyTask.Result.Close(); // gets stuck processing this
 				this.Invoke(new Action(() => this.Close()));
 				return;
 			}
+			notifyTask.Result.Close();
 		}
 
 		public static alert loadAlert(string message, bool closeButton = true)
@@ -111,7 +112,7 @@ namespace client_app
 			Application.ApplicationExit += (sender, e) => btn_close_Click(sender, e);
 			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
-		public void updateUserData(string userID, string aboutMe, string localisation)
+		public void updateUserData(string userID, string aboutMe, string localisation) // updating friend data may be redundant
 		{
 			if (userID == userData.userID)
 			{

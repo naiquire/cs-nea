@@ -122,6 +122,7 @@ namespace server_app.neuralNetwork
 				{
 					return new Bitmap(image, 24, 24);
 				}
+
 				int largestDimension = Math.Max(image.Width, image.Height);
 				int offset = Math.Abs((image.Width - image.Height) / 2);
 				string extendDirection = largestDimension == image.Height ? "right" : "down";
@@ -189,7 +190,7 @@ namespace server_app.neuralNetwork
 			for (int i = 0; i < evaluate.layerCount - 1; i++)
 			{
 				weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
-				using (StreamReader sr = new($@"C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\weights\{i}.txt"))
+				using (StreamReader sr = new($@"{location}weights\{i}.txt"))
 				{
 					string[] lines = sr.ReadToEnd().Split('\n');
 					for (int j = 0; j < evaluate.layerSizes[i]; j++)
@@ -252,7 +253,6 @@ namespace server_app.neuralNetwork
 		}
 		public static (List<double[]>, List<int>) loadImages()
 		{
-
 			int done = 0;
 			const int total = 500000;
 

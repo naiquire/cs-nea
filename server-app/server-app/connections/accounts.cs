@@ -19,25 +19,26 @@ namespace server_app.connections
 			await updateOnline(userID, true);
 			return true;
 		}
-		public async Task<bool> loadUserData(string userID)
-		{
-			if (!database.loadUserData(userID, out userData userData))
-			{
-                return false;
-            }
-			
-            if (map.TryGetValue(userID, out string? connectionID))
-            {
-                await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
-            }
-            return true;
-        }
 		public async void clientDisconnected(string userID)
 		{
 			await updateOnline(userID, false);
 			map.Remove(userID);
 			Logger.Log("LOGOUT", "lime", $"<{userID}> has disconnected");
 		}
+
+		public async Task<bool> loadUserData(string userID)
+		{
+			if (!database.loadUserData(userID, out userData userData))
+			{
+                return false;
+            }
+
+            if (map.TryGetValue(userID, out string? connectionID))
+            {
+                await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
+            }
+            return true;
+        }
 
 		public async Task updateOnline(string userID, bool online)
 		{
