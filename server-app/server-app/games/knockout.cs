@@ -19,7 +19,7 @@ namespace server_app.games
 			aliveUsers.Remove(userID);
 			base.dequeueUser(userID);
 		}
-		public override async Task submissionPhase()
+		public async Task submissionPhase()
 		{
 			if (aliveUsers.Count > 1)
 			{

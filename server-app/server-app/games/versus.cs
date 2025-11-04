@@ -28,7 +28,7 @@ namespace server_app.games
 			letters = generateLetters(rounds);
 			await submissionPhase();
 		}
-		public override async Task submissionPhase()
+		public async Task submissionPhase()
 		{
 			if (roundCount < rounds)
 			{

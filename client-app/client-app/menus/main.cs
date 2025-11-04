@@ -109,7 +109,6 @@ namespace client_app
 			main.userData = userData;
 
 			InitializeComponent();
-			Application.ApplicationExit += (sender, e) => btn_close_Click(sender, e);
 			await connection.InvokeAsync("loadInvites", userData.userID);
 		}
 		public void updateUserData(string userID, string aboutMe, string localisation) // updating friend data may be redundant

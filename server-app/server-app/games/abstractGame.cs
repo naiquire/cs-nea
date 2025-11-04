@@ -90,7 +90,7 @@ namespace server_app.games
 
 		public bool queueUser(string userID)
 		{
-			if (database.loadFriendData(userID, out friendData data))
+			if (!database.loadFriendData(userID, out friendData data))
 			{
 				return false;
 			}
