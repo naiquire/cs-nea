@@ -6,7 +6,7 @@ namespace server_app.neuralNetwork
 {
 	public static class @data
 	{
-		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? string.Empty}\neuralNetwork\data\";
+		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\neuralNetwork\data\";
 
 		public static readonly double[][,] weights = loadWeights();
 		public static readonly double[][] biases = loadBiases();

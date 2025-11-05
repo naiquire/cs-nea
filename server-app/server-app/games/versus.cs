@@ -2,14 +2,13 @@
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
-using System.Drawing;
 
 namespace server_app.games
 {
 	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "versus", userID, 2), IPlayable
 	{
 		private const int rounds = 10;
-		private List<friendData> userCache = [];
+		private readonly List<friendData> userCache = [];
 		private readonly Dictionary<string, double> scores = [];
 
 		public override async Task startGame()
@@ -19,7 +18,7 @@ namespace server_app.games
 				scores[userID] = 0;
 			}
 
-			// cache user data to allow for rank updates after dequeue
+			// cache user data to allow for rank updates after dequeue during game
 			userCache.Add(userDatas[0]);
 			userCache.Add(userDatas[1]);
 
@@ -107,7 +106,7 @@ namespace server_app.games
 		{
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				double expectedScore = 1.0 / 1 + Math.Pow(10, (i == 0 ? 1 : -1) * userCache[0].rank - userCache[1].rank) / 400;
+				double expectedScore = 1.0 / (1 + Math.Pow(10, (i == 0 ? userCache[1].rank - userCache[0].rank : userCache[0].rank - userCache[1].rank) / 400.0));
 				expectedScore *= rounds;
 
 				int rank = calculateRank(userCache[i], expectedScore);

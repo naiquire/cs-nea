@@ -2,26 +2,31 @@
 
 namespace server_app.databases
 {
-	/* the todo list of DOOM
-	 *
+    /* the todo list of DOOM
+	 * 
+	 * stats update fail in versus --> abstractGame\updateStatistics
+	 * endGame ui, rank and knockout info
 	 * client needs try catches on all server calls
-	 * server CRASH on versus disconnect
-	 * home -> panel_main ui
+	 * server CRASH on versus disconnect --fixed but untested
 	 * TRANSLATIONS
-	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
-	 * btn_home ui
+	 * 
 	 * game -> "next letter in" dissapears ONLY on round 1
 	 * game -> panel_drawing sometimes invisible until click
-	 * endGame ui
+	 * 
 	 * profile -> about me
-	 * cleanup ui code
 	 * some langauge cause textboxes to break text position -> autosize?
-	 * disconnect log appears twice
+	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
+	 * 
+	 * btn_home ui
+	 * disconnect log sometimes appears twice??
+	 * home -> panel_main ui
+	 * cleanup ui code
+	 * 
 	 */
 
 
 
-	public struct userData
+    public struct userData
 	{
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
@@ -47,22 +52,16 @@ namespace server_app.databases
 
 		public string localisation { get; set; }
 		//public DateTime dateCreated { get; set; }
-
+		
 		public int rank { get; set; }
 		//public Dictionary<char, statistics> statistics { get; set; }
 	}
 	public static class @database
 	{
-		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? string.Empty}\databases\maindb.sqlite";
+		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
-		public static void outputException(Exception ex)
-		{
-			Logger.ErrorLog(ex);
-		}
-		public static void outputException(string ex)
-		{
-			Logger.ErrorLog(ex);
-		}
+		public static void outputException(Exception ex) => Logger.ErrorLog(ex);
+		public static void outputException(string ex) => Logger.ErrorLog(ex);
 
 		public static bool loginRequest(string userID, string password, out int success)
 		{
@@ -104,7 +103,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool accountRequest(string userID, string password, string localisation, out int success)
+		public static bool  accountRequest(string userID, string password, string localisation, out int success)
 		{
 			if (!userExists(userID, out bool exists))
 			{

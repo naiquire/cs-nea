@@ -20,12 +20,12 @@ namespace server_app
             if (database.loginRequest(userID, hashPassword(password), out int success))
             {
                 Logger.Log("LOGIN", "lime", $"<{userID}> logged in with success <{success}> ");
-                await Clients.Caller.SendAsync("loginSuccess", success, userID);
             }
             else
             {
                 Logger.Log("WARN", "yellow", $"Login failed for user <{userID}>");
             }
+            await Clients.Caller.SendAsync("loginSuccess", success, userID);
         }
 
         public async void accountRequest(string userID, string password, string localisation)
@@ -33,12 +33,12 @@ namespace server_app
             if (database.accountRequest(userID, hashPassword(password), localisation, out int success))
             {
                 Logger.Log("ACCOUNT", "fuchsia", $"<{userID}> created account with success <{success}>");
-                await Clients.Caller.SendAsync("accountSuccess", success, userID);
             }
             else
             {
                 Logger.Log("WARN", "yellow", $"Account creation failed for user <{userID}>");
             }
+            await Clients.Caller.SendAsync("accountSuccess", success, userID);
         }
     }
 }

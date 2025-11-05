@@ -19,8 +19,8 @@ namespace server_app
 		{
 			Logger.SetupAsync();
 
-            startNginx();
-            hostBuilder(args).Build().Run();
+			//startNginx();
+			hostBuilder(args).Build().Run();
 		}
 
 		private static void startNginx()

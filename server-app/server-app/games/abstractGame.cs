@@ -256,7 +256,7 @@ namespace server_app.games
 				}
 			}
 		}
-		private async Task updateStatistics(userData userData, char letter, int index)
+		private async Task updateStatistics(userData userData, char letter, int index)  // breaks on versus ----------------------------------------------------------------------
 		{
 			double accuracy = userData.statistics[letter].accuracy;
 			TimeSpan time = userData.statistics[letter].time;
