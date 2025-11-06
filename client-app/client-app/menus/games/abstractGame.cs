@@ -96,6 +96,11 @@ namespace client_app.menus.games
 		}
 		public async virtual void queueGame()
 		{
+			if (main.connection.State != HubConnectionState.Connected)
+			{
+                main.btn_home.PerformClick();
+			}
+
 			gameID = await main.connection.InvokeAsync<string>("queueGame", type, main.userData.userID);
 
 			if (string.IsNullOrEmpty(gameID))
@@ -110,7 +115,12 @@ namespace client_app.menus.games
 		}
 		public virtual async Task joinGameLobby()
 		{
-			UXelements.resetLayout(main);
+            if (main.connection.State != HubConnectionState.Connected)
+            {
+                main.btn_home.PerformClick();
+            }
+
+            UXelements.resetLayout(main);
 			UXelements.initialiseLobby(main);
 			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
@@ -147,7 +157,12 @@ namespace client_app.menus.games
 					data = ms.ToArray();
 				}
 
-				await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, data);
+                if (main.connection.State != HubConnectionState.Connected)
+                {
+                    main.btn_home.PerformClick();
+                }
+
+                await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, data);
 
 				drawingPanel.clearPanel();
 			};

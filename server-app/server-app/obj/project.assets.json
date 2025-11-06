@@ -402,10 +402,10 @@
           }
         }
       },
-      "Microsoft.Data.Sqlite/9.0.5": {
+      "Microsoft.Data.Sqlite/9.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "9.0.5",
+          "Microsoft.Data.Sqlite.Core": "9.0.10",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.10",
           "SQLitePCLRaw.core": "2.1.10"
         },
@@ -416,7 +416,7 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.Data.Sqlite.Core/9.0.5": {
+      "Microsoft.Data.Sqlite.Core/9.0.10": {
         "type": "package",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.10"
@@ -1306,24 +1306,24 @@
         "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
-    "Microsoft.Data.Sqlite/9.0.5": {
-      "sha512": "Fht/vwX7uzPaIdlj1xtcpKD225GXjPOj7iW8934NNiTfBX5uqeCy2TdlPWPpLj+VPty/UmfgUSJSb55hXHqJMw==",
+    "Microsoft.Data.Sqlite/9.0.10": {
+      "sha512": "1waeeEEM/Dp5l2laUByEEWfd6qyI00HExDduhLKGT2kPnHArjIDcMf2z9HIjeLPoR56iBHhvXTfAv1hiH/wAAQ==",
       "type": "package",
-      "path": "microsoft.data.sqlite/9.0.5",
+      "path": "microsoft.data.sqlite/9.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "PACKAGE.md",
         "lib/netstandard2.0/_._",
-        "microsoft.data.sqlite.9.0.5.nupkg.sha512",
+        "microsoft.data.sqlite.9.0.10.nupkg.sha512",
         "microsoft.data.sqlite.nuspec"
       ]
     },
-    "Microsoft.Data.Sqlite.Core/9.0.5": {
-      "sha512": "cP5eBSqra4Ae80X72g0h2N+jdrA4BgoMQmz9JaQmKAEXUHw9N21DPIBqIyMjOo2fK9ISiGytlAOxBAJf1hEvqg==",
+    "Microsoft.Data.Sqlite.Core/9.0.10": {
+      "sha512": "tWbN2uzG4uBxxMjcHA3Oa9ecAYjyRTfDwRbgQ7ueyx7eEgyYbBiKADY2rllF8wO3dHUvN+/8fgylwSGMfiCtVg==",
       "type": "package",
-      "path": "microsoft.data.sqlite.core/9.0.5",
+      "path": "microsoft.data.sqlite.core/9.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1335,7 +1335,7 @@
         "lib/net8.0/Microsoft.Data.Sqlite.xml",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.dll",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.xml",
-        "microsoft.data.sqlite.core.9.0.5.nupkg.sha512",
+        "microsoft.data.sqlite.core.9.0.10.nupkg.sha512",
         "microsoft.data.sqlite.core.nuspec"
       ]
     },
@@ -2433,7 +2433,7 @@
       "MathNet.Numerics >= 5.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
       "Microsoft.AspNetCore.SignalR >= 1.2.0",
-      "Microsoft.Data.Sqlite >= 9.0.5",
+      "Microsoft.Data.Sqlite >= 9.0.10",
       "Spectre.Console >= 0.52.0",
       "Swashbuckle.AspNetCore >= 6.4.0",
       "System.Drawing.Common >= 9.0.9"
@@ -2503,7 +2503,7 @@
           },
           "Microsoft.Data.Sqlite": {
             "target": "Package",
-            "version": "[9.0.5, )"
+            "version": "[9.0.10, )"
           },
           "Spectre.Console": {
             "target": "Package",

@@ -64,7 +64,7 @@
             },
             "Microsoft.Data.Sqlite": {
               "target": "Package",
-              "version": "[9.0.5, )"
+              "version": "[9.0.10, )"
             },
             "Spectre.Console": {
               "target": "Package",

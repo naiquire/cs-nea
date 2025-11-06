@@ -809,7 +809,12 @@ namespace client_app.menus
 
 			btn_continue.Click += async (sender, e) =>
 			{
-				btn_continue.Enabled = false;
+                if (main.connection.State != HubConnectionState.Connected)
+                {
+					main.btn_home.PerformClick();
+                }
+
+                btn_continue.Enabled = false;
 				await main.connection.InvokeAsync("requestRound", game.getGameID(), main.userData.userID);
 			};
 

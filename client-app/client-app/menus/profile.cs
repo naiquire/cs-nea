@@ -61,6 +61,11 @@ namespace client_app.menus
 
         private async void btn_addFriends_Click(object sender, EventArgs e)
         {
+            if (main.connection.State != HubConnectionState.Connected)
+            {
+                return;
+            }
+
             btn_addFriends.Enabled = false;
             if (!await main.connection.InvokeAsync<bool>("sendInvite", user.userID, main.userData.userID))
             {
@@ -70,6 +75,11 @@ namespace client_app.menus
 
         private async void btn_removeFriends_Click(object sender, EventArgs e)
         {
+            if (main.connection.State != HubConnectionState.Connected)
+            {
+                return;
+            }
+
             btn_removeFriends.Enabled = false;
             if (!await main.connection.InvokeAsync<bool>("removeFriends", user.userID, main.userData.userID))
             {

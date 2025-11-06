@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vGbsxbMyhP8=",
+  "dgSpecHash": "GNlV9BmoU7Q=",
   "success": true,
   "projectFilePath": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\server-app.csproj",
   "expectedPackageFiles": [
@@ -26,8 +26,8 @@
     "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.aspnetcore.signalr.protocols.json\\1.2.0\\microsoft.aspnetcore.signalr.protocols.json.1.2.0.nupkg.sha512",
     "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.aspnetcore.websockets\\2.3.0\\microsoft.aspnetcore.websockets.2.3.0.nupkg.sha512",
     "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.3.0\\microsoft.aspnetcore.webutilities.2.3.0.nupkg.sha512",
-    "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.data.sqlite\\9.0.5\\microsoft.data.sqlite.9.0.5.nupkg.sha512",
-    "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.5\\microsoft.data.sqlite.core.9.0.5.nupkg.sha512",
+    "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.data.sqlite\\9.0.10\\microsoft.data.sqlite.9.0.10.nupkg.sha512",
+    "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.10\\microsoft.data.sqlite.core.9.0.10.nupkg.sha512",
     "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\24ns2144\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",

@@ -76,13 +76,18 @@ namespace client_app
 
 			connection.Closed += connectionClosed;
 
-			if (!await connection.InvokeAsync<bool>("clientConnected", userID))
+            if (connection.State != HubConnectionState.Connected)
+            {
+				Close();
+            }
+
+            if (!await connection.InvokeAsync<bool>("clientConnected", userID))
 			{
 				loadAlert("Failed to connect to server. Quitting application.");
 				Close();
 			}
 		}
-		private async Task connectionClosed(Exception arg)
+		private async Task connectionClosed(Exception arg)  // broken ----------------------------------------------------------------------------------------------
 		{
 			Task<alert> notifyTask = Task.Run(() =>
 			{
@@ -93,7 +98,7 @@ namespace client_app
 			await Task.Delay(5000);
 			if (!reconnectTask.IsCompleted)
 			{
-				notifyTask.Result.Close(); // gets stuck processing this
+				notifyTask.Result.Close(); // gets stuck processing this --> try Dispose()
 				this.Invoke(new Action(() => this.Close()));
 				return;
 			}
@@ -109,7 +114,11 @@ namespace client_app
 			main.userData = userData;
 
 			InitializeComponent();
-			await connection.InvokeAsync("loadInvites", userData.userID);
+
+			if (connection.State == HubConnectionState.Connected)
+			{
+				await connection.InvokeAsync("loadInvites", userData.userID);
+			}
 		}
 		public void updateUserData(string userID, string aboutMe, string localisation) // updating friend data may be redundant
 		{
@@ -132,18 +141,18 @@ namespace client_app
 				}
 				if (index == -1)
 				{
-                    loadAlert("Failed to update user data.");
-                    return;
-                }
+					loadAlert("Failed to update user data.");
+					return;
+				}
 
 				// update friendData
-                var friend = userData.friends[index];
-                friend.aboutMe = aboutMe;
-                friend.localisation = localisation;
-                userData.friends[index] = friend;
+				var friend = userData.friends[index];
+				friend.aboutMe = aboutMe;
+				friend.localisation = localisation;
+				userData.friends[index] = friend;
 
 				return;
-            }
+			}
 
 			if (menu.game != null)
 			{
@@ -234,10 +243,15 @@ namespace client_app
 			{
 				if (new confirm($"Received a friend invite from {invite}").DialogResult == DialogResult.OK)
 				{
+					if (connection.State != HubConnectionState.Connected)
+					{
+                        loadAlert("Failed to accept friend invite.");
+                    }
 					if (!await connection.InvokeAsync<bool>("addFriends", invite, userData.userID))
 					{
 						loadAlert("Failed to accept friend invite.");
 					}
+					
 				}
 			}
 		}
@@ -275,6 +289,11 @@ namespace client_app
 		}
 		public async Task requestProfile(string userID)
 		{
+			if (connection.State != HubConnectionState.Connected)
+			{
+				return;
+			}
+
 			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 			if (user.userID != userID)
 			{
@@ -304,6 +323,11 @@ namespace client_app
 
 		public async void btn_home_Click(object sender, EventArgs e)
 		{
+			if (connection.State != HubConnectionState.Connected)
+			{
+				return;
+			}
+
 			if (menu.game != null)
 			{
 				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
@@ -317,6 +341,11 @@ namespace client_app
 		}
 		public async void btn_close_Click(object sender, EventArgs e)
 		{
+			if (connection.State != HubConnectionState.Connected)
+			{
+				return;
+			}
+
 			Hide();
 			if (menu.game != null)
 			{

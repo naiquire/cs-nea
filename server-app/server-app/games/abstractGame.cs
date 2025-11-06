@@ -265,7 +265,7 @@ namespace server_app.games
 			double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[index]) / (total + 1);
 			TimeSpan updatedTime = (time * total + stats[userData.userID].time[index]) / (total + 1);
 
-			if (database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
+			if (!database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 			{
 				database.outputException("Failed to update statistics");
 				return;
@@ -273,7 +273,7 @@ namespace server_app.games
 
 			if (connection.map.TryGetValue(userData.userID, out string? connectionID))
 			{
-				statistics updated = new statistics(updatedAccuracy, updatedTime, total + 1);
+				statistics updated = new(updatedAccuracy, updatedTime, total + 1);
 				await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);
 			}
 		}

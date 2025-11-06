@@ -113,8 +113,13 @@ namespace client_app
 			string userID = txt_userID.Text.Trim();
 			string password = txt_password.Text;
 			this.lbl_information.ResetText();
-			
-			await connection.InvokeAsync("loginRequest", userID, password);
+
+            // System.InvalidOperationException
+
+			if (connection.State == HubConnectionState.Connected)
+			{
+                await connection.InvokeAsync("loginRequest", userID, password);
+            }
 		}
 		private void btn_createAccount_Click(object sender, EventArgs e)
 		{
@@ -139,7 +144,11 @@ namespace client_app
 			string userID = txt_userID.Text.Trim();
 			string password = txt_password.Text;
 			string localisation = languages.languageCodes[languageIndex];
-			await connection.InvokeAsync("accountRequest", userID, password, localisation);
+
+			if (connection.State == HubConnectionState.Connected)
+			{
+				await connection.InvokeAsync("accountRequest", userID, password, localisation);
+			}
 		}
 		private void btn_language_Click(object sender, EventArgs e)
 		{

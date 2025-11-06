@@ -7,7 +7,7 @@ namespace server_app.games
 {
 	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "versus", userID, 2), IPlayable
 	{
-		private const int rounds = 10;
+		private const int rounds = 1;
 		private readonly List<friendData> userCache = [];
 		private readonly Dictionary<string, double> scores = [];
 

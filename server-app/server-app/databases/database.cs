@@ -2,9 +2,8 @@
 
 namespace server_app.databases
 {
-    /* the todo list of DOOM
+	/* the todo list of DOOM
 	 * 
-	 * stats update fail in versus --> abstractGame\updateStatistics
 	 * endGame ui, rank and knockout info
 	 * client needs try catches on all server calls
 	 * server CRASH on versus disconnect --fixed but untested
@@ -26,7 +25,7 @@ namespace server_app.databases
 
 
 
-    public struct userData
+	public struct userData
 	{
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
