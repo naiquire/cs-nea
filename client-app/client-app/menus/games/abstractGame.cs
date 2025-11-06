@@ -105,7 +105,7 @@ namespace client_app.menus.games
 
 			if (string.IsNullOrEmpty(gameID))
 			{
-				main.loadAlert("An error occured queueing for a game. Please try again.");
+				main.loadAlert(languages.localisation["An error occured. Please wait and try again"][main.userData.localisation]);
 				main.btn_home.PerformClick();
 			}
 			else
@@ -121,17 +121,16 @@ namespace client_app.menus.games
             }
 
             UXelements.resetLayout(main);
-			UXelements.initialiseLobby(main);
 			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
-				main.loadAlert("An error occured joining the game. Please try again.");
+				main.loadAlert(languages.localisation["An error occured. Please wait and try again"][main.userData.localisation]);
 				main.btn_home.PerformClick();
 			}
 		}
 		public virtual async void awaitStart()
 		{
 			started = true;
-			await UXelements.countdown(lbl_countdown, 5, lbl_status, "Starting in");
+			await UXelements.countdown(lbl_countdown, 5, lbl_status, languages.localisation["Starting in"][main.userData.localisation]);
 		}
 		public virtual void startGame()
 		{
@@ -167,7 +166,7 @@ namespace client_app.menus.games
 				drawingPanel.clearPanel();
 			};
 
-			await UXelements.countdown(lbl_countdown, 3, lbl_status, "Next letter in");
+			await UXelements.countdown(lbl_countdown, 3, lbl_status, languages.localisation["Next letter in"][main.userData.localisation]);
 		}
 		public virtual void submissionPhase(char letter)
 		{

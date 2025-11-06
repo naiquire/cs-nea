@@ -55,7 +55,6 @@ namespace client_app.components
 				Controls.Add(btn_close);
 			}
 			FormBorderStyle = FormBorderStyle.None;
-			Name = "abstractMenu";
 			ShowIcon = false;
 			ShowInTaskbar = false;
 			StartPosition = FormStartPosition.CenterScreen;

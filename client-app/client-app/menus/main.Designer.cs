@@ -343,7 +343,7 @@ namespace client_app
 
 			for (int i = 0; i < onlineList.Count; i++, y_offset += buttonY + padding)
 			{
-				Guna2Button user = createUserButton($"{onlineList[i].userID} | {onlineList[i].rank}", (0, y_offset), (buttonX, buttonY));
+				Guna2Button user = createUserButton(onlineList[i].userID, (0, y_offset), (buttonX, buttonY));
 				panel_friendList.Controls.Add(user);
 			}
 
@@ -359,7 +359,7 @@ namespace client_app
 
 			for (int i = 0; i < offlineList.Count; i++, y_offset += buttonY + padding)
 			{
-				Guna2Button user = createUserButton($"{offlineList[i].userID} | {offlineList[i].rank}", (0, y_offset), (buttonX, buttonY));
+				Guna2Button user = createUserButton(offlineList[i].userID, (0, y_offset), (buttonX, buttonY));
 				panel_friendList.Controls.Add(user);
 			}
 		}

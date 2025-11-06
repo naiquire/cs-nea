@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using client_app.Properties;
 
 namespace client_app
 {
@@ -69,21 +70,21 @@ namespace client_app
 					break;
 				case VALID:
 					Hide();
-					new main(userID).ShowDialog();
+					new main(userID, languages.languageCodes[languageIndex]).ShowDialog();
 					Show();
 					//Close();
 					break;
 				case USER_DOES_NOT_EXIST:
-					lbl_information.Text = "Account does not exist";
+					lbl_information.Text = languages.localisation["Account does not exist"][languages.languageCodes[languageIndex]];
 					break;
 				case ERROR_OCCURED:
-					lbl_information.Text = "An error occurred. Please wait and try again";
+					lbl_information.Text = languages.localisation["An error occurred. Please wait and try again"][languages.languageCodes[languageIndex]];
 					break;
 				case USER_LOGGED_IN_ON_OTHER_DEVICE:
-					lbl_information.Text = "User is currently logged in on another device";
+					lbl_information.Text = languages.localisation["User is currently logged in on another device"][languages.languageCodes[languageIndex]];
 					break;
 				default:
-					throw new Exception($"Unrecognised login success code < {success} >");
+					throw new Exception($"{languages.localisation["Unrecognised success code"][languages.languageCodes[languageIndex]]} < {success} >");
 			}
 		}
 		public void handleAccountCreationSuccess(int success, string userID)
@@ -92,18 +93,18 @@ namespace client_app
 			{
 				case VALID:
 					Hide();
-					new main(userID).ShowDialog();
+					new main(userID, languages.languageCodes[languageIndex]).ShowDialog();
 					Show();
 					//Close();
 					break;
 				case USERID_TAKEN:
-					lbl_information.Text = "Username is not available";
+					lbl_information.Text = languages.localisation["Username is not available"][languages.languageCodes[languageIndex]];
 					break;
 				case ERROR_OCCURED:
-					lbl_information.Text = "An error occurred. Please wait and try again";
+					lbl_information.Text = languages.localisation["An error occured. Please wait and try again"][languages.languageCodes[languageIndex]];
 					break;
 				default:
-					throw new Exception($"Unrecognised account success code < {success} >");
+					throw new Exception($"{languages.localisation["Unrecognised success code"][languages.languageCodes[languageIndex]]} < {success} >");
 			}
 		}
 
@@ -114,7 +115,10 @@ namespace client_app
 			string password = txt_password.Text;
 			this.lbl_information.ResetText();
 
-            // System.InvalidOperationException
+			if (string.IsNullOrWhiteSpace(userID) || string.IsNullOrEmpty(password))
+			{
+				return;
+			}
 
 			if (connection.State == HubConnectionState.Connected)
 			{

@@ -3,27 +3,27 @@
 namespace server_app.databases
 {
 	/* the todo list of DOOM
-	 * 
+	 *
 	 * endGame ui, rank and knockout info
-	 * client needs try catches on all server calls
 	 * server CRASH on versus disconnect --fixed but untested
 	 * TRANSLATIONS
-	 * 
+	 *		Search players
+	 *		game descriptions
+	 *		
+	 *
 	 * game -> "next letter in" dissapears ONLY on round 1
-	 * game -> panel_drawing sometimes invisible until click
-	 * 
+	 * game -> panel_drawing invisible after alt-tab or something idk
+	 *
 	 * profile -> about me
 	 * some langauge cause textboxes to break text position -> autosize?
 	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
-	 * 
+	 *
 	 * btn_home ui
 	 * disconnect log sometimes appears twice??
 	 * home -> panel_main ui
 	 * cleanup ui code
-	 * 
+	 *
 	 */
-
-
 
 	public struct userData
 	{
@@ -46,7 +46,7 @@ namespace server_app.databases
 	public struct friendData
 	{
 		public string userID { get; set; }
-		public string aboutMe { get; set; }
+		//public string aboutMe { get; set; }
 		public bool online { get; set; }
 
 		public string localisation { get; set; }
@@ -59,7 +59,7 @@ namespace server_app.databases
 	{
 		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
-		public static void outputException(Exception ex) => Logger.ErrorLog(ex);
+		public static void outputException(Exception ex) => Logger.ErrorLog(ex.Message);
 		public static void outputException(string ex) => Logger.ErrorLog(ex);
 
 		public static bool loginRequest(string userID, string password, out int success)
@@ -102,7 +102,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool  accountRequest(string userID, string password, string localisation, out int success)
+		public static bool accountRequest(string userID, string password, string localisation, out int success)
 		{
 			if (!userExists(userID, out bool exists))
 			{
@@ -373,7 +373,7 @@ namespace server_app.databases
 					var reader = command.ExecuteReader();
 					while (reader.Read())
 					{
-						friendData.aboutMe = reader.GetString(0);
+						//friendData.aboutMe = reader.GetString(0);
 						//friendData.dateCreated = reader.GetDateTime(1);
 						friendData.localisation = reader.GetString(2);
 						friendData.rank = reader.GetInt32(3);

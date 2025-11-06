@@ -40,7 +40,7 @@ namespace client_app
 				}
 				catch
 				{
-					login?.Invoke(new Action(() => login.lbl_information.Text = "An error occured while connecting to the server"));
+					login?.Invoke(new Action(() => login.lbl_information.Text = languages.localisation["An error occured while connecting to the server"][main.userData.localisation]));
 				}
 			}
 

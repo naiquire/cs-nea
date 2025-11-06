@@ -35,7 +35,7 @@ namespace client_app
 	public struct friendData
 	{
 		public string userID { get; set; }
-		public string aboutMe { get; set; }
+		//public string aboutMe { get; set; }
 		public bool online { get; set; }
 
 		public string localisation { get; set; }
@@ -60,8 +60,9 @@ namespace client_app
 		public const string address = "http://localhost:3900/cs-nea";
 
 
-		public main(string userID)
+		public main(string userID, string defaultLocalisation)
 		{
+			userData.localisation = defaultLocalisation;
 			hub_connection.injectForm(null, this);
 
 			UXelements.InitializeComponent(this);
@@ -120,39 +121,15 @@ namespace client_app
 				await connection.InvokeAsync("loadInvites", userData.userID);
 			}
 		}
-		public void updateUserData(string userID, string aboutMe, string localisation) // updating friend data may be redundant
+		public void updateUserData(string userID, string aboutMe, string localisation)
 		{
-			if (userID == userData.userID)
+			if (userID != userData.userID)
 			{
-				// update userData
-				userData.aboutMe = aboutMe;
-				userData.localisation = localisation;
-			}
-			else
-			{
-				int index = -1;
-				for (int i = 0; i < userData.friends.Count; i++)
-				{
-					if (userData.friends[i].userID == userID)
-					{
-						index = i;
-						break;
-					}
-				}
-				if (index == -1)
-				{
-					loadAlert("Failed to update user data.");
-					return;
-				}
-
-				// update friendData
-				var friend = userData.friends[index];
-				friend.aboutMe = aboutMe;
-				friend.localisation = localisation;
-				userData.friends[index] = friend;
-
 				return;
 			}
+
+			userData.aboutMe = aboutMe;
+			userData.localisation = localisation;
 
 			if (menu.game != null)
 			{

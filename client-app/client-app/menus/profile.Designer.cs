@@ -183,7 +183,7 @@ namespace client_app.menus
 			this.btn_addFriends.Location = new Point(40, 900);
 			this.btn_addFriends.Name = "btn_login";
 			this.btn_addFriends.Size = new Size(200, 40);
-			this.btn_addFriends.Text = "Add Friend";
+			this.btn_addFriends.Text = languages.localisation["Add Friend"][main.userData.localisation];
 			this.btn_addFriends.Click += new System.EventHandler(this.btn_addFriends_Click);
 			//
 			// btn_removeFriends
@@ -196,7 +196,7 @@ namespace client_app.menus
 			this.btn_removeFriends.Location = new Point(240, 900);
 			this.btn_removeFriends.Name = "btn_login";
 			this.btn_removeFriends.Size = new Size(200, 40);
-			this.btn_removeFriends.Text = "Remove Friend";
+			this.btn_removeFriends.Text = languages.localisation["Remove Friend"][main.userData.localisation];
 			this.btn_removeFriends.Click += new System.EventHandler(this.btn_removeFriends_Click);
 
 			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);

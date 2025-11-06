@@ -1,24 +1,10 @@
 ﻿using Spectre.Console;
-using SQLitePCL;
-using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
 using System.Threading.Channels;
-using System.Threading.Tasks;
 
 namespace server_app
 {
 	public static class Logger
-	{		
-		public static void Log(string code, ConsoleColor codeColor, string message)
-		{
-			Console.ResetColor();
-			Console.Write($"[ ");
-			Console.ForegroundColor = codeColor;
-			Console.Write($"{code}");
-			Console.ResetColor();
-			Console.WriteLine($" ] {message}");
-		}
-
+	{
 		private static readonly Channel<(string code, string colour, string message)> _logChannel = Channel.CreateUnbounded<(string, string, string)>();
 		private static readonly Channel<string> _errorChannel = Channel.CreateUnbounded<string>();
 
@@ -30,10 +16,6 @@ namespace server_app
 		{
 			await _errorChannel.Writer.WriteAsync(message);
 		}
-		public static async void ErrorLog(Exception ex)
-		{
-			await _errorChannel.Writer.WriteAsync(ex.Message);
-		}
 
 		public static void SetupAsync()
 		{
@@ -42,18 +24,16 @@ namespace server_app
 				.Expand()
 				.AddColumn("")
 				.AddColumn("");
-            Table errorTable = new Table()
-                .NoBorder()
-                .Expand()
-                .AddColumn("")
-                .AddColumn("");
+			Table errorTable = new Table()
+				.NoBorder()
+				.Expand()
+				.AddColumn("")
+				.AddColumn("");
 
-            var loggerPanel = new Panel(loggerTable).Header("Logger", Justify.Left).Expand();
-            var errorPanel = new Panel(errorTable).Header("Errors", Justify.Left).Expand();
+			var loggerPanel = new Panel(loggerTable).Header("Logger", Justify.Left).Expand();
+			var errorPanel = new Panel(errorTable).Header("Errors", Justify.Left).Expand();
 
-			// elsewhere in your layout setup
-			var layout = new Layout("Root");
-
+			var layout = new Layout("layout");
 
 			var topLeft = new Layout("topLeft");
 			var topRight = new Layout("topRight");
@@ -84,23 +64,33 @@ namespace server_app
 					{
 						while (_logChannel.Reader.TryRead(out var item))
 						{
+							if (loggerTable.Rows.Count > 10)
+							{
+								loggerTable.RemoveRow(0);
+							}
+
 							loggerTable.AddRow($@"[{item.colour}]{item.code}[/]", item.message);
 							ctx.Refresh();
 						}
 					}
 				}
-                async void readErrorChannel()
-                {
-                    while (await _errorChannel.Reader.WaitToReadAsync())
-                    {
-                        while (_errorChannel.Reader.TryRead(out var item))
-                        {
-                            errorTable.AddRow($@"[red]ERROR[/]", item);
-                            ctx.Refresh();
-                        }
-                    }
-                }
-            });
+				async void readErrorChannel()
+				{
+					while (await _errorChannel.Reader.WaitToReadAsync())
+					{
+						while (_errorChannel.Reader.TryRead(out var item))
+						{
+							if (errorTable.Rows.Count > 10)
+							{
+								errorTable.RemoveRow(0);
+							}
+
+							errorTable.AddRow($@"[red]ERROR[/]", item);
+							ctx.Refresh();
+						}
+					}
+				}
+			});
 		}
 	}
 }

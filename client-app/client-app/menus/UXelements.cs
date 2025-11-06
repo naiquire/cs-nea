@@ -18,26 +18,6 @@ namespace client_app.menus
 		public static int clientX = Screen.PrimaryScreen.WorkingArea.Width;
 		public static int clientY = Screen.PrimaryScreen.WorkingArea.Height;
 
-		private Guna2GradientButton btn_continue;
-		private Guna2Panel panel_results;
-		private Guna2HtmlLabel lbl_letter;
-		private Guna2Shapes shape_letterOutline;
-		private Guna2PictureBox seperator;
-		private Guna2HtmlLabel guna2HtmlLabel1;
-		private Guna2ProgressBar bar_accuracy;
-		private Guna2HtmlLabel lbl_accuracy;
-		private Guna2TextBox txt_accuracyDiff;
-		private Guna2TextBox txt_timeDiff;
-		private Guna2HtmlLabel lbl_time;
-		private Guna2ProgressBar bar_time;
-		private Guna2HtmlLabel lbl_diff;
-		private Guna2HtmlLabel lbl_correct;
-		private Guna2HtmlLabel lbl_eliminated;
-		private Guna2HtmlLabel lbl_eliminateReason;
-		private Guna2HtmlLabel lbl_winner;
-		private Guna2ProgressBar bar_winner;
-
-
 		public void aInitializeComponent()
 		{
 
@@ -69,9 +49,7 @@ namespace client_app.menus
 			main.panel_topBorder.Controls.Add(main.lbl_appName);
 			main.panel_topBorder.Controls.Add(main.btn_close);
 			main.panel_topBorder.Location = new Point(0, 0);
-			main.panel_topBorder.Name = "panel_topBorder";
 			main.panel_topBorder.Size = new Size(1920, 30);
-			main.panel_topBorder.TabIndex = 0;
 			// 
 			// lbl_appName
 			// 
@@ -80,15 +58,13 @@ namespace client_app.menus
 			main.lbl_appName.Location = new Point(10, 7);
 			main.lbl_appName.Name = "lbl_appName";
 			main.lbl_appName.Size = new Size(100, 16);
-			main.lbl_appName.TabIndex = 0;
 			main.lbl_appName.Text = "Glyph";
 			// 
 			// btn_close
 			// 
 			main.btn_close.Location = new Point(1890, 0);
-			main.btn_close.Name = "btn_close";
 			main.btn_close.Size = new Size(30, 30);
-			main.btn_close.TabIndex = 0;
+			main.btn_close.TabStop = false;
 			main.btn_close.Text = "X";
 			main.btn_close.UseVisualStyleBackColor = true;
 			main.btn_close.Click += (sender, e) => main.btn_close_Click(sender, e);
@@ -96,10 +72,9 @@ namespace client_app.menus
 			// btn_home
 			// 
 			main.btn_home.Location = new Point(50, 880);
-			main.btn_home.Name = "btn_home";
 			main.btn_home.Size = new Size(200, 30);
-			main.btn_home.TabIndex = 0;
-			main.btn_home.Text = "HOME";
+			main.btn_home.TabStop = false;
+			main.btn_home.Text = languages.localisation["Home"][main.userData.localisation];
 			main.btn_home.UseVisualStyleBackColor = true;
 			// 
 			// panel_left
@@ -108,39 +83,31 @@ namespace client_app.menus
 			main.panel_left.BackColor = Color.FromArgb(35, 31, 32);
 			main.panel_left.Controls.Add(main.btn_home);
 			main.panel_left.Location = new Point(0, 130);
-			main.panel_left.Name = "panel_left";
 			main.panel_left.Size = new Size(300, 950);
-			main.panel_left.TabIndex = 2;
 			// 
 			// panel_topLeft
 			// 
 			main.panel_topLeft.BackColor = Color.FromArgb(46, 46, 46);
 			main.panel_topLeft.Location = new Point(0, 30);
-			main.panel_topLeft.Name = "panel_topLeft";
 			main.panel_topLeft.Size = new Size(300, 100);
-			main.panel_topLeft.TabIndex = 1;
 			// 
 			// panel_main
 			// 
 			main.panel_main.BackColor = Color.FromArgb(104, 104, 104);
 			main.panel_main.Location = new Point(300, 30);
-			main.panel_main.Name = "panel_main";
 			main.panel_main.Size = new Size(1120, clientY - 30);
-			main.panel_main.TabIndex = 4;
 			// 
 			// panel_right
 			// 
 			main.panel_right.BackColor = Color.FromArgb(35, 31, 32);
 			main.panel_right.Location = new Point(1420, 30);
-			main.panel_right.Name = "panel_right";
 			main.panel_right.Size = new Size(500, 1050);
-			main.panel_right.TabIndex = 3;
 			// 
 			// abstractMenu
 			// 
 			main.AutoScroll = false;
 			main.BackColor = Color.White;
-			main.ClientSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+			main.ClientSize = new Size(clientX, clientY);
 			main.Controls.Add(main.panel_topLeft);
 			main.Controls.Add(main.panel_topBorder);
 			main.Controls.Add(main.panel_left);
@@ -149,7 +116,6 @@ namespace client_app.menus
 			main.StartPosition = FormStartPosition.Manual;
 			main.Location = new Point(0, 0);
 			main.FormBorderStyle = FormBorderStyle.None;
-			main.Name = "abstractMenu";
 			main.panel_topBorder.ResumeLayout(false);
 			main.panel_left.ResumeLayout(false);
 			main.panel_main.ResumeLayout(false);
@@ -178,13 +144,11 @@ namespace client_app.menus
 				BorderThickness = 10,
 				FillColor = Color.White,
 				Location = new Point(260, 250),
-				Name = "panel_outline",
 				PolygonSkip = 1,
 				Rotate = 0F,
 				Shape = Guna.UI2.WinForms.Enums.ShapeType.Rounded,
 				Size = new Size(600, 600),
-				TabIndex = 1,
-				Text = "panel_outline",
+				TabStop = false,
 				Zoom = 100,
 			};
 			game.lbl_letter = new Guna2HtmlLabel()
@@ -194,10 +158,8 @@ namespace client_app.menus
 				Font = new Font("Calibri", 144F),
 				ForeColor = Color.Black,
 				Location = new Point(380, 50),
-				Margin = new Padding(42, 47, 42, 47),
-				Name = "lbl_letter",
 				Size = new Size(360, 150),
-				TabIndex = 2,
+				TabStop = false,
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			game.btn_submit = new Guna2GradientButton()
@@ -210,10 +172,9 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
 				ForeColor = Color.White,
 				Location = new Point(460, 900),
-				Name = "btn_submit",
 				Size = new Size(440, 100),
-				TabIndex = 3,
-				Text = "Submit",
+				TabStop = false,
+				Text = languages.localisation["Submit"][main.userData.localisation],
 			};
 			game.btn_clear = new Guna2GradientButton()
 			{
@@ -225,10 +186,9 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 31.75F, FontStyle.Bold),
 				ForeColor = Color.White,
 				Location = new Point(220, 900),
-				Name = "btn_clearDrawing",
 				Size = new Size(225, 100),
-				TabIndex = 4,
-				Text = "Clear",
+				TabStop = false,
+				Text = languages.localisation["Clear"][main.userData.localisation],
 			};
 
 			var input = new input(game.main.panel_main, (260, 250), (600, 600));
@@ -249,21 +209,17 @@ namespace client_app.menus
 				Cursor = Cursors.Arrow,
 				Font = new Font("Bahnschrift SemiBold", 48F, FontStyle.Bold),
 				Location = new Point(40, 40),
-				Margin = new Padding(15, 15, 15, 15),
-				Name = "lbl_rounds",
 				Size = new Size(420, 80),
 				TabStop = false,
-				Text = $"Round {game.getRounds()}",
+				Text = $"{languages.localisation["Round"][main.userData.localisation]} {game.getRounds()}",
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			PictureBox seperator = new PictureBox()
 			{
 				Image = Resources.seperator,
 				Location = new Point(30, 120),
-				Name = "seperator",
 				Size = new Size(440, 7),
 				SizeMode = PictureBoxSizeMode.StretchImage,
-				TabIndex = 1,
 				TabStop = false,
 			};
 			game.panel_stats = new Guna2Panel()
@@ -271,9 +227,7 @@ namespace client_app.menus
 				BorderRadius = 20,
 				FillColor = Color.FromArgb(104, 104, 104),
 				Location = new Point(40, 160),
-				Name = "panel_stats",
 				Size = new Size(420, 720),
-				TabIndex = 2,
 			};
 
 			game.main.panel_right.Controls.Add(game.lbl_rounds);
@@ -310,29 +264,22 @@ namespace client_app.menus
 					BorderRadius = 10,
 					FillColor = Color.FromArgb(156, 156, 156),
 					Location = new Point(padding, y),
-					Name = "panel_stat",
 					Size = new Size(420 - 2 * padding, panelY),
-					TabIndex = 3,
 				};
 
 				Label lbl_letter = new Label()
 				{
-					AutoSize = true,
 					BackColor = Color.FromArgb(156, 156, 156),
 					Font = new Font("Bahnschrift SemiBold", 27.75F, FontStyle.Bold),
 					Location = new Point(10, 2),
-					Name = "lbl_letter",
 					Size = new Size(43, 45),
-					TabIndex = 0,
 					Text = letter.ToString(),
 				};
 				Panel bar_base = new Panel()
 				{
 					BackColor = Color.White,
 					Location = new Point(60, 10),
-					Name = "bar_base",
 					Size = new Size(230, 30),
-					TabIndex = 1,
 				};
 				Guna2TextBox lbl_accuracy = new Guna2TextBox()
 				{
@@ -343,18 +290,15 @@ namespace client_app.menus
 					Font = new Font("Bahnschrift", 19.75F),
 					ForeColor = Color.FromArgb(52, 52, 52),
 					Location = new Point(290, 10),
-					Name = "lbl_accuracy",
 					Size = new Size(80, 30),
-					TabIndex = 2,
+					TabStop = false,
 					TextAlign = HorizontalAlignment.Right,
 				};
 				Guna2Panel bar_fill = new Guna2Panel()
 				{
 					BackColor = ColorTranslator.FromHtml($"{r}, {g}, {b}"),
 					Location = new Point(60, 10),
-					Name = "bar_fill",
 					Size = new Size((int)(accuracy * bar_base.Size.Width), bar_base.Size.Height),
-					TabIndex = 3,
 				};
 
 				panel_stat.Controls.Add(bar_fill);
@@ -378,7 +322,6 @@ namespace client_app.menus
 				Location = new Point(20, 90),
 				Name = "panel_friendList",
 				Size = new Size(260, 384),
-				TabIndex = 2,
 			};
 			PictureBox seperator = new PictureBox()
 			{
@@ -400,7 +343,6 @@ namespace client_app.menus
 				Location = new Point(0, 20),
 				Name = "txt_friendsLabel",
 				Size = new Size(300, 33),
-				TabIndex = 0,
 				Text = "Players",
 				TextAlign = (ContentAlignment)HorizontalAlignment.Center,
 			};
@@ -415,7 +357,6 @@ namespace client_app.menus
 					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 					Location = new Point(10, y_offset),
 					Size = new Size(200, 30),
-					TabStop = false,
 					Text = users[i].userID,
 				};
 				Label rank = new Label()
@@ -426,7 +367,6 @@ namespace client_app.menus
 					Location = new Point(210, y_offset),
 					Name = "txt_onlineCount",
 					Size = new Size(50, 20),
-					TabIndex = 0,
 					Text = users[i].rank.ToString(),
 					TextAlign = ContentAlignment.MiddleRight,
 				};
@@ -452,7 +392,6 @@ namespace client_app.menus
 				Location = new Point(20, 90),
 				Name = "panel_friendList",
 				Size = new Size(260, 384),
-				TabIndex = 2,
 			};
 			PictureBox seperator = new PictureBox()
 			{
@@ -462,7 +401,6 @@ namespace client_app.menus
 				Name = "seperator",
 				Size = new Size(200, 5),
 				SizeMode = PictureBoxSizeMode.StretchImage,
-				TabIndex = 1,
 				TabStop = false,
 			};
 			Label lbl_players = new Label()
@@ -474,7 +412,6 @@ namespace client_app.menus
 				Location = new Point(0, 20),
 				Name = "txt_friendsLabel",
 				Size = new Size(300, 33),
-				TabIndex = 0,
 				Text = "Players",
 				TextAlign = (ContentAlignment)HorizontalAlignment.Center,
 			};
@@ -492,7 +429,7 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				Location = new Point(10, y_offset),
 				Size = new Size(200, labelY),
-				TabIndex = 0,
+				TabStop = false,
 				Text = "Alive"
 			};
 			panel_players.Controls.Add(lbl_alive);
@@ -504,7 +441,7 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				Location = new Point(230, 10),
 				Size = new Size(30, 20),
-				TabIndex = 0,
+				TabStop = false,
 				Text = alive.Count.ToString(),
 				TextAlign = ContentAlignment.MiddleRight,
 			};
@@ -519,7 +456,7 @@ namespace client_app.menus
 					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 					Location = new Point(10, y_offset),
 					Size = new Size(labelX, labelY),
-					TabIndex = 0,
+					TabStop = false,
 					Text = alive[i].userID,
 					FlatStyle = FlatStyle.Flat,
 				};
@@ -534,8 +471,8 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				Location = new Point(10, y_offset),
 				Size = new Size(200, labelY),
-				TabIndex = 0,
-				Text = "Eliminated",
+				TabStop = false,
+				Text = languages.localisation["Eliminated"][main.userData.localisation],
 			};
 			panel_players.Controls.Add(lbl_dead);
 
@@ -546,7 +483,7 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				Location = new Point(230, y_offset),
 				Size = new Size(30, 20),
-				TabIndex = 0,
+				TabStop = false,
 				Text = dead.Count.ToString(),
 				TextAlign = ContentAlignment.MiddleRight,
 			};
@@ -561,7 +498,7 @@ namespace client_app.menus
 					Font = new Font("Bahnschrift SemiBold", 12.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 					Location = new Point(10, y_offset),
 					Size = new Size(labelX, labelY),
-					TabIndex = 0,
+					TabStop = false,
 					Text = dead[i].userID,
 					FlatStyle = FlatStyle.Flat,
 				};
@@ -603,7 +540,7 @@ namespace client_app.menus
 				Location = new Point(220, 900),
 				Size = new Size(680, 100),
 				TabStop = false,
-				Text = "Continue",
+				Text = languages.localisation["Continue"][main.userData.localisation],
 			};
 			Guna2Panel panel_results = new Guna2Panel()
 			{
@@ -616,16 +553,14 @@ namespace client_app.menus
 			Guna2TextBox txt_timeDiff = new Guna2TextBox()
 			{
 				BackColor = Color.Transparent,
-				BorderColor = Color.Empty,
 				BorderRadius = 20,
 				BorderThickness = 0,
 				Cursor = Cursors.Arrow,
 				FillColor = Color.FromArgb(82, 65, 65),
 				Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point, 0),
-				ForeColor = Color.Empty,
+				ForeColor = timeColour,
 				Location = new Point(740, 270),
-				PlaceholderForeColor = timeColour,
-				PlaceholderText = timeDeltaText,
+				Text = timeDeltaText,
 				ReadOnly = true,
 				Size = new Size(140, 40),
 				TabStop = false,
@@ -641,7 +576,7 @@ namespace client_app.menus
 				Location = new Point(40, 270),
 				Size = new Size(160, 40),
 				TabStop = false,
-				Text = "Time",
+				Text = languages.localisation["Time"][main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2ProgressBar bar_time = new Guna2ProgressBar()
@@ -669,16 +604,14 @@ namespace client_app.menus
 			Guna2TextBox txt_accuracyDiff = new Guna2TextBox()
 			{
 				BackColor = Color.Transparent,
-				BorderColor = Color.Empty,
 				BorderRadius = 20,
 				BorderThickness = 0,
 				Cursor = Cursors.Arrow,
 				FillColor = Color.FromArgb(82, 65, 65),
 				Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point, 0),
-				ForeColor = Color.Empty,
+				ForeColor = accuracyColour,
 				Location = new Point(740, 220),
-				PlaceholderForeColor = accuracyColour,
-				PlaceholderText = accuracyDeltaText,
+				Text = accuracyDeltaText,
 				ReadOnly = true,
 				Size = new Size(140, 40),
 				TabStop = false,
@@ -694,7 +627,7 @@ namespace client_app.menus
 				Location = new Point(40, 220),
 				Size = new Size(160, 40),
 				TabStop = false,
-				Text = "Accuracy",
+				Text = languages.localisation["Accuracy"][main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2ProgressBar bar_accuracy = new Guna2ProgressBar()
@@ -722,15 +655,13 @@ namespace client_app.menus
 			{
 				AutoSize = false,
 				BackColor = Color.FromArgb(208, 208, 208),
-				Font = new Font("Bahnschrift SemiBold", 96F, System.Drawing.FontStyle.Bold),
+				Font = new Font("Bahnschrift SemiBold", 96F, FontStyle.Bold),
 				ForeColor = Color.Black,
-				ImeMode = ImeMode.NoControl,
 				Location = new Point(60, 63),
-				Name = "lbl_letter",
 				Size = new Size(120, 120),
 				TabStop = false,
 				Text = letter,
-				TextAlignment = System.Drawing.ContentAlignment.MiddleCenter,
+				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			Guna2Shapes shape_letterOutline = new Guna2Shapes()
 			{
@@ -767,7 +698,7 @@ namespace client_app.menus
 				Location = new Point(50, 20),
 				Size = new Size(1020, 120),
 				TabStop = false,
-				Text = "RESULTS",
+				Text = languages.localisation["Results"][main.userData.localisation],
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			Guna2HtmlLabel lbl_diff = new Guna2HtmlLabel()
@@ -777,10 +708,9 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift", 14.25F),
 				ForeColor = Color.White,
 				Location = new Point(740, 170),
-				Name = "lbl_diff",
 				Size = new Size(140, 40),
 				TabStop = false,
-				Text = "Delta",
+				Text = languages.localisation["Delta"][main.userData.localisation],
 				TextAlignment = ContentAlignment.BottomCenter,
 			};
 			Guna2HtmlLabel lbl_correct = new Guna2HtmlLabel()
@@ -790,10 +720,9 @@ namespace client_app.menus
 				Font = new Font("Bahnschrift", 40.25F),
 				ForeColor = Color.White,
 				Location = new Point(220, 40),
-				Name = "lbl_correct",
 				Size = new Size(330, 70),
 				TabStop = false,
-				Text = correct ? "Correct" : "Incorrect",
+				Text = correct ? languages.localisation["Correct"][main.userData.localisation] : languages.localisation["Incorrect"][main.userData.localisation],
 			};
 
 			panel_results.Controls.Add(lbl_correct);
@@ -809,12 +738,12 @@ namespace client_app.menus
 
 			btn_continue.Click += async (sender, e) =>
 			{
-                if (main.connection.State != HubConnectionState.Connected)
-                {
-					main.btn_home.PerformClick();
-                }
+				if (main.connection.State != HubConnectionState.Connected)
+				{
+					game.main.btn_home.PerformClick();
+				}
 
-                btn_continue.Enabled = false;
+				btn_continue.Enabled = false;
 				await main.connection.InvokeAsync("requestRound", game.getGameID(), main.userData.userID);
 			};
 
@@ -835,10 +764,8 @@ namespace client_app.menus
 				Image = Resources.account,
 				ImageRotate = 0F,
 				Location = new Point(150, 50),
-				Name = "pic_account",
 				Size = new Size(200, 200),
 				SizeMode = PictureBoxSizeMode.Zoom,
-				TabIndex = 0,
 				TabStop = false
 			};
 			Guna2GradientButton btn_profile = new Guna2GradientButton()
@@ -849,9 +776,8 @@ namespace client_app.menus
 				FillColor2 = Color.FromArgb(197, 113, 247),
 				Font = new Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
 				Location = new Point(140, 930),
-				Name = "btn_profile",
 				Size = new Size(220, 50),
-				TabIndex = 3,
+				TabStop = false,
 				Text = languages.localisation["Profile"][main.userData.localisation],
 			};
 			Guna2GradientButton btn_edit = new Guna2GradientButton()
@@ -862,30 +788,24 @@ namespace client_app.menus
 				FillColor2 = Color.FromArgb(197, 113, 247),
 				Font = new Font("Bahnschrift SemiBold", 11.25F, System.Drawing.FontStyle.Bold),
 				Location = new Point(140, 850),
-				Name = "btn_profile",
 				Size = new Size(220, 50),
-				TabIndex = 3,
+				TabStop = false,
 				Text = languages.localisation["Edit"][main.userData.localisation],
 			};
 			Guna2TextBox lbl_userID = new Guna2TextBox()
 			{
 				BackColor = Color.FromArgb(44, 39, 41),
 				BorderThickness = 0,
-				Cursor = Cursors.IBeam,
+				Cursor = Cursors.Arrow,
 				DefaultText = userData.userID,
 				BorderColor = Color.FromArgb(208, 208, 208),
 				FillColor = Color.FromArgb(44, 39, 41),
 				Font = new Font("Bahnschrift", 27.75F, System.Drawing.FontStyle.Bold),
 				ForeColor = Color.White,
 				Location = new Point(40, 265),
-				Margin = new Padding(6),
-				Name = "lbl_userID",
-				PlaceholderForeColor = Color.Transparent,
-				PlaceholderText = "",
 				ReadOnly = true,
-				SelectedText = "",
 				Size = new Size(420, 70),
-				TabIndex = 13,
+				TabStop = false,
 				TextAlign = HorizontalAlignment.Center,
 			};
 			Guna2TextBox lbl_aboutMe = new Guna2TextBox()
@@ -916,9 +836,14 @@ namespace client_app.menus
 				var update = new update(main.userData);
 				if (update.DialogResult == DialogResult.OK)
 				{
+					if (main.connection.State != HubConnectionState.Connected)
+					{
+						main.loadAlert(languages.localisation["An error occurred. Please wait and try again"][main.userData.localisation]);
+						return;
+					}
 					if (!await main.connection.InvokeAsync<bool>("updateUserData", main.userData.userID, update.getAboutMe(), update.getLocalisation()))
 					{
-						main.loadAlert("Failed to update profile. Please try again.");
+						main.loadAlert(languages.localisation["An error occurred. Please wait and try again"][main.userData.localisation]);
 					}
 				}
 			};
@@ -939,144 +864,138 @@ namespace client_app.menus
 			{
 				return new Guna2Panel()
 				{
-                    BackColor = Color.Transparent,
-                    BorderRadius = 20,
-                    FillColor = Color.FromArgb(208, 208, 208),
-                    Location = new Point(p.X, p.Y),
-                    Size = new Size(380, 50),
-                    TabIndex = 0,
-                };
+					BackColor = Color.Transparent,
+					BorderRadius = 20,
+					FillColor = Color.FromArgb(208, 208, 208),
+					Location = new Point(p.X, p.Y),
+					Size = new Size(380, 50),
+					TabIndex = 0,
+				};
 			}
 			Guna2Shapes createCircle((int X, int Y) p)
 			{
 				return new Guna2Shapes()
 				{
-                    BackColor = Color.Transparent,
-                    BorderColor = Color.White,
-                    BorderThickness = 5,
-                    FillColor = Color.Transparent,
-                    Location = new Point(31, 80),
-                    PolygonSides = 3,
-                    PolygonSkip = 1,
-                    Rotate = 9F,
-                    Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
-                    Size = new Size(70, 70),
-                    TabIndex = 1,
-                    UseTransparentBackground = true,
-                    Zoom = 80,
-                };
+					BackColor = Color.Transparent,
+					BorderColor = Color.White,
+					BorderThickness = 5,
+					FillColor = Color.Transparent,
+					Location = new Point(31, 80),
+					PolygonSides = 3,
+					PolygonSkip = 1,
+					Rotate = 9F,
+					Shape = Guna.UI2.WinForms.Enums.ShapeType.Ellipse,
+					Size = new Size(70, 70),
+					TabIndex = 1,
+					UseTransparentBackground = true,
+					Zoom = 80,
+				};
 			}
 			Guna2PictureBox createPicture((int X, int Y) p, (int X, int Y) s, Bitmap image)
 			{
 				return new Guna2PictureBox()
 				{
-                    BackColor = Color.Transparent,
-                    FillColor = Color.Transparent,
-                    Image = image,
-                    ImageRotate = 0F,
-                    Location = new Point(p.X, p.Y),
-                    Size = new Size(s.X, s.Y),
-                    SizeMode = PictureBoxSizeMode.Zoom,
-                    TabStop = false,
-                    UseTransparentBackground = true,
+					BackColor = Color.Transparent,
+					FillColor = Color.Transparent,
+					Image = image,
+					ImageRotate = 0F,
+					Location = new Point(p.X, p.Y),
+					Size = new Size(s.X, s.Y),
+					SizeMode = PictureBoxSizeMode.Zoom,
+					TabStop = false,
+					UseTransparentBackground = true,
 				};
 			}
 			Guna2TextBox createLabel((int X, int Y) p, (int X, int Y) s, string text)
 			{
 				return new Guna2TextBox()
 				{
-                    BorderThickness = 0,
-                    Cursor = Cursors.Arrow,
-                    DefaultText = text,
-                    FillColor = Color.FromArgb(208, 208, 208),
-                    Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
-                    ForeColor = Color.FromArgb(52, 52, 52),
-                    Location = new Point(p.X, p.Y),
-                    //Margin = new Padding(3, 4, 3, 4),
-                    ReadOnly = true,
-                    Size = new Size(s.X, s.Y),
+					BorderThickness = 0,
+					Cursor = Cursors.Arrow,
+					DefaultText = text,
+					FillColor = Color.FromArgb(208, 208, 208),
+					Font = new Font("Bahnschrift SemiBold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+					ForeColor = Color.FromArgb(52, 52, 52),
+					Location = new Point(p.X, p.Y),
+					ReadOnly = true,
+					Size = new Size(s.X, s.Y),
 					TabStop = false,
-                };
+				};
 			}
 			Guna2TextBox createTxt(string text)
 			{
 				return new Guna2TextBox()
 				{
-                    BorderThickness = 0,
-                    Cursor = Cursors.Arrow,
-                    DefaultText = text,
-                    FillColor = Color.FromArgb(208, 208, 208),
-                    Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    ForeColor = Color.FromArgb(104, 104, 104),
-                    Location = new Point(280, 10),
-                    //Margin = new Padding(3, 4, 3, 4),
-                    ReadOnly = true,
-                    RightToLeft = RightToLeft.Yes,
-                    Size = new Size(80, 30),
-                    TabStop = false,
-                    TextOffset = new Point(0, -1),
-                };
+					BorderThickness = 0,
+					Cursor = Cursors.Arrow,
+					DefaultText = text,
+					FillColor = Color.FromArgb(208, 208, 208),
+					Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0),
+					ForeColor = Color.FromArgb(104, 104, 104),
+					Location = new Point(280, 10),
+					ReadOnly = true,
+					RightToLeft = RightToLeft.Yes,
+					Size = new Size(80, 30),
+					TabStop = false,
+					TextOffset = new Point(0, -1),
+				};
 			}
-            Guna2Separator createSeperator((int X, int Y) p, (int X, int Y) s)
-            {
-                return new Guna2Separator()
-                {
-                    FillColor = Color.FromArgb(247, 113, 163),
-                    FillThickness = 2,
-                    Location = new Point(p.X, p.Y),
-                    Name = "seperator_rank",
-                    Size = new Size(s.X, s.Y),
-                    TabStop = false,
-                };
-            }
+			Guna2Separator createSeperator((int X, int Y) p, (int X, int Y) s)
+			{
+				return new Guna2Separator()
+				{
+					FillColor = Color.FromArgb(247, 113, 163),
+					FillThickness = 2,
+					Location = new Point(p.X, p.Y),
+					Size = new Size(s.X, s.Y),
+					TabStop = false,
+				};
+			}
 
-            Guna2Panel panel_statsOverview = new Guna2Panel()
+			Guna2Panel panel_statsOverview = new Guna2Panel()
 			{
 				BorderRadius = 20,
 				BorderThickness = 5,
 				BorderColor = Color.White,
 				FillColor = Color.FromArgb(156, 156, 156),
 				Location = new Point(pos.X, pos.Y),
-				Name = "panel_statsOverview",
 				Size = new Size(420, 230),
 				TabIndex = 0,
 			};
-            Guna2Shapes line_stats = new Guna2Shapes()
-            {
-                BorderThickness = 0,
-                FillColor = Color.White,
-                LineThickness = 1,
-                Location = new Point(63, 1),
-                Name = "line_stats",
-                PolygonSkip = 1,
-                Rotate = 0F,
-                Shape = Guna.UI2.WinForms.Enums.ShapeType.Rectangle,
-                Size = new Size(5, 228),
-                TabIndex = 2,
-                Text = "guna2Shapes2",
-                Zoom = 100,
-            };
+			Guna2Shapes line_stats = new Guna2Shapes()
+			{
+				BorderThickness = 0,
+				FillColor = Color.White,
+				LineThickness = 1,
+				Location = new Point(63, 1),
+				PolygonSkip = 1,
+				Rotate = 0F,
+				Shape = Guna.UI2.WinForms.Enums.ShapeType.Rectangle,
+				Size = new Size(5, 228),
+				TabIndex = 2,
+				Zoom = 100,
+			};
 
-            Guna2Panel panel_rank = createPanel((20, 20));
-            Guna2TextBox lbl_rank = createLabel((90, 10), (48, 30), "ELO");
-            Guna2Shapes circle_rank = createCircle((31, 10));
-            Guna2PictureBox pic_rank = createPicture((30, 10), (30, 30), Resources.rank);
-            Guna2TextBox txt_rank = createTxt(rank);
-            Guna2Separator seperator_rank = createSeperator((144, 20), (150, 10));
+			Guna2Panel panel_rank = createPanel((20, 20));
+			Guna2TextBox lbl_rank = createLabel((90, 10), (48, 30), "Elo");
+			Guna2Shapes circle_rank = createCircle((31, 10));
+			Guna2PictureBox pic_rank = createPicture((30, 10), (30, 30), Resources.rank);
+			Guna2TextBox txt_rank = createTxt(rank);
+			Guna2Separator seperator_rank = createSeperator((144, 20), (150, 10));
 
-            Guna2Panel panel_accuracy = createPanel((20, 160));
-            Guna2TextBox lbl_accuracy = createLabel((90, 10), (93, 30), "ACCURACY");
-            Guna2TextBox txt_accuracy = createTxt($"{accuracy}%");
-            Guna2Shapes circle_accuracy = createCircle((31, 150));
-            Guna2PictureBox pic_accuracy = createPicture((27, 7), (36, 36), Resources.accuracy);
-            Guna2Separator seperator_accuracy = createSeperator((189, 20), (86, 10));
+			Guna2Panel panel_accuracy = createPanel((20, 160));
+			Guna2TextBox lbl_accuracy = createLabel((90, 10), (93, 30), languages.localisation["Accuracy"][main.userData.localisation]);
+			Guna2TextBox txt_accuracy = createTxt($"{accuracy}%");
+			Guna2Shapes circle_accuracy = createCircle((31, 150));
+			Guna2PictureBox pic_accuracy = createPicture((27, 7), (36, 36), Resources.accuracy);
+			Guna2Separator seperator_accuracy = createSeperator((189, 20), (86, 10));
 
-            Guna2Panel panel_total = createPanel((20, 90));
-            Guna2TextBox lbl_total = createLabel((90, 10), (62, 30), "TOTAL");
-            Guna2TextBox txt_total = createTxt(total);
-            Guna2Shapes circle_total = createCircle((31, 80));
-            Guna2PictureBox pic_total = createPicture((30, 10), (30, 30), Resources.total);
-            Guna2Separator seperator_total = createSeperator((158, 20), (136, 10));
+			Guna2Panel panel_total = createPanel((20, 90));
+			Guna2TextBox lbl_total = createLabel((90, 10), (62, 30), languages.localisation["Total"][main.userData.localisation]);
+			Guna2TextBox txt_total = createTxt(total);
+			Guna2Shapes circle_total = createCircle((31, 80));
+			Guna2PictureBox pic_total = createPicture((30, 10), (30, 30), Resources.total);
+			Guna2Separator seperator_total = createSeperator((158, 20), (136, 10));
 
 			panel_rank.Controls.Add(seperator_rank);
 			panel_rank.Controls.Add(txt_rank);
@@ -1104,29 +1023,12 @@ namespace client_app.menus
 			panel.Controls.Add(panel_statsOverview);
 		}
 
-		public static void initialiseLobby(main main)
-		{
-			//Label lbl_header = new Label
-			//{
-			//	BackColor = main.panel_main.BackColor,
-			//	Font = new Font("Bahnschrift SemiBold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
-			//	Location = new Point(10, 10),
-			//	Name = "lbl_header",
-			//	Size = new Size(300, 30),
-			//	TabIndex = 0,
-			//	Text = "Lobby",
-			//};
-
-			//main.panel_main.Controls.Add(lbl_header);
-		}
 		public static void configLobbyPanel(abstractGame game, List<friendData> users)
 		{
 			game.main.panel_main.Controls.Clear();
-			initialiseLobby(game.main);
 
 			Panel panel_users = new Panel()
 			{
-				Name = "panel_users",
 				BackColor = game.main.panel_main.BackColor,
 				BorderStyle = BorderStyle.FixedSingle,
 				Location = new Point(50, 150),
@@ -1143,7 +1045,7 @@ namespace client_app.menus
 				Size = new Size(680, 100),
 				TabStop = false,
 				ForeColor = Color.FromArgb(52, 52, 52),
-				Text = $"{users.Count}/{game.getMaxPlayers()} players",
+				Text = $"{users.Count}/{game.getMaxPlayers()} {languages.localisation["players"][main.userData.localisation]}",
 				TextAlign = HorizontalAlignment.Center,
 			};
 
@@ -1171,10 +1073,10 @@ namespace client_app.menus
 					Location = new Point(padding, padding),
 					Name = user.userID,
 					Size = new Size(userX - userY - 2 * padding, userY - 2 * padding),
-					TabIndex = 0,
+					TabStop = false,
 					Text = user.userID,
 					BorderStyle = BorderStyle.FixedSingle,
-					TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+					TextAlign = ContentAlignment.MiddleLeft,
 				};
 				Label rank = new Label()
 				{
@@ -1183,9 +1085,9 @@ namespace client_app.menus
 					Location = new Point(userID.Width + 2 * padding, padding),
 					Name = "rank",
 					Size = new Size(userY - padding, userY - 2 * padding),
-					TabIndex = 0,
+					TabStop = false,
 					Text = user.rank.ToString(),
-					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					TextAlign = ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
 
@@ -1231,13 +1133,13 @@ namespace client_app.menus
 		}
 		public static async Task countdown(Guna2HtmlLabel lbl_countdown, int num, Guna2HtmlLabel lbl_status, string text)
 		{
-			await Task.Run(() =>
+			await Task.Run(async () =>
 			{
 				lbl_status.Text = text;
 				for (int i = num; i > 0; i--)
 				{
 					lbl_countdown.Text = i.ToString();
-					Thread.Sleep(1000);
+					await Task.Delay(1000);
 				}
 				lbl_countdown.ResetText();
 				lbl_status.ResetText();
@@ -1255,7 +1157,7 @@ namespace client_app.menus
 				Location = new Point(40, 360),
 				Size = new Size(160, 40),
 				TabStop = false,
-				Text = "Winner",
+				Text = languages.localisation["Winner"][main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2ProgressBar bar_winner = new Guna2ProgressBar()
@@ -1272,7 +1174,6 @@ namespace client_app.menus
 				ShowText = true,
 				Size = new Size(200, 30),
 				Style = ProgressBarStyle.Continuous,
-				TabIndex = 11,
 				TabStop = false,
 				Text = winner,
 				TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Custom,
@@ -1296,7 +1197,7 @@ namespace client_app.menus
 				Location = new Point(550, 40),
 				Size = new Size(330, 70),
 				TabStop = false,
-				Text = eliminated ? "Eliminated" : "Passed",
+				Text = eliminated ? languages.localisation["Eliminated"][main.userData.localisation] : languages.localisation["Passed"][main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2HtmlLabel lbl_eliminateReason = new Guna2HtmlLabel()
@@ -1308,18 +1209,19 @@ namespace client_app.menus
 				Location = new Point(550, 90),
 				Size = new Size(330, 60),
 				TabStop = false,
-				Text = correct ? "by longest time elapsed" : "by incorrect submission",
+				Text = correct ? languages.localisation["by longest time elapsed"][main.userData.localisation] : languages.localisation["by incorrect submission"][main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 
-			if (eliminated) panel_results.Controls.Add(lbl_eliminateReason);
 			panel_results.Controls.Add(lbl_eliminated);
+			if (eliminated)
+			{
+				panel_results.Controls.Add(lbl_eliminateReason);
+			}
 		}
 
 		public static void configEndGamePanel(abstractGame game, List<char> letters, gameStats statistics)
 		{
-			// maybe copy results panel and add scroll buttons
-
 			game.main.panel_main.Controls.Clear();
 
 			const int X = 10;
@@ -1336,11 +1238,8 @@ namespace client_app.menus
 				BorderRadius = 0,
 				FillColor = Color.White,
 				Location = new Point(40, 175),
-				Name = "panel_stats",
 				Size = new Size(1040, 500),
-				TabIndex = 5,
 			};
-			panel_stats.VerticalScroll.Enabled = true;
 
 			for (int i = 0; i < statistics.accuracy.Count; i++)
 			{
@@ -1354,19 +1253,15 @@ namespace client_app.menus
 				Label lbl_letter = new Label()
 				{
 					Location = new Point(0 + padding, 0 + padding),
-					Name = "lbl_letter",
 					Size = new Size(defaultSize, defaultSize),
-					TabIndex = 0,
 					Text = letter,
-					TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+					TextAlign = ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
 				Label lbl_correct = new Label()
 				{
 					Location = new Point(panelX - 2 * defaultSize - padding, padding),
-					Name = "lbl_correct",
 					Size = new Size(2 * defaultSize, defaultSize),
-					TabIndex = 1,
 					Text = correct.ToString(),
 					TextAlign = ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
@@ -1374,9 +1269,7 @@ namespace client_app.menus
 				Label lbl_time = new Label()
 				{
 					Location = new Point(lbl_correct.Location.X - 2 * defaultSize - padding, padding),
-					Name = "lbl_time",
 					Size = new Size(2 * defaultSize, defaultSize),
-					TabIndex = 2,
 					Text = $"{time.TotalSeconds}",
 					TextAlign = ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
@@ -1384,9 +1277,7 @@ namespace client_app.menus
 				Label lbl_percentage = new Label()
 				{
 					Location = new Point(lbl_time.Location.X - defaultSize - padding, padding),
-					Name = "lbl_percentage",
 					Size = new Size(defaultSize, defaultSize),
-					TabIndex = 3,
 					Text = $"{100 * accuracy}%",
 					TextAlign = ContentAlignment.MiddleCenter,
 					BorderStyle = BorderStyle.FixedSingle,
@@ -1395,18 +1286,14 @@ namespace client_app.menus
 				{
 					BackColor = SystemColors.ControlLight,
 					Location = new Point(lbl_letter.Location.X + defaultSize + padding, 2 * padding),
-					Name = "bar_base",
 					Size = new Size(lbl_percentage.Location.X - padding - (lbl_letter.Location.X + defaultSize + padding), defaultSize - 2 * padding),
-					TabIndex = 4,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
 				Panel bar_fill = new Panel()
 				{
 					BackColor = ColorTranslator.FromHtml($"{colour.r}, {colour.g}, {colour.b}"),
 					Location = new Point(bar_base.Location.X, bar_base.Location.Y),
-					Name = "panel_fill",
 					Size = new Size(((int)(accuracy * bar_base.Size.Width)), bar_base.Size.Height),
-					TabIndex = 5,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
 
@@ -1414,9 +1301,7 @@ namespace client_app.menus
 				{
 					BackColor = SystemColors.ControlDark,
 					Location = new Point(X, y),
-					Name = "panel_char",
 					Size = new Size(panelX, panelY),
-					TabIndex = 0,
 					BorderStyle = BorderStyle.FixedSingle,
 				};
 
@@ -1434,6 +1319,7 @@ namespace client_app.menus
 				y += panelY + 2 * padding;
 			}
 
+			panel_stats.VerticalScroll.Enabled = true;
 			game.main.panel_main.Controls.Add(panel_stats);
 		}
 	}

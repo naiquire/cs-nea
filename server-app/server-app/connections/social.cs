@@ -28,20 +28,6 @@ namespace server_app.connections
 				await Clients.Client(connectionID).SendAsync("updateUserData", userID, aboutMe, localisation);
 			}
 
-			if (!database.loadFriends(userID, out var friends))
-			{
-				database.outputException($"Failed to load friends for <{userID}>");
-				return false;
-			}
-
-			foreach (var friend in friends)
-			{
-				if (map.TryGetValue(friend, out connectionID))
-				{
-					await Clients.Client(connectionID).SendAsync("updateUserData", userID, aboutMe, localisation);
-				}
-			}
-
 			return true;
 		}
 		public async Task<bool> updateFriendData(string userID, string friendID, bool delete)
@@ -102,7 +88,7 @@ namespace server_app.connections
 		public async Task<bool> addFriends(string user1, string user2)
 		{
 			Logger.Log("SOCIAL", "cyan", $"<{user1}> has accepted a friend invite from <{user2}>");
-			if (database.addFriends(user1, user2))
+			if (!database.addFriends(user1, user2))
 			{
 				database.outputException($"Failed to add <{user1}> and <{user2}> as friends");
 				return false;

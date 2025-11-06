@@ -105,7 +105,7 @@ namespace client_app.components
 				MaxLength = 500,
 				Multiline = true,
 				PlaceholderForeColor = Color.FromArgb(156, 156, 156),
-				PlaceholderText = "About me",
+				PlaceholderText = languages.localisation["About me"][main.userData.localisation],
 				Size = new Size(760, 100),
 			};
 			

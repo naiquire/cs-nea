@@ -41,7 +41,7 @@ namespace client_app.components
 				Location = new Point(215, 145),
 				Size = new Size(160, 30),
 				TabIndex = 1,
-				Text = "Accept",
+				Text = languages.localisation["Accept"][main.userData.localisation],
 			};
 			btn_cancel = new Guna.UI2.WinForms.Guna2GradientButton()
 			{
@@ -76,7 +76,6 @@ namespace client_app.components
 			Controls.Add(btn_accept);
 			Controls.Add(btn_cancel);
 			FormBorderStyle = FormBorderStyle.None;
-			Name = "abstractMenu";
 			ShowIcon = false;
 			ShowInTaskbar = false;
 			StartPosition = FormStartPosition.CenterScreen;
