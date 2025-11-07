@@ -18,6 +18,7 @@ namespace server_app
 		static void Main(string[] args)
 		{
 			Logger.SetupAsync();
+			Logger.Log("SERVER", "white", "Application started");
 
 			//startNginx();
 			hostBuilder(args).Build().Run();

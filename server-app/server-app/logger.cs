@@ -29,24 +29,32 @@ namespace server_app
 				.Expand()
 				.AddColumn("")
 				.AddColumn("");
+			Table infoTable = new Table()
+				.NoBorder()
+				.Expand()
+				.AddColumn("")
+				.AddColumn("")
+				.AddRow("[palegreen1]Info[/]", "server application for cs-nea\n")
+				.AddRow("[palegreen1]Libraries[/]", "Microsoft.AspNetCore.SignalR\nMicrosoft.Data.Sqlite\nSpectre.Console\nMathNet.Numerics\n")
+				.AddRow("[palegreen1]Statistics[/]", "~6000 lines of code\n14 server classes\n15 client classes\n")
+				.AddRow("", "Running on [link]https://localhost:3900[/]");
 
-			var loggerPanel = new Panel(loggerTable).Header("Logger", Justify.Left).Expand();
-			var errorPanel = new Panel(errorTable).Header("Errors", Justify.Left).Expand();
+			var loggerPanel = new Panel(loggerTable).Header("[palegreen3_1]Logger[/]", Justify.Right).Expand().BorderColor(Color.DarkSeaGreen1_1);
+			var errorPanel = new Panel(errorTable).Header("[hotpink2]Errors[/]", Justify.Right).Expand().BorderColor(Color.Plum3);
 
 			var layout = new Layout("layout");
-
-			var topLeft = new Layout("topLeft");
-			var topRight = new Layout("topRight");
-
-			var top = new Layout("top");
-			var bottom = new Layout("bottom");
-
-			topLeft.Update(new Panel("topleft").Expand().Header("topleft"));
-			topRight.Update(loggerPanel);
-			bottom.Update(errorPanel);
-
-			top.SplitColumns(topLeft, topRight);
-
+				var top = new Layout("top");
+					var topLeft = new Layout("topLeft");
+					topLeft.Update(new Panel(infoTable).Expand().Header("server-app"));
+					var topRight = new Layout("topRight");
+					topRight.Update(loggerPanel);
+				top.SplitColumns(topLeft, topRight);
+				var bottom = new Layout("bottom");
+					var bottomLeft = new Layout("bottomLeft").Ratio(1);
+					var bottomRight = new Layout("bottomRight").Ratio(2);
+					bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/][dim]\n\nIn the very unlikely event an exception is thrown, please let me know. It should continue to run after logging the exception, but might have some unexpected behaviour.\n\nIf it completely crashes then you win a prize.[/]").Expand());
+			bottomRight.Update(errorPanel);
+				bottom.SplitColumns(bottomLeft, bottomRight);
 			layout.SplitRows(top, bottom);
 
 
@@ -86,6 +94,7 @@ namespace server_app
 							}
 
 							errorTable.AddRow($@"[red]ERROR[/]", item);
+							
 							ctx.Refresh();
 						}
 					}

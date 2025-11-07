@@ -12,6 +12,8 @@ namespace client_app
 		private HubConnection connection;
 		private int languageIndex = 0;
 
+		public int getLanguageIndex() => languageIndex;
+
 		const int VALID = 1;
 
 		const int INCORRECT_PASSWORD = 0;
@@ -53,7 +55,7 @@ namespace client_app
 				this.lbl_connection.Text = "Reconnecting";
 				this.pic_connecting.Start();
 			}));
-			await hub_connection.startConnection(connection);
+			connection = await hub_connection.startConnection(connection);
 			this.Invoke(new Action(() =>
 			{
 				this.lbl_connection.Text = "Connected";

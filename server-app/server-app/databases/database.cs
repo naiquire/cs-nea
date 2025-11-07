@@ -5,10 +5,12 @@ namespace server_app.databases
 	/* the todo list of DOOM
 	 *
 	 * endGame ui, rank and knockout info
+	 * scroll broke on profile again damnit
 	 * server CRASH on versus disconnect --fixed but untested
 	 * TRANSLATIONS
 	 *		Search players
 	 *		game descriptions
+	 *		Players
 	 *		
 	 *
 	 * game -> "next letter in" dissapears ONLY on round 1
