@@ -815,7 +815,6 @@ namespace client_app.menus
 				BorderThickness = 4,
 				Cursor = Cursors.Arrow,
 				DefaultText = userData.aboutMe,
-				Enabled = false,
 				FillColor = Color.FromArgb(208, 208, 208),
 				Font = new Font("Bahnschrift SemiBold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0),
 				ForeColor = Color.White,

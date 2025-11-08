@@ -8,7 +8,7 @@ namespace client_app.components
 		private readonly Guna.UI2.WinForms.Guna2TextBox header;
 		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_close;
 
-		public alert(string text, bool closeButton)
+		public alert(string text, bool closeButton, bool autoShow)
 		{
 			SuspendLayout();
 
@@ -61,7 +61,10 @@ namespace client_app.components
 			TopMost = true;
 			ResumeLayout(false);
 
-			ShowDialog();
+			if (autoShow)
+			{
+				ShowDialog();
+			}
 		}
 	}
 }

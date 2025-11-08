@@ -99,6 +99,7 @@ namespace client_app.menus.games
 			if (main.connection.State != HubConnectionState.Connected)
 			{
                 main.btn_home.PerformClick();
+				return;
 			}
 
 			gameID = await main.connection.InvokeAsync<string>("queueGame", type, main.userData.userID);

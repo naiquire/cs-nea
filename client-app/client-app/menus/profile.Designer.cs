@@ -166,7 +166,7 @@ namespace client_app.menus
 			// 
 			this.panel_stats.AutoScroll = true;
 			this.panel_stats.AutoSize = false;
-			this.panel_stats.BorderStyle = BorderStyle.Fixed3D;
+			this.panel_stats.BorderStyle = BorderStyle.None;
 			this.panel_stats.BackColor = System.Drawing.Color.White;
 			this.panel_stats.Location = new System.Drawing.Point(40, 175);
 			this.panel_stats.Name = "panel_stats";

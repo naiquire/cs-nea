@@ -90,11 +90,11 @@ namespace client_app
 			});
 			localisation.Add("Knockout", new Dictionary<string, string>()
 			{
-				{"en", "Knockout" },
+				{"en", "Elimination" },
 				{"fr", "Élimination" },
 				{"es", "Eliminación" },
 				{"pt", "Eliminação" },
-				{"de", "" },
+				{"de", "Beseitigung" },
 			});
 			localisation.Add("Profile", new Dictionary<string, string>()
 			{

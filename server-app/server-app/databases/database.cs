@@ -17,12 +17,9 @@ namespace server_app.databases
 	 * game -> panel_drawing invisible after alt-tab or something idk
 	 *
 	 * profile -> about me
-	 * some langauge cause textboxes to break text position -> autosize?
 	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
 	 *
 	 * btn_home ui
-	 * disconnect log sometimes appears twice??
-	 * home -> panel_main ui
 	 * cleanup ui code
 	 *
 	 */
@@ -32,10 +29,8 @@ namespace server_app.databases
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
 		public List<friendData> friends { get; set; }
-
 		public string localisation { get; set; }
 		public DateTime dateCreated { get; set; }
-
 		public int rank { get; set; }
 		public Dictionary<char, statistics> statistics { get; set; }
 	}
@@ -48,14 +43,8 @@ namespace server_app.databases
 	public struct friendData
 	{
 		public string userID { get; set; }
-		//public string aboutMe { get; set; }
 		public bool online { get; set; }
-
-		public string localisation { get; set; }
-		//public DateTime dateCreated { get; set; }
-		
 		public int rank { get; set; }
-		//public Dictionary<char, statistics> statistics { get; set; }
 	}
 	public static class @database
 	{
@@ -363,7 +352,7 @@ namespace server_app.databases
 		public static bool loadFriendData(string userID, out friendData friendData)
 		{
 			friendData = new();
-			string query = @"SELECT aboutMe, dateCreated, localisation, rank
+			string query = @"SELECT rank
 				FROM userData
 				WHERE userID = @userID";
 			try
@@ -375,10 +364,7 @@ namespace server_app.databases
 					var reader = command.ExecuteReader();
 					while (reader.Read())
 					{
-						//friendData.aboutMe = reader.GetString(0);
-						//friendData.dateCreated = reader.GetDateTime(1);
-						friendData.localisation = reader.GetString(2);
-						friendData.rank = reader.GetInt32(3);
+						friendData.rank = reader.GetInt32(0);
 					}
 				}
 				connection.Close();
@@ -389,15 +375,6 @@ namespace server_app.databases
 				connection.Close();
 				return false;
 			}
-
-			//if (loadStatistics(userID, out var stats))
-			//{
-			//	friendData.statistics = stats;
-			//}
-			//else
-			//{
-			//	return false;
-			//}
 
 			friendData.userID = userID;
 			friendData.online = connections.connection.map.ContainsKey(userID);

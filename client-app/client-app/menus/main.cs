@@ -19,10 +19,8 @@ namespace client_app
 		public string userID { get; set; }
 		public string aboutMe { get; set; }
 		public List<friendData> friends { get; set; }
-
 		public string localisation { get; set; }
 		public DateTime dateCreated { get; set; }
-
 		public int rank { get; set; }
 		public Dictionary<char, statistics> statistics { get; set; }
 	}
@@ -35,14 +33,8 @@ namespace client_app
 	public struct friendData
 	{
 		public string userID { get; set; }
-		//public string aboutMe { get; set; }
 		public bool online { get; set; }
-
-		public string localisation { get; set; }
-		//public DateTime dateCreated { get; set; }
-
 		public int rank { get; set; }
-		//public Dictionary<char, statistics> statistics { get; set; }
 	}
 	public struct menu
 	{
@@ -88,27 +80,18 @@ namespace client_app
 				Close();
 			}
 		}
-		private async Task connectionClosed(Exception arg)  // broken ----------------------------------------------------------------------------------------------
-		{
-			Task<alert> notifyTask = Task.Run(() =>
-			{
-				return loadAlert("Disconnected from server. Attempting to reconnect...", false);
-			});
 
-			var reconnectTask = hub_connection.startConnection(connection);
-			await Task.Delay(5000);
-			if (!reconnectTask.IsCompleted)
-			{
-				notifyTask.Result.Close(); // gets stuck processing this --> try Dispose()
-				this.Invoke(new Action(() => this.Close()));
-				return;
-			}
-			notifyTask.Result.Close();
+		private Task connectionClosed(Exception arg)
+		{
+			btn_home.Invoke(new Action(() => btn_home.PerformClick()));
+			var alert = loadAlert("Disconnected from server. Restarting application...");
+			this.Invoke(new Action(() => Close()));
+			return Task.CompletedTask;
 		}
 
-		public static alert loadAlert(string message, bool closeButton = true)
+		public static alert loadAlert(string message, bool closeButton = true, bool autoShow = true)
 		{
-			return new alert(message, closeButton);
+			return new alert(message, closeButton, autoShow);
 		}
 		public async void clientConnected(userData userData)
 		{
@@ -250,7 +233,7 @@ namespace client_app
 				mean += user.statistics[letter].accuracy;
 			}
 			mean /= user.statistics.Count;
-			string accuracy = (Math.Round((100 * mean), 2)).ToString();
+			string accuracy = (Math.Round(100 * mean, 2)).ToString();
 
 			return (rank, total, accuracy);
 		}

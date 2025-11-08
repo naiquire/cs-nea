@@ -25,6 +25,21 @@ namespace server_app.connections
 			map.Remove(userID);
 			Logger.Log("LOGOUT", "lime", $"<{userID}> has disconnected");
 		}
+		public override Task OnDisconnectedAsync(Exception? exception)
+		{
+			string connectionID = Context.ConnectionId;
+			foreach (string user in map.Keys)
+			{
+				if (map[user] == connectionID)
+				{
+					Logger.Log("WARN", "yellow", $"<{user}> has unexpectedly disconnected");
+					map.Remove(user);
+					break;
+				}
+			}
+
+			return base.OnDisconnectedAsync(exception);
+		}
 
 		public async Task<bool> loadUserData(string userID)
 		{

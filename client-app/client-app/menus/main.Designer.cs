@@ -150,14 +150,14 @@ namespace client_app
 
 		public void configGamePanels()
 		{
-			const int gamePanelX = 20;
+			const int gamePanelX = 60;
 			const int gamePanelY = 100;
-			const int gamePanelSizeX = 800;
+			const int gamePanelSizeX = 1000;
 			const int gamePanelSizeY = 90;
 			const int gamePanelSpacing = 50;
 
 			const int padding = 10;
-			const int lblSizeX = 180;
+			const int lblSizeX = 300;
 			const int btnSizeX = 160;
 			const int txtSizeY = gamePanelSizeY - 2 * padding;
 
@@ -240,9 +240,9 @@ namespace client_app
 			this.btn_queue1v1 = createQueueButton((gamePanelSizeX - 2 * padding - btnSizeX, 2 * padding), (btnSizeX, gamePanelSizeY - 4 * padding));
 			this.btn_queueKnockout = createQueueButton((gamePanelSizeX - 2 * padding - btnSizeX, 2 * padding), (btnSizeX, gamePanelSizeY - 4 * padding));
 
-			this.txt_accuracy = createGameInfoTextbox("PLAYERS  :  1         |         ROUNDS : 10         |         UNRANKED", (lbl_accuracy.Right + 2 * padding, padding), (gamePanelSizeX - (lbl_accuracy.Right + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
-			this.txt_1v1 = createGameInfoTextbox("PLAYERS  :  2         |         ROUNDS : 10         |         RANKED", (lbl_1v1.Right + 2 * padding, padding), (gamePanelSizeX - (lbl_1v1.Right + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
-			this.txt_knockout = createGameInfoTextbox("PLAYERS  :  12         |         ELIMINATION         |         UNRANKED", (lbl_knockout.Right + 2 * padding, padding), (gamePanelSizeX - (lbl_1v1.Right + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
+			this.txt_accuracy = createGameInfoTextbox("PLAYERS  :  1         |         ROUNDS : 10         |         UNRANKED", (2 * padding + lblSizeX + 2 * padding, padding), (gamePanelSizeX - (2 * padding + lblSizeX + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
+			this.txt_1v1 = createGameInfoTextbox("PLAYERS  :  2         |         ROUNDS : 10         |         RANKED", (2 * padding + lblSizeX + 2 * padding, padding), (gamePanelSizeX - (2 * padding + lblSizeX + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
+			this.txt_knockout = createGameInfoTextbox("PLAYERS  :  12         |         ELIMINATION         |         UNRANKED", (2 * padding + lblSizeX + 2 * padding, padding), (gamePanelSizeX - (2 * padding + lblSizeX + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
 
 			this.panel_accuracy.Controls.Add(this.lbl_accuracy);
 			this.panel_accuracy.Controls.Add(this.btn_queueAccuracy);

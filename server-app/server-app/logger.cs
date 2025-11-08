@@ -39,21 +39,21 @@ namespace server_app
 				.AddRow("[palegreen1]Statistics[/]", "~6000 lines of code\n14 server classes\n15 client classes\n")
 				.AddRow("", "Running on [link]https://localhost:3900[/]");
 
-			var loggerPanel = new Panel(loggerTable).Header("[palegreen3_1]Logger[/]", Justify.Right).Expand().BorderColor(Color.DarkSeaGreen1_1);
-			var errorPanel = new Panel(errorTable).Header("[hotpink2]Errors[/]", Justify.Right).Expand().BorderColor(Color.Plum3);
+			var loggerPanel = new Panel(loggerTable).Header("[palegreen3_1]Logger[/]", Justify.Right).Expand().BorderColor(Color.DarkSeaGreen1_1).RoundedBorder();
+			var errorPanel = new Panel(errorTable).Header("[hotpink2]Errors[/]", Justify.Right).Expand().BorderColor(Color.Plum3).RoundedBorder();
 
 			var layout = new Layout("layout");
 				var top = new Layout("top");
 					var topLeft = new Layout("topLeft");
-					topLeft.Update(new Panel(infoTable).Expand().Header("server-app"));
+						topLeft.Update(new Panel(infoTable).Expand().Header("server-app").RoundedBorder());
 					var topRight = new Layout("topRight");
-					topRight.Update(loggerPanel);
+						topRight.Update(loggerPanel);
 				top.SplitColumns(topLeft, topRight);
 				var bottom = new Layout("bottom");
 					var bottomLeft = new Layout("bottomLeft").Ratio(1);
+						bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/][dim]\n\nIn the very unlikely event an exception is thrown, please let me know. It should continue to run after logging the exception, but might have some unexpected behaviour.\n\nIf it completely crashes then you win a prize.[/]").Expand().RoundedBorder());
 					var bottomRight = new Layout("bottomRight").Ratio(2);
-					bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/][dim]\n\nIn the very unlikely event an exception is thrown, please let me know. It should continue to run after logging the exception, but might have some unexpected behaviour.\n\nIf it completely crashes then you win a prize.[/]").Expand());
-			bottomRight.Update(errorPanel);
+						bottomRight.Update(errorPanel);
 				bottom.SplitColumns(bottomLeft, bottomRight);
 			layout.SplitRows(top, bottom);
 
