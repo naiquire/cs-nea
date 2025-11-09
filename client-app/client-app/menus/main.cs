@@ -38,36 +38,34 @@ namespace client_app
 	}
 	public struct menu
 	{
-		public static main main;
-		public static profile profile;
-
+		public static Main main;
+		public static Profile profile;
 		public static IPlayable game;
 	}
 
-	public partial class main : Form
+	public partial class Main : Form
 	{
 		public static HubConnection connection;
 		public static userData userData;
 		//public const string address = "http://[2a0e:cb01:184:e500:8c9:b6dd:4a72:f90e]:5252/cs-nea";
 		public const string address = "http://localhost:3900/cs-nea";
 
-
-		public main(string userID, string defaultLocalisation)
+		public Main(string userID, string defaultLocalisation)
 		{
 			userData.localisation = defaultLocalisation;
 			hub_connection.injectForm(null, this);
 
 			UXelements.InitializeComponent(this);
-			initialiseConnection(userID);
+			InitialiseConnection(userID);
 
 		}
-		private async void initialiseConnection(string userID)
+		private async void InitialiseConnection(string userID)
 		{
 			connection = hub_connection.configConnection($"{address}/connections");
 			connection = hub_connection.addHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
-			connection.Closed += connectionClosed;
+			connection.Closed += ConnectionClosed;
 
             if (connection.State != HubConnectionState.Connected)
             {
@@ -76,26 +74,26 @@ namespace client_app
 
             if (!await connection.InvokeAsync<bool>("clientConnected", userID))
 			{
-				loadAlert("Failed to connect to server. Quitting application.");
+				LoadAlert("Failed to connect to server. Quitting application.");
 				Close();
 			}
 		}
 
-		private Task connectionClosed(Exception arg)
+		private Task ConnectionClosed(Exception arg)
 		{
 			btn_home.Invoke(new Action(() => btn_home.PerformClick()));
-			var alert = loadAlert("Disconnected from server. Restarting application...");
+			var alert = LoadAlert("Disconnected from server. Restarting application...");
 			this.Invoke(new Action(() => Close()));
 			return Task.CompletedTask;
 		}
 
-		public static alert loadAlert(string message, bool closeButton = true, bool autoShow = true)
+		public static alert LoadAlert(string message, bool closeButton = true, bool autoShow = true)
 		{
 			return new alert(message, closeButton, autoShow);
 		}
-		public async void clientConnected(userData userData)
+		public async void ClientConnected(userData userData)
 		{
-			main.userData = userData;
+			Main.userData = userData;
 
 			InitializeComponent();
 
@@ -104,7 +102,7 @@ namespace client_app
 				await connection.InvokeAsync("loadInvites", userData.userID);
 			}
 		}
-		public void updateUserData(string userID, string aboutMe, string localisation)
+		public void UpdateUserData(string userID, string aboutMe, string localisation)
 		{
 			if (userID != userData.userID)
 			{
@@ -131,12 +129,12 @@ namespace client_app
 				if (menu.profile.getUserID() == userData.userID)
 				{
 					// if viewing own profile then refresh
-					menu.profile = new profile(this, userData);
+					menu.profile = new Profile(this, userData);
 				}
 			}
 		}
 
-		public void updateOnline(string user, bool online)
+		public void UpdateOnline(string user, bool online)
 		{
 			int index = 0;
 			for (int i = 0; i < userData.friends.Count; i++)
@@ -157,7 +155,7 @@ namespace client_app
 				configFriendsPanel();
 			}
 		}
-		public void updateFriendData(friendData data)
+		public void UpdateFriendData(friendData data)
 		{
 			bool exists = false;
 			for (int i = 0; i < userData.friends.Count; i++)
@@ -179,7 +177,7 @@ namespace client_app
 				configFriendsPanel();
 			}
 		}
-		public void removeFriend(string friendID)
+		public void RemoveFriend(string friendID)
 		{
 			foreach (var friend in userData.friends)
 			{
@@ -197,7 +195,7 @@ namespace client_app
 			}
 		}
 
-		public async void handleInvites(List<string> invites)
+		public async void HandleInvites(List<string> invites)
 		{
 			foreach (string invite in invites)
 			{
@@ -205,18 +203,18 @@ namespace client_app
 				{
 					if (connection.State != HubConnectionState.Connected)
 					{
-                        loadAlert("Failed to accept friend invite.");
+                        LoadAlert("Failed to accept friend invite.");
                     }
 					if (!await connection.InvokeAsync<bool>("addFriends", invite, userData.userID))
 					{
-						loadAlert("Failed to accept friend invite.");
+						LoadAlert("Failed to accept friend invite.");
 					}
 					
 				}
 			}
 		}
 
-		public static (string, string, string) calculateStatsOverview(userData user)
+		public static (string, string, string) CalculateStatsOverview(userData user)
 		{
 			string rank = user.rank.ToString();
 
@@ -244,10 +242,10 @@ namespace client_app
 			if (!string.IsNullOrWhiteSpace(userID))
 			{
 				txt_userSearch.ResetText();
-				await requestProfile(userID);
+				await RequestProfile(userID);
 			}
 		}
-		public async Task requestProfile(string userID)
+		public async Task RequestProfile(string userID)
 		{
 			if (connection.State != HubConnectionState.Connected)
 			{
@@ -257,27 +255,27 @@ namespace client_app
 			userData user = await connection.InvokeAsync<userData>("requestProfile", userID);
 			if (user.userID != userID)
 			{
-				loadAlert($"Could not find user with username: {userID}");
+				LoadAlert($"Could not find user with username: {userID}");
 			}
 			else
 			{
-				menu.profile = new profile(this, user);
+				menu.profile = new Profile(this, user);
 			}
 		}
 
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)
 		{
-			menu.game = new accuracy(this);
+			menu.game = new Accuracy(this);
 			menu.game.queueGame();
 		}
 		private void btn_queue1v1_Click(object sender, EventArgs e)
 		{
-			menu.game = new versus(this);
+			menu.game = new Versus(this);
 			menu.game.queueGame();
 		}
 		private void btn_queueKnockout_Click(object sender, EventArgs e)
 		{
-			menu.game = new knockout(this);
+			menu.game = new Elimination(this);
 			menu.game.queueGame();
 		}
 

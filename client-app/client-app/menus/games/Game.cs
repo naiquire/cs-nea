@@ -32,20 +32,20 @@ namespace client_app.menus.games
 	{
 		void queueGame();
 		Task joinGameLobby();
-		void awaitStart();
+		void AwaitStart();
 		void startGame();
 		void awaitRound();
-		void submissionPhase(char letter);
+		void SubmissionPhase(char letter);
 		void evaluationPhase(bool correct, double accuracy, TimeSpan time);
-		void endGame();
-		void updateUsers(List<friendData> users);
+		void EndGame();
+		void UpdateUsers(List<friendData> users);
 		string getType();
 		string getGameID();
 	}
 
-	public abstract class abstractGame : Form
+	public abstract class Game : Form
 	{
-		public readonly main main;
+		public readonly Main main;
 
 		private string gameID;
 		private readonly string type;
@@ -56,7 +56,7 @@ namespace client_app.menus.games
 		private readonly int maxPlayers;
 
 		protected gameStats stats;
-		private readonly List<char> letters;
+		protected readonly List<char> letters;
 
 		public Guna.UI2.WinForms.Guna2Panel panel_results;
 		public Guna.UI2.WinForms.Guna2Shapes panel_outline;
@@ -71,7 +71,7 @@ namespace client_app.menus.games
 
 		private input drawingPanel;
 
-		protected abstractGame(main main, string type, int maxPlayers)
+		protected Game(Main main, string type, int maxPlayers)
 		{
 			this.main = main;
 			this.type = type;
@@ -81,7 +81,7 @@ namespace client_app.menus.games
 			letters = new List<char>();
 			this.maxPlayers = maxPlayers;
 		}
-		public virtual void updateUsers(List<friendData> users)
+		public virtual void UpdateUsers(List<friendData> users)
 		{
 			this.users = users;
 
@@ -96,17 +96,17 @@ namespace client_app.menus.games
 		}
 		public async virtual void queueGame()
 		{
-			if (main.connection.State != HubConnectionState.Connected)
+			if (Main.connection.State != HubConnectionState.Connected)
 			{
                 main.btn_home.PerformClick();
 				return;
 			}
 
-			gameID = await main.connection.InvokeAsync<string>("queueGame", type, main.userData.userID);
+			gameID = await Main.connection.InvokeAsync<string>("queueGame", type, Main.userData.userID);
 
 			if (string.IsNullOrEmpty(gameID))
 			{
-				main.loadAlert(languages.localisation["An error occured. Please wait and try again"][main.userData.localisation]);
+				Main.LoadAlert(languages.localisation["An error occured. Please wait and try again"][Main.userData.localisation]);
 				main.btn_home.PerformClick();
 			}
 			else
@@ -116,22 +116,22 @@ namespace client_app.menus.games
 		}
 		public virtual async Task joinGameLobby()
 		{
-            if (main.connection.State != HubConnectionState.Connected)
+            if (Main.connection.State != HubConnectionState.Connected)
             {
                 main.btn_home.PerformClick();
             }
 
             UXelements.resetLayout(main);
-			if (!await main.connection.InvokeAsync<bool>("userJoined", gameID))
+			if (!await Main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
-				main.loadAlert(languages.localisation["An error occured. Please wait and try again"][main.userData.localisation]);
+				Main.LoadAlert(languages.localisation["An error occured. Please wait and try again"][Main.userData.localisation]);
 				main.btn_home.PerformClick();
 			}
 		}
-		public virtual async void awaitStart()
+		public virtual async void AwaitStart()
 		{
 			started = true;
-			await UXelements.countdown(lbl_countdown, 5, lbl_status, languages.localisation["Starting in"][main.userData.localisation]);
+			await UXelements.countdown(lbl_countdown, 5, lbl_status, languages.localisation["Starting in"][Main.userData.localisation]);
 		}
 		public virtual void startGame()
 		{
@@ -157,19 +157,19 @@ namespace client_app.menus.games
 					data = ms.ToArray();
 				}
 
-                if (main.connection.State != HubConnectionState.Connected)
+                if (Main.connection.State != HubConnectionState.Connected)
                 {
                     main.btn_home.PerformClick();
                 }
 
-                await main.connection.InvokeAsync("receiveSubmission", gameID, main.userData.userID, data);
+                await Main.connection.InvokeAsync("receiveSubmission", gameID, Main.userData.userID, data);
 
 				drawingPanel.clearPanel();
 			};
 
-			await UXelements.countdown(lbl_countdown, 3, lbl_status, languages.localisation["Next letter in"][main.userData.localisation]);
+			await UXelements.countdown(lbl_countdown, 3, lbl_status, languages.localisation["Next letter in"][Main.userData.localisation]);
 		}
-		public virtual void submissionPhase(char letter)
+		public virtual void SubmissionPhase(char letter)
 		{
 			rounds++;
 			lbl_rounds.Text = $"Round {rounds}";
@@ -189,7 +189,7 @@ namespace client_app.menus.games
 			UXelements.configRightGamePanelStats(panel_stats, letters, stats.accuracy);
 		}
 
-		public virtual void endGame()
+		public virtual void EndGame()
 		{
 			UXelements.configEndGamePanel(this, letters, stats);
 		}

@@ -4,14 +4,14 @@ using server_app.games;
 
 namespace server_app.connections
 {
-	public partial class @connection : Hub
+	public partial class Connection : Hub
 	{
 		public string queueGame(string gameType, string userID)
 		{
 			if (Program.hubContext != null)
 			{
 				Logger.Log("QUEUE", "blue", $"<{userID}> has queued for <{gameType}>");
-				return queueing.queueGame(gameType, userID, Program.hubContext);
+				return Queueing.queueGame(gameType, userID, Program.hubContext);
 			}
 			else
 			{
@@ -22,11 +22,11 @@ namespace server_app.connections
 		public void dequeueGame(string gameID, string userID)
 		{
 			Logger.Log("QUEUE", "blue", $"<{userID}> has dequeued");
-			queueing.dequeueUser(gameID, userID);
+			Queueing.dequeueUser(gameID, userID);
 		}
 		public bool userJoined(string gameID)
 		{
-			return queueing.userJoined(gameID);
+			return Queueing.userJoined(gameID);
 		}
 	}
 }

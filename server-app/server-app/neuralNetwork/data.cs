@@ -4,12 +4,12 @@ using System.Text;
 
 namespace server_app.neuralNetwork
 {
-	public static class @data
+	public static class data
 	{
 		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\neuralNetwork\data\";
 
-		public static readonly double[][,] weights = loadWeights();
-		public static readonly double[][] biases = loadBiases();
+		public static readonly double[][,] weights = LoadWeights();
+		public static readonly double[][] biases = LoadBiases();
 
 		public static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
 		public static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));
@@ -31,15 +31,15 @@ namespace server_app.neuralNetwork
 		public static void initialiseParameters()
 		{
 			// initialise weights
-			double[][,] weights = new double[evaluate.layerCount - 1][,];
+			double[][,] weights = new double[Network.layerCount - 1][,];
 			for (int i = 0; i < weights.Length; i++)
 			{
 				Random rnd = new();
-				weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
-				double limit = Math.Sqrt(6 / (double)(evaluate.layerSizes[i] + evaluate.layerSizes[i + 1]));
-				for (int j = 0; j < evaluate.layerSizes[i]; j++)
+				weights[i] = new double[Network.layerSizes[i], Network.layerSizes[i + 1]];
+				double limit = Math.Sqrt(6 / (double)(Network.layerSizes[i] + Network.layerSizes[i + 1]));
+				for (int j = 0; j < Network.layerSizes[i]; j++)
 				{
-					for (int k = 0; k < evaluate.layerSizes[i + 1]; k++)
+					for (int k = 0; k < Network.layerSizes[i + 1]; k++)
 					{
 						// uniform distribution between -limit and limit
 						weights[i][j, k] = (rnd.NextDouble() * 2 - 1) * limit;
@@ -48,15 +48,15 @@ namespace server_app.neuralNetwork
 			}
 
 			// initialise biases
-			double[][] biases = new double[evaluate.layerCount - 1][];
+			double[][] biases = new double[Network.layerCount - 1][];
 			for (int i = 0; i < biases.Length; i++)
 			{
-				biases[i] = new double[evaluate.layerSizes[i + 1]];
+				biases[i] = new double[Network.layerSizes[i + 1]];
 			}
 
 			// save weights and biases
-			saveWeights(weights);
-			saveBiases(biases);
+			SaveWeights(weights);
+			SaveBiases(biases);
 		}
 
 		public static double[] preprocessImage(Bitmap original)
@@ -184,19 +184,19 @@ namespace server_app.neuralNetwork
 				return square;
 			}
 		}
-		public static double[][,] loadWeights()
+		public static double[][,] LoadWeights()
 		{
-			double[][,] weights = new double[evaluate.layerCount - 1][,];
-			for (int i = 0; i < evaluate.layerCount - 1; i++)
+			double[][,] weights = new double[Network.layerCount - 1][,];
+			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
-				weights[i] = new double[evaluate.layerSizes[i], evaluate.layerSizes[i + 1]];
+				weights[i] = new double[Network.layerSizes[i], Network.layerSizes[i + 1]];
 				using (StreamReader sr = new($@"{location}weights\{i}.txt"))
 				{
 					string[] lines = sr.ReadToEnd().Split('\n');
-					for (int j = 0; j < evaluate.layerSizes[i]; j++)
+					for (int j = 0; j < Network.layerSizes[i]; j++)
 					{
 						string[] s = lines[j].Split(',');
-						for (int k = 0; k < evaluate.layerSizes[i + 1]; k++)
+						for (int k = 0; k < Network.layerSizes[i + 1]; k++)
 						{
 							weights[i][j, k] = double.Parse(s[k]);
 						}
@@ -205,16 +205,16 @@ namespace server_app.neuralNetwork
 			}
 			return weights;
 		}
-		public static double[][] loadBiases()
+		public static double[][] LoadBiases()
 		{
-			double[][] biases = new double[evaluate.layerCount - 1][];
-			for (int i = 0; i < evaluate.layerCount - 1; i++)
+			double[][] biases = new double[Network.layerCount - 1][];
+			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
-				biases[i] = new double[evaluate.layerSizes[i + 1]];
+				biases[i] = new double[Network.layerSizes[i + 1]];
 				using (StreamReader sr = new($@"{location}biases\{i}.txt"))
 				{
 					string[] s = sr.ReadToEnd().Split(',');
-					for (int j = 0; j < evaluate.layerSizes[i + 1]; j++)
+					for (int j = 0; j < Network.layerSizes[i + 1]; j++)
 					{
 						biases[i][j] = double.Parse(s[j]);
 					}
@@ -222,9 +222,9 @@ namespace server_app.neuralNetwork
 			}
 			return biases;
 		}
-		public static void saveWeights(double[][,] weights)
+		public static void SaveWeights(double[][,] weights)
 		{
-			for (int i = 0; i < evaluate.layerCount - 1; i++)
+			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
 				StringBuilder build = new();
 				for (int j = 0; j < weights[i].GetLength(0); j++)
@@ -241,9 +241,9 @@ namespace server_app.neuralNetwork
 				}
 			}
 		}
-		public static void saveBiases(double[][] biases)
+		public static void SaveBiases(double[][] biases)
 		{
-			for (int i = 0; i < evaluate.layerCount - 1; i++)
+			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
 				using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
 				{
@@ -251,7 +251,7 @@ namespace server_app.neuralNetwork
 				}
 			}
 		}
-		public static (List<double[]>, List<int>) loadImages()
+		public static (List<double[]>, List<int>) LoadImages()
 		{
 			int done = 0;
 			const int total = 500000;
@@ -328,7 +328,7 @@ namespace server_app.neuralNetwork
 
 			return (images, labels);
 		}
-		public static (List<double[]>, List<int>) filterImages((List<double[]> images, List<int> labels) fullData)
+		public static (List<double[]>, List<int>) FilterImages((List<double[]> images, List<int> labels) fullData)
 		{
 			int length = fullData.labels.Count;
 

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace client_app
 {
-	partial class main
+	partial class Main
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -203,7 +203,7 @@ namespace client_app
 					ForeColor = System.Drawing.Color.White,
 					Location = new Point(location.X, location.Y),
 					Size = new Size(size.X, size.Y),
-					Text = languages.localisation["Queue"][main.userData.localisation],
+					Text = languages.localisation["Queue"][Main.userData.localisation],
 				};
 			}
 			Guna2TextBox createGameInfoTextbox(string text, (int X, int Y) location, (int X, int Y) size)
@@ -232,9 +232,9 @@ namespace client_app
 			this.panel_1v1 = createGamePanel((gamePanelX, gamePanelY + gamePanelSizeY + gamePanelSpacing), (gamePanelSizeX, gamePanelSizeY));
 			this.panel_knockout = createGamePanel((gamePanelX, gamePanelY + 2 * (gamePanelSizeY + gamePanelSpacing)), (gamePanelSizeX, gamePanelSizeY));
 
-			this.lbl_accuracy = createGameLabel(languages.localisation["Accuracy"][main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
-			this.lbl_1v1 = createGameLabel(languages.localisation["Versus"][main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
-			this.lbl_knockout = createGameLabel(languages.localisation["Knockout"][main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
+			this.lbl_accuracy = createGameLabel(languages.localisation["Accuracy"][Main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
+			this.lbl_1v1 = createGameLabel(languages.localisation["Versus"][Main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
+			this.lbl_knockout = createGameLabel(languages.localisation["Knockout"][Main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
 
 			this.btn_queueAccuracy = createQueueButton((gamePanelSizeX - 2 * padding - btnSizeX, 2 * padding), (btnSizeX, gamePanelSizeY - 4 * padding));
 			this.btn_queue1v1 = createQueueButton((gamePanelSizeX - 2 * padding - btnSizeX, 2 * padding), (btnSizeX, gamePanelSizeY - 4 * padding));
@@ -327,7 +327,7 @@ namespace client_app
 				b.Click += async (sender, e) =>
 				{
 					string userID = ((Guna2Button)sender).Name;
-					await requestProfile(userID);
+					await RequestProfile(userID);
 				};
 
 				return b;

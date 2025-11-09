@@ -10,9 +10,9 @@ namespace client_app
 	public static class hub_connection
 	{
 		private static login login;
-		private static main main;
+		private static Main main;
 
-		public static void injectForm(login l, main m)
+		public static void injectForm(login l, Main m)
 		{
 			if (m != null) main = m;
 			if (l != null) login = l;
@@ -65,42 +65,42 @@ namespace client_app
 		{
 			connection.On<userData>("receiveUserData", (userData) =>
 			{
-				main.Invoke(new Action(() => main.clientConnected(userData)));
+				main.Invoke(new Action(() => main.ClientConnected(userData)));
 			});
 			connection.On<string, string, string>("updateUserData", (userID, aboutMe, localisation) =>
 			{
-				main.Invoke(new Action(() => main.updateUserData(userID, aboutMe, localisation)));
+				main.Invoke(new Action(() => main.UpdateUserData(userID, aboutMe, localisation)));
 			});
 			connection.On<List<string>>("receiveInvites", (invites) =>
 			{
-				main.Invoke(new Action(() => main.handleInvites(invites)));
+				main.Invoke(new Action(() => main.HandleInvites(invites)));
 			});
 			connection.On<friendData>("updateFriendData", (data) =>
 			{
-				main.Invoke(new Action(() => main.updateFriendData(data)));
+				main.Invoke(new Action(() => main.UpdateFriendData(data)));
 			});
 			connection.On<string>("removeFriend", (friendID) =>
 			{
-				main.Invoke(new Action(() => main.removeFriend(friendID)));
+				main.Invoke(new Action(() => main.RemoveFriend(friendID)));
 			});
 			connection.On<string, bool>("updateOnline", (user, online) =>
 			{
-				main.Invoke(new Action(() => main.updateOnline(user, online)));
+				main.Invoke(new Action(() => main.UpdateOnline(user, online)));
 			});
 
 			connection.On<char, statistics>("updateStatistics", (letter, statistics) =>
 			{
-				main.userData.statistics[letter] = statistics;
+				Main.userData.statistics[letter] = statistics;
 			});
 
 			connection.On<List<friendData>>("updateUsers", (users) =>
 			{
-				main.panel_main.Invoke(new Action(() => menu.game.updateUsers(users)));
+				main.panel_main.Invoke(new Action(() => menu.game.UpdateUsers(users)));
 			});
 
 			connection.On("awaitStart", () =>
 			{
-				main.Invoke(new Action(() => menu.game.awaitStart()));
+				main.Invoke(new Action(() => menu.game.AwaitStart()));
 			});
 			connection.On("startGame", () =>
 			{
@@ -113,7 +113,7 @@ namespace client_app
 			});
 			connection.On<char>("receiveLetter", (letter) =>
 			{
-				main.Invoke(new Action(() => menu.game.submissionPhase(letter)));
+				main.Invoke(new Action(() => menu.game.SubmissionPhase(letter)));
 			});
 
 			connection.On<bool, double, TimeSpan>("receiveResults", (correct, accuracy, time) =>
@@ -126,8 +126,8 @@ namespace client_app
 				{
 					main.Invoke(new Action(() =>
 					{
-						versus game = (versus)menu.game;
-						game.versusResults(winner);
+						Versus game = (Versus)menu.game;
+						game.VersusResults(winner);
 					}));
 				}
 				else
@@ -141,8 +141,8 @@ namespace client_app
 				{
 					main.Invoke(new Action(() =>
 					{
-						knockout game = (knockout)menu.game;
-						game.knockoutResults(aliveUsers);
+						Elimination game = (Elimination)menu.game;
+						game.KnockoutResults(aliveUsers);
 					}));
 				}
 				else
@@ -153,7 +153,7 @@ namespace client_app
 
 			connection.On("endGame", () =>
 			{
-				main.Invoke(new Action(() => menu.game.endGame()));
+				main.Invoke(new Action(() => menu.game.EndGame()));
 			});
 			connection.On<int>("updateRank", (rank) =>
 			{
@@ -161,8 +161,8 @@ namespace client_app
 				{
 					main.Invoke(new Action(() =>
 					{
-						versus game = (versus)menu.game;
-						game.updateRank(rank);
+						Versus game = (Versus)menu.game;
+						game.UpdateRank(rank);
 					}));
 				}
 				else
@@ -173,7 +173,7 @@ namespace client_app
 
 			connection.On<string>("alert", (message) =>
 			{
-				main.Invoke(new Action(() => main.loadAlert(message)));
+				main.Invoke(new Action(() => Main.LoadAlert(message)));
 			});
 
 			return connection;

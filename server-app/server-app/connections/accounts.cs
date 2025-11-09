@@ -3,7 +3,7 @@ using server_app.databases;
 
 namespace server_app.connections
 {
-	public partial class @connection : Hub
+	public partial class Connection : Hub
 	{
 		public static readonly Dictionary<string, string> map = [];
 		public async Task<bool> clientConnected(string userID)

@@ -12,23 +12,23 @@ using System.Windows.Forms;
 
 namespace client_app.menus
 {
-    public partial class profile : Form
+    public partial class Profile : Form
     {
-        private readonly main main;
-        private readonly userData user;
-        public profile(main main, userData user)
+        private readonly Main _main;
+        private readonly userData _user;
+        public Profile(Main main, userData user)
         {
-            this.main = main;
-            this.user = user;
+            this._main = main;
+            this._user = user;
 
             InitializeComponent();
-            setupButtons();
+            SetupButtons();
         }
-        public string getUserID() => user.userID;
-        public userData getUserData() => user;
-        private void setupButtons()
+        public string getUserID() => _user.userID;
+        public userData getUserData() => _user;
+        private void SetupButtons()
         {
-            if (user.userID == main.userData.userID)
+            if (_user.userID == Main.userData.userID)
             {
 				btn_addFriends.Enabled = false;
 				btn_addFriends.Hide();
@@ -37,9 +37,9 @@ namespace client_app.menus
             }
 
             bool isFriend = false;
-            foreach (var friend in main.userData.friends)
+            foreach (var friend in Main.userData.friends)
             {
-                if (friend.userID == user.userID)
+                if (friend.userID == _user.userID)
                 {
                     isFriend = true;
                     
@@ -61,29 +61,29 @@ namespace client_app.menus
 
         private async void btn_addFriends_Click(object sender, EventArgs e)
         {
-            if (main.connection.State != HubConnectionState.Connected)
+            if (Main.connection.State != HubConnectionState.Connected)
             {
                 return;
             }
 
             btn_addFriends.Enabled = false;
-            if (!await main.connection.InvokeAsync<bool>("sendInvite", user.userID, main.userData.userID))
+            if (!await Main.connection.InvokeAsync<bool>("sendInvite", _user.userID, Main.userData.userID))
             {
-                main.loadAlert("Failed to send friend invite. Please try again.");
+                Main.LoadAlert("Failed to send friend invite. Please try again.");
             }
         }
 
         private async void btn_removeFriends_Click(object sender, EventArgs e)
         {
-            if (main.connection.State != HubConnectionState.Connected)
+            if (Main.connection.State != HubConnectionState.Connected)
             {
                 return;
             }
 
             btn_removeFriends.Enabled = false;
-            if (!await main.connection.InvokeAsync<bool>("removeFriends", user.userID, main.userData.userID))
+            if (!await Main.connection.InvokeAsync<bool>("removeFriends", _user.userID, Main.userData.userID))
             {
-                main.loadAlert("Failed to remove friend. Please try again");
+                Main.LoadAlert("Failed to remove friend. Please try again");
             }
         }
     }

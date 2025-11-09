@@ -1,9 +1,8 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using server_app.databases;
 
 namespace server_app.neuralNetwork
 {
-	public class @evaluate
+	public class Network
 	{
 		public static readonly int[] layerSizes = [784, 144, 72, 26];
 		public static readonly int layerCount = layerSizes.Length;
@@ -15,7 +14,7 @@ namespace server_app.neuralNetwork
 		public double[][] biases = new double[layerCount - 1][];
 
 		public int result;
-		public evaluate(double[] input)
+		public Network(double[] input)
 		{
 			// initialise input layer
 			neuronValues[0] = input;
@@ -25,9 +24,9 @@ namespace server_app.neuralNetwork
 			weights = data.weights;
 			biases = data.biases;
 
-			evaluateNetwork();
+			EvaluateNetwork();
 		}
-		public evaluate(double[] input, double[][,] weights, double[][] biases)
+		public Network(double[] input, double[][,] weights, double[][] biases)
 		{
 			// initialises input layer
 			neuronValues[0] = input;
@@ -37,9 +36,9 @@ namespace server_app.neuralNetwork
 			this.weights = weights;
 			this.biases = biases;
 
-			evaluateNetwork();
+			EvaluateNetwork();
 		}
-		public void evaluateNetwork()
+		public void EvaluateNetwork()
 		{
 			// for each layer excluding the input layer
 			for (int layer = 1; layer < layerCount; layer++)

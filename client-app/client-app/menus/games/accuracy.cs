@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace client_app.games
 {
-	public class accuracy : abstractGame, IPlayable
+	public class Accuracy : Game, IPlayable
 	{
-		public accuracy(main main) : base(main, "accuracy", 1)
+		public Accuracy(Main main) : base(main, "accuracy", 1)
 		{
 
 		}

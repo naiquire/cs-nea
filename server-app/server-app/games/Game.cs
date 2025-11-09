@@ -28,29 +28,29 @@ namespace server_app.games
 	public interface IPlayable
 	{
 		bool queueUser(string userID);
-		void dequeueUser(string userID);
+		void DequeueUser(string userID);
 		Task updateUsers();
-		Task startGame();
-		Task submissionPhase();
-		void loadResponse(string userID, byte[] input);
-		void evaluationPhase(char letter);
-		Task continueRequest(string userID);
-		void endGame();
+		Task StartGame();
+		Task SubmissionPhase();
+		void LoadResponse(string userID, byte[] input);
+		void EvaluationPhase(char letter);
+		Task ContinueRequest(string userID);
+		void EndGame();
 		string getType();
 		string getGameID();
 		bool hasStarted();
 		int getPlayerCount();
 		int getMaxPlayers();
 	}
-	public abstract class abstractGame
+	public abstract class Game
 	{
-		protected IHubContext<connection> hubContext;
+		protected IHubContext<Connection> hubContext;
 
 		protected string gameID;
 		protected int maxPlayers;
 		protected string type;
 
-		private bool started = false;
+		private bool _started = false;
 
 		protected List<string> userIDs;
 		protected List<friendData> userDatas;
@@ -66,11 +66,11 @@ namespace server_app.games
 
 		public string getType() => type;
 		public string getGameID() => gameID;
-		public bool hasStarted() => started;
+		public bool hasStarted() => _started;
 		public int getMaxPlayers() => maxPlayers;
 		public int getPlayerCount() => userIDs.Count;
 
-		public abstractGame(IHubContext<connection> context, string type, string userID, int maxPlayers)
+		public Game(IHubContext<Connection> context, string type, string userID, int maxPlayers)
 		{
 			hubContext = context;
 
@@ -99,7 +99,7 @@ namespace server_app.games
 			userDatas.Add(data);
 			return true;
 		}
-		public async virtual void dequeueUser(string userID)
+		public async virtual void DequeueUser(string userID)
 		{
 			userIDs.Remove(userID);
 
@@ -120,16 +120,16 @@ namespace server_app.games
 		{
 			foreach (var user in userIDs)
 			{
-				if (connection.map.TryGetValue(user, out string? connectionID))
+				if (Connection.map.TryGetValue(user, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("updateUsers", userDatas);
 				}
 			}
 		}
 
-		public virtual async Task startGame()
+		public virtual async Task StartGame()
 		{
-			started = true;
+			_started = true;
 
 			foreach (string user in userIDs)
 			{
@@ -138,7 +138,7 @@ namespace server_app.games
 
 			foreach (string userID in userIDs)
 			{
-				if (connection.map.TryGetValue(userID, out string? connectionID))
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("awaitStart");
 				}
@@ -148,13 +148,13 @@ namespace server_app.games
 
 			foreach (string userID in userIDs)
 			{
-				if (connection.map.TryGetValue(userID, out string? connectionID))
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("startGame");
 				}
 			}
 		}
-		protected List<char> generateLetters(int count)
+		protected List<char> GenerateLetters(int count)
 		{
 			List<char> letters = [];
 
@@ -166,28 +166,28 @@ namespace server_app.games
 			return letters;
 		}
 
-		protected async Task awaitRound()
+		protected async Task AwaitRound()
 		{
 			continueRequests.Clear();
 			foreach (string userID in userIDs)
 			{
-				if (connection.map.TryGetValue(userID, out string? connectionID))
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
 				}
 			}
 		}
-		protected async Task sendLetter(List<string> userIDs, char letter)
+		protected async Task SendLetter(List<string> userIDs, char letter)
 		{
 			foreach (string userID in userIDs)
 			{
-				if (connection.map.TryGetValue(userID, out string? connectionID))
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("receiveLetter", letter);
 				}
 			}
 		}
-		public virtual void loadResponse(string userID, byte[] input)
+		public virtual void LoadResponse(string userID, byte[] input)
 		{
             DateTime endTime = DateTime.UtcNow;
 			double[] array;
@@ -201,41 +201,41 @@ namespace server_app.games
 			currentResponses.Add(userID, (array, endTime));
         }
 
-		protected bool evaluateSubmission(ref evaluate evaluate, string userID, char character)
+		protected bool EvaluateSubmission(ref Network evaluate, string userID, char character)
 		{
 			int letter = character - 65;
 
-			evaluate = new evaluate(currentResponses[userID].submission);
+			evaluate = new Network(currentResponses[userID].submission);
 			bool correct = evaluate.result == letter;
 
 			if (stats.TryGetValue(userID, out gameStats currentStats))
 			{
 				DateTime endTime = currentResponses[userID].time;
-				double accuracy = evaluate.activatedValues[evaluate.layerCount - 1][letter];
+				double accuracy = evaluate.activatedValues[Network.layerCount - 1][letter];
 
 				currentStats.update(accuracy, endTime - startTime, correct);
 			}
 			stats[userID] = currentStats;
 			return correct;
 		}
-		protected async Task sendResult(string userID, gameStats stats)
+		protected async Task SendResult(string userID, gameStats stats)
 		{
 			bool correct = stats.correct[roundCount];
 			double accuracy = stats.accuracy[roundCount];
 			TimeSpan time = stats.time[roundCount];
 
-			if (connection.map.TryGetValue(userID, out string? connectionID))
+			if (Connection.map.TryGetValue(userID, out string? connectionID))
 			{
 				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
 			}
 		}
-		public abstract Task continueRequest(string userID);
+		public abstract Task ContinueRequest(string userID);
 
-		public virtual async void endGame()
+		public virtual async void EndGame()
 		{
 			foreach (string userID in userIDs)
 			{
-				if (connection.map.TryGetValue(userID, out string? connectionID))
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
 				}
@@ -271,7 +271,7 @@ namespace server_app.games
 				return;
 			}
 
-			if (connection.map.TryGetValue(userData.userID, out string? connectionID))
+			if (Connection.map.TryGetValue(userData.userID, out string? connectionID))
 			{
 				statistics updated = new(updatedAccuracy, updatedTime, total + 1);
 				await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);

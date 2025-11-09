@@ -4,9 +4,7 @@ namespace server_app.databases
 {
 	/* the todo list of DOOM
 	 *
-	 * endGame ui, rank and knockout info
 	 * scroll broke on profile again damnit
-	 * server CRASH on versus disconnect --fixed but untested
 	 * TRANSLATIONS
 	 *		Search players
 	 *		game descriptions
@@ -377,7 +375,7 @@ namespace server_app.databases
 			}
 
 			friendData.userID = userID;
-			friendData.online = connections.connection.map.ContainsKey(userID);
+			friendData.online = connections.Connection.map.ContainsKey(userID);
 			return true;
 		}
 		public static bool addFriends(string user1, string user2)

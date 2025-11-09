@@ -4,57 +4,57 @@ using server_app.neuralNetwork;
 
 namespace server_app.games
 {
-	public class @accuracy(string userID, IHubContext<connection> context) : abstractGame(context, "accuracy", userID, 1), IPlayable
+	public class Accuracy(string userID, IHubContext<Connection> context) : Game(context, "accuracy", userID, 1), IPlayable
 	{
 		private const int rounds = 10;
-		public override async Task startGame()
+		public override async Task StartGame()
 		{
-			await base.startGame();
+			await base.StartGame();
 
-			letters = generateLetters(rounds);
-			await submissionPhase();
+			letters = GenerateLetters(rounds);
+			await SubmissionPhase();
 		}
-		public async Task submissionPhase()
+		public async Task SubmissionPhase()
 		{
 			if (roundCount < rounds)
 			{
 				continueRequests.Clear();
-				await awaitRound();
+				await AwaitRound();
 				await Task.Delay(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
-				await sendLetter(userIDs, letters[roundCount]);
+				await SendLetter(userIDs, letters[roundCount]);
 			}
 			else
 			{
-				endGame();
+				EndGame();
 			}
 		}
-		public override void loadResponse(string userID, byte[] input)
+		public override void LoadResponse(string userID, byte[] input)
 		{
-			base.loadResponse(userID, input);
+			base.LoadResponse(userID, input);
 			if (currentResponses.Count == getPlayerCount())
 			{
-				evaluationPhase(letters[roundCount]);
+				EvaluationPhase(letters[roundCount]);
 			}
 		}
-		public async void evaluationPhase(char letter)
+		public async void EvaluationPhase(char letter)
 		{
-			evaluate[] evaluates = new evaluate[getPlayerCount()];
+			Network[] evaluates = new Network[getPlayerCount()];
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				evaluateSubmission(ref evaluates[i], userIDs[i], letter);
-				await sendResult(userIDs[i], stats[userIDs[i]]);
+				EvaluateSubmission(ref evaluates[i], userIDs[i], letter);
+				await SendResult(userIDs[i], stats[userIDs[i]]);
 			}
 			roundCount++;
 		}
-		public override async Task continueRequest(string userID)
+		public override async Task ContinueRequest(string userID)
 		{
 			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)
 			{
-				await submissionPhase();
+				await SubmissionPhase();
 			}
 		}
 	}

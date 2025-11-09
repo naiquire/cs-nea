@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheArtOfDevHtmlRenderer.Adapters.Entities;
 
 namespace client_app.menus
 {
@@ -24,7 +25,7 @@ namespace client_app.menus
 
 		}
 
-		public static void InitializeComponent(main main)
+		public static void InitializeComponent(Main main)
 		{
 			// OPENING DESIGNER WILL BREAK THIS MODULE
 
@@ -74,7 +75,7 @@ namespace client_app.menus
 			main.btn_home.Location = new Point(50, 880);
 			main.btn_home.Size = new Size(200, 30);
 			main.btn_home.TabStop = false;
-			main.btn_home.Text = languages.localisation["Home"][main.userData.localisation];
+			main.btn_home.Text = languages.localisation["Home"][Main.userData.localisation];
 			main.btn_home.UseVisualStyleBackColor = true;
 			// 
 			// panel_left
@@ -123,7 +124,7 @@ namespace client_app.menus
 
 		}
 
-		public static void resetLayout(main main)
+		public static void resetLayout(Main main)
 		{
 			main.panel_main?.Controls.Clear();
 			main.panel_left?.Controls.Clear();
@@ -134,7 +135,7 @@ namespace client_app.menus
 			main.btn_home.Click += main.btn_home_Click;
 		}
 
-		public static input configGamePanel(abstractGame game)
+		public static input configGamePanel(Game game)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -174,7 +175,7 @@ namespace client_app.menus
 				Location = new Point(460, 900),
 				Size = new Size(440, 100),
 				TabStop = false,
-				Text = languages.localisation["Submit"][main.userData.localisation],
+				Text = languages.localisation["Submit"][Main.userData.localisation],
 			};
 			game.btn_clear = new Guna2GradientButton()
 			{
@@ -188,7 +189,7 @@ namespace client_app.menus
 				Location = new Point(220, 900),
 				Size = new Size(225, 100),
 				TabStop = false,
-				Text = languages.localisation["Clear"][main.userData.localisation],
+				Text = languages.localisation["Clear"][Main.userData.localisation],
 			};
 
 			var input = new input(game.main.panel_main, (260, 250), (600, 600));
@@ -200,7 +201,7 @@ namespace client_app.menus
 			return input;
 		}
 
-		public static void configRightGamePanel(abstractGame game)
+		public static void configRightGamePanel(Game game)
 		{
 			game.lbl_rounds = new Guna2HtmlLabel()
 			{
@@ -211,7 +212,7 @@ namespace client_app.menus
 				Location = new Point(40, 40),
 				Size = new Size(420, 80),
 				TabStop = false,
-				Text = $"{languages.localisation["Round"][main.userData.localisation]} {game.getRounds()}",
+				Text = $"{languages.localisation["Round"][Main.userData.localisation]} {game.getRounds()}",
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			PictureBox seperator = new PictureBox()
@@ -311,7 +312,7 @@ namespace client_app.menus
 
 		}
 
-		public static void configLeftGamePanel(abstractGame game, List<friendData> users)
+		public static void configLeftGamePanel(Game game, List<friendData> users)
 		{
 			game.main.panel_left.Controls.Clear(); // will clear countdown of its happening
 
@@ -381,7 +382,7 @@ namespace client_app.menus
 
 			configCountdown(game);
 		}
-		public static void configLeftGamePanel(abstractGame game, List<friendData> alive, List<friendData> dead)
+		public static void configLeftGamePanel(Game game, List<friendData> alive, List<friendData> dead)
 		{
 			game.main.panel_left.Controls.Clear();
 
@@ -472,7 +473,7 @@ namespace client_app.menus
 				Location = new Point(10, y_offset),
 				Size = new Size(200, labelY),
 				TabStop = false,
-				Text = languages.localisation["Eliminated"][main.userData.localisation],
+				Text = languages.localisation["Eliminated"][Main.userData.localisation],
 			};
 			panel_players.Controls.Add(lbl_dead);
 
@@ -512,7 +513,7 @@ namespace client_app.menus
 			configCountdown(game);
 		}
 
-		public static Guna2Panel configResultsPanel(abstractGame game, char c, gameStats stats)
+		public static Guna2Panel configResultsPanel(Game game, char c, gameStats stats)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -521,11 +522,11 @@ namespace client_app.menus
 			double accuracy = stats.accuracy.Last();
 			TimeSpan time = stats.time.Last();
 
-			double accuracyDelta = accuracy - main.userData.statistics[c].accuracy;
+			double accuracyDelta = accuracy - Main.userData.statistics[c].accuracy;
 			string accuracyDeltaText = $"{(accuracyDelta < 0 ? "" : "+")}{Math.Round(accuracyDelta * 100, 2)}";
 			Color accuracyColour = accuracyDelta < 0 ? Color.Red : Color.Lime;
 
-			double timeDelta = time.TotalSeconds - main.userData.statistics[c].time.TotalSeconds;
+			double timeDelta = time.TotalSeconds - Main.userData.statistics[c].time.TotalSeconds;
 			string timeDeltaText = $"{(timeDelta < 0 ? "" : "+")}{Math.Round(timeDelta, 2)}";
 			Color timeColour = timeDelta < 0 ? Color.Lime : Color.Red;
 
@@ -540,7 +541,7 @@ namespace client_app.menus
 				Location = new Point(220, 900),
 				Size = new Size(680, 100),
 				TabStop = false,
-				Text = languages.localisation["Continue"][main.userData.localisation],
+				Text = languages.localisation["Continue"][Main.userData.localisation],
 			};
 			Guna2Panel panel_results = new Guna2Panel()
 			{
@@ -576,7 +577,7 @@ namespace client_app.menus
 				Location = new Point(40, 270),
 				Size = new Size(160, 40),
 				TabStop = false,
-				Text = languages.localisation["Time"][main.userData.localisation],
+				Text = languages.localisation["Time"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2ProgressBar bar_time = new Guna2ProgressBar()
@@ -627,7 +628,7 @@ namespace client_app.menus
 				Location = new Point(40, 220),
 				Size = new Size(160, 40),
 				TabStop = false,
-				Text = languages.localisation["Accuracy"][main.userData.localisation],
+				Text = languages.localisation["Accuracy"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2ProgressBar bar_accuracy = new Guna2ProgressBar()
@@ -698,7 +699,7 @@ namespace client_app.menus
 				Location = new Point(50, 20),
 				Size = new Size(1020, 120),
 				TabStop = false,
-				Text = languages.localisation["Results"][main.userData.localisation],
+				Text = languages.localisation["Results"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			Guna2HtmlLabel lbl_diff = new Guna2HtmlLabel()
@@ -710,7 +711,7 @@ namespace client_app.menus
 				Location = new Point(740, 170),
 				Size = new Size(140, 40),
 				TabStop = false,
-				Text = languages.localisation["Delta"][main.userData.localisation],
+				Text = languages.localisation["Delta"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.BottomCenter,
 			};
 			Guna2HtmlLabel lbl_correct = new Guna2HtmlLabel()
@@ -722,7 +723,7 @@ namespace client_app.menus
 				Location = new Point(220, 40),
 				Size = new Size(330, 70),
 				TabStop = false,
-				Text = correct ? languages.localisation["Correct"][main.userData.localisation] : languages.localisation["Incorrect"][main.userData.localisation],
+				Text = correct ? languages.localisation["Correct"][Main.userData.localisation] : languages.localisation["Incorrect"][Main.userData.localisation],
 			};
 
 			panel_results.Controls.Add(lbl_correct);
@@ -738,13 +739,13 @@ namespace client_app.menus
 
 			btn_continue.Click += async (sender, e) =>
 			{
-				if (main.connection.State != HubConnectionState.Connected)
+				if (Main.connection.State != HubConnectionState.Connected)
 				{
 					game.main.btn_home.PerformClick();
 				}
 
 				btn_continue.Enabled = false;
-				await main.connection.InvokeAsync("requestRound", game.getGameID(), main.userData.userID);
+				await Main.connection.InvokeAsync("requestRound", game.getGameID(), Main.userData.userID);
 			};
 
 			game.main.panel_main.Controls.Add(lbl_results);
@@ -755,7 +756,7 @@ namespace client_app.menus
 			return panel_results;
 		}
 
-		public static void configUserDataPanel(main main, userData userData)
+		public static void configUserDataPanel(Main main, userData userData)
 		{
 			main.panel_right.Controls.Clear();
 
@@ -778,7 +779,7 @@ namespace client_app.menus
 				Location = new Point(140, 930),
 				Size = new Size(220, 50),
 				TabStop = false,
-				Text = languages.localisation["Profile"][main.userData.localisation],
+				Text = languages.localisation["Profile"][Main.userData.localisation],
 			};
 			Guna2GradientButton btn_edit = new Guna2GradientButton()
 			{
@@ -790,7 +791,7 @@ namespace client_app.menus
 				Location = new Point(140, 850),
 				Size = new Size(220, 50),
 				TabStop = false,
-				Text = languages.localisation["Edit"][main.userData.localisation],
+				Text = languages.localisation["Edit"][Main.userData.localisation],
 			};
 			Guna2TextBox lbl_userID = new Guna2TextBox()
 			{
@@ -828,21 +829,21 @@ namespace client_app.menus
 
 			btn_profile.Click += (sender, e) =>
 			{
-				menu.profile = new profile(main, userData);
+				menu.profile = new Profile(main, userData);
 			};
 			btn_edit.Click += async (sender, e) =>
 			{
-				var update = new update(main.userData);
+				var update = new update(Main.userData);
 				if (update.DialogResult == DialogResult.OK)
 				{
-					if (main.connection.State != HubConnectionState.Connected)
+					if (Main.connection.State != HubConnectionState.Connected)
 					{
-						main.loadAlert(languages.localisation["An error occurred. Please wait and try again"][main.userData.localisation]);
+						Main.LoadAlert(languages.localisation["An error occurred. Please wait and try again"][Main.userData.localisation]);
 						return;
 					}
-					if (!await main.connection.InvokeAsync<bool>("updateUserData", main.userData.userID, update.getAboutMe(), update.getLocalisation()))
+					if (!await Main.connection.InvokeAsync<bool>("updateUserData", Main.userData.userID, update.getAboutMe(), update.getLocalisation()))
 					{
-						main.loadAlert(languages.localisation["An error occurred. Please wait and try again"][main.userData.localisation]);
+						Main.LoadAlert(languages.localisation["An error occurred. Please wait and try again"][Main.userData.localisation]);
 					}
 				}
 			};
@@ -857,7 +858,7 @@ namespace client_app.menus
 		}
 		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
 		{
-			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
+			(string rank, string total, string accuracy) = Main.CalculateStatsOverview(user);
 
 			Guna2Panel createPanel((int X, int Y) p)
 			{
@@ -983,14 +984,14 @@ namespace client_app.menus
 			Guna2Separator seperator_rank = createSeperator((144, 20), (150, 10));
 
 			Guna2Panel panel_accuracy = createPanel((20, 160));
-			Guna2TextBox lbl_accuracy = createLabel((90, 10), (93, 30), languages.localisation["Accuracy"][main.userData.localisation]);
+			Guna2TextBox lbl_accuracy = createLabel((90, 10), (93, 30), languages.localisation["Accuracy"][Main.userData.localisation]);
 			Guna2TextBox txt_accuracy = createTxt($"{accuracy}%");
 			Guna2Shapes circle_accuracy = createCircle((31, 150));
 			Guna2PictureBox pic_accuracy = createPicture((27, 7), (36, 36), Resources.accuracy);
 			Guna2Separator seperator_accuracy = createSeperator((189, 20), (86, 10));
 
 			Guna2Panel panel_total = createPanel((20, 90));
-			Guna2TextBox lbl_total = createLabel((90, 10), (62, 30), languages.localisation["Total"][main.userData.localisation]);
+			Guna2TextBox lbl_total = createLabel((90, 10), (62, 30), languages.localisation["Total"][Main.userData.localisation]);
 			Guna2TextBox txt_total = createTxt(total);
 			Guna2Shapes circle_total = createCircle((31, 80));
 			Guna2PictureBox pic_total = createPicture((30, 10), (30, 30), Resources.total);
@@ -1022,7 +1023,7 @@ namespace client_app.menus
 			panel.Controls.Add(panel_statsOverview);
 		}
 
-		public static void configLobbyPanel(abstractGame game, List<friendData> users)
+		public static void configLobbyPanel(Game game, List<friendData> users)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -1044,7 +1045,7 @@ namespace client_app.menus
 				Size = new Size(680, 100),
 				TabStop = false,
 				ForeColor = Color.FromArgb(52, 52, 52),
-				Text = $"{users.Count}/{game.getMaxPlayers()} {languages.localisation["players"][main.userData.localisation]}",
+				Text = $"{users.Count}/{game.getMaxPlayers()} {languages.localisation["players"][Main.userData.localisation]}",
 				TextAlign = HorizontalAlignment.Center,
 			};
 
@@ -1102,7 +1103,7 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(lbl_remainingPlayers);
 		}
 
-		private static void configCountdown(abstractGame game)
+		private static void configCountdown(Game game)
 		{
 			game.lbl_countdown = new Guna2HtmlLabel()
 			{
@@ -1156,7 +1157,7 @@ namespace client_app.menus
 				Location = new Point(40, 360),
 				Size = new Size(160, 40),
 				TabStop = false,
-				Text = languages.localisation["Winner"][main.userData.localisation],
+				Text = languages.localisation["Winner"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2ProgressBar bar_winner = new Guna2ProgressBar()
@@ -1196,7 +1197,7 @@ namespace client_app.menus
 				Location = new Point(550, 40),
 				Size = new Size(330, 70),
 				TabStop = false,
-				Text = eliminated ? languages.localisation["Eliminated"][main.userData.localisation] : languages.localisation["Passed"][main.userData.localisation],
+				Text = eliminated ? languages.localisation["Eliminated"][Main.userData.localisation] : languages.localisation["Passed"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 			Guna2HtmlLabel lbl_eliminateReason = new Guna2HtmlLabel()
@@ -1208,7 +1209,7 @@ namespace client_app.menus
 				Location = new Point(550, 90),
 				Size = new Size(330, 60),
 				TabStop = false,
-				Text = correct ? languages.localisation["by longest time elapsed"][main.userData.localisation] : languages.localisation["by incorrect submission"][main.userData.localisation],
+				Text = correct ? languages.localisation["by longest time elapsed"][Main.userData.localisation] : languages.localisation["by incorrect submission"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
 
@@ -1219,7 +1220,7 @@ namespace client_app.menus
 			}
 		}
 
-		public static void configEndGamePanel(abstractGame game, List<char> letters, gameStats statistics)
+		public static void configEndGamePanel(Game game, List<char> letters, gameStats statistics)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -1320,6 +1321,41 @@ namespace client_app.menus
 
 			panel_stats.VerticalScroll.Enabled = true;
 			game.main.panel_main.Controls.Add(panel_stats);
+		}
+
+		public static void configVersusEndgame(Panel panel, int change)
+		{
+			Guna2HtmlLabel txt_rank = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.White,
+				Font = new Font("Bahnschrift", 16.25F),
+				ForeColor = Color.Black,
+				Location = new Point(10, 10),
+				Size = new Size(330, 60),
+				TabStop = false,
+				Text = $"{Main.userData.rank} | {(change < 0 ? "" : "+")}{change}",
+				TextAlignment = ContentAlignment.MiddleLeft,
+			};
+
+			panel.Controls.Add(txt_rank);
+		}
+		public static void configKnockoutEndgame(Panel panel, bool win)
+		{
+			Guna2HtmlLabel txt_winner = new Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.White,
+				Font = new Font("Bahnschrift", 16.25F),
+				ForeColor = Color.Black,
+				Location = new Point(100, 900),
+				Size = new Size(330, 60),
+				TabStop = false,
+				Text = $"You {(win ? "won" : "did not win")}",
+				TextAlignment = ContentAlignment.MiddleLeft,
+			};
+
+			panel.Controls.Add(txt_winner);
 		}
 	}
 }

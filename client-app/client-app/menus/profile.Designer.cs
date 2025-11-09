@@ -8,7 +8,7 @@ using Guna.UI2.WinForms;
 
 namespace client_app.menus
 {
-	partial class profile
+	partial class Profile
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -36,7 +36,7 @@ namespace client_app.menus
 		/// </summary>
 		public void InitializeComponent()
 		{
-			main.panel_main.Controls.Clear();
+			_main.panel_main.Controls.Clear();
 
 			this.lbl_username = new Guna.UI2.WinForms.Guna2TextBox();
 			this.lbl_rank = new Guna.UI2.WinForms.Guna2TextBox();
@@ -183,7 +183,7 @@ namespace client_app.menus
 			this.btn_addFriends.Location = new Point(40, 900);
 			this.btn_addFriends.Name = "btn_login";
 			this.btn_addFriends.Size = new Size(200, 40);
-			this.btn_addFriends.Text = languages.localisation["Add Friend"][main.userData.localisation];
+			this.btn_addFriends.Text = languages.localisation["Add Friend"][Main.userData.localisation];
 			this.btn_addFriends.Click += new System.EventHandler(this.btn_addFriends_Click);
 			//
 			// btn_removeFriends
@@ -196,12 +196,12 @@ namespace client_app.menus
 			this.btn_removeFriends.Location = new Point(240, 900);
 			this.btn_removeFriends.Name = "btn_login";
 			this.btn_removeFriends.Size = new Size(200, 40);
-			this.btn_removeFriends.Text = languages.localisation["Remove Friend"][main.userData.localisation];
+			this.btn_removeFriends.Text = languages.localisation["Remove Friend"][Main.userData.localisation];
 			this.btn_removeFriends.Click += new System.EventHandler(this.btn_removeFriends_Click);
 
-			(string rank, string total, string accuracy) = main.calculateStatsOverview(user);
+			(string rank, string total, string accuracy) = Main.CalculateStatsOverview(_user);
 
-			this.lbl_username.Text = user.userID;
+			this.lbl_username.Text = _user.userID;
 			this.lbl_rank.Text = rank;
 			this.lbl_total.Text = total;
 			this.lbl_accuracy.Text = accuracy + "%";
@@ -209,14 +209,14 @@ namespace client_app.menus
 			configStats();
 			panel_stats.ResumeLayout(false);
 
-			main.panel_main.Controls.Add(this.panel_stats);
-			main.panel_main.Controls.Add(this.pic_seperator);
-			main.panel_main.Controls.Add(this.lbl_accuracy);
-			main.panel_main.Controls.Add(this.lbl_total);
-			main.panel_main.Controls.Add(this.lbl_rank);
-			main.panel_main.Controls.Add(this.lbl_username);
-			main.panel_main.Controls.Add(this.btn_addFriends);
-			main.panel_main.Controls.Add(this.btn_removeFriends);
+			_main.panel_main.Controls.Add(this.panel_stats);
+			_main.panel_main.Controls.Add(this.pic_seperator);
+			_main.panel_main.Controls.Add(this.lbl_accuracy);
+			_main.panel_main.Controls.Add(this.lbl_total);
+			_main.panel_main.Controls.Add(this.lbl_rank);
+			_main.panel_main.Controls.Add(this.lbl_username);
+			_main.panel_main.Controls.Add(this.btn_addFriends);
+			_main.panel_main.Controls.Add(this.btn_removeFriends);
 
 			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).EndInit();
 		}
@@ -233,7 +233,7 @@ namespace client_app.menus
 
 			panel_stats.SuspendLayout();
 
-			foreach (var stat in user.statistics)
+			foreach (var stat in _user.statistics)
 			{
 				string letter = stat.Key.ToString();
 				int total = stat.Value.total;

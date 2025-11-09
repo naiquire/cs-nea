@@ -38,7 +38,7 @@ namespace client_app
 		}
 		private async void initialiseConnection()
 		{
-			connection = hub_connection.configConnection($"{main.address}/accounts");
+			connection = hub_connection.configConnection($"{Main.address}/accounts");
 			connection = hub_connection.addLoginHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
@@ -72,9 +72,8 @@ namespace client_app
 					break;
 				case VALID:
 					Hide();
-					new main(userID, languages.languageCodes[languageIndex]).ShowDialog();
+					new Main(userID, languages.languageCodes[languageIndex]).ShowDialog();
 					Show();
-					//Close();
 					break;
 				case USER_DOES_NOT_EXIST:
 					lbl_information.Text = languages.localisation["Account does not exist"][languages.languageCodes[languageIndex]];
@@ -94,10 +93,21 @@ namespace client_app
 			switch (success)
 			{
 				case VALID:
+					this.Controls.Add(btn_login);
+					this.Controls.Add(btn_createAccount);
+
+					this.Controls.Remove(txt_passwordconfirm);
+					this.Controls.Remove(btn_requestAccount);
+
+					this.txt_password.Location = new Point(560, 250);
+					this.lbl_information.Location = new Point(560, 290);
+
+					this.txt_password.ResetText();
+					this.txt_passwordconfirm.ResetText();
+
 					Hide();
-					new main(userID, languages.languageCodes[languageIndex]).ShowDialog();
+					new Main(userID, languages.languageCodes[languageIndex]).ShowDialog();
 					Show();
-					//Close();
 					break;
 				case USERID_TAKEN:
 					lbl_information.Text = languages.localisation["Username is not available"][languages.languageCodes[languageIndex]];
@@ -124,8 +134,9 @@ namespace client_app
 
 			if (connection.State == HubConnectionState.Connected)
 			{
-                await connection.InvokeAsync("loginRequest", userID, password);
-            }
+				await connection.InvokeAsync("loginRequest", userID, password);
+				txt_password.ResetText();
+			}
 		}
 		private void btn_createAccount_Click(object sender, EventArgs e)
 		{

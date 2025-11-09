@@ -5,65 +5,65 @@ using server_app.neuralNetwork;
 
 namespace server_app.games
 {
-	public class @versus(string userID, IHubContext<connection> context) : abstractGame(context, "versus", userID, 2), IPlayable
+	public class Versus(string userID, IHubContext<Connection> context) : Game(context, "versus", userID, 2), IPlayable
 	{
 		private const int rounds = 1;
-		private readonly List<friendData> userCache = [];
-		private readonly Dictionary<string, double> scores = [];
+		private readonly List<friendData> _userCache = [];
+		private readonly Dictionary<string, double> _scores = [];
 
-		public override async Task startGame()
+		public override async Task StartGame()
 		{
 			foreach (string userID in userIDs)
 			{
-				scores[userID] = 0;
+				_scores[userID] = 0;
 			}
 
 			// cache user data to allow for rank updates after dequeue during game
-			userCache.Add(userDatas[0]);
-			userCache.Add(userDatas[1]);
+			_userCache.Add(userDatas[0]);
+			_userCache.Add(userDatas[1]);
 
-			await base.startGame();
+			await base.StartGame();
 
-			letters = generateLetters(rounds);
-			await submissionPhase();
+			letters = GenerateLetters(rounds);
+			await SubmissionPhase();
 		}
-		public async Task submissionPhase()
+		public async Task SubmissionPhase()
 		{
 			if (roundCount < rounds)
 			{
 				continueRequests.Clear();
-				await awaitRound();
+				await AwaitRound();
 				await Task.Delay(3000);
 
 				startTime = DateTime.UtcNow;
 				currentResponses.Clear();
-				await sendLetter(userIDs, letters[roundCount]);
+				await SendLetter(userIDs, letters[roundCount]);
 			}
 			else
 			{
-				endGame();
+				EndGame();
 			}
 		}
-		public override void loadResponse(string userID, byte[] input)
+		public override void LoadResponse(string userID, byte[] input)
 		{
-			base.loadResponse(userID, input);
+			base.LoadResponse(userID, input);
 			if (currentResponses.Count == getPlayerCount())
 			{
-				evaluationPhase(letters[roundCount]);
+				EvaluationPhase(letters[roundCount]);
 			}
 		}
-		public async void evaluationPhase(char letter)
+		public async void EvaluationPhase(char letter)
 		{
 			List<string> correctUsers = [];
 
-			evaluate[] evaluates = new evaluate[getPlayerCount()];
+			Network[] evaluates = new Network[getPlayerCount()];
 			for (int i = 0; i < userIDs.Count; i++)
 			{
-				if (evaluateSubmission(ref evaluates[i], userIDs[i], letter))
+				if (EvaluateSubmission(ref evaluates[i], userIDs[i], letter))
 				{
 					correctUsers.Add(userIDs[i]);
 				}
-				await sendResult(userIDs[i], stats[userIDs[i]]);
+				await SendResult(userIDs[i], stats[userIDs[i]]);
 			}
 
 			if (correctUsers.Count == 0)
@@ -71,10 +71,10 @@ namespace server_app.games
 				// if none correct then a winner is not determined
 				foreach (string userID in userIDs)
 				{
-					scores[userID] += 0.5;
+					_scores[userID] += 0.5;
 				}
 
-				await sendVersusResults(userIDs, null);
+				await SendVersusResults(userIDs, null);
 			}
 			else
 			{
@@ -89,45 +89,45 @@ namespace server_app.games
 					}
 				}
 
-				scores[lowest.user] += 1;
-				await sendVersusResults(userIDs, lowest.user);
+				_scores[lowest.user] += 1;
+				await SendVersusResults(userIDs, lowest.user);
 			}
 			roundCount++;
 		}
-		public override async Task continueRequest(string userID)
+		public override async Task ContinueRequest(string userID)
 		{
 			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)
 			{
-				await submissionPhase();
+				await SubmissionPhase();
 			}
 		}
-		public async override void endGame()
+		public async override void EndGame()
 		{
-			for (int i = 0; i < userIDs.Count; i++)
+			for (int i = 0; i < _userCache.Count; i++)
 			{
-				double expectedScore = 1.0 / (1 + Math.Pow(10, (i == 0 ? userCache[1].rank - userCache[0].rank : userCache[0].rank - userCache[1].rank) / 400.0));
+				double expectedScore = 1.0 / (1 + Math.Pow(10, (i == 0 ? _userCache[1].rank - _userCache[0].rank : _userCache[0].rank - _userCache[1].rank) / 400.0));
 				expectedScore *= rounds;
 
-				int rank = calculateRank(userCache[i], expectedScore);
+				int rank = CalculateRank(_userCache[i], expectedScore);
 
-				if (database.updateRank(userIDs[i], rank))
+				if (database.updateRank(_userCache[i].userID, rank))
 				{
-					if (connection.map.TryGetValue(userIDs[i], out string? connectionID))
+					if (Connection.map.TryGetValue(_userCache[i].userID, out string? connectionID))
 					{
 						await hubContext.Clients.Client(connectionID).SendAsync("updateRank", rank);
 					}
 				}
 				else
 				{
-					database.outputException($"Failed to update user rank : <{userIDs[i]}>");
+					database.outputException($"Failed to update user rank : <{_userCache[i].userID}>");
 				}
 			}
 
-			base.endGame();
+			base.EndGame();
 		}
 
-		private int calculateRank(friendData user, double expectedScore)
+		private int CalculateRank(friendData user, double expectedScore)
 		{
 			double k;
 			if (user.rank < 2100)
@@ -145,14 +145,14 @@ namespace server_app.games
 
 			k /= rounds;
 
-			return (int)(user.rank + k * (scores[user.userID] - expectedScore));
+			return (int)(user.rank + k * (_scores[user.userID] - expectedScore));
 		}
 
-		private async Task sendVersusResults(List<string> userIDs, string? winner)
+		private async Task SendVersusResults(List<string> userIDs, string? winner)
 		{
 			foreach (string userID in userIDs)
 			{
-				if (connection.map.TryGetValue(userID, out string? connectionID))
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
 					await hubContext.Clients.Client(connectionID).SendAsync("receiveVersusResult", winner);
 				}

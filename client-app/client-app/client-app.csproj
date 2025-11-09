@@ -209,7 +209,7 @@
     <Compile Include="components\update.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menus\games\abstractGame.cs">
+    <Compile Include="menus\games\Game.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="hub-connection.cs" />
@@ -220,13 +220,13 @@
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
-    <Compile Include="menus\games\accuracy.cs">
+    <Compile Include="menus\games\Accuracy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menus\games\knockout.cs">
+    <Compile Include="menus\games\Elimination.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menus\games\versus.cs">
+    <Compile Include="menus\games\Versus.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="menus\UXelements.cs">

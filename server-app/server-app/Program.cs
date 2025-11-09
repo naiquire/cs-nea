@@ -13,7 +13,7 @@ namespace server_app
 {
 	internal class Program : Hub
 	{
-		public static IHubContext<connection>? hubContext;
+		public static IHubContext<Connection>? hubContext;
 
 		static void Main(string[] args)
 		{
@@ -75,13 +75,13 @@ namespace server_app
 					setup.Use((context, next) =>
 					{
 						// load the hubContext
-						hubContext = context.RequestServices.GetRequiredService<IHubContext<connection>>();
+						hubContext = context.RequestServices.GetRequiredService<IHubContext<Connection>>();
 						return next(context);
 					});
 					setup.UseEndpoints(endpoints =>
 					{
 						// map endpoints to a class
-						endpoints.MapHub<connection>("/cs-nea/connections");
+						endpoints.MapHub<Connection>("/cs-nea/connections");
 						endpoints.MapHub<accounts>("/cs-nea/accounts");
 					});
 				});

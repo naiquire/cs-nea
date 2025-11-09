@@ -3,7 +3,7 @@ using server_app.databases;
 
 namespace server_app.connections
 {
-	public partial class @connection : Hub
+	public partial class Connection : Hub
 	{
 		public userData requestProfile(string userID)
 		{
@@ -87,7 +87,7 @@ namespace server_app.connections
 		}
 		public async Task<bool> addFriends(string user1, string user2)
 		{
-			Logger.Log("SOCIAL", "cyan", $"<{user1}> has accepted a friend invite from <{user2}>");
+			Logger.Log("SOCIAL", "cyan", $"<{user2}> has accepted a friend invite from <{user1}>");
 			if (!database.addFriends(user1, user2))
 			{
 				database.outputException($"Failed to add <{user1}> and <{user2}> as friends");

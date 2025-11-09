@@ -11,7 +11,7 @@ namespace server_app
 		private static string hashPassword(string input) => Encoding.UTF8.GetString(SHA512.HashData(Encoding.UTF8.GetBytes(input)));
 		public async void loginRequest(string userID, string password)
         {
-            if (connection.map.ContainsKey(userID))
+            if (Connection.map.ContainsKey(userID))
             {
                 await Clients.Caller.SendAsync("loginSuccess", 3, userID);
                 return;

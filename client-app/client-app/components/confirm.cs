@@ -41,7 +41,7 @@ namespace client_app.components
 				Location = new Point(215, 145),
 				Size = new Size(160, 30),
 				TabIndex = 1,
-				Text = languages.localisation["Accept"][main.userData.localisation],
+				Text = languages.localisation["Accept"][Main.userData.localisation],
 			};
 			btn_cancel = new Guna.UI2.WinForms.Guna2GradientButton()
 			{

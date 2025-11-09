@@ -1,11 +1,11 @@
 ﻿namespace server_app.neuralNetwork
 {
-    public class @training
+    public class Training
     {
-        public training()
+        public Training()
         {
             // load training data
-            (List<double[]> images, List<int> results) = data.filterImages(data.loadImages());
+            (List<double[]> images, List<int> results) = data.FilterImages(data.LoadImages());
 
             // random sample of 50 images
             Random rnd = new();
@@ -19,7 +19,7 @@
                 var subresults = results.GetRange(index, 50);
 
                 // forward propagation and backpropagation
-                var network = new backpropagation(subimages, subresults);
+                var network = new Backpropagation(subimages, subresults);
             }
         }
     }
