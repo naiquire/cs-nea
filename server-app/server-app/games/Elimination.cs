@@ -4,7 +4,7 @@ using server_app.neuralNetwork;
 
 namespace server_app.games
 {
-	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, "knockout", userID, 2), IPlayable
+	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Knockout, userID, 12), IPlayable
 	{
 		private List<string> _aliveUsers = [];
 		public override async Task StartGame()
@@ -58,7 +58,7 @@ namespace server_app.games
 				{
 					incorrectUsers.Add(userIDs[i]);
 				}
-				await SendResult(userIDs[i], stats[userIDs[i]]);
+				await SendResult(userIDs[i], gameStats[userIDs[i]]);
 			}
 
 			if (incorrectUsers.Count == 0)
@@ -67,7 +67,7 @@ namespace server_app.games
 				(string user, TimeSpan time) highest = (string.Empty, TimeSpan.MinValue);
 				foreach (string userID in _aliveUsers)
 				{
-					var time = stats[userID].time[roundCount];
+					var time = gameStats[userID].time[roundCount];
 					if (time > highest.time)
 					{
 						highest = (userID, time);
@@ -88,7 +88,7 @@ namespace server_app.games
 			await SendKnockoutResults(userIDs, _aliveUsers);
             roundCount++;
         }
-		public override async Task ContinueRequest(string userID)
+		public async Task ContinueRequest(string userID)
 		{
 			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
 			if (continueRequests.Count == _aliveUsers.Count)

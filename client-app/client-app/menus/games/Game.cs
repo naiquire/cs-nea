@@ -28,6 +28,13 @@ namespace client_app.menus.games
 			this.time.Add(time);
 		}
 	}
+	public enum Games
+	{
+		Accuracy,
+		Versus,
+		Knockout,
+	}
+
 	public interface IPlayable
 	{
 		void queueGame();
@@ -39,7 +46,7 @@ namespace client_app.menus.games
 		void evaluationPhase(bool correct, double accuracy, TimeSpan time);
 		void EndGame();
 		void UpdateUsers(List<friendData> users);
-		string getType();
+		Games getType();
 		string getGameID();
 	}
 
@@ -48,7 +55,7 @@ namespace client_app.menus.games
 		public readonly Main main;
 
 		private string gameID;
-		private readonly string type;
+		private readonly Games type;
 		protected List<friendData> users;
 
 		private bool started;
@@ -63,7 +70,7 @@ namespace client_app.menus.games
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_letter;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_submit;
 		public Guna.UI2.WinForms.Guna2GradientButton btn_clear;
-		//public Guna.UI2.WinForms.Guna2GradientButton btn_continue;
+
 		public Panel panel_stats;
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_rounds;
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_countdown;
@@ -71,7 +78,7 @@ namespace client_app.menus.games
 
 		private input drawingPanel;
 
-		protected Game(Main main, string type, int maxPlayers)
+		protected Game(Main main, Games type, int maxPlayers)
 		{
 			this.main = main;
 			this.type = type;
@@ -196,7 +203,7 @@ namespace client_app.menus.games
 
 		public int getMaxPlayers() => maxPlayers;
 		public string getGameID() => gameID;
-		public string getType() => type;
+		public Games getType() => type;
 		public bool hasStarted() => started;
 		public int getRounds() => rounds;
 

@@ -1,14 +1,12 @@
 ﻿using client_app.menus.games;
 using System;
 using System.Threading.Tasks;
-using client_app.menus;
-
-namespace client_app.games
+namespace client_app.menus.games
 {
 	public class Versus : Game, IPlayable
 	{
 		private int _rankDelta = 0;
-		public Versus(Main main) : base(main, "versus", 2)
+		public Versus(Main main) : base(main, Games.Versus, 2)
 		{
 
 		}

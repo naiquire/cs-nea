@@ -4,7 +4,7 @@ using server_app.neuralNetwork;
 
 namespace server_app.games
 {
-	public class Accuracy(string userID, IHubContext<Connection> context) : Game(context, "accuracy", userID, 1), IPlayable
+	public class Accuracy(string userID, IHubContext<Connection> context) : Game(context, Games.Accuracy, userID, 1), IPlayable
 	{
 		private const int rounds = 10;
 		public override async Task StartGame()
@@ -41,18 +41,22 @@ namespace server_app.games
 		}
 		public async void EvaluationPhase(char letter)
 		{
-			Network[] evaluates = new Network[getPlayerCount()];
-			for (int i = 0; i < userIDs.Count; i++)
+			Network[] networks = new Network[getPlayerCount()];
+			for (int i = 0; i < getPlayerCount(); i++)
 			{
-				EvaluateSubmission(ref evaluates[i], userIDs[i], letter);
-				await SendResult(userIDs[i], stats[userIDs[i]]);
+				EvaluateSubmission(ref networks[i], userIDs[i], letter);
+				await SendResult(userIDs[i], gameStats[userIDs[i]]);
 			}
 			roundCount++;
 		}
-		public override async Task ContinueRequest(string userID)
+		public async Task ContinueRequest(string userID)
 		{
-			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
-			if (continueRequests.Count == userIDs.Count)
+			if (!continueRequests.Contains(userID))
+			{
+				continueRequests.Add(userID);
+			}
+
+			if (continueRequests.Count == getPlayerCount())
 			{
 				await SubmissionPhase();
 			}

@@ -18,25 +18,31 @@ namespace server_app.games
 			time = [];
 		}
 
-		public readonly void update(double accuracy, TimeSpan time, bool correct)
+		public readonly void Update(double accuracy, TimeSpan time, bool correct)
 		{
 			this.accuracy.Add(accuracy);
 			this.correct.Add(correct);
 			this.time.Add(time);
 		}
 	}
+	public enum Games
+	{
+		Accuracy,
+		Versus,
+		Knockout,
+	}
 	public interface IPlayable
 	{
-		bool queueUser(string userID);
+		bool QueueUser(string userID);
 		void DequeueUser(string userID);
-		Task updateUsers();
+		Task UpdateUsers();
 		Task StartGame();
 		Task SubmissionPhase();
 		void LoadResponse(string userID, byte[] input);
 		void EvaluationPhase(char letter);
 		Task ContinueRequest(string userID);
 		void EndGame();
-		string getType();
+		Games getType();
 		string getGameID();
 		bool hasStarted();
 		int getPlayerCount();
@@ -48,47 +54,49 @@ namespace server_app.games
 
 		protected string gameID;
 		protected int maxPlayers;
-		protected string type;
-
-		private bool _started = false;
+		protected Games type;
+		private bool _started;
 
 		protected List<string> userIDs;
 		protected List<friendData> userDatas;
-		protected Dictionary<string, gameStats> stats;
+		protected Dictionary<string, gameStats> gameStats;
 
 		protected Random rnd;
 		protected List<char> letters;
-		protected int roundCount = 0;
+		protected int roundCount;
 
 		protected DateTime startTime;
 		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
-		protected List<string> continueRequests = [];
+		protected List<string> continueRequests;
 
-		public string getType() => type;
+		public Games getType() => type;
 		public string getGameID() => gameID;
 		public bool hasStarted() => _started;
 		public int getMaxPlayers() => maxPlayers;
 		public int getPlayerCount() => userIDs.Count;
 
-		public Game(IHubContext<Connection> context, string type, string userID, int maxPlayers)
+		public Game(IHubContext<Connection> context, Games type, string userID, int maxPlayers)
 		{
 			hubContext = context;
 
 			gameID = userID + DateTime.UtcNow.ToString();
 			this.maxPlayers = maxPlayers;
 			this.type = type;
+			_started = false;
 
 			userIDs = [];
 			userDatas = [];
-			stats = [];
+			gameStats = [];
 
 			rnd = new();
 			letters = [];
+			roundCount = 0;
 
 			currentResponses = [];
+			continueRequests = [];
 		}
 
-		public bool queueUser(string userID)
+		public bool QueueUser(string userID)
 		{
 			if (!database.loadFriendData(userID, out friendData data))
 			{
@@ -104,7 +112,7 @@ namespace server_app.games
 			userIDs.Remove(userID);
 
 			int index = 0;
-			for (int i = 0; i < userDatas.Count; i++)
+			for (int i = 0; i < getPlayerCount(); i++)
 			{
 				if (userDatas[i].userID == userID)
 				{
@@ -114,9 +122,9 @@ namespace server_app.games
 			}
 			userDatas.RemoveAt(index);
 
-			await updateUsers();
+			await UpdateUsers();
 		}
-		public async Task updateUsers()
+		public async Task UpdateUsers()
 		{
 			foreach (var user in userIDs)
 			{
@@ -133,7 +141,7 @@ namespace server_app.games
 
 			foreach (string user in userIDs)
 			{
-				stats.Add(user, new gameStats());
+				gameStats.Add(user, new gameStats());
 			}
 
 			foreach (string userID in userIDs)
@@ -208,14 +216,14 @@ namespace server_app.games
 			evaluate = new Network(currentResponses[userID].submission);
 			bool correct = evaluate.result == letter;
 
-			if (stats.TryGetValue(userID, out gameStats currentStats))
+			if (gameStats.TryGetValue(userID, out gameStats currentStats))
 			{
 				DateTime endTime = currentResponses[userID].time;
 				double accuracy = evaluate.activatedValues[Network.layerCount - 1][letter];
 
-				currentStats.update(accuracy, endTime - startTime, correct);
+				currentStats.Update(accuracy, endTime - startTime, correct);
 			}
-			stats[userID] = currentStats;
+			gameStats[userID] = currentStats;
 			return correct;
 		}
 		protected async Task SendResult(string userID, gameStats stats)
@@ -229,7 +237,6 @@ namespace server_app.games
 				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
 			}
 		}
-		public abstract Task ContinueRequest(string userID);
 
 		public virtual async void EndGame()
 		{
@@ -247,7 +254,7 @@ namespace server_app.games
 				{
 					if (database.loadUserData(userID, out userData userData))
 					{
-						await updateStatistics(userData, letters[i], i);
+						await UpdateStatistics(userData, letters[i], i);
 					}
 					else
 					{
@@ -256,14 +263,14 @@ namespace server_app.games
 				}
 			}
 		}
-		private async Task updateStatistics(userData userData, char letter, int index)  // breaks on versus ----------------------------------------------------------------------
+		private async Task UpdateStatistics(userData userData, char letter, int index)
 		{
 			double accuracy = userData.statistics[letter].accuracy;
 			TimeSpan time = userData.statistics[letter].time;
 			int total = userData.statistics[letter].total;
 
-			double updatedAccuracy = (accuracy * total + stats[userData.userID].accuracy[index]) / (total + 1);
-			TimeSpan updatedTime = (time * total + stats[userData.userID].time[index]) / (total + 1);
+			double updatedAccuracy = (accuracy * total + gameStats[userData.userID].accuracy[index]) / (total + 1);
+			TimeSpan updatedTime = (time * total + gameStats[userData.userID].time[index]) / (total + 1);
 
 			if (!database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 			{

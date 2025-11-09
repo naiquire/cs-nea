@@ -1,17 +1,13 @@
-﻿using client_app.menus;
-using client_app.menus.games;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace client_app.games
+namespace client_app.menus.games
 {
 	public class Elimination : Game, IPlayable
 	{
 		private bool _eliminated;
 		private List<string> _aliveUsers;
-		public Elimination(Main main) : base(main, "knockout", 12)
+		public Elimination(Main main) : base(main, Games.Knockout, 12)
 		{
 			_aliveUsers = new List<string>();
 		}

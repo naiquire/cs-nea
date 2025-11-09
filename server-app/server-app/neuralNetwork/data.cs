@@ -4,7 +4,7 @@ using System.Text;
 
 namespace server_app.neuralNetwork
 {
-	public static class data
+	public static class @data
 	{
 		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\neuralNetwork\data\";
 

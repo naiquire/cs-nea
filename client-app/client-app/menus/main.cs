@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Imaging;
-using System.Linq.Expressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using client_app.components;
-using client_app.games;
 using client_app.menus;
 using client_app.menus.games;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -67,12 +62,12 @@ namespace client_app
 
 			connection.Closed += ConnectionClosed;
 
-            if (connection.State != HubConnectionState.Connected)
-            {
+			if (connection.State != HubConnectionState.Connected)
+			{
 				Close();
-            }
+			}
 
-            if (!await connection.InvokeAsync<bool>("clientConnected", userID))
+			if (!await connection.InvokeAsync<bool>("clientConnected", userID))
 			{
 				LoadAlert("Failed to connect to server. Quitting application.");
 				Close();
@@ -203,8 +198,8 @@ namespace client_app
 				{
 					if (connection.State != HubConnectionState.Connected)
 					{
-                        LoadAlert("Failed to accept friend invite.");
-                    }
+						LoadAlert("Failed to accept friend invite.");
+					}
 					if (!await connection.InvokeAsync<bool>("addFriends", invite, userData.userID))
 					{
 						LoadAlert("Failed to accept friend invite.");

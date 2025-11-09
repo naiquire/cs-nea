@@ -1,5 +1,5 @@
 ﻿using client_app.components;
-using client_app.games;
+using client_app.menus.games;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -122,7 +122,7 @@ namespace client_app
 			});
 			connection.On<string>("receiveVersusResult", (winner) =>
 			{
-				if (menu.game.getType() == "versus")
+				if (menu.game.getType() == Games.Versus)
 				{
 					main.Invoke(new Action(() =>
 					{
@@ -137,7 +137,7 @@ namespace client_app
 			});
 			connection.On<List<string>>("receiveKnockoutResult", (aliveUsers) =>
 			{
-				if (menu.game.getType() == "knockout")
+				if (menu.game.getType() == Games.Knockout)
 				{
 					main.Invoke(new Action(() =>
 					{
@@ -157,7 +157,7 @@ namespace client_app
 			});
 			connection.On<int>("updateRank", (rank) =>
 			{
-				if (menu.game.getType() == "versus")
+				if (menu.game.getType() == Games.Versus)
 				{
 					main.Invoke(new Action(() =>
 					{

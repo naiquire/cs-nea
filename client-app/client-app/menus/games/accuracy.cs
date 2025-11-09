@@ -1,12 +1,8 @@
-﻿using client_app.menus.games;
-using System;
-using System.Threading.Tasks;
-
-namespace client_app.games
+﻿namespace client_app.menus.games
 {
 	public class Accuracy : Game, IPlayable
 	{
-		public Accuracy(Main main) : base(main, "accuracy", 1)
+		public Accuracy(Main main) : base(main, Games.Accuracy, 1)
 		{
 
 		}

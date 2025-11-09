@@ -30,7 +30,7 @@ namespace server_app.connections
 
 			return true;
 		}
-		public async Task<bool> updateFriendData(string userID, string friendID, bool delete)
+		private async Task<bool> UpdateFriendData(string userID, string friendID, bool delete = false)
 		{
 			if (delete)
 			{
@@ -88,22 +88,24 @@ namespace server_app.connections
 		public async Task<bool> addFriends(string user1, string user2)
 		{
 			Logger.Log("SOCIAL", "cyan", $"<{user2}> has accepted a friend invite from <{user1}>");
+
 			if (!database.addFriends(user1, user2))
 			{
 				database.outputException($"Failed to add <{user1}> and <{user2}> as friends");
 				return false;
 			}
 
-			bool isRemoved = false;
-			if (!await updateFriendData(user1, user2, isRemoved))
+			if (!await UpdateFriendData(user1, user2))
 			{
+				// alert client if retrieving friendData fails
 				if (map.TryGetValue(user1, out string? connectionID))
 				{
 					await Clients.Client(connectionID).SendAsync("alert", $"Failed to retrieve data for friend <{user2}>");
 				}
 			}
-			if (!await updateFriendData(user2, user1, isRemoved))
+			if (!await UpdateFriendData(user2, user1))
 			{
+				// no alert sent to other user as they may be in-game
 				return false;
 			}
 
@@ -112,18 +114,17 @@ namespace server_app.connections
 		public async Task<bool> removeFriends(string user1, string user2)
 		{
 			Logger.Log("SOCIAL", "cyan", $"<{user1}> has removed <{user2}> from their friends list");
-			if (database.removeFriends(user1, user2))
-			{
-				bool isRemoved = true;
-				await updateFriendData(user1, user2, isRemoved);
-				await updateFriendData(user2, user1, isRemoved);
-				return true;
-			}
-			else
+
+			if (!database.removeFriends(user1, user2))
 			{
 				database.outputException($"Failed to remove <{user1}> and <{user2}> as friends");
 				return false;
 			}
+
+			await UpdateFriendData(user1, user2, true);
+			await UpdateFriendData(user2, user1, true);
+
+			return true;
 		}
 	}
 }

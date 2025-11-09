@@ -8,12 +8,12 @@ namespace server_app.connections
 	{
 		public void receiveSubmission(string gameID, string userID, byte[] input)
 		{
-			Queueing.loadSubmission(gameID, userID, input);
+			Queueing.LoadSubmission(gameID, userID, input);
 		}
 
 		public void requestRound(string gameID, string userID)
 		{
-			Queueing.requestRound(gameID, userID);
+			Queueing.RequestRound(gameID, userID);
 		}
 	}
 }

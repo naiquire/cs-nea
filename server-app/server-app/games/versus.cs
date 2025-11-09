@@ -5,9 +5,9 @@ using server_app.neuralNetwork;
 
 namespace server_app.games
 {
-	public class Versus(string userID, IHubContext<Connection> context) : Game(context, "versus", userID, 2), IPlayable
+	public class Versus(string userID, IHubContext<Connection> context) : Game(context, Games.Versus, userID, 2), IPlayable
 	{
-		private const int rounds = 1;
+		private const int rounds = 10;
 		private readonly List<friendData> _userCache = [];
 		private readonly Dictionary<string, double> _scores = [];
 
@@ -63,7 +63,7 @@ namespace server_app.games
 				{
 					correctUsers.Add(userIDs[i]);
 				}
-				await SendResult(userIDs[i], stats[userIDs[i]]);
+				await SendResult(userIDs[i], gameStats[userIDs[i]]);
 			}
 
 			if (correctUsers.Count == 0)
@@ -82,7 +82,7 @@ namespace server_app.games
 				(string user, TimeSpan time) lowest = (string.Empty, TimeSpan.MaxValue);
 				foreach (string userID in correctUsers)
 				{
-					var time = stats[userID].time[roundCount];
+					var time = gameStats[userID].time[roundCount];
 					if (time < lowest.time)
 					{
 						lowest = (userID, time);
@@ -94,7 +94,7 @@ namespace server_app.games
 			}
 			roundCount++;
 		}
-		public override async Task ContinueRequest(string userID)
+		public async Task ContinueRequest(string userID)
 		{
 			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
 			if (continueRequests.Count == userIDs.Count)
@@ -126,7 +126,6 @@ namespace server_app.games
 
 			base.EndGame();
 		}
-
 		private int CalculateRank(friendData user, double expectedScore)
 		{
 			double k;
@@ -147,7 +146,6 @@ namespace server_app.games
 
 			return (int)(user.rank + k * (_scores[user.userID] - expectedScore));
 		}
-
 		private async Task SendVersusResults(List<string> userIDs, string? winner)
 		{
 			foreach (string userID in userIDs)

@@ -6,12 +6,12 @@ namespace server_app.connections
 {
 	public partial class Connection : Hub
 	{
-		public string queueGame(string gameType, string userID)
+		public string queueGame(Games gameType, string userID)
 		{
 			if (Program.hubContext != null)
 			{
 				Logger.Log("QUEUE", "blue", $"<{userID}> has queued for <{gameType}>");
-				return Queueing.queueGame(gameType, userID, Program.hubContext);
+				return Queueing.QueueGame(gameType, userID, Program.hubContext);
 			}
 			else
 			{
@@ -22,11 +22,11 @@ namespace server_app.connections
 		public void dequeueGame(string gameID, string userID)
 		{
 			Logger.Log("QUEUE", "blue", $"<{userID}> has dequeued");
-			Queueing.dequeueUser(gameID, userID);
+			Queueing.DequeueUser(gameID, userID);
 		}
 		public bool userJoined(string gameID)
 		{
-			return Queueing.userJoined(gameID);
+			return Queueing.UserJoined(gameID);
 		}
 	}
 }

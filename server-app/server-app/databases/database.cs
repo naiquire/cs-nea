@@ -151,7 +151,7 @@ namespace server_app.databases
 			}
 
 		}
-		public static bool userExists(string userID, out bool exists)
+		private static bool userExists(string userID, out bool exists)
 		{
 			string query = @"SELECT userID
 				FROM userData
@@ -276,7 +276,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool loadStatistics(string userID, out Dictionary<char, statistics> statistics)
+		private static bool loadStatistics(string userID, out Dictionary<char, statistics> statistics)
 		{
 			statistics = [];
 			string query = @"SELECT letter, accuracy, time, total

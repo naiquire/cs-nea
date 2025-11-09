@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
+using System.ComponentModel;
 
 namespace server_app.games
 {
@@ -8,51 +9,44 @@ namespace server_app.games
 	{
 		private static readonly List<IPlayable> _currentGames = [];
 
-		public static string queueGame(string gameType, string userID, IHubContext<Connection> context)
+		public static string QueueGame(Games gameType, string userID, IHubContext<Connection> context)
 		{
 			foreach (IPlayable game in _currentGames)
 			{
 				if (game.getType() != gameType) continue;
 				if (game.getPlayerCount() >= game.getMaxPlayers() || game.hasStarted()) continue;
-				if (game.queueUser(userID))
+				if (game.QueueUser(userID))
 				{
 					return game.getGameID();
 				}
 				return string.Empty;
 			}
 
-			IPlayable newGame;
-			switch (gameType)
+			IPlayable newGame = gameType switch
 			{
-				case "accuracy":
-					newGame = new Accuracy(userID, context);
-					break;
-				case "versus":
-					newGame = new Versus(userID, context);
-					break;
-				case "knockout":
-					newGame = new Elimination(userID, context);
-					break;
-				default:
-					database.outputException($"Could not find game with type {gameType}");
-					return string.Empty;
-			}
+				Games.Accuracy => new Accuracy(userID, context),
+				Games.Versus => new Versus(userID, context),
+				Games.Knockout => new Elimination(userID, context),
+
+				_ => throw new InvalidEnumArgumentException()
+			};
 
 			_currentGames.Add(newGame);
-			if (newGame.queueUser(userID))
+			if (newGame.QueueUser(userID))
 			{
 				return newGame.getGameID();
 			}
 			return string.Empty;
 		}
 		
-		public static bool userJoined(string gameID)
+		public static bool UserJoined(string gameID)
 		{
+			// client acknowledgement on joining a game
 			foreach (IPlayable game in _currentGames)
 			{
 				if (game.getGameID() == gameID)
 				{
-					game.updateUsers();
+					game.UpdateUsers();
 					if (game.getPlayerCount() == game.getMaxPlayers() && !game.hasStarted())
 					{
 						game.StartGame();
@@ -63,7 +57,7 @@ namespace server_app.games
 			return false;
 		}
 
-		public static void dequeueUser(string gameID, string userID)
+		public static void DequeueUser(string gameID, string userID)
 		{
 			foreach (IPlayable game in _currentGames)
 			{
@@ -79,7 +73,7 @@ namespace server_app.games
 			}
 		}
 
-		public static void loadSubmission(string gameID, string userID, byte[] input)
+		public static void LoadSubmission(string gameID, string userID, byte[] input)
 		{
 			foreach (IPlayable game in _currentGames)
 			{
@@ -90,7 +84,7 @@ namespace server_app.games
 				}
 			}
 		}
-		public static void requestRound(string gameID, string userID)
+		public static void RequestRound(string gameID, string userID)
 		{
 			foreach (IPlayable game in _currentGames)
 			{

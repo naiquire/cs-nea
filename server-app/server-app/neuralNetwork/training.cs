@@ -18,8 +18,8 @@
                 var subimages = images.GetRange(index, 50);
                 var subresults = results.GetRange(index, 50);
 
-                // forward propagation and backpropagation
-                var network = new Backpropagation(subimages, subresults);
+				// forward propagation and backpropagation
+				_ = new Backpropagation(subimages, subresults);
             }
         }
     }

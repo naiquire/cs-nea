@@ -8,7 +8,8 @@ namespace server_app.connections
 		public static readonly Dictionary<string, string> map = [];
 		public async Task<bool> clientConnected(string userID)
 		{
-			map.Remove(userID); // failsafe for logouts on server crash
+			// failsafe for recent server crash
+			map.Remove(userID);
 			map.Add(userID, Context.ConnectionId);
 
 			if (!await loadUserData(userID))
@@ -16,6 +17,7 @@ namespace server_app.connections
 				map.Remove(userID);
 				return false;
 			}
+
 			await updateOnline(userID, true);
 			return true;
 		}
@@ -27,6 +29,7 @@ namespace server_app.connections
 		}
 		public override Task OnDisconnectedAsync(Exception? exception)
 		{
+			// unexpected disconnection
 			string connectionID = Context.ConnectionId;
 			foreach (string user in map.Keys)
 			{
@@ -52,19 +55,22 @@ namespace server_app.connections
             {
                 await Clients.Client(connectionID).SendAsync("receiveUserData", userData);
             }
+
             return true;
         }
 
 		public async Task updateOnline(string userID, bool online)
 		{
-			if (database.loadFriends(userID, out List<string> friends))
+			if (!database.loadFriends(userID, out List<string> friends))
 			{
-				foreach (string friend in friends)
+				return;
+			}
+
+			foreach (string friend in friends)
+			{
+				if (map.TryGetValue(friend, out string? connectionID))
 				{
-					if (map.TryGetValue(friend, out string? connectionID))
-					{
-						await Clients.Client(connectionID).SendAsync("updateOnline", userID, online);
-					}
+					await Clients.Client(connectionID).SendAsync("updateOnline", userID, online);
 				}
 			}
 		}
