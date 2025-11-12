@@ -51,7 +51,7 @@ namespace server_app
 				top.SplitColumns(topLeft, topRight);
 				var bottom = new Layout("bottom");
 					var bottomLeft = new Layout("bottomLeft").Ratio(1);
-						bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/][dim]\n\nIn the very unlikely event an exception is thrown, please let me know. It should continue to run after logging the exception, but might have some unexpected behaviour.\n\nIf it completely crashes then you win a prize.[/]").Expand().RoundedBorder());
+						bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/]\n\nTesting for Objective 1.b Account creation\n\n(i) [dim]username already in use[/]\n(ii) [dim]empty fields[/]\n(iii) [dim]passwords do not match[/]\n(iv) [dim]valid credentials and database check[/]").Expand().RoundedBorder());
 					var bottomRight = new Layout("bottomRight").Ratio(2);
 						bottomRight.Update(errorPanel);
 				bottom.SplitColumns(bottomLeft, bottomRight);

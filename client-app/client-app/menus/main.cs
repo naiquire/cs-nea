@@ -76,9 +76,14 @@ namespace client_app
 
 		private Task ConnectionClosed(Exception arg)
 		{
-			btn_home.Invoke(new Action(() => btn_home.PerformClick()));
+			try
+			{
+				btn_home.Invoke(new Action(() => btn_home.PerformClick()));
+			}
+			catch { }
+
 			var alert = LoadAlert("Disconnected from server. Restarting application...");
-			this.Invoke(new Action(() => Close()));
+			try { this.Invoke(new Action(() => Close())); } catch { }
 			return Task.CompletedTask;
 		}
 

@@ -129,6 +129,7 @@ namespace client_app
 		{
 			string userID = txt_userID.Text.Trim();
 			string password = txt_password.Text;
+			txt_password.ResetText();
 			this.lbl_information.ResetText();
 
 			if (string.IsNullOrWhiteSpace(userID) || string.IsNullOrEmpty(password))
@@ -139,7 +140,6 @@ namespace client_app
 			if (connection.State == HubConnectionState.Connected)
 			{
 				await connection.InvokeAsync("loginRequest", userID, password);
-				txt_password.ResetText();
 			}
 		}
 		private void btn_createAccount_Click(object sender, EventArgs e)
@@ -165,6 +165,11 @@ namespace client_app
 			string userID = txt_userID.Text.Trim();
 			string password = txt_password.Text;
 			string localisation = languages.languageCodes[languageIndex];
+
+			if (string.IsNullOrWhiteSpace(userID) || string.IsNullOrEmpty(password))
+			{
+				return;
+			}
 
 			if (connection.State == HubConnectionState.Connected)
 			{

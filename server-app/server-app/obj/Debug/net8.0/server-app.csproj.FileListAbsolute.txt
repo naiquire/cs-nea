@@ -497,7 +497,6 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.csproj.Up2Date
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\server-app.dll
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\refint\server-app.dll
@@ -580,3 +579,4 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-ap
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\server-app\server-app\obj\Debug\net8.0\server-app.pdb
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\server-app\server-app\obj\Debug\net8.0\server-app.genruntimeconfig.cache
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\server-app\server-app\obj\Debug\net8.0\ref\server-app.dll
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

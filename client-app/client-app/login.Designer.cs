@@ -210,6 +210,7 @@ namespace client_app
 			this.txt_passwordconfirm.PlaceholderText = "Confirm Password";
 			this.txt_passwordconfirm.SelectedText = "";
 			this.txt_passwordconfirm.TextOffset = new System.Drawing.Point(10, 0);
+			this.txt_passwordconfirm.TabIndex = 2;
 			this.txt_passwordconfirm.UseSystemPasswordChar = true;
 			// 
 			// login
