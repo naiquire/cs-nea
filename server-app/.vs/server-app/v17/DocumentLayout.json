@@ -3,6 +3,12 @@
   "WorkspaceRootPath": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\neuralnetwork\\network.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\neuralnetwork\\backpropagation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -39,9 +45,6 @@
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\connections\\social.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\neuralnetwork\\network.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -58,11 +61,28 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 0,
+              "Title": "database.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\databases\\database.cs",
+              "RelativeDocumentMoniker": "server-app\\databases\\database.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\databases\\database.cs",
+              "RelativeToolTip": "server-app\\databases\\database.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAcwFwBAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T10:57:07.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "social.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\connections\\social.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\social.cs",
@@ -74,7 +94,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "queueing.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\connections\\queueing.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\queueing.cs",
@@ -86,7 +106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "games.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\connections\\games.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\games.cs",
@@ -98,7 +118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "accounts.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\connections\\accounts.cs",
               "RelativeDocumentMoniker": "server-app\\connections\\accounts.cs",
@@ -110,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Program.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\Program.cs",
               "RelativeDocumentMoniker": "server-app\\Program.cs",
@@ -122,7 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "logger.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\logger.cs",
               "RelativeDocumentMoniker": "server-app\\logger.cs",
@@ -134,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "accounts.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\accounts.cs",
               "RelativeDocumentMoniker": "server-app\\accounts.cs",
@@ -146,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "training.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\neuralNetwork\\training.cs",
               "RelativeDocumentMoniker": "server-app\\neuralNetwork\\training.cs",
@@ -158,19 +178,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 1,
               "Title": "Network.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\neuralNetwork\\Network.cs",
               "RelativeDocumentMoniker": "server-app\\neuralNetwork\\Network.cs",
               "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\neuralNetwork\\Network.cs",
               "RelativeToolTip": "server-app\\neuralNetwork\\Network.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T16:05:30.96Z"
+              "WhenOpened": "2025-11-09T16:05:30.96Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "data.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\neuralNetwork\\data.cs",
               "RelativeDocumentMoniker": "server-app\\neuralNetwork\\data.cs",
@@ -178,25 +199,24 @@
               "RelativeToolTip": "server-app\\neuralNetwork\\data.cs",
               "ViewState": "AgIAADsAAAAAAAAAAAAwwBYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T16:05:30.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T16:05:30.445Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "backpropagation.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
               "RelativeDocumentMoniker": "server-app\\neuralNetwork\\backpropagation.cs",
               "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\neuralNetwork\\backpropagation.cs",
               "RelativeToolTip": "server-app\\neuralNetwork\\backpropagation.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAIwHYAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAIwIYAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T16:05:29.889Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "versus.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\games\\versus.cs",
               "RelativeDocumentMoniker": "server-app\\games\\versus.cs",
@@ -208,7 +228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "queueing.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\games\\queueing.cs",
               "RelativeDocumentMoniker": "server-app\\games\\queueing.cs",
@@ -216,12 +236,11 @@
               "RelativeToolTip": "server-app\\games\\queueing.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T16:05:28.618Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T16:05:28.618Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Game.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\games\\Game.cs",
               "RelativeDocumentMoniker": "server-app\\games\\Game.cs",
@@ -233,7 +252,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Elimination.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\games\\Elimination.cs",
               "RelativeDocumentMoniker": "server-app\\games\\Elimination.cs",
@@ -245,7 +264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "accuracy.cs",
               "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\games\\accuracy.cs",
               "RelativeDocumentMoniker": "server-app\\games\\accuracy.cs",

@@ -7,10 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TheArtOfDevHtmlRenderer.Adapters.Entities;
 
 namespace client_app.menus
 {
@@ -18,12 +16,6 @@ namespace client_app.menus
 	{
 		public static int clientX = Screen.PrimaryScreen.WorkingArea.Width;
 		public static int clientY = Screen.PrimaryScreen.WorkingArea.Height;
-
-		public void aInitializeComponent()
-		{
-
-
-		}
 
 		public static void InitializeComponent(Main main)
 		{
@@ -1133,18 +1125,15 @@ namespace client_app.menus
 		}
 		public static async Task countdown(Guna2HtmlLabel lbl_countdown, int num, Guna2HtmlLabel lbl_status, string text)
 		{
-			await Task.Run(async () =>
-			{
-				lbl_status.Text = text;
-				for (int i = num; i > 0; i--)
-				{
-					lbl_countdown.Text = i.ToString();
-					await Task.Delay(1000);
-				}
-				lbl_countdown.ResetText();
-				lbl_status.ResetText();
-			});
-		}
+            lbl_status.Text = text;
+            for (int i = num; i > 0; i--)
+            {
+                lbl_countdown.Text = i.ToString();
+                await Task.Delay(1000);
+            }
+            lbl_countdown.ResetText();
+            lbl_status.ResetText();
+        }
 
 		public static void configVersusResults(Panel panel_results, string winner)
 		{
