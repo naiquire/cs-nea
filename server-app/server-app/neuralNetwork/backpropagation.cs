@@ -6,7 +6,7 @@
 		public static double correct = 0;
 
 		private readonly double[][] _neuronErrors = new double[Network.layerCount][];
-		private const double _learningRate = 0.01;
+		private const double learningRate = 0.01;
 		private readonly int _batchCount;
 
 		public Backpropagation(List<double[]> input, List<int> expected)
@@ -58,7 +58,7 @@
 						{
 							weightSum += weight[i][j, k];
 						}
-						weights[i][j, k] -= (_learningRate / _batchCount) * weightSum;
+						weights[i][j, k] -= (learningRate / _batchCount) * weightSum;
 					}
 				}
 			}
@@ -75,7 +75,7 @@
 					{
 						biasSum += bias[i + 1][j];
 					}
-					biases[i][j] -= (_learningRate / _batchCount) * biasSum;
+					biases[i][j] -= (learningRate / _batchCount) * biasSum;
 				}
 			}
 			return biases;
