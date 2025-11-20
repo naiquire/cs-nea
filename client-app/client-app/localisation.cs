@@ -368,6 +368,8 @@ namespace client_app
 				{"pt", "Vencedor" },
 				{"de", "Gewinner" },
 			});
+			// Confirm Password
+			// Incorrect Password
 		}
 	}
 }

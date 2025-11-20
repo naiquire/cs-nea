@@ -179,7 +179,7 @@ namespace client_app.menus.games
 		public virtual void SubmissionPhase(char letter)
 		{
 			rounds++;
-			lbl_rounds.Text = $"Round {rounds}";
+			lbl_rounds.Text = $"{languages.localisation["Rounds"][Main.userData.localisation]} {rounds}";
 
 			letters.Add(letter);
 			lbl_letter.Text = letter.ToString();

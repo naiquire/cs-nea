@@ -1,7 +1,23 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\",
-  "Documents": [],
+  "WorkspaceRootPath": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\localisation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\login.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\menus\\games\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\client-app\\client-app\\menus\\uxelements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,41 +25,72 @@
       "DocumentGroups": [
         {
           "DockedWidth": 144,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "login.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\login.cs",
+              "RelativeDocumentMoniker": "client-app\\login.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\login.cs",
+              "RelativeToolTip": "client-app\\login.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAIwD0AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T15:40:18.328Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "login.Designer.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\login.Designer.cs",
+              "RelativeDocumentMoniker": "client-app\\login.Designer.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\login.Designer.cs",
+              "RelativeToolTip": "client-app\\login.Designer.cs",
+              "ViewState": "AgIAAL0AAAAAAAAAAAASwNMAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T15:40:10.329Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "localisation.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\localisation.cs",
+              "RelativeDocumentMoniker": "client-app\\localisation.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\localisation.cs",
+              "RelativeToolTip": "client-app\\localisation.cs",
+              "ViewState": "AgIAAGMBAAAAAAAAAAAgwHIBAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T15:39:40.488Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{90243340-bd7a-11d0-93ef-00a0c90f2734}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Game.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\Game.cs",
+              "RelativeDocumentMoniker": "client-app\\menus\\games\\Game.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\games\\Game.cs",
+              "RelativeToolTip": "client-app\\menus\\games\\Game.cs",
+              "ViewState": "AgIAAKIAAAAAAAAAAADgv6gAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T15:37:26.565Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UXelements.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\UXelements.cs",
+              "RelativeDocumentMoniker": "client-app\\menus\\UXelements.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\client-app\\client-app\\menus\\UXelements.cs",
+              "RelativeToolTip": "client-app\\menus\\UXelements.cs",
+              "ViewState": "AgIAACoBAAAAAAAAAAAqwEMBAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T15:07:18.72Z",
+              "EditorCaption": ""
             }
           ]
         }

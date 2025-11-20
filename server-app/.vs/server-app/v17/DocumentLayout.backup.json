@@ -1,14 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\",
+  "WorkspaceRootPath": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|solutionrelative:server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{057335DE-A396-4F44-B65A-C928B78E4327}|server-app\\server-app.csproj|\\\\store\\studenthomes\\2024\\24ns2144\\compsci\\cs-nea\\server-app\\server-app\\databases\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,21 +16,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\Program.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\Program.cs",
               "RelativeDocumentMoniker": "server-app\\Program.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\Program.cs",
-              "RelativeToolTip": "server-app\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAADAAAAAAAAAA==",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\Program.cs*",
+              "RelativeToolTip": "server-app\\Program.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-15T15:49:22.982Z",
               "EditorCaption": ""
@@ -41,14 +35,13 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "database.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs",
+              "DocumentMoniker": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\databases\\database.cs",
               "RelativeDocumentMoniker": "server-app\\databases\\database.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\server-app\\server-app\\databases\\database.cs",
+              "ToolTip": "\\\\store\\studenthomes\\2024\\24NS2144\\CompSci\\cs-nea\\server-app\\server-app\\databases\\database.cs",
               "RelativeToolTip": "server-app\\databases\\database.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAAABQAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-12T17:46:13.577Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-12T17:46:13.577Z"
             }
           ]
         }
