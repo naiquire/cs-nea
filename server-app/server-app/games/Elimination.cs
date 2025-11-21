@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.neuralNetwork;
+using System.Runtime.CompilerServices;
 
 namespace server_app.games
 {
-	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Knockout, userID, 12), IPlayable
+	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Knockout, userID, 3), IPlayable
 	{
 		private List<string> _aliveUsers = [];
 		public override async Task StartGame()
@@ -18,6 +19,17 @@ namespace server_app.games
 		{
 			_aliveUsers.Remove(userID);
 			base.DequeueUser(userID);
+		}
+		protected override async Task AwaitRound()
+		{
+			continueRequests.Clear();
+			foreach (string userID in _aliveUsers)
+			{
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
+				}
+			}
 		}
 		public async Task SubmissionPhase()
 		{
@@ -50,15 +62,17 @@ namespace server_app.games
 		}
 		public async void EvaluationPhase(char letter)
 		{
+			List<string> eliminatedUsers = [];
+
 			List<string> incorrectUsers = [];
 			Network[] evaluates = new Network[getPlayerCount()];
 			for (int i = 0; i < _aliveUsers.Count; i++)
 			{
-				if (!EvaluateSubmission(ref evaluates[i], userIDs[i], letter))
+				if (!EvaluateSubmission(ref evaluates[i], _aliveUsers[i], letter))
 				{
-					incorrectUsers.Add(userIDs[i]);
+					incorrectUsers.Add(_aliveUsers[i]);
 				}
-				await SendResult(userIDs[i], gameStats[userIDs[i]]);
+				await SendResult(_aliveUsers[i], gameStats[_aliveUsers[i]]);
 			}
 
 			if (incorrectUsers.Count == 0)
@@ -74,35 +88,59 @@ namespace server_app.games
 					}
 				}
 
+				eliminatedUsers.Add(highest.user);
+
 				_aliveUsers.Remove(highest.user);
 			}
 			else if (incorrectUsers.Count < _aliveUsers.Count)
 			{
 				// eliminate incorrect users
+				eliminatedUsers.AddRange(incorrectUsers);
 				foreach (string user in incorrectUsers)
 				{
 					_aliveUsers.Remove(user);
 				}
 			}
 
-			await SendKnockoutResults(userIDs, _aliveUsers);
+			await SendKnockoutResults(eliminatedUsers);
             roundCount++;
         }
 		public async Task ContinueRequest(string userID)
 		{
-			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
+			if (!_aliveUsers.Contains(userID))
+			{
+				// if user is eliminated, then endGame for client
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
+				}
+				return;
+			}
+
+			if (!continueRequests.Contains(userID) && _aliveUsers.Contains(userID))
+			{
+				continueRequests.Add(userID);
+			}
+
 			if (continueRequests.Count == _aliveUsers.Count)
 			{
 				await SubmissionPhase();
 			}
 		}
-		private async Task SendKnockoutResults(List<string> userIDs, List<string> aliveUsers)
+		private async Task SendKnockoutResults(List<string> eliminatedUsers)
 		{
-			foreach (string userID in userIDs)
+			foreach (string userID in _aliveUsers)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
+					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", _aliveUsers);
+				}
+			}
+			foreach (string userID in eliminatedUsers)
+			{
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", _aliveUsers);
 				}
 			}
 		}

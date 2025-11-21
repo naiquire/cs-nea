@@ -4,11 +4,13 @@ namespace server_app.databases
 {
 	/* the todo list of DOOM
 	 *
+	 * eliminated does not send to endgame screen
 	 * scroll broke on profile again damnit
 	 * TRANSLATIONS
 	 *		Search players
 	 *		game descriptions
 	 *		Players
+	 *		any others listed in the class
 	 *		
 	 *
 	 * game -> "next letter in" dissapears ONLY on round 1

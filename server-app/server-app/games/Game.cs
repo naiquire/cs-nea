@@ -174,7 +174,7 @@ namespace server_app.games
 			return letters;
 		}
 
-		protected async Task AwaitRound()
+		protected virtual async Task AwaitRound()
 		{
 			continueRequests.Clear();
 			foreach (string userID in userIDs)
@@ -250,10 +250,12 @@ namespace server_app.games
 
 			foreach (string userID in userIDs)
 			{
-				for (int i = 0; i < letters.Count; i++)
+				for (int i = 0; i < gameStats[userID].accuracy.Count; i++)
 				{
+					// iterate through each round the current user completed - in Elimination each user may complete a different number of rounds
 					if (database.loadUserData(userID, out userData userData))
 					{
+						// reload userData after each update for duplicate letters
 						await UpdateStatistics(userData, letters[i], i);
 					}
 					else
@@ -263,14 +265,14 @@ namespace server_app.games
 				}
 			}
 		}
-		private async Task UpdateStatistics(userData userData, char letter, int index)
+		private async Task UpdateStatistics(userData userData, char letter, int round)
 		{
 			double accuracy = userData.statistics[letter].accuracy;
 			TimeSpan time = userData.statistics[letter].time;
 			int total = userData.statistics[letter].total;
 
-			double updatedAccuracy = (accuracy * total + gameStats[userData.userID].accuracy[index]) / (total + 1);
-			TimeSpan updatedTime = (time * total + gameStats[userData.userID].time[index]) / (total + 1);
+			double updatedAccuracy = (accuracy * total + gameStats[userData.userID].accuracy[round]) / (total + 1);
+			TimeSpan updatedTime = (time * total + gameStats[userData.userID].time[round]) / (total + 1);
 
 			if (!database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 			{
@@ -280,6 +282,7 @@ namespace server_app.games
 
 			if (Connection.map.TryGetValue(userData.userID, out string? connectionID))
 			{
+				// update statistics client-side for the indexed round
 				statistics updated = new(updatedAccuracy, updatedTime, total + 1);
 				await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);
 			}

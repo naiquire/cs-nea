@@ -176,10 +176,10 @@ namespace client_app.menus.games
 
 			await UXelements.countdown(lbl_countdown, 3, lbl_status, languages.localisation["Next letter in"][Main.userData.localisation]);
 		}
-		public virtual void SubmissionPhase(char letter)
+		public void SubmissionPhase(char letter)
 		{
 			rounds++;
-			lbl_rounds.Text = $"{languages.localisation["Rounds"][Main.userData.localisation]} {rounds}";
+			lbl_rounds.Text = $"{languages.localisation["Round"][Main.userData.localisation]} {rounds}";
 
 			letters.Add(letter);
 			lbl_letter.Text = letter.ToString();

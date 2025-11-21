@@ -737,6 +737,7 @@ namespace client_app.menus
 				}
 
 				btn_continue.Enabled = false;
+
 				await Main.connection.InvokeAsync("requestRound", game.getGameID(), Main.userData.userID);
 			};
 
@@ -1202,11 +1203,13 @@ namespace client_app.menus
 				TextAlignment = ContentAlignment.TopRight,
 			};
 
+
 			panel_results.Controls.Add(lbl_eliminated);
 			if (eliminated)
 			{
 				panel_results.Controls.Add(lbl_eliminateReason);
 			}
+			lbl_eliminateReason.BringToFront();
 		}
 
 		public static void configEndGamePanel(Game game, List<char> letters, gameStats statistics)
