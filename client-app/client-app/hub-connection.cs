@@ -104,12 +104,12 @@ namespace client_app
 			});
 			connection.On("startGame", () =>
 			{
-				main.Invoke(new Action(() => menu.game.startGame()));
+				main.Invoke(new Action(() => menu.game.StartGame()));
 			});
 
 			connection.On("awaitRound", () =>
 			{
-				main.Invoke(new Action(() => menu.game.awaitRound()));
+				main.Invoke(new Action(() => menu.game.AwaitRound()));
 			});
 			connection.On<char>("receiveLetter", (letter) =>
 			{
@@ -118,11 +118,11 @@ namespace client_app
 
 			connection.On<bool, double, TimeSpan>("receiveResults", (correct, accuracy, time) =>
 			{
-				main.Invoke(new Action(() => menu.game.evaluationPhase(correct, accuracy, time)));
+				main.Invoke(new Action(() => menu.game.EvaluationPhase(correct, accuracy, time)));
 			});
 			connection.On<string>("receiveVersusResult", (winner) =>
 			{
-				if (menu.game.getType() == Games.Versus)
+				if (menu.game.GetGameType() == Games.Versus)
 				{
 					main.Invoke(new Action(() =>
 					{
@@ -137,7 +137,7 @@ namespace client_app
 			});
 			connection.On<List<string>>("receiveKnockoutResult", (aliveUsers) =>
 			{
-				if (menu.game.getType() == Games.Knockout)
+				if (menu.game.GetGameType() == Games.Knockout)
 				{
 					main.Invoke(new Action(() =>
 					{
@@ -157,7 +157,7 @@ namespace client_app
 			});
 			connection.On<int>("updateRank", (rank) =>
 			{
-				if (menu.game.getType() == Games.Versus)
+				if (menu.game.GetGameType() == Games.Versus)
 				{
 					main.Invoke(new Action(() =>
 					{

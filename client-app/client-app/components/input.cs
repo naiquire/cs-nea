@@ -16,18 +16,18 @@ namespace client_app.components
 
 		const int PEN_THICKNESS = 40;
 
-		public Bitmap getDrawing() => drawing;
+		public Bitmap GetDrawing() => drawing;
 
 		public input(Panel panel, (int, int) pos, (int, int) size)
 		{
 			this.panel_base = panel;
 			loadPanel(pos, size);
-			clearPanel();
+			ClearPanel();
 		}
 
-		public void enablePanel()
+		public void EnablePanel()
 		{
-			clearPanel();
+			ClearPanel();
 
 			panel_input.MouseDown += panel_MouseDown;
 			panel_input.MouseUp += panel_MouseUp;
@@ -41,7 +41,7 @@ namespace client_app.components
 			panel_input.MouseMove -= panel_MouseMove;
 		}
 
-		public void clearPanel()
+		public void ClearPanel()
 		{
 			Graphics.FromImage(drawing).Clear(Color.White);
 			panel_input.CreateGraphics().DrawImageUnscaled(drawing, new Point(0, 0));

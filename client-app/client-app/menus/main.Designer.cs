@@ -42,18 +42,17 @@ namespace client_app
 
 		public void InitializeComponent()
 		{
-			UXelements.resetLayout(this);
+			UXelements.ResetLayout(this);
 
 			this.panel_friendList = new Panel();
 			this.seperator = new PictureBox();
 			this.lbl_friendsLabel = new Guna2HtmlLabel();
-			this.appLogo = new PictureBox();
+			this.lbl_menu = new Guna2HtmlLabel();
 			this.txt_userSearch = new Guna2TextBox();
 			this.btn_userSearch = new Guna2CircleButton();
 
 			this.panel_topBorder.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.appLogo)).BeginInit();
 			this.panel_main.SuspendLayout();
 			this.panel_left.SuspendLayout();
 
@@ -93,14 +92,6 @@ namespace client_app
 			this.lbl_friendsLabel.Text = languages.localisation["Friends"][userData.localisation];
 			this.lbl_friendsLabel.TextAlignment = ContentAlignment.MiddleCenter;
 			//
-			// appLogo
-			//
-			this.appLogo.Location = new Point(20, 20);
-			this.appLogo.Image = global::client_app.Properties.Resources.app_logo;
-			this.appLogo.Size = new Size(260, 60);
-			this.appLogo.SizeMode = PictureBoxSizeMode.Zoom;
-			this.appLogo.TabStop = false;
-			//
 			// txt_userSearch
 			//
 			this.txt_userSearch.BorderRadius = 8;
@@ -133,13 +124,13 @@ namespace client_app
 			this.panel_left.Controls.Add(lbl_friendsLabel);
 			this.panel_left.Controls.Add(txt_userSearch);
 			this.panel_left.Controls.Add(btn_userSearch);
-			this.panel_topLeft.Controls.Add(appLogo);
+			this.panel_topLeft.Controls.Add(lbl_menu);
 
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.appLogo)).EndInit();
 
 			configFriendsPanel();
 			configGamePanels();
+			UpdatePageText("Home");
 
 			this.panel_main.ResumeLayout(false);
 			this.panel_left.ResumeLayout(false);
@@ -376,7 +367,7 @@ namespace client_app
 		private Panel panel_friendList;
 		private PictureBox seperator;
 		private Guna2HtmlLabel lbl_friendsLabel;
-		private PictureBox appLogo;
+		private Guna2HtmlLabel lbl_menu;
 		private Guna2TextBox txt_userSearch;
 		private Guna2CircleButton btn_userSearch;
 

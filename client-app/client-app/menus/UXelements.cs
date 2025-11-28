@@ -51,7 +51,7 @@ namespace client_app.menus
 			main.lbl_appName.Location = new Point(10, 7);
 			main.lbl_appName.Name = "lbl_appName";
 			main.lbl_appName.Size = new Size(100, 16);
-			main.lbl_appName.Text = "Glyph";
+			main.lbl_appName.Text = "v1.0.0a";
 			// 
 			// btn_close
 			// 
@@ -116,7 +116,7 @@ namespace client_app.menus
 
 		}
 
-		public static void resetLayout(Main main)
+		public static void ResetLayout(Main main)
 		{
 			main.panel_main?.Controls.Clear();
 			main.panel_left?.Controls.Clear();
@@ -127,7 +127,7 @@ namespace client_app.menus
 			main.btn_home.Click += main.btn_home_Click;
 		}
 
-		public static input configGamePanel(Game game)
+		public static input ConfigGamePanel(Game game)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -204,7 +204,7 @@ namespace client_app.menus
 				Location = new Point(40, 40),
 				Size = new Size(420, 80),
 				TabStop = false,
-				Text = $"{languages.localisation["Round"][Main.userData.localisation]} {game.getRounds()}",
+				Text = $"{languages.localisation["Round"][Main.userData.localisation]} {game.GetRounds()}",
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 			PictureBox seperator = new PictureBox()
@@ -227,7 +227,7 @@ namespace client_app.menus
 			game.main.panel_right.Controls.Add(seperator);
 			game.main.panel_right.Controls.Add(game.panel_stats);
 		}
-		public static void configRightGamePanelStats(Panel panel, List<char> letters, List<double> accuracies)
+		public static void ConfigRightGamePanelStats(Panel panel, List<char> letters, List<double> accuracies)
 		{
 			panel.Controls.Clear();
 
@@ -505,7 +505,7 @@ namespace client_app.menus
 			configCountdown(game);
 		}
 
-		public static Guna2Panel configResultsPanel(Game game, char c, gameStats stats)
+		public static Guna2Panel ConfigResultsPanel(Game game, char c, gameStats stats)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -738,7 +738,7 @@ namespace client_app.menus
 
 				btn_continue.Enabled = false;
 
-				await Main.connection.InvokeAsync("requestRound", game.getGameID(), Main.userData.userID);
+				await Main.connection.InvokeAsync("requestRound", game.GetGameID(), Main.userData.userID);
 			};
 
 			game.main.panel_main.Controls.Add(lbl_results);
@@ -1038,7 +1038,7 @@ namespace client_app.menus
 				Size = new Size(680, 100),
 				TabStop = false,
 				ForeColor = Color.FromArgb(52, 52, 52),
-				Text = $"{users.Count}/{game.getMaxPlayers()} {languages.localisation["players"][Main.userData.localisation]}",
+				Text = $"{users.Count}/{game.GetMaxPlayers()} {languages.localisation["players"][Main.userData.localisation]}",
 				TextAlign = HorizontalAlignment.Center,
 			};
 
@@ -1124,17 +1124,17 @@ namespace client_app.menus
 			game.main.panel_left.Controls.Add(game.lbl_countdown);
 			game.main.panel_left.Controls.Add(game.lbl_status);
 		}
-		public static async Task countdown(Guna2HtmlLabel lbl_countdown, int num, Guna2HtmlLabel lbl_status, string text)
+		public static async Task Countdown(Guna2HtmlLabel lbl_countdown, int num, Guna2HtmlLabel lbl_status, string text)
 		{
-            lbl_status.Text = text;
-            for (int i = num; i > 0; i--)
-            {
-                lbl_countdown.Text = i.ToString();
-                await Task.Delay(1000);
-            }
-            lbl_countdown.ResetText();
-            lbl_status.ResetText();
-        }
+			lbl_status.Text = text;
+			for (int i = num; i > 0; i--)
+			{
+				lbl_countdown.Text = i.ToString();
+				await Task.Delay(1000);
+			}
+			lbl_countdown.ResetText();
+			lbl_status.ResetText();
+		}
 
 		public static void configVersusResults(Panel panel_results, string winner)
 		{
@@ -1212,7 +1212,7 @@ namespace client_app.menus
 			lbl_eliminateReason.BringToFront();
 		}
 
-		public static void configEndGamePanel(Game game, List<char> letters, gameStats statistics)
+		public static void ConfigEndGamePanel(Game game, List<char> letters, gameStats statistics)
 		{
 			game.main.panel_main.Controls.Clear();
 

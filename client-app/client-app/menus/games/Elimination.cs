@@ -15,14 +15,14 @@ namespace client_app.menus.games
 
 		public override void UpdateUsers(List<friendData> users)
 		{
-			if (hasStarted())
+			if (HasStarted())
 			{
 				// left panel should only display alive users
-				this.users = users;
+				this._users = users;
 
 				List<friendData> alive = new List<friendData>();
 				List<friendData> dead = new List<friendData>();
-				foreach (var user in this.users)
+				foreach (var user in this._users)
 				{
 					if (_aliveUsers.Contains(user.userID))
 					{
@@ -45,7 +45,7 @@ namespace client_app.menus.games
 
 		public override void AwaitStart()
 		{
-			foreach (var user in users)
+			foreach (var user in _users)
 			{
 				_aliveUsers.Add(user.userID);
 			}
@@ -61,8 +61,8 @@ namespace client_app.menus.games
 				_eliminated = true;
 			}
 
-			UpdateUsers(users);
-			UXelements.configKnockoutResults(panel_results, _eliminated, stats.correct.Last());
+			UpdateUsers(_users);
+			UXelements.configKnockoutResults(panel_results, _eliminated, _stats.correct.Last());
 		}
 
 		public override void EndGame()

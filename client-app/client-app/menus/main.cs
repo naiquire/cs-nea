@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using client_app.components;
+﻿using client_app.components;
 using client_app.menus;
 using client_app.menus.games;
 using Microsoft.AspNetCore.SignalR.Client;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace client_app
 {
@@ -42,7 +43,7 @@ namespace client_app
 	{
 		public static HubConnection connection;
 		public static userData userData;
-		//public const string address = "http://[2a0e:cb01:184:e500:8c9:b6dd:4a72:f90e]:5252/cs-nea";
+		//public const string address = "http://192.168.0.251:5252/cs-nea";
 		public const string address = "http://localhost:3900/cs-nea";
 
 		public Main(string userID, string defaultLocalisation)
@@ -74,13 +75,9 @@ namespace client_app
 			}
 		}
 
-		private Task ConnectionClosed(Exception arg)
+		private Task ConnectionClosed(Exception ex)
 		{
-			try
-			{
-				btn_home.Invoke(new Action(() => btn_home.PerformClick()));
-			}
-			catch { }
+			try { btn_home.Invoke(new Action(() => btn_home.PerformClick())); } catch { }
 
 			var alert = LoadAlert("Disconnected from server. Restarting application...");
 			try { this.Invoke(new Action(() => Close())); } catch { }
@@ -263,24 +260,52 @@ namespace client_app
 			}
 		}
 
+		private void UpdatePageText(string text)
+		{
+			panel_topLeft.Controls.Clear();
+			lbl_menu = new Guna.UI2.WinForms.Guna2HtmlLabel()
+			{
+				AutoSize = false,
+				BackColor = Color.Transparent,
+				BorderStyle = BorderStyle.None,
+				Font = new Font("Bahnschrift", 24.25F, FontStyle.Bold, GraphicsUnit.Point, 0),
+				ForeColor = Color.FromArgb(247, 113, 163),
+				Location = new Point(0, 0),
+				Name = "lbl_menu",
+				Size = new Size(300, 100),
+				TabIndex = 0,
+				Text = text,
+				TextAlignment = ContentAlignment.MiddleCenter,
+			};
+
+			panel_topLeft.Controls.Add(lbl_menu);
+		}
+
 		private void btn_queueAccuracy_Click(object sender, EventArgs e)
 		{
+			UpdatePageText("Accuracy");
+
 			menu.game = new Accuracy(this);
-			menu.game.queueGame();
+			menu.game.QueueGame();
 		}
 		private void btn_queue1v1_Click(object sender, EventArgs e)
 		{
+			UpdatePageText("Versus");
+
 			menu.game = new Versus(this);
-			menu.game.queueGame();
+			menu.game.QueueGame();
 		}
 		private void btn_queueKnockout_Click(object sender, EventArgs e)
 		{
+			UpdatePageText("Elimination");
+
 			menu.game = new Elimination(this);
-			menu.game.queueGame();
+			menu.game.QueueGame();
 		}
 
 		public async void btn_home_Click(object sender, EventArgs e)
 		{
+			UpdatePageText("Home");
 			if (connection.State != HubConnectionState.Connected)
 			{
 				return;
@@ -288,7 +313,7 @@ namespace client_app
 
 			if (menu.game != null)
 			{
-				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
+				await connection.InvokeAsync("dequeueGame", menu.game.GetGameID(), userData.userID);
 			}
 
 			// dispose all other classes
@@ -307,7 +332,7 @@ namespace client_app
 			Hide();
 			if (menu.game != null)
 			{
-				await connection.InvokeAsync("dequeueGame", menu.game.getGameID(), userData.userID);
+				await connection.InvokeAsync("dequeueGame", menu.game.GetGameID(), userData.userID);
 			}
 			await connection.InvokeAsync("clientDisconnected", userData.userID);
 			Close();
