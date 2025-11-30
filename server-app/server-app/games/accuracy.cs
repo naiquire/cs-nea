@@ -11,20 +11,20 @@ namespace server_app.games
 		{
 			await base.StartGame();
 
-			letters = GenerateLetters(rounds);
+			_letters = GenerateLetters(rounds);
 			await SubmissionPhase();
 		}
 		public async Task SubmissionPhase()
 		{
-			if (roundCount < rounds)
+			if (_roundCount < rounds)
 			{
-				continueRequests.Clear();
+				_continueRequests.Clear();
 				await AwaitRound();
 				await Task.Delay(3000);
 
-				startTime = DateTime.UtcNow;
-				currentResponses.Clear();
-				await SendLetter(userIDs, letters[roundCount]);
+				_startTime = DateTime.UtcNow;
+				_currentResponses.Clear();
+				await SendLetter(_userIDs, _letters[_roundCount]);
 			}
 			else
 			{
@@ -34,29 +34,29 @@ namespace server_app.games
 		public override void LoadResponse(string userID, byte[] input)
 		{
 			base.LoadResponse(userID, input);
-			if (currentResponses.Count == getPlayerCount())
+			if (_currentResponses.Count == GetPlayerCount())
 			{
-				EvaluationPhase(letters[roundCount]);
+				EvaluationPhase(_letters[_roundCount]);
 			}
 		}
 		public async void EvaluationPhase(char letter)
 		{
-			Network[] networks = new Network[getPlayerCount()];
-			for (int i = 0; i < getPlayerCount(); i++)
+			Network[] networks = new Network[GetPlayerCount()];
+			for (int i = 0; i < GetPlayerCount(); i++)
 			{
-				EvaluateSubmission(ref networks[i], userIDs[i], letter);
-				await SendResult(userIDs[i], gameStats[userIDs[i]]);
+				EvaluateSubmission(ref networks[i], _userIDs[i], letter);
+				await SendResult(_userIDs[i], _gameStats[_userIDs[i]]);
 			}
-			roundCount++;
+			_roundCount++;
 		}
 		public async Task ContinueRequest(string userID)
 		{
-			if (!continueRequests.Contains(userID))
+			if (!_continueRequests.Contains(userID))
 			{
-				continueRequests.Add(userID);
+				_continueRequests.Add(userID);
 			}
 
-			if (continueRequests.Count == getPlayerCount())
+			if (_continueRequests.Count == GetPlayerCount())
 			{
 				await SubmissionPhase();
 			}

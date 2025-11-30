@@ -13,11 +13,11 @@ namespace server_app.games
 		{
 			foreach (IPlayable game in _currentGames)
 			{
-				if (game.getType() != gameType) continue;
-				if (game.getPlayerCount() >= game.getMaxPlayers() || game.hasStarted()) continue;
+				if (game.GetGameType() != gameType) continue;
+				if (game.GetPlayerCount() >= game.GetMaxPlayers() || game.HasStarted()) continue;
 				if (game.QueueUser(userID))
 				{
-					return game.getGameID();
+					return game.GetGameID();
 				}
 				return string.Empty;
 			}
@@ -34,7 +34,7 @@ namespace server_app.games
 			_currentGames.Add(newGame);
 			if (newGame.QueueUser(userID))
 			{
-				return newGame.getGameID();
+				return newGame.GetGameID();
 			}
 			return string.Empty;
 		}
@@ -44,10 +44,10 @@ namespace server_app.games
 			// client acknowledgement on joining a game
 			foreach (IPlayable game in _currentGames)
 			{
-				if (game.getGameID() == gameID)
+				if (game.GetGameID() == gameID)
 				{
 					game.UpdateUsers();
-					if (game.getPlayerCount() == game.getMaxPlayers() && !game.hasStarted())
+					if (game.GetPlayerCount() == game.GetMaxPlayers() && !game.HasStarted())
 					{
 						game.StartGame();
 					}
@@ -61,10 +61,10 @@ namespace server_app.games
 		{
 			foreach (IPlayable game in _currentGames)
 			{
-				if (game.getGameID() == gameID)
+				if (game.GetGameID() == gameID)
 				{
 					game.DequeueUser(userID);
-					if (game.getPlayerCount() <= 0)
+					if (game.GetPlayerCount() <= 0)
 					{
 						_currentGames.Remove(game);
 					}
@@ -77,7 +77,7 @@ namespace server_app.games
 		{
 			foreach (IPlayable game in _currentGames)
 			{
-				if (game.getGameID() == gameID)
+				if (game.GetGameID() == gameID)
 				{
 					game.LoadResponse(userID, input);
 					return;
@@ -88,7 +88,7 @@ namespace server_app.games
 		{
 			foreach (IPlayable game in _currentGames)
 			{
-				if (game.getGameID() == gameID)
+				if (game.GetGameID() == gameID)
 				{
 					game.ContinueRequest(userID);
 				}

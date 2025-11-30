@@ -112,7 +112,7 @@ namespace client_app
 			this.btn_userSearch.FillColor = System.Drawing.Color.FromArgb(208, 208, 208);
 			this.btn_userSearch.ForeColor = System.Drawing.Color.FromArgb(26, 26, 26);
 			this.btn_userSearch.Name = "btn_userSearch";
-			this.btn_userSearch.Image = global::client_app.Properties.Resources.password;
+			this.btn_userSearch.Image = global::client_app.Properties.Resources.search;
 			this.btn_userSearch.Location = new Point(230, 500);
 			this.btn_userSearch.Size = new Size(50, 50);
 			this.btn_userSearch.Click += btn_userSearch_Click;

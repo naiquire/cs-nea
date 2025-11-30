@@ -42,58 +42,58 @@ namespace server_app.games
 		void EvaluationPhase(char letter);
 		Task ContinueRequest(string userID);
 		void EndGame();
-		Games getType();
-		string getGameID();
-		bool hasStarted();
-		int getPlayerCount();
-		int getMaxPlayers();
+		Games GetGameType();
+		string GetGameID();
+		bool HasStarted();
+		int GetPlayerCount();
+		int GetMaxPlayers();
 	}
 	public abstract class Game
 	{
-		protected IHubContext<Connection> hubContext;
+		protected IHubContext<Connection> _hubContext;
 
-		protected string gameID;
-		protected int maxPlayers;
-		protected Games type;
+		protected string _gameID;
+		protected int _maxPlayers;
+		protected Games _type;
 		private bool _started;
 
-		protected List<string> userIDs;
-		protected List<friendData> userDatas;
-		protected Dictionary<string, gameStats> gameStats;
+		protected List<string> _userIDs;
+		protected List<friendData> _userDatas;
+		protected Dictionary<string, gameStats> _gameStats;
 
-		protected Random rnd;
-		protected List<char> letters;
-		protected int roundCount;
+		protected Random _rnd;
+		protected List<char> _letters;
+		protected int _roundCount;
 
-		protected DateTime startTime;
-		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
-		protected List<string> continueRequests;
+		protected DateTime _startTime;
+		protected Dictionary<string, (double[] submission, DateTime time)> _currentResponses;
+		protected List<string> _continueRequests;
 
-		public Games getType() => type;
-		public string getGameID() => gameID;
-		public bool hasStarted() => _started;
-		public int getMaxPlayers() => maxPlayers;
-		public int getPlayerCount() => userIDs.Count;
+		public Games GetGameType() => _type;
+		public string GetGameID() => _gameID;
+		public bool HasStarted() => _started;
+		public int GetMaxPlayers() => _maxPlayers;
+		public int GetPlayerCount() => _userIDs.Count;
 
 		public Game(IHubContext<Connection> context, Games type, string userID, int maxPlayers)
 		{
-			hubContext = context;
+			_hubContext = context;
 
-			gameID = userID + DateTime.UtcNow.ToString();
-			this.maxPlayers = maxPlayers;
-			this.type = type;
+			_gameID = userID + DateTime.UtcNow.ToString();
+			this._maxPlayers = maxPlayers;
+			this._type = type;
 			_started = false;
 
-			userIDs = [];
-			userDatas = [];
-			gameStats = [];
+			_userIDs = [];
+			_userDatas = [];
+			_gameStats = [];
 
-			rnd = new();
-			letters = [];
-			roundCount = 0;
+			_rnd = new();
+			_letters = [];
+			_roundCount = 0;
 
-			currentResponses = [];
-			continueRequests = [];
+			_currentResponses = [];
+			_continueRequests = [];
 		}
 
 		public bool QueueUser(string userID)
@@ -103,34 +103,34 @@ namespace server_app.games
 				return false;
 			}
 
-			userIDs.Add(userID);
-			userDatas.Add(data);
+			_userIDs.Add(userID);
+			_userDatas.Add(data);
 			return true;
 		}
 		public async virtual void DequeueUser(string userID)
 		{
-			userIDs.Remove(userID);
-
 			int index = 0;
-			for (int i = 0; i < getPlayerCount(); i++)
+			for (int i = 0; i < GetPlayerCount(); i++)
 			{
-				if (userDatas[i].userID == userID)
+				if (_userDatas[i].userID == userID)
 				{
 					index = i;
 					break;
 				}
 			}
-			userDatas.RemoveAt(index);
+
+			_userIDs.Remove(userID);
+			_userDatas.RemoveAt(index);
 
 			await UpdateUsers();
 		}
 		public async Task UpdateUsers()
 		{
-			foreach (var user in userIDs)
+			foreach (var user in _userIDs)
 			{
 				if (Connection.map.TryGetValue(user, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("updateUsers", userDatas);
+					await _hubContext.Clients.Client(connectionID).SendAsync("updateUsers", _userDatas);
 				}
 			}
 		}
@@ -139,26 +139,26 @@ namespace server_app.games
 		{
 			_started = true;
 
-			foreach (string user in userIDs)
+			foreach (string user in _userIDs)
 			{
-				gameStats.Add(user, new gameStats());
+				_gameStats.Add(user, new gameStats());
 			}
 
-			foreach (string userID in userIDs)
+			foreach (string userID in _userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("awaitStart");
+					await _hubContext.Clients.Client(connectionID).SendAsync("awaitStart");
 				}
 			}
 
 			await Task.Delay(5000);
 
-			foreach (string userID in userIDs)
+			foreach (string userID in _userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("startGame");
+					await _hubContext.Clients.Client(connectionID).SendAsync("startGame");
 				}
 			}
 		}
@@ -176,12 +176,12 @@ namespace server_app.games
 
 		protected virtual async Task AwaitRound()
 		{
-			continueRequests.Clear();
-			foreach (string userID in userIDs)
+			_continueRequests.Clear();
+			foreach (string userID in _userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
+					await _hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
 				}
 			}
 		}
@@ -191,7 +191,7 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("receiveLetter", letter);
+					await _hubContext.Clients.Client(connectionID).SendAsync("receiveLetter", letter);
 				}
 			}
 		}
@@ -206,57 +206,57 @@ namespace server_app.games
 				array = data.preprocessImage(bmp);
 			}
 
-			currentResponses.Add(userID, (array, endTime));
+			_currentResponses.Add(userID, (array, endTime));
         }
 
 		protected bool EvaluateSubmission(ref Network evaluate, string userID, char character)
 		{
 			int letter = character - 65;
 
-			evaluate = new Network(currentResponses[userID].submission);
+			evaluate = new Network(_currentResponses[userID].submission);
 			bool correct = evaluate.result == letter;
 
-			if (gameStats.TryGetValue(userID, out gameStats currentStats))
+			if (_gameStats.TryGetValue(userID, out gameStats currentStats))
 			{
-				DateTime endTime = currentResponses[userID].time;
+				DateTime endTime = _currentResponses[userID].time;
 				double accuracy = evaluate.activatedValues[Network.layerCount - 1][letter];
 
-				currentStats.Update(accuracy, endTime - startTime, correct);
+				currentStats.Update(accuracy, endTime - _startTime, correct);
 			}
-			gameStats[userID] = currentStats;
+			_gameStats[userID] = currentStats;
 			return correct;
 		}
 		protected async Task SendResult(string userID, gameStats stats)
 		{
-			bool correct = stats.correct[roundCount];
-			double accuracy = stats.accuracy[roundCount];
-			TimeSpan time = stats.time[roundCount];
+			bool correct = stats.correct[_roundCount];
+			double accuracy = stats.accuracy[_roundCount];
+			TimeSpan time = stats.time[_roundCount];
 
 			if (Connection.map.TryGetValue(userID, out string? connectionID))
 			{
-				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
+				await _hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
 			}
 		}
 
 		public virtual async void EndGame()
 		{
-			foreach (string userID in userIDs)
+			foreach (string userID in _userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
+					await _hubContext.Clients.Client(connectionID).SendAsync("endGame");
 				}
 			}
 
-			foreach (string userID in userIDs)
+			foreach (string userID in _userIDs)
 			{
-				for (int i = 0; i < gameStats[userID].accuracy.Count; i++)
+				for (int i = 0; i < _gameStats[userID].accuracy.Count; i++)
 				{
 					// iterate through each round the current user completed - in Elimination each user may complete a different number of rounds
 					if (database.loadUserData(userID, out userData userData))
 					{
 						// reload userData after each update for duplicate letters
-						await UpdateStatistics(userData, letters[i], i);
+						await UpdateStatistics(userData, _letters[i], i);
 					}
 					else
 					{
@@ -271,8 +271,8 @@ namespace server_app.games
 			TimeSpan time = userData.statistics[letter].time;
 			int total = userData.statistics[letter].total;
 
-			double updatedAccuracy = (accuracy * total + gameStats[userData.userID].accuracy[round]) / (total + 1);
-			TimeSpan updatedTime = (time * total + gameStats[userData.userID].time[round]) / (total + 1);
+			double updatedAccuracy = (accuracy * total + _gameStats[userData.userID].accuracy[round]) / (total + 1);
+			TimeSpan updatedTime = (time * total + _gameStats[userData.userID].time[round]) / (total + 1);
 
 			if (!database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 			{
@@ -284,7 +284,7 @@ namespace server_app.games
 			{
 				// update statistics client-side for the indexed round
 				statistics updated = new(updatedAccuracy, updatedTime, total + 1);
-				await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);
+				await _hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);
 			}
 		}
 	}

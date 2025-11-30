@@ -10,7 +10,7 @@ namespace server_app.games
 		private List<string> _aliveUsers = [];
 		public override async Task StartGame()
 		{
-			_aliveUsers = [.. userIDs];
+			_aliveUsers = [.. _userIDs];
 
 			await base.StartGame();
 			await SubmissionPhase();
@@ -22,12 +22,12 @@ namespace server_app.games
 		}
 		protected override async Task AwaitRound()
 		{
-			continueRequests.Clear();
+			_continueRequests.Clear();
 			foreach (string userID in _aliveUsers)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
+					await _hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
 				}
 			}
 		}
@@ -35,16 +35,16 @@ namespace server_app.games
 		{
 			if (_aliveUsers.Count > 1)
 			{
-				continueRequests.Clear();
+				_continueRequests.Clear();
 
-				char letter = (char)(rnd.Next(0, 26) + 65);
-				letters.Add(letter);
+				char letter = (char)(_rnd.Next(0, 26) + 65);
+				_letters.Add(letter);
 
 				await AwaitRound();
 				await Task.Delay(3000);
 
-				startTime = DateTime.UtcNow;
-				currentResponses.Clear();
+				_startTime = DateTime.UtcNow;
+				_currentResponses.Clear();
 				await SendLetter(_aliveUsers, letter);
 			}
 			else
@@ -55,9 +55,9 @@ namespace server_app.games
 		public override void LoadResponse(string userID, byte[] input)
 		{
 			base.LoadResponse(userID, input);
-			if (currentResponses.Count == _aliveUsers.Count)
+			if (_currentResponses.Count == _aliveUsers.Count)
 			{
-				EvaluationPhase(letters[^1]);
+				EvaluationPhase(_letters[^1]);
 			}
 		}
 		public async void EvaluationPhase(char letter)
@@ -65,14 +65,14 @@ namespace server_app.games
 			List<string> eliminatedUsers = [];
 
 			List<string> incorrectUsers = [];
-			Network[] evaluates = new Network[getPlayerCount()];
+			Network[] evaluates = new Network[GetPlayerCount()];
 			for (int i = 0; i < _aliveUsers.Count; i++)
 			{
 				if (!EvaluateSubmission(ref evaluates[i], _aliveUsers[i], letter))
 				{
 					incorrectUsers.Add(_aliveUsers[i]);
 				}
-				await SendResult(_aliveUsers[i], gameStats[_aliveUsers[i]]);
+				await SendResult(_aliveUsers[i], _gameStats[_aliveUsers[i]]);
 			}
 
 			if (incorrectUsers.Count == 0)
@@ -81,7 +81,7 @@ namespace server_app.games
 				(string user, TimeSpan time) highest = (string.Empty, TimeSpan.MinValue);
 				foreach (string userID in _aliveUsers)
 				{
-					var time = gameStats[userID].time[roundCount];
+					var time = _gameStats[userID].time[_roundCount];
 					if (time > highest.time)
 					{
 						highest = (userID, time);
@@ -103,7 +103,7 @@ namespace server_app.games
 			}
 
 			await SendKnockoutResults(eliminatedUsers);
-            roundCount++;
+            _roundCount++;
         }
 		public async Task ContinueRequest(string userID)
 		{
@@ -112,17 +112,17 @@ namespace server_app.games
 				// if user is eliminated, then endGame for client
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
+					await _hubContext.Clients.Client(connectionID).SendAsync("endGame");
 				}
 				return;
 			}
 
-			if (!continueRequests.Contains(userID) && _aliveUsers.Contains(userID))
+			if (!_continueRequests.Contains(userID) && _aliveUsers.Contains(userID))
 			{
-				continueRequests.Add(userID);
+				_continueRequests.Add(userID);
 			}
 
-			if (continueRequests.Count == _aliveUsers.Count)
+			if (_continueRequests.Count == _aliveUsers.Count)
 			{
 				await SubmissionPhase();
 			}
@@ -133,14 +133,14 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", _aliveUsers);
+					await _hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", _aliveUsers);
 				}
 			}
 			foreach (string userID in eliminatedUsers)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", _aliveUsers);
+					await _hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", _aliveUsers);
 				}
 			}
 		}

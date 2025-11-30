@@ -13,31 +13,31 @@ namespace server_app.games
 
 		public override async Task StartGame()
 		{
-			foreach (string userID in userIDs)
+			foreach (string userID in _userIDs)
 			{
 				_scores[userID] = 0;
 			}
 
 			// cache user data to allow for rank updates after dequeue during game
-			_userCache.Add(userDatas[0]);
-			_userCache.Add(userDatas[1]);
+			_userCache.Add(_userDatas[0]);
+			_userCache.Add(_userDatas[1]);
 
 			await base.StartGame();
 
-			letters = GenerateLetters(rounds);
+			_letters = GenerateLetters(rounds);
 			await SubmissionPhase();
 		}
 		public async Task SubmissionPhase()
 		{
-			if (roundCount < rounds)
+			if (_roundCount < rounds)
 			{
-				continueRequests.Clear();
+				_continueRequests.Clear();
 				await AwaitRound();
 				await Task.Delay(3000);
 
-				startTime = DateTime.UtcNow;
-				currentResponses.Clear();
-				await SendLetter(userIDs, letters[roundCount]);
+				_startTime = DateTime.UtcNow;
+				_currentResponses.Clear();
+				await SendLetter(_userIDs, _letters[_roundCount]);
 			}
 			else
 			{
@@ -47,34 +47,34 @@ namespace server_app.games
 		public override void LoadResponse(string userID, byte[] input)
 		{
 			base.LoadResponse(userID, input);
-			if (currentResponses.Count == getPlayerCount())
+			if (_currentResponses.Count == GetPlayerCount())
 			{
-				EvaluationPhase(letters[roundCount]);
+				EvaluationPhase(_letters[_roundCount]);
 			}
 		}
 		public async void EvaluationPhase(char letter)
 		{
 			List<string> correctUsers = [];
 
-			Network[] evaluates = new Network[getPlayerCount()];
-			for (int i = 0; i < userIDs.Count; i++)
+			Network[] evaluates = new Network[GetPlayerCount()];
+			for (int i = 0; i < _userIDs.Count; i++)
 			{
-				if (EvaluateSubmission(ref evaluates[i], userIDs[i], letter))
+				if (EvaluateSubmission(ref evaluates[i], _userIDs[i], letter))
 				{
-					correctUsers.Add(userIDs[i]);
+					correctUsers.Add(_userIDs[i]);
 				}
-				await SendResult(userIDs[i], gameStats[userIDs[i]]);
+				await SendResult(_userIDs[i], _gameStats[_userIDs[i]]);
 			}
 
 			if (correctUsers.Count == 0)
 			{
 				// if none correct then a winner is not determined
-				foreach (string userID in userIDs)
+				foreach (string userID in _userIDs)
 				{
 					_scores[userID] += 0.5;
 				}
 
-				await SendVersusResults(userIDs, null);
+				await SendVersusResults(_userIDs, null);
 			}
 			else
 			{
@@ -82,7 +82,7 @@ namespace server_app.games
 				(string user, TimeSpan time) lowest = (string.Empty, TimeSpan.MaxValue);
 				foreach (string userID in correctUsers)
 				{
-					var time = gameStats[userID].time[roundCount];
+					var time = _gameStats[userID].time[_roundCount];
 					if (time < lowest.time)
 					{
 						lowest = (userID, time);
@@ -90,14 +90,14 @@ namespace server_app.games
 				}
 
 				_scores[lowest.user] += 1;
-				await SendVersusResults(userIDs, lowest.user);
+				await SendVersusResults(_userIDs, lowest.user);
 			}
-			roundCount++;
+			_roundCount++;
 		}
 		public async Task ContinueRequest(string userID)
 		{
-			if (!continueRequests.Contains(userID)) continueRequests.Add(userID);
-			if (continueRequests.Count == userIDs.Count)
+			if (!_continueRequests.Contains(userID)) _continueRequests.Add(userID);
+			if (_continueRequests.Count == _userIDs.Count)
 			{
 				await SubmissionPhase();
 			}
@@ -115,7 +115,7 @@ namespace server_app.games
 				{
 					if (Connection.map.TryGetValue(_userCache[i].userID, out string? connectionID))
 					{
-						await hubContext.Clients.Client(connectionID).SendAsync("updateRank", rank);
+						await _hubContext.Clients.Client(connectionID).SendAsync("updateRank", rank);
 					}
 				}
 				else
@@ -152,7 +152,7 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await hubContext.Clients.Client(connectionID).SendAsync("receiveVersusResult", winner);
+					await _hubContext.Clients.Client(connectionID).SendAsync("receiveVersusResult", winner);
 				}
 			}
 		}

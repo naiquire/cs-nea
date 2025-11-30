@@ -121,6 +121,7 @@ namespace client_app
 			}
 			else
 			{
+				UpdatePageText("Profile");
 				configFriendsPanel();
 				UXelements.configUserDataPanel(this, userData);
 				if (menu.profile.getUserID() == userData.userID)
@@ -256,6 +257,7 @@ namespace client_app
 			}
 			else
 			{
+				UpdatePageText("Profile");
 				menu.profile = new Profile(this, user);
 			}
 		}
@@ -274,7 +276,7 @@ namespace client_app
 				Name = "lbl_menu",
 				Size = new Size(300, 100),
 				TabIndex = 0,
-				Text = text,
+				Text = languages.localisation[text][userData.localisation],
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 
