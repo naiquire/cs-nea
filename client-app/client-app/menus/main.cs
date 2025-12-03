@@ -299,7 +299,7 @@ namespace client_app
 		}
 		private void btn_queueKnockout_Click(object sender, EventArgs e)
 		{
-			UpdatePageText("Elimination");
+			UpdatePageText("Knockout");
 
 			menu.game = new Elimination(this);
 			menu.game.QueueGame();
