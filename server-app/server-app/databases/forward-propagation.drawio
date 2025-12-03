@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.2.3">
+  <diagram name="Page-1" id="Xsp_GavMYkttbFUWGD9u">
+    <mxGraphModel dx="983" dy="548" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3000" pageHeight="3000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-1" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Instantiate &lt;b&gt;Network&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="100" x="250" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-6" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-2" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-5" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-7" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-2" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-4" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-2" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" value="Weights and biases passed&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;as&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;parameters?&lt;/span&gt;" vertex="1">
+          <mxGeometry height="100" width="220" x="190" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-3" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-10" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-4" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Set first layer of network to input values" vertex="1">
+          <mxGeometry height="100" width="100" x="250" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-8" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-5" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Load network parameters from &lt;b&gt;Data &lt;/b&gt;class" vertex="1">
+          <mxGeometry height="100" width="100" x="90" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-15" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-9" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Increment layer by 1" vertex="1">
+          <mxGeometry height="100" width="100" x="410" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-19" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-11" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-18" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-25" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-11" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-24" value="No">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-11" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" value="Is current layer the&lt;div&gt;output layer?&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="140" x="890" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-16" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-13" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Build matrices using activated values of the previous layer" vertex="1">
+          <mxGeometry height="100" width="100" x="570" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Evaluate neuron values for current layer" vertex="1">
+          <mxGeometry height="100" width="100" x="730" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-17" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-14" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-21" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-18" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Apply softmax function to the neuron values" vertex="1">
+          <mxGeometry height="100" width="100" x="910" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Set result to the highest activated value" vertex="1">
+          <mxGeometry height="100" width="100" x="730" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-22" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="End" vertex="1">
+          <mxGeometry height="60" width="100" x="570" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-23" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-20" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-26" edge="1" parent="1" source="opYQlLfT3zP-aF-P8o0s-24" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="opYQlLfT3zP-aF-P8o0s-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="opYQlLfT3zP-aF-P8o0s-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Apply the sigmoid function to each neuron value" vertex="1">
+          <mxGeometry height="100" width="100" x="650" y="490" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
