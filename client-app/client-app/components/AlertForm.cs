@@ -3,13 +3,12 @@ using System.Windows.Forms;
 
 namespace client_app.components
 {
-	public class confirm : Form
+	public class AlertForm : Form
 	{
 		private readonly Guna.UI2.WinForms.Guna2TextBox header;
-		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_accept;
-		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_cancel;
+		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_close;
 
-		public confirm(string text)
+		public AlertForm(string text, bool closeButton, bool autoShow)
 		{
 			SuspendLayout();
 
@@ -26,11 +25,12 @@ namespace client_app.components
 				Location = new Point(20, 20),
 				Margin = new Padding(5, 5, 5, 5),
 				Multiline = true,
-				Size = new Size(360, 100),
+				ReadOnly = true,
+				Size = new Size(720, 300),
 				TabIndex = 0,
 				TabStop = false,
 			};
-			btn_accept = new Guna.UI2.WinForms.Guna2GradientButton()
+			btn_close = new Guna.UI2.WinForms.Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 14,
@@ -38,43 +38,22 @@ namespace client_app.components
 				FillColor2 = Color.FromArgb(197, 113, 247),
 				Font = new Font("Bahnschrift", 9.75F),
 				ForeColor = Color.White,
-				Location = new Point(215, 145),
+				Location = new Point(615, 345),
 				Size = new Size(160, 30),
 				TabIndex = 1,
-				Text = languages.localisation["Accept"][Main.userData.localisation],
-			};
-			btn_cancel = new Guna.UI2.WinForms.Guna2GradientButton()
-			{
-				AutoRoundedCorners = true,
-				BorderRadius = 14,
-				FillColor = Color.FromArgb(156, 156, 156),
-				FillColor2 = Color.FromArgb(156, 156, 156),
-				Font = new Font("Bahnschrift", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
-				ForeColor = Color.White,
-				Location = new Point(25, 145),
-				Size = new Size(160, 30),
-				TabIndex = 1,
-				Text = "Ignore",
+				Text = "Close",
 			};
 
-			btn_accept.Click += (sender, e) =>
-			{
-				DialogResult = DialogResult.OK;
-				Close();
-			};
-			btn_cancel.Click += (sender, e) =>
-			{
-				DialogResult = DialogResult.Cancel;
-				Close();
-			};
+			btn_close.Click += (sender, e) => Close();
 
-			AcceptButton = btn_accept;
+			AcceptButton = btn_close;
 			BackColor = Color.FromArgb(208, 208, 208);
-			CancelButton = btn_cancel;
-			ClientSize = new Size(400, 200);
+			ClientSize = new Size(800, 400);
 			Controls.Add(header);
-			Controls.Add(btn_accept);
-			Controls.Add(btn_cancel);
+			if (closeButton)
+			{
+				Controls.Add(btn_close);
+			}
 			FormBorderStyle = FormBorderStyle.None;
 			ShowIcon = false;
 			ShowInTaskbar = false;
@@ -82,7 +61,10 @@ namespace client_app.components
 			TopMost = true;
 			ResumeLayout(false);
 
-			ShowDialog();
+			if (autoShow)
+			{
+				ShowDialog();
+			}
 		}
 	}
 }

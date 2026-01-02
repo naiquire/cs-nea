@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace client_app.components
 {
-	public class input : Form
+	public class InputPanel : Form
 	{
 		private readonly Panel panel_base;
 
@@ -18,7 +18,7 @@ namespace client_app.components
 
 		public Bitmap GetDrawing() => drawing;
 
-		public input(Panel panel, (int, int) pos, (int, int) size)
+		public InputPanel(Panel panel, (int, int) pos, (int, int) size)
 		{
 			this.panel_base = panel;
 			loadPanel(pos, size);
@@ -34,7 +34,7 @@ namespace client_app.components
 			panel_input.MouseMove += panel_MouseMove;
 		}
 
-		public void disablePanel()
+		public void DisablePanel()
 		{
 			panel_input.MouseDown -= panel_MouseDown;
 			panel_input.MouseUp -= panel_MouseUp;

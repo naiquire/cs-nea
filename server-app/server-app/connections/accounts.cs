@@ -8,22 +8,22 @@ namespace server_app.connections
 		public static readonly Dictionary<string, string> map = [];
 		public async Task<bool> clientConnected(string userID)
 		{
-			// failsafe for recent server crash
+			// failsafe for server crash
 			map.Remove(userID);
 			map.Add(userID, Context.ConnectionId);
 
-			if (!await loadUserData(userID))
+			if (!await LoadUserData(userID))
 			{
 				map.Remove(userID);
 				return false;
 			}
 
-			await updateOnline(userID, true);
+			await UpdateOnline(userID, true);
 			return true;
 		}
 		public async void clientDisconnected(string userID)
 		{
-			await updateOnline(userID, false);
+			await UpdateOnline(userID, false);
 			map.Remove(userID);
 			Logger.Log("LOGOUT", "lime", $"<{userID}> has disconnected");
 		}
@@ -44,9 +44,9 @@ namespace server_app.connections
 			return base.OnDisconnectedAsync(exception);
 		}
 
-		public async Task<bool> loadUserData(string userID)
+		private async Task<bool> LoadUserData(string userID)
 		{
-			if (!database.loadUserData(userID, out userData userData))
+			if (!Database.LoadUserData(userID, out userData userData))
 			{
                 return false;
             }
@@ -59,9 +59,9 @@ namespace server_app.connections
             return true;
         }
 
-		public async Task updateOnline(string userID, bool online)
+		private async Task UpdateOnline(string userID, bool online)
 		{
-			if (!database.loadFriends(userID, out List<string> friends))
+			if (!Database.LoadFriends(userID, out List<string> friends))
 			{
 				return;
 			}

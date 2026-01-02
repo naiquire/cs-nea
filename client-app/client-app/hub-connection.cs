@@ -9,10 +9,10 @@ namespace client_app
 {
 	public static class hub_connection
 	{
-		private static login login;
+		private static Login login;
 		private static Main main;
 
-		public static void injectForm(login l, Main m)
+		public static void InjectForm(Login l, Main m)
 		{
 			if (m != null) main = m;
 			if (l != null) login = l;
@@ -40,7 +40,7 @@ namespace client_app
 				}
 				catch
 				{
-					login?.Invoke(new Action(() => login.lbl_information.Text = languages.localisation["An error occured while connecting to the server"][languages.languageCodes[login.getLanguageIndex()]]));
+					login?.Invoke(new Action(() => login.lbl_information.Text = Languages.localisation["An error occured while connecting to the server"][Languages.languageCodes[login.GetLanguageIndex()]]));
 				}
 			}
 
@@ -51,11 +51,11 @@ namespace client_app
 		{
 			connection.On<int, string>("loginSuccess", (success, userID) =>
 			{
-				login.lbl_information.Invoke(new Action(() => { login.handleLoginSuccess(success, userID); }));
+				login.lbl_information.Invoke(new Action(() => login.HandleLoginSuccess(success, userID)));
 			});
 			connection.On<int, string>("accountSuccess", (success, userID) =>
 			{
-				login.lbl_information.Invoke(new Action(() => { login.handleAccountCreationSuccess(success, userID); }));
+				login.lbl_information.Invoke(new Action(() => login.HandleAccountCreationSuccess(success, userID)));
 			});
 
 			return connection;
@@ -137,12 +137,12 @@ namespace client_app
 			});
 			connection.On<List<string>>("receiveKnockoutResult", (aliveUsers) =>
 			{
-				if (menu.game.GetGameType() == Games.Knockout)
+				if (menu.game.GetGameType() == Games.Elimination)
 				{
 					main.Invoke(new Action(() =>
 					{
 						Elimination game = (Elimination)menu.game;
-						game.KnockoutResults(aliveUsers);
+						game.EliminationResults(aliveUsers);
 					}));
 				}
 				else

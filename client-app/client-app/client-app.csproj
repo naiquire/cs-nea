@@ -197,16 +197,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="components\alert.cs">
+    <Compile Include="components\AlertForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="components\confirm.cs">
+    <Compile Include="components\ConfirmForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="components\input.cs">
+    <Compile Include="components\InputPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="components\update.cs">
+    <Compile Include="components\UpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="menus\games\Game.cs">
@@ -246,8 +246,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="components\update.resx">
-      <DependentUpon>update.cs</DependentUpon>
+    <EmbeddedResource Include="components\UpdateForm.resx">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menus\UXelements.resx">
       <DependentUpon>UXelements.cs</DependentUpon>

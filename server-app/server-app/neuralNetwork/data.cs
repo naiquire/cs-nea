@@ -4,9 +4,9 @@ using System.Text;
 
 namespace server_app.neuralNetwork
 {
-	public static class @data
+	public static class Data
 	{
-		public static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\neuralNetwork\data\";
+		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\neuralNetwork\data\";
 
 		public static readonly double[][,] weights = LoadWeights();
 		public static readonly double[][] biases = LoadBiases();
@@ -28,7 +28,7 @@ namespace server_app.neuralNetwork
 			}
 			return output;
 		}
-		public static void initialiseParameters()
+		public static void InitialiseParameters()
 		{
 			// initialise weights
 			double[][,] weights = new double[Network.layerCount - 1][,];
@@ -59,7 +59,7 @@ namespace server_app.neuralNetwork
 			SaveBiases(biases);
 		}
 
-		public static double[] preprocessImage(Bitmap original)
+		public static double[] PreprocessImage(Bitmap original)
 		{
 			Bitmap image = addPadding(
 				extendToSquare(
@@ -125,7 +125,7 @@ namespace server_app.neuralNetwork
 
 				int largestDimension = Math.Max(image.Width, image.Height);
 				int offset = Math.Abs((image.Width - image.Height) / 2);
-				string extendDirection = largestDimension == image.Height ? "right" : "down";
+				char extendDirection = largestDimension == image.Height ? 'w' : 'h';
 
 				var square = new Bitmap(largestDimension, largestDimension);
 
@@ -144,11 +144,11 @@ namespace server_app.neuralNetwork
 						// check pixel is not out of bounds
 						if (i < image.Width && j < image.Height)
 						{
-							if (extendDirection == "right")
+							if (extendDirection == 'w')
 							{
 								square.SetPixel(i + offset, j, image.GetPixel(i, j));
 							}
-							if (extendDirection == "down")
+							if (extendDirection == 'h')
 							{
 								square.SetPixel(i, j + offset, image.GetPixel(i, j));
 							}
@@ -226,18 +226,18 @@ namespace server_app.neuralNetwork
 		{
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
-				StringBuilder build = new();
+				StringBuilder builder = new();
 				for (int j = 0; j < weights[i].GetLength(0); j++)
 				{
 					for (int k = 0; k < weights[i].GetLength(1) - 1; k++)
 					{
-						build.Append($"{weights[i][j, k]},");
+						builder.Append($"{weights[i][j, k]},");
 					}
-					build.Append($"{weights[i][j, weights[i].GetLength(1) - 1]}\n");
+					builder.Append($"{weights[i][j, weights[i].GetLength(1) - 1]}\n");
 				}
 				using (StreamWriter sw = new($@"{location}weights\{i}.txt"))
 				{
-					sw.Write(build);
+					sw.Write(builder);
 				}
 			}
 		}

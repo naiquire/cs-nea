@@ -14,11 +14,11 @@ namespace server_app.games
 			_letters = GenerateLetters(rounds);
 			await SubmissionPhase();
 		}
+
 		public async Task SubmissionPhase()
 		{
 			if (_roundCount < rounds)
 			{
-				_continueRequests.Clear();
 				await AwaitRound();
 				await Task.Delay(3000);
 
@@ -39,6 +39,7 @@ namespace server_app.games
 				EvaluationPhase(_letters[_roundCount]);
 			}
 		}
+
 		public async void EvaluationPhase(char letter)
 		{
 			Network[] networks = new Network[GetPlayerCount()];

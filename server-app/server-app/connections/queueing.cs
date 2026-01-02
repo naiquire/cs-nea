@@ -15,14 +15,14 @@ namespace server_app.connections
 			}
 			else
 			{
-				database.outputException("IHubContext was null when attempting to queue a user");
+				Database.outputException("IHubContext was null when attempting to queue a user");
 				return string.Empty;
 			}
 		}
-		public void dequeueGame(string gameID, string userID)
+		public async Task dequeueGame(string gameID, string userID)
 		{
 			Logger.Log("QUEUE", "blue", $"<{userID}> has dequeued");
-			Queueing.DequeueUser(gameID, userID);
+			await Queueing.DequeueUser(gameID, userID);
 		}
 		public bool userJoined(string gameID)
 		{

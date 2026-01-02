@@ -136,7 +136,6 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-ap
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.pdb
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client-app.exe.config
 C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\bin\Debug\Guna.UI2.dll
-C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.components.update.resources
 H:\CompSci\git\client-app\client-app\bin\Debug\client-app.exe.config
 H:\CompSci\git\client-app\client-app\bin\Debug\client-app.exe
 H:\CompSci\git\client-app\client-app\bin\Debug\client-app.pdb
@@ -381,3 +380,4 @@ C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-ap
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\es-ES\client-app.resources.dll
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\fr\client-app.resources.dll
 \\store\studenthomes\2024\24NS2144\CompSci\cs-nea\client-app\client-app\obj\Debug\pt-PT\client-app.resources.dll
+C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\client-app\client-app\obj\Debug\client_app.components.UpdateForm.resources

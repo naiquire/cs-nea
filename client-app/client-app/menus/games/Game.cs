@@ -11,7 +11,7 @@ namespace client_app.menus.games
 {
 	public struct gameStats
 	{
-		public gameStats(object arg) // requires argument for some reason
+		public gameStats(object _) // requires argument for some reason
 		{
 			correct = new List<bool>();
 			accuracy = new List<double>();
@@ -33,7 +33,7 @@ namespace client_app.menus.games
 	{
 		Accuracy,
 		Versus,
-		Knockout,
+		Elimination,
 	}
 
 	public interface IPlayable
@@ -55,45 +55,47 @@ namespace client_app.menus.games
 	{
 		public readonly Main main;
 
-		private string _gameID;
-		private readonly Games _type;
-		protected List<friendData> _users;
+		private string gameID;
+		private readonly Games type;
+		protected List<friendData> users;
 
-		private bool _started;
-		private int _rounds;
-		private readonly int _maxPlayers;
+		private bool started;
+		private int rounds;
+		private readonly int maxPlayers;
 
-		protected gameStats _stats;
-		protected readonly List<char> _letters;
+		protected gameStats gameStats;
+		protected readonly List<char> letters;
 
-		public Guna2Panel panel_results;
-		public Guna2Shapes panel_outline;
+		protected Guna2Panel panel_results;
+		public Guna2Panel panel_stats;
 		public Guna2HtmlLabel lbl_letter;
 		public Guna2GradientButton btn_submit;
 		public Guna2GradientButton btn_clear;
-
-		public Panel panel_stats;
 		public Guna2HtmlLabel lbl_rounds;
-		public Guna2HtmlLabel lbl_countdown;
-		public Guna2HtmlLabel lbl_status;
 
-		private input _drawingPanel;
+		private InputPanel drawingPanel;
 
-		protected Game(Main main, Games type, int maxPlayers)
+		public int GetMaxPlayers() => maxPlayers;
+		public string GetGameID() => gameID;
+		public Games GetGameType() => type;
+		public bool HasStarted() => started;
+		public int GetRounds() => rounds;
+
+		public Game(Main main, Games type, int maxPlayers)
 		{
 			this.main = main;
-			_type = type;
-			_stats = new gameStats("");
-			_started = false;
-			_rounds = 0;
-			_letters = new List<char>();
-			_maxPlayers = maxPlayers;
+			this.type = type;
+			gameStats = new gameStats(null);
+			started = false;
+			rounds = 0;
+			letters = new List<char>();
+			this.maxPlayers = maxPlayers;
 		}
 		public virtual void UpdateUsers(List<friendData> users)
 		{
-			this._users = users;
+			this.users = users;
 
-			if (!_started)
+			if (!started)
 			{
 				UXelements.configLobbyPanel(this, users);
 			}
@@ -102,7 +104,7 @@ namespace client_app.menus.games
 			main.panel_left.Controls.Add(main.btn_home);
 
 		}
-		public async virtual void QueueGame()
+		public async void QueueGame()
 		{
 			if (Main.connection.State != HubConnectionState.Connected)
 			{
@@ -110,11 +112,11 @@ namespace client_app.menus.games
 				return;
 			}
 
-			_gameID = await Main.connection.InvokeAsync<string>("queueGame", _type, Main.userData.userID);
+			gameID = await Main.connection.InvokeAsync<string>("queueGame", type, Main.userData.userID);
 
-			if (string.IsNullOrEmpty(_gameID))
+			if (string.IsNullOrEmpty(gameID))
 			{
-				Main.LoadAlert(languages.localisation["An error occured. Please wait and try again"][Main.userData.localisation]);
+				Main.LoadAlert(Languages.localisation["An error occured. Please wait and try again"][Main.userData.localisation]);
 				main.btn_home.PerformClick();
 			}
 			else
@@ -122,7 +124,7 @@ namespace client_app.menus.games
 				await JoinGameLobby();
 			}
 		}
-		public virtual async Task JoinGameLobby()
+		public async Task JoinGameLobby()
 		{
 			if (Main.connection.State != HubConnectionState.Connected)
 			{
@@ -130,33 +132,33 @@ namespace client_app.menus.games
 			}
 
 			UXelements.ResetLayout(main);
-			if (!await Main.connection.InvokeAsync<bool>("userJoined", _gameID))
+			if (!await Main.connection.InvokeAsync<bool>("userJoined", gameID))
 			{
-				Main.LoadAlert(languages.localisation["An error occured. Please wait and try again"][Main.userData.localisation]);
+				Main.LoadAlert(Languages.localisation["An error occured. Please wait and try again"][Main.userData.localisation]);
 				main.btn_home.PerformClick();
 			}
 		}
-		public virtual async void AwaitStart()
+		public async virtual void AwaitStart()
 		{
-			_started = true;
-			await UXelements.Countdown(lbl_countdown, 5, lbl_status, languages.localisation["Starting in"][Main.userData.localisation]);
+			started = true;
+			await UXelements.Countdown(main.panel_left, 5, Languages.localisation["Starting in"][Main.userData.localisation]);
 		}
-		public virtual void StartGame()
+		public void StartGame()
 		{
 			UXelements.configRightGamePanel(this);
 		}
 		public async void AwaitRound()
 		{
-			_drawingPanel = UXelements.ConfigGamePanel(this);
+			drawingPanel = UXelements.ConfigGamePanel(this);
 
-			btn_clear.Click += (sender, e) => _drawingPanel.ClearPanel();
+			btn_clear.Click += (sender, e) => drawingPanel.ClearPanel();
 			btn_submit.Click += async (sender, e) =>
 			{
 				btn_submit.Enabled = false;
 				btn_clear.Enabled = false;
-				_drawingPanel.disablePanel();
+				drawingPanel.DisablePanel();
 
-				var submission = _drawingPanel.GetDrawing();
+				var submission = drawingPanel.GetDrawing();
 
 				byte[] data;
 				using (var ms = new MemoryStream())
@@ -170,43 +172,35 @@ namespace client_app.menus.games
 					main.btn_home.PerformClick();
 				}
 
-				await Main.connection.InvokeAsync("receiveSubmission", _gameID, Main.userData.userID, data);
+				await Main.connection.InvokeAsync("receiveSubmission", gameID, Main.userData.userID, data);
 
-				_drawingPanel.ClearPanel();
+				drawingPanel.ClearPanel();
 			};
 
-			await UXelements.Countdown(lbl_countdown, 3, lbl_status, languages.localisation["Next letter in"][Main.userData.localisation]);
+			await UXelements.Countdown(main.panel_left, 3, Languages.localisation["Next letter in"][Main.userData.localisation]);
 		}
 		public void SubmissionPhase(char letter)
 		{
-			_rounds++;
-			lbl_rounds.Text = $"{languages.localisation["Round"][Main.userData.localisation]} {_rounds}";
+			rounds++;
+			lbl_rounds.Text = $"{Languages.localisation["Round"][Main.userData.localisation]} {rounds}";
 
-			_letters.Add(letter);
+			letters.Add(letter);
 			lbl_letter.Text = letter.ToString();
 
-			_drawingPanel.EnablePanel();
+			drawingPanel.EnablePanel();
 			btn_submit.Enabled = true;
 			btn_clear.Enabled = true;
 		}
-		public virtual void EvaluationPhase(bool correct, double accuracy, TimeSpan time)
+		public void EvaluationPhase(bool correct, double accuracy, TimeSpan time)
 		{
-			_stats.UpdateStats(correct, accuracy, time);
-			panel_results = UXelements.ConfigResultsPanel(this, _letters[_letters.Count - 1], _stats);
+			gameStats.UpdateStats(correct, accuracy, time);
+			panel_results = UXelements.ConfigResultsPanel(this, letters[letters.Count - 1], gameStats);
 
-			UXelements.ConfigRightGamePanelStats(panel_stats, _letters, _stats.accuracy);
+			UXelements.ConfigRightGamePanelStats(panel_stats, letters, gameStats.accuracy);
 		}
-
 		public virtual void EndGame()
 		{
-			UXelements.ConfigEndGamePanel(this, _letters, _stats);
+			UXelements.ConfigEndGamePanel(this, letters, gameStats);
 		}
-
-		public int GetMaxPlayers() => _maxPlayers;
-		public string GetGameID() => _gameID;
-		public Games GetGameType() => _type;
-		public bool HasStarted() => _started;
-		public int GetRounds() => _rounds;
-
 	}
 }

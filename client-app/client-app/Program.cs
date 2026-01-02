@@ -16,8 +16,8 @@ namespace client_app
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            languages.loadWords();
-            Application.Run(new login());
+            Languages.loadWords();
+            Application.Run(new Login());
         }
     }
 }

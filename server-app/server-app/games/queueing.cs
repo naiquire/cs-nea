@@ -2,13 +2,13 @@ using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace server_app.games
 {
 	public static class Queueing
 	{
 		private static readonly List<IPlayable> _currentGames = [];
-
 		public static string QueueGame(Games gameType, string userID, IHubContext<Connection> context)
 		{
 			foreach (IPlayable game in _currentGames)
@@ -26,7 +26,7 @@ namespace server_app.games
 			{
 				Games.Accuracy => new Accuracy(userID, context),
 				Games.Versus => new Versus(userID, context),
-				Games.Knockout => new Elimination(userID, context),
+				Games.Elimination => new Elimination(userID, context),
 
 				_ => throw new InvalidEnumArgumentException()
 			};
@@ -57,13 +57,14 @@ namespace server_app.games
 			return false;
 		}
 
-		public static void DequeueUser(string gameID, string userID)
+		public static async Task DequeueUser(string gameID, string userID)
 		{
 			foreach (IPlayable game in _currentGames)
 			{
 				if (game.GetGameID() == gameID)
 				{
 					game.DequeueUser(userID);
+					await game.UpdateUsers();
 					if (game.GetPlayerCount() <= 0)
 					{
 						_currentGames.Remove(game);

@@ -2,7 +2,7 @@
 
 namespace client_app
 {
-	public static class @languages
+	public static class Languages
 	{
 		public static readonly List<string> supportedLanguages = new List<string>()
 		{
@@ -22,7 +22,7 @@ namespace client_app
 		};
 		public static readonly Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
 
-		public static void loadWords() // this is horrible but it will have to do
+		public static void loadWords()
 		{
 			localisation.Add("Friends", new Dictionary<string, string>()
 			{

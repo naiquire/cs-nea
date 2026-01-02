@@ -2,12 +2,12 @@
 {
 	public class Backpropagation
 	{
-		public static double epochs = 0;
-		public static double correct = 0;
+		private static int epochs = 0;
+		private static int correct = 0;
 
 		private readonly double[][] _neuronErrors = new double[Network.layerCount][];
 		private const double learningRate = 0.01;
-		private readonly int _batchCount;
+		private readonly int batchCount;
 
 		public Backpropagation(List<double[]> input, List<int> expected)
 		{
@@ -16,11 +16,11 @@
 
 			List<double> loss = [];
 
-			_batchCount = input.Count;
+			batchCount = input.Count;
 
 			// load weights and biases
-			var weights = data.LoadWeights();
-			var biases = data.LoadBiases();
+			var weights = Data.LoadWeights();
+			var biases = Data.LoadBiases();
 
 			// evaluate for each input
 			for (int i = 0; i < input.Count; i++)
@@ -37,8 +37,8 @@
 			var updatedBiases = UpdateBiases(biases, ref biasAdjustments);
 
             // save weights and biases
-            data.SaveWeights(updatedWeights);
-            data.SaveBiases(updatedBiases);
+            Data.SaveWeights(updatedWeights);
+            Data.SaveBiases(updatedBiases);
 
             // log cumulative percentage and average loss
             Console.WriteLine($"{correct / epochs * 100.0}%\t{loss.Sum() / loss.Count}");
@@ -58,7 +58,7 @@
 						{
 							weightSum += weight[i][j, k];
 						}
-						weights[i][j, k] -= (learningRate / _batchCount) * weightSum;
+						weights[i][j, k] -= (learningRate / batchCount) * weightSum;
 					}
 				}
 			}
@@ -75,7 +75,7 @@
 					{
 						biasSum += bias[i + 1][j];
 					}
-					biases[i][j] -= (learningRate / _batchCount) * biasSum;
+					biases[i][j] -= (learningRate / batchCount) * biasSum;
 				}
 			}
 			return biases;
@@ -87,7 +87,7 @@
 			Network network = new(inputValues, weights, biases);
 
 			epochs++;
-			if (network.result == expectedResult - 1)
+			if (network.GetResult() == expectedResult - 1)
 			{
 				correct++;
 			}
@@ -112,7 +112,6 @@
             // bias gradients are equal to the neuron errors
             return (weightGradients, _neuronErrors, loss);
         }
-
 		private double CalculateOutputErrors(ref Network network, int expectedResult)
 		{
 			// output layer errors
@@ -129,7 +128,6 @@
 			}
 			return loss;
 		}
-
 		private void CalculateHiddenErrors(ref Network network, ref double[][,] weights)
 		{
 			// for each remaining layer
@@ -145,7 +143,7 @@
 						sum += weights[layer][i, j] * _neuronErrors[layer + 1][j];
 					}
 					// sigmoid error function
-					_neuronErrors[layer][i] = sum * data.dx_sigmoid(network.neuronValues[layer][i]);
+					_neuronErrors[layer][i] = sum * Data.dx_sigmoid(network.neuronValues[layer][i]);
 				}
 			}
 		}    

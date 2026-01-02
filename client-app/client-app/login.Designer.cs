@@ -2,7 +2,7 @@
 
 namespace client_app
 {
-    partial class login
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,13 @@ namespace client_app
         /// </summary>
         private void InitializeComponent()
         {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
 			this.btn_login = new Guna.UI2.WinForms.Guna2GradientButton();
 			this.btn_createAccount = new Guna.UI2.WinForms.Guna2Button();
 			this.lbl_header = new Guna.UI2.WinForms.Guna2HtmlLabel();
 			this.btn_language = new Guna.UI2.WinForms.Guna2Button();
 			this.btn_requestAccount = new Guna.UI2.WinForms.Guna2GradientButton();
-			this.pic_connecting = new Guna.UI2.WinForms.Guna2ProgressIndicator();
+			this.loader_connecting = new Guna.UI2.WinForms.Guna2ProgressIndicator();
 			this.lbl_connection = new Guna.UI2.WinForms.Guna2HtmlLabel();
 			this.lbl_information = new Guna.UI2.WinForms.Guna2HtmlLabel();
 			this.pic_language = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -103,12 +103,12 @@ namespace client_app
 			// 
 			// pic_connecting
 			// 
-			this.pic_connecting.AutoStart = true;
-			this.pic_connecting.BackColor = System.Drawing.Color.Transparent;
-			resources.ApplyResources(this.pic_connecting, "pic_connecting");
-			this.pic_connecting.Name = "pic_connecting";
-			this.pic_connecting.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
-			this.pic_connecting.TabStop = false;
+			this.loader_connecting.AutoStart = true;
+			this.loader_connecting.BackColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.loader_connecting, "pic_connecting");
+			this.loader_connecting.Name = "pic_connecting";
+			this.loader_connecting.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
+			this.loader_connecting.TabStop = false;
 			// 
 			// lbl_connection
 			// 
@@ -220,7 +220,7 @@ namespace client_app
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(39)))), ((int)(((byte)(41)))));
 			this.Controls.Add(this.lbl_information);
-			this.Controls.Add(this.pic_connecting);
+			this.Controls.Add(this.loader_connecting);
 			this.Controls.Add(this.lbl_connection);
 			this.Controls.Add(this.pic_language);
 			this.Controls.Add(this.btn_language);
@@ -248,7 +248,7 @@ namespace client_app
 		private Guna.UI2.WinForms.Guna2PictureBox pic_language;
 		private Guna.UI2.WinForms.Guna2GradientButton btn_requestAccount;
 		private Guna.UI2.WinForms.Guna2TextBox txt_passwordconfirm;
-		private Guna.UI2.WinForms.Guna2ProgressIndicator pic_connecting;
+		private Guna.UI2.WinForms.Guna2ProgressIndicator loader_connecting;
 		private Guna.UI2.WinForms.Guna2HtmlLabel lbl_connection;
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_information;
 	}

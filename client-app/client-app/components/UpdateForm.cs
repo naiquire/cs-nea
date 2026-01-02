@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace client_app.components
 {
-	public class update : Form
+	public class UpdateForm : Form
 	{
 		private readonly string userID;
 		private string aboutMe;
@@ -24,26 +24,26 @@ namespace client_app.components
 
 		private int languageIndex;
 
-		public update(userData user)
+		public UpdateForm(userData user)
 		{
 			userID = user.userID;
 			aboutMe = user.aboutMe;
 			localisation = user.localisation;
 
-			languageIndex = languages.languageCodes.IndexOf(localisation);
+			languageIndex = Languages.languageCodes.IndexOf(localisation);
 
 			InitializeComponent();
 
 			txt_username.Text = userID;
 			txt_aboutMe.Text = aboutMe;
-			lbl_header.Text = languages.localisation["Account"][localisation];
+			lbl_header.Text = Languages.localisation["Account"][localisation];
 
-			btn_language.Text = languages.supportedLanguages[languageIndex];
+			btn_language.Text = Languages.supportedLanguages[languageIndex];
 			lbl_textLength.Text = $"{txt_aboutMe.Text.Length} / 500";
 
 			btn_accept.Click += (sender, e) =>
 			{
-				localisation = languages.languageCodes[languageIndex];
+				localisation = Languages.languageCodes[languageIndex];
 				aboutMe = txt_aboutMe.Text;
 
 				DialogResult = DialogResult.OK;
@@ -105,7 +105,7 @@ namespace client_app.components
 				MaxLength = 500,
 				Multiline = true,
 				PlaceholderForeColor = Color.FromArgb(156, 156, 156),
-				PlaceholderText = languages.localisation["About me"][Main.userData.localisation],
+				PlaceholderText = Languages.localisation["About me"][Main.userData.localisation],
 				Size = new Size(760, 100),
 			};
 			
@@ -191,13 +191,13 @@ namespace client_app.components
 		private void btn_language_Click(object sender, EventArgs e)
 		{
 			languageIndex++;
-			if (languageIndex == languages.supportedLanguages.Count)
+			if (languageIndex == Languages.supportedLanguages.Count)
 			{
 				languageIndex = 0;
 			}
-			btn_language.Text = languages.supportedLanguages[languageIndex];
+			btn_language.Text = Languages.supportedLanguages[languageIndex];
 
-			lbl_header.Text = languages.localisation["Account"][languages.languageCodes[languageIndex]];
+			lbl_header.Text = Languages.localisation["Account"][Languages.languageCodes[languageIndex]];
 		}
 
 		private void txt_aboutMe_TextChanged(object sender, EventArgs e)

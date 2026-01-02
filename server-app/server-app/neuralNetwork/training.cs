@@ -5,7 +5,7 @@
         public Training()
         {
             // load training data
-            (List<double[]> images, List<int> results) = data.FilterImages(data.LoadImages());
+            (List<double[]> images, List<int> results) = Data.FilterImages(Data.LoadImages());
 
             // random sample of 50 images
             Random rnd = new();

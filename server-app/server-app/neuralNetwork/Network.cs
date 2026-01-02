@@ -10,10 +10,13 @@ namespace server_app.neuralNetwork
 		public double[][] neuronValues = new double[layerCount][];
 		public double[][] activatedValues = new double[layerCount][];
 
-		public double[][,] weights = new double[layerCount - 1][,];
-		public double[][] biases = new double[layerCount - 1][];
+		private readonly double[][,] weights = new double[layerCount - 1][,];
+		private readonly double[][] biases = new double[layerCount - 1][];
 
-		public int result;
+		private int result;
+
+		public int GetResult() => result;
+		public double GetAccuracy(int letter) => activatedValues[layerCount - 1][letter];
 		public Network(double[] input)
 		{
 			// initialise input layer
@@ -21,8 +24,8 @@ namespace server_app.neuralNetwork
 			activatedValues[0] = input;
 
 			// load weights and biases
-			weights = data.weights;
-			biases = data.biases;
+			weights = Data.weights;
+			biases = Data.biases;
 
 			EvaluateNetwork();
 		}
@@ -38,7 +41,7 @@ namespace server_app.neuralNetwork
 
 			EvaluateNetwork();
 		}
-		public void EvaluateNetwork()
+		private void EvaluateNetwork()
 		{
 			// for each layer excluding the input layer
 			for (int layer = 1; layer < layerCount; layer++)
@@ -56,13 +59,13 @@ namespace server_app.neuralNetwork
 				activatedValues[layer] = new double[layerSizes[layer]];
 				if (layer == layerCount - 1)
 				{
-					activatedValues[layer] = data.softmax(neuronValues[layer]);
+					activatedValues[layer] = Data.softmax(neuronValues[layer]);
 				}
 				else
 				{
 					for (int i = 0; i < neuronValues[layer].Length; i++)
 					{
-						activatedValues[layer][i] = data.sigmoid(neuronValues[layer][i]);
+						activatedValues[layer][i] = Data.sigmoid(neuronValues[layer][i]);
 					}
 				}
 			}

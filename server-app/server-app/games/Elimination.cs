@@ -1,42 +1,29 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.neuralNetwork;
-using System.Runtime.CompilerServices;
 
 namespace server_app.games
 {
-	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Knockout, userID, 3), IPlayable
+	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Elimination, userID, 3), IPlayable
 	{
 		private List<string> _aliveUsers = [];
+		public override bool DequeueUser(string userID)
+		{
+			_aliveUsers.Remove(userID);
+			return base.DequeueUser(userID);
+		}
 		public override async Task StartGame()
 		{
 			_aliveUsers = [.. _userIDs];
 
 			await base.StartGame();
 			await SubmissionPhase();
-		}
-		public override void DequeueUser(string userID)
-		{
-			_aliveUsers.Remove(userID);
-			base.DequeueUser(userID);
-		}
-		protected override async Task AwaitRound()
-		{
-			_continueRequests.Clear();
-			foreach (string userID in _aliveUsers)
-			{
-				if (Connection.map.TryGetValue(userID, out string? connectionID))
-				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
-				}
-			}
-		}
+		}		
+
 		public async Task SubmissionPhase()
 		{
 			if (_aliveUsers.Count > 1)
 			{
-				_continueRequests.Clear();
-
 				char letter = (char)(_rnd.Next(0, 26) + 65);
 				_letters.Add(letter);
 
@@ -52,6 +39,17 @@ namespace server_app.games
 				EndGame();
 			}
 		}
+		protected override async Task AwaitRound()
+		{
+			_continueRequests.Clear();
+			foreach (string userID in _aliveUsers)
+			{
+				if (Connection.map.TryGetValue(userID, out string? connectionID))
+				{
+					await _hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
+				}
+			}
+		}
 		public override void LoadResponse(string userID, byte[] input)
 		{
 			base.LoadResponse(userID, input);
@@ -60,12 +58,13 @@ namespace server_app.games
 				EvaluationPhase(_letters[^1]);
 			}
 		}
+
 		public async void EvaluationPhase(char letter)
 		{
 			List<string> eliminatedUsers = [];
 
 			List<string> incorrectUsers = [];
-			Network[] evaluates = new Network[GetPlayerCount()];
+			Network[] evaluates = new Network[_aliveUsers.Count];
 			for (int i = 0; i < _aliveUsers.Count; i++)
 			{
 				if (!EvaluateSubmission(ref evaluates[i], _aliveUsers[i], letter))
@@ -102,9 +101,9 @@ namespace server_app.games
 				}
 			}
 
-			await SendKnockoutResults(eliminatedUsers);
-            _roundCount++;
-        }
+			await SendEliminationResults(eliminatedUsers);
+			_roundCount++;
+		}
 		public async Task ContinueRequest(string userID)
 		{
 			if (!_aliveUsers.Contains(userID))
@@ -127,7 +126,7 @@ namespace server_app.games
 				await SubmissionPhase();
 			}
 		}
-		private async Task SendKnockoutResults(List<string> eliminatedUsers)
+		private async Task SendEliminationResults(List<string> eliminatedUsers)
 		{
 			foreach (string userID in _aliveUsers)
 			{

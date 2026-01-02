@@ -48,7 +48,7 @@ namespace server_app
 					}
 					catch (Exception ex)
 					{
-						database.outputException(ex);
+						Database.outputException(ex);
 					}
 				}
 				Thread.Sleep(1000);
@@ -82,7 +82,7 @@ namespace server_app
 					{
 						// map endpoints to a class
 						endpoints.MapHub<Connection>("/cs-nea/connections");
-						endpoints.MapHub<accounts>("/cs-nea/accounts");
+						endpoints.MapHub<Accounts>("/cs-nea/accounts");
 					});
 				});
 				config.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.None));

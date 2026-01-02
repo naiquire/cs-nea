@@ -49,9 +49,9 @@ namespace client_app
 		public Main(string userID, string defaultLocalisation)
 		{
 			userData.localisation = defaultLocalisation;
-			hub_connection.injectForm(null, this);
+			hub_connection.InjectForm(null, this);
 
-			UXelements.InitializeComponent(this);
+			UXelements.InitialiseComponent(this);
 			InitialiseConnection(userID);
 
 		}
@@ -80,19 +80,19 @@ namespace client_app
 			try { btn_home.Invoke(new Action(() => btn_home.PerformClick())); } catch { }
 
 			var alert = LoadAlert("Disconnected from server. Restarting application...");
-			try { this.Invoke(new Action(() => Close())); } catch { }
+			try { Invoke(new Action(() => Close())); } catch { }
 			return Task.CompletedTask;
 		}
 
-		public static alert LoadAlert(string message, bool closeButton = true, bool autoShow = true)
+		public static AlertForm LoadAlert(string message, bool closeButton = true, bool autoShow = true)
 		{
-			return new alert(message, closeButton, autoShow);
+			return new AlertForm(message, closeButton, autoShow);
 		}
 		public async void ClientConnected(userData userData)
 		{
 			Main.userData = userData;
 
-			InitializeComponent();
+			InitialiseComponent();
 
 			if (connection.State == HubConnectionState.Connected)
 			{
@@ -124,7 +124,7 @@ namespace client_app
 				UpdatePageText("Profile");
 				configFriendsPanel();
 				UXelements.configUserDataPanel(this, userData);
-				if (menu.profile.getUserID() == userData.userID)
+				if (menu.profile.GetUserID() == userData.userID)
 				{
 					// if viewing own profile then refresh
 					menu.profile = new Profile(this, userData);
@@ -197,7 +197,7 @@ namespace client_app
 		{
 			foreach (string invite in invites)
 			{
-				if (new confirm($"Received a friend invite from {invite}").DialogResult == DialogResult.OK)
+				if (new ConfirmForm($"Received a friend invite from {invite}").DialogResult == DialogResult.OK)
 				{
 					if (connection.State != HubConnectionState.Connected)
 					{
@@ -276,7 +276,7 @@ namespace client_app
 				Name = "lbl_menu",
 				Size = new Size(300, 100),
 				TabIndex = 0,
-				Text = languages.localisation[text][userData.localisation],
+				Text = Languages.localisation[text][userData.localisation],
 				TextAlignment = ContentAlignment.MiddleCenter,
 			};
 
@@ -322,7 +322,7 @@ namespace client_app
 			menu.profile = null;
 			menu.game = null;
 
-			InitializeComponent();
+			InitialiseComponent();
 		}
 		public async void btn_close_Click(object sender, EventArgs e)
 		{

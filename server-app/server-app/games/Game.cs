@@ -11,13 +11,13 @@ namespace server_app.games
 		public List<bool> correct;
 		public List<double> accuracy;
 		public List<TimeSpan> time;
+
 		public gameStats()
 		{
 			correct = [];
 			accuracy = [];
 			time = [];
 		}
-
 		public readonly void Update(double accuracy, TimeSpan time, bool correct)
 		{
 			this.accuracy.Add(accuracy);
@@ -25,16 +25,17 @@ namespace server_app.games
 			this.time.Add(time);
 		}
 	}
+
 	public enum Games
 	{
 		Accuracy,
 		Versus,
-		Knockout,
+		Elimination,
 	}
 	public interface IPlayable
 	{
 		bool QueueUser(string userID);
-		void DequeueUser(string userID);
+		bool DequeueUser(string userID);
 		Task UpdateUsers();
 		Task StartGame();
 		Task SubmissionPhase();
@@ -48,6 +49,7 @@ namespace server_app.games
 		int GetPlayerCount();
 		int GetMaxPlayers();
 	}
+
 	public abstract class Game
 	{
 		protected IHubContext<Connection> _hubContext;
@@ -98,7 +100,7 @@ namespace server_app.games
 
 		public bool QueueUser(string userID)
 		{
-			if (!database.loadFriendData(userID, out friendData data))
+			if (!Database.LoadFriendData(userID, out friendData data))
 			{
 				return false;
 			}
@@ -107,9 +109,9 @@ namespace server_app.games
 			_userDatas.Add(data);
 			return true;
 		}
-		public async virtual void DequeueUser(string userID)
+		public virtual bool DequeueUser(string userID)
 		{
-			int index = 0;
+			int index = -1;
 			for (int i = 0; i < GetPlayerCount(); i++)
 			{
 				if (_userDatas[i].userID == userID)
@@ -119,10 +121,13 @@ namespace server_app.games
 				}
 			}
 
+			if (index == -1)
+				return false;
+
 			_userIDs.Remove(userID);
 			_userDatas.RemoveAt(index);
 
-			await UpdateUsers();
+			return true;
 		}
 		public async Task UpdateUsers()
 		{
@@ -162,6 +167,7 @@ namespace server_app.games
 				}
 			}
 		}
+
 		protected List<char> GenerateLetters(int count)
 		{
 			List<char> letters = [];
@@ -173,7 +179,6 @@ namespace server_app.games
 			}
 			return letters;
 		}
-
 		protected virtual async Task AwaitRound()
 		{
 			_continueRequests.Clear();
@@ -195,31 +200,31 @@ namespace server_app.games
 				}
 			}
 		}
+
 		public virtual void LoadResponse(string userID, byte[] input)
 		{
-            DateTime endTime = DateTime.UtcNow;
+			DateTime endTime = DateTime.UtcNow;
 			double[] array;
 
 			using (var ms = new MemoryStream(input))
 			{
 				var bmp = new Bitmap(ms);
-				array = data.preprocessImage(bmp);
+				array = Data.PreprocessImage(bmp);
 			}
 
 			_currentResponses.Add(userID, (array, endTime));
-        }
-
+		}
 		protected bool EvaluateSubmission(ref Network evaluate, string userID, char character)
 		{
 			int letter = character - 65;
 
 			evaluate = new Network(_currentResponses[userID].submission);
-			bool correct = evaluate.result == letter;
+			bool correct = evaluate.GetResult() == letter;
 
 			if (_gameStats.TryGetValue(userID, out gameStats currentStats))
 			{
 				DateTime endTime = _currentResponses[userID].time;
-				double accuracy = evaluate.activatedValues[Network.layerCount - 1][letter];
+				double accuracy = evaluate.GetAccuracy(letter);
 
 				currentStats.Update(accuracy, endTime - _startTime, correct);
 			}
@@ -253,14 +258,14 @@ namespace server_app.games
 				for (int i = 0; i < _gameStats[userID].accuracy.Count; i++)
 				{
 					// iterate through each round the current user completed - in Elimination each user may complete a different number of rounds
-					if (database.loadUserData(userID, out userData userData))
+					if (Database.LoadUserData(userID, out userData userData))
 					{
 						// reload userData after each update for duplicate letters
 						await UpdateStatistics(userData, _letters[i], i);
 					}
 					else
 					{
-						database.outputException("Failed to retrieve statistics");
+						Database.outputException("Failed to retrieve statistics");
 					}
 				}
 			}
@@ -274,9 +279,9 @@ namespace server_app.games
 			double updatedAccuracy = (accuracy * total + _gameStats[userData.userID].accuracy[round]) / (total + 1);
 			TimeSpan updatedTime = (time * total + _gameStats[userData.userID].time[round]) / (total + 1);
 
-			if (!database.updateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
+			if (!Database.UpdateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 			{
-				database.outputException("Failed to update statistics");
+				Database.outputException("Failed to update statistics");
 				return;
 			}
 

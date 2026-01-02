@@ -5,7 +5,7 @@ namespace client_app.menus.games
 {
 	public class Versus : Game, IPlayable
 	{
-		private int _rankDelta = 0;
+		private int rankDelta = 0;
 		public Versus(Main main) : base(main, Games.Versus, 2)
 		{
 
@@ -19,13 +19,13 @@ namespace client_app.menus.games
 		public override void EndGame()
 		{
 			base.EndGame();
-			UXelements.configVersusEndgame(main.panel_main, _rankDelta);
+			UXelements.configVersusEndgame(main.panel_main, rankDelta);
 		}
 
 		public void UpdateRank(int currentRank)
 		{
 			int previousRank = Main.userData.rank;
-			_rankDelta = currentRank - previousRank;
+			rankDelta = currentRank - previousRank;
 
 			Main.userData.rank = currentRank;
 		}

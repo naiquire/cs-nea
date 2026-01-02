@@ -46,14 +46,14 @@ namespace server_app.databases
 		public bool online { get; set; }
 		public int rank { get; set; }
 	}
-	public static class @database
+	public static class Database
 	{
 		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
 		public static void outputException(Exception ex) => Logger.ErrorLog(ex.Message);
 		public static void outputException(string ex) => Logger.ErrorLog(ex);
 
-		public static bool loginRequest(string userID, string password, out int success)
+		public static bool LoginRequest(string userID, string password, out int success)
 		{
 			string query = @"SELECT userData.password
 				FROM userData
@@ -93,9 +93,9 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool accountRequest(string userID, string password, string localisation, out int success)
+		public static bool AccountRequest(string userID, string password, string localisation, out int success)
 		{
-			if (!userExists(userID, out bool exists))
+			if (!UserExists(userID, out bool exists))
 			{
 				success = -1;
 				return false;
@@ -153,7 +153,7 @@ namespace server_app.databases
 			}
 
 		}
-		private static bool userExists(string userID, out bool exists)
+		private static bool UserExists(string userID, out bool exists)
 		{
 			string query = @"SELECT userID
 				FROM userData
@@ -180,11 +180,11 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool loadUserData(string userID, out userData userData)
+		public static bool LoadUserData(string userID, out userData userData)
 		{
 			userData = new();
 
-			if (!userExists(userID, out bool exists))
+			if (!UserExists(userID, out bool exists))
 			{
 				// error checking if user exists
 				return false;
@@ -223,13 +223,13 @@ namespace server_app.databases
 				return false;
 			}
 
-			if (!loadStatistics(userID, out var stats))
+			if (!LoadStatistics(userID, out var stats))
 			{
 				// error loading statistics
 				return false;
 			}
 
-			if (!loadFriends(userID, out List<string> friends))
+			if (!LoadFriends(userID, out List<string> friends))
 			{
 				// error loading friends
 				return false;
@@ -238,7 +238,7 @@ namespace server_app.databases
 			List<friendData> friendData = [];
 			foreach (var friend in friends)
 			{
-				if (!loadFriendData(friend, out friendData data))
+				if (!LoadFriendData(friend, out friendData data))
 				{
 					// error loading friend data
 					return false;
@@ -252,7 +252,7 @@ namespace server_app.databases
 
 			return true;
 		}
-		public static bool updateUserData(string userID, string aboutMe, string localisation)
+		public static bool UpdateUserData(string userID, string aboutMe, string localisation)
 		{
 			string query = @"UPDATE userData
 				SET aboutMe = @aboutMe, localisation = @localisation
@@ -278,7 +278,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		private static bool loadStatistics(string userID, out Dictionary<char, statistics> statistics)
+		private static bool LoadStatistics(string userID, out Dictionary<char, statistics> statistics)
 		{
 			statistics = [];
 			string query = @"SELECT letter, accuracy, time, total
@@ -311,7 +311,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool loadFriends(string userID, out List<string> friends)
+		public static bool LoadFriends(string userID, out List<string> friends)
 		{
 			friends = [];
 			string query = @"SELECT user1, user2
@@ -349,7 +349,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool loadFriendData(string userID, out friendData friendData)
+		public static bool LoadFriendData(string userID, out friendData friendData)
 		{
 			friendData = new();
 			string query = @"SELECT rank
@@ -380,7 +380,7 @@ namespace server_app.databases
 			friendData.online = connections.Connection.map.ContainsKey(userID);
 			return true;
 		}
-		public static bool addFriends(string user1, string user2)
+		public static bool AddFriends(string user1, string user2)
 		{
 			string query = @"INSERT INTO friends
 				VALUES (@user1, @user2)";
@@ -404,7 +404,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool removeFriends(string user1, string user2)
+		public static bool RemoveFriends(string user1, string user2)
 		{
 			string query = @"DELETE FROM friends
 				WHERE (user1 = @user1 AND user2 = @user2) OR (user2 = @user1 AND user1 = @user2)";
@@ -428,7 +428,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool saveInvite(string userID, string senderID)
+		public static bool SaveInvite(string userID, string senderID)
 		{
 			string query = @"INSERT INTO friendInvites
 				VALUES (@userID, @senderID)";
@@ -452,7 +452,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool loadInvites(string userID, out List<string> senderIDs)
+		public static bool LoadInvites(string userID, out List<string> senderIDs)
 		{
 			senderIDs = [];
 			string query = @"SELECT senderID
@@ -480,10 +480,10 @@ namespace server_app.databases
 				return false;
 			}
 
-			bool success = deleteInvites(userID);
+			bool success = DeleteInvites(userID);
 			return success;
 		}
-		private static bool deleteInvites(string userID)
+		private static bool DeleteInvites(string userID)
 		{
 			string query = @"DELETE	FROM friendInvites
 				WHERE userID = @userID";
@@ -505,7 +505,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool updateStatistics(string userID, char letter, double accuracy, TimeSpan time, int total)
+		public static bool UpdateStatistics(string userID, char letter, double accuracy, TimeSpan time, int total)
 		{
 			string query = @"UPDATE statistics
 				SET accuracy = @accuracy, time = @time, total = @total
@@ -533,7 +533,7 @@ namespace server_app.databases
 				return false;
 			}
 		}
-		public static bool updateRank(string userID, int rank)
+		public static bool UpdateRank(string userID, int rank)
 		{
 			string query = @"UPDATE userData
 				SET rank = @rank

@@ -7,12 +7,12 @@ using client_app.Properties;
 
 namespace client_app
 {
-	public partial class login : Form
+	public partial class Login : Form
 	{
 		private HubConnection connection;
 		private int languageIndex = 0;
 
-		public int getLanguageIndex() => languageIndex;
+		public int GetLanguageIndex() => languageIndex;
 
 		const int VALID = 1;
 
@@ -24,7 +24,7 @@ namespace client_app
 
 		const int ERROR_OCCURED = -1;
 
-		public login()
+		public Login()
 		{
 			InitializeComponent();
 
@@ -32,38 +32,38 @@ namespace client_app
 			txt_password.TextChanged += (sender, e) => lbl_information.ResetText();
 			txt_passwordconfirm.TextChanged += (sender, e) => lbl_information.ResetText();
 
-			btn_language.Text = languages.supportedLanguages[languageIndex];
-			hub_connection.injectForm(this, null);
-			initialiseConnection();
+			btn_language.Text = Languages.supportedLanguages[languageIndex];
+			hub_connection.InjectForm(this, null);
+			InitialiseConnection();
 		}
-		private async void initialiseConnection()
+		private async void InitialiseConnection()
 		{
 			connection = hub_connection.configConnection($"{Main.address}/accounts");
 			connection = hub_connection.addLoginHandles(connection);
 			connection = await hub_connection.startConnection(connection);
 
-			connection.Closed += connectionClosed;
+			connection.Closed += ConnectionClosed;
 
 			this.lbl_connection.Text = "Connected";
-			this.pic_connecting.Stop();
+			this.loader_connecting.Stop();
 		}
 
-		private async Task connectionClosed(Exception arg)
+		private async Task ConnectionClosed(Exception arg)
 		{
 			this.Invoke(new Action(() =>
 			{
 				this.lbl_connection.Text = "Reconnecting";
-				this.pic_connecting.Start();
+				this.loader_connecting.Start();
 			}));
 			connection = await hub_connection.startConnection(connection);
 			this.Invoke(new Action(() =>
 			{
 				this.lbl_connection.Text = "Connected";
-				this.pic_connecting.Stop();
+				this.loader_connecting.Stop();
 			}));
 		}
 
-		public void handleLoginSuccess(int success, string userID)
+		public void HandleLoginSuccess(int success, string userID)
 		{
 			switch (success)
 			{
@@ -72,25 +72,25 @@ namespace client_app
 					break;
 				case VALID:
 					Hide();
-					Main main = new Main(userID, languages.languageCodes[languageIndex]);
+					Main main = new Main(userID, Languages.languageCodes[languageIndex]);
 					main.ShowDialog();
 					main.Dispose();
 					Show();
 					break;
 				case USER_DOES_NOT_EXIST:
-					lbl_information.Text = languages.localisation["Account does not exist"][languages.languageCodes[languageIndex]];
+					lbl_information.Text = Languages.localisation["Account does not exist"][Languages.languageCodes[languageIndex]];
 					break;
 				case ERROR_OCCURED:
-					lbl_information.Text = languages.localisation["An error occurred. Please wait and try again"][languages.languageCodes[languageIndex]];
+					lbl_information.Text = Languages.localisation["An error occurred. Please wait and try again"][Languages.languageCodes[languageIndex]];
 					break;
 				case USER_LOGGED_IN_ON_OTHER_DEVICE:
-					lbl_information.Text = languages.localisation["User is currently logged in on another device"][languages.languageCodes[languageIndex]];
+					lbl_information.Text = Languages.localisation["User is currently logged in on another device"][Languages.languageCodes[languageIndex]];
 					break;
 				default:
-					throw new Exception($"{languages.localisation["Unrecognised success code"][languages.languageCodes[languageIndex]]} < {success} >");
+					throw new Exception($"{Languages.localisation["Unrecognised success code"][Languages.languageCodes[languageIndex]]} < {success} >");
 			}
 		}
-		public void handleAccountCreationSuccess(int success, string userID)
+		public void HandleAccountCreationSuccess(int success, string userID)
 		{
 			switch (success)
 			{
@@ -108,23 +108,22 @@ namespace client_app
 					this.txt_passwordconfirm.ResetText();
 
 					Hide();
-					Main main = new Main(userID, languages.languageCodes[languageIndex]);
+					Main main = new Main(userID, Languages.languageCodes[languageIndex]);
 					main.ShowDialog();
 					main.Dispose();
 					Show();
 					break;
 				case USERID_TAKEN:
-					lbl_information.Text = languages.localisation["Username is not available"][languages.languageCodes[languageIndex]];
+					lbl_information.Text = Languages.localisation["Username is not available"][Languages.languageCodes[languageIndex]];
 					break;
 				case ERROR_OCCURED:
-					lbl_information.Text = languages.localisation["An error occured. Please wait and try again"][languages.languageCodes[languageIndex]];
+					lbl_information.Text = Languages.localisation["An error occured. Please wait and try again"][Languages.languageCodes[languageIndex]];
 					break;
 				default:
-					throw new Exception($"{languages.localisation["Unrecognised success code"][languages.languageCodes[languageIndex]]} < {success} >");
+					throw new Exception($"{Languages.localisation["Unrecognised success code"][Languages.languageCodes[languageIndex]]} < {success} >");
 			}
 		}
 
-		#region Button logic
 		private async void btn_login_Click(object sender, EventArgs e)
 		{
 			string userID = txt_userID.Text.Trim();
@@ -164,7 +163,7 @@ namespace client_app
 
 			string userID = txt_userID.Text.Trim();
 			string password = txt_password.Text;
-			string localisation = languages.languageCodes[languageIndex];
+			string localisation = Languages.languageCodes[languageIndex];
 
 			if (string.IsNullOrWhiteSpace(userID) || string.IsNullOrEmpty(password))
 			{
@@ -179,17 +178,15 @@ namespace client_app
 		private void btn_language_Click(object sender, EventArgs e)
 		{
 			languageIndex++;
-			if (languageIndex == languages.supportedLanguages.Count)
+			if (languageIndex == Languages.supportedLanguages.Count)
 			{
 				languageIndex = 0;
 			}
-			btn_language.Text = languages.supportedLanguages[languageIndex];
+			btn_language.Text = Languages.supportedLanguages[languageIndex];
 
-			txt_userID.PlaceholderText = languages.localisation["Username"][languages.languageCodes[languageIndex]];
-			txt_password.PlaceholderText = languages.localisation["Password"][languages.languageCodes[languageIndex]];
-			lbl_header.Text = languages.localisation["Account"][languages.languageCodes[languageIndex]];
+			txt_userID.PlaceholderText = Languages.localisation["Username"][Languages.languageCodes[languageIndex]];
+			txt_password.PlaceholderText = Languages.localisation["Password"][Languages.languageCodes[languageIndex]];
+			lbl_header.Text = Languages.localisation["Account"][Languages.languageCodes[languageIndex]];
 		}
-		#endregion
-
 	}
 }

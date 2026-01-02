@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
 using server_app.games;
-using System.Drawing;
 
 namespace server_app.connections
 {
