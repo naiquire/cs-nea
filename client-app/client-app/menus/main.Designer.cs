@@ -17,30 +17,7 @@ namespace client_app
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
-
-		/// <summary>
-		/// hex codes for graphics
-		///
-		/// f771a3
-		/// c571f7
-		///
-		/// </summary>
-
-
-
-		public void InitialiseComponent()
+		private void InitialiseComponent()
 		{
 			UXelements.ResetLayout(this);
 
@@ -128,8 +105,8 @@ namespace client_app
 
 			((System.ComponentModel.ISupportInitialize)(this.seperator)).EndInit();
 
-			configFriendsPanel();
-			configGamePanels();
+			ConfigFriendsPanel();
+			ConfigGamePanels();
 			UpdatePageText("Home");
 
 			this.panel_main.ResumeLayout(false);
@@ -139,7 +116,7 @@ namespace client_app
 			UXelements.configUserDataPanel(this, userData);
 		}
 
-		public void configGamePanels()
+		private void ConfigGamePanels()
 		{
 			const int gamePanelX = 60;
 			const int gamePanelY = 100;
@@ -248,14 +225,14 @@ namespace client_app
 			this.panel_knockout.Controls.Add(this.txt_knockout);
 
 			this.btn_queueAccuracy.Click += btn_queueAccuracy_Click;
-			this.btn_queue1v1.Click += btn_queue1v1_Click;
-			this.btn_queueKnockout.Click += btn_queueKnockout_Click;
+			this.btn_queue1v1.Click += btn_queueVersus_Click;
+			this.btn_queueKnockout.Click += btn_queueElimination_Click;
 
 			this.panel_main.Controls.Add(this.panel_knockout);
 			this.panel_main.Controls.Add(this.panel_1v1);
 			this.panel_main.Controls.Add(this.panel_accuracy);
 		}
-		public void configFriendsPanel()
+		private void ConfigFriendsPanel()
 		{
 			panel_friendList.Controls.Clear();
 

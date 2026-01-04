@@ -8,6 +8,8 @@ namespace client_app.menus
 	{
 		private readonly Main main;
 		private readonly userData user;
+		public string GetUserID() => user.userID;
+		public userData GetUserData() => user;
 		public Profile(Main main, userData user)
 		{
 			this.main = main;
@@ -16,8 +18,6 @@ namespace client_app.menus
 			InitialiseComponent();
 			SetupButtons();
 		}
-		public string GetUserID() => user.userID;
-		public userData GetUserData() => user;
 		private void SetupButtons()
 		{
 			if (user.userID == Main.userData.userID)
@@ -64,7 +64,6 @@ namespace client_app.menus
 				Main.LoadAlert("Failed to send friend invite. Please try again.");
 			}
 		}
-
 		private async void btn_removeFriends_Click(object sender, EventArgs e)
 		{
 			if (Main.connection.State != HubConnectionState.Connected)

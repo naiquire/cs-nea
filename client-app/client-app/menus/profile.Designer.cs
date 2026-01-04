@@ -15,26 +15,7 @@ namespace client_app.menus
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
-
-		#region Windows Form Designer generated code
-
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		public void InitialiseComponent()
+		private void InitialiseComponent()
 		{
 			main.panel_main.Controls.Clear();
 
@@ -206,7 +187,7 @@ namespace client_app.menus
 			this.lbl_total.Text = total;
 			this.lbl_accuracy.Text = accuracy + "%";
 
-			configStats();
+			ConfigStats();
 			panel_stats.ResumeLayout(false);
 
 			main.panel_main.Controls.Add(this.panel_stats);
@@ -221,7 +202,7 @@ namespace client_app.menus
 			((System.ComponentModel.ISupportInitialize)(this.pic_seperator)).EndInit();
 		}
 
-		private void configStats()
+		private void ConfigStats()
 		{
 			const int X = 10;
 			int y = 10;
@@ -322,12 +303,13 @@ namespace client_app.menus
 				panel_char.Controls.Add(lbl_letter);
 
 				bar_fill.BringToFront();
-
-				panel_stats.VerticalScroll.Enabled = true;
+				
 				panel_stats.Controls.Add(panel_char);
 
 				y += panelY + 2 * padding;
 			}
+
+			panel_stats.ResumeLayout();
 		}
 
 		private Guna2TextBox lbl_username;
@@ -338,7 +320,5 @@ namespace client_app.menus
 		private Guna2GradientButton btn_removeFriends;
 		private PictureBox pic_seperator;
 		private Panel panel_stats;
-
-		#endregion
 	}
 }

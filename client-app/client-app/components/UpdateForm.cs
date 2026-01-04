@@ -11,18 +11,19 @@ namespace client_app.components
 		private readonly string userID;
 		private string aboutMe;
 		private string localisation;
+		private int languageIndex;
 
 		private Guna2HtmlLabel lbl_header;
 		private Guna2GradientButton btn_accept;
 		private Guna2GradientButton btn_cancel;
 		private Guna2TextBox txt_username;
 		private Guna2TextBox txt_aboutMe;
-		private PictureBox pic_logo;
 		private Guna2PictureBox pic_language;
 		private Guna2Button btn_language;
 		private Guna2HtmlLabel lbl_textLength;
 
-		private int languageIndex;
+		public string GetAboutMe() => aboutMe;
+		public string GetLocalisation() => localisation;
 
 		public UpdateForm(userData user)
 		{
@@ -32,7 +33,7 @@ namespace client_app.components
 
 			languageIndex = Languages.languageCodes.IndexOf(localisation);
 
-			InitializeComponent();
+			InitialiseComponent();
 
 			txt_username.Text = userID;
 			txt_aboutMe.Text = aboutMe;
@@ -53,7 +54,7 @@ namespace client_app.components
 
 			ShowDialog();
 		}
-		private void InitializeComponent()
+		private void InitialiseComponent()
 		{
 			SuspendLayout();
 
@@ -126,14 +127,6 @@ namespace client_app.components
 				TabStop = false,
 				TextOffset = new Point(10, -1),
 			};
-			pic_logo = new PictureBox()
-			{
-				Image = Resources.app_logo,
-				Location = new Point(601, 15),
-				Size = new Size(200, 50),
-				SizeMode = PictureBoxSizeMode.Zoom,
-				TabStop = false,
-			};
 			pic_language = new Guna2PictureBox()
 			{
 				Image = Resources.language,
@@ -169,7 +162,6 @@ namespace client_app.components
 			Controls.Add(lbl_textLength);
 			Controls.Add(btn_language);
 			Controls.Add(pic_language);
-			Controls.Add(pic_logo);
 			Controls.Add(txt_aboutMe);
 			Controls.Add(txt_username);
 			Controls.Add(lbl_header);
@@ -199,13 +191,9 @@ namespace client_app.components
 
 			lbl_header.Text = Languages.localisation["Account"][Languages.languageCodes[languageIndex]];
 		}
-
 		private void txt_aboutMe_TextChanged(object sender, EventArgs e)
 		{
 			lbl_textLength.Text = $"{txt_aboutMe.Text.Length} / 500";
 		}
-
-		public string getAboutMe() => aboutMe;
-		public string getLocalisation() => localisation;
 	}
 }

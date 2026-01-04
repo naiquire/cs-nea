@@ -1,12 +1,13 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 
 namespace client_app.components
 {
 	public class AlertForm : Form
 	{
-		private readonly Guna.UI2.WinForms.Guna2TextBox header;
-		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_close;
+		private readonly Guna2TextBox header;
+		private readonly Guna2GradientButton btn_close;
 
 		public AlertForm(string text, bool closeButton, bool autoShow)
 		{

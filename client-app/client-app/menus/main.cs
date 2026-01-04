@@ -43,8 +43,8 @@ namespace client_app
 	{
 		public static HubConnection connection;
 		public static userData userData;
-		//public const string address = "http://192.168.0.251:5252/cs-nea";
-		public const string address = "http://localhost:3900/cs-nea";
+		public const string address = "http://192.168.0.251:5252/cs-nea";
+		//public const string address = "http://localhost:3900/cs-nea";
 
 		public Main(string userID, string defaultLocalisation)
 		{
@@ -122,7 +122,7 @@ namespace client_app
 			else
 			{
 				UpdatePageText("Profile");
-				configFriendsPanel();
+				ConfigFriendsPanel();
 				UXelements.configUserDataPanel(this, userData);
 				if (menu.profile.GetUserID() == userData.userID)
 				{
@@ -150,7 +150,7 @@ namespace client_app
 			if (menu.game == null)
 			{
 				// user is not in-game
-				configFriendsPanel();
+				ConfigFriendsPanel();
 			}
 		}
 		public void UpdateFriendData(friendData data)
@@ -172,7 +172,7 @@ namespace client_app
 			if (menu.game == null)
 			{
 				// user is not in-game
-				configFriendsPanel();
+				ConfigFriendsPanel();
 			}
 		}
 		public void RemoveFriend(string friendID)
@@ -189,7 +189,7 @@ namespace client_app
 			if (menu.game == null)
 			{
 				// user is not in-game
-				configFriendsPanel();
+				ConfigFriendsPanel();
 			}
 		}
 
@@ -262,7 +262,7 @@ namespace client_app
 			}
 		}
 
-		private void UpdatePageText(string text)
+		public void UpdatePageText(string text)
 		{
 			panel_topLeft.Controls.Clear();
 			lbl_menu = new Guna.UI2.WinForms.Guna2HtmlLabel()
@@ -290,14 +290,14 @@ namespace client_app
 			menu.game = new Accuracy(this);
 			menu.game.QueueGame();
 		}
-		private void btn_queue1v1_Click(object sender, EventArgs e)
+		private void btn_queueVersus_Click(object sender, EventArgs e)
 		{
 			UpdatePageText("Versus");
 
 			menu.game = new Versus(this);
 			menu.game.QueueGame();
 		}
-		private void btn_queueKnockout_Click(object sender, EventArgs e)
+		private void btn_queueElimination_Click(object sender, EventArgs e)
 		{
 			UpdatePageText("Knockout");
 

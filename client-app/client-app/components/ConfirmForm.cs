@@ -1,13 +1,14 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using Guna.UI2.WinForms;
 
 namespace client_app.components
 {
 	public class ConfirmForm : Form
 	{
-		private readonly Guna.UI2.WinForms.Guna2TextBox header;
-		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_accept;
-		private readonly Guna.UI2.WinForms.Guna2GradientButton btn_cancel;
+		private readonly Guna2TextBox header;
+		private readonly Guna2GradientButton btn_accept;
+		private readonly Guna2GradientButton btn_cancel;
 
 		public ConfirmForm(string text)
 		{

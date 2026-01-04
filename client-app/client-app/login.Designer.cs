@@ -248,8 +248,8 @@ namespace client_app
 		private Guna.UI2.WinForms.Guna2PictureBox pic_language;
 		private Guna.UI2.WinForms.Guna2GradientButton btn_requestAccount;
 		private Guna.UI2.WinForms.Guna2TextBox txt_passwordconfirm;
-		private Guna.UI2.WinForms.Guna2ProgressIndicator loader_connecting;
-		private Guna.UI2.WinForms.Guna2HtmlLabel lbl_connection;
+		public Guna.UI2.WinForms.Guna2ProgressIndicator loader_connecting;
+		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_connection;
 		public Guna.UI2.WinForms.Guna2HtmlLabel lbl_information;
 	}
 }

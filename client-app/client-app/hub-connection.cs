@@ -20,19 +20,25 @@ namespace client_app
 		public static HubConnection configConnection(string address)
 		{
 			HubConnection connection = new HubConnectionBuilder()
-				.WithUrl(address, options =>
-				{
-					options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets |
-										 Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents |
-										 Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
-				})
+				.WithUrl(address)
 				.Build();
 			return connection;
 		}
 		public async static Task<HubConnection> startConnection(HubConnection connection)
 		{
+			int retries = -1;
 			while (connection.State == HubConnectionState.Disconnected)
 			{
+				if (retries++ > 3)
+				{
+					login?.Invoke(new Action(() =>
+					{
+						login.loader_connecting.Stop();
+						login.lbl_connection.Text = "Disconnected";
+					}));
+					break;
+				}
+
 				try
 				{
 					await connection.StartAsync();

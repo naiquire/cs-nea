@@ -4,7 +4,7 @@ using server_app.neuralNetwork;
 
 namespace server_app.games
 {
-	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Elimination, userID, 3), IPlayable
+	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Elimination, userID, 2), IPlayable
 	{
 		private List<string> _aliveUsers = [];
 		public override bool DequeueUser(string userID)

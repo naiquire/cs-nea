@@ -43,6 +43,7 @@ namespace client_app
 			connection = await hub_connection.startConnection(connection);
 
 			connection.Closed += ConnectionClosed;
+			if (connection.State == HubConnectionState.Disconnected) return;
 
 			this.lbl_connection.Text = "Connected";
 			this.loader_connecting.Stop();

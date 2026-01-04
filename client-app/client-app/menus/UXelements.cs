@@ -730,6 +730,7 @@ namespace client_app.menus
 				if (Main.connection.State != HubConnectionState.Connected)
 				{
 					game.main.btn_home.PerformClick();
+					return;
 				}
 
 				btn_continue.Enabled = false;
@@ -818,6 +819,7 @@ namespace client_app.menus
 
 			btn_profile.Click += (sender, e) =>
 			{
+				main.UpdatePageText("Profile");
 				menu.profile = new Profile(main, userData);
 			};
 			btn_edit.Click += async (sender, e) =>
@@ -830,7 +832,7 @@ namespace client_app.menus
 						Main.LoadAlert(Languages.localisation["An error occurred. Please wait and try again"][Main.userData.localisation]);
 						return;
 					}
-					if (!await Main.connection.InvokeAsync<bool>("updateUserData", Main.userData.userID, update.getAboutMe(), update.getLocalisation()))
+					if (!await Main.connection.InvokeAsync<bool>("updateUserData", Main.userData.userID, update.GetAboutMe(), update.GetLocalisation()))
 					{
 						Main.LoadAlert(Languages.localisation["An error occurred. Please wait and try again"][Main.userData.localisation]);
 					}
@@ -966,7 +968,7 @@ namespace client_app.menus
 			};
 
 			Guna2Panel panel_rank = createPanel((20, 20));
-			Guna2TextBox lbl_rank = createLabel((90, 10), (48, 30), "Elo");
+			Guna2TextBox lbl_rank = createLabel((90, 10), (48, 30), "Elo"); // elo is the same in all languages
 			Guna2Shapes circle_rank = createCircle((31, 10));
 			Guna2PictureBox pic_rank = createPicture((30, 10), (30, 30), Resources.rank);
 			Guna2TextBox txt_rank = createTxt(rank);
