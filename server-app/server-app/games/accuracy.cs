@@ -24,7 +24,7 @@ namespace server_app.games
 
 				_startTime = DateTime.UtcNow;
 				_currentResponses.Clear();
-				await SendLetter(_userIDs, _letters[_roundCount]);
+				await SendLetter(userIDs, _letters[_roundCount]);
 			}
 			else
 			{
@@ -42,11 +42,10 @@ namespace server_app.games
 
 		public async void EvaluationPhase(char letter)
 		{
-			Network[] networks = new Network[GetPlayerCount()];
 			for (int i = 0; i < GetPlayerCount(); i++)
 			{
-				EvaluateSubmission(ref networks[i], _userIDs[i], letter);
-				await SendResult(_userIDs[i], _gameStats[_userIDs[i]]);
+				EvaluateSubmission(userIDs[i], letter);
+				await SendResult(userIDs[i], _gameStats[userIDs[i]]);
 			}
 			_roundCount++;
 		}

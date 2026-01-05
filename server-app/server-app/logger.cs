@@ -16,7 +16,7 @@ namespace server_app
 		{
 			await _errorChannel.Writer.WriteAsync(message);
 		}
-
+		
 		public static void SetupAsync()
 		{
 			Table loggerTable = new Table()
@@ -51,7 +51,7 @@ namespace server_app
 				top.SplitColumns(topLeft, topRight);
 				var bottom = new Layout("bottom");
 					var bottomLeft = new Layout("bottomLeft").Ratio(1);
-						bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/]\n\nTesting for Objective 1.c Localisation\n\n(i) [dim]creating an account with a different language chosen[/]\n(ii) [dim]the language selected is saved in the database[/]").Expand().RoundedBorder());
+						bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/]\n\ngirl go do your testing").Expand().RoundedBorder());
 					var bottomRight = new Layout("bottomRight").Ratio(2);
 						bottomRight.Update(errorPanel);
 				bottom.SplitColumns(bottomLeft, bottomRight);

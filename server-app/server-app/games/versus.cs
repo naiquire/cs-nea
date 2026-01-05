@@ -13,7 +13,7 @@ namespace server_app.games
 
         public override async Task StartGame()
         {
-            foreach (string userID in _userIDs)
+            foreach (string userID in userIDs)
             {
                 _scores[userID] = 0;
             }
@@ -37,7 +37,7 @@ namespace server_app.games
 
                 _startTime = DateTime.UtcNow;
                 _currentResponses.Clear();
-                await SendLetter(_userIDs, _letters[_roundCount]);
+                await SendLetter(userIDs, _letters[_roundCount]);
             }
             else
             {
@@ -57,25 +57,24 @@ namespace server_app.games
         {
             List<string> correctUsers = [];
 
-            Network[] evaluates = new Network[GetPlayerCount()];
-            for (int i = 0; i < _userIDs.Count; i++)
+            for (int i = 0; i < userIDs.Count; i++)
             {
-                if (EvaluateSubmission(ref evaluates[i], _userIDs[i], letter))
+                if (EvaluateSubmission(userIDs[i], letter))
                 {
-                    correctUsers.Add(_userIDs[i]);
+                    correctUsers.Add(userIDs[i]);
                 }
-                await SendResult(_userIDs[i], _gameStats[_userIDs[i]]);
+                await SendResult(userIDs[i], _gameStats[userIDs[i]]);
             }
 
             if (correctUsers.Count == 0)
             {
                 // if none correct then a winner is not determined
-                foreach (string userID in _userIDs)
+                foreach (string userID in userIDs)
                 {
                     _scores[userID] += 0.5;
                 }
 
-                await SendVersusResults(_userIDs, null);
+                await SendVersusResults(userIDs, null);
             }
             else
             {
@@ -91,7 +90,7 @@ namespace server_app.games
                 }
 
                 _scores[lowest.user] += 1;
-                await SendVersusResults(_userIDs, lowest.user);
+                await SendVersusResults(userIDs, lowest.user);
             }
             _roundCount++;
         }
@@ -99,7 +98,7 @@ namespace server_app.games
         {
             if (!_continueRequests.Contains(userID))
                 _continueRequests.Add(userID);
-            if (_continueRequests.Count == _userIDs.Count)
+            if (_continueRequests.Count == userIDs.Count)
             {
                 await SubmissionPhase();
             }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using server_app.connections;
 using server_app.databases;
+using server_app.neuralNetwork;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 using System;
@@ -19,6 +20,7 @@ namespace server_app
 		{
 			Logger.SetupAsync();
 			Logger.Log("SERVER", "white", "Application started");
+			Data.BuildMatrices();
 
 			startNginx();
 			hostBuilder(args).Build().Run();

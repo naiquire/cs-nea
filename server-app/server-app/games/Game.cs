@@ -59,7 +59,7 @@ namespace server_app.games
 		protected Games _type;
 		private bool _started;
 
-		protected List<string> _userIDs;
+		protected List<string> userIDs;
 		protected List<friendData> _userDatas;
 		protected Dictionary<string, gameStats> _gameStats;
 
@@ -75,7 +75,7 @@ namespace server_app.games
 		public string GetGameID() => _gameID;
 		public bool HasStarted() => _started;
 		public int GetMaxPlayers() => _maxPlayers;
-		public int GetPlayerCount() => _userIDs.Count;
+		public int GetPlayerCount() => userIDs.Count;
 
 		public Game(IHubContext<Connection> context, Games type, string userID, int maxPlayers)
 		{
@@ -86,7 +86,7 @@ namespace server_app.games
 			this._type = type;
 			_started = false;
 
-			_userIDs = [];
+			userIDs = [];
 			_userDatas = [];
 			_gameStats = [];
 
@@ -105,7 +105,7 @@ namespace server_app.games
 				return false;
 			}
 
-			_userIDs.Add(userID);
+			userIDs.Add(userID);
 			_userDatas.Add(data);
 			return true;
 		}
@@ -124,14 +124,14 @@ namespace server_app.games
 			if (index == -1)
 				return false;
 
-			_userIDs.Remove(userID);
+			userIDs.Remove(userID);
 			_userDatas.RemoveAt(index);
 
 			return true;
 		}
 		public async Task UpdateUsers()
 		{
-			foreach (var user in _userIDs)
+			foreach (var user in userIDs)
 			{
 				if (Connection.map.TryGetValue(user, out string? connectionID))
 				{
@@ -144,12 +144,12 @@ namespace server_app.games
 		{
 			_started = true;
 
-			foreach (string user in _userIDs)
+			foreach (string user in userIDs)
 			{
 				_gameStats.Add(user, new gameStats());
 			}
 
-			foreach (string userID in _userIDs)
+			foreach (string userID in userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
@@ -159,7 +159,7 @@ namespace server_app.games
 
 			await Task.Delay(5000);
 
-			foreach (string userID in _userIDs)
+			foreach (string userID in userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
@@ -182,7 +182,7 @@ namespace server_app.games
 		protected virtual async Task AwaitRound()
 		{
 			_continueRequests.Clear();
-			foreach (string userID in _userIDs)
+			foreach (string userID in userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
@@ -214,17 +214,17 @@ namespace server_app.games
 
 			_currentResponses.Add(userID, (array, endTime));
 		}
-		protected bool EvaluateSubmission(ref Network evaluate, string userID, char character)
+		protected bool EvaluateSubmission(string userID, char character)
 		{
 			int letter = character - 65;
 
-			evaluate = new Network(_currentResponses[userID].submission);
-			bool correct = evaluate.GetResult() == letter;
+			Network network = new(_currentResponses[userID].submission);
+			bool correct = network.GetResult() == letter;
 
 			if (_gameStats.TryGetValue(userID, out gameStats currentStats))
 			{
 				DateTime endTime = _currentResponses[userID].time;
-				double accuracy = evaluate.GetAccuracy(letter);
+				double accuracy = network.GetAccuracy(letter);
 
 				currentStats.Update(accuracy, endTime - _startTime, correct);
 			}
@@ -245,7 +245,7 @@ namespace server_app.games
 
 		public virtual async void EndGame()
 		{
-			foreach (string userID in _userIDs)
+			foreach (string userID in userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
@@ -253,7 +253,7 @@ namespace server_app.games
 				}
 			}
 
-			foreach (string userID in _userIDs)
+			foreach (string userID in userIDs)
 			{
 				for (int i = 0; i < _gameStats[userID].accuracy.Count; i++)
 				{

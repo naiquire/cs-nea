@@ -43,8 +43,8 @@ namespace client_app
 	{
 		public static HubConnection connection;
 		public static userData userData;
-		public const string address = "http://192.168.0.251:5252/cs-nea";
-		//public const string address = "http://localhost:3900/cs-nea";
+		//public const string address = "http://192.168.0.251:5252/cs-nea";
+		public const string address = "http://localhost:3900/cs-nea";
 
 		public Main(string userID, string defaultLocalisation)
 		{

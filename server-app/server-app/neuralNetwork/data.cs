@@ -1,5 +1,7 @@
-﻿using System.Drawing;
+﻿using MathNet.Numerics.LinearAlgebra;
+using System.Drawing;
 using System.IO.Compression;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace server_app.neuralNetwork
@@ -10,6 +12,26 @@ namespace server_app.neuralNetwork
 
 		public static readonly double[][,] weights = LoadWeights();
 		public static readonly double[][] biases = LoadBiases();
+
+		public static readonly Matrix<double>[] weightsMatrices = new Matrix<double>[Network.layerCount - 1];
+		public static readonly Vector<double>[] biasesMatrices = new Vector<double>[Network.layerCount - 1];
+
+		public static void BuildMatrices()
+		{
+			for (int layer = 1; layer < Network.layerCount; layer++)
+			{
+				weightsMatrices[layer - 1] = Matrix<double>.Build.DenseOfArray(weights[layer - 1]);
+				biasesMatrices[layer - 1] = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
+			}
+		}
+		public static void BuildMatrices(double[][,] weights, double[][] biases)
+		{
+			for (int layer = 1; layer < Network.layerCount; layer++)
+			{
+				weightsMatrices[layer - 1] = Matrix<double>.Build.DenseOfArray(weights[layer - 1]);
+				biasesMatrices[layer - 1] = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
+			}
+		}
 
 		public static double sigmoid(double x) => 1 / (1 + Math.Exp(-x));
 		public static double dx_sigmoid(double x) => sigmoid(x) * (1 - sigmoid(x));

@@ -1,4 +1,9 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
+using System.Collections.Generic;
+using System.Reflection.Emit;
+
+// insane memory usage happens before EvaluateSubmission() is called in Game. i don't know when but its not the neural net
+// could be: preprocess, uh actually that's it. yeah definitely take a look at that thing lol
 
 namespace server_app.neuralNetwork
 {
@@ -10,9 +15,6 @@ namespace server_app.neuralNetwork
 		public double[][] neuronValues = new double[layerCount][];
 		public double[][] activatedValues = new double[layerCount][];
 
-		private readonly double[][,] weights = new double[layerCount - 1][,];
-		private readonly double[][] biases = new double[layerCount - 1][];
-
 		private int result;
 
 		public int GetResult() => result;
@@ -23,10 +25,6 @@ namespace server_app.neuralNetwork
 			neuronValues[0] = input;
 			activatedValues[0] = input;
 
-			// load weights and biases
-			weights = Data.weights;
-			biases = Data.biases;
-
 			EvaluateNetwork();
 		}
 		public Network(double[] input, double[][,] weights, double[][] biases)
@@ -35,25 +33,20 @@ namespace server_app.neuralNetwork
 			neuronValues[0] = input;
 			activatedValues[0] = input;
 
-			// assign loaded weights and biases
-			this.weights = weights;
-			this.biases = biases;
+			// build matrices from loaded weights and biases
+			Data.BuildMatrices(weights, biases);
 
 			EvaluateNetwork();
 		}
+		
 		private void EvaluateNetwork()
 		{
 			// for each layer excluding the input layer
 			for (int layer = 1; layer < layerCount; layer++)
 			{
-				// build matrices
-				Vector<double> neuronsMatrix = Vector<double>.Build.DenseOfArray(activatedValues[layer - 1]);
-
-				Matrix<double> weightsMatrix = Matrix<double>.Build.DenseOfArray(weights[layer - 1]);
-				Vector<double> biasesMatrix = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
-
 				// calculate neuron values
-				neuronValues[layer] = [.. neuronsMatrix * weightsMatrix + biasesMatrix];
+				Vector<double> neuronsMatrix = Vector<double>.Build.DenseOfArray(activatedValues[layer - 1]);
+				neuronValues[layer] = (neuronsMatrix * Data.weightsMatrices[layer - 1] + Data.biasesMatrices[layer - 1]).AsArray();
 
 				// calculate activated values
 				activatedValues[layer] = new double[layerSizes[layer]];
@@ -70,8 +63,18 @@ namespace server_app.neuralNetwork
 				}
 			}
 
+			(int index, double maxValue) = (-1, -1);
+			for (int i = 0; i < activatedValues[layerCount - 1].Length; i++)
+			{
+				if (activatedValues[layerCount - 1][i] > maxValue)
+				{
+					maxValue = activatedValues[layerCount - 1][i];
+					index = i;
+				}
+			}
+
 			// output letter as integer from 0-25
-			result = activatedValues[layerCount - 1].ToList().IndexOf(activatedValues[layerCount - 1].Max());
+			result = index;
 		}
 	}
 }

@@ -177,6 +177,8 @@ namespace client_app.menus.games
 				drawingPanel.ClearPanel();
 			};
 
+			UXelements.configLeftGamePanel(this, users);
+			main.panel_left.Controls.Add(main.btn_home);
 			await UXelements.Countdown(main.panel_left, 3, Languages.localisation["Next letter in"][Main.userData.localisation]);
 		}
 		public void SubmissionPhase(char letter)

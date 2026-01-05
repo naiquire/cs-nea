@@ -306,7 +306,7 @@ namespace client_app.menus
 
 		public static void configLeftGamePanel(Game game, List<friendData> users)
 		{
-			game.main.panel_left.Controls.Clear(); // will clear countdown of its happening
+			game.main.panel_left.Controls.Clear();
 
 			Panel panel_players = new Panel()
 			{
@@ -1101,6 +1101,7 @@ namespace client_app.menus
 				AutoSize = false,
 				BackColor = Color.FromArgb(35, 31, 32),
 				Font = new Font("Bahnschrift SemiBold", 64F, FontStyle.Bold),
+				ForeColor = Color.White,
 				Location = new Point(20, 700),
 				Margin = new Padding(15, 15, 15, 15),
 				Size = new Size(260, 100),
@@ -1112,6 +1113,7 @@ namespace client_app.menus
 				AutoSize = false,
 				BackColor = Color.FromArgb(35, 31, 32),
 				Font = new Font("Bahnschrift SemiBold", 32F, FontStyle.Bold),
+				ForeColor = Color.White,
 				Location = new Point(20, 650),
 				Margin = new Padding(15, 15, 15, 15),
 				Size = new Size(260, 70),
@@ -1125,7 +1127,7 @@ namespace client_app.menus
 			lbl_status.Text = text;
 			for (int i = num; i > 0; i--)
 			{
-				lbl_countdown.Text = i.ToString();
+				lbl_countdown.Invoke(new Action(() => lbl_countdown.Text = i.ToString()));
 				await Task.Delay(1000);
 			}
 			lbl_countdown.ResetText();
