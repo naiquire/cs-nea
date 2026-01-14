@@ -257,7 +257,7 @@ namespace server_app.neuralNetwork
 					}
 					builder.Append($"{weights[i][j, weights[i].GetLength(1) - 1]}\n");
 				}
-				using (StreamWriter sw = new($@"{location}weights\{i}.txt"))
+				using (StreamWriter sw = new($@"C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\weights\{i}.txt"))
 				{
 					sw.Write(builder);
 				}
@@ -267,7 +267,7 @@ namespace server_app.neuralNetwork
 		{
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
-				using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
+				using (StreamWriter sw = new($@"C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\biases\{i}.txt"))
 				{
 					sw.Write(string.Join(',', biases[i]));
 				}
@@ -276,7 +276,7 @@ namespace server_app.neuralNetwork
 		public static (List<double[]>, List<int>) LoadImages()
 		{
 			int done = 0;
-			const int total = 500000;
+			const int total = 100000;
 
 			Console.Write($"\r[ {100 * done / total,3}% ] Loading training images");
 

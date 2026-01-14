@@ -1,14 +1,8 @@
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
-using Spectre.Console;
-using Spectre.Console.Rendering;
-using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Threading.Channels;
 
 namespace server_app
 {

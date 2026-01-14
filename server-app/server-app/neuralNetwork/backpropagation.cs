@@ -6,7 +6,7 @@
 		private static int correct = 0;
 
 		private readonly double[][] _neuronErrors = new double[Network.layerCount][];
-		private const double learningRate = 0.01;
+		private const double learningRate = 0.1;
 		private readonly int batchCount;
 
 		public Backpropagation(List<double[]> input, List<int> expected)
@@ -36,13 +36,13 @@
 			var updatedWeights = UpdateWeights(weights, ref weightAdjustments);
 			var updatedBiases = UpdateBiases(biases, ref biasAdjustments);
 
-            // save weights and biases
-            Data.SaveWeights(updatedWeights);
-            Data.SaveBiases(updatedBiases);
+			// save weights and biases
+			Data.SaveWeights(updatedWeights);
+			Data.SaveBiases(updatedBiases);
 
-            // log cumulative percentage and average loss
-            Console.WriteLine($"{correct / epochs * 100.0}%\t{loss.Sum() / loss.Count}");
-        }
+			// log cumulative percentage and average loss
+			Console.WriteLine($"{Math.Round((double)correct / (double)epochs * 100.0), 3}%\t{loss.Sum() / loss.Count}");
+		}
 		
 		private double[][,] UpdateWeights(double[][,] weights, ref List<double[][,]> weightAdjustments)
 		{
@@ -84,7 +84,8 @@
 		private (double[][,], double[][], double) Backpropagate(double[] inputValues, int expectedResult, double[][,] weights, double[][] biases)
 		{
 			// evaluate network
-			Network network = new(inputValues, weights, biases);
+			Network
+				network = new(inputValues, weights, biases);
 
 			epochs++;
 			if (network.GetResult() == expectedResult - 1)
@@ -95,23 +96,23 @@
 			double loss = CalculateOutputErrors(ref network, expectedResult);
 			CalculateHiddenErrors(ref network, ref weights);
 
-            // weight gradients
-            double[][,] weightGradients = new double[Network.layerCount - 1][,];
-            for (int layer = 0; layer < Network.layerCount - 1; layer++)
-            {
-                weightGradients[layer] = new double[Network.layerSizes[layer], Network.layerSizes[layer + 1]];
-                for (int neuron = 0; neuron < Network.layerSizes[layer]; neuron++)
-                {
-                    for (int weight = 0; weight < Network.layerSizes[layer + 1]; weight++)
-                    {
-                        weightGradients[layer][neuron, weight] = _neuronErrors[layer + 1][weight] * network.activatedValues[layer][neuron];
-                    }
-                }
-            }
+			// weight gradients
+			double[][,] weightGradients = new double[Network.layerCount - 1][,];
+			for (int layer = 0; layer < Network.layerCount - 1; layer++)
+			{
+				weightGradients[layer] = new double[Network.layerSizes[layer], Network.layerSizes[layer + 1]];
+				for (int neuron = 0; neuron < Network.layerSizes[layer]; neuron++)
+				{
+					for (int weight = 0; weight < Network.layerSizes[layer + 1]; weight++)
+					{
+						weightGradients[layer][neuron, weight] = _neuronErrors[layer + 1][weight] * network.activatedValues[layer][neuron];
+					}
+				}
+			}
 
-            // bias gradients are equal to the neuron errors
-            return (weightGradients, _neuronErrors, loss);
-        }
+			// bias gradients are equal to the neuron errors
+			return (weightGradients, _neuronErrors, loss);
+		}
 		private double CalculateOutputErrors(ref Network network, int expectedResult)
 		{
 			// output layer errors
@@ -131,8 +132,7 @@
 		private void CalculateHiddenErrors(ref Network network, ref double[][,] weights)
 		{
 			// for each remaining layer
-			int layer = Network.layerCount - 2;
-			for (layer -= 1; layer > 0; layer--)
+			for (int layer = Network.layerCount - 2; layer > 0; layer--)
 			{
 				_neuronErrors[layer] = new double[Network.layerSizes[layer]];
 				for (int i = 0; i < Network.layerSizes[layer]; i++)

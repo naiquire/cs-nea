@@ -3,73 +3,75 @@ using System.Linq;
 
 namespace client_app.menus.games
 {
-	public class Elimination : Game, IPlayable
-	{
-		private bool eliminated;
-		private List<string> aliveUsers;
-		public Elimination(Main main) : base(main, Games.Elimination, 12)
-		{
-			eliminated = false;
-			aliveUsers = new List<string>();
-		}
+    public class Elimination : Game, IPlayable
+    {
+        private bool eliminated;
+        private List<string> aliveUsers;
 
-		public override void UpdateUsers(List<friendData> users)
-		{
-			if (HasStarted())
-			{
-				this.users = users;
+        public Elimination(Main main)
+            : base(main, Games.Elimination, 12)
+        {
+            eliminated = false;
+            aliveUsers = new List<string>();
+        }
 
-				List<friendData> alive = new List<friendData>();
-				List<friendData> dead = new List<friendData>();
-				foreach (var user in this.users)
-				{
-					if (aliveUsers.Contains(user.userID))
-					{
-						alive.Add(user);
-					}
-					else
-					{
-						dead.Add(user);
-					}
-				}
+        public override void UpdateUsers(List<friendData> users)
+        {
+            if (HasStarted())
+            {
+                this.users = users;
 
-				UXelements.configLeftGamePanel(this, alive, dead);
-				main.panel_left.Controls.Add(main.btn_home);
-			}
-			else
-			{
-				base.UpdateUsers(users);
-			}
-		}
+                List<friendData> alive = new List<friendData>();
+                List<friendData> dead = new List<friendData>();
+                foreach (var user in this.users)
+                {
+                    if (aliveUsers.Contains(user.userID))
+                    {
+                        alive.Add(user);
+                    }
+                    else
+                    {
+                        dead.Add(user);
+                    }
+                }
 
-		public override void AwaitStart()
-		{
-			foreach (var user in users)
-			{
-				aliveUsers.Add(user.userID);
-			}
+                UXelements.configLeftGamePanel(this, alive, dead);
+                main.panel_left.Controls.Add(main.btn_home);
+            }
+            else
+            {
+                base.UpdateUsers(users);
+            }
+        }
 
-			base.AwaitStart();
-		}
+        public override void AwaitStart()
+        {
+            foreach (var user in users)
+            {
+                aliveUsers.Add(user.userID);
+            }
+            UXelements.configLeftGamePanel(this, users, new List<string>());
+            base.AwaitStart();
+        }
 
-		public void EliminationResults(List<string> aliveUsers)
-		{
-			this.aliveUsers = aliveUsers;
-			if (!aliveUsers.Contains(Main.userData.userID))
-			{
-				eliminated = true;
-			}
+        public void EliminationResults(List<string> aliveUsers)
+        {
+            this.aliveUsers = aliveUsers;
+            if (!aliveUsers.Contains(Main.userData.userID))
+            {
+                eliminated = true;
+            }
 
-			UpdateUsers(users);
-			UXelements.configKnockoutResults(panel_results, eliminated, gameStats.correct.Last());
-		}
+            UpdateUsers(users);
+            UXelements.configKnockoutResults(panel_results, eliminated, gameStats.correct.Last());
+        }
 
-		public override void EndGame()
-		{
-			base.EndGame();
+        public override void EndGame()
+        {
+            base.EndGame();
 
-			bool winner = aliveUsers.Contains(Main.userData.userID);
-			UXelements.configKnockoutEndgame(main.panel_main, winner);
-		}
-	}
+            bool winner = aliveUsers.Contains(Main.userData.userID);
+            UXelements.configKnockoutEndgame(main.panel_main, winner);
+        }
+    }
 }
