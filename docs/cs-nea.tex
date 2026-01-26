@@ -1179,7 +1179,7 @@ First, a message is sent to all the users that the game has ended, to allow the 
 
 The `Versus' game type updates each user's Elo rating before calling the base method. The program iterates through each user and calculates their expected score, and thereby their updated rank using the appropriate K-factor. The current rating for the user is obtained from the cached userData from when the game was started. The database is then updated with this new rating, which is also sent to the user.
 
-\subsubsection{Data structures} % //
+\subsubsection{Data structures}
 
 Each game class instance contains a list of the users who are queued into the game, as well as an integer for the maximum number of users that can join the game. A game also contains a unique ID which allows user submissions to be sent to the correct class instance. \\
 
@@ -1557,6 +1557,9 @@ The `QueueGame()' method is then called, which first invokes the `queueGame()' m
 This also causes the server to invoke the `UpdateUsers()' method on the client, which updates the list of users. If the game has not started, then the lobby screen is configured and shown the user. Regardless of this, the left panel is updated with the new list of users. The `Elimination' game type overrides this method as it additionally seperates the users on whether they have been eliminated. Since this is only the case during the game, the `HasStarted()' method is used to determine if the game has started and will instead call the base method if it returns false. 
 
 \subsubsection{Game Logic} % //
+
+The general process by which a game runs is by repeating two key phases until the condition for the game to be ended is met. When the game is started, the first `Submission' phase is started which is where a letter is broadcasted to the clients and the user's submissions are received by the server. Once all of the expected submissions have been received, the `Evaluation' phase is started where the server uses the neural network to evaluate each of the users' submissions. The results are then sent to the client application, and the server waits for all clients to acknowledge 
+
 \paragraph{Game Start\\}
 
 When the server invokes the `awaitStart' handler, the boolean value representing if the game has started is set to true. For the `Elimination' game type, each user is added to the list of alive users. A countdown is then configured to display to the user. Once the game has been started, the right panel is configured to display the round results. \\
