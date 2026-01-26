@@ -10,8 +10,8 @@ namespace server_app.neuralNetwork
 	{
 		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\neuralNetwork\data\";
 
-		public static readonly double[][,] weights = LoadWeights();
-		public static readonly double[][] biases = LoadBiases();
+		private static readonly double[][,] weights = LoadWeights();
+		private static readonly double[][] biases = LoadBiases();
 
 		public static readonly Matrix<double>[] weightsMatrices = new Matrix<double>[Network.layerCount - 1];
 		public static readonly Vector<double>[] biasesMatrices = new Vector<double>[Network.layerCount - 1];
@@ -257,7 +257,7 @@ namespace server_app.neuralNetwork
 					}
 					builder.Append($"{weights[i][j, weights[i].GetLength(1) - 1]}\n");
 				}
-				using (StreamWriter sw = new($@"C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\weights\{i}.txt"))
+				using (StreamWriter sw = new($@"{location}weights\{i}.txt"))
 				{
 					sw.Write(builder);
 				}
@@ -267,7 +267,7 @@ namespace server_app.neuralNetwork
 		{
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
-				using (StreamWriter sw = new($@"C:\Users\naiquire\Documents\General\Relay\github\cs-nea-app\server-app\server-app\neuralNetwork\data\biases\{i}.txt"))
+				using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
 				{
 					sw.Write(string.Join(',', biases[i]));
 				}
@@ -347,7 +347,6 @@ namespace server_app.neuralNetwork
 			}
 
 			Console.WriteLine('\n');
-
 			return (images, labels);
 		}
 		public static (List<double[]>, List<int>) FilterImages((List<double[]> images, List<int> labels) fullData)

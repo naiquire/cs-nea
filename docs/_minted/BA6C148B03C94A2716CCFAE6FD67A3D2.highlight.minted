@@ -1,0 +1,17 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{host}\PYG{o}{\PYGZhy{}}\PYG{n}{config}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{services}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{AddSignalR}\PYG{p}{()}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n}{setup}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{UseRouting}\PYG{p}{()}
+\PYG{+w}{            }\PYG{n}{hubContext}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{GetIHubContext}\PYG{o}{\PYGZlt{}}\PYG{n}{Connection}\PYG{o}{\PYGZgt{}}\PYG{p}{()}
+\PYG{+w}{            }\PYG{n}{endpoints}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{Connection}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/cs\PYGZhy{}nea/connections\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{Accounts}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/cs\PYGZhy{}nea/accounts\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n}{Logging}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{None}
+\PYG{+w}{        }\PYG{n}{UseUrls}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}http://localhost:3900\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

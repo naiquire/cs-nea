@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
-using server_app.neuralNetwork;
 
 namespace server_app.games
 {
@@ -11,20 +10,20 @@ namespace server_app.games
 		{
 			await base.StartGame();
 
-			_letters = GenerateLetters(rounds);
+			letters = GenerateLetters(rounds);
 			await SubmissionPhase();
 		}
 
 		public async Task SubmissionPhase()
 		{
-			if (_roundCount < rounds)
+			if (roundCount < rounds)
 			{
 				await AwaitRound();
 				await Task.Delay(3000);
 
-				_startTime = DateTime.UtcNow;
-				_currentResponses.Clear();
-				await SendLetter(userIDs, _letters[_roundCount]);
+				startTime = DateTime.UtcNow;
+				currentResponses.Clear();
+				await SendLetter(userIDs, letters[roundCount]);
 			}
 			else
 			{
@@ -34,9 +33,9 @@ namespace server_app.games
 		public override void LoadResponse(string userID, byte[] input)
 		{
 			base.LoadResponse(userID, input);
-			if (_currentResponses.Count == GetPlayerCount())
+			if (currentResponses.Count == GetPlayerCount())
 			{
-				EvaluationPhase(_letters[_roundCount]);
+				EvaluationPhase(letters[roundCount]);
 			}
 		}
 
@@ -45,18 +44,18 @@ namespace server_app.games
 			for (int i = 0; i < GetPlayerCount(); i++)
 			{
 				EvaluateSubmission(userIDs[i], letter);
-				await SendResult(userIDs[i], _gameStats[userIDs[i]]);
+				await SendResult(userIDs[i], gameStats[userIDs[i]]);
 			}
-			_roundCount++;
+			roundCount++;
 		}
 		public async Task ContinueRequest(string userID)
 		{
-			if (!_continueRequests.Contains(userID))
+			if (!continueRequests.Contains(userID))
 			{
-				_continueRequests.Add(userID);
+				continueRequests.Add(userID);
 			}
 
-			if (_continueRequests.Count == GetPlayerCount())
+			if (continueRequests.Count == GetPlayerCount())
 			{
 				await SubmissionPhase();
 			}

@@ -1,0 +1,25 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{func}\PYG{+w}{ }\PYG{n+nf}{EvaluateNetwork}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{layer}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{network\PYGZus{}layers}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{neuronsMatrix}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{BuildMatrix}\PYG{p}{(}\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{layer}\PYG{o}{\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{])}
+\PYG{+w}{            }\PYG{n}{neuronValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{neuronsMatrix}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{weightsMatrix}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{biasesMatrix}\PYG{p}{)}
+
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{layer}\PYG{+w}{ }\PYG{k}{is}\PYG{+w}{ }\PYG{n}{output\PYGZus{}layer}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Softmax}\PYG{p}{(}\PYG{n}{neuronValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{])}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{            }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{neuron}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{layer}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{][}\PYG{n}{neuron}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Sigmoid}\PYG{p}{(}\PYG{n}{neuronValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{][}\PYG{n}{neuron}\PYG{p}{])}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{n}{maxValue}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{maxIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+\PYG{+w}{        }\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{neuron}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{output\PYGZus{}layer}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{output\PYGZus{}layer}\PYG{p}{][}\PYG{n}{neuron}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{maxValue}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{maxValue}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{maxIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{output\PYGZus{}layer}\PYG{p}{][}\PYG{n}{neuron}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{neuron}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n}{result}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{maxIndex}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

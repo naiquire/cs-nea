@@ -1,17 +1,15 @@
 using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
-using server_app.databases;
 using System.ComponentModel;
-using System.Threading.Tasks;
 
 namespace server_app.games
 {
 	public static class Queueing
 	{
-		private static readonly List<IPlayable> _currentGames = [];
+		private static readonly List<IPlayable> currentGames = [];
 		public static string QueueGame(Games gameType, string userID, IHubContext<Connection> context)
 		{
-			foreach (IPlayable game in _currentGames)
+			foreach (IPlayable game in currentGames)
 			{
 				if (game.GetGameType() != gameType) continue;
 				if (game.GetPlayerCount() >= game.GetMaxPlayers() || game.HasStarted()) continue;
@@ -31,18 +29,18 @@ namespace server_app.games
 				_ => throw new InvalidEnumArgumentException()
 			};
 
-			_currentGames.Add(newGame);
+			currentGames.Add(newGame);
 			if (newGame.QueueUser(userID))
 			{
 				return newGame.GetGameID();
 			}
 			return string.Empty;
 		}
-		
+
 		public static bool UserJoined(string gameID)
 		{
 			// client acknowledgement on joining a game
-			foreach (IPlayable game in _currentGames)
+			foreach (IPlayable game in currentGames)
 			{
 				if (game.GetGameID() == gameID)
 				{
@@ -59,7 +57,7 @@ namespace server_app.games
 
 		public static async Task DequeueUser(string gameID, string userID)
 		{
-			foreach (IPlayable game in _currentGames)
+			foreach (IPlayable game in currentGames)
 			{
 				if (game.GetGameID() == gameID)
 				{
@@ -67,7 +65,7 @@ namespace server_app.games
 					await game.UpdateUsers();
 					if (game.GetPlayerCount() <= 0)
 					{
-						_currentGames.Remove(game);
+						currentGames.Remove(game);
 					}
 					break;
 				}
@@ -76,7 +74,7 @@ namespace server_app.games
 
 		public static void LoadSubmission(string gameID, string userID, byte[] input)
 		{
-			foreach (IPlayable game in _currentGames)
+			foreach (IPlayable game in currentGames)
 			{
 				if (game.GetGameID() == gameID)
 				{
@@ -87,7 +85,7 @@ namespace server_app.games
 		}
 		public static void RequestRound(string gameID, string userID)
 		{
-			foreach (IPlayable game in _currentGames)
+			foreach (IPlayable game in currentGames)
 			{
 				if (game.GetGameID() == gameID)
 				{

@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace client_app.menus.games
+﻿namespace client_app.menus.games
 {
     public class Elimination : Game, IPlayable
     {
         private bool eliminated;
         private List<string> aliveUsers;
 
-        public Elimination(Main main)
-            : base(main, Games.Elimination, 12)
+        public Elimination(Main main) : base(main, Games.Elimination, 12)
         {
             eliminated = false;
             aliveUsers = new List<string>();
@@ -50,7 +46,7 @@ namespace client_app.menus.games
             {
                 aliveUsers.Add(user.userID);
             }
-            UXelements.configLeftGamePanel(this, users, new List<string>());
+            UXelements.configLeftGamePanel(this, users, new List<friendData>());
             base.AwaitStart();
         }
 

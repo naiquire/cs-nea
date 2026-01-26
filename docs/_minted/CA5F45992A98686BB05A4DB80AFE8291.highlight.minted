@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{k}{enum}\PYG{+w}{ }\PYG{n}{Games}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{Accuracy}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{Versus}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n}{Elimination}\PYG{p}{,}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

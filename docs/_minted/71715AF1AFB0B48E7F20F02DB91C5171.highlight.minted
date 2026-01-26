@@ -1,0 +1,16 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{k}{interface}\PYG{+w}{ }\PYG{n}{IPlayable}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{QueueGame}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{JoinGameLobby}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{AwaitStart}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{StartGame}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{AwaitRound}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{(}\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EvaluationPhase}\PYG{p}{(}\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{correct}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{TimeSpan}\PYG{+w}{ }\PYG{n}{time}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EndGame}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{UpdateUsers}\PYG{p}{(}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{n}{friendData}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{users}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{Games}\PYG{+w}{ }\PYG{n+nf}{GetGameType}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n+nf}{GetGameID}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

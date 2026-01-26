@@ -1,0 +1,9 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{k}{await}\PYG{+w}{ }\PYG{n}{Clients}\PYG{p}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{n}{connectionID}\PYG{p}{).}\PYG{n}{SendAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}requestedAction\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parameter1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parameter2}\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{n}{hubconnection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}requestedAction\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{text}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{num}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{       }\PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Received string: `` + text);}
+\PYG{+w}{       }\PYG{n}{total}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{num}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{});}
+\end{MintedVerbatim}

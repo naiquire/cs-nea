@@ -2,28 +2,6 @@
 
 namespace server_app.databases
 {
-	/* the todo list of DOOM
-	 *
-	 * eliminated does not send to endgame screen
-	 * scroll broke on profile again damnit
-	 * TRANSLATIONS
-	 *		Search players
-	 *		game descriptions
-	 *		Players
-	 *		any others listed in the class
-	 *		
-	 *
-	 * game -> "next letter in" dissapears ONLY on round 1
-	 * game -> panel_drawing invisible after alt-tab or something idk
-	 *
-	 * profile -> about me
-	 * can place cursor in home/aboutMe and other places -> investigate colouring of Enabled=false for textboxes as fix for cursor placing
-	 *
-	 * btn_home ui
-	 * cleanup ui code
-	 *
-	 */
-
 	public struct userData
 	{
 		public string userID { get; set; }

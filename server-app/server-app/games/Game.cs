@@ -52,50 +52,50 @@ namespace server_app.games
 
 	public abstract class Game
 	{
-		protected IHubContext<Connection> _hubContext;
+		protected IHubContext<Connection> hubContext;
 
-		protected string _gameID;
-		protected int _maxPlayers;
-		protected Games _type;
-		private bool _started;
+		protected string gameID;
+		protected int maxPlayers;
+		protected Games type;
+		private bool started;
 
 		protected List<string> userIDs;
-		protected List<friendData> _userDatas;
-		protected Dictionary<string, gameStats> _gameStats;
+		protected List<friendData> userDatas;
+		protected Dictionary<string, gameStats> gameStats;
 
-		protected Random _rnd;
-		protected List<char> _letters;
-		protected int _roundCount;
+		protected Random rnd;
+		protected List<char> letters;
+		protected int roundCount;
 
-		protected DateTime _startTime;
-		protected Dictionary<string, (double[] submission, DateTime time)> _currentResponses;
-		protected List<string> _continueRequests;
+		protected DateTime startTime;
+		protected Dictionary<string, (double[] submission, DateTime time)> currentResponses;
+		protected List<string> continueRequests;
 
-		public Games GetGameType() => _type;
-		public string GetGameID() => _gameID;
-		public bool HasStarted() => _started;
-		public int GetMaxPlayers() => _maxPlayers;
+		public Games GetGameType() => type;
+		public string GetGameID() => gameID;
+		public bool HasStarted() => started;
+		public int GetMaxPlayers() => maxPlayers;
 		public int GetPlayerCount() => userIDs.Count;
 
 		public Game(IHubContext<Connection> context, Games type, string userID, int maxPlayers)
 		{
-			_hubContext = context;
+			hubContext = context;
 
-			_gameID = userID + DateTime.UtcNow.ToString();
-			this._maxPlayers = maxPlayers;
-			this._type = type;
-			_started = false;
+			gameID = userID + DateTime.UtcNow.ToString();
+			this.maxPlayers = maxPlayers;
+			this.type = type;
+			started = false;
 
 			userIDs = [];
-			_userDatas = [];
-			_gameStats = [];
+			userDatas = [];
+			gameStats = [];
 
-			_rnd = new();
-			_letters = [];
-			_roundCount = 0;
+			rnd = new();
+			letters = [];
+			roundCount = 0;
 
-			_currentResponses = [];
-			_continueRequests = [];
+			currentResponses = [];
+			continueRequests = [];
 		}
 
 		public bool QueueUser(string userID)
@@ -106,7 +106,7 @@ namespace server_app.games
 			}
 
 			userIDs.Add(userID);
-			_userDatas.Add(data);
+			userDatas.Add(data);
 			return true;
 		}
 		public virtual bool DequeueUser(string userID)
@@ -114,18 +114,17 @@ namespace server_app.games
 			int index = -1;
 			for (int i = 0; i < GetPlayerCount(); i++)
 			{
-				if (_userDatas[i].userID == userID)
+				if (userDatas[i].userID == userID)
 				{
 					index = i;
 					break;
 				}
 			}
 
-			if (index == -1)
-				return false;
+			if (index == -1) return false;
 
 			userIDs.Remove(userID);
-			_userDatas.RemoveAt(index);
+			userDatas.RemoveAt(index);
 
 			return true;
 		}
@@ -135,25 +134,25 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(user, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("updateUsers", _userDatas);
+					await hubContext.Clients.Client(connectionID).SendAsync("updateUsers", userDatas);
 				}
 			}
 		}
 
 		public virtual async Task StartGame()
 		{
-			_started = true;
+			started = true;
 
 			foreach (string user in userIDs)
 			{
-				_gameStats.Add(user, new gameStats());
+				gameStats.Add(user, new gameStats());
 			}
 
 			foreach (string userID in userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("awaitStart");
+					await hubContext.Clients.Client(connectionID).SendAsync("awaitStart");
 				}
 			}
 
@@ -163,7 +162,7 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("startGame");
+					await hubContext.Clients.Client(connectionID).SendAsync("startGame");
 				}
 			}
 		}
@@ -181,12 +180,12 @@ namespace server_app.games
 		}
 		protected virtual async Task AwaitRound()
 		{
-			_continueRequests.Clear();
+			continueRequests.Clear();
 			foreach (string userID in userIDs)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
+					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
 				}
 			}
 		}
@@ -196,7 +195,7 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("receiveLetter", letter);
+					await hubContext.Clients.Client(connectionID).SendAsync("receiveLetter", letter);
 				}
 			}
 		}
@@ -212,34 +211,34 @@ namespace server_app.games
 				array = Data.PreprocessImage(bmp);
 			}
 
-			_currentResponses.Add(userID, (array, endTime));
+			currentResponses.Add(userID, (array, endTime));
 		}
 		protected bool EvaluateSubmission(string userID, char character)
 		{
 			int letter = character - 65;
 
-			Network network = new(_currentResponses[userID].submission);
+			Network network = new(currentResponses[userID].submission);
 			bool correct = network.GetResult() == letter;
 
-			if (_gameStats.TryGetValue(userID, out gameStats currentStats))
+			if (gameStats.TryGetValue(userID, out gameStats currentStats))
 			{
-				DateTime endTime = _currentResponses[userID].time;
+				DateTime endTime = currentResponses[userID].time;
 				double accuracy = network.GetAccuracy(letter);
 
-				currentStats.Update(accuracy, endTime - _startTime, correct);
+				currentStats.Update(accuracy, endTime - startTime, correct);
 			}
-			_gameStats[userID] = currentStats;
+			gameStats[userID] = currentStats;
 			return correct;
 		}
 		protected async Task SendResult(string userID, gameStats stats)
 		{
-			bool correct = stats.correct[_roundCount];
-			double accuracy = stats.accuracy[_roundCount];
-			TimeSpan time = stats.time[_roundCount];
+			bool correct = stats.correct[roundCount];
+			double accuracy = stats.accuracy[roundCount];
+			TimeSpan time = stats.time[roundCount];
 
 			if (Connection.map.TryGetValue(userID, out string? connectionID))
 			{
-				await _hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
+				await hubContext.Clients.Client(connectionID).SendAsync("receiveResults", correct, accuracy, time);
 			}
 		}
 
@@ -249,19 +248,19 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("endGame");
+					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
 				}
 			}
 
 			foreach (string userID in userIDs)
 			{
-				for (int i = 0; i < _gameStats[userID].accuracy.Count; i++)
+				// iterate through each round the current user completed
+				for (int i = 0; i < gameStats[userID].accuracy.Count; i++)
 				{
-					// iterate through each round the current user completed - in Elimination each user may complete a different number of rounds
+					// reload userData after each update for duplicate letters
 					if (Database.LoadUserData(userID, out userData userData))
-					{
-						// reload userData after each update for duplicate letters
-						await UpdateStatistics(userData, _letters[i], i);
+					{						
+						await UpdateStatistics(userData, letters[i], i);
 					}
 					else
 					{
@@ -276,8 +275,8 @@ namespace server_app.games
 			TimeSpan time = userData.statistics[letter].time;
 			int total = userData.statistics[letter].total;
 
-			double updatedAccuracy = (accuracy * total + _gameStats[userData.userID].accuracy[round]) / (total + 1);
-			TimeSpan updatedTime = (time * total + _gameStats[userData.userID].time[round]) / (total + 1);
+			double updatedAccuracy = (accuracy * total + gameStats[userData.userID].accuracy[round]) / (total + 1);
+			TimeSpan updatedTime = (time * total + gameStats[userData.userID].time[round]) / (total + 1);
 
 			if (!Database.UpdateStatistics(userData.userID, letter, updatedAccuracy, updatedTime, total + 1))
 			{
@@ -287,9 +286,9 @@ namespace server_app.games
 
 			if (Connection.map.TryGetValue(userData.userID, out string? connectionID))
 			{
-				// update statistics client-side for the indexed round
+				// update statistics client-side for the current round
 				statistics updated = new(updatedAccuracy, updatedTime, total + 1);
-				await _hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);
+				await hubContext.Clients.Client(connectionID).SendAsync("updateStatistics", letter, updated);
 			}
 		}
 	}

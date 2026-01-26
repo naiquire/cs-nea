@@ -1,0 +1,5 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{k}{SELECT}\PYG{+w}{ }\PYG{n}{user1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{user2}
+\PYG{+w}{    }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{friends}
+\PYG{+w}{    }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{user1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{userID}\PYG{+w}{ }\PYG{k}{OR}\PYG{+w}{ }\PYG{n}{user2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{userID}
+\end{MintedVerbatim}

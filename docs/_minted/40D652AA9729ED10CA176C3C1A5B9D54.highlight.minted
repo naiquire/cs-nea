@@ -1,0 +1,19 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{k}{interface}\PYG{+w}{ }\PYG{n}{IPlayable}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{QueueUser}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{DequeueUser}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{UpdateUsers}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{StartGame}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{LoadResponse}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{byte}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EvaluationPhase}\PYG{p}{(}\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{ContinueRequest}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EndGame}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{Games}\PYG{+w}{ }\PYG{n+nf}{GetGameType}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n+nf}{GetGameID}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{HasStarted}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{GetPlayerCount}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{GetMaxPlayers}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

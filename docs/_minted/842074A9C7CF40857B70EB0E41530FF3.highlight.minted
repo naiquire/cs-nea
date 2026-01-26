@@ -1,0 +1,35 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{func}\PYG{+w}{ }\PYG{n+nf}{Backpropagation}\PYG{p}{(}\PYG{n}{inputImages}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{expectedValues}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{batchCount}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{inputImages}\PYG{p}{.}\PYG{n}{Count}
+
+\PYG{+w}{        }\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{image}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{inputImages}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{weightGradients}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{biasGradients}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{loss}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Backpropagate}\PYG{p}{(}\PYG{n}{image}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{expected}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{weights}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{biases}\PYG{p}{)}
+
+\PYG{+w}{            }\PYG{n}{weightAdjustments}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{weightGradients}\PYG{p}{)}
+\PYG{+w}{            }\PYG{n}{biasAdjustments}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{biasGradients}\PYG{p}{)}
+\PYG{+w}{            }\PYG{n}{losses}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{loss}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{n}{upatedWeights}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{UpdateWeights}\PYG{p}{(}\PYG{n}{weights}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{weightAdjustments}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{updatedBiases}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{UpdateBiases}\PYG{p}{(}\PYG{n}{biases}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{biasAdjustments}\PYG{p}{)}
+
+\PYG{+w}{        }\PYG{n}{SaveWeights}\PYG{p}{(}\PYG{n}{updatedWeights}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{SaveBiases}\PYG{p}{(}\PYG{n}{updatedBiases}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{func}\PYG{+w}{ }\PYG{n+nf}{Backpropagate}\PYG{p}{(}\PYG{n}{input}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{expected}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{weights}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{biases}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{network}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{(}\PYG{n}{input}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{weights}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{biases}\PYG{p}{)}
+
+\PYG{+w}{        }\PYG{n}{loss}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{CalculateOutputErrors}\PYG{p}{(}\PYG{n}{network}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{expected}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{CalculateHiddenErrors}\PYG{p}{(}\PYG{n}{network}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{weights}\PYG{p}{)}
+
+\PYG{+w}{        }\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{layer}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{network}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{weight}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{layer}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{weightGradients}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{][}\PYG{n}{weight}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{neuronErrors}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{][}\PYG{n}{weight}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{*}
+\PYG{+w}{                                                 }\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{][}\PYG{n}{weight}\PYG{p}{]}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{weightGradients}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{neuronErrors}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{loss}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

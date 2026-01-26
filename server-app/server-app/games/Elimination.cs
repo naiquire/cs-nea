@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
-using server_app.neuralNetwork;
 
 namespace server_app.games
 {
-	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Elimination, userID, 3), IPlayable
+	public class Elimination(string userID, IHubContext<Connection> context) : Game(context, Games.Elimination, userID, 12), IPlayable
 	{
 		private List<string> aliveUsers = [];
 		public override bool DequeueUser(string userID)
@@ -18,20 +17,20 @@ namespace server_app.games
 
 			await base.StartGame();
 			await SubmissionPhase();
-		}		
+		}
 
 		public async Task SubmissionPhase()
 		{
 			if (aliveUsers.Count > 1)
 			{
-				char letter = (char)(_rnd.Next(0, 26) + 65);
-				_letters.Add(letter);
+				char letter = (char)(rnd.Next(0, 26) + 65);
+				letters.Add(letter);
 
 				await AwaitRound();
 				await Task.Delay(3000);
 
-				_startTime = DateTime.UtcNow;
-				_currentResponses.Clear();
+				startTime = DateTime.UtcNow;
+				currentResponses.Clear();
 				await SendLetter(aliveUsers, letter);
 			}
 			else
@@ -41,21 +40,21 @@ namespace server_app.games
 		}
 		protected override async Task AwaitRound()
 		{
-			_continueRequests.Clear();
+			continueRequests.Clear();
 			foreach (string userID in aliveUsers)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
+					await hubContext.Clients.Client(connectionID).SendAsync("awaitRound");
 				}
 			}
 		}
 		public override void LoadResponse(string userID, byte[] input)
 		{
 			base.LoadResponse(userID, input);
-			if (_currentResponses.Count == aliveUsers.Count)
+			if (currentResponses.Count == aliveUsers.Count)
 			{
-				EvaluationPhase(_letters[^1]);
+				EvaluationPhase(letters[^1]);
 			}
 		}
 
@@ -70,7 +69,7 @@ namespace server_app.games
 				{
 					incorrectUsers.Add(aliveUsers[i]);
 				}
-				await SendResult(aliveUsers[i], _gameStats[aliveUsers[i]]);
+				await SendResult(aliveUsers[i], gameStats[aliveUsers[i]]);
 			}
 
 			if (incorrectUsers.Count == 0)
@@ -79,7 +78,7 @@ namespace server_app.games
 				(string user, TimeSpan time) highest = (string.Empty, TimeSpan.MinValue);
 				foreach (string userID in aliveUsers)
 				{
-					var time = _gameStats[userID].time[_roundCount];
+					var time = gameStats[userID].time[roundCount];
 					if (time > highest.time)
 					{
 						highest = (userID, time);
@@ -101,7 +100,7 @@ namespace server_app.games
 			}
 
 			await SendEliminationResults(eliminatedUsers);
-			_roundCount++;
+			roundCount++;
 		}
 		public async Task ContinueRequest(string userID)
 		{
@@ -110,17 +109,17 @@ namespace server_app.games
 				// if user is eliminated, then endGame for client
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("endGame");
+					await hubContext.Clients.Client(connectionID).SendAsync("endGame");
 				}
 				return;
 			}
 
-			if (!_continueRequests.Contains(userID) && aliveUsers.Contains(userID))
+			if (!continueRequests.Contains(userID) && aliveUsers.Contains(userID))
 			{
-				_continueRequests.Add(userID);
+				continueRequests.Add(userID);
 			}
 
-			if (_continueRequests.Count == aliveUsers.Count)
+			if (continueRequests.Count == aliveUsers.Count)
 			{
 				await SubmissionPhase();
 			}
@@ -131,14 +130,14 @@ namespace server_app.games
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
+					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
 				}
 			}
 			foreach (string userID in eliminatedUsers)
 			{
 				if (Connection.map.TryGetValue(userID, out string? connectionID))
 				{
-					await _hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
+					await hubContext.Clients.Client(connectionID).SendAsync("receiveKnockoutResult", aliveUsers);
 				}
 			}
 		}
