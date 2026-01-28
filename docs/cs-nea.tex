@@ -73,7 +73,7 @@ Source: Oxford Languages
 \subsection{End User}
 This program is being developed for people at various stages of learning to write in English. It will allow beginners to build the necessary muscle memory for writing, and help those more familiar with the Latin script to improve their fluency. \\
 
-The end user I have selected is a student web developer from India who goes by “Koko”. I have contact with them through Discord and they are frequently available, hence suitable as an end user for this project. As their first language was Hindi, learning to write in English is something they have experienced firsthand. Therefore they can provide me with information on how learning to write in the Latin script can be made easier.
+The end user I have selected is a student web developer from India who goes by ``Koko''. I have contact with them through Discord and they are frequently available, hence suitable as an end user for this project. As their first language was Hindi, learning to write in English is something they have experienced firsthand. Therefore they can provide me with information on how learning to write in the Latin script can be made easier.
 
 \newpage
 \subsection{Initial Research}
@@ -98,7 +98,7 @@ The second type is similar to the first, except the snapping feature is disabled
     \caption{User is given a false positive}  
 \end{figure}
 
-The third type has no outline and is completely freehand. Sometimes, Duolingo will give the user a “Hard” task, in which they will not be given any reference of the character and instead hear it as an outputted sound. \\
+The third type has no outline and is completely freehand. Sometimes, Duolingo will give the user a `Hard' task, in which they will not be given any reference of the character and instead hear it as an outputted sound. \\
 
 The system is very intuitive, and I had very little trouble using it. Occasionally the snapping present in the first type of exercise would cause some issues with the pen following my touch. In addition the algorithm to evaluate the user's submission is too lenient in some cases. However the app encouraged me to practice daily by sending notifications, so a user could definitely learn something in a short amount of time. \\
 
@@ -2447,7 +2447,34 @@ This means that for any score which is less than a highly accurate recall, the `
 
 \subsection{Contents}
 
-% go through mark scheme and check where group A,B stuff is i guess
+% // add some mising labels to file column
+
+\begin{table}[H]
+    \centering
+        \begin{tabularx}{\textwidth}{|L|L|L|}
+        \hline
+        \textbf{File} & \textbf{Description} & \textbf{Pages} \\\hline
+
+        server/games/Game.cs/IPlayable, Game & Object-Oriented Programming & page \\\hline
+        server/databases/Database.cs/LoadUserData() & Loading account data using paramterised SQL & page \\\hline
+        server/neuralNetwork/Backpropagation.cs/Backpropagate() & Backpropagation algorithm & page \\\hline
+        server/neuralNetwork/Data.cs/LoadWeights(), SaveWeights() & Reading and writing to text files & \\\hline
+        server/games/Versus.cs/CalculateRank() & Implementation of the Elo formulae & page \\\hline
+        server/games/Elimination/EvaluationPhase() & List operations for determining which users are eliminated & page \\\hline
+        server/games/Game.cs/ & Evaluating a submission using the neural network & page \\\hline
+        server/games/Game.cs/UpdateStatistics() & Updating averages in the database & page \\\hline
+        server/neuralNetwork/Data.cs/softmax() & Softmax function & page \\\hline
+        server/neuralNetwork/Data.cs/PreprocessImage() & Image preprocessing & page \\\hline
+        server/neuralNetwork/Network.cs/EvaluateNetwork() & Forward pass of the neural network & page \\\hline
+        server/Accounts.cs & Account management & \\\hline
+        server/Program.cs/ & Server configuration & page \\\hline
+
+        client/menus/Main.cs & Calculating a summary of a user's statistics & page \\\hline
+        client/menus/Main.Designer.cs/ConfigGamePanels() & Configuring the panels to display the available game types & page \\\hline
+        client/hub-connection.cs/AddHandles() & Client logic for receiving server invokations & page \\\hline
+
+        \end{tabularx}
+    \end{table}
 
 \subsection{Code}
 
