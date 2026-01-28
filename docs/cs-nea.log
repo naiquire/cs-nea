@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.24)  25 JAN 2026 23:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.24)  27 JAN 2026 23:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -817,10 +817,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 723--724
 \pydata@fh@0=\write6
 \openout6 = `_7333154D5D4D3D25B3BFFBB7E34E7366.data.minted'.
 
-runsystem(latexminted config  --timestamp 20260125232353Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
+runsystem(latexminted config  --timestamp 20260127232238Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
 
 (./_7333154D5D4D3D25B3BFFBB7E34E7366.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20260125232353Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
+runsystem(latexminted cleanconfig  --timestamp 20260127232238Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
 
  (./_minted/vs.style.minted) (./_minted/A0287C037ACA26A900F54CB2BDA0E21C.highlight.minted) (./_minted/49EB4E6AF021BA11E7D0204B5C3FEE86.highlight.minted)
 Underfull \hbox (badness 10000) in paragraph at lines 747--748
@@ -877,14 +877,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 800--801
 
  []
 
-[30 <./resx/overview.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 802--803
-
+[30 <./resx/overview.png>] [31]
+Overfull \hbox (13.4994pt too wide) in paragraph at lines 810--811
+\OT1/cmr/bx/n/10 Net-work \OT1/cmr/m/n/10 class per-forms the for-ward pass, which is used to eval-u-ate a user's sub-mis-sion. The \OT1/cmr/bx/n/10 Back-prop-a-ga-tion
  []
 
-[31]
-Overfull \hbox (13.4994pt too wide) in paragraph at lines 812--813
-\OT1/cmr/bx/n/10 Net-work \OT1/cmr/m/n/10 class per-forms the for-ward pass, which is used to eval-u-ate a user's sub-mis-sion. The \OT1/cmr/bx/n/10 Back-prop-a-ga-tion
+
+Underfull \hbox (badness 10000) in paragraph at lines 814--815
+
  []
 
 
@@ -892,18 +892,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 816--817
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 818--819
-
- []
-
 <resx/forward_pass.png, id=799, 1043.39813pt x 559.33969pt>
 File: resx/forward_pass.png Graphic file (type png)
 <use resx/forward_pass.png>
-Package pdftex.def Info: resx/forward_pass.png  used on input line 830.
+Package pdftex.def Info: resx/forward_pass.png  used on input line 828.
 (pdftex.def)             Requested size: 469.75502pt x 251.82855pt.
 [32] (./_minted/B62306E26254308A629A4048CB8D92F5.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 870--871
+Underfull \hbox (badness 10000) in paragraph at lines 868--869
 
  []
 
@@ -911,56 +906,61 @@ Underfull \hbox (badness 10000) in paragraph at lines 870--871
 <resx/flow_backprop.png, id=811, 1041.1397pt x 475.7775pt>
 File: resx/flow_backprop.png Graphic file (type png)
 <use resx/flow_backprop.png>
-Package pdftex.def Info: resx/flow_backprop.png  used on input line 875.
+Package pdftex.def Info: resx/flow_backprop.png  used on input line 873.
 (pdftex.def)             Requested size: 352.31625pt x 160.99992pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 879--880
+Underfull \hbox (badness 10000) in paragraph at lines 877--878
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 887--888
+Underfull \hbox (badness 10000) in paragraph at lines 885--886
 
  []
 
 <resx/backpropagation_pptx.png, id=812, 1075.76906pt x 586.44093pt>
 File: resx/backpropagation_pptx.png Graphic file (type png)
 <use resx/backpropagation_pptx.png>
-Package pdftex.def Info: resx/backpropagation_pptx.png  used on input line 891.
+Package pdftex.def Info: resx/backpropagation_pptx.png  used on input line 889.
 (pdftex.def)             Requested size: 352.31625pt x 192.05856pt.
 [34 <./resx/flow_backprop.png>] (./_minted/842074A9C7CF40857B70EB0E41530FF3.highlight.minted [35 <./resx/backpropagation_pptx.png>]) (./_minted/FB296C36BAC3B9C9120341180389DEF7.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 1007--1008
+Underfull \hbox (badness 10000) in paragraph at lines 1005--1006
 
  []
 
 [36]
-Underfull \hbox (badness 10000) in paragraph at lines 1009--1010
+Underfull \hbox (badness 10000) in paragraph at lines 1007--1008
 
  []
 
 (./_minted/14321FF30C2A091C1665EEFBA6E82A31.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 1032--1033
+Underfull \hbox (badness 10000) in paragraph at lines 1030--1031
 
  []
 
 [37]
-Underfull \hbox (badness 10000) in paragraph at lines 1042--1043
+Underfull \hbox (badness 10000) in paragraph at lines 1040--1041
 
  []
 
 <resx/network_class.png, id=835, 1189.44376pt x 817.0525pt>
 File: resx/network_class.png Graphic file (type png)
 <use resx/network_class.png>
-Package pdftex.def Info: resx/network_class.png  used on input line 1057.
+Package pdftex.def Info: resx/network_class.png  used on input line 1055.
 (pdftex.def)             Requested size: 469.75502pt x 322.6761pt.
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 1063--1064
+Underfull \hbox (badness 10000) in paragraph at lines 1061--1062
 
  []
 
 (./_minted/40D652AA9729ED10CA176C3C1A5B9D54.highlight.minted [39 <./resx/network_class.png (PNG copy)>]) (./_minted/CA5F45992A98686BB05A4DB80AFE8291.highlight.minted)
-Overfull \hbox (13.3284pt too wide) in paragraph at lines 1102--1103
+Overfull \hbox (13.3284pt too wide) in paragraph at lines 1100--1101
 \OT1/cmr/m/n/10 class for-wards this re-quest to the \OT1/cmr/bx/n/10 Queue-ing \OT1/cmr/m/n/10 class and ad-di-tion-ally pro-vides the IHub-Con-text of the \OT1/cmr/bx/n/10 Con-nec-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1108--1109
+
  []
 
 
@@ -978,24 +978,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 1114--1115
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1116--1117
-
- []
-
 [40{c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 <resx/queue_flow.png, id=852, 1233.85968pt x 503.63156pt>
 File: resx/queue_flow.png Graphic file (type png)
 <use resx/queue_flow.png>
-Package pdftex.def Info: resx/queue_flow.png  used on input line 1122.
+Package pdftex.def Info: resx/queue_flow.png  used on input line 1120.
 (pdftex.def)             Requested size: 469.75502pt x 191.74316pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1126--1127
+
+ []
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 1128--1129
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1130--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1134--1135
 
  []
 
@@ -1004,18 +1004,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 1136--1137
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1138--1139
+[41 <./resx/queue_flow.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
 
  []
 
-[41 <./resx/queue_flow.png>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 1144--1145
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1146--1147
+Underfull \hbox (badness 10000) in paragraph at lines 1150--1151
 
  []
 
@@ -1035,16 +1035,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 1156--1157
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1158--1159
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1164--1165
+Underfull \hbox (badness 10000) in paragraph at lines 1162--1163
 
  []
 
 [42]
+Underfull \hbox (badness 10000) in paragraph at lines 1164--1165
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 1166--1167
 
  []
@@ -1055,7 +1055,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1168--1169
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1170--1171
+Underfull \hbox (badness 10000) in paragraph at lines 1174--1175
 
  []
 
@@ -1065,12 +1065,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1176--1177
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1178--1179
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1184--1185
+Underfull \hbox (badness 10000) in paragraph at lines 1182--1183
 
  []
 
@@ -1078,40 +1073,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 1184--1185
 <resx/games_class.png, id=874, 1004.75375pt x 1044.90375pt>
 File: resx/games_class.png Graphic file (type png)
 <use resx/games_class.png>
-Package pdftex.def Info: resx/games_class.png  used on input line 1207.
+Package pdftex.def Info: resx/games_class.png  used on input line 1205.
 (pdftex.def)             Requested size: 469.75502pt x 488.52191pt.
  [44]
-Underfull \hbox (badness 10000) in paragraph at lines 1213--1214
+Underfull \hbox (badness 10000) in paragraph at lines 1211--1212
 
  []
 
 [45 <./resx/games_class.png>]
 File: resx/sql.png Graphic file (type png)
 <use resx/sql.png>
-Package pdftex.def Info: resx/sql.png  used on input line 1223.
+Package pdftex.def Info: resx/sql.png  used on input line 1221.
 (pdftex.def)             Requested size: 234.8775pt x 157.23383pt.
 <resx/database_class.png, id=885, 925.4575pt x 483.8075pt>
 File: resx/database_class.png Graphic file (type png)
 <use resx/database_class.png>
-Package pdftex.def Info: resx/database_class.png  used on input line 1233.
+Package pdftex.def Info: resx/database_class.png  used on input line 1231.
 (pdftex.def)             Requested size: 469.75502pt x 245.57954pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1239--1240
+Underfull \hbox (badness 10000) in paragraph at lines 1237--1238
 
  []
 
 [46 <./resx/database_class.png>] (./_minted/A42AD62AF12E4DA4132D235703E61BEE.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 1257--1258
+Underfull \hbox (badness 10000) in paragraph at lines 1255--1256
 
  []
 
 (./_minted/5119F1BA49A68C4CC9380372CD973B50.highlight.minted) (./_minted/7CA19D4F2393F293DE7F0B78DDBCD360.highlight.minted) (./_minted/A07E77CFFAFD2F88BB3FDEE6EA40740E.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 1277--1278
+Underfull \hbox (badness 10000) in paragraph at lines 1275--1276
 
  []
 
 [47] (./_minted/16E2E4ABE647208C4FEFD4CBAC66CA6F.highlight.minted) (./_minted/75953468ED1447015A9EEC5988EEC948.highlight.minted) (./_minted/B8B9A565F263AB351AED49F0BB68AD4F.highlight.minted) (./_minted/14F9A9397E93C8A11F1167260A4A8F49.highlight.minted) (./_minted/D7418A1EC9547494CF4CF25B2C5F2288.highlight.minted) (./_minted/3AC82E5DB0A5F8E6308B63A724CD9BEF.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 1352--1353
+Underfull \hbox (badness 10000) in paragraph at lines 1350--1351
 
  []
 
@@ -1119,15 +1114,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 1352--1353
 <resx/connection_class.png, id=907, 925.4575pt x 403.5075pt>
 File: resx/connection_class.png Graphic file (type png)
 <use resx/connection_class.png>
-Package pdftex.def Info: resx/connection_class.png  used on input line 1406.
+Package pdftex.def Info: resx/connection_class.png  used on input line 1404.
 (pdftex.def)             Requested size: 469.75502pt x 204.81944pt.
 <resx/server-class-overview.png, id=908, 885.3075pt x 564.1075pt>
 File: resx/server-class-overview.png Graphic file (type png)
 <use resx/server-class-overview.png>
-Package pdftex.def Info: resx/server-class-overview.png  used on input line 1419.
+Package pdftex.def Info: resx/server-class-overview.png  used on input line 1417.
 (pdftex.def)             Requested size: 469.75502pt x 299.32845pt.
  [50 <./resx/connection_class.png>] [51 <./resx/server-class-overview.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1430--1431
+Underfull \hbox (badness 10000) in paragraph at lines 1428--1429
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1434--1435
 
  []
 
@@ -1137,27 +1137,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 1436--1437
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1438--1439
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1444--1445
+Underfull \hbox (badness 10000) in paragraph at lines 1442--1443
 
  []
 
 [52]
+Underfull \hbox (badness 10000) in paragraph at lines 1458--1459
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 1460--1461
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1462--1463
+Underfull \hbox (badness 10000) in paragraph at lines 1474--1475
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1476--1477
+Underfull \hbox (badness 10000) in paragraph at lines 1480--1481
 
  []
 
@@ -1166,114 +1166,109 @@ Underfull \hbox (badness 10000) in paragraph at lines 1482--1483
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1484--1485
-
- []
-
 [53]
-Underfull \hbox (badness 10000) in paragraph at lines 1490--1491
+Underfull \hbox (badness 10000) in paragraph at lines 1488--1489
 
  []
 
 <resx/ui_class.png, id=933, 1085.05376pt x 1165.35374pt>
 File: resx/ui_class.png Graphic file (type png)
 <use resx/ui_class.png>
-Package pdftex.def Info: resx/ui_class.png  used on input line 1511.
+Package pdftex.def Info: resx/ui_class.png  used on input line 1509.
 (pdftex.def)             Requested size: 469.75502pt x 504.52425pt.
 [54]
+Underfull \hbox (badness 10000) in paragraph at lines 1515--1516
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 1517--1518
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1519--1520
+[55 <./resx/ui_class.png>] (./_minted/71715AF1AFB0B48E7F20F02DB91C5171.highlight.minted) (./_minted/CA5F45992A98686BB05A4DB80AFE8291.highlight.minted)
+Underfull \hbox (badness 10000) in paragraph at lines 1551--1552
 
  []
 
-[55 <./resx/ui_class.png>] (./_minted/71715AF1AFB0B48E7F20F02DB91C5171.highlight.minted) (./_minted/CA5F45992A98686BB05A4DB80AFE8291.highlight.minted)
+
 Underfull \hbox (badness 10000) in paragraph at lines 1553--1554
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1555--1556
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1562--1563
-
- []
-
 [56]
-Underfull \hbox (badness 10000) in paragraph at lines 1568--1569
+Underfull \hbox (badness 10000) in paragraph at lines 1563--1564
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1574--1575
+Underfull \hbox (badness 10000) in paragraph at lines 1569--1570
 
  []
 
-<resx/cgames_class.png, id=953, 1085.05376pt x 805.0075pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 1575--1576
+
+ []
+
+<resx/cgames_class.png, id=952, 1085.05376pt x 805.0075pt>
 File: resx/cgames_class.png Graphic file (type png)
 <use resx/cgames_class.png>
-Package pdftex.def Info: resx/cgames_class.png  used on input line 1586.
+Package pdftex.def Info: resx/cgames_class.png  used on input line 1587.
 (pdftex.def)             Requested size: 469.75502pt x 348.51718pt.
 [57]
-Underfull \hbox (badness 10000) in paragraph at lines 1592--1593
+Underfull \hbox (badness 10000) in paragraph at lines 1593--1594
 
  []
 
 
-Overfull \hbox (9.28845pt too wide) in paragraph at lines 1594--1595
+Overfull \hbox (9.28845pt too wide) in paragraph at lines 1595--1596
 []\OT1/cmr/m/n/10 The `Ini-tialiseC-om-po-nent()' method of the \OT1/cmr/bx/n/10 UX-ele-ments \OT1/cmr/m/n/10 class con-fig-ures the base lay-out for the ap-pli-ca-tion.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1594--1595
+Underfull \hbox (badness 10000) in paragraph at lines 1595--1596
 
  []
 
 <resx/ui_layout.png, id=961, 1927.2pt x 1043.9pt>
 File: resx/ui_layout.png Graphic file (type png)
 <use resx/ui_layout.png>
-Package pdftex.def Info: resx/ui_layout.png  used on input line 1598.
+Package pdftex.def Info: resx/ui_layout.png  used on input line 1599.
 (pdftex.def)             Requested size: 352.31625pt x 190.82475pt.
 [58 <./resx/cgames_class.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1602--1603
+Underfull \hbox (badness 10000) in paragraph at lines 1603--1604
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1604--1605
+Underfull \hbox (badness 10000) in paragraph at lines 1605--1606
 
  []
 
 
-Overfull \hbox (14.08371pt too wide) in paragraph at lines 1606--1607
+Overfull \hbox (14.08371pt too wide) in paragraph at lines 1607--1608
 \OT1/cmr/m/n/10 the form and in-vokes the `de-queueGame()' method on the server if the user is in-game. The `client-Dis-con-nected()'
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1610--1611
+Underfull \hbox (badness 10000) in paragraph at lines 1611--1612
 
  []
 
 <resx/ui_accounts.png, id=968, 949.5475pt x 534.99875pt>
 File: resx/ui_accounts.png Graphic file (type png)
 <use resx/ui_accounts.png>
-Package pdftex.def Info: resx/ui_accounts.png  used on input line 1616.
+Package pdftex.def Info: resx/ui_accounts.png  used on input line 1617.
 (pdftex.def)             Requested size: 352.31625pt x 198.50154pt.
 [59 <./resx/ui_layout.png (PNG copy)>]
 <resx/ui_accounts2.png, id=974, 949.5475pt x 534.99875pt>
 File: resx/ui_accounts2.png Graphic file (type png)
 <use resx/ui_accounts2.png>
-Package pdftex.def Info: resx/ui_accounts2.png  used on input line 1624.
+Package pdftex.def Info: resx/ui_accounts2.png  used on input line 1625.
 (pdftex.def)             Requested size: 352.31625pt x 198.50154pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1630--1631
+Underfull \hbox (badness 10000) in paragraph at lines 1631--1632
 
  []
 
@@ -1281,25 +1276,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 1630--1631
 <resx/ui_edit.png, id=982, 602.25pt x 301.125pt>
 File: resx/ui_edit.png Graphic file (type png)
 <use resx/ui_edit.png>
-Package pdftex.def Info: resx/ui_edit.png  used on input line 1639.
+Package pdftex.def Info: resx/ui_edit.png  used on input line 1640.
 (pdftex.def)             Requested size: 352.31625pt x 176.16429pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1644--1645
+Underfull \hbox (badness 10000) in paragraph at lines 1645--1646
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1648--1649
+Underfull \hbox (badness 10000) in paragraph at lines 1649--1650
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1654--1655
+Underfull \hbox (badness 10000) in paragraph at lines 1655--1656
 
  []
 
 
-Overfull \hbox (5.77362pt too wide) in paragraph at lines 1656--1657
+Overfull \hbox (5.77362pt too wide) in paragraph at lines 1657--1658
 []\OT1/cmr/m/n/10 The val-ues for the rank, to-tal, and av-er-age ac-cu-racy are ob-tained from the static `Cal-cu-lat-eS-tatsOverview()'
  []
 
@@ -1307,307 +1302,323 @@ Overfull \hbox (5.77362pt too wide) in paragraph at lines 1656--1657
 <resx/ui_profile.png, id=994, 1927.2pt x 1043.9pt>
 File: resx/ui_profile.png Graphic file (type png)
 <use resx/ui_profile.png>
-Package pdftex.def Info: resx/ui_profile.png  used on input line 1664.
+Package pdftex.def Info: resx/ui_profile.png  used on input line 1665.
 (pdftex.def)             Requested size: 352.31625pt x 190.82475pt.
 
-Overfull \hbox (29.60646pt too wide) in paragraph at lines 1671--1672
+Overfull \hbox (29.60646pt too wide) in paragraph at lines 1672--1673
 [] \OT1/cmr/m/n/10 The draw-ing panel is con-tained within a seper-ate class \OT1/cmr/bx/n/10 In-put-Panel \OT1/cmr/m/n/10 which is in-tialised by the `Con-figGamePanel()'
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1671--1672
+Underfull \hbox (badness 10000) in paragraph at lines 1672--1673
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1673--1674
+Underfull \hbox (badness 10000) in paragraph at lines 1674--1675
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1675--1676
+Underfull \hbox (badness 10000) in paragraph at lines 1676--1677
 
  []
 
 <resx/ui_drawing.png, id=995, 1927.2pt x 1043.9pt>
 File: resx/ui_drawing.png Graphic file (type png)
 <use resx/ui_drawing.png>
-Package pdftex.def Info: resx/ui_drawing.png  used on input line 1681.
+Package pdftex.def Info: resx/ui_drawing.png  used on input line 1682.
 (pdftex.def)             Requested size: 352.31625pt x 190.82475pt.
 [62 <./resx/ui_profile.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 1687--1688
+Underfull \hbox (badness 10000) in paragraph at lines 1688--1689
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1689--1690
+Underfull \hbox (badness 10000) in paragraph at lines 1690--1691
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1691--1692
+Underfull \hbox (badness 10000) in paragraph at lines 1692--1693
 
  []
 
 <resx/ui_resacc.png, id=1002, 1927.2pt x 1043.9pt>
 File: resx/ui_resacc.png Graphic file (type png)
 <use resx/ui_resacc.png>
-Package pdftex.def Info: resx/ui_resacc.png  used on input line 1697.
+Package pdftex.def Info: resx/ui_resacc.png  used on input line 1698.
 (pdftex.def)             Requested size: 352.31625pt x 190.82475pt.
 [63 <./resx/ui_drawing.png (PNG copy)>]
 <resx/ui_resver.png, id=1009, 1927.2pt x 1043.9pt>
 File: resx/ui_resver.png Graphic file (type png)
 <use resx/ui_resver.png>
-Package pdftex.def Info: resx/ui_resver.png  used on input line 1703.
+Package pdftex.def Info: resx/ui_resver.png  used on input line 1704.
 (pdftex.def)             Requested size: 352.31625pt x 190.82475pt.
 <resx/ui_reseli.png, id=1010, 1927.2pt x 1043.9pt>
 File: resx/ui_reseli.png Graphic file (type png)
 <use resx/ui_reseli.png>
-Package pdftex.def Info: resx/ui_reseli.png  used on input line 1709.
+Package pdftex.def Info: resx/ui_reseli.png  used on input line 1710.
 (pdftex.def)             Requested size: 352.31625pt x 190.82475pt.
  [64 <./resx/ui_resacc.png (PNG copy)> <./resx/ui_resver.png (PNG copy)>]
 <resx/client-class-overview.png, id=1017, 786.94pt x 918.43124pt>
 File: resx/client-class-overview.png Graphic file (type png)
 <use resx/client-class-overview.png>
-Package pdftex.def Info: resx/client-class-overview.png  used on input line 1722.
+Package pdftex.def Info: resx/client-class-overview.png  used on input line 1723.
 (pdftex.def)             Requested size: 469.75502pt x 548.24615pt.
  [65 <./resx/ui_reseli.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 1728--1729
+Underfull \hbox (badness 10000) in paragraph at lines 1729--1730
 
  []
 
 [66 <./resx/client-class-overview.png>]
-Overfull \hbox (24.28041pt too wide) in paragraph at lines 1736--1737
+Overfull \hbox (24.28041pt too wide) in paragraph at lines 1737--1738
 \OT1/cmr/m/n/10 The con-nec-tion han-dlers are added by the `Ad-dHan-dles()' method for the \OT1/cmr/bx/n/10 Main \OT1/cmr/m/n/10 class, and the `AddLogin-Han-dles()'
  []
 
 (./_minted/6938928A401FCC8B491FF22C962E5E1E.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 1751--1752
+Underfull \hbox (badness 10000) in paragraph at lines 1752--1753
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1753--1754
+Underfull \hbox (badness 10000) in paragraph at lines 1754--1755
 
  []
 
 [67]
-Underfull \hbox (badness 10000) in paragraph at lines 1757--1759
+Underfull \hbox (badness 10000) in paragraph at lines 1758--1760
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1767--1768
+Underfull \hbox (badness 10000) in paragraph at lines 1768--1769
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1798--1799
+Underfull \hbox (badness 10000) in paragraph at lines 1799--1800
 
  []
 
 [68]
-Underfull \hbox (badness 10000) in paragraph at lines 1829--1830
+Underfull \hbox (badness 10000) in paragraph at lines 1830--1831
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1850--1851
+Underfull \hbox (badness 10000) in paragraph at lines 1851--1852
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1860--1861
+Underfull \hbox (badness 10000) in paragraph at lines 1861--1862
 
  []
 
 [69]
-Underfull \hbox (badness 10000) in paragraph at lines 1887--1888
+Underfull \hbox (badness 10000) in paragraph at lines 1888--1889
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1906--1907
+Underfull \hbox (badness 10000) in paragraph at lines 1907--1908
 
  []
 
 [70]
-Underfull \hbox (badness 10000) in paragraph at lines 1927--1928
+Underfull \hbox (badness 10000) in paragraph at lines 1928--1929
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1948--1949
+Underfull \hbox (badness 10000) in paragraph at lines 1949--1950
 
  []
 
 [71]
-Underfull \hbox (badness 10000) in paragraph at lines 1983--1984
+Underfull \hbox (badness 10000) in paragraph at lines 1984--1985
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2004--2005
+Underfull \hbox (badness 10000) in paragraph at lines 2005--2006
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2027--2028
+Underfull \hbox (badness 10000) in paragraph at lines 2028--2029
 
  []
 
 [72]
-Underfull \hbox (badness 10000) in paragraph at lines 2050--2051
+Underfull \hbox (badness 10000) in paragraph at lines 2051--2052
 
  []
 
 [73] [74]
-Underfull \hbox (badness 10000) in paragraph at lines 2126--2127
+Underfull \hbox (badness 10000) in paragraph at lines 2127--2128
 
  []
 
-[75] [76] [77]
-Overfull \hbox (44.03604pt too wide) in paragraph at lines 2267--2267
+[75] [76]
+Underfull \hbox (badness 10000) in paragraph at lines 2197--2198
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2220--2221
+
+ []
+
+[77]
+Underfull \hbox (badness 10000) in paragraph at lines 2245--2246
+
+ []
+
+
+Overfull \hbox (44.03604pt too wide) in paragraph at lines 2270--2270
 \OT1/cmr/m/it/10 http://192.168.0.251:5252/cs-nea/accounts 
  []
 
 
-Overfull \hbox (50.68031pt too wide) in paragraph at lines 2267--2267
+Overfull \hbox (50.68031pt too wide) in paragraph at lines 2270--2270
 \OT1/cmr/m/it/10 http://server-public-ip:5252/cs-nea/accounts 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2270--2271
+Underfull \hbox (badness 10000) in paragraph at lines 2273--2274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2276--2277
+Underfull \hbox (badness 10000) in paragraph at lines 2279--2280
 
  []
 
-[78] [79]
-Underfull \hbox (badness 10000) in paragraph at lines 2293--2295
+[78]
+Underfull \hbox (badness 10000) in paragraph at lines 2285--2286
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 2296--2297
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2302--2304
-
- []
-
-[80]
+[79]
 Underfull \hbox (badness 10000) in paragraph at lines 2305--2306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2312--2313
+Underfull \hbox (badness 10000) in paragraph at lines 2307--2308
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2314--2315
+Underfull \hbox (badness 10000) in paragraph at lines 2316--2317
 
  []
 
-
+[80]
 Underfull \hbox (badness 10000) in paragraph at lines 2318--2319
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2320--2321
+Underfull \hbox (badness 10000) in paragraph at lines 2328--2329
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2322--2323
+Underfull \hbox (badness 10000) in paragraph at lines 2334--2335
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2324--2325
+Underfull \hbox (badness 10000) in paragraph at lines 2336--2337
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2333--2334
+Underfull \hbox (badness 10000) in paragraph at lines 2340--2341
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2342--2343
 
  []
 
 [81]
-Underfull \hbox (badness 10000) in paragraph at lines 2335--2336
+Underfull \hbox (badness 10000) in paragraph at lines 2350--2351
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2337--2338
+Underfull \hbox (badness 10000) in paragraph at lines 2352--2353
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2353--2354
+Underfull \hbox (badness 10000) in paragraph at lines 2354--2355
 
  []
 
 [82]
-Underfull \hbox (badness 10000) in paragraph at lines 2355--2356
+Underfull \hbox (badness 10000) in paragraph at lines 2370--2371
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2365--2366
+Underfull \hbox (badness 10000) in paragraph at lines 2372--2373
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2367--2368
+Underfull \hbox (badness 10000) in paragraph at lines 2382--2383
+
+ []
+
+[83]
+Underfull \hbox (badness 10000) in paragraph at lines 2384--2385
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2369--2370
+Underfull \hbox (badness 10000) in paragraph at lines 2386--2387
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2371--2372
+Underfull \hbox (badness 10000) in paragraph at lines 2388--2389
 
  []
 
-[83] (./_minted/6BE058300AB9000284661AFAE30B4668.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 2392--2393
+(./_minted/6BE058300AB9000284661AFAE30B4668.highlight.minted)
+Underfull \hbox (badness 10000) in paragraph at lines 2409--2410
 
  []
 
-<resx/leitner.png, id=1178, 334.24875pt x 151.56625pt>
+[84]
+<resx/leitner.png, id=1183, 334.24875pt x 151.56625pt>
 File: resx/leitner.png Graphic file (type png)
 <use resx/leitner.png>
-Package pdftex.def Info: resx/leitner.png  used on input line 2398.
+Package pdftex.def Info: resx/leitner.png  used on input line 2415.
 (pdftex.def)             Requested size: 234.8775pt x 106.50961pt.
-[84 <./resx/leitner.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2412--2413
+
+Underfull \hbox (badness 10000) in paragraph at lines 2429--2430
 
  []
 
-[85] (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted [86]) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted [87]) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted)
-Underfull \hbox (badness 10000) in paragraph at lines 2591--2592
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2593--2595
+[85 <./resx/leitner.png>] (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted [86]) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted [87]) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted) (./_minted/58EA6B063EB465A1FC77015688A119C2.highlight.minted)
+Underfull \hbox (badness 10000) in paragraph at lines 2610--2611
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2596--2600
+Underfull \hbox (badness 10000) in paragraph at lines 2612--2614
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2615--2619
 
  []
 
@@ -1620,18 +1631,18 @@ Package rerunfilecheck Info: File `cs-nea.out' has not changed.
 (rerunfilecheck)             Checksum: 1767DD73239562B952DC8B228F131435;13192.
  ) 
 Here is how much of TeX's memory you used:
- 16988 strings out of 469470
- 329678 string characters out of 5469183
+ 16989 strings out of 469470
+ 329689 string characters out of 5469183
  850095 words of memory out of 5000000
  44835 multiletter control sequences out of 15000+600000
  631148 words of font info for 52 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 85i,14n,93p,1311b,1046s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 85i,14n,93p,1939b,1046s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on cs-nea.pdf (88 pages, 2492836 bytes).
+Output written on cs-nea.pdf (88 pages, 2498059 bytes).
 PDF statistics:
- 1412 PDF objects out of 1440 (max. 8388607)
- 1214 compressed objects within 13 object streams
- 479 named destinations out of 1000 (max. 500000)
+ 1413 PDF objects out of 1440 (max. 8388607)
+ 1215 compressed objects within 13 object streams
+ 480 named destinations out of 1000 (max. 500000)
  959 words of extra memory for PDF output out of 10000 (max. 10000000)
 

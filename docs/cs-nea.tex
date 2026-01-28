@@ -793,15 +793,13 @@ The client communicates to the server through the \textbf{Connection} class whic
 
 The client has a designated class for each menu the application contains, which include the `Home' page, the `Profile' page, and when the user is playing a game.
 
-\subsection{Choice of Language and Libraries} % // this is not good, maybe just rewrite
+\subsection{Choice of Language and Libraries}
 
 Since object-oriented programming is a necessary paradigm to use, C\# will be the most suitable language for this project. This also allows for the use of Windows Forms to create the UI for the client, and SignalR to provide a client-server connection. I have significant experience in both of these softwares, hence why they are suitable for the technical solution. \\
 
-As discussed, the most suitable option for networking is the SignalR library from ASP.NET, as it allows for easy configuration and simple invokation of methods. I also require the System.Cryptography library in order to store passwords securely in the SQL database. I intend to use SHA512 encryption to hash the passwords, such that the plaintext passwords are not stored anywhere. \\
+Regarding the libraries required for the server application, the SignalR library is mandatory for creating a server which clients can connect to. Furthermore, the SQLite library will be used to store the account data and statistics for each user, and allow the C\# to interact with the database file. For the neural network, I have chosen to use the Mathnet.Numerics library to perform operations on matrices, since this library provides `Matrix' and `Vector' classes. These will be used to improve the speed of the forward pass of the network. \\
 
-Since the solution requires a neural network, a method of multiplying matrices is necessary. As described in Objective 1.4.2, it is better to use the MathNet.Numerics library in order to perform the forward pass of the network. \\
-
-As part of the UI design, I have chosen to use the Guna.UI2.WinForms package as it offers a wider variety of controls than the base Windows Forms.
+As for the libraries required by the client application, the user interface will be created using the Windows Forms library. I have also chosen to use the Guna.UI2.WinForms library, which provides an enhanced set of controls to use with Windows Forms, such as progress bars and gradient fill colours. Additionally, the client application also requires the SignalR.Client library to allow it to establish a connection with the server.
 
 \newpage
 \hiddensection{Server Design}
@@ -1556,9 +1554,9 @@ The `QueueGame()' method is then called, which first invokes the `queueGame()' m
 
 This also causes the server to invoke the `UpdateUsers()' method on the client, which updates the list of users. If the game has not started, then the lobby screen is configured and shown the user. Regardless of this, the left panel is updated with the new list of users. The `Elimination' game type overrides this method as it additionally seperates the users on whether they have been eliminated. Since this is only the case during the game, the `HasStarted()' method is used to determine if the game has started and will instead call the base method if it returns false. 
 
-\subsubsection{Game Logic} % //
+\subsubsection{Game Logic}
 
-The general process by which a game runs is by repeating two key phases until the condition for the game to be ended is met. When the game is started, the first `Submission' phase is started which is where a letter is broadcasted to the clients and the user's submissions are received by the server. Once all of the expected submissions have been received, the `Evaluation' phase is started where the server uses the neural network to evaluate each of the users' submissions. The results are then sent to the client application, and the server waits for all clients to acknowledge 
+The general process by which a game runs is by repeating two key phases until the condition for the game to be ended is met. When the game is started, the first `Submission' phase is started which is where the client receive a Latin character and the user's submit a drawing to the server. Once all of the expected submissions have been received, the `Evaluation' phase is started where the server uses the neural network to evaluate each of the users' submissions. The results are then recieved by the client application, and the users can then request for the next round to start. Once the server has received this request from all of the expected users, it then begins the next `Submission' phase.
 
 \paragraph{Game Start\\}
 
@@ -2187,16 +2185,16 @@ The layout for the testing section first outlines the tests that will be complet
         \begin{tabularx}{\textwidth}{|L|L|L|}
         \hline
         \textbf{Input} & \textbf{Expected outcome} & \textbf{Observed outcome} \\\hline
-        Sending a friend request & Request received by server & \\\hline
-        Returning to the `Home' screen and sending a friend request again & The server does not handle the invite and discards it & \\\hline
-        Sending a friend request while the client is online & A pop-up appears for the receiving client & \\\hline
-        Sending a friend request while the client is offline, and then logging the client in & A pop-up only appears for the receiving client once when have logged in & \\\hline
-        Removing a friend & Friends list for both users is updated & \\\hline
-        Accepting a friend invite & Both users' friends list are updated & \\\hline
+        Sending a friend request & Request received by server & Request received by server \\\hline
+        Returning to the `Home' screen and sending a friend request again & The server does not handle the invite and discards it & The server catches the failed `unique' constraint for the database and discards the invite \\\hline
+        Sending a friend request while the client is online & A pop-up appears for the receiving client & A pop-up appears for the receiving client \\\hline
+        Sending a friend request while the client is offline, and then logging the client in & A pop-up only appears for the receiving client once when have logged in & A pop-up only appears for the receiving client once when have logged in \\\hline
+        Removing a friend & Friends list for both users is updated & Friends list for both users is updated \\\hline
+        Accepting a friend invite & Both users' friends list are updated & Friends list for only the sender is updated, and a manual refresh is required to refresh the receiver's friends list \\\hline
         \end{tabularx}
     \end{table}
 
-    \_/6 tests passed
+    5/6 tests passed. \\
 
     \item \textbf{Updating profile information}
     
@@ -2219,7 +2217,7 @@ The layout for the testing section first outlines the tests that will be complet
         \end{tabularx}
     \end{table}
 
-    3/3 tests passed.
+    3/3 tests passed. \\
 
     \item \textbf{Viewing and searching user profiles}
     
@@ -2237,12 +2235,14 @@ The layout for the testing section first outlines the tests that will be complet
         \begin{tabularx}{\textwidth}{|L|L|L|}
         \hline
         \textbf{Input} & \textbf{Expected outcome} & \textbf{Observed outcome} \\\hline
+        Clicking the `Profile' button on the main menu & The profile page is shown & \\\hline
+        Clicking the `Profile' button on the main menu & Each letter from A-Z is viewable with all statistics relating to it shown & \\\hline
         Searching for `account2' & The profile page of `account2' is shown & \\\hline
         Searching for `account4' & `User does not exist' is displayed as an error message & \\\hline
         \end{tabularx}
     \end{table}
 
-    \_/2 tests passed.
+    \_/4 tests passed. \\
     
 \end{enumerate}
 
@@ -2280,6 +2280,12 @@ Around halfway through completing the tests I noticed that the `countdown' for t
 
 Additionally, I noticed that the list of users while in an `Elimination' game type did not create `alive' and `eliminated' headers at the start of the game. Since all of the users are alive at the start of game regardless, this does not have a significant impact. I suspect the issue arises from how the list of users is refreshed, since it differs in the `Elimination' game type. The panel is updated when a user joins or leaves the game, or a player has been eliminated. Since none of these events occur when the game is started, the panel is not converted from its configuration in the lobby menu, to how it should be in-game. Once the game has started, a boolean variable is set to true, such that on the next update event the panel is then split into alive and eliminated users. One way that this issue could be resolved is by directly calling the panel creation method when the game starts, passing in the list of users and an empty list to represent the eliminated users.
 
+\paragraph{Failed Tests\\}
+
+Test 4.1(f) which ensured that the friends list for both users is updated when a new friendship unfortunately failed. Instead of both users receiving an update to their home screen, only the user who sent the request saw the receiving user added to their list. Interestingly, only a refresh of the home screen by clicking the `Home' button was necessary for the receiving user to update their friends list. This suggested that the `friendData' structure for the friend was received by the client, but the screen was not refreshed---the `Home' button does not make a request to the server. Upon inspecting the source code for the `UpdateFriendData()' method, I was expecting to see that the method was missing a call to the `ConfigFriendsPanel()' method. However this would mean that the other user would also not receive an update to their friends list. The code does contain a call to update the friends list, but it is guarded by a selection statement which checks to see if the user is in-game by equating the `game' attribute of the `menu' structure to the null type. This implies that while performing the test, the client application had an instance of a game class loaded in the background. After some time debugging and further testing, I identified the source of this issue with the click event handler for the close button. The `Home' button has logic to set the `profile' and `game' attributes to null, however this was missing in the logic for the close button. If a user chose to quit the application while in-game, the instance of the game class would not be disposed of until the user either closed the application completely, or logged in again and clicked the `Home' button. This must have been what occured during testing: while setting up, I must have started a game, closed the application, and logged back in. \\
+
+I have also chosen to analyse test 4.1(b): how the duplicate friend invite was handled by the server. While this test was not marked as failed since the expected outcome was observed, the server application did throw an exception. It appears I did not implement a safeguard for saving a duplicate invite, however this was caught by the defensive design of the \textbf{Database} class which threw an exception due to the `unique' constraint for the primary key not being met. This prevented the server crashing and produced the expected outcome, however is not sustainable as a design choice. Furthermore the error received by the client implied that the request failed to be saved, which may be misleading since this is not what actually occured.
+
 \newpage
 \section{Evaluation}
 \noindent\rule{\textwidth}{0.2pt}
@@ -2290,52 +2296,60 @@ As defined in the problem statement, this solution was developed to address the 
 \subsection{Evaluation of Objectives}
 \subsubsection{Core Objectives}
 \begin{enumerate}
-    \item \textbf{Accounts} \\
+    \item \textbf{Accounts}
+
     These objectives were part of the accounts system which was implemented completely. A user is able to login to their account or create a new account, and suitable error messages are displayed when appropriate. It was challenging at times to ensure that all the cases for an invalid login were met, especially when relaying this information to the client application and displaying an appropriate response.
 
-    \item \textbf{Games} \\
+    \item \textbf{Games}
+
     These objectives regard the three game types which the application offers to the user. The majority of the objectives were completed, however the `Accuracy' game type was originally an offline game which would not require a connection to run. While designing the technical solution, it became clear that this would not be feasible since a user's statistics are stored on the server. It would also have been harder to integrate with the other games, and would require the client application to store a copy of the neural network locally. This would increase the memory usage of the application significantly, making it highly unsuitable for the `Accuracy' game type to be offline. \\
     
     Objective 2.c was successfully implemented: a user can use the mouse to draw the character on the panel and it is an intuitive input method to use. The user then receives feedback on their submission as a percentage for the accuracy and an elapsed time. Additionally, a `delta' was implemented for both the accuracy and time of the submission, which compared the statistics of the current round with the user's average for the current letter. This allows a user to clearly see if they are improving as the text is coloured red and green depending on the signs of the `deltas'. \\
     
     There are three different types of games to choose from, and the solution has been programmed in such a way that adding new game types is simple and efficient without any major refactors. The games all inherit a base class and implement an interface: adding a new game type would only involve creating the new classes, and overriding any methods where the gamemode rules are different from the base class. Some of the methods provided by the interface do not have a definition in the base class, although these methods differ significantly between game types.
     \begin{enumerate}
-        \item \textbf{Accuracy} \\
+        \item \textbf{Accuracy}
+
         The objectives for this game type were successfully met. The `Accuracy' game type functions well as a way for users to practice writing the Latin script. It may have been more effective in learning to not randomise the characters and instead show characters which the user has a lower average accuracy on. However this involves an algorithm for \textbf{spaced repetition}, which is covered in 4.4.
-        \item \textbf{Versus} \\
+        \item \textbf{Versus}
+
         The objectives for this game type were met, although with some difficulties in programming the Elo formulae. Before testing, I noticed that the rating changes were greater than the K-factor which suggested that the implemented equations were incorrect. It was not easy to find the error of brackets being in the wrong position, so implementing objective 2.i.ii.A took longer than anticipated. \\
         
         In retrospect, I noticed that I had overlooked using the Elo rating of a user to queue user's more fairly, and was not even present in the objectives. This was discussed during Analysis, and it was what prompted the addition of the Elo rating system. Unfortunately, this method of queueing users was not implemented in the final solution and is therefore something I should consider as a possible system improvement. \\
         
         Furthermore, objective 2.i.ii.A was successfully met and exceeded. The objective did not mention displaying to the user their change in Elo rating, however this was implemented in the techincal solution. I believe the addition of this is useful for a user, since they may be unfamiliar with how the Elo rating system works. If they saw their rating change without warning it may cause some confusion---showing when their rating changes instead may remove this possibility.
-        \item \textbf{Elimination} \\
+        \item \textbf{Elimination}
+
         The objectives for this game type were fully met. The user's who are elimated are informed that they did not win, and the winner is also informed of this. This exceeds the original objective 2.i.iii.C since it was not stated that the user should receive this information, even though it is a feature a user would expect.
     \end{enumerate}
 
-    \item \textbf{Statistics} \\
+    \item \textbf{Statistics}
     
     The objectives for the user's statistics were completely met, however there were some challenges implenting objective 3.a.i. Seperating the statistics for each letter required configuring a Windows Forms panel for each letter using an iteration structure. I had some issues adding scrollbars to the parent panel which the 26 sub-panels were added to. Ultimately the issue came down to how Windows Forms draws new controls in, and calling the `SuspendLayout()' method had some odd quirks which had to be dealt with. \\
 
     Regarding the `about me' attribute of a user, this was implemented without much reason other than user experience since it is a common feature in other applications. However this is not viewable to other users since a panel to display it was not added to the `Profile' page.
     
-    \item \textbf{Social} \\
+    \item \textbf{Social}
     
     There was some successes in implementing these objectives. In particular, objective 4.c had some issues regarding the translations. While I had aimed to ensure translations existed for every text field in the client application, there were still some that lacked this. These include the description for each of the game types on the main menu and the button on the login form to create an account. \\
 
     Fortunately, the friends system was succesfully implemented and the invitation system works without flaws. However I will highlight how the server ensures that a user does not send a friend invite more than once. Instead of checking before requesting the invite to be inserted into the database, the server attempts to insert the record regardless if it is a duplicate invite or not. This doesn't cause any issues for the client, however the database does throw a exception when it attempts to add a record with the same primary key as an existing record. This exception is handled well, however is possibly not the most defensive design for such an occurence. \\ 
 
-    \item \textbf{Server} \\
-    
-    % //
+    \item \textbf{Server}
 
+    Implementing the objectives regarding the functionality of the server application saw some successes, and some failures. One aspect which was completed was how the progression of the games is managed. Each game progresses naturally, and there were no issues in programming due to the defensive design of the system and extensive planning done beforehand. Furthermore, the processing done by the server alleviates the clients of a significant amount of resource usage, especially the neural network. This ensures that a range of devices can run the client application without any issues. \\
+
+    Regarding the neural network and in particular its accuracy of evaluating the users' submissions, I found that for the most part it achieves this objective very well and is able to handle a variety of inputs. In particular the preprocessing performed on the images works flawlessly, which allows a user to improve their writing ability without concerning themselves with the exact position and size of their submission. \\
+    
+    One point of failure I noticed in the evaluation of an image involves submitting an empty image. The way the neural network outputs a result is such that regardless of the input, the output will always be a number between 1 and 26. The probability distribution for the output layer describes which letter the submission is most likely to be, not what the submission actually is. In this particular case, submitting an empty drawing for the character `I' resulted in the submission being marked as correct, since this letter is the closest match to a blank image. This revealed an inherent flaw of the network: it must always choose a letter. If this were to be implemented with this consideration in mind, then the network should be able to identify when it has been given an image which is not recognisable as any of the Latin characters as an input. It should then be able to mark this submission as incorrect, rather than choosing the letter whose shape most closely matches the image.
 
 \end{enumerate}
 
 \subsubsection{Extension Objectives}
 
-Unfortunately, none of the extension objectives were implemented as they required significant refactors to the codebase. Extension objectives 1 and 2 could not be implemented easily as it would require adding a setting to games which makes them private or public. In this context, a private game would be one where a `host' user would create the game and only users which they directly send an invite to would be allowed to join the game. Any other users would not be able to see this game when queueing. \\
+Unfortunately, none of the extension objectives were implemented as they required significant refactors to the codebase. Extension objectives 1 and 2 could not be implemented easily as they would require adding a setting to games which makes them private or public. In this context, a private game would be one where a `host' user would create the game and only users which they directly send an invite to would be allowed to join the game. Any other users would not be able to see this game when queueing. \\
 
-Implementing this feature would require an additional check when queueing, to check the visibility status of the game to ensure that the user only queues into public games. If a user were to receive an invite, they would need to make a request to a new method, which queues the user into the game with the same gameID that matches the invite they were sent. Additionally, the appropriate controls would need to be added to the client application such that a user can invite others to their game and change the visibility status of their game. One issue that may arise is whether only the `host' user should be able to change the visibility status---this would require each game storing its respective `host' and only allowing the relevant client access to these controls. Although, this is technically already implemented since the gameID is constructed from the `host' user and the current time. However extracting the userID from this string is challenging if their have numbers in their username. \\
+Implementing this feature would require an additional check when queueing, to check the visibility status of the game to ensure that the user only queues into public games. If a user were to receive an invite, they would need to make a request to a new method, which queues the user into the game with the same gameID that matches the invite they were sent. Additionally, the appropriate controls would need to be added to the client application such that a user can invite others to their game and change the visibility status of their game. One issue that may arise is whether only the `host' user should be able to change the visibility status---this would require each game storing its respective `host' and only allowing the relevant client access to these controls. Although, this is technically already implemented since the gameID is constructed from the `host' user and the current time. However extracting the userID from this string is challenging if they have numbers in their username. \\
 
 The third extension objective would require a restructure of the SQL database, as well as optimisations to how this data is stored and when the unnecessary records are deleted. This is covered further in section 4.4.3. \\
 
@@ -2357,7 +2371,7 @@ This feedback was useful for the evaluation of the techinical solution, as the i
 
 Furthermore the interviewee highlighted some missing translations in the application. I had attempted to minimise the amount of text boxes without hindering the accessibility of the user interface, as a way to avoid missing translations. However it seems there a few obscure text boxes which I did not incorporate translations into, so an improvement may be to fix any missing localisation. \\
 
-% // "would work in practice"
+As for the interviewee's experience with teaching young children how to write, they stated that they believe the solution would be effective for those learning pencil control. While the end user for this project was not young children, this statement may stil imply that the solution is also effective for those able to write, but are learning a new script. I myself found that a similar application from Analysis is convinenient to use and effective at its purpose. There are many similarities between learning to write and learning to write in a different script, hence this feedback suggests that the produced solution is effective in solving the proposed problem.
 
 \subsection{System Improvements}
 
@@ -2367,11 +2381,11 @@ As discussed earlier, there are improvements that could feasibly be made to some
 
 The connection between the client application and the server is the underlying system on which the technical solution runs on. It was shown during Testing that client devices from outside the Local Area Network (LAN) could not establish a connection to the server. This is an issue with the Internet Service Provider (ISP) which the server application uses to connect to the internet: Toob. Toob is one of the many ISPs which use Carrier-Grade NAT (CGNAT) where multiple customers share a single public IP address. The public IP address is required by the client to uniquely identify the machine on which the server is running, however CGNAT does not provide unique public IP addresses to its devices. \\
 
-The main issue caused by CGNAT is the absence of port forwarding. If the server device has a unique public IP address, then a request made by the client application will only reach the router which connects the server's LAN to the internet. By supplying a port number as part of the request, the router can send any packets which use this port number to the local IP address of the server machine. This is called port forwarding, and is required to expose the server application to the internet. \\
+The main issue caused by CGNAT is the absence of custom port forwarding. If the server device has a unique public IP address, then a request made by the client application will only reach the router which connects the server's LAN to the internet. By supplying a port number as part of the request, the router can send any packets which use this port number to the local IP address of the server machine. This is called port forwarding, and is required to expose the server application to the internet. CGNAT works in a similar way to regular NAT when making a request from the network: port forwarding is used to return a server response to a client. However in the setup which the technical solution uses, it is the server rather than the client using CGNAT.\@ The client is not returning a response to the server and is instead making a request---a custom port fowarding must be set up in order for this request to reach the server, which CGNAT does not provide. \\
 
-There are systems which provide a workaround to CGNAT.\@ A `tunnel' can be used to link a machine with a public website, which is hosted by the tunnel provider. The client can instead make its requests to this website which are `tunnelled' to the server machine. However I found this to be quite a hacky alternative and the options often came with a subscription, as well as making the client-server network more complicated. Toob is designed to be easy to use for an average internet user---CGNAT acts as an extra layer between the router and the internet, preventing direct access through a locked-down environment. It is not a suitable ISP choice for the technical solution I have produced. \\
+There are systems which provide a workaround to CGNAT.\@ A `tunnel' can be used to link a machine with a public website, which is hosted by the tunnel provider. The client can instead make its requests to this website which are `tunnelled' to the server machine. However I found this to be quite a hacky alternative and the options often came with a subscription, as well as making the client-server network more complicated. Toob is designed to be easy to use for an average internet user---CGNAT acts as an extra layer between the router and the internet, and is not a suitable ISP choice for the technical solution I have produced. \\
 
-Before switching to Toob, the ISP which the server connected through was Virgin Media. This is a more traditional ISP which allocates a unique public IPv4 address to a device, which allowed a device outside of the LAN to establish a connection to the server. \\
+Before switching to Toob, the ISP which the server connected through was Virgin Media. This is a more traditional ISP which allocates a unique public IPv4 address to a device. This allowed a device outside of the LAN to successfully establish a connection to the server. \\
 
 \subsubsection{User Interface}
 
@@ -2424,6 +2438,8 @@ If the score \(q\) given to the confidence of a letter is in \([0,2]\), then the
 \end{equation*}
 
 This means that for any score which is less than a highly accurate recall, the `easing factor' decreases such that the interval for the letter decreases. The function defined by \(f(q)\) has a root at \(q=4\), which is where the interval is not changed.
+
+% // how would you then implement this?
 
 \newpage
 \section{Technical Solution}
@@ -2605,3 +2621,14 @@ I have included references to the main documentation used when creating the tech
 \href{https://stackoverflow.com/questions/7609839/accessing-a-forms-control-from-a-separate-thread}{Accessing a Windows Form Control from outside the thread it was created on}
 
 \end{document}
+
+
+% questions du jour:
+
+% ~ embedded links in pdf
+% ~ do i specifically have enough diagrams
+% ~ have i sufficiently explained the neural network
+% ~ do i need a test for every objective
+% ~ do i need a whole system test
+% ~ what if uml diagrams are a little inaccurate
+% ~ is my testing video too fast

@@ -73,9 +73,9 @@ namespace client_app
 					break;
 				case VALID:
 					Hide();
-					Main main = new Main(userID, Languages.languageCodes[languageIndex]);
-					main.ShowDialog();
-					main.Dispose();
+					menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
+					menu.main.ShowDialog();
+					menu.main.Dispose();
 					Show();
 					break;
 				case USER_DOES_NOT_EXIST:
@@ -109,9 +109,9 @@ namespace client_app
 					this.txt_passwordconfirm.ResetText();
 
 					Hide();
-					Main main = new Main(userID, Languages.languageCodes[languageIndex]);
-					main.ShowDialog();
-					main.Dispose();
+					menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
+					menu.main.ShowDialog();
+					menu.main.Dispose();
 					Show();
 					break;
 				case USERID_TAKEN:

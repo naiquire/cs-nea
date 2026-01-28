@@ -1,4 +1,7 @@
-﻿namespace client_app.menus.games
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace client_app.menus.games
 {
     public class Elimination : Game, IPlayable
     {

@@ -8,25 +8,25 @@ namespace server_app
 		private static readonly Channel<(string code, string colour, string message)> _logChannel = Channel.CreateUnbounded<(string, string, string)>();
 		private static readonly Channel<string> _errorChannel = Channel.CreateUnbounded<string>();
 
-		public static void Log(string code, string colour, string message)
+		public static async void Log(string code, string colour, string message)
 		{
-			Console.Write($"[");
-			if (Enum.TryParse(colour[0].ToString().ToUpper() + colour[1..], out ConsoleColor c))
-			{
-				// capitalise the first letter of the colour string to match the enum type
-				Console.ForegroundColor = c;
-			}
+			//Console.Write($"[");
+			//if (Enum.TryParse(colour[0].ToString().ToUpper() + colour[1..], out ConsoleColor c))
+			//{
+			//	// capitalise the first letter of the colour string to match the enum type
+			//	Console.ForegroundColor = c;
+			//}
 
-			Console.Write($"{code}");
-			Console.ResetColor();
-			Console.WriteLine($"] {message}");
+			//Console.Write($"{code}");
+			//Console.ResetColor();
+			//Console.WriteLine($"] {message}");
 
-			//await _logChannel.Writer.WriteAsync((code, colour, message));
+			await _logChannel.Writer.WriteAsync((code, colour, message));
 		}
-		public static void ErrorLog(string message)
+		public static async void ErrorLog(string message)
 		{
-			Console.Write($"["); Console.ForegroundColor = ConsoleColor.Red; Console.Write($"ERROR"); Console.ResetColor(); Console.WriteLine($"] {message}");
-			//await _errorChannel.Writer.WriteAsync(message);
+			//Console.Write($"["); Console.ForegroundColor = ConsoleColor.Red; Console.Write($"ERROR"); Console.ResetColor(); Console.WriteLine($"] {message}");
+			await _errorChannel.Writer.WriteAsync(message);
 		}
 		
 		public static void SetupAsync()
@@ -63,7 +63,7 @@ namespace server_app
 				top.SplitColumns(topLeft, topRight);
 				var bottom = new Layout("bottom");
 					var bottomLeft = new Layout("bottomLeft").Ratio(1);
-						bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/]\n\ngirl go do your testing").Expand().RoundedBorder());
+						bottomLeft.Update(new Panel("[bold][paleturquoise1]Information[/][/]\n\nTesting for Objective 4\n\n(i) [dim]Sending a friend request[/]\n(ii) [dim]Sending duplicate friend requests[/]\n(iii) [dim]Online receiving[/]\n(iv) [dim]Offline receiving[/]\n(v) [dim]Removing a friend[/]\n(vi) [dim]UI is updated[/]\n").Expand().RoundedBorder());
 					var bottomRight = new Layout("bottomRight").Ratio(2);
 						bottomRight.Update(errorPanel);
 				bottom.SplitColumns(bottomLeft, bottomRight);

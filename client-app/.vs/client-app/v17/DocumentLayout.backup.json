@@ -3,7 +3,31 @@
   "WorkspaceRootPath": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\components\\inputpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\uxelements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\uxelements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\elimination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\games\\elimination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\games\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\components\\inputpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\components\\inputpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -13,26 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|c:\\users\\naiquire\\documents\\general\\relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\uxelements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\uxelements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\hub-connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\elimination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\games\\elimination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA0FB626-EA4F-492F-A889-8347A8C7AF5C}|client-app\\client-app.csproj|solutionrelative:client-app\\menus\\games\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,8 +46,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 144,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 13,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "login.cs",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs",
+              "RelativeDocumentMoniker": "client-app\\login.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\login.cs",
+              "RelativeToolTip": "client-app\\login.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwFwAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T22:53:00.063Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -53,25 +70,8 @@
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UXelements.cs",
-              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\UXelements.cs",
-              "RelativeDocumentMoniker": "client-app\\menus\\UXelements.cs",
-              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\UXelements.cs",
-              "RelativeToolTip": "client-app\\menus\\UXelements.cs",
-              "ViewState": "AgIAAJsBAAAAAAAAAADwv8IBAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-04T19:36:17.351Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3822e751-eb69-4b0e-b301-595a9e4c74d5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{f4fc5ff1-28ef-4b04-ad02-6b298310ccc7}"
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",
@@ -84,6 +84,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "UXelements.cs",
+              "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\UXelements.cs",
+              "RelativeDocumentMoniker": "client-app\\menus\\UXelements.cs",
+              "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\UXelements.cs",
+              "RelativeToolTip": "client-app\\menus\\UXelements.cs",
+              "ViewState": "AgIAAFoEAAAAAAAAAAAgwGwEAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-04T19:36:17.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "main.Designer.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.Designer.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\main.Designer.cs",
@@ -91,24 +104,24 @@
               "RelativeToolTip": "client-app\\menus\\main.Designer.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAkwG0BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-16T19:49:21.013Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-16T19:49:21.013Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Elimination.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\Elimination.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\games\\Elimination.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\Elimination.cs",
               "RelativeToolTip": "client-app\\menus\\games\\Elimination.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAWwDEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:47:31.014Z"
+              "WhenOpened": "2026-01-05T20:47:31.014Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "Versus.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\Versus.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\games\\Versus.cs",
@@ -116,12 +129,11 @@
               "RelativeToolTip": "client-app\\menus\\games\\Versus.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:42:48.248Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:42:48.248Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "InputPanel.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\components\\InputPanel.cs",
               "RelativeDocumentMoniker": "client-app\\components\\InputPanel.cs",
@@ -134,38 +146,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Game.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\Game.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\games\\Game.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\games\\Game.cs",
               "RelativeToolTip": "client-app\\menus\\games\\Game.cs",
-              "ViewState": "AgIAALUAAAAAAAAAAAAAAK4AAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAAAH0AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-04T11:28:53.408Z"
+              "WhenOpened": "2026-01-04T11:28:53.408Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "hub-connection.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs",
               "RelativeDocumentMoniker": "client-app\\hub-connection.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\hub-connection.cs",
               "RelativeToolTip": "client-app\\hub-connection.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAqwC4AAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAAAFUAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-03T22:13:37.13Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "main.cs",
               "DocumentMoniker": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs",
               "RelativeDocumentMoniker": "client-app\\menus\\main.cs",
               "ToolTip": "C:\\Users\\naiquire\\Documents\\General\\Relay\\github\\cs-nea-app\\client-app\\client-app\\menus\\main.cs",
               "RelativeToolTip": "client-app\\menus\\main.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAwwGIAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAADgBAAAAAAAAAAD4v1oBAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-03T22:31:29.783Z",
               "EditorCaption": ""
