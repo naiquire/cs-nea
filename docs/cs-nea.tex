@@ -782,7 +782,6 @@ In each of these gamemodes, the user is presented with a Latin character and a d
 
 An SQL database is used to store accounts for each user, as well as statistics for the Latin characters from A to Z. Each user has an account which details their login credentials, Elo rank, and localisation. The application's language can be changed to some of the common languages which use the Latin alphabet, and each user's chosen language is saved in their account details. Each user has an Elo rank, which ranks their fluency in writing the Latin characters compared to others. \\
 
-% // maybe update this to be more accurate
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{resx/overview.png}
@@ -865,14 +864,16 @@ The use of static Maxtrix and Vector objects in the \textbf{Data} class was not 
 
 \subsubsection{Backpropagation}
 
-Backpropagation is the process by which the parameters for the network are optimised to accurately evaluate a user's submission. The \textbf{Backpropagation} class is constructed with a batch of training data, where the size of the batch is assigned to a variable. The weights and biases for the network are then loaded using the methods in the \textbf{Data} class. The flowchart below outlines the general process for performing the backpropagation algorithm. \\
+Backpropagation is the process by which the parameters for the network are optimised to accurately evaluate a user's submission. The \textbf{Backpropagation} class is constructed with a batch of training data, where the size of the batch is assigned to a variable. The weights and biases for the network are then loaded using the methods in the \textbf{Data} class. The list below outlines the general process for performing the backpropagation algorithm. \\
 
-% // i don't even know how i messed this one up
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\linewidth]{resx/flow_backprop.png}
-    \caption{Flowchart detailing the implementation of the backpropagation algorithm}
-\end{figure}
+\begin{itemize}
+    Perform the forward pass of the network.
+    Calculate the neuron errors for the output layers.
+    Calculate the neuron errors for the hidden layers.
+    Calculate the weight gradients and the bias gradients.
+    Update the network parameters using the average gradients.
+    Save the updated network parameters to their respective files.
+\end{itemize}
 
 The program then iterates through each set of images and labels, and applies the backpropagation algorithm to these sets. A new instance of the \textbf{Network} class is instantiated, passing in the input values and network parameters. If the result of the network correctly matches the label of the image then a counter is incremented. A second counter is incremented regardless of this condition, in order to produce an accuracy percentage. \\
 
@@ -2469,7 +2470,7 @@ This means that for any score which is less than a highly accurate recall, the `
         server/Accounts.cs & Account management & \\\hline
         server/Program.cs/ & Server configuration & page \\\hline
 
-        client/menus/Main.cs & Calculating a summary of a user's statistics & page \\\hline
+        client/menus/Main.cs/CalculateStatsOverview() & Calculating a summary of a user's statistics & page \\\hline
         client/menus/Main.Designer.cs/ConfigGamePanels() & Configuring the panels to display the available game types & page \\\hline
         client/hub-connection.cs/AddHandles() & Client logic for receiving server invokations & page \\\hline
 
@@ -2652,10 +2653,10 @@ I have included references to the main documentation used when creating the tech
 
 % questions du jour:
 
-% ~ embedded links in pdf
-% ~ do i specifically have enough diagrams
-% ~ have i sufficiently explained the neural network
-% ~ do i need a test for every objective
-% ~ do i need a whole system test
-% ~ what if uml diagrams are a little inaccurate
-% ~ is my testing video too fast
+% ~ embedded links in pdf OKAY
+% ~ do i specifically have enough diagrams PROBABLY
+% ~ have i sufficiently explained the neural network ??
+% ~ do i need a test for every objective PROBABLY
+% ~ do i need a whole system test YES
+% ~ what if uml diagrams are a little inaccurate NO
+% ~ is my testing video too fast NO
