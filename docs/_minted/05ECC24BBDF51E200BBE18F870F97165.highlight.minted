@@ -1,0 +1,20 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{Microsoft.AspNetCore.SignalR}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.games}\PYG{p}{;}
+
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.connections}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{partial}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Connection}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{Hub}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{receiveSubmission}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{gameID}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{byte}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{Queueing}\PYG{p}{.}\PYG{n}{LoadSubmission}\PYG{p}{(}\PYG{n}{gameID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{requestRound}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{gameID}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{Queueing}\PYG{p}{.}\PYG{n}{RequestRound}\PYG{p}{(}\PYG{n}{gameID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

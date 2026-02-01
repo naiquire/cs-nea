@@ -1,9 +1,4 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-
-// insane memory usage happens before EvaluateSubmission() is called in Game. i don't know when but its not the neural net
-// could be: preprocess, uh actually that's it. yeah definitely take a look at that thing lol
 
 namespace server_app.neuralNetwork
 {
@@ -38,7 +33,7 @@ namespace server_app.neuralNetwork
 
 			EvaluateNetwork();
 		}
-		
+
 		private void EvaluateNetwork()
 		{
 			// for each layer excluding the input layer

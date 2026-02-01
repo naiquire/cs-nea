@@ -1,0 +1,165 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{Microsoft.AspNetCore.SignalR}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.connections}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.databases}\PYG{p}{;}
+
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.games}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nf}{Versus}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{IHubContext}\PYG{o}{\PYGZlt{}}\PYG{n}{Connection}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{context}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{Game}\PYG{p}{(}\PYG{n}{context}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Games}\PYG{p}{.}\PYG{n}{Versus}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{IPlayable}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{rounds}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{n}{friendData}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{userCache}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[];}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{n}{Dictionary}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{scores}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[];}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{override}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{StartGame}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{userIDs}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{scores}\PYG{p}{[}\PYG{n}{userID}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{c+c1}{// cache user data to allow for rank updates after dequeue during game}
+\PYG{+w}{			}\PYG{n}{userCache}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{userDatas}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]);}
+\PYG{+w}{			}\PYG{n}{userCache}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{userDatas}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]);}
+
+\PYG{+w}{			}\PYG{k}{await}\PYG{+w}{ }\PYG{k}{base}\PYG{p}{.}\PYG{n}{StartGame}\PYG{p}{();}
+
+\PYG{+w}{			}\PYG{n}{letters}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{GenerateLetters}\PYG{p}{(}\PYG{n}{rounds}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{();}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{roundCount}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{rounds}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{AwaitRound}\PYG{p}{();}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{Task}\PYG{p}{.}\PYG{n}{Delay}\PYG{p}{(}\PYG{l+m+mi}{3000}\PYG{p}{);}
+
+\PYG{+w}{				}\PYG{n}{startTime}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DateTime}\PYG{p}{.}\PYG{n}{UtcNow}\PYG{p}{;}
+\PYG{+w}{				}\PYG{n}{currentResponses}\PYG{p}{.}\PYG{n}{Clear}\PYG{p}{();}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SendLetter}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{letters}\PYG{p}{[}\PYG{n}{roundCount}\PYG{p}{]);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{k}{else}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{EndGame}\PYG{p}{();}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{override}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{LoadResponse}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{byte}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{base}\PYG{p}{.}\PYG{n}{LoadResponse}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{currentResponses}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{GetPlayerCount}\PYG{p}{())}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{EvaluationPhase}\PYG{p}{(}\PYG{n}{letters}\PYG{p}{[}\PYG{n}{roundCount}\PYG{p}{]);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EvaluationPhase}\PYG{p}{(}\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{correctUsers}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[];}
+
+\PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{userIDs}\PYG{p}{.}\PYG{n}{Count}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{EvaluateSubmission}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{))}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{correctUsers}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SendResult}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{gameStats}\PYG{p}{[}\PYG{n}{userIDs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{correctUsers}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{c+c1}{// if none correct then a winner is not determined}
+\PYG{+w}{				}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{userIDs}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{scores}\PYG{p}{[}\PYG{n}{userID}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{l+m+mf}{0.5}\PYG{p}{;}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SendVersusResults}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{null}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{k}{else}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{c+c1}{// otherwise the user with the lowest time who is also correct is the winner}
+\PYG{+w}{				}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{TimeSpan}\PYG{+w}{ }\PYG{n}{time}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{lowest}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{p}{.}\PYG{n}{Empty}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{TimeSpan}\PYG{p}{.}\PYG{n}{MaxValue}\PYG{p}{);}
+\PYG{+w}{				}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{correctUsers}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{time}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{gameStats}\PYG{p}{[}\PYG{n}{userID}\PYG{p}{].}\PYG{n}{time}\PYG{p}{[}\PYG{n}{roundCount}\PYG{p}{];}
+\PYG{+w}{					}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{time}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{lowest}\PYG{p}{.}\PYG{n}{time}\PYG{p}{)}
+\PYG{+w}{					}\PYG{p}{\PYGZob{}}
+\PYG{+w}{						}\PYG{n}{lowest}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{time}\PYG{p}{);}
+\PYG{+w}{					}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{				}\PYG{n}{scores}\PYG{p}{[}\PYG{n}{lowest}\PYG{p}{.}\PYG{n}{user}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SendVersusResults}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{lowest}\PYG{p}{.}\PYG{n}{user}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{n}{roundCount}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{ContinueRequest}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{continueRequests}\PYG{p}{.}\PYG{n}{Contains}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{))}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{continueRequests}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{continueRequests}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{GetPlayerCount}\PYG{p}{())}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{();}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{override}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EndGame}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{userCache}\PYG{p}{.}\PYG{n}{Count}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{expectedScore}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mf}{1.0}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n}{Pow}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{?}\PYG{+w}{ }\PYG{n}{userCache}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{].}\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{userCache}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{].}\PYG{n}{rank}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{userCache}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{].}\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{userCache}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{].}\PYG{n}{rank}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{l+m+mf}{400.0}\PYG{p}{));}
+\PYG{+w}{				}\PYG{n}{expectedScore}\PYG{+w}{ }\PYG{o}{*=}\PYG{+w}{ }\PYG{n}{rounds}\PYG{p}{;}
+
+\PYG{+w}{				}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{CalculateRank}\PYG{p}{(}\PYG{n}{userCache}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{expectedScore}\PYG{p}{);}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Database}\PYG{p}{.}\PYG{n}{UpdateRank}\PYG{p}{(}\PYG{n}{userCache}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rank}\PYG{p}{))}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Connection}\PYG{p}{.}\PYG{n}{map}\PYG{p}{.}\PYG{n}{TryGetValue}\PYG{p}{(}\PYG{n}{userCache}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{k+kt}{string?}\PYG{+w}{ }\PYG{n}{connectionID}\PYG{p}{))}
+\PYG{+w}{					}\PYG{p}{\PYGZob{}}
+\PYG{+w}{						}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{hubContext}\PYG{p}{.}\PYG{n}{Clients}\PYG{p}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{n}{connectionID}\PYG{p}{).}\PYG{n}{SendAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateRank\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rank}\PYG{p}{);}
+\PYG{+w}{					}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{k}{else}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{Database}\PYG{p}{.}\PYG{n}{outputException}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}Failed to update user rank : \PYGZlt{}\PYGZob{}userCache[i].userID\PYGZcb{}\PYGZgt{}\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{base}\PYG{p}{.}\PYG{n}{EndGame}\PYG{p}{();}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{CalculateRank}\PYG{p}{(}\PYG{n}{friendData}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{expectedScore}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{k}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{user}\PYG{p}{.}\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{2100}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{k}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{32}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{k}{else}\PYG{+w}{ }\PYG{n+nf}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{user}\PYG{p}{.}\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{2400}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{k}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{16}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{k}{else}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{k}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{24}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{n}{k}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{n}{rounds}\PYG{p}{;}
+
+\PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)(}\PYG{n}{user}\PYG{p}{.}\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{k}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{scores}\PYG{p}{[}\PYG{n}{user}\PYG{p}{.}\PYG{n}{userID}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{expectedScore}\PYG{p}{));}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{SendVersusResults}\PYG{p}{(}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{userIDs}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string?}\PYG{+w}{ }\PYG{n}{winner}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{userIDs}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Connection}\PYG{p}{.}\PYG{n}{map}\PYG{p}{.}\PYG{n}{TryGetValue}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{k+kt}{string?}\PYG{+w}{ }\PYG{n}{connectionID}\PYG{p}{))}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{hubContext}\PYG{p}{.}\PYG{n}{Clients}\PYG{p}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{n}{connectionID}\PYG{p}{).}\PYG{n}{SendAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveVersusResult\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{winner}\PYG{p}{);}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

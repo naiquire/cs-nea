@@ -1,0 +1,19 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Windows.Forms}\PYG{p}{;}
+
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{internal}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Program}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{n+na}{[STAThread]}
+\PYG{+w}{		}\PYG{k}{static}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{Main}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{Application}\PYG{p}{.}\PYG{n}{EnableVisualStyles}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{Application}\PYG{p}{.}\PYG{n}{SetCompatibleTextRenderingDefault}\PYG{p}{(}\PYG{k}{false}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{LoadWords}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{Application}\PYG{p}{.}\PYG{n}{Run}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Login}\PYG{p}{());}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

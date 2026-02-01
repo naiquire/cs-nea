@@ -1,0 +1,80 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{Microsoft.AspNetCore.SignalR}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.databases}\PYG{p}{;}
+
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.connections}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{partial}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Connection}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{Hub}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{n}{Dictionary}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{map}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[];}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{clientConnected}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{c+c1}{// fail\PYGZhy{}safe for server crash}
+\PYG{+w}{			}\PYG{n}{map}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{map}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Context}\PYG{p}{.}\PYG{n}{ConnectionId}\PYG{p}{);}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{LoadUserData}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{))}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{map}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{				}\PYG{k}{return}\PYG{+w}{ }\PYG{k}{false}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{UpdateOnline}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{true}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{k}{true}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{clientDisconnected}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{UpdateOnline}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{false}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{map}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{Logger}\PYG{p}{.}\PYG{n}{Log}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}LOGOUT\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}green\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZlt{}\PYGZob{}userID\PYGZcb{}\PYGZgt{} has disconnected\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{override}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{OnDisconnectedAsync}\PYG{p}{(}\PYG{n}{Exception}\PYG{o}{?}\PYG{+w}{ }\PYG{n}{exception}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{c+c1}{// unexpected disconnection}
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{connectionID}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Context}\PYG{p}{.}\PYG{n}{ConnectionId}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{user}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{.}\PYG{n}{Keys}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{map}\PYG{p}{[}\PYG{n}{user}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{connectionID}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{Logger}\PYG{p}{.}\PYG{n}{Log}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}WARN\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}yellow\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZlt{}\PYGZob{}user\PYGZcb{}\PYGZgt{} has unexpectedly disconnected\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{					}\PYG{n}{map}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{user}\PYG{p}{);}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{k}{base}\PYG{p}{.}\PYG{n}{OnDisconnectedAsync}\PYG{p}{(}\PYG{n}{exception}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{LoadUserData}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{Database}\PYG{p}{.}\PYG{n}{LoadUserData}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{n}{userData}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{))}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{k}{return}\PYG{+w}{ }\PYG{k}{false}\PYG{p}{;}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{map}\PYG{p}{.}\PYG{n}{TryGetValue}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{k+kt}{string?}\PYG{+w}{ }\PYG{n}{connectionID}\PYG{p}{))}
+\PYG{+w}{            }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{k}{await}\PYG{+w}{ }\PYG{n}{Clients}\PYG{p}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{n}{connectionID}\PYG{p}{).}\PYG{n}{SendAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveUserData\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{);}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{k}{true}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{UpdateOnline}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{online}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{Database}\PYG{p}{.}\PYG{n}{LoadFriends}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{friends}\PYG{p}{))}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{return}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{friend}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{friends}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{map}\PYG{p}{.}\PYG{n}{TryGetValue}\PYG{p}{(}\PYG{n}{friend}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{out}\PYG{+w}{ }\PYG{k+kt}{string?}\PYG{+w}{ }\PYG{n}{connectionID}\PYG{p}{))}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{Clients}\PYG{p}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{n}{connectionID}\PYG{p}{).}\PYG{n}{SendAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateOnline\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{online}\PYG{p}{);}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

@@ -1,0 +1,195 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{Microsoft.AspNetCore.SignalR.Client}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Threading.Tasks}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Drawing}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Windows.Forms}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app.Properties}\PYG{p}{;}
+
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{partial}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Login}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{Form}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{languageIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{GetLanguageIndex}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{languageIndex}\PYG{p}{;}
+
+\PYG{+w}{		}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{VALID}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+
+\PYG{+w}{		}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{INCORRECT\PYGZus{}PASSWORD}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{USERID\PYGZus{}TAKEN}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{+w}{		}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{USER\PYGZus{}DOES\PYGZus{}NOT\PYGZus{}EXIST}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{USER\PYGZus{}LOGGED\PYGZus{}IN\PYGZus{}ON\PYGZus{}OTHER\PYGZus{}DEVICE}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}
+
+\PYG{+w}{		}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{ERROR\PYGZus{}OCCURED}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{n+nf}{Login}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{InitializeComponent}\PYG{p}{();}
+
+\PYG{+w}{			}\PYG{n}{txt\PYGZus{}userID}\PYG{p}{.}\PYG{n}{TextChanged}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{sender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{TextChanged}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{sender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{.}\PYG{n}{TextChanged}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{sender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+
+\PYG{+w}{			}\PYG{n}{btn\PYGZus{}language}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{supportedLanguages}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{];}
+\PYG{+w}{			}\PYG{n}{hub\PYGZus{}connection}\PYG{p}{.}\PYG{n}{InjectForm}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{null}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{InitialiseConnection}\PYG{p}{();}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{InitialiseConnection}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hub\PYGZus{}connection}\PYG{p}{.}\PYG{n}{configConnection}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}Main.address\PYGZcb{}/accounts\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hub\PYGZus{}connection}\PYG{p}{.}\PYG{n}{addLoginHandles}\PYG{p}{(}\PYG{n}{connection}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{await}\PYG{+w}{ }\PYG{n}{hub\PYGZus{}connection}\PYG{p}{.}\PYG{n}{startConnection}\PYG{p}{(}\PYG{n}{connection}\PYG{p}{);}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{Closed}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{ConnectionClosed}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{State}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{HubConnectionState}\PYG{p}{.}\PYG{n}{Disconnected}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{return}\PYG{p}{;}
+
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}connection}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Connected\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{loader\PYGZus{}connecting}\PYG{p}{.}\PYG{n}{Stop}\PYG{p}{();}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{ConnectionClosed}\PYG{p}{(}\PYG{n}{Exception}\PYG{+w}{ }\PYG{n}{arg}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{this}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}connection}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Reconnecting\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{this}\PYG{p}{.}\PYG{n}{loader\PYGZus{}connecting}\PYG{p}{.}\PYG{n}{Start}\PYG{p}{();}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{await}\PYG{+w}{ }\PYG{n}{hub\PYGZus{}connection}\PYG{p}{.}\PYG{n}{startConnection}\PYG{p}{(}\PYG{n}{connection}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{this}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}connection}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Connected\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{this}\PYG{p}{.}\PYG{n}{loader\PYGZus{}connecting}\PYG{p}{.}\PYG{n}{Stop}\PYG{p}{();}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{HandleLoginSuccess}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{success}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{switch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{success}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{INCORRECT\PYGZus{}PASSWORD}\PYG{p}{:}
+\PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Incorrect Password\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{VALID}\PYG{p}{:}
+\PYG{+w}{					}\PYG{n}{Hide}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Main}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]);}
+\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{ShowDialog}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Dispose}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{Show}\PYG{p}{();}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{USER\PYGZus{}DOES\PYGZus{}NOT\PYGZus{}EXIST}\PYG{p}{:}
+\PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Account does not exist\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{ERROR\PYGZus{}OCCURED}\PYG{p}{:}
+\PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}An error occurred. Please wait and try again\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{USER\PYGZus{}LOGGED\PYGZus{}IN\PYGZus{}ON\PYGZus{}OTHER\PYGZus{}DEVICE}\PYG{p}{:}
+\PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}User is currently logged in on another device\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{default}\PYG{p}{:}
+\PYG{+w}{					}\PYG{k}{throw}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n+nf}{Exception}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}Languages.localisation[\PYGZdq{}}\PYG{n}{Unrecognised}\PYG{+w}{ }\PYG{n}{success}\PYG{+w}{ }\PYG{n}{code}\PYG{l+s}{\PYGZdq{}][Languages.languageCodes[languageIndex]]\PYGZcb{} \PYGZlt{} \PYGZob{}success\PYGZcb{} \PYGZgt{}\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{HandleAccountCreationSuccess}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{success}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{switch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{success}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{VALID}\PYG{p}{:}
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{btn\PYGZus{}login}\PYG{p}{);}
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{btn\PYGZus{}createAccount}\PYG{p}{);}
+
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{);}
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{btn\PYGZus{}requestAccount}\PYG{p}{);}
+
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{Location}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Point}\PYG{p}{(}\PYG{l+m+mi}{560}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{250}\PYG{p}{);}
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Location}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Point}\PYG{p}{(}\PYG{l+m+mi}{560}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{290}\PYG{p}{);}
+
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+\PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+
+\PYG{+w}{					}\PYG{n}{Hide}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Main}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]);}
+\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{ShowDialog}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Dispose}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{Show}\PYG{p}{();}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{USERID\PYGZus{}TAKEN}\PYG{p}{:}
+\PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Username is not available\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{ERROR\PYGZus{}OCCURED}\PYG{p}{:}
+\PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}An error occured. Please wait and try again\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{default}\PYG{p}{:}
+\PYG{+w}{					}\PYG{k}{throw}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n+nf}{Exception}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}Languages.localisation[\PYGZdq{}}\PYG{n}{Unrecognised}\PYG{+w}{ }\PYG{n}{success}\PYG{+w}{ }\PYG{n}{code}\PYG{l+s}{\PYGZdq{}][Languages.languageCodes[languageIndex]]\PYGZcb{} \PYGZlt{} \PYGZob{}success\PYGZcb{} \PYGZgt{}\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{btn\PYGZus{}login\PYGZus{}Click}\PYG{p}{(}\PYG{k+kt}{object}\PYG{+w}{ }\PYG{n}{sender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{EventArgs}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{txt\PYGZus{}userID}\PYG{p}{.}\PYG{n}{Text}\PYG{p}{.}\PYG{n}{Trim}\PYG{p}{();}
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{password}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{Text}\PYG{p}{;}
+\PYG{+w}{			}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{p}{.}\PYG{n}{IsNullOrWhiteSpace}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{||}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{p}{.}\PYG{n}{IsNullOrEmpty}\PYG{p}{(}\PYG{n}{password}\PYG{p}{))}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{return}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{State}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{HubConnectionState}\PYG{p}{.}\PYG{n}{Connected}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{.}\PYG{n}{InvokeAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}loginRequest\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{password}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{btn\PYGZus{}createAccount\PYGZus{}Click}\PYG{p}{(}\PYG{k+kt}{object}\PYG{+w}{ }\PYG{n}{sender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{EventArgs}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{btn\PYGZus{}login}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Remove}\PYG{p}{(}\PYG{n}{btn\PYGZus{}createAccount}\PYG{p}{);}
+
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{Location}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Point}\PYG{p}{(}\PYG{l+m+mi}{560}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{260}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Location}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Point}\PYG{p}{(}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Location}\PYG{p}{.}\PYG{n}{X}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{.}\PYG{n}{Location}\PYG{p}{.}\PYG{n}{Y}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{.}\PYG{n}{Size}\PYG{p}{.}\PYG{n}{Height}\PYG{p}{);}
+
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{btn\PYGZus{}requestAccount}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{btn\PYGZus{}requestAccount\PYGZus{}Click}\PYG{p}{(}\PYG{k+kt}{object}\PYG{+w}{ }\PYG{n}{sender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{EventArgs}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{.}\PYG{n}{Text}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Passwords do not match\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{				}\PYG{k}{return}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{txt\PYGZus{}userID}\PYG{p}{.}\PYG{n}{Text}\PYG{p}{.}\PYG{n}{Trim}\PYG{p}{();}
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{password}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{Text}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{localisation}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{];}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{string}\PYG{p}{.}\PYG{n}{IsNullOrWhiteSpace}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{||}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{p}{.}\PYG{n}{IsNullOrEmpty}\PYG{p}{(}\PYG{n}{password}\PYG{p}{))}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{return}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{State}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{HubConnectionState}\PYG{p}{.}\PYG{n}{Connected}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{.}\PYG{n}{InvokeAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}accountRequest\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{password}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{localisation}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{btn\PYGZus{}language\PYGZus{}Click}\PYG{p}{(}\PYG{k+kt}{object}\PYG{+w}{ }\PYG{n}{sender}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{EventArgs}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{languageIndex}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{languageIndex}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{supportedLanguages}\PYG{p}{.}\PYG{n}{Count}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{languageIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{n}{btn\PYGZus{}language}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{supportedLanguages}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{];}
+
+\PYG{+w}{			}\PYG{n}{txt\PYGZus{}userID}\PYG{p}{.}\PYG{n}{PlaceholderText}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Username\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{			}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{PlaceholderText}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Password\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{			}\PYG{n}{lbl\PYGZus{}header}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Account\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

@@ -10,7 +10,7 @@
 \PYG{+w}{            }\PYG{n}{losses}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{loss}\PYG{p}{)}
 \PYG{+w}{        }\PYG{p}{\PYGZcb{}}
 
-\PYG{+w}{        }\PYG{n}{upatedWeights}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{UpdateWeights}\PYG{p}{(}\PYG{n}{weights}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{weightAdjustments}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{updatedWeights}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{UpdateWeights}\PYG{p}{(}\PYG{n}{weights}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{weightAdjustments}\PYG{p}{)}
 \PYG{+w}{        }\PYG{n}{updatedBiases}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{UpdateBiases}\PYG{p}{(}\PYG{n}{biases}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{biasAdjustments}\PYG{p}{)}
 
 \PYG{+w}{        }\PYG{n}{SaveWeights}\PYG{p}{(}\PYG{n}{updatedWeights}\PYG{p}{)}

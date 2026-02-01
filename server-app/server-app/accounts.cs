@@ -8,7 +8,7 @@ namespace server_app
 {
     public class Accounts : Hub
     {
-		private static string hashPassword(string input) => Encoding.UTF8.GetString(SHA512.HashData(Encoding.UTF8.GetBytes(input)));
+		private static string HashPassword(string input) => Encoding.UTF8.GetString(SHA512.HashData(Encoding.UTF8.GetBytes(input)));
 		public async void loginRequest(string userID, string password)
         {
             if (Connection.map.ContainsKey(userID))
@@ -17,7 +17,7 @@ namespace server_app
                 return;
             }
 
-            if (Database.LoginRequest(userID, hashPassword(password), out int success))
+            if (Database.LoginRequest(userID, HashPassword(password), out int success))
             {
                 Logger.Log("LOGIN", "lime", $"<{userID}> logged in with success <{success}> ");
             }
@@ -30,7 +30,7 @@ namespace server_app
 
         public async void accountRequest(string userID, string password, string localisation)
         {
-            if (Database.AccountRequest(userID, hashPassword(password), localisation, out int success))
+            if (Database.AccountRequest(userID, HashPassword(password), localisation, out int success))
             {
                 Logger.Log("ACCOUNT", "fuchsia", $"<{userID}> created account with success <{success}>");
             }

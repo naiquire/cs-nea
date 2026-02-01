@@ -11,7 +11,7 @@ namespace client_app.menus.games
 {
 	public struct gameStats
 	{
-		public gameStats(object _) // requires argument for some reason
+		public gameStats(object _)
 		{
 			correct = new List<bool>();
 			accuracy = new List<double>();

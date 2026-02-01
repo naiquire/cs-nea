@@ -22,7 +22,7 @@ namespace client_app
 		};
 		public static readonly Dictionary<string, Dictionary<string, string>> localisation = new Dictionary<string, Dictionary<string, string>>();
 
-		public static void loadWords()
+		public static void LoadWords()
 		{
 			localisation.Add("Friends", new Dictionary<string, string>()
 			{
@@ -368,8 +368,6 @@ namespace client_app
 				{"pt", "Vencedor" },
 				{"de", "Gewinner" },
 			});
-			// Confirm Password
-			// Incorrect Password
 		}
 	}
 }

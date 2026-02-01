@@ -1,0 +1,193 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app.components}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app.menus.games}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{Microsoft.AspNetCore.SignalR.Client}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Collections.Generic}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Threading.Tasks}\PYG{p}{;}
+
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{hub\PYGZus{}connection}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{Login}\PYG{+w}{ }\PYG{n}{login}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{Main}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{;}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{InjectForm}\PYG{p}{(}\PYG{n}{Login}\PYG{+w}{ }\PYG{n}{l}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Main}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{m}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{k}{null}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{main}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{m}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{l}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{k}{null}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{login}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{l}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n+nf}{configConnection}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{address}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n}{connection}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{HubConnectionBuilder}\PYG{p}{()}
+\PYG{+w}{				}\PYG{p}{.}\PYG{n}{WithUrl}\PYG{p}{(}\PYG{n}{address}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{.}\PYG{n}{Build}\PYG{p}{();}
+\PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{Task}\PYG{o}{\PYGZlt{}}\PYG{n}{HubConnection}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{startConnection}\PYG{p}{(}\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{retries}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{State}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{HubConnectionState}\PYG{p}{.}\PYG{n}{Disconnected}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{retries}\PYG{o}{++}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{login}\PYG{o}{?.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{					}\PYG{p}{\PYGZob{}}
+\PYG{+w}{						}\PYG{n}{login}\PYG{p}{.}\PYG{n}{loader\PYGZus{}connecting}\PYG{p}{.}\PYG{n}{Stop}\PYG{p}{();}
+\PYG{+w}{						}\PYG{n}{login}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}connection}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Disconnected\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{					}\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{				}\PYG{k}{try}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{.}\PYG{n}{StartAsync}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{login}\PYG{o}{?.}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{k}{catch}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{login}\PYG{o}{?.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{login}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}An error occured while connecting to the server\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{login}\PYG{p}{.}\PYG{n}{GetLanguageIndex}\PYG{p}{()]]));}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n+nf}{addLoginHandles}\PYG{p}{(}\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}loginSuccess\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{success}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{login}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{login}\PYG{p}{.}\PYG{n}{HandleLoginSuccess}\PYG{p}{(}\PYG{n}{success}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}accountSuccess\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{success}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{login}\PYG{p}{.}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{login}\PYG{p}{.}\PYG{n}{HandleAccountCreationSuccess}\PYG{p}{(}\PYG{n}{success}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n+nf}{addHandles}\PYG{p}{(}\PYG{n}{HubConnection}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{n}{userData}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveUserData\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{userData}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{.}\PYG{n}{ClientConnected}\PYG{p}{(}\PYG{n}{userData}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateUserData\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{aboutMe}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{localisation}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{.}\PYG{n}{UpdateUserData}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{aboutMe}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{localisation}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveInvites\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{invites}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{.}\PYG{n}{HandleInvites}\PYG{p}{(}\PYG{n}{invites}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{n}{friendData}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateFriendData\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{data}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{.}\PYG{n}{UpdateFriendData}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}removeFriend\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{friendID}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{.}\PYG{n}{RemoveFriend}\PYG{p}{(}\PYG{n}{friendID}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateOnline\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{user}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{online}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{.}\PYG{n}{UpdateOnline}\PYG{p}{(}\PYG{n}{user}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{online}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{char}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{statistics}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateStatistics\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{letter}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{statistics}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{Main}\PYG{p}{.}\PYG{n}{userData}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{[}\PYG{n}{letter}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{statistics}\PYG{p}{;}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{n}{friendData}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateUsers\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{users}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{panel\PYGZus{}main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{UpdateUsers}\PYG{p}{(}\PYG{n}{users}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}awaitStart\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{AwaitStart}\PYG{p}{()));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}startGame\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{StartGame}\PYG{p}{()));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}awaitRound\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{AwaitRound}\PYG{p}{()));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{char}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveLetter\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{letter}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{SubmissionPhase}\PYG{p}{(}\PYG{n}{letter}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{bool}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{TimeSpan}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveResults\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{correct}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{time}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{EvaluationPhase}\PYG{p}{(}\PYG{n}{correct}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{time}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveVersusResult\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{winner}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{GetGameType}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{Games}\PYG{p}{.}\PYG{n}{Versus}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{					}\PYG{p}{\PYGZob{}}
+\PYG{+w}{						}\PYG{n}{Versus}\PYG{+w}{ }\PYG{n}{game}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Versus}\PYG{p}{)}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{;}
+\PYG{+w}{						}\PYG{n}{game}\PYG{p}{.}\PYG{n}{VersusResults}\PYG{p}{(}\PYG{n}{winner}\PYG{p}{);}
+\PYG{+w}{					}\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{k}{else}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{Main}\PYG{p}{.}\PYG{n}{LoadAlert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Unexpected game type. Returning to main menu.\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{					}\PYG{n}{main}\PYG{p}{.}\PYG{n}{btn\PYGZus{}home}\PYG{p}{.}\PYG{n}{PerformClick}\PYG{p}{();}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}receiveKnockoutResult\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{aliveUsers}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{GetGameType}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{Games}\PYG{p}{.}\PYG{n}{Elimination}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{					}\PYG{p}{\PYGZob{}}
+\PYG{+w}{						}\PYG{n}{Elimination}\PYG{+w}{ }\PYG{n}{game}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Elimination}\PYG{p}{)}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{;}
+\PYG{+w}{						}\PYG{n}{game}\PYG{p}{.}\PYG{n}{EliminationResults}\PYG{p}{(}\PYG{n}{aliveUsers}\PYG{p}{);}
+\PYG{+w}{					}\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{k}{else}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{Main}\PYG{p}{.}\PYG{n}{LoadAlert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Unexpected game type. Returning to main menu.\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{					}\PYG{n}{main}\PYG{p}{.}\PYG{n}{btn\PYGZus{}home}\PYG{p}{.}\PYG{n}{PerformClick}\PYG{p}{();}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}endGame\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{EndGame}\PYG{p}{()));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}updateRank\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{rank}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{.}\PYG{n}{GetGameType}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{Games}\PYG{p}{.}\PYG{n}{Versus}\PYG{p}{)}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{					}\PYG{p}{\PYGZob{}}
+\PYG{+w}{						}\PYG{n}{Versus}\PYG{+w}{ }\PYG{n}{game}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Versus}\PYG{p}{)}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{game}\PYG{p}{;}
+\PYG{+w}{						}\PYG{n}{game}\PYG{p}{.}\PYG{n}{UpdateRank}\PYG{p}{(}\PYG{n}{rank}\PYG{p}{);}
+\PYG{+w}{					}\PYG{p}{\PYGZcb{}));}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{				}\PYG{k}{else}
+\PYG{+w}{				}\PYG{p}{\PYGZob{}}
+\PYG{+w}{					}\PYG{n}{Main}\PYG{p}{.}\PYG{n}{LoadAlert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Unexpected game type. Returning to main menu.\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{					}\PYG{n}{main}\PYG{p}{.}\PYG{n}{btn\PYGZus{}home}\PYG{p}{.}\PYG{n}{PerformClick}\PYG{p}{();}
+\PYG{+w}{				}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{n}{connection}\PYG{p}{.}\PYG{n}{On}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{string}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}alert\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{message}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Invoke}\PYG{p}{(}\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Action}\PYG{p}{(()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{Main}\PYG{p}{.}\PYG{n}{LoadAlert}\PYG{p}{(}\PYG{n}{message}\PYG{p}{)));}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{});}
+
+\PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{connection}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

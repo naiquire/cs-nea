@@ -14,7 +14,7 @@ namespace server_app
 		{
 			Logger.SetupAsync();
 			Logger.Log("SERVER", "white", "Application started");
-			Data.BuildMatrices();
+			Data.BuildMatrices(Data.LoadWeights(), Data.LoadBiases());
 
 			startNginx();
 			hostBuilder(args).Build().Run();

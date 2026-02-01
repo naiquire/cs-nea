@@ -138,7 +138,8 @@ namespace client_app
 				}
 				else
 				{
-					throw new Exception("unexpected game type");
+					Main.LoadAlert("Unexpected game type. Returning to main menu.");
+					main.btn_home.PerformClick();
 				}
 			});
 			connection.On<List<string>>("receiveKnockoutResult", (aliveUsers) =>
@@ -153,7 +154,8 @@ namespace client_app
 				}
 				else
 				{
-					throw new Exception("unexpected game type");
+					Main.LoadAlert("Unexpected game type. Returning to main menu.");
+					main.btn_home.PerformClick();
 				}
 			});
 
@@ -173,7 +175,8 @@ namespace client_app
 				}
 				else
 				{
-					throw new Exception("unexpected game type");
+					Main.LoadAlert("Unexpected game type. Returning to main menu.");
+					main.btn_home.PerformClick();
 				}
 			});
 

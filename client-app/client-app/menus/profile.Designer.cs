@@ -10,9 +10,6 @@ namespace client_app.menus
 {
 	partial class Profile
 	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
 		private void InitialiseComponent()
@@ -35,14 +32,14 @@ namespace client_app.menus
 			this.lbl_username.BorderThickness = 0;
 			this.lbl_username.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.lbl_username.DefaultText = "username";
-			this.lbl_username.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-			this.lbl_username.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-			this.lbl_username.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_username.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_username.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_username.DisabledState.BorderColor = System.Drawing.Color.FromArgb(208, 208, 208);
+			this.lbl_username.DisabledState.FillColor = System.Drawing.Color.FromArgb(226, 226, 226);
+			this.lbl_username.DisabledState.ForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_username.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_username.FocusedState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_username.Font = new System.Drawing.Font("Bahnschrift SemiBold", 31.75F, System.Drawing.FontStyle.Bold);
-			this.lbl_username.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-			this.lbl_username.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_username.ForeColor = System.Drawing.Color.FromArgb(26, 26, 26);
+			this.lbl_username.HoverState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_username.IconLeft = global::client_app.Properties.Resources.account;
 			this.lbl_username.IconLeftOffset = new System.Drawing.Point(10, 0);
 			this.lbl_username.IconLeftSize = new System.Drawing.Size(45, 50);
@@ -62,14 +59,14 @@ namespace client_app.menus
 			this.lbl_rank.BorderThickness = 0;
 			this.lbl_rank.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.lbl_rank.DefaultText = "rank";
-			this.lbl_rank.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-			this.lbl_rank.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-			this.lbl_rank.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_rank.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_rank.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_rank.DisabledState.BorderColor = System.Drawing.Color.FromArgb(208, 208, 208);
+			this.lbl_rank.DisabledState.FillColor = System.Drawing.Color.FromArgb(226, 226, 226);
+			this.lbl_rank.DisabledState.ForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_rank.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_rank.FocusedState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_rank.Font = new System.Drawing.Font("Bahnschrift", 15.75F);
-			this.lbl_rank.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-			this.lbl_rank.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_rank.ForeColor = System.Drawing.Color.FromArgb(52, 52, 52);
+			this.lbl_rank.HoverState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_rank.IconLeft = global::client_app.Properties.Resources.rank;
 			this.lbl_rank.IconLeftOffset = new System.Drawing.Point(10, 0);
 			this.lbl_rank.Location = new System.Drawing.Point(20, 100);
@@ -88,14 +85,14 @@ namespace client_app.menus
 			this.lbl_total.BorderThickness = 0;
 			this.lbl_total.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.lbl_total.DefaultText = "total";
-			this.lbl_total.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-			this.lbl_total.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-			this.lbl_total.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_total.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_total.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_total.DisabledState.BorderColor = System.Drawing.Color.FromArgb(208, 208, 208);
+			this.lbl_total.DisabledState.FillColor = System.Drawing.Color.FromArgb(226, 226, 226);
+			this.lbl_total.DisabledState.ForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_total.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_total.FocusedState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_total.Font = new System.Drawing.Font("Bahnschrift", 15.75F);
-			this.lbl_total.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-			this.lbl_total.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_total.ForeColor = System.Drawing.Color.FromArgb(52, 52, 52);
+			this.lbl_total.HoverState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_total.IconLeft = global::client_app.Properties.Resources.total;
 			this.lbl_total.IconLeftOffset = new System.Drawing.Point(10, 0);
 			this.lbl_total.Location = new System.Drawing.Point(385, 100);
@@ -114,14 +111,14 @@ namespace client_app.menus
 			this.lbl_accuracy.BorderThickness = 0;
 			this.lbl_accuracy.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.lbl_accuracy.DefaultText = "accuracy";
-			this.lbl_accuracy.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-			this.lbl_accuracy.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-			this.lbl_accuracy.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_accuracy.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-			this.lbl_accuracy.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_accuracy.DisabledState.BorderColor = System.Drawing.Color.FromArgb(208, 208, 208);
+			this.lbl_accuracy.DisabledState.FillColor = System.Drawing.Color.FromArgb(226, 226, 226);
+			this.lbl_accuracy.DisabledState.ForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_accuracy.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(138, 138, 138);
+			this.lbl_accuracy.FocusedState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_accuracy.Font = new System.Drawing.Font("Bahnschrift", 15.75F);
-			this.lbl_accuracy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-			this.lbl_accuracy.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+			this.lbl_accuracy.ForeColor = System.Drawing.Color.FromArgb(52, 52, 52);
+			this.lbl_accuracy.HoverState.BorderColor = System.Drawing.Color.FromArgb(94, 148, 255);
 			this.lbl_accuracy.IconLeft = global::client_app.Properties.Resources.accuracy;
 			this.lbl_accuracy.IconLeftOffset = new System.Drawing.Point(10, 0);
 			this.lbl_accuracy.Location = new System.Drawing.Point(750, 100);
@@ -158,8 +155,8 @@ namespace client_app.menus
 			//
 			this.btn_addFriends.AutoRoundedCorners = true;
 			this.btn_addFriends.BorderRadius = 14;
-			this.btn_addFriends.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
-			this.btn_addFriends.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247)))));
+			this.btn_addFriends.FillColor = System.Drawing.Color.FromArgb(247, 113, 163);
+			this.btn_addFriends.FillColor2 = System.Drawing.Color.FromArgb(197, 113, 247);
 			this.btn_addFriends.ForeColor = System.Drawing.Color.White;
 			this.btn_addFriends.Location = new Point(40, 900);
 			this.btn_addFriends.Name = "btn_login";
@@ -171,8 +168,8 @@ namespace client_app.menus
 			//
 			this.btn_removeFriends.AutoRoundedCorners = true;
 			this.btn_removeFriends.BorderRadius = 14;
-			this.btn_removeFriends.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(113)))), ((int)(((byte)(163)))));
-			this.btn_removeFriends.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(113)))), ((int)(((byte)(247)))));
+			this.btn_removeFriends.FillColor = System.Drawing.Color.FromArgb(247, 113, 163);
+			this.btn_removeFriends.FillColor2 = System.Drawing.Color.FromArgb(197, 113, 247);
 			this.btn_removeFriends.ForeColor = System.Drawing.Color.White;
 			this.btn_removeFriends.Location = new Point(240, 900);
 			this.btn_removeFriends.Name = "btn_login";

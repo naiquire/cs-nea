@@ -12,9 +12,6 @@ namespace client_app
 {
 	partial class Main
 	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
 		private void InitialiseComponent()
@@ -60,7 +57,7 @@ namespace client_app
 			this.lbl_friendsLabel.AutoSize = false;
 			this.lbl_friendsLabel.BackColor = Color.Transparent;
 			this.lbl_friendsLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.lbl_friendsLabel.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbl_friendsLabel.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
 			this.lbl_friendsLabel.ForeColor = System.Drawing.Color.FromArgb(247, 113, 163);
 			this.lbl_friendsLabel.Location = new System.Drawing.Point(0, 20);
 			this.lbl_friendsLabel.Name = "txt_friendsLabel";
@@ -122,12 +119,12 @@ namespace client_app
 			const int gamePanelY = 100;
 			const int gamePanelSizeX = 1000;
 			const int gamePanelSizeY = 90;
-			const int gamePanelSpacing = 50;
+			const int gamePanelYSpacing = 50;
 
 			const int padding = 10;
-			const int lblSizeX = 300;
-			const int btnSizeX = 160;
-			const int txtSizeY = gamePanelSizeY - 2 * padding;
+			const int lbl_nameSizeX = 300;
+			const int btn_queueSizeX = 160;
+			const int paddedSizeY = gamePanelSizeY - 2 * padding;
 
 			Guna2GradientPanel createGamePanel((int X, int Y) location, (int X, int Y) size)
 			{
@@ -197,20 +194,23 @@ namespace client_app
 			}
 
 			this.panel_accuracy = createGamePanel((gamePanelX, gamePanelY), (gamePanelSizeX, gamePanelSizeY));
-			this.panel_1v1 = createGamePanel((gamePanelX, gamePanelY + gamePanelSizeY + gamePanelSpacing), (gamePanelSizeX, gamePanelSizeY));
-			this.panel_knockout = createGamePanel((gamePanelX, gamePanelY + 2 * (gamePanelSizeY + gamePanelSpacing)), (gamePanelSizeX, gamePanelSizeY));
+			this.panel_1v1 = createGamePanel((gamePanelX, gamePanelY + gamePanelSizeY + gamePanelYSpacing), (gamePanelSizeX, gamePanelSizeY));
+			this.panel_knockout = createGamePanel((gamePanelX, gamePanelY + 2 * (gamePanelSizeY + gamePanelYSpacing)), (gamePanelSizeX, gamePanelSizeY));
 
-			this.lbl_accuracy = createGameLabel(Languages.localisation["Accuracy"][Main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
-			this.lbl_1v1 = createGameLabel(Languages.localisation["Versus"][Main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
-			this.lbl_knockout = createGameLabel(Languages.localisation["Knockout"][Main.userData.localisation], (2 * padding, padding), (lblSizeX, txtSizeY));
+			this.lbl_accuracy = createGameLabel(Languages.localisation["Accuracy"][Main.userData.localisation], (2 * padding, padding), (lbl_nameSizeX, paddedSizeY));
+			this.lbl_1v1 = createGameLabel(Languages.localisation["Versus"][Main.userData.localisation], (2 * padding, padding), (lbl_nameSizeX, paddedSizeY));
+			this.lbl_knockout = createGameLabel(Languages.localisation["Knockout"][Main.userData.localisation], (2 * padding, padding), (lbl_nameSizeX, paddedSizeY));
 
-			this.btn_queueAccuracy = createQueueButton((gamePanelSizeX - 2 * padding - btnSizeX, 2 * padding), (btnSizeX, gamePanelSizeY - 4 * padding));
-			this.btn_queue1v1 = createQueueButton((gamePanelSizeX - 2 * padding - btnSizeX, 2 * padding), (btnSizeX, gamePanelSizeY - 4 * padding));
-			this.btn_queueKnockout = createQueueButton((gamePanelSizeX - 2 * padding - btnSizeX, 2 * padding), (btnSizeX, gamePanelSizeY - 4 * padding));
+			this.btn_queueAccuracy = createQueueButton((gamePanelSizeX - 2 * padding - btn_queueSizeX, 2 * padding), (btn_queueSizeX, gamePanelSizeY - 4 * padding));
+			this.btn_queue1v1 = createQueueButton((gamePanelSizeX - 2 * padding - btn_queueSizeX, 2 * padding), (btn_queueSizeX, gamePanelSizeY - 4 * padding));
+			this.btn_queueKnockout = createQueueButton((gamePanelSizeX - 2 * padding - btn_queueSizeX, 2 * padding), (btn_queueSizeX, gamePanelSizeY - 4 * padding));
 
-			this.txt_accuracy = createGameInfoTextbox("PLAYERS  :  1         |         ROUNDS : 10         |         UNRANKED", (2 * padding + lblSizeX + 2 * padding, padding), (gamePanelSizeX - (2 * padding + lblSizeX + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
-			this.txt_1v1 = createGameInfoTextbox("PLAYERS  :  2         |         ROUNDS : 10         |         RANKED", (2 * padding + lblSizeX + 2 * padding, padding), (gamePanelSizeX - (2 * padding + lblSizeX + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
-			this.txt_knockout = createGameInfoTextbox("PLAYERS  :  12         |         ELIMINATION         |         UNRANKED", (2 * padding + lblSizeX + 2 * padding, padding), (gamePanelSizeX - (2 * padding + lblSizeX + 2 * padding) - (4 * padding + btnSizeX), txtSizeY));
+			string accuracyInfo =    "PLAYERS  :  1          |         ROUNDS : 10         |         UNRANKED";
+			string versusInfo =      "PLAYERS  :  2          |         ROUNDS : 10         |           RANKED";
+			string eliminationInfo = "PLAYERS  :  12         |         ELIMINATION         |         UNRANKED";
+			this.txt_accuracy = createGameInfoTextbox(accuracyInfo, (4 * padding + lbl_nameSizeX, padding), (gamePanelSizeX - (4 * padding + lbl_nameSizeX) - (4 * padding + btn_queueSizeX), paddedSizeY));
+			this.txt_1v1 = createGameInfoTextbox(versusInfo, (4 * padding + lbl_nameSizeX, padding), (gamePanelSizeX - (4 * padding + lbl_nameSizeX) - (4 * padding + btn_queueSizeX), paddedSizeY));
+			this.txt_knockout = createGameInfoTextbox(eliminationInfo, (4 * padding + lbl_nameSizeX, padding), (gamePanelSizeX - (4 * padding + lbl_nameSizeX) - (4 * padding + btn_queueSizeX), paddedSizeY));
 
 			this.panel_accuracy.Controls.Add(this.lbl_accuracy);
 			this.panel_accuracy.Controls.Add(this.btn_queueAccuracy);
@@ -254,7 +254,6 @@ namespace client_app
 			const int buttonX = 260;
 			const int buttonY = 30;
 			const int padding = 5;
-
 			int y_offset = 10;
 
 			Guna2HtmlLabel createLabel(string text, (int X, int Y) location, (int X, int Y) size, ContentAlignment align)
@@ -264,7 +263,7 @@ namespace client_app
 					AutoSize = false,
 					BackColor = System.Drawing.Color.Transparent,
 					Cursor = System.Windows.Forms.Cursors.Arrow,
-					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0),
 					ForeColor = System.Drawing.Color.White,
 					Location = new Point(location.X, location.Y),
 					Margin = new System.Windows.Forms.Padding(6),
@@ -279,7 +278,7 @@ namespace client_app
 				var b = new Guna2Button()
 				{
 					BackColor = Color.Transparent,
-					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+					Font = new System.Drawing.Font("Bahnschrift SemiBold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0),
 					FillColor = Color.Transparent,
 					Location = new System.Drawing.Point(location.X, location.Y),
 					Name = text,

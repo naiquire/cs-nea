@@ -42,12 +42,10 @@ namespace client_app.menus
 			if (isFriend)
 			{
 				btn_addFriends.Enabled = false;
-				//btn_addFriends.Hide();
 			}
 			else
 			{
 				btn_removeFriends.Enabled = false;
-				//btn_removeFriends.Hide();
 			}
 		}
 

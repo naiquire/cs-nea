@@ -1,0 +1,12 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app.menus.games}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Accuracy}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{Game}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{IPlayable}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{n+nf}{Accuracy}\PYG{p}{(}\PYG{n}{Main}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{k}{base}\PYG{p}{(}\PYG{n}{main}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Games}\PYG{p}{.}\PYG{n}{Accuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

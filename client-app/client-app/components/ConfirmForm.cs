@@ -14,7 +14,7 @@ namespace client_app.components
 		{
 			SuspendLayout();
 
-			header = new Guna.UI2.WinForms.Guna2TextBox()
+			header = new Guna2TextBox()
 			{
 				BorderColor = Color.FromArgb(156, 156, 156),
 				BorderRadius = 10,
@@ -31,7 +31,7 @@ namespace client_app.components
 				TabIndex = 0,
 				TabStop = false,
 			};
-			btn_accept = new Guna.UI2.WinForms.Guna2GradientButton()
+			btn_accept = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 14,
@@ -44,7 +44,7 @@ namespace client_app.components
 				TabIndex = 1,
 				Text = Languages.localisation["Accept"][Main.userData.localisation],
 			};
-			btn_cancel = new Guna.UI2.WinForms.Guna2GradientButton()
+			btn_cancel = new Guna2GradientButton()
 			{
 				AutoRoundedCorners = true,
 				BorderRadius = 14,

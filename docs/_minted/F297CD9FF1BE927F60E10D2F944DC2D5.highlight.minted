@@ -1,0 +1,32 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{client\PYGZus{}app.menus.games}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Versus}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{Game}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{IPlayable}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{rankDelta}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{n+nf}{Versus}\PYG{p}{(}\PYG{n}{Main}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{k}{base}\PYG{p}{(}\PYG{n}{main}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Games}\PYG{p}{.}\PYG{n}{Versus}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{rankDelta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{VersusResults}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{winner}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configVersusResults}\PYG{p}{(}\PYG{n}{panel\PYGZus{}results}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{winner}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{override}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EndGame}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{base}\PYG{p}{.}\PYG{n}{EndGame}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configVersusEndgame}\PYG{p}{(}\PYG{n}{main}\PYG{p}{.}\PYG{n}{panel\PYGZus{}main}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rankDelta}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{UpdateRank}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{currentRank}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{previousRank}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Main}\PYG{p}{.}\PYG{n}{userData}\PYG{p}{.}\PYG{n}{rank}\PYG{p}{;}
+\PYG{+w}{			}\PYG{n}{rankDelta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{currentRank}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{previousRank}\PYG{p}{;}
+
+\PYG{+w}{			}\PYG{n}{Main}\PYG{p}{.}\PYG{n}{userData}\PYG{p}{.}\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{currentRank}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

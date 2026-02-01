@@ -5,167 +5,167 @@
 \contentsline {subsection}{\numberline {1.4}Initial Research}{5}{subsection.1.4}%
 \contentsline {subsubsection}{\numberline {1.4.1}Existing Programs}{5}{subsubsection.1.4.1}%
 \contentsline {paragraph}{Duolingo\\}{5}{section*.2}%
-\contentsline {paragraph}{Write It!\\}{6}{section*.3}%
-\contentsline {subsubsection}{\numberline {1.4.2}Potential Algorithms}{8}{subsubsection.1.4.2}%
+\contentsline {paragraph}{Write It!\\}{7}{section*.3}%
+\contentsline {subsubsection}{\numberline {1.4.2}Potential Algorithms}{9}{subsubsection.1.4.2}%
 \contentsline {paragraph}{Matrices\\}{9}{section*.4}%
-\contentsline {paragraph}{Neural Network\\}{9}{section*.5}%
-\contentsline {subsubsection}{\numberline {1.4.3}First Interview}{10}{subsubsection.1.4.3}%
-\contentsline {paragraph}{End User\\}{10}{section*.6}%
-\contentsline {paragraph}{Duolingo User\\}{13}{section*.7}%
+\contentsline {paragraph}{Neural Network\\}{10}{section*.5}%
+\contentsline {subsubsection}{\numberline {1.4.3}First Interview}{11}{subsubsection.1.4.3}%
+\contentsline {paragraph}{End User\\}{11}{section*.6}%
+\contentsline {paragraph}{Duolingo User\\}{14}{section*.7}%
 \contentsline {subsubsection}{\numberline {1.4.4}Key Requirements}{14}{subsubsection.1.4.4}%
-\contentsline {subsection}{\numberline {1.5}Further Research}{15}{subsection.1.5}%
-\contentsline {subsubsection}{\numberline {1.5.1}Prototype}{15}{subsubsection.1.5.1}%
-\contentsline {paragraph}{Execution\\}{15}{section*.8}%
-\contentsline {paragraph}{Function\\}{16}{section*.9}%
-\contentsline {paragraph}{Analysis\\}{16}{section*.10}%
-\contentsline {subsubsection}{\numberline {1.5.2}Second Interview}{16}{subsubsection.1.5.2}%
-\contentsline {subsection}{\numberline {1.6}Objectives}{18}{subsection.1.6}%
-\contentsline {subsubsection}{\numberline {1.6.1}Core Objectives}{18}{subsubsection.1.6.1}%
-\contentsline {subsubsection}{\numberline {1.6.2}Extension Objectives}{20}{subsubsection.1.6.2}%
-\contentsline {subsection}{\numberline {1.7}Modelling}{21}{subsection.1.7}%
-\contentsline {subsubsection}{\numberline {1.7.1}Class Diagrams}{21}{subsubsection.1.7.1}%
-\contentsline {subsubsection}{\numberline {1.7.2}Flowcharts}{22}{subsubsection.1.7.2}%
-\contentsline {subsubsection}{\numberline {1.7.3}Entity-Relationship Diagram}{24}{subsubsection.1.7.3}%
-\contentsline {subsubsection}{\numberline {1.7.4}Neural Network}{25}{subsubsection.1.7.4}%
-\contentsline {paragraph}{Forward Propagation\\}{25}{section*.11}%
-\contentsline {paragraph}{Backpropagation\\}{26}{section*.12}%
-\contentsline {paragraph}{Training\\}{27}{section*.13}%
-\contentsline {paragraph}{Image Preprocessing\\}{28}{section*.14}%
-\contentsline {subsubsection}{\numberline {1.7.5}Client-Server Connection}{28}{subsubsection.1.7.5}%
-\contentsline {subsubsection}{\numberline {1.7.6}Player Ranking}{28}{subsubsection.1.7.6}%
-\contentsline {section}{\numberline {2}Design}{30}{section.2}%
-\contentsline {subsection}{\numberline {2.1}High-level Overview}{30}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Choice of Language and Libraries}{30}{subsection.2.2}%
+\contentsline {subsection}{\numberline {1.5}Further Research}{16}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Prototype}{16}{subsubsection.1.5.1}%
+\contentsline {paragraph}{Execution\\}{16}{section*.8}%
+\contentsline {paragraph}{Function\\}{17}{section*.9}%
+\contentsline {paragraph}{Analysis\\}{17}{section*.10}%
+\contentsline {subsubsection}{\numberline {1.5.2}Second Interview}{17}{subsubsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.6}Objectives}{19}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Core Objectives}{19}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Extension Objectives}{21}{subsubsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.7}Modelling}{22}{subsection.1.7}%
+\contentsline {subsubsection}{\numberline {1.7.1}Class Diagrams}{22}{subsubsection.1.7.1}%
+\contentsline {subsubsection}{\numberline {1.7.2}Flowcharts}{23}{subsubsection.1.7.2}%
+\contentsline {subsubsection}{\numberline {1.7.3}Entity-Relationship Diagram}{25}{subsubsection.1.7.3}%
+\contentsline {subsubsection}{\numberline {1.7.4}Neural Network}{26}{subsubsection.1.7.4}%
+\contentsline {paragraph}{Forward Propagation\\}{26}{section*.11}%
+\contentsline {paragraph}{Backpropagation\\}{27}{section*.12}%
+\contentsline {paragraph}{Training\\}{28}{section*.13}%
+\contentsline {paragraph}{Image Preprocessing\\}{29}{section*.14}%
+\contentsline {subsubsection}{\numberline {1.7.5}Client-Server Connection}{29}{subsubsection.1.7.5}%
+\contentsline {subsubsection}{\numberline {1.7.6}Player Ranking}{29}{subsubsection.1.7.6}%
+\contentsline {section}{\numberline {2}Design}{31}{section.2}%
+\contentsline {subsection}{\numberline {2.1}High-level Overview}{31}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Choice of Language and Libraries}{31}{subsection.2.2}%
 \contentsline {section}{\hspace {1.3em}Server Design}{}{}
-\contentsline {subsection}{\numberline {2.3}Neural Network}{32}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Forward Propagation}{32}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Backpropagation}{34}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Image Preprocessing}{36}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.4}Training}{37}{subsubsection.2.3.4}%
-\contentsline {paragraph}{File Loading\\}{37}{section*.16}%
-\contentsline {paragraph}{Filtering\\}{38}{section*.17}%
-\contentsline {paragraph}{Sampling\\}{38}{section*.18}%
-\contentsline {subsubsection}{\numberline {2.3.5}Data Structures}{38}{subsubsection.2.3.5}%
-\contentsline {subsubsection}{\numberline {2.3.6}File Organisation}{38}{subsubsection.2.3.6}%
-\contentsline {subsubsection}{\numberline {2.3.7}UML Diagrams}{39}{subsubsection.2.3.7}%
-\contentsline {subsection}{\numberline {2.4}Games}{39}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Queueing}{40}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Game Logic}{41}{subsubsection.2.4.2}%
-\contentsline {paragraph}{Queueing\\}{41}{section*.19}%
-\contentsline {paragraph}{Game Start\\}{42}{section*.20}%
-\contentsline {paragraph}{Submission Phase\\}{42}{section*.21}%
-\contentsline {paragraph}{Evaluation Phase\\}{42}{section*.22}%
-\contentsline {paragraph}{Game End\\}{43}{section*.23}%
-\contentsline {subsubsection}{\numberline {2.4.3}Data structures}{43}{subsubsection.2.4.3}%
-\contentsline {subsubsection}{\numberline {2.4.4}Object-Oriented Design}{44}{subsubsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.5}Database}{45}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Database Design}{46}{subsubsection.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.5.2}UML Diagram}{46}{subsubsection.2.5.2}%
-\contentsline {subsubsection}{\numberline {2.5.3}SQL Queries}{47}{subsubsection.2.5.3}%
-\contentsline {subsubsection}{\numberline {2.5.4}Security of Data}{48}{subsubsection.2.5.4}%
-\contentsline {subsection}{\numberline {2.6}Client-Server Connection}{48}{subsection.2.6}%
-\contentsline {subsubsection}{\numberline {2.6.1}Server Configuration}{49}{subsubsection.2.6.1}%
-\contentsline {subsubsection}{\numberline {2.6.2}UML Diagrams}{50}{subsubsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.7}Object-Oriented Design}{50}{subsection.2.7}%
-\contentsline {subsubsection}{\numberline {2.7.1}Class Diagram}{51}{subsubsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.3}Neural Network}{33}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Forward Propagation}{33}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Backpropagation}{35}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Image Preprocessing}{37}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Training}{38}{subsubsection.2.3.4}%
+\contentsline {paragraph}{File Loading\\}{38}{section*.16}%
+\contentsline {paragraph}{Filtering\\}{39}{section*.17}%
+\contentsline {paragraph}{Sampling\\}{39}{section*.18}%
+\contentsline {subsubsection}{\numberline {2.3.5}Data Structures}{39}{subsubsection.2.3.5}%
+\contentsline {subsubsection}{\numberline {2.3.6}File Organisation}{39}{subsubsection.2.3.6}%
+\contentsline {subsubsection}{\numberline {2.3.7}UML Diagrams}{40}{subsubsection.2.3.7}%
+\contentsline {subsection}{\numberline {2.4}Games}{40}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Queueing}{41}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Game Logic}{42}{subsubsection.2.4.2}%
+\contentsline {paragraph}{Queueing\\}{43}{section*.19}%
+\contentsline {paragraph}{Game Start\\}{44}{section*.20}%
+\contentsline {paragraph}{Submission Phase\\}{44}{section*.21}%
+\contentsline {paragraph}{Evaluation Phase\\}{44}{section*.22}%
+\contentsline {paragraph}{Game End\\}{45}{section*.23}%
+\contentsline {subsubsection}{\numberline {2.4.3}Data structures}{45}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.4}Object-Oriented Design}{46}{subsubsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.5}Database}{47}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Database Design}{48}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}UML Diagram}{48}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}SQL Queries}{49}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}Security of Data}{50}{subsubsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.6}Client-Server Connection}{50}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Server Configuration}{51}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}UML Diagrams}{51}{subsubsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.7}Object-Oriented Design}{52}{subsection.2.7}%
+\contentsline {subsubsection}{\numberline {2.7.1}Class Diagram}{52}{subsubsection.2.7.1}%
 \contentsline {section}{\hspace {1.3em}Client Design}{}{}
-\contentsline {subsection}{\numberline {2.8}Client Menus}{52}{subsection.2.8}%
-\contentsline {subsubsection}{\numberline {2.8.1}Accounts}{52}{subsubsection.2.8.1}%
-\contentsline {paragraph}{Login\\}{52}{section*.25}%
-\contentsline {paragraph}{Account Creation\\}{53}{section*.26}%
-\contentsline {subsubsection}{\numberline {2.8.2}User Information}{53}{subsubsection.2.8.2}%
-\contentsline {paragraph}{Friends\\}{53}{section*.27}%
-\contentsline {paragraph}{Social\\}{54}{section*.28}%
-\contentsline {subsubsection}{\numberline {2.8.3}Profiles}{54}{subsubsection.2.8.3}%
-\contentsline {paragraph}{Searching\\}{54}{section*.29}%
-\contentsline {paragraph}{Algorithms\\}{54}{section*.30}%
-\contentsline {subsubsection}{\numberline {2.8.4}UML Diagrams}{54}{subsubsection.2.8.4}%
-\contentsline {subsection}{\numberline {2.9}Games}{55}{subsection.2.9}%
-\contentsline {subsubsection}{\numberline {2.9.1}Queueing}{56}{subsubsection.2.9.1}%
-\contentsline {subsubsection}{\numberline {2.9.2}Game Logic}{56}{subsubsection.2.9.2}%
-\contentsline {paragraph}{Game Start\\}{57}{section*.31}%
-\contentsline {paragraph}{Submission Phase\\}{57}{section*.32}%
-\contentsline {paragraph}{Evaluation Phase\\}{57}{section*.33}%
-\contentsline {paragraph}{Game End\\}{57}{section*.34}%
-\contentsline {subsubsection}{\numberline {2.9.3}UML Diagrams}{58}{subsubsection.2.9.3}%
-\contentsline {subsection}{\numberline {2.10}UI Design}{58}{subsection.2.10}%
-\contentsline {subsubsection}{\numberline {2.10.1}Accounts Page}{59}{subsubsection.2.10.1}%
-\contentsline {subsubsection}{\numberline {2.10.2}Home Page}{60}{subsubsection.2.10.2}%
-\contentsline {paragraph}{Profile Updates\\}{61}{section*.35}%
-\contentsline {paragraph}{Menu Label\\}{61}{section*.36}%
-\contentsline {paragraph}{Friends\\}{61}{section*.37}%
-\contentsline {paragraph}{Statistics\\}{61}{section*.38}%
-\contentsline {subsubsection}{\numberline {2.10.3}Profile}{62}{subsubsection.2.10.3}%
-\contentsline {subsubsection}{\numberline {2.10.4}Games}{62}{subsubsection.2.10.4}%
-\contentsline {paragraph}{Drawing Panel\\}{62}{section*.39}%
-\contentsline {paragraph}{Results\\}{63}{section*.40}%
-\contentsline {subsection}{\numberline {2.11}Object-Oriented Design}{65}{subsection.2.11}%
-\contentsline {subsubsection}{\numberline {2.11.1}Class Diagrams}{65}{subsubsection.2.11.1}%
-\contentsline {subsection}{\numberline {2.12}Client-Server Connection}{66}{subsection.2.12}%
-\contentsline {subsubsection}{\numberline {2.12.1}Creating a Connection}{67}{subsubsection.2.12.1}%
-\contentsline {subsubsection}{\numberline {2.12.2}Connection Handlers}{67}{subsubsection.2.12.2}%
-\contentsline {subsubsection}{\numberline {2.12.3}Starting a Connection}{67}{subsubsection.2.12.3}%
-\contentsline {subsubsection}{\numberline {2.12.4}Handling Connection Loss}{67}{subsubsection.2.12.4}%
-\contentsline {section}{\numberline {3}Testing}{68}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Testing}{68}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Accounts}{68}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Games}{69}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Neural Network}{73}{subsubsection.3.1.3}%
-\contentsline {subsubsection}{\numberline {3.1.4}Social}{76}{subsubsection.3.1.4}%
-\contentsline {subsubsection}{\numberline {3.1.5}Client-Server Connection}{78}{subsubsection.3.1.5}%
-\contentsline {subsection}{\numberline {3.2}Analysis of Testing}{79}{subsection.3.2}%
-\contentsline {paragraph}{Failed Tests\\}{79}{section*.41}%
-\contentsline {section}{\numberline {4}Evaluation}{80}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Overall Effectiveness of the System}{80}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Evaluation of Objectives}{80}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Core Objectives}{80}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Extension Objectives}{82}{subsubsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.3}End User Feedback}{82}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Feedback}{83}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Analysis}{83}{subsubsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.4}System Improvements}{83}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}Client-Server Connection}{83}{subsubsection.4.4.1}%
-\contentsline {subsubsection}{\numberline {4.4.2}User Interface}{84}{subsubsection.4.4.2}%
-\contentsline {subsubsection}{\numberline {4.4.3}Database Design}{84}{subsubsection.4.4.3}%
-\contentsline {subsubsection}{\numberline {4.4.4}Spaced Repetition}{84}{subsubsection.4.4.4}%
-\contentsline {section}{\numberline {5}Technical Solution}{86}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Contents}{86}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Code}{86}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Server}{86}{subsubsection.5.2.1}%
-\contentsline {paragraph}{connections/accounts.cs}{86}{section*.42}%
-\contentsline {paragraph}{connections/games.cs}{86}{section*.43}%
-\contentsline {paragraph}{connections/queueing.cs}{86}{section*.44}%
-\contentsline {paragraph}{connections/social.cs}{86}{section*.45}%
-\contentsline {paragraph}{databases/Database.cs}{86}{section*.46}%
-\contentsline {paragraph}{games/Accuracy.cs}{86}{section*.47}%
-\contentsline {paragraph}{games/Elimination.cs}{86}{section*.48}%
-\contentsline {paragraph}{games/Game.cs}{86}{section*.49}%
-\contentsline {paragraph}{games/Queueing.cs}{86}{section*.50}%
-\contentsline {paragraph}{games/Versus.cs}{86}{section*.51}%
-\contentsline {paragraph}{neuralNetwork/Backpropagation.cs}{86}{section*.52}%
-\contentsline {paragraph}{neuralNetwork/Data.cs}{86}{section*.53}%
-\contentsline {paragraph}{neuralNetwork/Network.cs}{87}{section*.54}%
-\contentsline {paragraph}{neuralNetwork/Training.cs}{87}{section*.55}%
-\contentsline {paragraph}{Accounts.cs}{87}{section*.56}%
-\contentsline {paragraph}{logger.cs}{87}{section*.57}%
-\contentsline {paragraph}{Program.cs}{87}{section*.58}%
-\contentsline {subsubsection}{\numberline {5.2.2}Client}{87}{subsubsection.5.2.2}%
-\contentsline {paragraph}{components/AlertForm.cs}{87}{section*.59}%
-\contentsline {paragraph}{components/ConfirmForm.cs}{87}{section*.60}%
-\contentsline {paragraph}{components/InputPanel.cs}{87}{section*.61}%
-\contentsline {paragraph}{components/UpdateForm.cs}{87}{section*.62}%
-\contentsline {paragraph}{menus/main.cs}{87}{section*.63}%
-\contentsline {paragraph}{menus/main.Designer.cs}{87}{section*.64}%
-\contentsline {paragraph}{menus/profile.cs}{87}{section*.65}%
-\contentsline {paragraph}{menus/profile.Designer.cs}{87}{section*.66}%
-\contentsline {paragraph}{menus/UXelements.cs}{87}{section*.67}%
-\contentsline {paragraph}{menus/games/Accuracy.cs}{88}{section*.68}%
-\contentsline {paragraph}{menus/games/Elimination.cs}{88}{section*.69}%
-\contentsline {paragraph}{menus/games/Game.cs}{88}{section*.70}%
-\contentsline {paragraph}{menus/games/Versus.cs}{88}{section*.71}%
-\contentsline {paragraph}{hub-connection.cs}{88}{section*.72}%
-\contentsline {paragraph}{localisation.cs}{88}{section*.73}%
-\contentsline {paragraph}{login.cs}{88}{section*.74}%
-\contentsline {paragraph}{login.Designer.cs}{88}{section*.75}%
-\contentsline {paragraph}{Program.cs}{88}{section*.76}%
-\contentsline {subsection}{\numberline {5.3}References}{88}{subsection.5.3}%
+\contentsline {subsection}{\numberline {2.8}Client Menus}{53}{subsection.2.8}%
+\contentsline {subsubsection}{\numberline {2.8.1}Accounts}{53}{subsubsection.2.8.1}%
+\contentsline {paragraph}{Login\\}{53}{section*.25}%
+\contentsline {paragraph}{Account Creation\\}{54}{section*.26}%
+\contentsline {subsubsection}{\numberline {2.8.2}User Information}{54}{subsubsection.2.8.2}%
+\contentsline {paragraph}{Friends\\}{54}{section*.27}%
+\contentsline {paragraph}{Social\\}{55}{section*.28}%
+\contentsline {subsubsection}{\numberline {2.8.3}Profiles}{55}{subsubsection.2.8.3}%
+\contentsline {paragraph}{Searching\\}{55}{section*.29}%
+\contentsline {paragraph}{Algorithms\\}{55}{section*.30}%
+\contentsline {subsubsection}{\numberline {2.8.4}UML Diagrams}{55}{subsubsection.2.8.4}%
+\contentsline {subsection}{\numberline {2.9}Games}{56}{subsection.2.9}%
+\contentsline {subsubsection}{\numberline {2.9.1}Queueing}{57}{subsubsection.2.9.1}%
+\contentsline {subsubsection}{\numberline {2.9.2}Game Logic}{57}{subsubsection.2.9.2}%
+\contentsline {paragraph}{Game Start\\}{58}{section*.31}%
+\contentsline {paragraph}{Submission Phase\\}{59}{section*.32}%
+\contentsline {paragraph}{Evaluation Phase\\}{59}{section*.33}%
+\contentsline {paragraph}{Game End\\}{59}{section*.34}%
+\contentsline {subsubsection}{\numberline {2.9.3}UML Diagrams}{60}{subsubsection.2.9.3}%
+\contentsline {subsection}{\numberline {2.10}UI Design}{60}{subsection.2.10}%
+\contentsline {subsubsection}{\numberline {2.10.1}Accounts Page}{61}{subsubsection.2.10.1}%
+\contentsline {subsubsection}{\numberline {2.10.2}Home Page}{62}{subsubsection.2.10.2}%
+\contentsline {paragraph}{Profile Updates\\}{63}{section*.35}%
+\contentsline {paragraph}{Menu Label\\}{63}{section*.36}%
+\contentsline {paragraph}{Friends\\}{63}{section*.37}%
+\contentsline {paragraph}{Statistics\\}{63}{section*.38}%
+\contentsline {subsubsection}{\numberline {2.10.3}Profile}{64}{subsubsection.2.10.3}%
+\contentsline {subsubsection}{\numberline {2.10.4}Games}{64}{subsubsection.2.10.4}%
+\contentsline {paragraph}{Drawing Panel\\}{64}{section*.39}%
+\contentsline {paragraph}{Results\\}{65}{section*.40}%
+\contentsline {subsection}{\numberline {2.11}Object-Oriented Design}{67}{subsection.2.11}%
+\contentsline {subsubsection}{\numberline {2.11.1}Class Diagrams}{67}{subsubsection.2.11.1}%
+\contentsline {subsection}{\numberline {2.12}Client-Server Connection}{68}{subsection.2.12}%
+\contentsline {subsubsection}{\numberline {2.12.1}Creating a Connection}{69}{subsubsection.2.12.1}%
+\contentsline {subsubsection}{\numberline {2.12.2}Connection Handlers}{69}{subsubsection.2.12.2}%
+\contentsline {subsubsection}{\numberline {2.12.3}Starting a Connection}{69}{subsubsection.2.12.3}%
+\contentsline {subsubsection}{\numberline {2.12.4}Handling Connection Loss}{69}{subsubsection.2.12.4}%
+\contentsline {section}{\numberline {3}Testing}{70}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Testing}{70}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Accounts}{70}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Games}{71}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Neural Network}{75}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}Social}{78}{subsubsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.5}Client-Server Connection}{80}{subsubsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.2}Analysis of Testing}{81}{subsection.3.2}%
+\contentsline {paragraph}{Failed Tests\\}{81}{section*.41}%
+\contentsline {section}{\numberline {4}Evaluation}{83}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Overall Effectiveness of the System}{83}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Evaluation of Objectives}{83}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Core Objectives}{83}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Extension Objectives}{85}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}End User Feedback}{85}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Feedback}{86}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Analysis}{86}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}System Improvements}{86}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Client-Server Connection}{86}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}User Interface}{87}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Database Design}{87}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}Spaced Repetition}{88}{subsubsection.4.4.4}%
+\contentsline {section}{\numberline {5}Technical Solution}{91}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Contents}{91}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Code}{92}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Server}{92}{subsubsection.5.2.1}%
+\contentsline {paragraph}{connections/accounts.cs}{92}{section*.42}%
+\contentsline {paragraph}{connections/games.cs}{94}{section*.43}%
+\contentsline {paragraph}{connections/queueing.cs}{94}{section*.44}%
+\contentsline {paragraph}{connections/social.cs}{95}{section*.45}%
+\contentsline {paragraph}{databases/Database.cs}{98}{section*.46}%
+\contentsline {paragraph}{games/Accuracy.cs}{108}{section*.47}%
+\contentsline {paragraph}{games/Elimination.cs}{109}{section*.48}%
+\contentsline {paragraph}{games/Game.cs}{112}{section*.49}%
+\contentsline {paragraph}{games/Queueing.cs}{117}{section*.50}%
+\contentsline {paragraph}{games/Versus.cs}{119}{section*.51}%
+\contentsline {paragraph}{neuralNetwork/Backpropagation.cs}{123}{section*.52}%
+\contentsline {paragraph}{neuralNetwork/Data.cs}{125}{section*.53}%
+\contentsline {paragraph}{neuralNetwork/Network.cs}{132}{section*.54}%
+\contentsline {paragraph}{neuralNetwork/Training.cs}{134}{section*.55}%
+\contentsline {paragraph}{Accounts.cs}{134}{section*.56}%
+\contentsline {paragraph}{logger.cs}{135}{section*.57}%
+\contentsline {paragraph}{Program.cs}{136}{section*.58}%
+\contentsline {subsubsection}{\numberline {5.2.2}Client}{138}{subsubsection.5.2.2}%
+\contentsline {paragraph}{components/AlertForm.cs}{138}{section*.59}%
+\contentsline {paragraph}{components/ConfirmForm.cs}{139}{section*.60}%
+\contentsline {paragraph}{components/InputPanel.cs}{141}{section*.61}%
+\contentsline {paragraph}{components/UpdateForm.cs}{142}{section*.62}%
+\contentsline {paragraph}{menus/main.cs}{146}{section*.63}%
+\contentsline {paragraph}{menus/main.Designer.cs}{153}{section*.64}%
+\contentsline {paragraph}{menus/profile.cs}{160}{section*.65}%
+\contentsline {paragraph}{menus/profile.Designer.cs}{162}{section*.66}%
+\contentsline {paragraph}{menus/UXelements.cs}{168}{section*.67}%
+\contentsline {paragraph}{menus/games/Accuracy.cs}{194}{section*.68}%
+\contentsline {paragraph}{menus/games/Elimination.cs}{194}{section*.69}%
+\contentsline {paragraph}{menus/games/Game.cs}{196}{section*.70}%
+\contentsline {paragraph}{menus/games/Versus.cs}{200}{section*.71}%
+\contentsline {paragraph}{hub-connection.cs}{200}{section*.72}%
+\contentsline {paragraph}{localisation.cs}{204}{section*.73}%
+\contentsline {paragraph}{login.cs}{205}{section*.74}%
+\contentsline {paragraph}{login.Designer.cs}{209}{section*.75}%
+\contentsline {paragraph}{Program.cs}{215}{section*.76}%
+\contentsline {subsection}{\numberline {5.3}References}{215}{subsection.5.3}%

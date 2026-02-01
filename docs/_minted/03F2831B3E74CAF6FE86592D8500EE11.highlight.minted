@@ -3,13 +3,7 @@
 
 \PYG{+w}{    }\PYG{k}{location}\PYG{+w}{ }\PYG{l+s}{/cs\PYGZhy{}nea}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
 \PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}pass}\PYG{+w}{ }\PYG{l+s}{http://localhost:3900}\PYG{p}{;}
-
-\PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}http\PYGZus{}version}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{l+s}{.1}\PYG{p}{;}
 \PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}set\PYGZus{}header}\PYG{+w}{ }\PYG{l+s}{Upgrade}\PYG{+w}{ }\PYG{n+nv}{\PYGZdl{}http\PYGZus{}upgrade}\PYG{p}{;}
 \PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}set\PYGZus{}header}\PYG{+w}{ }\PYG{l+s}{Connection}\PYG{+w}{ }\PYG{n+nv}{\PYGZdl{}connection\PYGZus{}upgrade}\PYG{p}{;}
-
-\PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}set\PYGZus{}header}\PYG{+w}{ }\PYG{l+s}{Host}\PYG{+w}{ }\PYG{n+nv}{\PYGZdl{}host}\PYG{p}{;}
-\PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}set\PYGZus{}header}\PYG{+w}{ }\PYG{l+s}{X\PYGZhy{}Real\PYGZhy{}IP}\PYG{+w}{ }\PYG{n+nv}{\PYGZdl{}remote\PYGZus{}addr}\PYG{p}{;}
-\PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}read\PYGZus{}timeout}\PYG{+w}{ }\PYG{l+m+mi}{86400}\PYG{p}{;}
 \PYG{+w}{    }\PYG{p}{\PYGZcb{}}
 \end{MintedVerbatim}

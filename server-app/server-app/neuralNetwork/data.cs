@@ -1,29 +1,17 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using System.Drawing;
 using System.IO.Compression;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace server_app.neuralNetwork
 {
 	public static class Data
 	{
-		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\neuralNetwork\data\";
-
-		private static readonly double[][,] weights = LoadWeights();
-		private static readonly double[][] biases = LoadBiases();
+		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server")}\neuralNetwork\data\";
 
 		public static readonly Matrix<double>[] weightsMatrices = new Matrix<double>[Network.layerCount - 1];
 		public static readonly Vector<double>[] biasesMatrices = new Vector<double>[Network.layerCount - 1];
 
-		public static void BuildMatrices()
-		{
-			for (int layer = 1; layer < Network.layerCount; layer++)
-			{
-				weightsMatrices[layer - 1] = Matrix<double>.Build.DenseOfArray(weights[layer - 1]);
-				biasesMatrices[layer - 1] = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
-			}
-		}
 		public static void BuildMatrices(double[][,] weights, double[][] biases)
 		{
 			for (int layer = 1; layer < Network.layerCount; layer++)

@@ -26,7 +26,7 @@ namespace server_app.databases
 	}
 	public static class Database
 	{
-		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server") ?? Environment.CurrentDirectory}\databases\maindb.sqlite";
+		private static readonly string dbPath = $@"Data Source={Environment.GetEnvironmentVariable("cs-nea-server")}\databases\maindb.sqlite";
 		private static readonly SqliteConnection connection = new(dbPath);
 		public static void outputException(Exception ex) => Logger.ErrorLog(ex.Message);
 		public static void outputException(string ex) => Logger.ErrorLog(ex);

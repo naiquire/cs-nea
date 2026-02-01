@@ -1,0 +1,28 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.neuralNetwork}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{public}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Training}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{public}\PYG{+w}{ }\PYG{n+nf}{Training}\PYG{p}{()}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{c+c1}{// load training data}
+\PYG{+w}{            }\PYG{p}{(}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{p}{[]}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{images}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{labels}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Data}\PYG{p}{.}\PYG{n}{FilterImages}\PYG{p}{(}\PYG{n}{Data}\PYG{p}{.}\PYG{n}{LoadImages}\PYG{p}{());}
+
+\PYG{+w}{			}\PYG{c+c1}{//random sample of 50 images}
+\PYG{+w}{			}\PYG{n}{Random}\PYG{+w}{ }\PYG{n}{rnd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{();}
+\PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{images}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{l+m+mi}{50}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{c+c1}{// load sample index}
+\PYG{+w}{				}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{index}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{rnd}\PYG{p}{.}\PYG{n}{Next}\PYG{p}{(}\PYG{n}{images}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{50}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{);}
+
+\PYG{+w}{				}\PYG{c+c1}{// load sampled images and labels}
+\PYG{+w}{				}\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{subimages}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{images}\PYG{p}{.}\PYG{n}{GetRange}\PYG{p}{(}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{50}\PYG{p}{);}
+\PYG{+w}{				}\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{subresults}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{labels}\PYG{p}{.}\PYG{n}{GetRange}\PYG{p}{(}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{50}\PYG{p}{);}
+
+\PYG{+w}{				}\PYG{c+c1}{// forward propagation and backpropagation}
+\PYG{+w}{				}\PYG{n}{\PYGZus{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Backpropagation}\PYG{p}{(}\PYG{n}{subimages}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{subresults}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

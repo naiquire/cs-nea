@@ -19,8 +19,6 @@ namespace client_app.menus
 
 		public static void InitialiseComponent(Main main)
 		{
-			// OPENING DESIGNER WILL BREAK THIS MODULE
-
 			main.Controls.Clear();
 
 			main.panel_topBorder = new Panel();
@@ -113,7 +111,6 @@ namespace client_app.menus
 			main.panel_left.ResumeLayout(false);
 			main.panel_main.ResumeLayout(false);
 			main.ResumeLayout(false);
-
 		}
 
 		public static void ResetLayout(Main main)
@@ -968,7 +965,7 @@ namespace client_app.menus
 			};
 
 			Guna2Panel panel_rank = createPanel((20, 20));
-			Guna2TextBox lbl_rank = createLabel((90, 10), (48, 30), "Elo"); // elo is the same in all languages
+			Guna2TextBox lbl_rank = createLabel((90, 10), (48, 30), "Elo");
 			Guna2Shapes circle_rank = createCircle((31, 10));
 			Guna2PictureBox pic_rank = createPicture((30, 10), (30, 30), Resources.rank);
 			Guna2TextBox txt_rank = createTxt(rank);
@@ -1197,10 +1194,9 @@ namespace client_app.menus
 				Location = new Point(550, 90),
 				Size = new Size(330, 60),
 				TabStop = false,
-				Text = correct ? Languages.localisation["by longest time elapsed"][Main.userData.localisation] : Languages.localisation["by incorrect submission"][Main.userData.localisation],
+				Text = Languages.localisation[correct ? "by longest time elapsed" : "by incorrect submission"][Main.userData.localisation],
 				TextAlignment = ContentAlignment.TopRight,
 			};
-
 
 			panel_results.Controls.Add(lbl_eliminated);
 			if (eliminated)

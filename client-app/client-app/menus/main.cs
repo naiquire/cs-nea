@@ -43,8 +43,7 @@ namespace client_app
 	{
 		public static HubConnection connection;
 		public static userData userData;
-		//public const string address = "http://192.168.0.251:5252/cs-nea";
-		public const string address = "http://localhost:3900/cs-nea";
+		public const string address = "http://192.168.0.251:5252/cs-nea";
 
 		public Main(string userID, string defaultLocalisation)
 		{
@@ -53,7 +52,6 @@ namespace client_app
 
 			UXelements.InitialiseComponent(this);
 			InitialiseConnection(userID);
-
 		}
 		private async void InitialiseConnection(string userID)
 		{
@@ -84,9 +82,9 @@ namespace client_app
 			return Task.CompletedTask;
 		}
 
-		public static AlertForm LoadAlert(string message, bool closeButton = true, bool autoShow = true)
+		public static AlertForm LoadAlert(string message, bool addCloseButton = true, bool autoShow = true)
 		{
-			return new AlertForm(message, closeButton, autoShow);
+			return new AlertForm(message, addCloseButton, autoShow);
 		}
 		public async void ClientConnected(userData userData)
 		{
@@ -143,7 +141,7 @@ namespace client_app
 					break;
 				}
 			}
-			var copy = userData.friends[index];
+			friendData copy = userData.friends[index];
 			copy.online = online;
 			userData.friends[index] = copy;
 
@@ -207,7 +205,7 @@ namespace client_app
 					{
 						LoadAlert("Failed to accept friend invite.");
 					}
-					
+
 				}
 			}
 		}

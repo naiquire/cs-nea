@@ -1,0 +1,66 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{Microsoft.AspNetCore.SignalR}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.connections}\PYG{p}{;}
+
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.games}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nf}{Accuracy}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{IHubContext}\PYG{o}{\PYGZlt{}}\PYG{n}{Connection}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{context}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{Game}\PYG{p}{(}\PYG{n}{context}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Games}\PYG{p}{.}\PYG{n}{Accuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{IPlayable}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{rounds}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{override}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{StartGame}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{await}\PYG{+w}{ }\PYG{k}{base}\PYG{p}{.}\PYG{n}{StartGame}\PYG{p}{();}
+
+\PYG{+w}{			}\PYG{n}{letters}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{GenerateLetters}\PYG{p}{(}\PYG{n}{rounds}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{();}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{()}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{roundCount}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{rounds}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{AwaitRound}\PYG{p}{();}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{Task}\PYG{p}{.}\PYG{n}{Delay}\PYG{p}{(}\PYG{l+m+mi}{3000}\PYG{p}{);}
+
+\PYG{+w}{				}\PYG{n}{startTime}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DateTime}\PYG{p}{.}\PYG{n}{UtcNow}\PYG{p}{;}
+\PYG{+w}{				}\PYG{n}{currentResponses}\PYG{p}{.}\PYG{n}{Clear}\PYG{p}{();}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SendLetter}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{letters}\PYG{p}{[}\PYG{n}{roundCount}\PYG{p}{]);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{k}{else}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{EndGame}\PYG{p}{();}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{override}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{LoadResponse}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{byte}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{base}\PYG{p}{.}\PYG{n}{LoadResponse}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{input}\PYG{p}{);}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{currentResponses}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{GetPlayerCount}\PYG{p}{())}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{EvaluationPhase}\PYG{p}{(}\PYG{n}{letters}\PYG{p}{[}\PYG{n}{roundCount}\PYG{p}{]);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{EvaluationPhase}\PYG{p}{(}\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{GetPlayerCount}\PYG{p}{();}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{EvaluateSubmission}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{);}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SendResult}\PYG{p}{(}\PYG{n}{userIDs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{gameStats}\PYG{p}{[}\PYG{n}{userIDs}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{			}\PYG{n}{roundCount}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{n}{Task}\PYG{+w}{ }\PYG{n+nf}{ContinueRequest}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{continueRequests}\PYG{p}{.}\PYG{n}{Contains}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{))}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{n}{continueRequests}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{);}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{continueRequests}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{GetPlayerCount}\PYG{p}{())}
+\PYG{+w}{			}\PYG{p}{\PYGZob{}}
+\PYG{+w}{				}\PYG{k}{await}\PYG{+w}{ }\PYG{n+nf}{SubmissionPhase}\PYG{p}{();}
+\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}
