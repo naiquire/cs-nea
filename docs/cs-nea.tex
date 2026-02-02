@@ -870,7 +870,7 @@ The use of static Matrix and Vector objects in the \textbf{Data} class was not s
 
 \subsubsection{Backpropagation}
 
-Backpropagation is the process by which the parameters for the network are optimised to accurately evaluate a user's submission. The \textbf{Backpropagation} class is constructed with a batch of training data, where the size of the batch is assigned to a variable. The weights and biases for the network are then loaded using the methods in the \textbf{Data} class. The list below outlines the general process for performing the backpropagation algorithm. \\
+Backpropagation is the process by which the parameters for the network are optimised to accurately evaluate a user's submission. The \textbf{Backpropagation} class is constructed with a batch of training data, where the size of the batch is assigned to a variable. The weights and biases for the network are then loaded using the methods in the \textbf{Data} class. The list below outlines the general process for performing the backpropagation algorithm.
 
 \begin{itemize}
     \item Perform the forward pass of the network.
@@ -1414,8 +1414,7 @@ For the `Accounts' and `Connection' classes, they contain methods which have zer
 
 \subsection{Object-Oriented Design}
 
-% //
-The diagram below illustrates the relationships between all of the classes in the server application. 
+The diagram below illustrates the relationships between all of the classes in the server application. I have also included the associations between the classes as dotted arrows. These represent if a class uses the subclass in a local method, such as when the `Game' class uses the `Network' class to evaluate a user's submission.
 
 \subsubsection{Class Diagram}
 
@@ -1485,7 +1484,7 @@ The userData for the current user can be updated, which is received by a connect
 
 \paragraph{Friends\\}
 
-The `UpdateFriendData()' method is invoked by the server when a friend of the user updates their account data, or the user has added a friend. The method passes a `friendData' structure as a parameter, and iterates through each friend of the user. If one of these friends matches the userID in the passed friendData, then the current friend is updates with the new structure. Otherwise, the friend must be a new friend, so the structure is added to the list of friends. The friends panel is then refreshed if the user is not in-game. \\
+The `UpdateFriendData()' method is invoked by the server when a friend of the user updates their account data, or the user has added a friend. The method passes a `friendData' structure as a parameter, and iterates through each friend of the user. If one of these friends matches the userID in the passed friendData, then the current friend is updated with the new structure. Otherwise, the friend must be a new friend, so the structure is added to the list of friends. The friends panel is then refreshed if the user is not in-game. \\
 
 If a friendship has been removed, the server invokes the `removeFriends' connection handler on the client application. This iterates through each friend of the user, and removes the appropriate friendData, breaking the loop after doing so. The friends panel is then refreshed if the user is not in-game. \\
 
@@ -1506,6 +1505,7 @@ The \textbf{Profile} form class manages the profile page and is constructed with
 When the user clicks the `Search' button, the click event handler first extracts the text in the input text box. If the extracted string is not empty or whitespace, the textbox is reset and the `RequestProfile()' method is called. This method invokes the `requestProfile()' method on the server, which returns a `userData' structure. If the userID of this returned structure does not match the requested userID, then a message is shown to the user that the requested user does not exist. Otherwise, the page text is set to ``Profile'', and a new instance of the \textbf{Profile} class is created in the `menu' structure. The instance of the \textbf{Main} class is passed as a parameter, as well as the returned `userData' structure.
 
 \paragraph{Algorithms\\}
+
 Each user has an overview of their statistics which can be viewed both on the home page and in the profile page. This includes the total number of rounds they have played, their Elo rating, and their average overall accuracy. The Elo rating is obtained from the `userData' structure so no calculations are required. By iterating through each letter, the total rounds played can be summed. The average accuracy is calculated by summing the accuracies for each letter, and dividing by the number of letters. This is then multiplied by 100 to convert it to a percentage, and rounded to two decimal places.
 
 \subsubsection{UML Diagrams}
@@ -1593,6 +1593,7 @@ The `Versus' game type receives the userID of the user who won the round, which 
 \paragraph{Game End\\}
 
 When the game ends, the server invokes the appropriate method on the client, which configures the main panel to display the results of all the rounds. The `Elimination' game type also displays if the user won the game or not, and the `Versus' game type displays the user's change in Elo rating.
+% // how ui
 
 \subsubsection{UML Diagrams}
 
@@ -1641,7 +1642,7 @@ If the user chooses to create an account, a `confirm password' text box is added
 \end{figure}
 
 \subsubsection{Home Page}
-
+% // this is pathetic
 The main panel on the home page lists the three available game to the user with a brief description and the ability to queue for each game. The left panel contains a list of the user's friends, separated into whether they are online or offline. The right panel contains an overview of the user's statistics, as well as the `Profile' and `Edit' buttons. \\
 
 The `Profile' button is used to access the profile page of the user. The click event handler for the button initialises a new instance of the \textbf{Profile} class with the user's userData.
@@ -1654,6 +1655,8 @@ The `Edit' button is used to customise the user's `about me' and change the lang
     \includegraphics[width=0.75\linewidth]{resx/ui_edit.png}
     \caption{Design for the Edit Profile form}
 \end{figure}
+
+% // user interace
 
 \paragraph{Menu Label\\}
 The `page text' is a label in the top section of the left panel. It displays to the user what menu they are currently in, and is updated using the `UpdatePageText()' method which takes in a string as a parameter. This clears the panel and creates a new label, which it applies the passed string to its `text' property after translating it. \\
@@ -2306,7 +2309,9 @@ I have also chosen to analyse test 4.1(b): how the duplicate friend invite was h
 \noindent\rule{\textwidth}{0.2pt}
 \subsection{Overall Effectiveness of the System}
 % //
-As defined in the problem statement, this solution was developed to address the need for an enjoyable and simple way to learn to write the Latin script. I have implemented a program which allows a user to receive instant feedback on writing a Latin character, through three different game types. 
+As defined in the problem statement, this solution was developed to address the need for an enjoyable and simple way to learn to write the Latin script. I have implemented a program which allows a user to receive instant feedback on writing a Latin character, through three different game types. A drawing panel is presented to the user for each round of a game, and they can submit an attempt at writing the given letter. The server application accurately evaluates the user's submission and returns a percentage accuracy and their elapsed time. These results are then updated for the user's account in the database, which allows a user to view their progress in learning to write the Latin characters. \\
+
+
 
 \subsection{Evaluation of Objectives}
 \subsubsection{Core Objectives}
@@ -8917,7 +8922,10 @@ namespace client_app
 
 \subsection{References}
 
-I have included references to the main documentation used when creating the technical solution. These mainly consist of documentation for the libraries I have used, along with some obscure Windows Forms behaviour. \\
+I have included references to the main documentation used when researching and creating the technical solution. These mainly consist of documentation for the libraries I have used, along with some obscure Windows Forms behaviour. \\
+
+\noindent\href{https://www.3blue1brown.com/topics/neural-networks}{Theory of neural networks ~ Grant Sanderson (Oct 2017)}
+\noindent\href{http://neuralnetworksanddeeplearning.com/chap2.html}{How the backpropagation algorithm works ~ Michael Nielsen (Dec 2019)}
 
 \noindent\href{https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-create-graphics-objects-for-drawing}{Creating a `Graphics' object to represent the drawing surface of a Panel} \\
 \href{https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-draw-a-line-on-a-windows-form}{Drawing a line between two points on a Panel} \\
@@ -8927,11 +8935,12 @@ I have included references to the main documentation used when creating the tech
 \href{https://github.com/aspnet/SignalR-samples/tree/main/WindowsFormsSample}{SignalR configuration example for client-side Windows Forms applications} \\
 \href{https://learn.microsoft.com/en-us/aspnet/core/signalr/hubcontext?view=aspnetcore-10.0}{Communication outside of a Hub class} \\
 
-\noindent\href{https://grantwinney.com/using-async-await-and-task-to-keep-the-winforms-ui-more-responsive/}{Asynchronous tasks in Windows Forms} \\
-\href{https://stackoverflow.com/questions/7609839/accessing-a-forms-control-from-a-separate-thread}{Accessing a Windows Form Control from outside the thread it was created on}
+\noindent\href{https://grantwinney.com/using-async-await-and-task-to-keep-the-winforms-ui-more-responsive/}{Using Async, Await, and Task to keep the WinForms UI responsive ~ Grant Winney (Jun 2021)} \\
+\href{https://stackoverflow.com/questions/7609839/accessing-a-forms-control-from-a-separate-thread}{Accessing a form's control from a separate thread (Oct 2011)}
 
 \end{document}
 
 % // whole system test idk
 % // formatting
 % // thoroughly check sources
+% // go over client and over explain
