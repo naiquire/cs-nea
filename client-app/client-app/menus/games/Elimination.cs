@@ -34,7 +34,7 @@ namespace client_app.menus.games
                     }
                 }
 
-                UXelements.configLeftGamePanel(this, alive, dead);
+                UXelements.ConfigLeftGamePanel(this, alive, dead);
                 main.panel_left.Controls.Add(main.btn_home);
             }
             else
@@ -49,7 +49,7 @@ namespace client_app.menus.games
             {
                 aliveUsers.Add(user.userID);
             }
-            UXelements.configLeftGamePanel(this, users, new List<friendData>());
+            UXelements.ConfigLeftGamePanel(this, users, new List<friendData>());
             base.AwaitStart();
         }
 
@@ -62,7 +62,7 @@ namespace client_app.menus.games
             }
 
             UpdateUsers(users);
-            UXelements.configKnockoutResults(panel_results, eliminated, gameStats.correct.Last());
+            UXelements.ConfigEliminationResults(panel_results, eliminated, gameStats.correct.Last());
         }
 
         public override void EndGame()
@@ -70,7 +70,7 @@ namespace client_app.menus.games
             base.EndGame();
 
             bool winner = aliveUsers.Contains(Main.userData.userID);
-            UXelements.configKnockoutEndgame(main.panel_main, winner);
+            UXelements.ConfigEliminationEndgame(main.panel_main, winner);
         }
     }
 }

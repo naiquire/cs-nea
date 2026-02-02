@@ -97,10 +97,10 @@ namespace client_app.menus.games
 
 			if (!started)
 			{
-				UXelements.configLobbyPanel(this, users);
+				UXelements.ConfigLobbyPanel(this, users);
 			}
 
-			UXelements.configLeftGamePanel(this, users);
+			UXelements.ConfigLeftGamePanel(this, users);
 			main.panel_left.Controls.Add(main.btn_home);
 
 		}
@@ -145,7 +145,7 @@ namespace client_app.menus.games
 		}
 		public void StartGame()
 		{
-			UXelements.configRightGamePanel(this);
+			UXelements.ConfigRightGamePanel(this);
 		}
 		public async void AwaitRound()
 		{
@@ -177,7 +177,7 @@ namespace client_app.menus.games
 				drawingPanel.ClearPanel();
 			};
 
-			UXelements.configLeftGamePanel(this, users);
+			UXelements.ConfigLeftGamePanel(this, users);
 			main.panel_left.Controls.Add(main.btn_home);
 			await UXelements.Countdown(main.panel_left, 3, Languages.localisation["Next letter in"][Main.userData.localisation]);
 		}

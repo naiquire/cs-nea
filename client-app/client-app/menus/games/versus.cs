@@ -10,7 +10,7 @@
 
 		public void VersusResults(string winner)
 		{
-			UXelements.configVersusResults(panel_results, winner);
+			UXelements.ConfigVersusResults(panel_results, winner);
 		}
 
 		public void UpdateRank(int currentRank)
@@ -19,7 +19,7 @@
 			rankDelta = currentRank - previousRank;
 
 			Main.userData.rank = currentRank;
-			UXelements.configVersusEndgame(main.panel_main, rankDelta);
+			UXelements.ConfigVersusEndgame(main.panel_main, rankDelta);
 		}
 	}
 }

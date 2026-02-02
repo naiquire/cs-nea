@@ -64,6 +64,16 @@ namespace client_app
 			}));
 		}
 
+		private void LoadMainApplication(string userID)
+		{
+			Hide();
+			menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
+			menu.main.ShowDialog();
+			menu.main.Dispose();
+			Show();
+			hub_connection.InjectForm(this, null);
+		}
+
 		public void HandleLoginSuccess(int success, string userID)
 		{
 			switch (success)
@@ -72,11 +82,7 @@ namespace client_app
 					lbl_information.Text = "Incorrect Password";
 					break;
 				case VALID:
-					Hide();
-					menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
-					menu.main.ShowDialog();
-					menu.main.Dispose();
-					Show();
+					LoadMainApplication(userID);
 					break;
 				case USER_DOES_NOT_EXIST:
 					lbl_information.Text = Languages.localisation["Account does not exist"][Languages.languageCodes[languageIndex]];
@@ -108,11 +114,7 @@ namespace client_app
 					this.txt_password.ResetText();
 					this.txt_passwordconfirm.ResetText();
 
-					Hide();
-					menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
-					menu.main.ShowDialog();
-					menu.main.Dispose();
-					Show();
+					LoadMainApplication(userID);
 					break;
 				case USERID_TAKEN:
 					lbl_information.Text = Languages.localisation["Username is not available"][Languages.languageCodes[languageIndex]];

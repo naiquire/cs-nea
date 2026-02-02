@@ -190,7 +190,7 @@ namespace client_app.menus
 			return input;
 		}
 
-		public static void configRightGamePanel(Game game)
+		public static void ConfigRightGamePanel(Game game)
 		{
 			game.lbl_rounds = new Guna2HtmlLabel()
 			{
@@ -301,7 +301,7 @@ namespace client_app.menus
 
 		}
 
-		public static void configLeftGamePanel(Game game, List<friendData> users)
+		public static void ConfigLeftGamePanel(Game game, List<friendData> users)
 		{
 			game.main.panel_left.Controls.Clear();
 
@@ -369,7 +369,7 @@ namespace client_app.menus
 			game.main.panel_left.Controls.Add(seperator);
 			game.main.panel_left.Controls.Add(lbl_players);
 		}
-		public static void configLeftGamePanel(Game game, List<friendData> alive, List<friendData> dead)
+		public static void ConfigLeftGamePanel(Game game, List<friendData> alive, List<friendData> dead)
 		{
 			game.main.panel_left.Controls.Clear();
 
@@ -743,7 +743,7 @@ namespace client_app.menus
 			return panel_results;
 		}
 
-		public static void configUserDataPanel(Main main, userData userData)
+		public static void ConfigUserDataPanel(Main main, userData userData)
 		{
 			main.panel_right.Controls.Clear();
 
@@ -842,9 +842,9 @@ namespace client_app.menus
 			main.panel_right.Controls.Add(btn_edit);
 			main.panel_right.Controls.Add(pic_account);
 
-			configStatsPanel(main.panel_right, (40, 570), userData);
+			ConfigStatsPanel(main.panel_right, (40, 570), userData);
 		}
-		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
+		public static void ConfigStatsPanel(Panel panel, (int X, int Y) pos, userData user)
 		{
 			(string rank, string total, string accuracy) = Main.CalculateStatsOverview(user);
 
@@ -1011,7 +1011,7 @@ namespace client_app.menus
 			panel.Controls.Add(panel_statsOverview);
 		}
 
-		public static void configLobbyPanel(Game game, List<friendData> users)
+		public static void ConfigLobbyPanel(Game game, List<friendData> users)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -1131,7 +1131,7 @@ namespace client_app.menus
 			lbl_status.ResetText();
 		}
 
-		public static void configVersusResults(Panel panel_results, string winner)
+		public static void ConfigVersusResults(Panel panel_results, string winner)
 		{
 			Guna2HtmlLabel lbl_winner = new Guna2HtmlLabel()
 			{
@@ -1171,7 +1171,7 @@ namespace client_app.menus
 			panel_results.Controls.Add(lbl_winner);
 			panel_results.Controls.Add(bar_winner);
 		}
-		public static void configKnockoutResults(Panel panel_results, bool eliminated, bool correct)
+		public static void ConfigEliminationResults(Panel panel_results, bool eliminated, bool correct)
 		{
 			Guna2HtmlLabel lbl_eliminated = new Guna2HtmlLabel()
 			{
@@ -1309,7 +1309,7 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(panel_stats);
 		}
 
-		public static void configVersusEndgame(Panel panel, int change)
+		public static void ConfigVersusEndgame(Panel panel, int change)
 		{
 			Guna2HtmlLabel txt_rank = new Guna2HtmlLabel()
 			{
@@ -1326,7 +1326,7 @@ namespace client_app.menus
 
 			panel.Controls.Add(txt_rank);
 		}
-		public static void configKnockoutEndgame(Panel panel, bool win)
+		public static void ConfigEliminationEndgame(Panel panel, bool win)
 		{
 			Guna2HtmlLabel txt_winner = new Guna2HtmlLabel()
 			{

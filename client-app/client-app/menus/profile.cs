@@ -34,7 +34,6 @@ namespace client_app.menus
 				if (friend.userID == user.userID)
 				{
 					isFriend = true;
-
 					break;
 				}
 			}

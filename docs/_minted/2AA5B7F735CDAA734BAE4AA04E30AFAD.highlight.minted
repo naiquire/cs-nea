@@ -1,0 +1,12 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{	}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{totalLetters}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{	}\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{meanAccuracy}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{	}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{letter}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{statistics}\PYG{p}{)}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{n}{totalLetters}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{.}\PYG{n}{total}\PYG{p}{;}
+\PYG{+w}{		}\PYG{n}{meanAccuracy}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{.}\PYG{n}{accuracy}\PYG{p}{;}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}
+\PYG{+w}{	}\PYG{n}{meanAccuracy}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{n}{statistics}\PYG{p}{.}\PYG{n}{Count}
+\PYG{+w}{	}\PYG{n}{meanAccuracy}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{round}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{meanAccuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)}
+\end{MintedVerbatim}

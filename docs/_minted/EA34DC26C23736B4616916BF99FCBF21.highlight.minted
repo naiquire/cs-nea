@@ -35,7 +35,6 @@
 \PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{friend}\PYG{p}{.}\PYG{n}{userID}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{userID}\PYG{p}{)}
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}
 \PYG{+w}{					}\PYG{n}{isFriend}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{true}\PYG{p}{;}
-
 \PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
 \PYG{+w}{				}\PYG{p}{\PYGZcb{}}
 \PYG{+w}{			}\PYG{p}{\PYGZcb{}}

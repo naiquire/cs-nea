@@ -21,7 +21,7 @@
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{rank}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{get}\PYG{p}{;}\PYG{+w}{ }\PYG{k}{set}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{n}{Dictionary}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{char}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{statistics}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{statistics}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{get}\PYG{p}{;}\PYG{+w}{ }\PYG{k}{set}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
 \PYG{+w}{	}\PYG{p}{\PYGZcb{}}
-\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{@statistics}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{statistics}
 \PYG{+w}{	}\PYG{p}{\PYGZob{}}
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{get}\PYG{p}{;}\PYG{+w}{ }\PYG{k}{set}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{n}{TimeSpan}\PYG{+w}{ }\PYG{n}{time}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{get}\PYG{p}{;}\PYG{+w}{ }\PYG{k}{set}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
@@ -122,7 +122,7 @@
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
 \PYG{+w}{				}\PYG{n}{UpdatePageText}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Profile\PYGZdq{}}\PYG{p}{);}
 \PYG{+w}{				}\PYG{n}{ConfigFriendsPanel}\PYG{p}{();}
-\PYG{+w}{				}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configUserDataPanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{);}
+\PYG{+w}{				}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{ConfigUserDataPanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{);}
 \PYG{+w}{				}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{profile}\PYG{p}{.}\PYG{n}{GetUserID}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{.}\PYG{n}{userID}\PYG{p}{)}
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}
 \PYG{+w}{					}\PYG{c+c1}{// if viewing own profile then refresh}
@@ -215,20 +215,17 @@
 \PYG{+w}{		}\PYG{p}{\PYGZob{}}
 \PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{rank}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{rank}\PYG{p}{.}\PYG{n}{ToString}\PYG{p}{();}
 
-\PYG{+w}{			}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{sum}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{totalLetters}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{meanAccuracy}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
 \PYG{+w}{			}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{letter}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{.}\PYG{n}{Keys}\PYG{p}{)}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
-\PYG{+w}{				}\PYG{n}{sum}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{[}\PYG{n}{letter}\PYG{p}{].}\PYG{n}{total}\PYG{p}{;}
+\PYG{+w}{				}\PYG{n}{totalLetters}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{[}\PYG{n}{letter}\PYG{p}{].}\PYG{n}{total}\PYG{p}{;}
+\PYG{+w}{				}\PYG{n}{meanAccuracy}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{[}\PYG{n}{letter}\PYG{p}{].}\PYG{n}{accuracy}\PYG{p}{;}
 \PYG{+w}{			}\PYG{p}{\PYGZcb{}}
-\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{total}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{sum}\PYG{p}{.}\PYG{n}{ToString}\PYG{p}{();}
-
-\PYG{+w}{			}\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{mean}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
-\PYG{+w}{			}\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{var}\PYG{+w}{ }\PYG{n}{letter}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{.}\PYG{n}{Keys}\PYG{p}{)}
-\PYG{+w}{			}\PYG{p}{\PYGZob{}}
-\PYG{+w}{				}\PYG{n}{mean}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{[}\PYG{n}{letter}\PYG{p}{].}\PYG{n}{accuracy}\PYG{p}{;}
-\PYG{+w}{			}\PYG{p}{\PYGZcb{}}
-\PYG{+w}{			}\PYG{n}{mean}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{.}\PYG{n}{Count}\PYG{p}{;}
-\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n}{Round}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{mean}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)).}\PYG{n}{ToString}\PYG{p}{();}
+\PYG{+w}{			}
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{total}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{totalLetters}\PYG{p}{.}\PYG{n}{ToString}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{meanAccuracy}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{n}{user}\PYG{p}{.}\PYG{n}{statistics}\PYG{p}{.}\PYG{n}{Count}\PYG{p}{;}
+\PYG{+w}{			}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n}{Round}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{meanAccuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)).}\PYG{n}{ToString}\PYG{p}{();}
 
 \PYG{+w}{			}\PYG{k}{return}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{rank}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{total}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{p}{);}
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}

@@ -26,7 +26,7 @@
 \PYG{+w}{			}\PYG{n}{ProcessStartInfo}\PYG{+w}{ }\PYG{n}{startInfo}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{()}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
 \PYG{+w}{				}\PYG{n}{FileName}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}nginx.exe\PYGZdq{}}\PYG{p}{,}
-\PYG{+w}{				}\PYG{n}{WorkingDirectory}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{@\PYGZdq{}C:\PYGZbs{}Users\PYGZbs{}naiquire\PYGZbs{}Documents\PYGZbs{}General\PYGZbs{}Relay\PYGZbs{}nginx\PYGZhy{}1.26.2\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{				}\PYG{n}{WorkingDirectory}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Environment}\PYG{p}{.}\PYG{n}{GetEnvironmentVariable}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}nginx\PYGZdq{}}\PYG{p}{),}
 \PYG{+w}{				}\PYG{n}{UseShellExecute}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{true}
 \PYG{+w}{			}\PYG{p}{\PYGZcb{};}
 \PYG{+w}{			}\PYG{n}{Process}\PYG{p}{.}\PYG{n}{Start}\PYG{p}{(}\PYG{n}{startInfo}\PYG{p}{);}

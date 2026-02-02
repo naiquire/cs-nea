@@ -1188,7 +1188,7 @@ The conditions to determine if a game should end are checked in the submission p
 
 First, a message is sent to all the users that the game has ended, to allow the client application to load the `Game End' screen. The program then iterates through each user and iterates through each round that the user completed, since this varies in the `Elimination' game type. The user's userData is loaded from the database and the `UpdateStatistics()' method is called, passing in the userData, current letter and the current round index as parameters. This takes the loaded statistics from the database for the current letter, and updates them with the new results. These new values are then inserted into the database, and a message is sent to the current user containing a `statistics' structure of the current letter. \\
 
-The `Versus' game type updates each user's Elo rating before calling the base method. The program iterates through each user and calculates their expected score, and thereby their updated rank using the appropriate K-factor. The current rating for the user is obtained from the cached userData from when the game was started. The database is then updated with this new rating, which is also sent to the user.
+The `Versus' game type updates each user's Elo rating before calling the base method. The program iterates through each user and calculates their expected score, and thereby their updated rank using the appropriate K-factor. The current rating for the user is obtained from the cached userData from when the game was started. The database is then updated with this new rating, which is also sent to the user by invoking the `receiveVersusResult' handler on the client application.
 
 \subsubsection{Data structures}
 
@@ -1414,7 +1414,11 @@ For the `Accounts' and `Connection' classes, they contain methods which have zer
 
 \subsection{Object-Oriented Design}
 
-The diagram below illustrates the relationships between all of the classes in the server application. I have also included the associations between the classes as dotted arrows. These represent if a class uses the subclass in a local method, such as when the `Game' class uses the `Network' class to evaluate a user's submission.
+The diagram below illustrates the relationships between all of the classes in the server application. I have also included the associations between the classes as dotted arrows. These represent if a class uses the subclass in a local method, such as when the `Game' class uses the `Network' class to evaluate a user's submission. Static classes are denoted by underlining the identifier. I have also chosen to include the \textbf{Hub} class---while this is not directly accessed by any of the classes, it is important to show which classes are assigned to an endpoint of the client-server connection. \\
+
+Regarding the methods used in the server application, I implemented a specific naming system for the identifiers to remove any uncertainty in the necessity of methods. The majority of the methods will have an uppercase letter as their first character. However if the class is only invoked by the client application, it is given a lowercase letter instead. This allowed me to easily identify which classes were being used by the client application, since the IDE used (Visual Studio 2022) tagged these methods as having zero references. Usually this would imply that the method is unnecessary as it is not used, but by using this naming system it made it clearer to see that this was not the case. \\
+
+The one exception to this rule is the `OnDisconnectedAsync()' method of the \textbf{Connection} class. This is overridden from the base class, therefore I do not have control over the naming scheme used by it.
 
 \subsubsection{Class Diagram}
 
@@ -1434,7 +1438,7 @@ The diagram below illustrates the relationships between all of the classes in th
 
 The \textbf{Main} form class is instantiated by the \textbf{Login} form class when a successful login occurs. The constructor passes the userID of the account that has been logged into, and the language used by the \textbf{Login} form. The `localisation' field of the `userData' is then set to this language, since this field cannot be null while rendering the form. If the user's account language differs then the text is immediately updated once the userData has been loaded. The instance of the \textbf{Main} class is then injected into the \textbf{hub\_connection} class, which allows methods to be called from a server invocation. \\
 
-The static `instantiateComponent()' method of the \textbf{UXelements} class is then called, which configures the basic layout of the form, which is consistent across all sub-menus. The `InitialiseConnection()' method is then called which creates a new `HubConnection' object, independent of the connection established by the \textbf{Login} class. The connection handles are then added to the object and the connection is started. The asynchronous `ConnectionClosed' method is attached to the event handler of the `HubConnection' object for the connection to the server being unexpectedly closed. The client then invokes the `clientConnected()' method on the server, passing the userID as a parameter.
+The static `InitialiseComponent()' method of the \textbf{UXelements} class is then called, which configures the basic layout of the form---consistent across all sub-menus. The `InitialiseConnection()' method is then called which creates a new `HubConnection' object, independent of the connection established by the \textbf{Login} class. The connection handles are then added to the object and the connection is started. The asynchronous `ConnectionClosed()' method is attached to the event handler of the `HubConnection' object for the connection to the server being unexpectedly closed. The client then invokes the `clientConnected()' method on the server, passing the userID as a parameter.
 
 \subsubsection{Accounts}
 
@@ -1442,7 +1446,9 @@ The client application creates a new \textbf{Login} form class on start, after l
 
 The instance of the \textbf{Login} form class is then injected into the static \textbf{hub\_connection} class, which it uses to call the appropriate subroutines of the class when a connection handler is invoked by the server. The `InitialiseConnection()' method is then called. \\
 
-This subroutine configures a connection of the `HubConnection' type, then attaches the required handlers and attempts to start the connection---this process is detailed later in section 2.12. The asynchronous `ConnectionClosed' method is attached to the event handler of the `HubConnection' object for the connection to the server being unexpectedly closed. This start an attempt to reconnect, which updates the connection status label on the form to alert the user of the loss of connection. 
+This subroutine configures a connection of the `HubConnection' type, then attaches the required handlers and attempts to start the connection---this process is detailed later in section 2.12. The asynchronous `ConnectionClosed' method is attached to the event handler of the `HubConnection' object for the connection to the server being unexpectedly closed. This start an attempt to reconnect, which updates the connection status label on the form to alert the user of the loss of connection. \\
+
+When a successful login or account creation is made, the `LoadMainApplication()' method is called, passing the userID as a parameter. This hides the `Login' page, and creates a new instance of the \textbf{Main} form class, passing the userID and current language as parameters, which is allocated to the `main' attribute of the `menus' structure. After the \textbf{Main} class has been constructed, the `ShowDialog()' method is then called to render the form to the screen. This method blocks the current thread while the main application is running, so the `LoadMainApplication()' only continues once the user has closed the main application. When this occurs, the `Dispose()' method is called on the \textbf{Main} class to free up resources, and the `Show()' method is called on the \textbf{Login} form class. The `InjectForm()' method of the \textbf{hub\_connection} class is then called again to reassign the \textbf{Login} form class instance, since the \textbf{Main} class injects itself when it is constructed which sets the `loginForm' attribute of the \textbf{hub\_connection} class to null. By reinjecting the class instance, the server invocations will be forwarded to the \textbf{Login} form class. \\ 
 
 \paragraph{Login\\}
 
@@ -1458,13 +1464,13 @@ If the request is successfully handled, a response is received into the `loginSu
     \item ERROR\_OCCURED = -1
 \end{itemize}
 
-If the returned success code is 1 indicating the login was successful, the main application is launched by initialising an instance of the \textbf{Main} class. The userID and language used in the login form is passed as a parameter, to allow the client to request the user's account data.
+If the returned success code is 1 indicating the login was successful, the main application is launched by calling the `LoadMainApplication()` method. The userID and language used in the login form is passed as a parameter, to allow the client to request the user's account data.
 
 \paragraph{Account Creation\\}
 
 If the user clicks the `Create Account' button, the `Login' button is moved down and the text is replaced with `Create Account'. A second password box is added which must have a matching password for the account to be successfully created. \\
 
-When the user clicks the `Create Account' button, the event handler for this button is called. This extracts the text stored in the username and password text boxes, and then resets the password text boxes. If the passwords do not match, the user is informed of this through a message and the account request is not sent. Similar to the `Login' button, a check is performed to ensure the username or password boxes are not empty or white space. The client then invokes the `accountRequest()' method on the server, passing the username, password, and the current language. \\
+When the user clicks the new `Create Account' button, the event handler for this button is called. This extracts the text stored in the username and password text boxes, and then resets the password text boxes. If the passwords do not match, the user is informed of this through a message and the account request is not sent. Similar to the `Login' button, a check is performed to ensure the username or password boxes are not empty or white space. The client then invokes the `accountRequest()' method on the server, passing the username, password, and the current language. \\
 
 If the request is successfully handled, a response is received into the `accountSuccess' connection handler. A switch statement is then performed with the returned success code with the following possibilities:
 
@@ -1474,11 +1480,15 @@ If the request is successfully handled, a response is received into the `account
     \item ERROR\_OCCURED = -1
 \end{itemize}
 
-If the returned success code is 1 indicating the account creation was successful, the main application is launched by initialising an instance of the \textbf{Main} class. The userID and language used in the login form is passed as a parameter, to retain the language used by the \textbf{Login} form class in the main application.
+If the returned success code is 1 indicating the account creation was successful, the main application is launched by calling the `LoadMainApplication()` method. The userID and language used in the login form is passed as a parameter, to retain the language used by the \textbf{Login} form class in the main application.
+
+\paragraph{Localisation\\}
+
+The language of the client application can be changed by clicking the `Language' button on the \textbf{Login} form class. The click event handler allows the user to cycle through the supported language of the client application. The method first increments the `languageIndex' by one, wrapping around to zero if the index is equal to the number of supported languages. Any text boxes are then refreshed to reflect the new selected language, including the text of the `Language' button.
 
 \subsubsection{User Information}
 
-When the client invokes the `clientConnected()' method on the server, the userData for the requested user is sent to the client which invokes the `ClientConnected()' method on the client. This passes the userData as a parameter, which is set to the static `userData' object in the \textbf{Main} class. The `InitialiseComponent()' method of the \textbf{Main} class is then called which loads the main menu onto the empty layout. \\
+When the client invokes the `clientConnected()' method on the server, the userData for the requested user is sent to the client which invokes the `ClientConnected()' method on the client. This passes the userData as a parameter, which is set to the static `userData' object in the \textbf{Main} class. The `InitialiseComponent()' method of the \textbf{Main} class is then called which loads the main menu onto the empty layout. The `loadInvites()' method of the server is then invoked to retrieve any pending friend requests for the user. \\
 
 The userData for the current user can be updated, which is received by a connection handler and forwarded to the `UpdateUserData()' method. This passes the userID, about me, and localisation. If the userID matches the userID associate with the current client application, then the about me and localisation in the `userData' structure are updated. If the user is currently in-game then no changes are made, and if they are on the main menu a full refresh is performed by calling the click event handler for the `Home' button. If the `Profile' object in the `menus' structure is not null, then the refresh has to be performed manually. The page text is reset, which indicates which sub-menu the user is currently in. The `ConfigFriendsPanel()' and `ConfigUserDataPanel()' methods are then called to refresh the left and right panels with the new language. If the user is viewing their own profile, then the profile page is also refreshed.
 
@@ -1486,19 +1496,21 @@ The userData for the current user can be updated, which is received by a connect
 
 The `UpdateFriendData()' method is invoked by the server when a friend of the user updates their account data, or the user has added a friend. The method passes a `friendData' structure as a parameter, and iterates through each friend of the user. If one of these friends matches the userID in the passed friendData, then the current friend is updated with the new structure. Otherwise, the friend must be a new friend, so the structure is added to the list of friends. The friends panel is then refreshed if the user is not in-game. \\
 
-If a friendship has been removed, the server invokes the `removeFriends' connection handler on the client application. This iterates through each friend of the user, and removes the appropriate friendData, breaking the loop after doing so. The friends panel is then refreshed if the user is not in-game. \\
+If a friendship has been removed, the server first handles the change in friendship, and then invokes the `removeFriends' connection handler on the client application. This calls the `RemoveFriend()' method of the \textbf{Main} class, which iterates through each friend of the user, and removes the appropriate friendData, breaking the loop after doing so. The friends panel is then refreshed if the user is not in-game. \\
 
-When a user opens or closes the client application, as part of the `clientConnected()' method, the `UpdateOnline()' method is also called. This iterates through each friend of the user, and resends their friendData. The server invokes a connection handler, which forwards the request to the `UpdateOnline()' method in the client application. This method has a userID and a boolean value representing if the user is now online or not as parameters. The method iterates through each friendData and updates the `online' attribute of the appropriate friend. If the user is not currently in-game, the left panel is refreshed to display these changes.
+When a user opens or closes the client application, as part of the `clientConnected()' server method, the `UpdateOnline()' method on the client application is also invoked for each of the user's friends who are online. This method has a userID and a boolean value representing if the user is now online or not as parameters. By iterating through each friendData, the `online' attribute of the appropriate friend can be updated. If the user is not currently in-game, the left panel is refreshed to display these changes.
 
 \paragraph{Social\\}
 
-A user can add and remove a friend through the `Profile' page of the user. When a user clicks the `Add Friend' button, the `sendInvite()' method is invoked on the server which passes the userID and the senderID.\@ The button is then disabled since a friend invite cannot be sent twice. If a user clicks the `Remove Friend' button, the button is disabled and the `removeFriends()' method is invoked on the server. \\
+A user can add and remove a friend through the `Profile' page of the user. When a user clicks the `Add Friend' button, the `sendInvite()' method is invoked on the server which passes the userID and the senderID, returning a boolean value representing if the request was successful.\@ The button is then disabled since a friend invite cannot be sent twice. If a user clicks the `Remove Friend' button, the button is disabled and the `removeFriends()' method is invoked on the server, which also returns a boolean value representing if the request was successful. Upon an unsuccessful request, a new \textbf{AlertForm} is created to inform the user of the failure. \\
 
 The invites for a user are forwarded when the user logs into their account. The server passes a list of userIDs by invoking the `receiveInvites' connection handler. The client creates a new \textbf{ConfirmForm} dialogue box for each invite, and invokes the `addFriends()' method on the server if the user clicks `Accept'.
 
 \subsubsection{Profiles}
 
-The \textbf{Profile} form class manages the profile page and is constructed with the instance of the \textbf{Main} class and a `userData' structure. The `InitialiseComponent()' method is then called which configures the main panel to display the profile page. This includes the userID and an overview of their statistics. A panel is then configured which contains the user's average accuracy, time, and total for each letter.
+The \textbf{Profile} form class manages the profile page and is constructed with the instance of the \textbf{Main} class and a `userData' structure. The `InitialiseComponent()' method is then called which configures the main panel to display the profile page. This includes the userID and an overview of their statistics. A panel is then configured which contains the user's average accuracy, time, and total for each letter. \\
+
+The buttons to add and remove a user as a friend are managed in the private `SetupButtons()' method. This method first checks if the user is viewing their own profile, in which case both buttons are hidden. If the user is not viewing their own profile, the friends list is iterated through to determine if the user is already a friend. If they are, then the `Add Friend' button is disabled---otherwise, the `Remove Friend' button is hidden.
 
 \paragraph{Searching\\}
 
@@ -1508,9 +1520,22 @@ When the user clicks the `Search' button, the click event handler first extracts
 
 Each user has an overview of their statistics which can be viewed both on the home page and in the profile page. This includes the total number of rounds they have played, their Elo rating, and their average overall accuracy. The Elo rating is obtained from the `userData' structure so no calculations are required. By iterating through each letter, the total rounds played can be summed. The average accuracy is calculated by summing the accuracies for each letter, and dividing by the number of letters. This is then multiplied by 100 to convert it to a percentage, and rounded to two decimal places.
 
+\begin{minted}{csharp}
+	int totalLetters = 0;
+	double meanAccuracy = 0;
+	foreach (var letter in statistics)
+	{
+		totalLetters += letter.total;
+		meanAccuracy += letter.accuracy;
+	}
+	
+	meanAccuracy /= statistics.Count
+	meanAccuracy = round(100 * meanAccuracy, 2)
+\end{minted}
+
 \subsubsection{UML Diagrams}
 
-The associations between the classes has not be shown in the figure below, due to the complexity of the diagrams, and is instead shown in section 2.11.
+As with the diagrams for the server application, the associations between the classes has not be shown in the figure below, due to the complexity of the diagrams, and is instead shown in section 2.11.
 
 \begin{figure}[H]
     \centering
@@ -1520,7 +1545,7 @@ The associations between the classes has not be shown in the figure below, due t
 
 \subsection{Games}
 
-As with the server application, the client application implements three different games types. These also inherit a base class for an abstracted game type, and an interface identified by IPlayable. The base class will include modules which are common across all game types, and also ones which can be overridden in order to extend their functionality. \\
+As with the server application, the client application implements three different games types. These also inherit a base class for an abstracted game type, and an interface identified by IPlayable. The base class includes modules which are common across all game types, and also ones which can be overridden in order to extend their functionality. \\
 
 The IPlayable interface consists of subroutines which make up the core functionality of a game. This is to allow different `phases' of a game to be called from outside the class, such as when a game to queue into is found. It also provides methods for retrieving information about the game, such as its type or the gameID.\@ \\
 
@@ -1564,7 +1589,7 @@ This also causes the server to invoke the `UpdateUsers()' method on the client, 
 
 \subsubsection{Game Logic}
 
-The general process by which a game runs is by repeating two key phases until the condition for the game to be ended is met. When the game is started, the first `Submission' phase is started which is where the client receive a Latin character and the user's submit a drawing to the server. Once all of the expected submissions have been received, the `Evaluation' phase is started where the server uses the neural network to evaluate each of the users' submissions. The results are then received by the client application, and the users can then request for the next round to start. Once the server has received this request from all of the expected users, it then begins the next `Submission' phase.
+The general process by which a game runs is by repeating two key phases until the condition for the game to be ended is met. When the game is started, the first `Submission' phase is started which is where the client receive a Latin character and the users submit a drawing to the server. Once all of the expected submissions have been received, the `Evaluation' phase is started where the server uses the neural network to evaluate each of the users' submissions. The results are then received by the client application, and the users can then request for the next round to start. Once the server has received this request from all of the expected users, it then begins the next `Submission' phase.
 
 \begin{figure}[H]
     \centering
@@ -1574,7 +1599,7 @@ The general process by which a game runs is by repeating two key phases until th
 
 \paragraph{Game Start\\}
 
-When the server invokes the `awaitStart' handler, the boolean value representing if the game has started is set to true. For the `Elimination' game type, each user is added to the list of alive users. A countdown is then configured to display to the user. Once the game has been started, the right panel is configured to display the round results. \\
+When the server invokes the `awaitStart' handler, the boolean value representing if the game has started is set to true. For the `Elimination' game type, each user is also added to the list of alive users. A countdown is then configured to display to the user. Once the game has been started, the right panel is configured to display the round results. \\
 
 When the server invokes the `awaitRound' handler, the main panel is configured and the drawing panel object is returned from the `ConfigGamePanel' method. The `clear' and `submit' buttons are then assigned click event handlers, and a second countdown is configured.
 
@@ -1582,18 +1607,17 @@ When the server invokes the `awaitRound' handler, the main panel is configured a
 
 The submission phase is invoked after the client receives a letter. The number of rounds played is incremented, and the new letter is added to the list of letters. The drawing panel is then enabled using the `EnablePanel()' method, and the `submit' and `clear' buttons are enabled. \\
 
-The `clear' button is allocated the `ClearPanel()' method of the drawing panel. The `submit' button disables itself and the `clear' button. It then calls the `DisablePanel' method of the drawing panel and gets the drawing from the panel as a Bitmap. This Bitmap is then converted to a byte array and the `receiveSubmission' subroutine is invoke on the server, passing the byte array as parameter with the userID and the gameID.\@ The drawing panel is then cleared.
+The `clear' button is allocated the `ClearPanel()' method of the drawing panel. The `submit' button disables itself and the `clear' button. It then calls the `DisablePanel()' method of the drawing panel and gets the drawing from the panel as a Bitmap. This Bitmap is then converted to a byte array and the `receiveSubmission()' subroutine is invoked on the server, passing the byte array as parameter with the userID and the gameID.\@ The drawing panel is then cleared.
 
 \paragraph{Evaluation Phase\\}
 
-The evaluation phase is invoked by the server and passes the accuracy and elapsed time for the current letter, as well as if the user was correct. This is then updated in the `gameStats' structure, and the right panel is updated with these new results. The results screen is then displayed to the user, which contains the `continue' button. The click event handler for this button invokes the `requestRound()' method on the server application. \\
+The evaluation phase is invoked by the server and passes the accuracy and elapsed time for the current letter, as well as if the user was correct. This is then updated in the `gameStats' structure using its `UpdateStats()' method, and the right panel is updated with these new results. The results screen is then displayed to the user, which contains the `continue' button. The click event handler for this button invokes the `requestRound()' method on the server application. \\
 
-The `Versus' game type receives the userID of the user who won the round, which is displayed by adding a label to the results panel. The `Elimination' game type receives a list of alive users, which allows the client to display on the results screen if the user was eliminated. The reason for the user being eliminated is also displayed which is determined by the `correct' attribute of the user's results. If they were correct, then the user must have been eliminated as they had the longest elapsed time. Otherwise the user was eliminated since they were incorrect. The `UpdateUsers()' method is also called, to reflect the change in the alive users
+The `Versus' game type receives the userID of the user who won the round, which is displayed by adding a label to the results panel. The `Elimination' game type receives a list of alive users, which allows the client to display on the results screen if the user was eliminated. The reason for the user being eliminated is also displayed which is determined by the `correct' attribute of the user's results. If they were correct, then the user must have been eliminated as they had the longest elapsed time. Otherwise the user was eliminated since they were incorrect. The `UpdateUsers()' method is also called, to reflect the change in the alive users.
 
 \paragraph{Game End\\}
 
-When the game ends, the server invokes the appropriate method on the client, which configures the main panel to display the results of all the rounds. The `Elimination' game type also displays if the user won the game or not, and the `Versus' game type displays the user's change in Elo rating.
-% // how ui
+When the game ends, the server invokes the appropriate method on the client, which configures the main panel to display the results of all the rounds. The `Elimination' game type will additionally display if the user won the game or not using the `ConfigEliminationEndgame()' method. This is not sent as a parameter, but can be determined by checking if the user is in the list of alive users. The 'Versus' game type will display the new Elo rating of the user, and the difference from their previous rating. This cannot be infered from existing data like the `Elimination' game type, so the server sends this value which is passed into the `UpdateRank()' method. This updates the user's Elo rating in the `userData' structure, and calculates the difference from their previous rating. The 'ConfigVersusEndgame()' method of the \textbf{UXelements} class is then called to display this information on the results panel.
 
 \subsubsection{UML Diagrams}
 
@@ -1617,9 +1641,7 @@ The `InitialiseComponent()' method of the \textbf{UXelements} class configures t
 
 The main panels consist of a left, centre, and right panel. The left panel is divided into a smaller top panel and main bottom panel, which contains the `Home' button. The title bar sits above these panels and contains the `Close' button. \\
 
-The click event handler for the `Home' button is attached in the `ResetLayout()' method. This cause the page text to be updated to ``Home'' and the `dequeueGame()' method to be invoked on the server if the user is in-game. The `profile' and `game' attributes of the `menu' structure are then disposed, and the `InitialiseComponent()' method is called. \\
-
-The click event handler for the `Close' button is attached as part of configuring the base layout. This hides the form and invokes the `dequeueGame()' method on the server if the user is in-game. The `clientDisconnected()' method is then invoked, before closing the form.
+The click event handler for the `Home' button is attached in the `ResetLayout()' method. This button causes the page text to be updated to ``Home'' and the `dequeueGame()' method to be invoked on the server if the user is in-game. The `profile' and `game' attributes of the `menu' structure are then disposed, and the `InitialiseComponent()' method is called. The click event handler for the `Close' button is attached as part of configuring the base layout. This hides the form and invokes the `dequeueGame()' method on the server if the user is in-game. The `clientDisconnected()' method is then invoked, before closing the form.
 
 \subsubsection{Accounts Page}
 
@@ -1642,13 +1664,18 @@ If the user chooses to create an account, a `confirm password' text box is added
 \end{figure}
 
 \subsubsection{Home Page}
-% // this is pathetic
+
 The main panel on the home page lists the three available game to the user with a brief description and the ability to queue for each game. The left panel contains a list of the user's friends, separated into whether they are online or offline. The right panel contains an overview of the user's statistics, as well as the `Profile' and `Edit' buttons. \\
 
-The `Profile' button is used to access the profile page of the user. The click event handler for the button initialises a new instance of the \textbf{Profile} class with the user's userData.
+The `Profile' button is used to access the profile page of the user. The click event handler for the button updates the page text to ``Profile'', and creates a new instance of the \textbf{Profile} class, passing the instance of the \textbf{Main} class and the `userData' structure as parameters. The `Edit' button creates a new \textbf{UpdateForm} dialogue box which allows the user to customise their `about me' and localisation. If the user confirms their changes, the `updateUserData()' method is invoked on the server, passing the userID, updated `about me', and localisation as parameters. These updated values are accessed using the appropriate methods of the form class. The invocation returns a boolean value which indicates if the update was successful---if the update failed, the user is informed of the error that has occured. \\
+
+Each game type is presented in a panel with a description and a `Queue' button. The click event handler for each button instantiates the appropriate game type class, passing the instance of the \textbf{Main} class as a parameter. The `QueueGame()' method is then called to begin the queueing process, since the constructor only creates the game class on the client application. The `QueueGame()' method handles the server invocation to queue the user for a game and thereby create a new game on the server. The click event handler also updates the `page text' to reflect the game type the user is queueing for.
 
 \paragraph{Profile Updates\\}
-The `Edit' button is used to customise the user's `about me' and change the language of the client application. The click event handler for the button creates a new \textbf{UpdateForm} dialogue form. If the user clicks the `Confirm' button, then the `about me' and language which the user set are extracted using the appropriate methods of the form class. The `updateUserData()' method is then invoked on the server, passing the userID and updated `about me' and localisation.
+
+The \textbf{UpdateForm} class is a dialogue box which contains text boxes for the `about me' and localisation. The current values for these fields are set in the constructor using the `userData' structure passed as a parameter. The `InitialiseComponent()' method is then called to configure the form controls. Once the controls have been created, the text boxes are assigned the current values from the `userData' structure. The label for the length of the `about me' text box is also updated to reflect the current length of the text. The click event handlers for the `Confirm' and `Cancel' buttons are also assigned. The `Confirm' button assigns the updated values to private attributes of the class, and sets the `DialogResult' property to `DialogResult.OK'. The `Cancel' button sets the `DialogResult' property to `DialogResult.Cancel'. \\
+
+The button to cycle through the different languages the client application supports is identical to the one used in the accounts page. Each time the button is clicked, the next language in the supported languages list is set as the active language, and the text of the button is updated to reflect this. An event handler for when the text in the `about me' text box is changed is also assigned. This updates the length label to the current length of the text.
 
 \begin{figure}[H]
     \centering
@@ -1656,22 +1683,18 @@ The `Edit' button is used to customise the user's `about me' and change the lang
     \caption{Design for the Edit Profile form}
 \end{figure}
 
-% // user interace
-
 \paragraph{Menu Label\\}
 The `page text' is a label in the top section of the left panel. It displays to the user what menu they are currently in, and is updated using the `UpdatePageText()' method which takes in a string as a parameter. This clears the panel and creates a new label, which it applies the passed string to its `text' property after translating it. \\
 
 \paragraph{Friends\\}
 
-The friends panel is added to the left panel and lists the user's friends separated into online and offline. The `ConfigFriendsPanel()' method of the \textbf{Main} class separates the user's friends into two lists based on whether they are online or offline. The `Online' label is created, withe the length of its respective list added to its right. The online users are then listed using a loop which increments the Y-position of the next label each iteration. The name of each button is mapped to the userID of the friend. This allows the click event handler to use the button's name to call the asynchronous `RequestProfile()' method, passing the userID of the friend as a parameter. This is then repeated for the offline users, with the Y-position incremented such that the offline users are places below all the online users. \\
+The friends panel is added to the left panel and lists the user's friends separated into online and offline. The `ConfigFriendsPanel()' method of the \textbf{Main} class separates the user's friends into two lists based on whether they are online or offline. The `Online' label is created, withe the length of its respective list added to its right. The online users are then listed using a loop which increments the Y-position of the next label each iteration. The name of each button is mapped to the userID of the friend. This allows the click event handler to use the button's name to call the asynchronous `RequestProfile()' method, passing the userID of the friend as a parameter. This is then repeated for the offline users, with the Y-position incremented such that the offline users are placed below all the online users. \\
 
-The `RequestProfile()' method invokes the `requestProfile()' method on the server which returns a `userData' structure. A new \textbf{Profile} class is then instantiated with the returned userData as an argument to the constructor.
+The `RequestProfile()' method invokes the `requestProfile()' method on the server, passing the requested userID as a parameter. The server then returns a `userData' structure for the requested user, which is used to create a new instance of the \textbf{Profile} class. The instance of the \textbf{Main} class and the returned `userData' structure are passed as parameters. The page text is also updated to ``Profile''. If the userID of the returned structure does not match the requested userID, then a message is shown to the user that the requested user does not exist.
 
 \paragraph{Statistics\\}
 
-The right panel contains an overview of the user's account details, along with the options to view their profile and customise their `about me' and localisation. The summary of the statistics is created as a separate panel which is then placed onto the right panel by the `ConfigStatsPanel()' method of the static \textbf{UXelements} class. \\
-
-The values for the rank, total, and average accuracy are obtained from the static `CalculateStatsOverview()' method from the \textbf{Main} class. Local methods are used to reduce the volume of repeated code, and typically take arguments of position and size. 
+The right panel contains an overview of the user's account details, along with the options to view their profile and customise their `about me' and localisation. The summary of the statistics is created as a separate panel which is then placed onto the right panel by the `ConfigStatsPanel()' method of the static \textbf{UXelements} class. First, the values for the rank, total, and average accuracy are obtained from the static `CalculateStatsOverview()' method from the \textbf{Main} class. To create the controls for the statistics panel, local methods are used to reduce the volume of repeated code. Many of the controls are identical but with varying positions, hence these methods typically take arguments of position and size. \\
 
 \subsubsection{Profile}
 
@@ -1682,6 +1705,16 @@ The \textbf{Profile} form class is instantiated to display the statistics of a u
     \includegraphics[width=0.75\linewidth]{resx/ui_profile.png}
     \caption{Design for the Profile page}
 \end{figure}
+
+As with the statistics overview on the `Home' page, the overview of statistics is calculated using the static `CalculateStatsOverview()' method. A panel is created as a parent to the 26 child panels that will be added to it which represent the user's progress in learning each of the Latin characters. For each of the letters, the colour of the progress bar is first calculated by scaling the red and green values with the average accuracy for the current letter.
+
+\begin{align*}
+	R=255\cdot (1-\text{accuracy})
+	G=255\cdot \text{accuracy}
+	B=0
+\end{align*}
+
+The relevant controls are then created, including a panel to represent the base colour of a progress bar, and a panel for the percentage value of the progress bar. The colour of the latter panel is assigned to the RGB values calculated before, and its size in the X direction is set to the product of the average accuracy and the width of the base panel.
 
 \subsubsection{Games}
 \paragraph{Drawing Panel\\}
@@ -1732,7 +1765,7 @@ A progress bar is also created for the accuracy, where the bar is appropriately 
 \subsection{Object-Oriented Design}
 \subsubsection{Class Diagrams}
 
-The dependencies between classes has not been shown in the diagram below as it severely impacts the legibility. Static classes have been denoted by underlining the class identifier. While the \textbf{Form} class not accessed by any classes directly, I chose to include it in order to show which classes derive and use Windows Forms controls.
+The dependencies between classes have not been shown in the diagram below as it severely impacts the legibility. Static classes have been denoted by underlining the class identifier. While the \textbf{Form} class is not accessed by any classes directly, I chose to include it in order to show which classes derive and use Windows Forms controls.
 
 \begin{figure}[H]
     \centering
@@ -2401,11 +2434,11 @@ As discussed earlier, there are improvements that could feasibly be made to some
 
 The connection between the client application and the server is the underlying system on which the technical solution runs on. It was shown during Testing that client devices from outside the Local Area Network (LAN) could not establish a connection to the server. This is an issue with the Internet Service Provider (ISP) which the server application uses to connect to the internet: Toob. Toob is one of the many ISPs which use Carrier-Grade NAT (CGNAT) where multiple customers share a single public IP address. The public IP address is required by the client to uniquely identify the machine on which the server is running, however CGNAT does not provide unique public IP addresses to its devices. \\
 
-The main issue caused by CGNAT is the absence of custom port forwarding. If the server device has a unique public IP address, then a request made by the client application will only reach the router which connects the server's LAN to the internet. By supplying a port number as part of the request, the router can send any packets which use this port number to the local IP address of the server machine. This is called port forwarding, and is required to expose the server application to the internet. CGNAT works in a similar way to regular NAT when making a request from the network: port forwarding is used to return a server response to a client. However in the setup which the technical solution uses, it is the server rather than the client using CGNAT.\@ The client is not returning a response to the server and is instead making a request---a custom port forwarding must be set up in order for this request to reach the server, which CGNAT does not provide. \\
+The main issue caused by CGNAT is the absence of custom port forwarding. If the server device has a unique public IP address, then a request made by the client application will only reach the router which connects the server's LAN to the internet. By supplying a port number as part of the request, the router can send any packets which use this port number to the local IP address of the server machine. This is called port forwarding, and is required to expose the server application to the internet. CGNAT works in a similar way to regular NAT when making a request from the network: port forwarding is used to return a server response to a client. However in the setup which the technical solution uses, it is the server rather than the client using CGNAT.\@ The client is not returning a response to the server and is instead making a request---a custom port forwarding must be set up in order for this request to reach the server, which CGNAT does not provide without a significant payment. \\
 
 There are systems which provide a workaround to CGNAT.\@ A `tunnel' can be used to link a machine with a public website, which is hosted by the tunnel provider. The client can instead make its requests to this website which are `tunnelled' to the server machine. However I found this to be quite a hacky alternative and the options often came with a subscription, as well as making the client-server network more complicated. Toob is designed to be easy to use for an average internet user---CGNAT acts as an extra layer between the router and the internet, and is not a suitable ISP choice for the technical solution I have produced. \\
 
-Before switching to Toob, the ISP which the server connected through was Virgin Media. This is a more traditional ISP which allocates a unique public IPv4 address to a device. This allowed a device outside of the LAN to successfully establish a connection to the server. \\
+Before switching to Toob, the ISP which the server connected through was Virgin Media. This is a more traditional ISP which allocates a unique public IPv4 address to a device. This allowed a device outside of the LAN to successfully establish a connection to the server.
 
 \subsubsection{User Interface}
 
@@ -2415,16 +2448,35 @@ I also researched into other frameworks for building the client application, par
 
 \subsubsection{Database Design}
 
-One of the extension objectives was to store the user's Elo rating from the previous 90 days to allow a graph to be produced. This would have been a good visualisation for a user to track their progress in learning the Latin characters. One way of implementing this involves adding a new table to store a user's rating over time.
+One of the extension objectives was to store the user's Elo rating from the previous 90 days to allow a graph to be produced. This would have been a good visualisation for a user to track their progress in learning the Latin characters. One way of implementing this involves adding a new table to store a user's rating over time, The `userID' attribute of the record is a foreign key which references the userID in the `userData' table.
 
-\begin{minted}{sql}
-    Rating(userID*, rating*, time*)
+\begin{minted}[escapeinside=||]{sql}
+	userData(|\underline{userID}|, password, aboutMe, localisation, dateCreated)
+	rating(|\underline{userID}|*, |\underline{date}|, rating)
 \end{minted}
 
-The `userID' attribute of the record is a foreign key which references the userID in the `userData' table.
+ The `Rating' table uses a composite primary key consisting of the `userID' and `date' attributes. This allows for multiple records of a user's Elo rating history to exist, each with a different date. The `rating' attribute stores the Elo rating of the user on that date. It is unnecessary to store the exact time of the rating in the day, since that precision could not easily be visualised on a graph. \\
 
-% // user data load
-% // where and how graph
+ The `userData' structure will need to be updated where the `rank' attribute is replaced with a list of a `DateTime' integer tuple pairs. The `friendData' structure will not be updated in the same way, since this data is unnecessary during a game. The alterations to the database will require a refactor of the `LoadUserData()' method in the \textbf{Database} class. Instead of reading the user's Elo rating from the attribute in the `userData' table, a new method should be implemented to get the user's rating history, possibly identified by `LoadRatingHistory()'. This will need to be called during the `LoadUserData()' method and should have an `out' parameter of a List<(DateTime, int)> which is assigned to the new `rating' attribute of the `userData' structure. In order to reduce redundancies in the database, it is also necessary to ensure that the ratings stored do not exceed 90 days in age. It may be suitable to purge these records on a login event, using a new `PurgeRatingHistory()' method which is called before loading the rating history for a user. The SQL commands for the two new methods are detailed below---the parameter `cutoffDate' is equal to 90 days less than the current date. \\
+
+ \begin{minted}{sql}
+	SELECT date, rating
+	FROM rating
+	WHERE userID = @userID
+	ORDER BY date DESC
+ \end{minted}
+ \begin{minted}{sql}
+	DELETE FROM rating
+	WHERE userID = @userID AND date < @cutoffDate
+ \end{minted}
+
+The `UpdateRank()' method of the \textbf{Database} class will also need to be refactored slightly. Instead of using an UPDATE command to replace the user's rating in the `userData' table, an INSERT INTO command should instead be used to add a new record to the `rating' table. However this presents the possibility of a user's Elo rating changing more than once in a single day, which is likely to happen. To resolve this issue, a command should be issued to the database before inserting the new record that deletes any records in the `rating' table for the user which have the same date value as the current date. This will only be one record at most, and ensures that the new rating is safely inserted into the database table.
+
+\begin{center}
+\rule{0.5\linewidth}{0.4pt}
+\end{center}
+
+Considering the changes required for the client application, it is firstly necessary to change the `userData' structure to match the updated version on the server. To display the user's current rating, the first value in the `rating' list is used since the SQL command sorts the dates into descending order. The most suitable place for a graph of the user's Elo rating over time is the `Profile' page, as this would allow other users to also view the graph. The graph could be implemented using the Chart object from Windows Forms. This is a single form control which allows for a variety of graphs to be plotted, including a line graph. The control class defines a method identified by `AddXY()', which takes in a coordinate and plots it onto the chart. This is highly suitable for the input data, since it is effectively a list of X and Y values where the date is the X coordinate and the Elo rating is the Y coordinate. 
 
 \subsubsection{Spaced Repetition}
 
@@ -2475,7 +2527,7 @@ Regarding the implementation of this algorithm for spaced repetition, the server
 
 The `Accuracy' game type would then need to implement the SuperMemo algorithm as its own encapsulated functions. The letter would all be generated at the start of the game, replacing the current call to the `GenerateLetters()' method from the base class. A new function would need to be defined which takes in a `statistics' structure and returns a list of characters. The variables for the algorithm would also need to be updated at the end of the game, which would be implemented as a function which is called for each letter of the game. Its parameters would include the rating given to these letter, and the `statistics' structure for that letter. \\
 
-In order to create the list of letters at the start of the game, the program must go through each letter in the user's statistics and first calculate the `interval' for that letter using the recurrence relation with the value of \(n\). It can then compare the `number of games since last seen', and the interval of that letter. If these two values are equal, then the letter should be shown in this game and is added to the list. If there are less letters in the list than there are number of rounds in the game, then the remaining letters are filled with letters chosen at random from the remaining letters, not including any duplicates. The game can then be started and the user will play each round, where they draw the letter and their confidence is rated from 0 to 5. This could be done by adding buttons for each confidence level where the user would click the one they think best matches their confidence, or a separate algorithm could be implemented to calculate an approximation for this value from the time and accuracy. I have created pseudocode for the process of generating letters below. \\
+In order to create the list of letters at the start of the game, the program must go through each letter in the user's statistics and first calculate the `interval' for that letter using the recurrence relation with the value of \(n\). It can then compare the `number of games since last seen', and the interval of that letter. If these two values are equal, then the letter should be shown in this game and is added to the list. If there are less letters in the list than there are number of rounds in the game, then the remaining letters are filled with letters chosen at random from the remaining letters, not including any duplicates. The game can then be started and the user will play each round, where they draw the letter and their confidence is rated from 0 to 5. This could be done by adding buttons for each confidence level where the user would click the one they think best matches their confidence, or a separate algorithm could be implemented to calculate an approximation for this value from the time and accuracy. I have created pseudocode for the process of generating letters below.
 
 \begin{minted}{csharp}
     func GenerateLetters(List<Statistics> statistics) -> List<char> {
@@ -2527,7 +2579,6 @@ The database would then be updated with the new values for the `easing factor' a
 
 \subsection{Contents}
 
-% // maybe just actually insert links properly, unless you can't for some reason
 Shown below is a table of contents which details any code files with complex or interesting logic. Each file is accompanied by a brief description of the functionality it provides, as well as the page number where the code can be found. It should be noted that the page number links to the start of the file, so the relevant method may be up to a few pages later.
 
 \begin{table}[H]
@@ -2854,7 +2905,7 @@ namespace server_app.databases
 		public int rank { get; set; }
 		public Dictionary<char, statistics> statistics { get; set; }
 	}
-	public struct @statistics(double a, TimeSpan ts, int t)
+	public struct statistics(double a, TimeSpan ts, int t)
 	{
 		public double accuracy { get; set; } = a;
 		public TimeSpan time { get; set; } = ts;
@@ -4893,7 +4944,7 @@ namespace server_app
 			ProcessStartInfo startInfo = new()
 			{
 				FileName = "nginx.exe",
-				WorkingDirectory = @"C:\Users\naiquire\Documents\General\Relay\nginx-1.26.2",
+				WorkingDirectory = Environment.GetEnvironmentVariable("nginx"),
 				UseShellExecute = true
 			};
 			Process.Start(startInfo);
@@ -5443,7 +5494,7 @@ namespace client_app
 		public int rank { get; set; }
 		public Dictionary<char, statistics> statistics { get; set; }
 	}
-	public struct @statistics
+	public struct statistics
 	{
 		public double accuracy { get; set; }
 		public TimeSpan time { get; set; }
@@ -5544,7 +5595,7 @@ namespace client_app
 			{
 				UpdatePageText("Profile");
 				ConfigFriendsPanel();
-				UXelements.configUserDataPanel(this, userData);
+				UXelements.ConfigUserDataPanel(this, userData);
 				if (menu.profile.GetUserID() == userData.userID)
 				{
 					// if viewing own profile then refresh
@@ -5637,20 +5688,17 @@ namespace client_app
 		{
 			string rank = user.rank.ToString();
 
-			int sum = 0;
+			int totalLetters = 0;
+			double meanAccuracy = 0;
 			foreach (var letter in user.statistics.Keys)
 			{
-				sum += user.statistics[letter].total;
+				totalLetters += user.statistics[letter].total;
+				meanAccuracy += user.statistics[letter].accuracy;
 			}
-			string total = sum.ToString();
-
-			double mean = 0;
-			foreach (var letter in user.statistics.Keys)
-			{
-				mean += user.statistics[letter].accuracy;
-			}
-			mean /= user.statistics.Count;
-			string accuracy = (Math.Round(100 * mean, 2)).ToString();
+			
+			string total = totalLetters.ToString();
+			meanAccuracy /= user.statistics.Count;
+			string accuracy = (Math.Round(100 * meanAccuracy, 2)).ToString();
 
 			return (rank, total, accuracy);
 		}
@@ -5882,7 +5930,7 @@ namespace client_app
 			this.panel_left.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-			UXelements.configUserDataPanel(this, userData);
+			UXelements.ConfigUserDataPanel(this, userData);
 		}
 
 		private void ConfigGamePanels()
@@ -6173,7 +6221,6 @@ namespace client_app.menus
 				if (friend.userID == user.userID)
 				{
 					isFriend = true;
-
 					break;
 				}
 			}
@@ -6735,7 +6782,7 @@ namespace client_app.menus
 			return input;
 		}
 
-		public static void configRightGamePanel(Game game)
+		public static void ConfigRightGamePanel(Game game)
 		{
 			game.lbl_rounds = new Guna2HtmlLabel()
 			{
@@ -6846,7 +6893,7 @@ namespace client_app.menus
 
 		}
 
-		public static void configLeftGamePanel(Game game, List<friendData> users)
+		public static void ConfigLeftGamePanel(Game game, List<friendData> users)
 		{
 			game.main.panel_left.Controls.Clear();
 
@@ -6914,7 +6961,7 @@ namespace client_app.menus
 			game.main.panel_left.Controls.Add(seperator);
 			game.main.panel_left.Controls.Add(lbl_players);
 		}
-		public static void configLeftGamePanel(Game game, List<friendData> alive, List<friendData> dead)
+		public static void ConfigLeftGamePanel(Game game, List<friendData> alive, List<friendData> dead)
 		{
 			game.main.panel_left.Controls.Clear();
 
@@ -7288,7 +7335,7 @@ namespace client_app.menus
 			return panel_results;
 		}
 
-		public static void configUserDataPanel(Main main, userData userData)
+		public static void ConfigUserDataPanel(Main main, userData userData)
 		{
 			main.panel_right.Controls.Clear();
 
@@ -7387,9 +7434,9 @@ namespace client_app.menus
 			main.panel_right.Controls.Add(btn_edit);
 			main.panel_right.Controls.Add(pic_account);
 
-			configStatsPanel(main.panel_right, (40, 570), userData);
+			ConfigStatsPanel(main.panel_right, (40, 570), userData);
 		}
-		public static void configStatsPanel(Panel panel, (int X, int Y) pos, userData user)
+		public static void ConfigStatsPanel(Panel panel, (int X, int Y) pos, userData user)
 		{
 			(string rank, string total, string accuracy) = Main.CalculateStatsOverview(user);
 
@@ -7556,7 +7603,7 @@ namespace client_app.menus
 			panel.Controls.Add(panel_statsOverview);
 		}
 
-		public static void configLobbyPanel(Game game, List<friendData> users)
+		public static void ConfigLobbyPanel(Game game, List<friendData> users)
 		{
 			game.main.panel_main.Controls.Clear();
 
@@ -7676,7 +7723,7 @@ namespace client_app.menus
 			lbl_status.ResetText();
 		}
 
-		public static void configVersusResults(Panel panel_results, string winner)
+		public static void ConfigVersusResults(Panel panel_results, string winner)
 		{
 			Guna2HtmlLabel lbl_winner = new Guna2HtmlLabel()
 			{
@@ -7716,7 +7763,7 @@ namespace client_app.menus
 			panel_results.Controls.Add(lbl_winner);
 			panel_results.Controls.Add(bar_winner);
 		}
-		public static void configKnockoutResults(Panel panel_results, bool eliminated, bool correct)
+		public static void ConfigEliminationResults(Panel panel_results, bool eliminated, bool correct)
 		{
 			Guna2HtmlLabel lbl_eliminated = new Guna2HtmlLabel()
 			{
@@ -7854,7 +7901,7 @@ namespace client_app.menus
 			game.main.panel_main.Controls.Add(panel_stats);
 		}
 
-		public static void configVersusEndgame(Panel panel, int change)
+		public static void ConfigVersusEndgame(Panel panel, int change)
 		{
 			Guna2HtmlLabel txt_rank = new Guna2HtmlLabel()
 			{
@@ -7871,7 +7918,7 @@ namespace client_app.menus
 
 			panel.Controls.Add(txt_rank);
 		}
-		public static void configKnockoutEndgame(Panel panel, bool win)
+		public static void ConfigEliminationEndgame(Panel panel, bool win)
 		{
 			Guna2HtmlLabel txt_winner = new Guna2HtmlLabel()
 			{
@@ -7943,7 +7990,7 @@ namespace client_app.menus.games
                     }
                 }
 
-                UXelements.configLeftGamePanel(this, alive, dead);
+                UXelements.ConfigLeftGamePanel(this, alive, dead);
                 main.panel_left.Controls.Add(main.btn_home);
             }
             else
@@ -7958,7 +8005,7 @@ namespace client_app.menus.games
             {
                 aliveUsers.Add(user.userID);
             }
-            UXelements.configLeftGamePanel(this, users, new List<friendData>());
+            UXelements.ConfigLeftGamePanel(this, users, new List<friendData>());
             base.AwaitStart();
         }
 
@@ -7971,7 +8018,7 @@ namespace client_app.menus.games
             }
 
             UpdateUsers(users);
-            UXelements.configKnockoutResults(panel_results, eliminated, gameStats.correct.Last());
+            UXelements.ConfigEliminationResults(panel_results, eliminated, gameStats.correct.Last());
         }
 
         public override void EndGame()
@@ -7979,7 +8026,7 @@ namespace client_app.menus.games
             base.EndGame();
 
             bool winner = aliveUsers.Contains(Main.userData.userID);
-            UXelements.configKnockoutEndgame(main.panel_main, winner);
+            UXelements.ConfigEliminationEndgame(main.panel_main, winner);
         }
     }
 }
@@ -8085,10 +8132,10 @@ namespace client_app.menus.games
 
 			if (!started)
 			{
-				UXelements.configLobbyPanel(this, users);
+				UXelements.ConfigLobbyPanel(this, users);
 			}
 
-			UXelements.configLeftGamePanel(this, users);
+			UXelements.ConfigLeftGamePanel(this, users);
 			main.panel_left.Controls.Add(main.btn_home);
 
 		}
@@ -8133,7 +8180,7 @@ namespace client_app.menus.games
 		}
 		public void StartGame()
 		{
-			UXelements.configRightGamePanel(this);
+			UXelements.ConfigRightGamePanel(this);
 		}
 		public async void AwaitRound()
 		{
@@ -8165,7 +8212,7 @@ namespace client_app.menus.games
 				drawingPanel.ClearPanel();
 			};
 
-			UXelements.configLeftGamePanel(this, users);
+			UXelements.ConfigLeftGamePanel(this, users);
 			main.panel_left.Controls.Add(main.btn_home);
 			await UXelements.Countdown(main.panel_left, 3, Languages.localisation["Next letter in"][Main.userData.localisation]);
 		}
@@ -8209,13 +8256,7 @@ namespace client_app.menus.games
 
 		public void VersusResults(string winner)
 		{
-			UXelements.configVersusResults(panel_results, winner);
-		}
-
-		public override void EndGame()
-		{
-			base.EndGame();
-			UXelements.configVersusEndgame(main.panel_main, rankDelta);
+			UXelements.ConfigVersusResults(panel_results, winner);
 		}
 
 		public void UpdateRank(int currentRank)
@@ -8224,6 +8265,7 @@ namespace client_app.menus.games
 			rankDelta = currentRank - previousRank;
 
 			Main.userData.rank = currentRank;
+			UXelements.ConfigVersusEndgame(main.panel_main, rankDelta);
 		}
 	}
 }
@@ -8459,8 +8501,7 @@ namespace client_app
 				{"pt", "Amigos" },
 				{"de", "Freunde" },
 			});
-
-			// additional language entries would go here, but have not been included for brevity
+			// ... (additional localisation entries have been omitted for brevity)
 		}
 	}
 }
@@ -8533,6 +8574,16 @@ namespace client_app
 			}));
 		}
 
+		private void LoadMainApplication(string userID)
+		{
+			Hide();
+			menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
+			menu.main.ShowDialog();
+			menu.main.Dispose();
+			Show();
+			hub_connection.InjectForm(this, null);
+		}
+
 		public void HandleLoginSuccess(int success, string userID)
 		{
 			switch (success)
@@ -8541,11 +8592,7 @@ namespace client_app
 					lbl_information.Text = "Incorrect Password";
 					break;
 				case VALID:
-					Hide();
-					menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
-					menu.main.ShowDialog();
-					menu.main.Dispose();
-					Show();
+					LoadMainApplication(userID);
 					break;
 				case USER_DOES_NOT_EXIST:
 					lbl_information.Text = Languages.localisation["Account does not exist"][Languages.languageCodes[languageIndex]];
@@ -8577,11 +8624,7 @@ namespace client_app
 					this.txt_password.ResetText();
 					this.txt_passwordconfirm.ResetText();
 
-					Hide();
-					menu.main = new Main(userID, Languages.languageCodes[languageIndex]);
-					menu.main.ShowDialog();
-					menu.main.Dispose();
-					Show();
+					LoadMainApplication(userID);
 					break;
 				case USERID_TAKEN:
 					lbl_information.Text = Languages.localisation["Username is not available"][Languages.languageCodes[languageIndex]];
@@ -8939,8 +8982,3 @@ I have included references to the main documentation used when researching and c
 \href{https://stackoverflow.com/questions/7609839/accessing-a-forms-control-from-a-separate-thread}{Accessing a form's control from a separate thread (Oct 2011)}
 
 \end{document}
-
-% // whole system test idk
-% // formatting
-% // thoroughly check sources
-% // go over client and over explain

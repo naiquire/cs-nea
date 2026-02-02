@@ -121,7 +121,7 @@ namespace client_app
 			{
 				UpdatePageText("Profile");
 				ConfigFriendsPanel();
-				UXelements.configUserDataPanel(this, userData);
+				UXelements.ConfigUserDataPanel(this, userData);
 				if (menu.profile.GetUserID() == userData.userID)
 				{
 					// if viewing own profile then refresh
@@ -214,20 +214,17 @@ namespace client_app
 		{
 			string rank = user.rank.ToString();
 
-			int sum = 0;
+			int totalLetters = 0;
+			double meanAccuracy = 0;
 			foreach (var letter in user.statistics.Keys)
 			{
-				sum += user.statistics[letter].total;
+				totalLetters += user.statistics[letter].total;
+				meanAccuracy += user.statistics[letter].accuracy;
 			}
-			string total = sum.ToString();
-
-			double mean = 0;
-			foreach (var letter in user.statistics.Keys)
-			{
-				mean += user.statistics[letter].accuracy;
-			}
-			mean /= user.statistics.Count;
-			string accuracy = (Math.Round(100 * mean, 2)).ToString();
+			
+			string total = totalLetters.ToString();
+			meanAccuracy /= user.statistics.Count;
+			string accuracy = (Math.Round(100 * meanAccuracy, 2)).ToString();
 
 			return (rank, total, accuracy);
 		}

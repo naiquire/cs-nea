@@ -399,7 +399,7 @@
         <mxCell id="oUzcSoPOWHESQZ5JpMJt-6" value="Game" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1840" y="1440" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="oUzcSoPOWHESQZ5JpMJt-7" value="InputForm" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="oUzcSoPOWHESQZ5JpMJt-7" value="InputPanel" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1680" y="1280" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="oUzcSoPOWHESQZ5JpMJt-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=0;endSize=12;" parent="1" source="oUzcSoPOWHESQZ5JpMJt-7" target="oUzcSoPOWHESQZ5JpMJt-1" edge="1">
@@ -800,7 +800,7 @@
         <mxCell id="XhKy_LzJhSkbdNxYqlzd-15" value="Hub Connection" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="3840" y="1400" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="fgA7VF8krIrdZb3Gw5o7-1" value="&lt;u&gt;Languages&lt;/u&gt;" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="fgA7VF8krIrdZb3Gw5o7-1" value="&lt;u&gt;Languages&lt;/u&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1520" y="1680" width="120" height="40" as="geometry" />
         </mxCell>
       </root>

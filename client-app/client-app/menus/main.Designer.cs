@@ -110,7 +110,7 @@ namespace client_app
 			this.panel_left.ResumeLayout(false);
 			this.ResumeLayout(false);
 
-			UXelements.configUserDataPanel(this, userData);
+			UXelements.ConfigUserDataPanel(this, userData);
 		}
 
 		private void ConfigGamePanels()

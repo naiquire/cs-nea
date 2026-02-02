@@ -33,8 +33,7 @@
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}pt\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Amigos\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}de\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Freunde\PYGZdq{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{},}
 \PYG{+w}{			}\PYG{p}{\PYGZcb{});}
-
-\PYG{+w}{			}\PYG{c+c1}{// additional language entries would go here, but have not been included for brevity}
+\PYG{+w}{			}\PYG{c+c1}{// ... (additional localisation entries have been omitted for brevity)}
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}
 \PYG{+w}{	}\PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}

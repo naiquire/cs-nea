@@ -98,10 +98,10 @@
 
 \PYG{+w}{			}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{started}\PYG{p}{)}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
-\PYG{+w}{				}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configLobbyPanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{users}\PYG{p}{);}
+\PYG{+w}{				}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{ConfigLobbyPanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{users}\PYG{p}{);}
 \PYG{+w}{			}\PYG{p}{\PYGZcb{}}
 
-\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configLeftGamePanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{users}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{ConfigLeftGamePanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{users}\PYG{p}{);}
 \PYG{+w}{			}\PYG{n}{main}\PYG{p}{.}\PYG{n}{panel\PYGZus{}left}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{main}\PYG{p}{.}\PYG{n}{btn\PYGZus{}home}\PYG{p}{);}
 
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}
@@ -146,7 +146,7 @@
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{StartGame}\PYG{p}{()}
 \PYG{+w}{		}\PYG{p}{\PYGZob{}}
-\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configRightGamePanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{ConfigRightGamePanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{);}
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{async}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{AwaitRound}\PYG{p}{()}
 \PYG{+w}{		}\PYG{p}{\PYGZob{}}
@@ -178,7 +178,7 @@
 \PYG{+w}{				}\PYG{n}{drawingPanel}\PYG{p}{.}\PYG{n}{ClearPanel}\PYG{p}{();}
 \PYG{+w}{			}\PYG{p}{\PYGZcb{};}
 
-\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configLeftGamePanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{users}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{ConfigLeftGamePanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{users}\PYG{p}{);}
 \PYG{+w}{			}\PYG{n}{main}\PYG{p}{.}\PYG{n}{panel\PYGZus{}left}\PYG{p}{.}\PYG{n}{Controls}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{main}\PYG{p}{.}\PYG{n}{btn\PYGZus{}home}\PYG{p}{);}
 \PYG{+w}{			}\PYG{k}{await}\PYG{+w}{ }\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{Countdown}\PYG{p}{(}\PYG{n}{main}\PYG{p}{.}\PYG{n}{panel\PYGZus{}left}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Next letter in\PYGZdq{}}\PYG{p}{][}\PYG{n}{Main}\PYG{p}{.}\PYG{n}{userData}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{]);}
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}

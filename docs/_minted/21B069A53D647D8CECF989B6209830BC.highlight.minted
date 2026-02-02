@@ -111,7 +111,7 @@
 \PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{panel\PYGZus{}left}\PYG{p}{.}\PYG{n}{ResumeLayout}\PYG{p}{(}\PYG{k}{false}\PYG{p}{);}
 \PYG{+w}{			}\PYG{k}{this}\PYG{p}{.}\PYG{n}{ResumeLayout}\PYG{p}{(}\PYG{k}{false}\PYG{p}{);}
 
-\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{configUserDataPanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{UXelements}\PYG{p}{.}\PYG{n}{ConfigUserDataPanel}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{);}
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}
 
 \PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{ConfigGamePanels}\PYG{p}{()}

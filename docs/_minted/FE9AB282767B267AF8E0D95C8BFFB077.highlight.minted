@@ -65,6 +65,16 @@
 \PYG{+w}{			}\PYG{p}{\PYGZcb{}));}
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}
 
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{LoadMainApplication}\PYG{p}{(}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
+\PYG{+w}{		}\PYG{p}{\PYGZob{}}
+\PYG{+w}{			}\PYG{n}{Hide}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Main}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]);}
+\PYG{+w}{			}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{ShowDialog}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Dispose}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{Show}\PYG{p}{();}
+\PYG{+w}{			}\PYG{n}{hub\PYGZus{}connection}\PYG{p}{.}\PYG{n}{InjectForm}\PYG{p}{(}\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{null}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{\PYGZcb{}}
+
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{HandleLoginSuccess}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{success}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{userID}\PYG{p}{)}
 \PYG{+w}{		}\PYG{p}{\PYGZob{}}
 \PYG{+w}{			}\PYG{k}{switch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{success}\PYG{p}{)}
@@ -73,11 +83,7 @@
 \PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Incorrect Password\PYGZdq{}}\PYG{p}{;}
 \PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
 \PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{VALID}\PYG{p}{:}
-\PYG{+w}{					}\PYG{n}{Hide}\PYG{p}{();}
-\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Main}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]);}
-\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{ShowDialog}\PYG{p}{();}
-\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Dispose}\PYG{p}{();}
-\PYG{+w}{					}\PYG{n}{Show}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{LoadMainApplication}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{);}
 \PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
 \PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{USER\PYGZus{}DOES\PYGZus{}NOT\PYGZus{}EXIST}\PYG{p}{:}
 \PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Account does not exist\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
@@ -109,11 +115,7 @@
 \PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{txt\PYGZus{}password}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
 \PYG{+w}{					}\PYG{k}{this}\PYG{p}{.}\PYG{n}{txt\PYGZus{}passwordconfirm}\PYG{p}{.}\PYG{n}{ResetText}\PYG{p}{();}
 
-\PYG{+w}{					}\PYG{n}{Hide}\PYG{p}{();}
-\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Main}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]);}
-\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{ShowDialog}\PYG{p}{();}
-\PYG{+w}{					}\PYG{n}{menu}\PYG{p}{.}\PYG{n}{main}\PYG{p}{.}\PYG{n}{Dispose}\PYG{p}{();}
-\PYG{+w}{					}\PYG{n}{Show}\PYG{p}{();}
+\PYG{+w}{					}\PYG{n}{LoadMainApplication}\PYG{p}{(}\PYG{n}{userID}\PYG{p}{);}
 \PYG{+w}{					}\PYG{k}{break}\PYG{p}{;}
 \PYG{+w}{				}\PYG{k}{case}\PYG{+w}{ }\PYG{n}{USERID\PYGZus{}TAKEN}\PYG{p}{:}
 \PYG{+w}{					}\PYG{n}{lbl\PYGZus{}information}\PYG{p}{.}\PYG{n}{Text}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{localisation}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}Username is not available\PYGZdq{}}\PYG{p}{][}\PYG{n}{Languages}\PYG{p}{.}\PYG{n}{languageCodes}\PYG{p}{[}\PYG{n}{languageIndex}\PYG{p}{]];}
