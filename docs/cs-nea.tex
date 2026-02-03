@@ -782,11 +782,11 @@ The player's rating can then be updated with the following formula, where player
 \noindent\rule{\textwidth}{0.2pt}
 \subsection{High-level Overview}
 
-The objective of this program is to allow users to practice writing the Latin script. The project consists of a server application and a client application, which communicate using the SignalR framework. The user has the option from three different gamemodes, which include `Accuracy', `Versus', and `Elimination'. \\
+The objective of this program is to allow users to practice writing the Latin script. The project consists of a server application and a client application, which communicate using the SignalR framework. The user has the option from three different game types, which include `Accuracy', `Versus', and `Elimination'. These games are hosted and managed by the server application, alleviating the clients of some processing and allowing for online multiplayer.\\
 
-In each of these gamemodes, the user is presented with a Latin character and a drawing panel. By using mouse input, the user can write the given letter in the drawing panel. The accuracy of a user's submission is evaluated on the server using a multi-layered neural network. The network uses the backpropagation algorithm and the EMNIST dataset to train the network. \\
+In each of these game types, the user is presented with a random Latin character and a drawing panel. By using mouse input, the user can write the given letter in the drawing panel. The accuracy of a user's submission is evaluated on the server using a multi-layered neural network, which is returned to the user as feedback on their submission. The network uses the backpropagation algorithm and a sample of the EMNIST dataset to train the neural network. \\
 
-An SQL database is used to store accounts for each user, as well as statistics for the Latin characters from A to Z. Each user has an account which details their login credentials, Elo rank, and localisation. The application's language can be changed to some of the common languages which use the Latin alphabet, and each user's chosen language is saved in their account details. Each user has an Elo rank, which ranks their fluency in writing the Latin characters compared to others. \\
+An SQL database is used to store the accounts for each user, as well as their statistics for the Latin characters from A to Z. Each user's account details their login credentials, Elo rating, and localisation choice. The user's choice of language determines the language which the client application is rendered in, and can be changed to some of the common languages which use the Latin alphabet. Each user also has an Elo rating, which ranks their fluency in writing the Latin characters compared to others. \\
 
 \begin{figure}[H]
     \centering
@@ -794,15 +794,17 @@ An SQL database is used to store accounts for each user, as well as statistics f
     \caption{High-level overview of components}
 \end{figure}
 
-The client communicates to the server through the \textbf{Connection} class which forwards requests related to a game to the \textbf{Queueing} class. This class contains a list of the current games, which it uses to relay the user's requests through to the appropriate game. The abstract game class can directly access the database and neural network, which it uses to evaluate a user's submission and save these results in a table. \\
+The diagram above outlines the key components of both the server application and the client application. The connection between these two processes is managed by the `Connection' component on the server, which handles any requests made by the client through the `Hub Connection' component. These communicate using the SignalR networking framework, which allows for invocations of methods on another device. \\
 
-The client has a designated class for each menu the application contains, which include the `Home' page, the `Profile' page, and when the user is playing a game.
+The server contains three main units which manage the progression of the games and access account data. The `Games' component contains all of the active games on the server, and manages the progression of each. It facilitates users queueing and dequeueing from games, and appropriately advances the round of the games when necessary. During the games, the `Neural Network' is utilised to provide an accurate evaluation of a user's submission, making it key to the function of the server application. The `Database' is used to access the account data for a given user, and allows for a user to login to the client application and synchronise their learning progress between devices. \\
+
+The client also contains three main units, each of which represents a major `page' which the user can visit in the application. The `Main' page is the screen which the user is first presented with upon logging into their account. From here, the user can queue for a game type of their choosing, or access their profile page to view their learning progress. The `Profile' page details a user's statistics for each letter of the Latin alphabet, including their average accuracy, average time, and the number of times which they have drawn each letter. The `Games' component manages the invocations received by the server when the progession of a game is advanced, usually involving updates to the screen. \\
 
 \subsection{Choice of Language and Libraries}
 
 Since object-oriented programming is a necessary paradigm to use, C\# will be the most suitable language for this project. This also allows for the use of Windows Forms to create the UI for the client, and SignalR to provide a client-server connection. I have significant experience in both of these software, hence why they are suitable for the technical solution. \\
 
-Regarding the libraries required for the server application, the SignalR library is mandatory for creating a server which clients can connect to. Furthermore, the SQLite library will be used to store the account data and statistics for each user, and allow the C\# to interact with the database file. For the neural network, I have chosen to use the Mathnet.Numerics library to perform operations on matrices, since this library provides `Matrix' and `Vector' classes. These will be used to improve the speed of the forward pass of the network. \\
+Regarding the libraries required for the server application, the SignalR library is mandatory for creating a server which clients can connect to. Furthermore, the SQLite library will be used to store and retrieve the account data and statistics for each user, and allow the C\# codebase to interact with the database file. For the neural network, I have chosen to use the Mathnet.Numerics library to perform operations on matrices, since this library provides `Matrix' and `Vector' classes. These will be used to improve the speed of the forward pass of the network. \\
 
 As for the libraries required by the client application, the user interface will be created using the Windows Forms library. I have also chosen to use the Guna.UI2.WinForms library, which provides an enhanced set of controls to use with Windows Forms, such as progress bars and gradient fill colours. Additionally, the client application also requires the SignalR.Client library to allow it to establish a connection with the server.
 
@@ -816,9 +818,10 @@ The neural network consists of four classes, each of which perform a core functi
 
 \subsubsection{Forward Propagation}
 
-Forward propagation in the neural network is managed by the \textbf{Network} class. This class contains two constructors, depending on whether a new set of weights and biases should be used. The \textbf{Data} class includes static attributes which store the network parameters as arrays of arrays. When this class is first accessed, the weights and biases are loaded from their respective files and stored in these attributes. The static `BuildMatrices()' method of the class is then called which creates the Matrix and Vector objects for each layer of parameters in the network, which are stored in static arrays. \\
+% // constructors
+Forward propagation in the neural network is managed by the \textbf{Network} class. This class contains two constructors, depending on whether a new set of weights and biases have been passed into the network. By default, the network uses the parameters which are preloaded into the \textbf{Data} class as Matrix and Vector objects. However during backpropagation, the network parameters are upated after each iteration---it is therefore necessary to rebuild the Matrix and Vector objects, which is done through the alternative constructor of the \textbf{Network} class. \\
 
-If the constructor arguments include a new set of network parameters, then the `BuildMatrices()' method of the \textbf{Data} class is called with the parameters passed as arguments. This updates the Matrix and Vector objects to represent the new set of weights and biases. This constructor is always used when the network is being trained using the \textbf{Backpropagation} class, since the parameters are update after each iteration. \\
+If the default constructor is used, then the network will use the Matrix and Vector objects present in the \textbf{Data} class during the forward pass. If the alternative constructor is used which passes in a new set of parameters, the `BuildMatrices()' method is called to rebuild the Matrix and Vector objects.
 
 Both constructors then call the `EvaluateNetwork()' subroutine, which performs the forward pass. The program iterates through each layer excluding the input layer and creates a Vector object from the 1D array of the activated values for the previous layer. The equation outlined in 1.7.4.1 is then applied to these objects, where \(z\), \(w\), and \(b\) represent the neuron values, weights, and biases respectively. The Matrix and Vector objects which represent the network parameters are stored as static attributes in the \textbf{Data} class.
 
@@ -1051,6 +1054,8 @@ First a random integer is chosen between 0 and 50 less than the number of images
 \subsubsection{Data Structures}
 
 Since a neural network consists of complete bipartite graphs, a set of adjacency matrices can be used to represent the network. The weights can be stored in an array of 2D arrays where \(\text{weight}[L][i,\ j]\) references the weight between the \(i^{\text{th}}\) neuron in layer \(L\) and the \(j^{\text{th}}\) in layer \(L+1\). Similarly the biases can be stored in an array of 1D arrays where \(\text{bias}[L][i]\) references the bias of the \(i^{\text{th}}\) neuron in layer \(L\). This allows libraries to easily convert the parameters into a matrix and vector, which improves the speed of a forward pass. The neuron values, neuron errors, and activated values can be stored in the same way as the biases.
+
+% // storing parameters
 
 \subsubsection{File Organisation}
 
