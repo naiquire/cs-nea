@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using server_app.connections;
 using server_app.databases;
 using server_app.neuralNetwork;
+using server_app.neuralNetwork.structures;
 using System.Diagnostics;
 
 namespace server_app
@@ -12,12 +13,12 @@ namespace server_app
 
 		static void Main(string[] args)
 		{
-			Logger.SetupAsync();
-			Logger.Log("SERVER", "white", "Application started");
-			Data.BuildMatrices(Data.LoadWeights(), Data.LoadBiases());
+			Vector result = (new Vector([-1, 3, 2])) * (new Matrix(new double[,] { { 1, 2 }, { 5, 3 }, { 2, -5 } }));
+			Console.ReadKey();
+			//Data.BuildMatrices(Data.LoadWeights(), Data.LoadBiases());
 
-			startNginx();
-			hostBuilder(args).Build().Run();
+			//startNginx();
+			//hostBuilder(args).Build().Run();
 		}
 
 		private static void startNginx()
@@ -84,6 +85,8 @@ namespace server_app
 			});
 
 			return host;
+			Logger.SetupAsync();
+			Logger.Log("SERVER", "white", "Application started");
 		}
 	}
 }

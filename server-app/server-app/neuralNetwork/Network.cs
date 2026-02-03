@@ -1,4 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using server_app.neuralNetwork.structures;
 
 namespace server_app.neuralNetwork
 {
@@ -40,8 +40,8 @@ namespace server_app.neuralNetwork
 			for (int layer = 1; layer < layerCount; layer++)
 			{
 				// calculate neuron values
-				Vector<double> neuronsMatrix = Vector<double>.Build.DenseOfArray(activatedValues[layer - 1]);
-				neuronValues[layer] = (neuronsMatrix * Data.weightsMatrices[layer - 1] + Data.biasesMatrices[layer - 1]).AsArray();
+				Vector neuronsVector = new(activatedValues[layer - 1]);
+				neuronValues[layer] = ((neuronsVector * Data.weightsMatrices[layer - 1]) + Data.biasesVector[layer - 1]).GetArray();
 
 				// calculate activated values
 				activatedValues[layer] = new double[layerSizes[layer]];

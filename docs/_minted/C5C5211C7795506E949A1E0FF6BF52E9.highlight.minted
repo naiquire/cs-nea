@@ -1,5 +1,5 @@
 \begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{MathNet.Numerics.LinearAlgebra}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.neuralNetwork.structures}\PYG{p}{;}
 \PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Drawing}\PYG{p}{;}
 \PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.IO.Compression}\PYG{p}{;}
 \PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{System.Text}\PYG{p}{;}
@@ -8,17 +8,17 @@
 \PYG{p}{\PYGZob{}}
 \PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Data}
 \PYG{+w}{	}\PYG{p}{\PYGZob{}}
-\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{location}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}Environment.GetEnvironmentVariable(\PYGZdq{}}\PYG{n}{cs}\PYG{o}{\PYGZhy{}}\PYG{n}{nea}\PYG{o}{\PYGZhy{}}\PYG{n}{server}\PYG{l+s}{\PYGZdq{})\PYGZcb{}\PYGZbs{}\PYGZbs{}neuralNetwork\PYGZbs{}\PYGZbs{}data\PYGZbs{}\PYGZbs{}\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{location}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{err}{\PYGZdl{}}\PYG{l+s}{@\PYGZdq{}\PYGZob{}Environment.GetEnvironmentVariable(\PYGZdq{}}\PYG{n}{cs}\PYG{o}{\PYGZhy{}}\PYG{n}{nea}\PYG{o}{\PYGZhy{}}\PYG{n}{server}\PYG{l+s}{\PYGZdq{})\PYGZcb{}\PYGZbs{}neuralNetwork\PYGZbs{}data\PYGZbs{}\PYGZdq{};}
 
-\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{n}{Matrix}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{weightsMatrices}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Matrix}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{[}\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{];}
-\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{n}{Vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{biasesMatrices}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{[}\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{];}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{n}{Matrix}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{weightsMatrices}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Matrix}\PYG{p}{[}\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{];}
+\PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{n}{Vector}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{biasesVector}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Vector}\PYG{p}{[}\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{];}
 
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{static}\PYG{+w}{ }\PYG{k}{void}\PYG{+w}{ }\PYG{n+nf}{BuildMatrices}\PYG{p}{(}\PYG{k+kt}{double}\PYG{p}{[][,]}\PYG{+w}{ }\PYG{n}{weights}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{p}{[][]}\PYG{+w}{ }\PYG{n}{biases}\PYG{p}{)}
 \PYG{+w}{		}\PYG{p}{\PYGZob{}}
 \PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{layer}\PYG{o}{++}\PYG{p}{)}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
-\PYG{+w}{				}\PYG{n}{weightsMatrices}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Matrix}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{.}\PYG{n}{Build}\PYG{p}{.}\PYG{n}{DenseOfArray}\PYG{p}{(}\PYG{n}{weights}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]);}
-\PYG{+w}{				}\PYG{n}{biasesMatrices}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{.}\PYG{n}{Build}\PYG{p}{.}\PYG{n}{DenseOfArray}\PYG{p}{(}\PYG{n}{biases}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]);}
+\PYG{+w}{				}\PYG{n}{weightsMatrices}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Matrix}\PYG{p}{(}\PYG{n}{weights}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]);}
+\PYG{+w}{				}\PYG{n}{biasesVector}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Vector}\PYG{p}{(}\PYG{n}{biases}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]);}
 \PYG{+w}{			}\PYG{p}{\PYGZcb{}}
 \PYG{+w}{		}\PYG{p}{\PYGZcb{}}
 
@@ -201,7 +201,7 @@
 \PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
 \PYG{+w}{				}\PYG{n}{weights}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{p}{[}\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerSizes}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerSizes}\PYG{p}{[}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]];}
-\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamReader}\PYG{+w}{ }\PYG{n}{sr}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}location\PYGZcb{}weights\PYGZbs{}\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
+\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamReader}\PYG{+w}{ }\PYG{n}{sr}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{err}{\PYGZdl{}}\PYG{l+s}{@\PYGZdq{}\PYGZob{}location\PYGZcb{}weights\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}
 \PYG{+w}{					}\PYG{k+kt}{string}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{lines}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{sr}\PYG{p}{.}\PYG{n}{ReadToEnd}\PYG{p}{().}\PYG{n}{Split}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{);}
 \PYG{+w}{					}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerSizes}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];}\PYG{+w}{ }\PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
@@ -222,7 +222,7 @@
 \PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
 \PYG{+w}{				}\PYG{n}{biases}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{p}{[}\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerSizes}\PYG{p}{[}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]];}
-\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamReader}\PYG{+w}{ }\PYG{n}{sr}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}location\PYGZcb{}biases\PYGZbs{}\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
+\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamReader}\PYG{+w}{ }\PYG{n}{sr}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{err}{\PYGZdl{}}\PYG{l+s}{@\PYGZdq{}\PYGZob{}location\PYGZcb{}biases\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}
 \PYG{+w}{					}\PYG{k+kt}{string}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{s}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{sr}\PYG{p}{.}\PYG{n}{ReadToEnd}\PYG{p}{().}\PYG{n}{Split}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{);}
 \PYG{+w}{					}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerSizes}\PYG{p}{[}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{];}\PYG{+w}{ }\PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
@@ -246,7 +246,7 @@
 \PYG{+w}{					}\PYG{p}{\PYGZcb{}}
 \PYG{+w}{					}\PYG{n}{builder}\PYG{p}{.}\PYG{n}{Append}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}weights[i][j, weights[i].GetLength(1) \PYGZhy{} 1]\PYGZcb{}\PYGZbs{}n\PYGZdq{}}\PYG{p}{);}
 \PYG{+w}{				}\PYG{p}{\PYGZcb{}}
-\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamWriter}\PYG{+w}{ }\PYG{n}{sw}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}location\PYGZcb{}weights\PYGZbs{}\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
+\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamWriter}\PYG{+w}{ }\PYG{n}{sw}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{err}{\PYGZdl{}}\PYG{l+s}{@\PYGZdq{}\PYGZob{}location\PYGZcb{}weights\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}
 \PYG{+w}{					}\PYG{n}{sw}\PYG{p}{.}\PYG{n}{Write}\PYG{p}{(}\PYG{n}{builder}\PYG{p}{);}
 \PYG{+w}{				}\PYG{p}{\PYGZcb{}}
@@ -256,7 +256,7 @@
 \PYG{+w}{		}\PYG{p}{\PYGZob{}}
 \PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{Network}\PYG{p}{.}\PYG{n}{layerCount}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
-\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamWriter}\PYG{+w}{ }\PYG{n}{sw}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}location\PYGZcb{}biases\PYGZbs{}\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
+\PYG{+w}{				}\PYG{k}{using}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{StreamWriter}\PYG{+w}{ }\PYG{n}{sw}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{err}{\PYGZdl{}}\PYG{l+s}{@\PYGZdq{}\PYGZob{}location\PYGZcb{}biases\PYGZbs{}\PYGZob{}i\PYGZcb{}.txt\PYGZdq{}}\PYG{p}{))}
 \PYG{+w}{				}\PYG{p}{\PYGZob{}}
 \PYG{+w}{					}\PYG{n}{sw}\PYG{p}{.}\PYG{n}{Write}\PYG{p}{(}\PYG{k+kt}{string}\PYG{p}{.}\PYG{n}{Join}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{biases}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]));}
 \PYG{+w}{				}\PYG{p}{\PYGZcb{}}
@@ -269,7 +269,7 @@
 
 \PYG{+w}{			}\PYG{n}{Console}\PYG{p}{.}\PYG{n}{Write}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZbs{}r[ \PYGZob{}100 * done / total,3\PYGZcb{}\PYGZpc{} ] Loading training images\PYGZdq{}}\PYG{p}{);}
 
-\PYG{+w}{			}\PYG{n}{FileStream}\PYG{+w}{ }\PYG{n}{fs}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}location\PYGZcb{}training\PYGZbs{}\PYGZbs{}images.gz\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileMode}\PYG{p}{.}\PYG{n}{Open}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileAccess}\PYG{p}{.}\PYG{n}{ReadWrite}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{FileStream}\PYG{+w}{ }\PYG{n}{fs}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{err}{\PYGZdl{}}\PYG{l+s}{@\PYGZdq{}\PYGZob{}location\PYGZcb{}training\PYGZbs{}images.gz\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileMode}\PYG{p}{.}\PYG{n}{Open}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileAccess}\PYG{p}{.}\PYG{n}{ReadWrite}\PYG{p}{);}
 \PYG{+w}{			}\PYG{n}{CompressionMode}\PYG{+w}{ }\PYG{n}{cm}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{CompressionMode}\PYG{p}{.}\PYG{n}{Decompress}\PYG{p}{;}
 
 \PYG{+w}{			}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{p}{[]}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{images}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[];}
@@ -311,7 +311,7 @@
 \PYG{+w}{			}\PYG{n}{Console}\PYG{p}{.}\PYG{n}{WriteLine}\PYG{p}{();}
 
 \PYG{+w}{			}\PYG{n}{done}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
-\PYG{+w}{			}\PYG{n}{fs}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZob{}location\PYGZcb{}training\PYGZbs{}\PYGZbs{}labels.gz\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileMode}\PYG{p}{.}\PYG{n}{Open}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileAccess}\PYG{p}{.}\PYG{n}{ReadWrite}\PYG{p}{);}
+\PYG{+w}{			}\PYG{n}{fs}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{err}{\PYGZdl{}}\PYG{l+s}{@\PYGZdq{}\PYGZob{}location\PYGZcb{}training\PYGZbs{}labels.gz\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileMode}\PYG{p}{.}\PYG{n}{Open}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FileAccess}\PYG{p}{.}\PYG{n}{ReadWrite}\PYG{p}{);}
 
 \PYG{+w}{			}\PYG{n}{Console}\PYG{p}{.}\PYG{n}{Write}\PYG{p}{(}\PYG{l+s}{\PYGZdl{}\PYGZdq{}\PYGZbs{}r[ \PYGZob{}100 * done / total,3\PYGZcb{}\PYGZpc{} ] Loading training labels\PYGZdq{}}\PYG{p}{);}
 

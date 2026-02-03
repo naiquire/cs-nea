@@ -17,7 +17,7 @@
 
 
 \usemintedstyle{vs}
-%\setlength{\parindent}{0pt}
+\setlength{\parindent}{0pt}
 
 \newcommand{\hiddensection}[1]{%
   \section*{#1}% print section title, but without a number
@@ -26,6 +26,8 @@
 }
 
 \begin{document}
+
+\setminted{tabsize=4}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -202,7 +204,7 @@ A neural network can be abstractly represented as a series of complete weighted 
 
 The training data could be sourced from the EMNIST database: a collection of \(28\times 28\) images featuring upper and lower case latin characters. There are over 200,000 images and labels in this dataset, therefore being highly suitable for training the network. These can be stored using 2D arrays which will be converted to a 1D array to input into the network. \\
 
-As for the forward pass in the network, it is likely that I will choose to use a library for matrix multiplication. While it is possible to build a multiplier myself, it is imperative that the forward pass is as efficient as possible. Hence I plan to use the MathNet.Numerics library. The activation function I plan to use in the hidden layers is the sigmoid function, rather than Rectified Linear Unit (ReLU). Since this is a classification network, it can be useful to retain any negative neuron values.
+As for the forward pass in the network, it is likely that I will choose to use a library for matrix multiplication. While it is possible to build a multiplier myself, it is useful for the forward pass to be as efficient as possible, in order to reduce the time a user spends waiting for their results. Hence I plan to use the MathNet.Numerics library. The activation function I plan to use in the hidden layers is the sigmoid function, rather than Rectified Linear Unit (ReLU). Since this is a classification network, it can be useful to retain any negative neuron values.
 
 \begin{table}[H]
 \centering
@@ -784,7 +786,7 @@ The player's rating can then be updated with the following formula, where player
 
 The objective of this program is to allow users to practice writing the Latin script. The project consists of a server application and a client application, which communicate using the SignalR framework. The user has the option from three different game types, which include `Accuracy', `Versus', and `Elimination'. These games are hosted and managed by the server application, alleviating the clients of some processing and allowing for online multiplayer.\\
 
-In each of these game types, the user is presented with a random Latin character and a drawing panel. By using mouse input, the user can write the given letter in the drawing panel. The accuracy of a user's submission is evaluated on the server using a multi-layered neural network, which is returned to the user as feedback on their submission. The network uses the backpropagation algorithm and a sample of the EMNIST dataset to train the neural network. \\
+In each of these game types, the user is presented with a random Latin character and a drawing panel. By using mouse input, the user can write the given letter in the drawing panel. The accuracy of a user's submission is evaluated on the server using a multi-layered neural network, which is returned to the user as feedback on their submission. The backpropagation algorithm and a sample of the EMNIST dataset is used to train the neural network. \\
 
 An SQL database is used to store the accounts for each user, as well as their statistics for the Latin characters from A to Z. Each user's account details their login credentials, Elo rating, and localisation choice. The user's choice of language determines the language which the client application is rendered in, and can be changed to some of the common languages which use the Latin alphabet. Each user also has an Elo rating, which ranks their fluency in writing the Latin characters compared to others. \\
 
@@ -798,15 +800,15 @@ The diagram above outlines the key components of both the server application and
 
 The server contains three main units which manage the progression of the games and access account data. The `Games' component contains all of the active games on the server, and manages the progression of each. It facilitates users queueing and dequeueing from games, and appropriately advances the round of the games when necessary. During the games, the `Neural Network' is utilised to provide an accurate evaluation of a user's submission, making it key to the function of the server application. The `Database' is used to access the account data for a given user, and allows for a user to login to the client application and synchronise their learning progress between devices. \\
 
-The client also contains three main units, each of which represents a major `page' which the user can visit in the application. The `Main' page is the screen which the user is first presented with upon logging into their account. From here, the user can queue for a game type of their choosing, or access their profile page to view their learning progress. The `Profile' page details a user's statistics for each letter of the Latin alphabet, including their average accuracy, average time, and the number of times which they have drawn each letter. The `Games' component manages the invocations received by the server when the progession of a game is advanced, usually involving updates to the screen. \\
+The client also contains three main units, each of which represents a major `page' which the user can visit in the application. The `Main' page is the screen which the user is first presented with upon logging into their account. From here, the user can queue for a game type of their choosing, or access their profile page to view their learning progress. The `Profile' page details a user's statistics for each letter of the Latin alphabet, including their average accuracy, average time, and the number of times which they have drawn each letter. The `Games' component manages the invocations received by the server when the progression of a game is advanced, usually involving updates to the screen. \\
 
 \subsection{Choice of Language and Libraries}
 
-Since object-oriented programming is a necessary paradigm to use, C\# will be the most suitable language for this project. This also allows for the use of Windows Forms to create the UI for the client, and SignalR to provide a client-server connection. I have significant experience in both of these software, hence why they are suitable for the technical solution. \\
+Since object-oriented programming is a necessary paradigm to use, C\# will be the most suitable language for this project. This also allows for the use of Windows Forms to create the UI for the client, and SignalR to provide a client-server connection. I have significant experience in both of these software, hence why they are suitable for the technical solution. Regarding the libraries required for the server application, the SignalR library is mandatory for creating a server which clients can connect to. It provides unique identification to each connected client, with the ability to invoke a handler on the client application which can execute code. Similarly, the client can directly invoke a method on the server application and can pass parameters and receive the returned value. Furthermore, the SQLite library will be used to store and retrieve the account data and statistics for each user, and allow the C\# codebase to interact with the database file. \\
 
-Regarding the libraries required for the server application, the SignalR library is mandatory for creating a server which clients can connect to. Furthermore, the SQLite library will be used to store and retrieve the account data and statistics for each user, and allow the C\# codebase to interact with the database file. For the neural network, I have chosen to use the Mathnet.Numerics library to perform operations on matrices, since this library provides `Matrix' and `Vector' classes. These will be used to improve the speed of the forward pass of the network. \\
+As for the libraries required by the client application, the user interface will be created using the Windows Forms library. This is a graphical user interface library which is configured and rendered using C\# code. I have also chosen to use the Guna.UI2.WinForms library, which provides an enhanced set of controls to use with Windows Forms, such as progress bars and gradient fill colours. These will help aid me in creating a user-friendly interface which requires little knowledge of the languages which the client application will be rendered in. Additionally, the client also requires the SignalR.Client library to allow it to establish a connection with the server. \\
 
-As for the libraries required by the client application, the user interface will be created using the Windows Forms library. I have also chosen to use the Guna.UI2.WinForms library, which provides an enhanced set of controls to use with Windows Forms, such as progress bars and gradient fill colours. Additionally, the client application also requires the SignalR.Client library to allow it to establish a connection with the server.
+It was stated in the Analysis section that I would be using an external library to perform the matrix operations required for the forward pass of the neural network. I have since decided against this, and have opted to create my own Matrix and Vector classes for this project. While these are likely less efficient than using a library, when creating the technical solution I did not notice any significant time delay while a submission was being evaluated.
 
 \newpage
 \hiddensection{Server Design}
@@ -814,22 +816,27 @@ As for the libraries required by the client application, the user interface will
 
 \subsection{Neural Network}
 
-The neural network consists of four classes, each of which perform a core function of the network. The \textbf{Network} class performs the forward pass, which is used to evaluate a user's submission. The \textbf{Backpropagation} class is used to train the network, and therefore will contain instances of the \textbf{Network} class. Both of these classes frequently use the static \textbf{Data} class, which contains methods for saving and loading the network parameters. It also contains any mathematical functions, such as sigmoid. The \textbf{Training} class oversees the training process, and is responsible for feeding images and labels into the \textbf{Backpropagation} class.
+The neural network consists of four classes, each of which perform a core function of the network. The \textbf{Network} class performs the forward pass, which is used to evaluate a user's submission. The \textbf{Backpropagation} class is used to train the network, and therefore will contain instances of the \textbf{Network} class. Both of these classes frequently use the static \textbf{Data} class, which contains methods for saving and loading the network parameters. It also contains any mathematical functions, such as sigmoid. The \textbf{Training} class oversees the training process, and is responsible for feeding images and labels into the \textbf{Backpropagation} class. \\
+
+One of the major differences between the neural network in the prototype and the one implemented for the technical solution is the addition of the \textbf{Matrix} and \textbf{Vector} classes. The prototype used external libraries for performing matrix operations, however the final solution uses my own classes. These have been created using index overriding and operator overloading, such that the data structures resemble an in-built data type. It also makes the classes far easier to work with and easier to understand, since a single operator can be used instead of a whole function which takes in the two input values as arguments.
 
 \subsubsection{Forward Propagation}
 
-% // constructors
-Forward propagation in the neural network is managed by the \textbf{Network} class. This class contains two constructors, depending on whether a new set of weights and biases have been passed into the network. By default, the network uses the parameters which are preloaded into the \textbf{Data} class as Matrix and Vector objects. However during backpropagation, the network parameters are upated after each iteration---it is therefore necessary to rebuild the Matrix and Vector objects, which is done through the alternative constructor of the \textbf{Network} class. \\
+Forward propagation in the neural network is managed by the \textbf{Network} class. This class contains two constructors, depending on whether a new set of weights and biases have been passed into the network. By default, the network uses the parameters which are preloaded into the \textbf{Data} class as Matrix and Vector objects. However during backpropagation, the network parameters are updated after each iteration---it is therefore necessary to rebuild the Matrix and Vector objects, which is done through the alternative constructor of the \textbf{Network} class. \\
 
-If the default constructor is used, then the network will use the Matrix and Vector objects present in the \textbf{Data} class during the forward pass. If the alternative constructor is used which passes in a new set of parameters, the `BuildMatrices()' method is called to rebuild the Matrix and Vector objects.
+If the default constructor is used, then the network will use the Matrix and Vector objects present in the \textbf{Data} class during the forward pass. If the alternative constructor is used which passes in a new set of parameters, the `BuildMatrices()' method is called to rebuild the Matrix and Vector objects. \\
 
-Both constructors then call the `EvaluateNetwork()' subroutine, which performs the forward pass. The program iterates through each layer excluding the input layer and creates a Vector object from the 1D array of the activated values for the previous layer. The equation outlined in 1.7.4.1 is then applied to these objects, where \(z\), \(w\), and \(b\) represent the neuron values, weights, and biases respectively. The Matrix and Vector objects which represent the network parameters are stored as static attributes in the \textbf{Data} class.
+Both constructors set the input values to the input layer of the network and call the `EvaluateNetwork()' subroutine, which performs the forward pass. The program iterates through each layer excluding the input layer and creates a Vector object from the 1D array of the activated values for the previous layer. The equation outlined in 1.7.4.1 is then applied to these objects, where \(z\), \(w\), and \(b\) represent the neuron values, weights, and biases respectively. The Matrix and Vector objects which represent the network parameters are stored as static attributes in the \textbf{Data} class.
 
 \begin{equation*}
-    z^L=z^{L-1}\cdot w^L+b^L
+    z^L=z^{(L-1)}\cdot w^L+b^L
 \end{equation*}
 
-The activated values for the current layer are then calculated using the neuron values. If the current layer is a hidden layer, then the sigmoid function is used to normalise the values. The sigmoid function is part of the \textbf{Data} class, which is accessed by static reference and returns the activated value for a neuron. Each neuron in the current layer is passed through this subroutine, and the resulting activated values are stored in a 1D array. The `AsArray()' method is used to directly extract the underlying array of the Vector class, instead of creating a new array.
+It should be noted that the equations described in the Modelling section showed the weights matrix being multiplied by the vector of activated values from the previous layer. The implementation of the forward pass is slightly different in order to reduce processing time during backpropagation. The forward pass instead multiplies the activated values from the previous layer by the weights matrix---matrix multiplication is not commutative so this would result in a different matrix as the output. However, when the matrices are loaded in from the text files, they are stored as their transpose in the Matrix objects. The transpose of a matrix can be thought of as mirroring the matrix down its leading diagonal, such that the two indices of each element are effectively swapped around. This means that the order of multiplication now yields the same result as multiplying the `correct' way round with the un-transposed matrix. The reason for this is that the mathematical equations for backpropagation require the weights matrix to be transposed. I decided that it would be more efficient to load the matrix already transposed, and slightly adjust the equations and indices used in iteration structures to account for this change. \\
+
+The activated values for the current layer are then calculated using the neuron values. If the current layer is a hidden layer, then the sigmoid function is used to normalise the values. The sigmoid function is part of the \textbf{Data} class, which is accessed by static reference and returns the activated value for a neuron. Each neuron in the current layer is passed through this subroutine, and the resulting activated values are stored in a 1D array. The `GetArray()' method is used to directly extract the underlying array of the resulting Vector class, instead of creating a new array. \\
+
+When the network reaches the output layer, the `softmax' function is used to normalise the neuron values such that it creates a probability distribution for each of the Latin characters. The resulting character which the network determines the input values to most likely be is given by the index of the neuron with the highest probability. This is accessed by an external class using the `GetResult()' method, which simply returns the result of the network as an integer between 0 and 25. Additionally, the `GetAccuracy()' method can be used to extract the probability of any given letter in the neural network, which is required in-game when determining the accuracy of a user's submission.
 
 \begin{figure}[H]
     \centering
@@ -837,7 +844,7 @@ The activated values for the current layer are then calculated using the neuron 
     \caption{Flowchart detailing the forward pass of the neural network}
 \end{figure}
 
-The use of static Matrix and Vector objects in the \textbf{Data} class was not something incorporated in the prototype, which instead created the objects required for the current layer on each pass. This process was inefficient for the memory usage of the server---the new approach uses around 30 megabytes less memory during runtime.
+The use of static Matrix and Vector objects in the \textbf{Data} class was not something incorporated in the prototype, even with the external library classes. Instead, the prototype created the Matrix and Vector objects from the MathNet library which were required for the current layer on each pass. This process was inefficient for the memory usage of the server---the new approach uses around 30 megabytes less memory during runtime, and uses my own Matrix and Vector classes which gives more control over how these classes function.
 
 \begin{center}
 \rule{0.5\linewidth}{0.4pt}
@@ -848,8 +855,8 @@ The use of static Matrix and Vector objects in the \textbf{Data} class was not s
 \begin{minted}{csharp}
     func EvaluateNetwork() {
         foreach (layer in network_layers) {
-            neuronsMatrix = BuildMatrix(activatedValues[layer---1])
-            neuronValues[layer] = (neuronsMatrix * weightsMatrix + biasesMatrix)
+            neuronsVector = BuildMatrix(activatedValues[layer-1])
+            neuronValues[layer] = (neuronsVector * weightsMatrix + biasesVector)
 
             if (layer is output_layer) {
                 activatedValues[layer] = Softmax(neuronValues[layer])
@@ -871,9 +878,48 @@ The use of static Matrix and Vector objects in the \textbf{Data} class was not s
     }
 \end{minted}
 
+\subsubsection{Data Structures}
+
+As stated in the introduction to the Design section, the server application implements its own \textbf{Matrix} and \textbf{Vector} classes for the forward pass of the neural network. By using operator overloading, methods can be created which override the functionality of arithmetic operations. This is especially useful for these classes since their operations are performed in unintuitive ways, and it improves the legibility of the code. I have implemented the operations which are specifically required by the neural network such as multiplication of a vector and a matrix. Additionally, some similar operations to the required ones were also added for completeness. The values in the \textbf{Matrix} and \textbf{Vector} classes are stored by a private array, and access to these values is controlled by an index overriding subroutine. This allows the indexing property to be directly applied to the object reference for these classes, which would mirror an array data type better than using public `getters' and `setters' \\
+
+Both of these classes implement public methods to get the dimensions of their stored data. The \textbf{Matrix} class contains two of these methods: one for each dimension, whereas the \textbf{Vector} class only contains one since it is one-dimensional. Additionally, both classes have a public method to extract the entire private array, which is used in obtaining the neuron values after a layer has been calculated in the forward pass of the network.
+
+\paragraph{Matrices\\}
+
+The \textbf{Matrix} class contains two constructors. The first constructor takes in two integers as arguments and creates an empty matrix with the specified dimensions. This is used when performing an operation on two matrix/vector classes, since the result of the calculation is first initialised to an empty matrix/vector. The second constructor is used when building a matrix object from an array of values, and therefore passes in an array as the constructor argument. \\
+
+The first set of operator overloads present in the \textbf{Matrix} class are the addition and subtraction of two matrices. First a check is made to ensure that the matrices have dimensions such that the addition can be performed: the matrices must have identical dimensions. A new \textbf{Matrix} class is then instantiated with the same dimensions as the input matrices. The program iterates through each value of the resulting matrix using two embedded iteration structures, and sets the value to the either the sum or the difference of the corresponding values in the input matrices. \\
+
+The remaining operator overloads are used to multiply matrices and vectors together. Since only the operation of multiplying a \textbf{Vector} by a \textbf{Matrix} is required, I will only document this method. However I have also implemented methods for multiplying the converse of this, and multiplying two matrices together for completeness. Similar to addition, the first check of the method is to ensure that multiplication can be performed on the inputs. This is done by checking if the length of the vector is equal to the number of rows in the matrix. A new \textbf{Vector} class is then instantiated, passing in the number of columns in the matrix as the parameter since this value will be equal to the length of the resulting vector from this operation. The program then iterates through each value in this new vector object, and initialises a new `sum' variable. Another iteration structure is started, which iterates through each row element of the current column in the matrix and multiplies it by equivalent value from the vector object. Each result of these multiplications is added to the `sum' variable, which is set to the appropriate value of the resulting vector object. The pseudocode for this process is outlined below:
+
+\begin{minted}{csharp}
+	func operator *(Vector vector, Matrix matrix) -> Vector {
+		if (vector.length != matrix.rowCount) {
+			return
+		}
+
+		length = matrix.columnCount
+		Vector result = new Vector(length)
+
+		foreach (outputValue in result) {
+			sum = 0
+			foreach (value in vector) {
+				sum += matrix[value, outputValue] * vector[outputValue]
+			}
+			result[outputValue] = sum
+		}
+	}
+\end{minted}
+
+\paragraph{Vectors\\}
+
+The \textbf{Vector} class contains two constructors, similar to the \textbf{Matrix} class. The first constructor takes in one integer as an argument and creates an empty vector with the specified dimension. As with the \textbf{Matrix} class, this is used for the resulting vector when performing an operation on two matrices/vectors. The second constructor is used when building a vector object from an array of values, and therefore passes in an array as the constructor argument. \\
+
+This class only contains one set of operators, since the operations involving both a matrix and a vector are found within the \textbf{Matrix} class. These operations are for the addition and subtraction of two vectors. Only the addition operation is used by the neural network, however subtraction works in almost an identical way. First, a check is made to see if the addition operation is valid for input vectors. This is done by comparing the lengths of the two vectors---if they are not equal then the calculation cannot be performed. Otherwise, a new \textbf{Vector} class is instantiated, passing in the length of one of the input vectors as its parameter. The program then iterates through each value of the resulting vector object, and sets each value to the sum of the corresponding values from each of the input vectors.
+
 \subsubsection{Backpropagation}
 
-Backpropagation is the process by which the parameters for the network are optimised to accurately evaluate a user's submission. The \textbf{Backpropagation} class is constructed with a batch of training data, where the size of the batch is assigned to a variable. The weights and biases for the network are then loaded using the methods in the \textbf{Data} class. The list below outlines the general process for performing the backpropagation algorithm.
+Backpropagation is the process by which the parameters for the network are optimised to accurately evaluate a user's submission. The \textbf{Backpropagation} class is constructed with a batch of training data, where the size of the batch is assigned to a variable. The weights and biases for the network are then loaded using the methods in the \textbf{Data} class which return arrays of arrays. These methods differ from using the static Matrix and Vector objects, since they allow direct access to the network parameters and backpropagation does not require any matrix operations to be performed. The list below outlines the general process for performing the backpropagation algorithm.
 
 \begin{itemize}
     \item Perform the forward pass of the network.
@@ -884,9 +930,9 @@ Backpropagation is the process by which the parameters for the network are optim
     \item Save the updated network parameters to their respective files.
 \end{itemize}
 
-The program then iterates through each set of images and labels, and applies the backpropagation algorithm to these sets. A new instance of the \textbf{Network} class is instantiated, passing in the input values and network parameters. If the result of the network correctly matches the label of the image then a counter is incremented. A second counter is incremented regardless of this condition, in order to produce an accuracy percentage. \\
+The program then iterates through each set of images and labels, and applies the backpropagation algorithm to these sets. A new instance of the \textbf{Network} class is instantiated, passing in the input values and network parameters. The result of the network is then accessed using the `GetResult()' method---if the result correctly matches the label of the image, then a counter is incremented to represent the number of images the network has gotten correct for the current batch. A second counter is incremented regardless of this condition to represent the total number of images processed, in order to produce an accuracy percentage. \\
 
-The neuron errors for the output layer are then calculated using the expected result of the network. The softmax error function is applied to each neuron in the layer, which is equal to the derivative of the mean-squared loss function. The loss is also calculated and returned, as an indication of the rate at which the network is learning.
+The neuron errors for the output layer are then calculated using the expected result of the network: the label of the image. The softmax error function is applied to each neuron in the output layer, which is equal to the derivative of the mean-squared loss function. The loss is also calculated and returned, as an indication of the rate at which the network is learning.
 
 \begin{equation*}
     \delta^L_i=2(a^L_i-y)
@@ -991,8 +1037,8 @@ These averages are then multiplied by the learning rate, and each resulting grad
     func CalculateOutputErrors(network, expected) {
         foreach (neuron in output_layer) {
             y = 1 if expected == neuron else 0
-            loss += (activatedValues[neuron]---y)^2
-            neuronErrors[output_layer][neuron] = 2 * (activatedValues[neuron]---y)
+            loss += (activatedValues[neuron]-y)^2
+            neuronErrors[output_layer][neuron] = 2 * (activatedValues[neuron]-y)
         }
         return loss
     }
@@ -1029,7 +1075,7 @@ The dimensions of the cropped image are then adjusted such that the resulting im
     }
 \end{minted}
 
-The padding is then added to the \(24\times 24\) image as 2 white pixels on all sides. This is done by creating a new Bitmap with dimensions \(28\times 28\), which is filled with white pixels. The \(24\times 24\) image is then added to this image offset by (2, 2) which places it in the centre.
+The padding is then added to the \(24\times 24\) image as 2 white pixels on all sides. This is done by creating a new Bitmap with dimensions \(28\times 28\), which is filled with white pixels. The \(24\times 24\) image is then added to this image, offset by (2, 2) which places it in the centre.
 
 \subsubsection{Training}
 
@@ -1050,12 +1096,6 @@ Once the images and labels have been loaded, the digits and lowercase letters ne
 The program then iterates over the following sequence a set number of times, which represents the number of training iterations that will be performed. I have set this to the number of images divided by the size of a batch. \\
 
 First a random integer is chosen between 0 and 50 less than the number of images. A range of 50 images and labels is then extracted from the filtered dataset, starting at the index chosen by the random integer. This set of 50 images and labels is then fed into the constructor of the \textbf{Backpropagation} class, which trains the network.
-
-\subsubsection{Data Structures}
-
-Since a neural network consists of complete bipartite graphs, a set of adjacency matrices can be used to represent the network. The weights can be stored in an array of 2D arrays where \(\text{weight}[L][i,\ j]\) references the weight between the \(i^{\text{th}}\) neuron in layer \(L\) and the \(j^{\text{th}}\) in layer \(L+1\). Similarly the biases can be stored in an array of 1D arrays where \(\text{bias}[L][i]\) references the bias of the \(i^{\text{th}}\) neuron in layer \(L\). This allows libraries to easily convert the parameters into a matrix and vector, which improves the speed of a forward pass. The neuron values, neuron errors, and activated values can be stored in the same way as the biases.
-
-% // storing parameters
 
 \subsubsection{File Organisation}
 
@@ -1622,7 +1662,7 @@ The `Versus' game type receives the userID of the user who won the round, which 
 
 \paragraph{Game End\\}
 
-When the game ends, the server invokes the appropriate method on the client, which configures the main panel to display the results of all the rounds. The `Elimination' game type will additionally display if the user won the game or not using the `ConfigEliminationEndgame()' method. This is not sent as a parameter, but can be determined by checking if the user is in the list of alive users. The 'Versus' game type will display the new Elo rating of the user, and the difference from their previous rating. This cannot be infered from existing data like the `Elimination' game type, so the server sends this value which is passed into the `UpdateRank()' method. This updates the user's Elo rating in the `userData' structure, and calculates the difference from their previous rating. The 'ConfigVersusEndgame()' method of the \textbf{UXelements} class is then called to display this information on the results panel.
+When the game ends, the server invokes the appropriate method on the client, which configures the main panel to display the results of all the rounds. The `Elimination' game type will additionally display if the user won the game or not using the `ConfigEliminationEndgame()' method. This is not sent as a parameter, but can be determined by checking if the user is in the list of alive users. The `Versus' game type will display the new Elo rating of the user, and the difference from their previous rating. This cannot be inferred from existing data like the `Elimination' game type, so the server sends this value which is passed into the `UpdateRank()' method. This updates the user's Elo rating in the `userData' structure, and calculates the difference from their previous rating. The `ConfigVersusEndgame()' method of the \textbf{UXelements} class is then called to display this information on the results panel.
 
 \subsubsection{UML Diagrams}
 
@@ -1672,7 +1712,7 @@ If the user chooses to create an account, a `confirm password' text box is added
 
 The main panel on the home page lists the three available game to the user with a brief description and the ability to queue for each game. The left panel contains a list of the user's friends, separated into whether they are online or offline. The right panel contains an overview of the user's statistics, as well as the `Profile' and `Edit' buttons. \\
 
-The `Profile' button is used to access the profile page of the user. The click event handler for the button updates the page text to ``Profile'', and creates a new instance of the \textbf{Profile} class, passing the instance of the \textbf{Main} class and the `userData' structure as parameters. The `Edit' button creates a new \textbf{UpdateForm} dialogue box which allows the user to customise their `about me' and localisation. If the user confirms their changes, the `updateUserData()' method is invoked on the server, passing the userID, updated `about me', and localisation as parameters. These updated values are accessed using the appropriate methods of the form class. The invocation returns a boolean value which indicates if the update was successful---if the update failed, the user is informed of the error that has occured. \\
+The `Profile' button is used to access the profile page of the user. The click event handler for the button updates the page text to ``Profile'', and creates a new instance of the \textbf{Profile} class, passing the instance of the \textbf{Main} class and the `userData' structure as parameters. The `Edit' button creates a new \textbf{UpdateForm} dialogue box which allows the user to customise their `about me' and localisation. If the user confirms their changes, the `updateUserData()' method is invoked on the server, passing the userID, updated `about me', and localisation as parameters. These updated values are accessed using the appropriate methods of the form class. The invocation returns a boolean value which indicates if the update was successful---if the update failed, the user is informed of the error that has occurred. \\
 
 Each game type is presented in a panel with a description and a `Queue' button. The click event handler for each button instantiates the appropriate game type class, passing the instance of the \textbf{Main} class as a parameter. The `QueueGame()' method is then called to begin the queueing process, since the constructor only creates the game class on the client application. The `QueueGame()' method handles the server invocation to queue the user for a game and thereby create a new game on the server. The click event handler also updates the `page text' to reflect the game type the user is queueing for.
 
@@ -2086,9 +2126,9 @@ The layout for the testing section first outlines the tests that will be complet
     The following tests expand on the game progressing when all users have clicked the `Continue' button. In the case of the `Elimination' game type, only the alive users are required to click this button for the game to progress, even though eliminated users are also given this button. In the case of the eliminated users, they are directed to the `Game End' screen. If there is only one alive user left, then the game has ended and that user has won.
 
     \begin{enumerate}
-        \item \textbf{06:40} [2.h.iii.D] The next round in the `Elimination' game type occurs when all alive users have clicked `Continue'.
-        \item \textbf{06:28} [2.h.iii.A] An eliminated user will be shown the `Game End' screen when clicking the `Continue' button.
-        \item \textbf{06:49} [2.h.iii.C] An `Elimination' game will end when there is only one alive user.
+        \item \textbf{06:46} [2.h.iii.D] The next round in the `Elimination' game type occurs when all alive users have clicked `Continue'.
+        \item \textbf{06:34} [2.h.iii.A] An eliminated user will be shown the `Game End' screen when clicking the `Continue' button.
+        \item \textbf{06:55} [2.h.iii.C] An `Elimination' game will end when there is only one alive user.
     \end{enumerate}
 
     \begin{table}[H]
@@ -2139,20 +2179,41 @@ The layout for the testing section first outlines the tests that will be complet
 
     7/7 tests passed.
 
-    \item \textbf{Training the neural network}
+    \item \textbf{Mathematics of the neural network}
     
-    The following tests confirm that the neural network is correctly applying the backpropagation algorithm to the training data. The previous sets of tests show that the network is sufficiently trained therefore it is likely these tests will also pass. Regardless, these tests are still necessary for completeness. The randomness of the training data has been temporarily removed for these tests, and additional console logs have been added.
+    The following tests confirm that the neural network is correctly applying matrix multiplication, and the backpropagation algorithm to the training data. The previous sets of tests show that the network is sufficiently trained therefore it is likely these tests will also pass. Regardless, these tests are still necessary for completeness. The randomness of the training data has been temporarily removed for these tests, and additional console logs have been added.
 
     \begin{enumerate}
-        \item \textbf{05:52} The neuron errors for the output layer are correctly calculated.
-        \item \textbf{06:02} The neuron errors for the hidden layers are correctly calculated.
-        \item \textbf{06:08} The network shows significant statistical evidence of correctly selecting the drawn letter.
+		\item \textbf{05:52} The multiplication operation is correctly applied to two matrices.
+        \item \textbf{05:58} The neuron errors for the output layer are correctly calculated.
+        \item \textbf{06:08} The neuron errors for the hidden layers are correctly calculated.
+        \item \textbf{06:14} The network shows significant statistical evidence of correctly selecting the drawn letter.
     \end{enumerate}
+
+	The algorithm for applying multiplication to two matrices is given in 1.4.2, however I will repeat it here in summary. Multiplication of matrices is not element-wise unlike addition, and instead sums the product of columns against rows. I have arbitrarily chosen two matrices of different dimensions where a multiplication operation is valid to perform on them.
+
+	\(\begin{bmatrix}
+		-1 & 3 & 2
+	\end{bmatrix}
+	\cdot
+	\begin{bmatrix}
+		1 & 2 \\
+		5 & 3 \\
+		2 & -5 \\
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		-1\times 1+3\times 5+2\times 2 & -1\times 2+3\times 3+2\times -5
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		18 & -3
+	\end{bmatrix}\)
 
     The neuron error for the output layer is calculated using the activated values of the neurons. Using a breakpoint in the program, I have determined the activated value of the `K' neuron to be approximately 0.00199. The value of \(y\) is 0, since the expected forward pass would have 0\% confidence that the `N' in the image is a `K'.
 
     \begin{equation*}
-        \delta = 2\cdot (0.00199---0) \approx 0.00398
+        \delta = 2\cdot (0.00199-0) \approx 0.00398
     \end{equation*}
 
     The neuron error for the first neuron of the last hidden layer is calculated using the its neuron value, the weights of the last layer, and the neuron errors of the output layer. The neuron value is approximately 1.050448.
@@ -2164,7 +2225,7 @@ The layout for the testing section first outlines the tests that will be complet
         \sigma'(1.050448) = 0.740861\cdot(1-0.740861) \approx 0.191986
     \end{equation*}
      \begin{equation*}
-        \delta = 0.191986\times---1.937113 \approx---0.371899
+        \delta = 0.191986\times -1.937113 \approx -0.371899
     \end{equation*}
 
     \begin{table}[H]
@@ -2172,7 +2233,8 @@ The layout for the testing section first outlines the tests that will be complet
         \begin{tabularx}{\textwidth}{|L|L|L|}
             \hline
             \textbf{Input} & \textbf{Expected outcome} & \textbf{Observed outcome} \\\hline
-            Running the network through the letter `N' & The neuron error of the `K' neuron \(\approx 0.00398\) & The neuron error of the `K' neuron \(\approx 0.00398\) \\\hline
+            Inputting the multiplication of the two matrices described above & The result of the operation is [18, -3] & The result of the operation is [18, -3] \\\hline
+			Running the network through the letter `N' & The neuron error of the `K' neuron \(\approx 0.00398\) & The neuron error of the `K' neuron \(\approx 0.00398\) \\\hline
             Running the network through the letter `N' & The neuron error of the first neuron in the last hidden layer \(\approx -0.371899\) & The neuron error of the first neuron in the last hidden layer \(\approx -0.371899\) \\\hline
             Training the network from initial parameters & The cumulative percentage accuracy exceeds 50\% & The percentage accuracy reaches 59\% after running the training data once \\\hline
         \end{tabularx}
@@ -2226,12 +2288,12 @@ The layout for the testing section first outlines the tests that will be complet
     The following tests ensure that the social features of the application are functioning correctly, including any exceptions that may occur.
     
     \begin{enumerate}
-        \item \textbf{07:00} [4.a] A user can send a friend invite to another user.
-        \item \textbf{07:06} Sending a friend request twice does not cause an error.
-        \item \textbf{07:19} [4.a.i] A friend invite is forwarded to the client if they are currently online.
-        \item \textbf{07:49} [4.a.i] A friend invite is forwarded to the client when they are next online if they are currently offline.
-        \item \textbf{07:38} [4.a] A user can remove a friend, which is immediately updated for the other user.
-        \item \textbf{07:32} Accepting a friend invite updates both users' friends list.
+        \item \textbf{07:06} [4.a] A user can send a friend invite to another user.
+        \item \textbf{07:12} Sending a friend request twice does not cause an error.
+        \item \textbf{07:25} [4.a.i] A friend invite is forwarded to the client if they are currently online.
+        \item \textbf{07:55} [4.a.i] A friend invite is forwarded to the client when they are next online if they are currently offline.
+        \item \textbf{07:44} [4.a] A user can remove a friend, which is immediately updated for the other user.
+        \item \textbf{07:38} Accepting a friend invite updates both users' friends list.
     \end{enumerate}
 
     \begin{table}[H]
@@ -2280,10 +2342,10 @@ The layout for the testing section first outlines the tests that will be complet
     The following tests ensure that a user's profile page is displayed correctly and that searching for other users functions as expected.
 
     \begin{enumerate}
-        \item \textbf{07:55} [3.a] A user's profile page can be viewed which displays their statistics.
-        \item \textbf{07:59} [3.a.i] The statistics shown on a user's profile page are separated by letter and include the average accuracy and average time for each letter.
-        \item \textbf{08:07} [3.d] A user's profile can be searched for using their exact username.
-        \item \textbf{08:16} [3.d] Searching for a user that does not exist returns a suitable error message.
+        \item \textbf{08:01} [3.a] A user's profile page can be viewed which displays their statistics.
+        \item \textbf{08:05} [3.a.i] The statistics shown on a user's profile page are separated by letter and include the average accuracy and average time for each letter.
+        \item \textbf{08:13} [3.d] A user's profile can be searched for using their exact username.
+        \item \textbf{08:22} [3.d] Searching for a user that does not exist returns a suitable error message.
     \end{enumerate}
 
     \begin{table}[H]
@@ -2310,9 +2372,9 @@ The layout for the testing section first outlines the tests that will be complet
     The following tests ensure that the client-server connection is robust and can handle various network conditions. The client is able to successfully connect to the server if the connection status control on the login form shows `Connected'. In the event that the client device is unable to run the client application, then it is sufficient to test if the client can reach the server by entering the socket into a browser. Unfortunately the footage for the tests requiring another device were at a lower quality, since the inbuilt screen recorder for the device did not have any options to adjust the resolution or bitrate. \\
 
     \begin{enumerate}
-        \item \textbf{08:25} [5.a] A user can connect to the server from localhost.
-        \item \textbf{08:29} [5.a] A user can connect to the server from another device on the same subnet.\@
-        \item \textbf{08:44} [5.a] A user can connect to the server from a different network over the internet.
+        \item \textbf{08:31} [5.a] A user can connect to the server from localhost.
+        \item \textbf{08:25} [5.a] A user can connect to the server from another device on the same subnet.\@
+        \item \textbf{08:50} [5.a] A user can connect to the server from a different network over the internet.
     \end{enumerate}
 
     \begin{table}[H]
@@ -2334,7 +2396,7 @@ The layout for the testing section first outlines the tests that will be complet
 
 Around halfway through completing the tests I noticed that the `countdown' for the games was not showing consistently. Since the method configuring this was asynchronous, I suspected there was a confliction between a `Task' and Windows Forms. The controls in Windows Forms can only be accessed on the thread which they were created, so I added `Invoke()' wrappers to the lines where the text of the `countdown' labels were changed. I also changed the text foreground colour to white for legibility. These changes removed the inconsistencies in the `countdown' displaying. \\
 
-Additionally, I noticed that the list of users while in an `Elimination' game type did not create `alive' and `eliminated' headers at the start of the game. Since all of the users are alive at the start of game regardless, this does not have a significant impact. I suspect the issue arises from how the list of users is refreshed, since it differs in the `Elimination' game type. The panel is updated when a user joins or leaves the game, or a player has been eliminated. Since none of these events occur when the game is started, the panel is not converted from its configuration in the lobby menu, to how it should be in-game. Once the game has started, a boolean variable is set to true, such that on the next update event the panel is then split into alive and eliminated users. One way that this issue could be resolved is by directly calling the panel creation method when the game starts, passing in the list of users and an empty list to represent the eliminated users.
+Additionally, I noticed that the list of users while in an `Elimination' game type did not create `alive' and `eliminated' headers at the start of the game. Since all of the users are alive at the start of game regardless, this does not have a significant impact. I suspect the issue arises from how the list of users is refreshed, since it differs in the `Elimination' game type. The panel is updated when a user joins or leaves the game, or a player has been eliminated. Since none of these events occur when the game is started, the panel is not converted from its configuration in the lobby menu, to how it should be in-game. Once the game has started, a boolean variable is set to true, such that on the next update event the panel is then split into alive and eliminated users. One way that this issue could be resolved is by directly calling the panel creation method when the game starts, passing in the list of users and an empty list to represent the eliminated users. \\
 
 \paragraph{Failed Tests\\}
 
@@ -2346,9 +2408,12 @@ I have also chosen to analyse test 4.1(b): how the duplicate friend invite was h
 \section{Evaluation}
 \noindent\rule{\textwidth}{0.2pt}
 \subsection{Overall Effectiveness of the System}
-% //
+% // finish this
 As defined in the problem statement, this solution was developed to address the need for an enjoyable and simple way to learn to write the Latin script. I have implemented a program which allows a user to receive instant feedback on writing a Latin character, through three different game types. A drawing panel is presented to the user for each round of a game, and they can submit an attempt at writing the given letter. The server application accurately evaluates the user's submission and returns a percentage accuracy and their elapsed time. These results are then updated for the user's account in the database, which allows a user to view their progress in learning to write the Latin characters. \\
 
+The key component of this project is the multilayered neural network, which was implemented successfully and completely. It has been shown through extensive testing that the network is able to handle a variety of inputs and accurately evaluate each of them fairly. In particular, the speed of evaluation is almost instant---this was one of the concerns for using my own matrix and vector data structures. However it is clear that there is no noticeable time delay while a user's submission is being evaluated, therefore the algorithm I have implemented for performing matrix operations is efficient. \\
+
+% something about the client being easy to use and handles exceptions well
 
 
 \subsection{Evaluation of Objectives}
@@ -2421,7 +2486,7 @@ Unfortunately, the end user I chose for this project has deleted their Discord a
 
 ``I tried to do an SQL injection using DROP TABLE, and your program handled it perfectly. I like the algorithm very much. It is lenient on minute human errors, whilst not allowing any large discrepancies to be given credit. The input method is also really good; perhaps a touchscreen version would be great too. As a tutoring assistant myself teaching children pencil control using very similar techniques, this solution I think would be a great way to get them to practice. The language switching still needs some work it seems. I like the fact that it stored progress data---not only does it make it more engaging to use, but it also is a valuable tool to know which letters you should practice writing most. I also think the competitive element added through the ``versus'' and ``elimination'' modes is a pretty clever and useful addition.
 
-I tried my best I cannot get it to error, very good defensive programming it seems. This, together with the very intuitive UI with larger buttons, makes me more confident that this will work with children learning pencil control especially. ''
+I tried my best I cannot get it to error, very good defensive programming it seems. This, together with the very intuitive UI with larger buttons, makes me more confident that this will work with children learning pencil control especially.''
 
 \subsubsection{Analysis}
 
@@ -2462,7 +2527,7 @@ One of the extension objectives was to store the user's Elo rating from the prev
 
  The `Rating' table uses a composite primary key consisting of the `userID' and `date' attributes. This allows for multiple records of a user's Elo rating history to exist, each with a different date. The `rating' attribute stores the Elo rating of the user on that date. It is unnecessary to store the exact time of the rating in the day, since that precision could not easily be visualised on a graph. \\
 
- The `userData' structure will need to be updated where the `rank' attribute is replaced with a list of a `DateTime' integer tuple pairs. The `friendData' structure will not be updated in the same way, since this data is unnecessary during a game. The alterations to the database will require a refactor of the `LoadUserData()' method in the \textbf{Database} class. Instead of reading the user's Elo rating from the attribute in the `userData' table, a new method should be implemented to get the user's rating history, possibly identified by `LoadRatingHistory()'. This will need to be called during the `LoadUserData()' method and should have an `out' parameter of a List<(DateTime, int)> which is assigned to the new `rating' attribute of the `userData' structure. In order to reduce redundancies in the database, it is also necessary to ensure that the ratings stored do not exceed 90 days in age. It may be suitable to purge these records on a login event, using a new `PurgeRatingHistory()' method which is called before loading the rating history for a user. The SQL commands for the two new methods are detailed below---the parameter `cutoffDate' is equal to 90 days less than the current date. \\
+ The `userData' structure will need to be updated where the `rank' attribute is replaced with a list of a `DateTime' integer tuple pairs. The `friendData' structure will not be updated in the same way, since this data is unnecessary during a game. The alterations to the database will require a refactor of the `LoadUserData()' method in the \textbf{Database} class. Instead of reading the user's Elo rating from the attribute in the `userData' table, a new method should be implemented to get the user's rating history, possibly identified by `LoadRatingHistory()'. This will need to be called during the `LoadUserData()' method and should have an `out' parameter of a list of times and integers, which is assigned to the new `rating' attribute of the `userData' structure. In order to reduce redundancies in the database, it is also necessary to ensure that the ratings stored do not exceed 90 days in age. It may be suitable to purge these records on a login event, using a new `PurgeRatingHistory()' method which is called before loading the rating history for a user. The SQL commands for the two new methods are detailed below---the parameter `cutoffDate' is equal to 90 days less than the current date.
 
  \begin{minted}{sql}
 	SELECT date, rating
@@ -2584,7 +2649,7 @@ The database would then be updated with the new values for the `easing factor' a
 
 \subsection{Contents}
 
-Shown below is a table of contents which details any code files with complex or interesting logic. Each file is accompanied by a brief description of the functionality it provides, as well as the page number where the code can be found. It should be noted that the page number links to the start of the file, so the relevant method may be up to a few pages later.
+Shown below is a table of contents which details any code files with complex algorithms or data structures. Each file is accompanied by a brief description of the functionality it provides, as well as the page number where the code can be found. Unfortunately it was not possible to create a link directly to the methods, so it should be noted that the page number links to the start of the file and the relevant method may be up to a few pages later.
 
 \begin{table}[H]
     \centering
@@ -2603,19 +2668,19 @@ Shown below is a table of contents which details any code files with complex or 
         server/neuralNetwork/\newline Data.cs/softmax() & Softmax function &\pageref{server/neuralnetwork/data.cs} \\\hline
         server/neuralNetwork/\newline Data.cs/PreprocessImage() & Image preprocessing &\pageref{server/neuralnetwork/data.cs} \\\hline
         server/neuralNetwork/\newline Network.cs/EvaluateNetwork() & Forward pass of the neural network &\pageref{server/neuralnetwork/network.cs} \\\hline
-        server/\newline Accounts.cs & Client-server connection: account management &\pageref{server/accounts.cs} \\\hline
+		server/neuralNetwork/\newline structures/Matrix.cs, Vector.cs & Matrix and Vector data structures &\pageref{server/neuralnetwork/structures/matrix.cs}, \pageref{server/neuralnetwork/structures/vector.cs} \\\hline
+        server/neuralNetwork/\newline structures/Matrix.cs/*() & Multiplication of matrices and vectors & \pageref{server/neuralnetwork/structures/matrix.cs} \\\hline
+		server/\newline Accounts.cs & Client-server connection: account management &\pageref{server/accounts.cs} \\\hline
         server/\newline Program.cs/HostBuilder() & Server configuration &\pageref{server/program.cs} \\\hline
 
         client/menus/games/\newline Game.cs/IPlayable, Game & Object-Oriented Programming &\pageref{client/menus/games/game.cs} \\\hline
         client/menus/\newline Main.cs/CalculateStatsOverview() & Calculating a summary of a user's statistics &\pageref{client/menus/main.cs} \\\hline
-        client/menus/\newline Main.Designer.cs/ConfigGamePanels() & Configuring the panels to display the available game types; user interface logic &\pageref{client/menus/main.designer.cs} \\\hline
-        client/\newline hub-connection.cs/AddHandles() & Client-server connection: client logic for receiving server invocationsm;  &\pageref{client/hub-connection.cs} \\\hline
-		client/menus/\newline UXelements.cs/ConfigResultsPanel() & Data manipulation while configuring the results panel after a round;  &\pageref{client/menus/uxelements.cs} \\\hline
+        client/menus/\newline Main.Designer.cs/ConfigGamePanels() & Configuring the panels to display the available game types &\pageref{client/menus/main.designer.cs} \\\hline
+        client/\newline hub-connection.cs/AddHandles() & Client-server connection: client logic for receiving server invocations  &\pageref{client/hub-connection.cs} \\\hline
+		client/menus/\newline UXelements.cs/ConfigResultsPanel() & Data manipulation while configuring the results panel after a round &\pageref{client/menus/uxelements.cs} \\\hline
 
     	\end{tabularx}
 \end{table}
-
-\setminted{tabsize=4}
 
 \subsection{Code}
 
@@ -4374,7 +4439,7 @@ namespace server_app.neuralNetwork
 \end{minted}
 \paragraph{neuralNetwork/Data.cs}\label{server/neuralnetwork/data.cs}
 \begin{minted}[breaklines]{csharp}
-using MathNet.Numerics.LinearAlgebra;
+using server_app.neuralNetwork.structures;
 using System.Drawing;
 using System.IO.Compression;
 using System.Text;
@@ -4383,17 +4448,17 @@ namespace server_app.neuralNetwork
 {
 	public static class Data
 	{
-		private static readonly string location = $"{Environment.GetEnvironmentVariable("cs-nea-server")}\\neuralNetwork\\data\\";
+		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server")}\neuralNetwork\data\";
 
-		public static readonly Matrix<double>[] weightsMatrices = new Matrix<double>[Network.layerCount - 1];
-		public static readonly Vector<double>[] biasesMatrices = new Vector<double>[Network.layerCount - 1];
+		public static readonly Matrix[] weightsMatrices = new Matrix[Network.layerCount - 1];
+		public static readonly Vector[] biasesVector = new Vector[Network.layerCount - 1];
 
 		public static void BuildMatrices(double[][,] weights, double[][] biases)
 		{
 			for (int layer = 1; layer < Network.layerCount; layer++)
 			{
-				weightsMatrices[layer - 1] = Matrix<double>.Build.DenseOfArray(weights[layer - 1]);
-				biasesMatrices[layer - 1] = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
+				weightsMatrices[layer - 1] = new Matrix(weights[layer - 1]);
+				biasesVector[layer - 1] = new Vector(biases[layer - 1]);
 			}
 		}
 
@@ -4576,7 +4641,7 @@ namespace server_app.neuralNetwork
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
 				weights[i] = new double[Network.layerSizes[i], Network.layerSizes[i + 1]];
-				using (StreamReader sr = new($"{location}weights\\{i}.txt"))
+				using (StreamReader sr = new($@"{location}weights\{i}.txt"))
 				{
 					string[] lines = sr.ReadToEnd().Split('\n');
 					for (int j = 0; j < Network.layerSizes[i]; j++)
@@ -4597,7 +4662,7 @@ namespace server_app.neuralNetwork
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
 				biases[i] = new double[Network.layerSizes[i + 1]];
-				using (StreamReader sr = new($"{location}biases\\{i}.txt"))
+				using (StreamReader sr = new($@"{location}biases\{i}.txt"))
 				{
 					string[] s = sr.ReadToEnd().Split(',');
 					for (int j = 0; j < Network.layerSizes[i + 1]; j++)
@@ -4621,7 +4686,7 @@ namespace server_app.neuralNetwork
 					}
 					builder.Append($"{weights[i][j, weights[i].GetLength(1) - 1]}\n");
 				}
-				using (StreamWriter sw = new($"{location}weights\\{i}.txt"))
+				using (StreamWriter sw = new($@"{location}weights\{i}.txt"))
 				{
 					sw.Write(builder);
 				}
@@ -4631,7 +4696,7 @@ namespace server_app.neuralNetwork
 		{
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
-				using (StreamWriter sw = new($"{location}biases\\{i}.txt"))
+				using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
 				{
 					sw.Write(string.Join(',', biases[i]));
 				}
@@ -4644,7 +4709,7 @@ namespace server_app.neuralNetwork
 
 			Console.Write($"\r[ {100 * done / total,3}% ] Loading training images");
 
-			FileStream fs = new($"{location}training\\images.gz", FileMode.Open, FileAccess.ReadWrite);
+			FileStream fs = new($@"{location}training\images.gz", FileMode.Open, FileAccess.ReadWrite);
 			CompressionMode cm = CompressionMode.Decompress;
 
 			List<double[]> images = [];
@@ -4686,7 +4751,7 @@ namespace server_app.neuralNetwork
 			Console.WriteLine();
 
 			done = 0;
-			fs = new($"{location}training\\labels.gz", FileMode.Open, FileAccess.ReadWrite);
+			fs = new($@"{location}training\labels.gz", FileMode.Open, FileAccess.ReadWrite);
 
 			Console.Write($"\r[ {100 * done / total,3}% ] Loading training labels");
 
@@ -4737,7 +4802,7 @@ namespace server_app.neuralNetwork
 \end{minted}
 \paragraph{neuralNetwork/Network.cs}\label{server/neuralnetwork/network.cs}
 \begin{minted}[breaklines]{csharp}
-using MathNet.Numerics.LinearAlgebra;
+using server_app.neuralNetwork.structures;
 
 namespace server_app.neuralNetwork
 {
@@ -4779,8 +4844,8 @@ namespace server_app.neuralNetwork
 			for (int layer = 1; layer < layerCount; layer++)
 			{
 				// calculate neuron values
-				Vector<double> neuronsMatrix = Vector<double>.Build.DenseOfArray(activatedValues[layer - 1]);
-				neuronValues[layer] = (neuronsMatrix * Data.weightsMatrices[layer - 1] + Data.biasesMatrices[layer - 1]).AsArray();
+				Vector neuronsVector = new(activatedValues[layer - 1]);
+				neuronValues[layer] = ((neuronsVector * Data.weightsMatrices[layer - 1]) + Data.biasesVector[layer - 1]).GetArray();
 
 				// calculate activated values
 				activatedValues[layer] = new double[layerSizes[layer]];
@@ -4838,6 +4903,231 @@ namespace server_app.neuralNetwork
 				// forward propagation and backpropagation
 				_ = new Backpropagation(subimages, subresults);
 			}
+		}
+	}
+}
+\end{minted}
+\paragraph{Matrix.cs}\label{server/neuralnetwork/structures/matrix.cs}
+\begin{minted}{csharp}
+namespace server_app.neuralNetwork.structures
+{
+	public class Matrix
+	{
+		private readonly double[,] values;
+		public double this[int i, int j]
+		{
+			get { 
+				return values[i, j];
+			}
+			set {
+				values[i, j] = value;
+			}
+		}
+
+		public int GetRowCount() => values.GetLength(0);
+		public int GetColumnCount() => values.GetLength(1);
+		public double[,] GetArray() => values;
+
+		public Matrix(int x, int y)
+		{
+			values = new double[x, y];
+		}	
+		public Matrix(double[,] matrix)
+		{
+			values = matrix;
+		}
+
+		public static Matrix operator +(Matrix m1, Matrix m2)
+		{
+			// check if addition is valid
+			if (m1.GetRowCount() != m2.GetRowCount() || m1.GetColumnCount() != m2.GetColumnCount())
+			{
+				throw new InvalidOperationException();
+			}
+
+			int rows = m1.GetRowCount();
+			int columns = m1.GetColumnCount();
+			Matrix result = new(rows, columns);
+
+			for (int i = 0; i < rows; i++)
+			{
+				for (int j = 0; j < columns; j++)
+				{
+					result[i, j] = m1[i, j] + m2[i, j];
+				}
+			}
+
+			return result;
+		}
+		public static Matrix operator -(Matrix m1, Matrix m2)
+		{
+			// check if subtraction is valid
+			if (m1.GetRowCount() != m2.GetRowCount() || m1.GetColumnCount() != m2.GetColumnCount())
+			{
+				throw new InvalidOperationException();
+			}
+
+			int rows = m1.GetRowCount();
+			int columns = m1.GetColumnCount();
+			Matrix result = new(rows, columns);
+
+			for (int i = 0; i < rows; i++)
+			{
+				for (int j = 0; j < columns; j++)
+				{
+					result[i, j] = m1[i, j] - m2[i, j];
+				}
+			}
+
+			return result;
+		}
+		public static Matrix operator *(Matrix m1, Matrix m2)
+		{
+			// check if multiplication is valid
+			if (m1.GetColumnCount() != m2.GetRowCount())
+			{
+				throw new InvalidOperationException();
+			}
+
+			int rows = m1.GetRowCount();
+			int columns = m2.GetColumnCount();
+			int multiplyLength = m1.GetColumnCount();
+
+			Matrix result = new(rows, columns);
+
+			for (int i = 0; i < rows; i++)
+			{
+				for (int j = 0; j < columns; j++)
+				{
+					double sum = 0;
+					for (int k = 0; k < multiplyLength; k++)
+					{
+						sum += m1[i, k] * m2[k, j];
+					}
+					result[i, j] = sum;
+				}
+			}
+
+			return result;
+		}
+		
+		public static Vector operator *(Matrix matrix, Vector vector)
+		{
+			// check if multiplication is valid
+			if (matrix.GetColumnCount() != vector.GetLength())
+			{
+				throw new InvalidOperationException();
+			}
+
+			int length = matrix.GetRowCount();
+			int multiplyLength = matrix.GetColumnCount();
+
+			Vector result = new(length);
+
+			for (int i = 0; i < length; i++)
+			{
+				double sum = 0;
+				for (int j = 0; j < multiplyLength; j++)
+				{
+					sum += matrix[i, j] * vector[j];
+				}
+				result[i] = sum;
+			}
+
+			return result;
+		}
+		public static Vector operator *(Vector vector, Matrix matrix)
+		{
+			// check if multiplication is valid
+			if (vector.GetLength() != matrix.GetRowCount())
+			{
+				throw new InvalidOperationException();
+			}
+
+			int length = matrix.GetColumnCount();
+			int multiplyLength = matrix.GetRowCount();
+
+			Vector result = new(length);
+
+			for (int i = 0; i < length; i++)
+			{
+				double sum = 0;
+				for (int j = 0; j < multiplyLength; j++)
+				{
+					sum += matrix[j, i] * vector[j];
+				}
+				result[i] = sum;
+			}
+
+			return result;
+		}
+	}
+}
+\end{minted}
+\paragraph{Vector.cs}\label{server/neuralnetwork/structures/vector.cs}
+\begin{minted}{csharp}
+namespace server_app.neuralNetwork.structures
+{
+	public class Vector
+	{
+		private readonly double[] values;
+		public double this[int i]
+		{
+			get {
+				return values[i];
+			}
+			set {
+				values[i] = value;
+			}
+		}
+
+		public int GetLength() => values.GetLength(0);
+		public double[] GetArray() => values;
+
+		public Vector(int x)
+		{
+			values = new double[x];
+		}
+		public Vector(double[] vector)
+		{
+			values = vector;
+		}
+
+		public static Vector operator +(Vector v1, Vector v2)
+		{
+			// check if addition is valid
+			if (v1.GetLength() != v2.GetLength())
+			{
+				throw new InvalidOperationException();
+			}
+
+			int length = v1.GetLength();
+			Vector result = new(length);
+
+			for (int i = 0; i < length; i++)
+			{
+				result.values[i] = v1.values[i] + v2.values[i];
+			}
+
+			return result;
+		}
+		public static Vector operator -(Vector v1, Vector v2)
+		{
+			// check if subtraction is valid
+			if (v1.GetLength() != v2.GetLength())
+			{
+				throw new InvalidOperationException();
+			}
+
+			int length = v1.GetLength();
+			Vector result = new(length);
+
+			for (int i = 0; i < length; i++)
+			{
+				result.values[i] = v1.values[i] - v2.values[i];
+			}
+
+			return result;
 		}
 	}
 }
@@ -8972,18 +9262,19 @@ namespace client_app
 
 I have included references to the main documentation used when researching and creating the technical solution. These mainly consist of documentation for the libraries I have used, along with some obscure Windows Forms behaviour. \\
 
-\noindent\href{https://www.3blue1brown.com/topics/neural-networks}{Theory of neural networks ~ Grant Sanderson (Oct 2017)}
-\noindent\href{http://neuralnetworksanddeeplearning.com/chap2.html}{How the backpropagation algorithm works ~ Michael Nielsen (Dec 2019)}
+\href{https://www.3blue1brown.com/topics/neural-networks}{Theory of neural networks - Grant Sanderson (Oct 2017)} \\
+\href{http://neuralnetworksanddeeplearning.com/chap2.html}{How the backpropagation algorithm works - Michael Nielsen (Dec 2019)} \\
+\href{https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading}{Operator overloading}
 
-\noindent\href{https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-create-graphics-objects-for-drawing}{Creating a `Graphics' object to represent the drawing surface of a Panel} \\
+\href{https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-create-graphics-objects-for-drawing}{Creating a `Graphics' object to represent the drawing surface of a Panel} \\
 \href{https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-draw-a-line-on-a-windows-form}{Drawing a line between two points on a Panel} \\
 
-\noindent\href{https://learn.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-10.0&tabs=visual-studio#configure-signalr}{SignalR Documentation} \\
+\href{https://learn.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-10.0&tabs=visual-studio#configure-signalr}{SignalR documentation} \\
 \href{https://github.com/aspnet/SignalR-samples/tree/main/ChatSample/ChatSample}{SignalR configuration example for the server} \\
 \href{https://github.com/aspnet/SignalR-samples/tree/main/WindowsFormsSample}{SignalR configuration example for client-side Windows Forms applications} \\
 \href{https://learn.microsoft.com/en-us/aspnet/core/signalr/hubcontext?view=aspnetcore-10.0}{Communication outside of a Hub class} \\
 
-\noindent\href{https://grantwinney.com/using-async-await-and-task-to-keep-the-winforms-ui-more-responsive/}{Using Async, Await, and Task to keep the WinForms UI responsive ~ Grant Winney (Jun 2021)} \\
+\href{https://grantwinney.com/using-async-await-and-task-to-keep-the-winforms-ui-more-responsive/}{Using Async, Await, and Task to keep the WinForms UI responsive - Grant Winney (Jun 2021)} \\
 \href{https://stackoverflow.com/questions/7609839/accessing-a-forms-control-from-a-separate-thread}{Accessing a form's control from a separate thread (Oct 2011)}
 
 \end{document}

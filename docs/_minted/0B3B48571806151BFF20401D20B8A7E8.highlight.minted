@@ -1,5 +1,5 @@
 \begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{MathNet.Numerics.LinearAlgebra}\PYG{p}{;}
+\PYG{k}{using}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.neuralNetwork.structures}\PYG{p}{;}
 
 \PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.neuralNetwork}
 \PYG{p}{\PYGZob{}}
@@ -41,8 +41,8 @@
 \PYG{+w}{			}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{layerCount}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{layer}\PYG{o}{++}\PYG{p}{)}
 \PYG{+w}{			}\PYG{p}{\PYGZob{}}
 \PYG{+w}{				}\PYG{c+c1}{// calculate neuron values}
-\PYG{+w}{				}\PYG{n}{Vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{neuronsMatrix}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}}\PYG{p}{.}\PYG{n}{Build}\PYG{p}{.}\PYG{n}{DenseOfArray}\PYG{p}{(}\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]);}
-\PYG{+w}{				}\PYG{n}{neuronValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{neuronsMatrix}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{Data}\PYG{p}{.}\PYG{n}{weightsMatrices}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{Data}\PYG{p}{.}\PYG{n}{biasesMatrices}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]).}\PYG{n}{AsArray}\PYG{p}{();}
+\PYG{+w}{				}\PYG{n}{Vector}\PYG{+w}{ }\PYG{n}{neuronsVector}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{p}{(}\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]);}
+\PYG{+w}{				}\PYG{n}{neuronValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{((}\PYG{n}{neuronsVector}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{Data}\PYG{p}{.}\PYG{n}{weightsMatrices}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{])}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{Data}\PYG{p}{.}\PYG{n}{biasesVector}\PYG{p}{[}\PYG{n}{layer}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]).}\PYG{n}{GetArray}\PYG{p}{();}
 
 \PYG{+w}{				}\PYG{c+c1}{// calculate activated values}
 \PYG{+w}{				}\PYG{n}{activatedValues}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{p}{[}\PYG{n}{layerSizes}\PYG{p}{[}\PYG{n}{layer}\PYG{p}{]];}

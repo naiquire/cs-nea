@@ -1,4 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using server_app.neuralNetwork.structures;
 using System.Drawing;
 using System.IO.Compression;
 using System.Text;
@@ -9,15 +9,15 @@ namespace server_app.neuralNetwork
 	{
 		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server")}\neuralNetwork\data\";
 
-		public static readonly Matrix<double>[] weightsMatrices = new Matrix<double>[Network.layerCount - 1];
-		public static readonly Vector<double>[] biasesMatrices = new Vector<double>[Network.layerCount - 1];
+		public static readonly Matrix[] weightsMatrices = new Matrix[Network.layerCount - 1];
+		public static readonly Vector[] biasesVector = new Vector[Network.layerCount - 1];
 
 		public static void BuildMatrices(double[][,] weights, double[][] biases)
 		{
 			for (int layer = 1; layer < Network.layerCount; layer++)
 			{
-				weightsMatrices[layer - 1] = Matrix<double>.Build.DenseOfArray(weights[layer - 1]);
-				biasesMatrices[layer - 1] = Vector<double>.Build.DenseOfArray(biases[layer - 1]);
+				weightsMatrices[layer - 1] = new Matrix(weights[layer - 1]);
+				biasesVector[layer - 1] = new Vector(biases[layer - 1]);
 			}
 		}
 
