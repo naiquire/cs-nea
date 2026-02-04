@@ -149,8 +149,8 @@
 \contentsline {paragraph}{neuralNetwork/Data.cs}{130}{section*.56}%
 \contentsline {paragraph}{neuralNetwork/Network.cs}{136}{section*.57}%
 \contentsline {paragraph}{neuralNetwork/Training.cs}{138}{section*.58}%
-\contentsline {paragraph}{Matrix.cs}{138}{section*.59}%
-\contentsline {paragraph}{Vector.cs}{141}{section*.60}%
+\contentsline {paragraph}{neuralNetwork/structures/Matrix.cs}{138}{section*.59}%
+\contentsline {paragraph}{neuralNetwork/structures/Vector.cs}{141}{section*.60}%
 \contentsline {paragraph}{Accounts.cs}{142}{section*.61}%
 \contentsline {paragraph}{logger.cs}{143}{section*.62}%
 \contentsline {paragraph}{Program.cs}{144}{section*.63}%

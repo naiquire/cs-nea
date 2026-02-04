@@ -2,7 +2,7 @@
 \PYG{+w}{    }\PYG{n}{func}\PYG{+w}{ }\PYG{n+nf}{GenerateLetters}\PYG{p}{(}\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{n}{Statistics}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{statistics}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{char}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
 \PYG{+w}{        }\PYG{n}{List}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{char}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{letters}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[]}
 \PYG{+w}{        }\PYG{k}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{letter}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{statistics}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{letter}\PYG{p}{.}\PYG{n}{lastSeen}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{Interval}\PYG{p}{(}\PYG{n}{letter}\PYG{p}{.}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{.}\PYG{n}{easingFactor}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{letter}\PYG{p}{.}\PYG{n}{lastSeen}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{n}{Interval}\PYG{p}{(}\PYG{n}{letter}\PYG{p}{.}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{.}\PYG{n}{easingFactor}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
 \PYG{+w}{                }\PYG{n}{letters}\PYG{p}{.}\PYG{n}{Add}\PYG{p}{(}\PYG{n}{letter}\PYG{p}{.}\PYG{n}{letter}\PYG{p}{)}
 \PYG{+w}{            }\PYG{p}{\PYGZcb{}}
 \PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{letters}\PYG{p}{.}\PYG{n}{Count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{rounds}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}

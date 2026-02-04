@@ -102,7 +102,7 @@ The second type is similar to the first, except the snapping feature is disabled
 
 The third type has no outline and is completely freehand. Sometimes, Duolingo will give the user a `Hard' task, in which they will not be given any reference of the character and instead hear it as an outputted sound. \\
 
-The system is very intuitive, and I had very little trouble using it. Occasionally the snapping present in the first type of exercise would cause some issues with the pen following my touch. In addition the algorithm to evaluate the user's submission is too lenient in some cases. However the app encouraged me to practice daily by sending notifications, so a user could definitely learn something in a short amount of time. The application also had a dedicated writing section for the Japanese language, which showed the user their progression in learning all the Hiragana characters. \\
+The system is very intuitive, and I had very little trouble using it. Occasionally the snapping present in the first type of exercise would cause some issues with the pen following my touch. In addition, the algorithm to evaluate the user's submission is too lenient in some cases. However the app encouraged me to practice daily by sending notifications, so a user could definitely learn something in a short amount of time. The application also had a dedicated writing section for the Japanese language, which showed the user their progression in learning all the Hiragana characters. \\
 
 \begin{figure}[H]
     \centering
@@ -139,7 +139,7 @@ The second type of activity is where you cannot see the outline of the character
 
 A major issue with this app is that it requires a particular stroke order for letters, some of which are unintuitive. This means the user must memorise the app's chosen stroke order, which is not something required to write some scripts. On the contrary, it is a simple app which anyone could figure out how to use with ease. \\
 
-As a test for its effectiveness in learning, I downloaded the Japanese version of the app and spent a week using it. Quite quickly I noticed that it was being far too lenient with the accuracy of my strokes, similar to Duolingo. I ended up developing incorrect muscle memory because the app would correct any minor mistakes instead of marking them as wrong. In addition, I didn't find it to be helping with fluent writing, and only aided in memorising the general strokes. This may have been due to the device I was using it on: a 12.5 inch tablet. This meant I was writing the characters much larger than normal handwriting. Of course a mobile phone would provide a better scaling, but many phones do not have a touch pen, so users must use their fingers. This of course does not help in developing muscle memory when using a physical pen. However after a week I did find it had been rather effective: I was able to write every character in the Hiragana script from the sound input alone. Considering this, it would suggest the app is more useful in teaching the users the characters. Building fluency and consistency appears to not be a goal; it is instead left to the user to achieve through their own practice.
+As a test for its effectiveness in learning, I downloaded the Japanese version of the app and spent a week using it. Quite quickly I noticed that it was being far too lenient with the accuracy of my strokes, similar to Duolingo. I ended up developing incorrect muscle memory because the app would correct any minor mistakes instead of marking them as wrong. In addition, I didn't find it to be helping with fluent writing, and only aided in memorising the general strokes. This may have been due to the device I was using it on: a 12.5-inch tablet. This meant I was writing the characters much larger than normal handwriting. Of course a mobile phone would provide a better scaling, but many phones do not have a touch pen, so users must use their fingers. This of course does not help in developing muscle memory when using a physical pen. However after a week I did find it had been rather effective: I was able to write every character in the Hiragana script from the sound input alone. Considering this, it would suggest the app is more useful in teaching the users the characters. Building fluency and consistency appears to not be a goal; it is instead left to the user to achieve through their own practice.
 
 \begin{center}
 \rule{0.5\linewidth}{0.4pt}
@@ -147,7 +147,7 @@ As a test for its effectiveness in learning, I downloaded the Japanese version o
 
 Both of these apps have clear indications of the user's progress, so it is important in the solution to store detailed information for each user. Furthermore both apps have a “practice mode” for studying, clearly making it a necessary feature to implement. Duolingo allows users to view the learning progress of their friends, which could improve a user's motivation to use the application. Furthermore the user interface is easy and intuitive to use, with different features of the app clearly separated into different sections. Write It! is a much simpler application with only a few features to offer. Each `lesson' is immediately presented to the user when the app is opened, so navigation is elementary. A straight forward user interface design is therefore something that should be considered for the objectives. \\
 
-Similarly, there is clearly an issue which the final solution should aim to not have: the leniency in evaluating the user's input. The user should not gain bad writing habits from the app, so it is important to make these mistakes clear for the user. Both applications also have many features which user's would benefit from behind a paywall, which is obviously something this project will avoid. \\
+Similarly, there is clearly an issue which the final solution should aim to not have: the leniency in evaluating the user's input. The user should not gain bad writing habits from the app, so it is important to make these mistakes clear for the user. Both applications also have many features which users would benefit from behind a paywall, which is obviously something this project will avoid. \\
 
 In particular, the way these applications present a user's progress in learning can be subjective. Duolingo has a section of the app in the Japanese language where each of the characters in the scripts appear with a progress bar beneath them. This does demonstrate the user's confidence with the characters, however fails to tell the user if they lose fluency---perhaps after taking a significant break from using the application. This is because the user does not receive feedback after each individual task in the lessons, so their only guide is their average progress. Therefore it is important for the user to receive immediate feedback in the technical solution.
 
@@ -202,7 +202,7 @@ Matrix addition is element-wise, so only works if the matrices have the same dim
 
 A neural network can be abstractly represented as a series of complete weighted bipartite graphs. This allows for a network to be represented a set of adjacency matrices. These are 2-way tables which store the weights between two nodes. Although these adjacency matrices are weighted, having the ability to store the absence of a connection between neurons is unnecessary since the graphs are complete. \\
 
-The training data could be sourced from the EMNIST database: a collection of \(28\times 28\) images featuring upper and lower case latin characters. There are over 200,000 images and labels in this dataset, therefore being highly suitable for training the network. These can be stored using 2D arrays which will be converted to a 1D array to input into the network. \\
+The training data could be sourced from the EMNIST database: a collection of \(28\times 28\) images featuring upper and lower case Latin characters. There are over 200,000 images and labels in this dataset, therefore being highly suitable for training the network. These can be stored using 2D arrays which will be converted to a 1D array to input into the network. \\
 
 As for the forward pass in the network, it is likely that I will choose to use a library for matrix multiplication. While it is possible to build a multiplier myself, it is useful for the forward pass to be as efficient as possible, in order to reduce the time a user spends waiting for their results. Hence I plan to use the MathNet.Numerics library. The activation function I plan to use in the hidden layers is the sigmoid function, rather than Rectified Linear Unit (ReLU). Since this is a classification network, it can be useful to retain any negative neuron values.
 
@@ -293,7 +293,7 @@ For future interviews, I will have to consider the complexity of the language wh
         \item They express concerns over demotivation from seeing the statistics of others who are more fluent. I will take this opinion into consideration, along with the insight of a frequent user of Duolingo.
     \end{enumerate}
     \item Not a useful answer, but possibly could have been too confusing of a question.
-    \item In this question they consider how a leaderboard could be ineffective for motivation. They state how a daily notification or reminder could encourage users to practise daily, so this is something that should be present in the solution.
+    \item In this question they consider how a leaderboard could be ineffective for motivation. They state how a daily notification or reminder could encourage users to practise daily, so this is something that could be present in the solution.
     \begin{enumerate}
         \item This question makes it clear how peer pressure could be used passively to motivate users to practice their writing skills. If a user were to see their friends doing better than them, it could encourage them to try and improve themselves.
         \item They suggest implementing something which tracks how many days in a row someone has used the app. This is a feature present in Duolingo known as a `Daily Streak'. It acts as motivation since users will try to not `lose' their streak. However this is also utilised in many free mobile games with malevolent intention---more time spent using the game will increase revenue for the developers. In some cases their `encouragement' for a user to play everyday can turn into an addiction, which is something I intend to avoid. Hence I will not be implementing a Daily Streak into the final solution.
@@ -330,7 +330,7 @@ Concerning features of the app rather than core functionality, a way to rank use
 
 \subsubsection{Prototype}
 
-Regarding the prototype, I decided to create the neural network and the user input. These make up the core requirement for my program, and are essential for the final solution. I anticipated that the neural network was likely to be the most time consuming part of the project, so prototyping it first was a suitable choice. While I had some experience with neural networks, I had only ever programmed an image classification for digits \(0-9\). Expanding this to have more than double the output neurons required several iterations of testing, since it was unclear what an optimal structure for the network would be. \\
+Regarding the prototype, I decided to create the neural network and the user input. These make up the core requirement for my program, and are essential for the final solution. I anticipated that the neural network was likely to be the most time-consuming part of the project, so prototyping it first was a suitable choice. While I had some experience with neural networks, I had only ever programmed an image classification for digits \(0-9\). Expanding this to have more than double the output neurons required several iterations of testing, since it was unclear what an optimal structure for the network would be. \\
 
 While programming the network, I kept in mind how the solution would use Object-Oriented Programming. It was important to use classes appropriately to allow me to seamlessly integrate it into the technical solution. After programming a beta for the network, I sourced the training data and attempted to train the network. There were several bugs at first where I had implemented the equations incorrectly. \\
 
@@ -387,7 +387,7 @@ UI design is an aspect which was not considered when creating the prototype, as 
 
 Overall this interview didn't provide me with significant information I was unaware of, but there are some key points worth highlighting. The majority of the comments were issues I had found myself while using the prototype, such as the drawing panel not being cleared. \\
 
-However the interviewee also suggested to implement a `clear' button for the panel, something I will consider for the technical solution as it improves user experience. Furthermore they identified some missing objectives which may be useful in the project, such as a system to add other users as a friend. It is also clear from the response that I will need to implement preprocessing for the images, since the neural network can only evaluated images drawn to a similar scale and size as the EMNIST dataset. I will also investigate why some letters are more accurate than others but I suspect this is due to certain Latin characters being similar shapes. \\
+However the interviewee also suggested implementing a `clear' button for the panel, something I will consider for the technical solution as it improves user experience. Furthermore they identified some missing objectives which may be useful in the project, such as a system to add other users as a friend. It is also clear from the response that I will need to implement preprocessing for the images, since the neural network can only evaluated images drawn to a similar scale and size as the EMNIST dataset. I will also investigate why some letters are more accurate than others but I suspect this is due to certain Latin characters being similar shapes. \\
 
 The issue of mouse input is not something I can easily fix, and does rely on a user having a drawing tablet if they wish to gain correct muscle memory. While I was testing the prototype myself I noticed that it did not encourage memorisation in its current state and purely focused on muscle memory. This is due to the character being on display at all times while the user is submitting their drawing. It may be suitable to add options to the technical solution which only show the character for a few seconds. However this raises some issues if the user were to miss its appearance, so perhaps focusing on elementary writing skills is a better option. Even a user passively copying what they see on screen will eventually develop their muscle memory to a sufficient state.
 
@@ -469,7 +469,7 @@ The objective of this program is to allow users to practice writing the Latin sc
     \begin{enumerate}
         \item There will be an option to add/remove friends on their profile page.
         \begin{enumerate}
-            \item An invite will be forwarded to a user if they are online, otherwise it will be stored in a database.
+            \item An invitation will be forwarded to a user if they are online, otherwise it will be stored in a database.
         \end{enumerate}
         \item A user's friends will be listed in the main menu.
         \begin{enumerate}
@@ -520,7 +520,7 @@ The objective of this program is to allow users to practice writing the Latin sc
 \newpage
 \subsection{Modelling}
 \subsubsection{Class Diagrams}
-I will be using Object Oriented Programming (OOP) in this project, so class diagrams are an essential part of the modelling phase. I have produced class diagrams for the both the client-side and server-side projects to assist with coding the technical solution. These are not final, and will likely be changed during Design.
+I will be using Object-Oriented Programming (OOP) in this project, so class diagrams are an essential part of the modelling phase. I have produced class diagrams for the both the client-side and server-side projects to assist with coding the technical solution. These are not final, and will likely be changed during Design.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{resx/server_class_1.png}
@@ -724,7 +724,7 @@ Before a neural network can be trained, the parameters of the network must be in
 
 A submitted image is likely to not be consistent with the EMNIST dataset, therefore preprocessing is required so an accurate evaluation can be made. This was made clear in the prototype, which does not have preprocessing. Firstly, the Region of Interest (ROI) is extracted from the drawn image, which involves cropping the image into a rectangle where there is no white space surrounding the ROI.\@ \\
 
-This rectangular crop then needs to be adjusted such that it is a square. This is done by adding white space to the shorter of the two dimensions. If the image was expanded in the Y direction, then the ROI is shifted down in order to recentre it. Similarly if the image was expanded in the X direction then the ROI is shifted right. \\
+This rectangular crop then needs to be adjusted such that it is a square. This is done by adding white space to the shorter of the two dimensions. If the image was expanded in the Y direction, then the ROI is shifted down in order to recentre it. Similarly, if the image was expanded in the X direction then the ROI is shifted right. \\
 
 The image is then scaled to \(24\times 24\), which differs from the prototype. This is to match the dataset, which has padding on the images. The remaining pixels to create the \(28\times 28\) image are added on all sides as white space. The image is then inverted, and converted to a set of decimal values using the luminance formula, as described in 1.5.1.
 
@@ -834,7 +834,7 @@ Both constructors set the input values to the input layer of the network and cal
     z^L=z^{(L-1)}\cdot w^L+b^L
 \end{equation*}
 
-It should be noted that the equations described in the Modelling section showed the weights matrix being multiplied by the vector of activated values from the previous layer. The implementation of the forward pass is slightly different in order to reduce processing time during backpropagation. The forward pass instead multiplies the activated values from the previous layer by the weights matrix---matrix multiplication is not commutative so this would result in a different matrix as the output. However, when the matrices are loaded in from the text files, they are stored as their transpose in the Matrix objects. The transpose of a matrix can be thought of as mirroring the matrix down its leading diagonal, such that the two indices of each element are effectively swapped around. This means that the order of multiplication now yields the same result as multiplying the `correct' way round with the un-transposed matrix. The reason for this is that the mathematical equations for backpropagation require the weights matrix to be transposed. I decided that it would be more efficient to load the matrix already transposed, and slightly adjust the equations and indices used in iteration structures to account for this change. \\
+It should be noted that the equations described in the Modelling section showed the weights matrix being multiplied by the vector of activated values from the previous layer. The implementation of the forward pass is slightly different in order to reduce processing time during backpropagation. The forward pass instead multiplies the activated values from the previous layer by the weights matrix---matrix multiplication is not commutative so this would result in a different matrix as the output. However, when the matrices are loaded in from the text files, they are stored as their transpose in the Matrix objects. The transpose of a matrix can be thought of as mirroring the matrix down its leading diagonal, such that the two indices of each element are effectively swapped around. This means that the order of multiplication now yields the same result as multiplying the `correct' way round with the untransposed matrix. The reason for this is that the mathematical equations for backpropagation require the weights matrix to be transposed. I decided that it would be more efficient to load the matrix already transposed, and slightly adjust the equations and indices used in iteration structures to account for this change. \\
 
 The activated values for the current layer are then calculated using the neuron values. If the current layer is a hidden layer, then the sigmoid function is used to normalise the values. The sigmoid function is part of the \textbf{Data} class, which is accessed by static reference and returns the activated value for a neuron. Each neuron in the current layer is passed through this subroutine, and the resulting activated values are stored in a 1D array. The `GetArray()' method is used to directly extract the underlying array of the resulting Vector class, instead of creating a new array. \\
 
@@ -890,7 +890,7 @@ Both of these structures implement public methods to get the dimensions of their
 
 The \textbf{Matrix} class contains two constructors. The first constructor takes in two integers as arguments and creates an empty matrix with the specified dimensions. This is used when performing an operation on two matrix/vector structures, since the result of the calculation is first initialised to an empty matrix/vector. The second constructor is used when building a matrix object from an array of values, and therefore passes in an array as the constructor argument. \\
 
-The first set of operator overloads present in the \textbf{Matrix} class are the addition and subtraction of two matrices. First a check is made to ensure that the matrices have dimensions such that the addition can be performed: the matrices must have identical dimensions. A new \textbf{Matrix} structure is then instantiated with the same dimensions as the input matrices. The program iterates through each value of the resulting matrix using two embedded iteration structures, and sets the value to the either the sum or the difference of the corresponding values in the input matrices. \\
+The first set of operator overloads present in the \textbf{Matrix} class are the addition and subtraction of two matrices. First a check is made to ensure that the matrices have dimensions such that the addition can be performed: the matrices must have identical dimensions. A new \textbf{Matrix} structure is then instantiated with the same dimensions as the input matrices. The program iterates through each value of the resulting matrix using two embedded iteration structures, and sets the value to either the sum or the difference of the corresponding values in the input matrices. \\
 
 The remaining operator overloads are used to multiply matrices and vectors together. Since only the operation of multiplying a \textbf{Vector} by a \textbf{Matrix} is required, I will only document this method. However I have also implemented methods for multiplying the converse of this, and multiplying two matrices together for completeness. Similar to addition, the first check of the method is to ensure that multiplication can be performed on the inputs. This is done by checking if the length of the vector is equal to the number of rows in the matrix. A new \textbf{Vector} structure is then instantiated, passing in the number of columns in the matrix as the parameter since this value will be equal to the length of the resulting vector from this operation. The program then iterates through each value in this new vector object, and initialises a new `sum' variable. Another iteration structure is started, which iterates through each row element of the current column in the matrix and multiplies it by equivalent value from the vector object. Each result of these multiplications is added to the `sum' variable, which is set to the appropriate value of the resulting vector object. The pseudocode for this process is outlined below:
 
@@ -1101,7 +1101,7 @@ First a random integer is chosen between 0 and 50 less than the number of images
 
 \subsubsection{File Organisation}
 
-In order to save and load the network parameters, I opted to store the values as plaintext. I formatted the values as separated by commas and linebreaks, where each layer has its own file. For the weights, each line represents a single neuron where each comma separated value is an arc to a neuron in the next layer. The biases are stored in a single line, with commas separating the value for each neuron.
+In order to save and load the network parameters, I opted to store the values as plaintext. I formatted the values as separated by commas and line breaks, where each layer has its own file. For the weights, each line represents a single neuron where each comma separated value is an arc to a neuron in the next layer. The biases are stored in a single line, with commas separating the value for each neuron.
 \subsubsection{UML Diagrams}
 
 \begin{figure}[H]
@@ -1258,7 +1258,7 @@ For every round, there exists a Dictionary `currentResponses' which stores the u
 
 \subsubsection{Object-Oriented Design}
 
-Each game type inherits methods and properties from the \textbf{Game} class, and implements the \textbf{IPlayable} interface. The \textbf{Game} class contains generic methods that each game utilises, and also implements some of the methods from the \textbf{IPlayable} interface. A number of its methods are virtual, which allows the specialised games to extend their base functionality. Each game contains a `gameStats' structure for each user, and the games are owned by the \textbf{Queueing} class. The associations between the classes has not be shown in the below figure, due to the complexity of the diagrams, and is instead shown in section 2.7.
+Each game type inherits methods and properties from the \textbf{Game} class, and implements the \textbf{IPlayable} interface. The \textbf{Game} class contains generic methods that each game utilises, and also implements some of the methods from the \textbf{IPlayable} interface. A number of its methods are virtual, which allows the specialised games to extend their base functionality. Each game contains a `gameStats' structure for each user, and the games are owned by the \textbf{Queueing} class. The associations between the classes has not been shown in the below figure, due to the complexity of the diagrams, and is instead shown in section 2.7.
 
 \begin{figure}[H]
     \centering
@@ -1274,7 +1274,7 @@ The `friends' table creates a link between two userIDs, which represents that th
 
 \subsubsection{Database Design}
 
-Since each user has 26 statistics, the `userData' table exists in a one to many relationship with the `statistics' table. 
+Since each user has 26 statistics, the `userData' table exists in a one-to-many relationship with the `statistics' table. 
 
 \begin{figure}[H]
     \centering
@@ -1302,7 +1302,7 @@ Each method in the \textbf{Database} class returns a boolean value to represent 
 \rule{0.5\linewidth}{0.4pt}
 \end{center}
 
-The `LoginRequest()' method gets the password for a user and compares it against the password passed as a parameter. The `success' of the login is initially set to 2 which represents a userID not existing in the database. The `reader' is then read in a while loop and will therefore not run if no rows are returned. If a row exists, the returned password stored in the database is compared to the one passed as a parameter and `success' is updated to 1 or 0 depending if the strings match. The password in the database is hashed, so the inputted password is hashed prior before it is passed into the `LoginRequest()' method. 
+The `LoginRequest()' method gets the password for a user and compares it against the password passed as a parameter. The `success' of the login is initially set to 2 which represents a userID not existing in the database. The `reader' is then read in a while loop and will therefore not run if no rows are returned. If a row exists, the returned password stored in the database is compared to the one passed as a parameter and `success' is updated to 1 or 0 depending on if the strings match. The password in the database is hashed, so the inputted password is hashed prior before it is passed into the `LoginRequest()' method. 
 \begin{minted}{SQL}
     SELECT userData.password
     FROM userData
@@ -1334,7 +1334,7 @@ If the requested userID does not exist then a new account is created in the data
 
 The `LoadUserData()' method is used to load the account details of a user from the database and returns a `userData' structure. The `out' parameter storing the userData is instantiated and the `UserExists()' method is called. If an exception is thrown in this method then it will return false and this is propagated back by immediately returning false with the empty userData. If the user does not exist then an empty userData is still outputted but the method returns true. \\
 
-Otherwise the account details are loaded from the `userData' table and allocated to the attributes in the `userData' structure. The `LoadStatistics()' and `LoadFriends()' methods are then called, which similarly propagate any thrown exceptions. A list of the `friendData' structure is then created, and the list of friendIDs is iterated through with the `LoadFriendData()' method called for each. This gets the Elo rating of the users, since their online status is determined otherwise.
+Otherwise, the account details are loaded from the `userData' table and allocated to the attributes in the `userData' structure. The `LoadStatistics()' and `LoadFriends()' methods are then called, which similarly propagate any thrown exceptions. A list of the `friendData' structure is then created, and the list of friendIDs is iterated through with the `LoadFriendData()' method called for each. This gets the Elo rating of the users, since their online status is determined otherwise.
 \begin{minted}{SQL}
     SELECT aboutMe, dateCreated, rank, localisation
     FROM userData
@@ -1427,7 +1427,7 @@ For the server to be able to communicate with a client, the server must have an 
 
 To configure the server, an `IHostBuilder' object is created using the `CreateDefaultBuilder()' method of the SignalR library and `SignalR' is added as a service to the host configuration. The configuration is set to use routing and the `IHubContext' of the \textbf{Connection} class is attributed to a public member in the class. This allows other classes to access the communication methods which the SignalR library provides. The two endpoints are then mapped to their respective classes, such that any requests to the given endpoints will be received by the appropriate methods within that class. \\
 
-CORS could also be set up to allow any origin to attempt a connection, which would allow devices outside of the server's LAN to communicate with the server. However this isn't very secure without proper implementation, and would need to be thoroughly researched. As a test, I did briefly start the server application with CORS enabled, however due to the setup of my home network this did not permit connections from outside the LAN.\@ This issue is further detailed in section 4.4.1, as I was not able to resolve it.
+CORS could also be set up to allow any origin to attempt a connection, which would allow devices outside the server's LAN to communicate with the server. However this isn't very secure without proper implementation, and would need to be thoroughly researched. As a test, I did briefly start the server application with CORS enabled, however due to the setup of my home network this did not permit connections from outside the LAN.\@ This issue is further detailed in section 4.4.1, as I was not able to resolve it.
 
 \begin{minted}{csharp}
     host-config {
@@ -1499,7 +1499,7 @@ When a successful login or account creation is made, the `LoadMainApplication()'
 
 \paragraph{Login\\}
 
-When the user clicks the `Login' button, the event handler for this button is called. This extracts the text stored in the username and password text boxes, and then resets the password text box. The credentials are then checked if they are empty or white space, terminating the subroutine if this is the case. Otherwise the `loginRequest()' method is invoked on the server to send the login request. \\
+When the user clicks the `Login' button, the event handler for this button is called. This extracts the text stored in the username and password text boxes, and then resets the password text box. The credentials are then checked if they are empty or white space, terminating the subroutine if this is the case. Otherwise, the `loginRequest()' method is invoked on the server to send the login request. \\
 
 If the request is successfully handled, a response is received into the `loginSuccess' connection handler. A switch statement is then performed with the returned success code with the following possibilities:
 
@@ -1508,7 +1508,7 @@ If the request is successfully handled, a response is received into the `loginSu
     \item INCORRECT\_PASSWORD = 0
     \item USER\_DOES\_NOT\_EXIST = 2
     \item USER\_LOGGED\_IN\_ON\_OTHER\_DEVICE = 3
-    \item ERROR\_OCCURED = -1
+    \item ERROR\_OCCURRED = -1
 \end{itemize}
 
 If the returned success code is 1 indicating the login was successful, the main application is launched by calling the `LoadMainApplication()` method. The userID and language used in the login form is passed as a parameter, to allow the client to request the user's account data.
@@ -1541,7 +1541,7 @@ The userData for the current user can be updated, which is received by a connect
 
 \paragraph{Friends\\}
 
-The `UpdateFriendData()' method is invoked by the server when a friend of the user updates their account data, or the user has added a friend. The method passes a `friendData' structure as a parameter, and iterates through each friend of the user. If one of these friends matches the userID in the passed friendData, then the current friend is updated with the new structure. Otherwise, the friend must be a new friend, so the structure is added to the list of friends. The friends panel is then refreshed if the user is not in-game. \\
+The `UpdateFriendData()' method is invoked by the server when a friend of the user updates their account data, or the user has added a friend. The method passes a `friendData' structure as a parameter, and iterates through each friend of the user. If one of these friends matches the userID in the friendData parameter, then the current friend is updated with the new structure. Otherwise, the friend must be a new friend, so the structure is added to the list of friends. The friends panel is then refreshed if the user is not in-game. \\
 
 If a friendship has been removed, the server first handles the change in friendship, and then invokes the `removeFriends' connection handler on the client application. This calls the `RemoveFriend()' method of the \textbf{Main} class, which iterates through each friend of the user, and removes the appropriate friendData, breaking the loop after doing so. The friends panel is then refreshed if the user is not in-game. \\
 
@@ -1565,7 +1565,7 @@ When the user clicks the `Search' button, the click event handler first extracts
 
 \paragraph{Algorithms\\}
 
-Each user has an overview of their statistics which can be viewed both on the home page and in the profile page. This includes the total number of rounds they have played, their Elo rating, and their average overall accuracy. The Elo rating is obtained from the `userData' structure so no calculations are required. By iterating through each letter, the total rounds played can be summed. The average accuracy is calculated by summing the accuracies for each letter, and dividing by the number of letters. This is then multiplied by 100 to convert it to a percentage, and rounded to two decimal places.
+Each user has an overview of their statistics which can be viewed both on the home page and in the profile page. This includes the total number of rounds they have played, their Elo rating, and their average overall accuracy. The Elo rating is obtained from the `userData' structure, so no calculations are required. By iterating through each letter, the total rounds played can be summed. The average accuracy is calculated by summing the accuracies for each letter, and dividing by the number of letters. This is then multiplied by 100 to convert it to a percentage, and rounded to two decimal places.
 
 \begin{minted}{csharp}
 	int totalLetters = 0;
@@ -1636,7 +1636,7 @@ This also causes the server to invoke the `UpdateUsers()' method on the client, 
 
 \subsubsection{Game Logic}
 
-The general process by which a game runs is by repeating two key phases until the condition for the game to be ended is met. When the game is started, the first `Submission' phase is started which is where the client receive a Latin character and the users submit a drawing to the server. Once all of the expected submissions have been received, the `Evaluation' phase is started where the server uses the neural network to evaluate each of the users' submissions. The results are then received by the client application, and the users can then request for the next round to start. Once the server has received this request from all of the expected users, it then begins the next `Submission' phase.
+The general process by which a game runs is by repeating two key phases until the condition for the game to be ended is met. When the game is started, the first `Submission' phase is started which is where the clients receive a Latin character and the users submit a drawing to the server. Once all of the expected submissions have been received, the `Evaluation' phase is started where the server uses the neural network to evaluate each of the users' submissions. The results are then received by the client application, and the users can then request for the next round to start. Once the server has received this request from all of the expected users, it then begins the next `Submission' phase.
 
 \begin{figure}[H]
     \centering
@@ -1660,7 +1660,7 @@ The `clear' button is allocated the `ClearPanel()' method of the drawing panel. 
 
 The evaluation phase is invoked by the server and passes the accuracy and elapsed time for the current letter, as well as if the user was correct. This is then updated in the `gameStats' structure using its `UpdateStats()' method, and the right panel is updated with these new results. The results screen is then displayed to the user, which contains the `continue' button. The click event handler for this button invokes the `requestRound()' method on the server application. \\
 
-The `Versus' game type receives the userID of the user who won the round, which is displayed by adding a label to the results panel. The `Elimination' game type receives a list of alive users, which allows the client to display on the results screen if the user was eliminated. The reason for the user being eliminated is also displayed which is determined by the `correct' attribute of the user's results. If they were correct, then the user must have been eliminated as they had the longest elapsed time. Otherwise the user was eliminated since they were incorrect. The `UpdateUsers()' method is also called, to reflect the change in the alive users.
+The `Versus' game type receives the userID of the user who won the round, which is displayed by adding a label to the results panel. The `Elimination' game type receives a list of alive users, which allows the client to display on the results screen if the user was eliminated. The reason for the user being eliminated is also displayed which is determined by the `correct' attribute of the user's results. If they were correct, then the user must have been eliminated as they had the longest elapsed time. Otherwise, the user was eliminated since they were incorrect. The `UpdateUsers()' method is also called, to reflect the change in the alive users.
 
 \paragraph{Game End\\}
 
@@ -1735,7 +1735,7 @@ The `page text' is a label in the top section of the left panel. It displays to 
 
 \paragraph{Friends\\}
 
-The friends panel is added to the left panel and lists the user's friends separated into online and offline. The `ConfigFriendsPanel()' method of the \textbf{Main} class separates the user's friends into two lists based on whether they are online or offline. The `Online' label is created, withe the length of its respective list added to its right. The online users are then listed using a loop which increments the Y-position of the next label each iteration. The name of each button is mapped to the userID of the friend. This allows the click event handler to use the button's name to call the asynchronous `RequestProfile()' method, passing the userID of the friend as a parameter. This is then repeated for the offline users, with the Y-position incremented such that the offline users are placed below all the online users. \\
+The friends panel is added to the left panel and lists the user's friends separated into online and offline. The `ConfigFriendsPanel()' method of the \textbf{Main} class separates the user's friends into two lists based on whether they are online or offline. The `Online' label is created, with the length of its respective list added to its right. The online users are then listed using a loop which increments the Y-position of the next label each iteration. The name of each button is mapped to the userID of the friend. This allows the click event handler to use the button's name to call the asynchronous `RequestProfile()' method, passing the userID of the friend as a parameter. This is then repeated for the offline users, with the Y-position incremented such that the offline users are placed below all the online users. \\
 
 The `RequestProfile()' method invokes the `requestProfile()' method on the server, passing the requested userID as a parameter. The server then returns a `userData' structure for the requested user, which is used to create a new instance of the \textbf{Profile} class. The instance of the \textbf{Main} class and the returned `userData' structure are passed as parameters. The page text is also updated to ``Profile''. If the userID of the returned structure does not match the requested userID, then a message is shown to the user that the requested user does not exist.
 
@@ -1871,7 +1871,7 @@ The testing video is attached to the submission as a video file, and can also be
 
     \item \textbf{Logging in to an account}
     
-    These tests involve the login process to an existing account: `account1' which was setup prior to these tests. For each test, the input is entered into the `Username' and `Password' text boxes, and the `Login' button is clicked. The output is typically given by a red message beneath the `Password' text box.
+    These tests involve the login process to an existing account: `account1' which was set up prior to these tests. For each test, the input is entered into the `Username' and `Password' text boxes, and the `Login' button is clicked. The output is typically given by a red message beneath the `Password' text box.
     
     \begin{enumerate}
         \item \textbf{00:00} [1.a.i] Entering an unregistered username returns a suitable error message.
@@ -2410,19 +2410,19 @@ I have also chosen to analyse test 4.1(b): how the duplicate friend invite was h
 \section{Evaluation}
 \noindent\rule{\textwidth}{0.2pt}
 \subsection{Overall Effectiveness of the System}
-% // proofread
+
 As defined in the problem statement, this solution was developed to address the need for an enjoyable and simple way to learn to write the Latin script. I have implemented a program which allows a user to receive instant feedback on writing a Latin character, through three different game types. A drawing panel is presented to the user for each round of a game, and they can submit an attempt at writing the given letter. The server application accurately evaluates the user's submission and returns a percentage accuracy and their elapsed time. These results are then updated for the user's account in the database, which allows a user to view their progress in learning to write the Latin characters. \\
 
-The key component of this project is the multilayered neural network, which was implemented successfully and completely. It has been shown through extensive testing that the network is able to handle a variety of inputs and accurately evaluate each of them fairly. In particular, the speed of evaluation is almost instant---this was one of the concerns for using my own matrix and vector data structures. However it is clear that there is no noticeable time delay while a user's submission is being evaluated, therefore the algorithm I have implemented for performing matrix operations is efficient. \\
+The key component of this project is the multilayered neural network, which was implemented successfully and completely. It has been shown through extensive testing that the network is able to handle a variety of inputs and accurately evaluate each of them fairly. In particular, the speed of evaluation is almost instant---this was one of the concerns for using my own matrix and vector data structures. However it is clear that there is no noticeable time delay while a user's submission is being evaluated. Therefore the algorithm I have implemented for performing matrix operations is efficient. \\
 
-As for what the user experiences while using the application, the client presents an easy to use and intuitive interface. Each section of the client application is split up, and navigating between these sections works flawlessly. Any exceptions which may occur on the server application are handled by the client by presenting relevant messages to the user, such that a runtime exception is completely avoided---both on the client and server application. A user's account data is stored securely in the database, along with their learning progress of the Latin characters. In my opinion, the technical solution I have produced acknowledges the statement of problem and provides an effective solution.
+Regarding the user experience while using the application, the client presents an appealing interface which is intuitive to use. Each section of the client application is split up, and navigating between these sections works flawlessly. Any exceptions which may occur on the server application are handled by the client by presenting relevant messages to the user, such that a runtime exception is completely avoided---both on the client and server application. A user's account data is stored securely in the database, along with their learning progress of the Latin characters. In my opinion, the technical solution I have produced acknowledges the proposed problem and provides an effective solution.
 
 \subsection{Evaluation of Objectives}
 \subsubsection{Core Objectives}
 \begin{enumerate}
     \item \textbf{Accounts}
 
-    These objectives were part of the accounts system which was implemented completely. A user is able to login to their account or create a new account, and suitable error messages are displayed when appropriate. It was challenging at times to ensure that all the cases for an invalid login were met, especially when relaying this information to the client application and displaying an appropriate response.
+    These objectives were part of the `accounts' system which was implemented completely. A user is able to login to their account or create a new account, and suitable error messages are displayed when appropriate. It was challenging at times to ensure that all the cases for an invalid login were met, especially when relaying this information to the client application and displaying an appropriate response.
 
     \item \textbf{Games}
 
@@ -2444,7 +2444,7 @@ As for what the user experiences while using the application, the client present
         Furthermore, objective 2.i.ii.A was successfully met and exceeded. The objective did not mention displaying to the user their change in Elo rating, however this was implemented in the technical solution. I believe the addition of this is useful for a user, since they may be unfamiliar with how the Elo rating system works. If they saw their rating change without warning it may cause some confusion---showing when their rating changes instead may remove this possibility.
         \item \textbf{Elimination}
 
-        The objectives for this game type were fully met. The user's who are eliminated are informed that they did not win, and the winner is also informed of this. This exceeds the original objective 2.i.iii.C since it was not stated that the user should receive this information, even though it is a feature a user would expect.
+        The objectives for this game type were fully met. The users who are eliminated are informed that they did not win, and the winner is also informed of this. This exceeds the original objective 2.i.iii.C since it was not stated that the user should receive this information, even though it is a feature a user would expect.
     \end{enumerate}
 
     \item \textbf{Statistics}
@@ -2455,9 +2455,9 @@ As for what the user experiences while using the application, the client present
     
     \item \textbf{Social}
     
-    There was some successes in implementing these objectives. In particular, objective 4.c had some issues regarding the translations. While I had aimed to ensure translations existed for every text field in the client application, there were still some that lacked this. These include the description for each of the game types on the main menu and the button on the login form to create an account. \\
+    There were some successes in implementing these objectives. In particular, objective 4.c had some issues regarding the translations. While I had aimed to ensure translations existed for every text field in the client application, there were still some that lacked this. These include the description for each of the game types on the main menu and the button on the login form to create an account. \\
 
-    Fortunately, the friends system was successfully implemented and the invitation system works without flaws. However I will highlight how the server ensures that a user does not send a friend invite more than once. Instead of checking before requesting the invite to be inserted into the database, the server attempts to insert the record regardless if it is a duplicate invite or not. This doesn't cause any issues for the client, however the database does throw a exception when it attempts to add a record with the same primary key as an existing record. This exception is handled well, however is possibly not the most defensive design for such an occurrence. \\ 
+    Fortunately, the `friends' system was successfully implemented and the invitation system works without flaws. However I will highlight how the server ensures that a user does not send a friend invite more than once. Instead of checking before requesting the invite to be inserted into the database, the server attempts to insert the record regardless if it is a duplicate invite or not. This doesn't cause any issues for the client, however the database does throw a exception when it attempts to add a record with the same primary key as an existing record. This exception is handled well, however is possibly not the most defensive design for such an occurrence. \\ 
 
     \item \textbf{Server}
 
@@ -2471,7 +2471,7 @@ As for what the user experiences while using the application, the client present
 
 \subsubsection{Extension Objectives}
 
-Unfortunately, none of the extension objectives were implemented as they required significant refactors to the codebase. Extension objectives 1 and 2 could not be implemented easily as they would require adding a setting to games which makes them private or public. In this context, a private game would be one where a `host' user would create the game and only users which they directly send an invite to would be allowed to join the game. Any other users would not be able to see this game when queueing. \\
+Unfortunately, none of the extension objectives were implemented as they required significant refactors to the codebase. Extension objectives 1 and 2 could not be implemented easily as they would require adding a setting to games which makes them private or public. In this context, a private game would be one where a `host' user would create the game and only users which directly receive an invite would be allowed to join the game. Any other users would not be able to see this game when queueing. \\
 
 Implementing this feature would require an additional check when queueing, to check the visibility status of the game to ensure that the user only queues into public games. If a user were to receive an invite, they would need to make a request to a new method, which queues the user into the game with the same gameID that matches the invite they were sent. Additionally, the appropriate controls would need to be added to the client application such that a user can invite others to their game and change the visibility status of their game. One issue that may arise is whether only the `host' user should be able to change the visibility status---this would require each game storing its respective `host' and only allowing the relevant client access to these controls. Although, this is technically already implemented since the gameID is constructed from the `host' user and the current time. However extracting the userID from this string is challenging if they have numbers in their username. \\
 
@@ -2604,7 +2604,7 @@ In order to create the list of letters at the start of the game, the program mus
     func GenerateLetters(List<Statistics> statistics) -> List<char> {
         List<char> letters = []
         foreach (letter in statistics) {
-            if (letter.lastSeen == Interval(letter.n, letter.easingFactor)) {
+            if (letter.lastSeen >= Interval(letter.n, letter.easingFactor)) {
                 letters.Add(letter.letter)
             }
             if (letters.Count == rounds) {
@@ -2664,7 +2664,7 @@ Shown below is a table of contents which details any code files with complex alg
         server/neuralNetwork/\newline Data.cs/LoadWeights(), SaveWeights() & Reading and writing to text files &\pageref{server/neuralnetwork/data.cs} \\\hline
         server/games/\newline Versus.cs/CalculateRank() & Implementation of the Elo formulae &\pageref{server/games/versus.cs} \\\hline
         server/games/\newline Elimination.cs/EvaluationPhase() & List operations for determining which users are eliminated &\pageref{server/games/elimination.cs} \\\hline
-        server/games/\newline Game.cs/ & Evaluating a submission using the neural network &\pageref{server/games/game.cs} \\\hline
+        server/games/\newline Game.cs/EvaluateSubmission() & Evaluating a submission using the neural network &\pageref{server/games/game.cs} \\\hline
         server/games/\newline Game.cs/UpdateStatistics() & Updating averages in the database &\pageref{server/games/game.cs} \\\hline
         server/neuralNetwork/\newline Data.cs/softmax() & Softmax function &\pageref{server/neuralnetwork/data.cs} \\\hline
         server/neuralNetwork/\newline Data.cs/PreprocessImage() & Image preprocessing &\pageref{server/neuralnetwork/data.cs} \\\hline
@@ -4908,7 +4908,7 @@ namespace server_app.neuralNetwork
 	}
 }
 \end{minted}
-\paragraph{Matrix.cs}\label{server/neuralnetwork/structures/matrix.cs}
+\paragraph{neuralNetwork/structures/Matrix.cs}\label{server/neuralnetwork/structures/matrix.cs}
 \begin{minted}{csharp}
 namespace server_app.neuralNetwork.structures
 {
@@ -5065,7 +5065,7 @@ namespace server_app.neuralNetwork.structures
 	}
 }
 \end{minted}
-\paragraph{Vector.cs}\label{server/neuralnetwork/structures/vector.cs}
+\paragraph{neuralNetwork/structures/Vector.cs}\label{server/neuralnetwork/structures/vector.cs}
 \begin{minted}{csharp}
 namespace server_app.neuralNetwork.structures
 {
