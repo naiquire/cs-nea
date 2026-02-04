@@ -1,6 +1,6 @@
 ﻿namespace server_app.neuralNetwork.structures
 {
-	public class Matrix
+	public readonly struct Matrix
 	{
 		private readonly double[,] values;
 		public double this[int i, int j]

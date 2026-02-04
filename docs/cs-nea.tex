@@ -808,7 +808,7 @@ Since object-oriented programming is a necessary paradigm to use, C\# will be th
 
 As for the libraries required by the client application, the user interface will be created using the Windows Forms library. This is a graphical user interface library which is configured and rendered using C\# code. I have also chosen to use the Guna.UI2.WinForms library, which provides an enhanced set of controls to use with Windows Forms, such as progress bars and gradient fill colours. These will help aid me in creating a user-friendly interface which requires little knowledge of the languages which the client application will be rendered in. Additionally, the client also requires the SignalR.Client library to allow it to establish a connection with the server. \\
 
-It was stated in the Analysis section that I would be using an external library to perform the matrix operations required for the forward pass of the neural network. I have since decided against this, and have opted to create my own Matrix and Vector classes for this project. While these are likely less efficient than using a library, when creating the technical solution I did not notice any significant time delay while a submission was being evaluated.
+It was stated in the Analysis section that I would be using an external library to perform the matrix operations required for the forward pass of the neural network. I have since decided against this, and have opted to create my own Matrix and Vector classes for this project. While these are likely less efficient than using a library, while creating the technical solution I did not notice any significant time delay while a submission was being evaluated.
 
 \newpage
 \hiddensection{Server Design}
@@ -818,7 +818,7 @@ It was stated in the Analysis section that I would be using an external library 
 
 The neural network consists of four classes, each of which perform a core function of the network. The \textbf{Network} class performs the forward pass, which is used to evaluate a user's submission. The \textbf{Backpropagation} class is used to train the network, and therefore will contain instances of the \textbf{Network} class. Both of these classes frequently use the static \textbf{Data} class, which contains methods for saving and loading the network parameters. It also contains any mathematical functions, such as sigmoid. The \textbf{Training} class oversees the training process, and is responsible for feeding images and labels into the \textbf{Backpropagation} class. \\
 
-One of the major differences between the neural network in the prototype and the one implemented for the technical solution is the addition of the \textbf{Matrix} and \textbf{Vector} classes. The prototype used external libraries for performing matrix operations, however the final solution uses my own classes. These have been created using index overriding and operator overloading, such that the data structures resemble an in-built data type. It also makes the classes far easier to work with and easier to understand, since a single operator can be used instead of a whole function which takes in the two input values as arguments.
+One of the major differences between the neural network in the prototype and the one implemented for the technical solution is the addition of the \textbf{Matrix} and \textbf{Vector} structures. The prototype used external libraries for performing matrix operations, however the final solution uses my own classes. These have been created using index overriding and operator overloading, such that the data structures resemble an in-built data type. It also makes the classes far easier to work with and easier to understand, since a single operator can be used instead of a whole function which takes in the two input values as arguments.
 
 \subsubsection{Forward Propagation}
 
@@ -880,17 +880,17 @@ The use of static Matrix and Vector objects in the \textbf{Data} class was not s
 
 \subsubsection{Data Structures}
 
-As stated in the introduction to the Design section, the server application implements its own \textbf{Matrix} and \textbf{Vector} classes for the forward pass of the neural network. By using operator overloading, methods can be created which override the functionality of arithmetic operations. This is especially useful for these classes since their operations are performed in unintuitive ways, and it improves the legibility of the code. I have implemented the operations which are specifically required by the neural network such as multiplication of a vector and a matrix. Additionally, some similar operations to the required ones were also added for completeness. The values in the \textbf{Matrix} and \textbf{Vector} classes are stored by a private array, and access to these values is controlled by an index overriding subroutine. This allows the indexing property to be directly applied to the object reference for these classes, which would mirror an array data type better than using public `getters' and `setters' \\
+As stated in the introduction to the Design section, the server application implements its own \textbf{Matrix} and \textbf{Vector} structures for the forward pass of the neural network. By using operator overloading, methods can be created which override the functionality of arithmetic operations. This is especially useful for these structures since their operations are performed in unintuitive ways, and it improves the legibility of the code. I have implemented the operations which are specifically required by the neural network such as multiplication of a vector and a matrix. Additionally, some similar operations to the required ones were also added for completeness. The values in the \textbf{Matrix} and \textbf{Vector} structures are stored by a private array, and access to these values is controlled by an index overriding subroutine. This allows the indexing property to be directly applied to the object reference for these classes, which would mirror an array data type better than using public `getters' and `setters' \\
 
-Both of these classes implement public methods to get the dimensions of their stored data. The \textbf{Matrix} class contains two of these methods: one for each dimension, whereas the \textbf{Vector} class only contains one since it is one-dimensional. Additionally, both classes have a public method to extract the entire private array, which is used in obtaining the neuron values after a layer has been calculated in the forward pass of the network.
+Both of these structures implement public methods to get the dimensions of their stored data. The \textbf{Matrix} structure contains two of these methods: one for each dimension, whereas the \textbf{Vector} structure only contains one since it is one-dimensional. Additionally, both structures have a public method to extract the entire private array, which is used in obtaining the neuron values after a layer has been calculated in the forward pass of the network.
 
 \paragraph{Matrices\\}
 
-The \textbf{Matrix} class contains two constructors. The first constructor takes in two integers as arguments and creates an empty matrix with the specified dimensions. This is used when performing an operation on two matrix/vector classes, since the result of the calculation is first initialised to an empty matrix/vector. The second constructor is used when building a matrix object from an array of values, and therefore passes in an array as the constructor argument. \\
+The \textbf{Matrix} class contains two constructors. The first constructor takes in two integers as arguments and creates an empty matrix with the specified dimensions. This is used when performing an operation on two matrix/vector structures, since the result of the calculation is first initialised to an empty matrix/vector. The second constructor is used when building a matrix object from an array of values, and therefore passes in an array as the constructor argument. \\
 
-The first set of operator overloads present in the \textbf{Matrix} class are the addition and subtraction of two matrices. First a check is made to ensure that the matrices have dimensions such that the addition can be performed: the matrices must have identical dimensions. A new \textbf{Matrix} class is then instantiated with the same dimensions as the input matrices. The program iterates through each value of the resulting matrix using two embedded iteration structures, and sets the value to the either the sum or the difference of the corresponding values in the input matrices. \\
+The first set of operator overloads present in the \textbf{Matrix} class are the addition and subtraction of two matrices. First a check is made to ensure that the matrices have dimensions such that the addition can be performed: the matrices must have identical dimensions. A new \textbf{Matrix} structure is then instantiated with the same dimensions as the input matrices. The program iterates through each value of the resulting matrix using two embedded iteration structures, and sets the value to the either the sum or the difference of the corresponding values in the input matrices. \\
 
-The remaining operator overloads are used to multiply matrices and vectors together. Since only the operation of multiplying a \textbf{Vector} by a \textbf{Matrix} is required, I will only document this method. However I have also implemented methods for multiplying the converse of this, and multiplying two matrices together for completeness. Similar to addition, the first check of the method is to ensure that multiplication can be performed on the inputs. This is done by checking if the length of the vector is equal to the number of rows in the matrix. A new \textbf{Vector} class is then instantiated, passing in the number of columns in the matrix as the parameter since this value will be equal to the length of the resulting vector from this operation. The program then iterates through each value in this new vector object, and initialises a new `sum' variable. Another iteration structure is started, which iterates through each row element of the current column in the matrix and multiplies it by equivalent value from the vector object. Each result of these multiplications is added to the `sum' variable, which is set to the appropriate value of the resulting vector object. The pseudocode for this process is outlined below:
+The remaining operator overloads are used to multiply matrices and vectors together. Since only the operation of multiplying a \textbf{Vector} by a \textbf{Matrix} is required, I will only document this method. However I have also implemented methods for multiplying the converse of this, and multiplying two matrices together for completeness. Similar to addition, the first check of the method is to ensure that multiplication can be performed on the inputs. This is done by checking if the length of the vector is equal to the number of rows in the matrix. A new \textbf{Vector} structure is then instantiated, passing in the number of columns in the matrix as the parameter since this value will be equal to the length of the resulting vector from this operation. The program then iterates through each value in this new vector object, and initialises a new `sum' variable. Another iteration structure is started, which iterates through each row element of the current column in the matrix and multiplies it by equivalent value from the vector object. Each result of these multiplications is added to the `sum' variable, which is set to the appropriate value of the resulting vector object. The pseudocode for this process is outlined below:
 
 \begin{minted}{csharp}
 	func operator *(Vector vector, Matrix matrix) -> Vector {
@@ -913,9 +913,9 @@ The remaining operator overloads are used to multiply matrices and vectors toget
 
 \paragraph{Vectors\\}
 
-The \textbf{Vector} class contains two constructors, similar to the \textbf{Matrix} class. The first constructor takes in one integer as an argument and creates an empty vector with the specified dimension. As with the \textbf{Matrix} class, this is used for the resulting vector when performing an operation on two matrices/vectors. The second constructor is used when building a vector object from an array of values, and therefore passes in an array as the constructor argument. \\
+The \textbf{Vector} structure contains two constructors, similar to the \textbf{Matrix} structure. The first constructor takes in one integer as an argument and creates an empty vector with the specified dimension. As with the \textbf{Matrix} structure, this is used for the resulting vector when performing an operation on two matrices/vectors. The second constructor is used when building a vector object from an array of values, and therefore passes in an array as the constructor argument. \\
 
-This class only contains one set of operators, since the operations involving both a matrix and a vector are found within the \textbf{Matrix} class. These operations are for the addition and subtraction of two vectors. Only the addition operation is used by the neural network, however subtraction works in almost an identical way. First, a check is made to see if the addition operation is valid for input vectors. This is done by comparing the lengths of the two vectors---if they are not equal then the calculation cannot be performed. Otherwise, a new \textbf{Vector} class is instantiated, passing in the length of one of the input vectors as its parameter. The program then iterates through each value of the resulting vector object, and sets each value to the sum of the corresponding values from each of the input vectors.
+This structure only contains one set of operators, since the operations involving both a matrix and a vector are found within the \textbf{Matrix} structure. These operations are for the addition and subtraction of two vectors. Only the addition operation is used by the neural network, however subtraction works in almost an identical way. First, a check is made to see if the addition operation is valid for input vectors. This is done by comparing the lengths of the two vectors---if they are not equal then the calculation cannot be performed. Otherwise, a new \textbf{Vector} structure is instantiated, passing in the length of one of the input vectors as its parameter. The program then iterates through each value of the resulting vector object, and sets each value to the sum of the corresponding values from each of the input vectors.
 
 \subsubsection{Backpropagation}
 
@@ -2240,7 +2240,7 @@ The layout for the testing section first outlines the tests that will be complet
         \end{tabularx}
     \end{table}
 
-    3/3 tests passed. \\
+    4/4 tests passed. \\
 
     The table below details the neuron errors and weights required to perform this calculation. These have been rounded to 6 decimal places for clarity but should not be used in the calculation. The percentage error created by using the rounded values is 44\%, which is very inaccurate.
 
@@ -4911,7 +4911,7 @@ namespace server_app.neuralNetwork
 \begin{minted}{csharp}
 namespace server_app.neuralNetwork.structures
 {
-	public class Matrix
+	public readonly struct Matrix
 	{
 		private readonly double[,] values;
 		public double this[int i, int j]
@@ -5068,7 +5068,7 @@ namespace server_app.neuralNetwork.structures
 \begin{minted}{csharp}
 namespace server_app.neuralNetwork.structures
 {
-	public class Vector
+	public readonly struct Vector
 	{
 		private readonly double[] values;
 		public double this[int i]
@@ -9264,7 +9264,8 @@ I have included references to the main documentation used when researching and c
 
 \href{https://www.3blue1brown.com/topics/neural-networks}{Theory of neural networks - Grant Sanderson (Oct 2017)} \\
 \href{http://neuralnetworksanddeeplearning.com/chap2.html}{How the backpropagation algorithm works - Michael Nielsen (Dec 2019)} \\
-\href{https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading}{Operator overloading}
+\href{https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading}{Operator overloading} \\
+\href{https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/indexers/using-indexers}{Using indexers} \\
 
 \href{https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-create-graphics-objects-for-drawing}{Creating a `Graphics' object to represent the drawing surface of a Panel} \\
 \href{https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-draw-a-line-on-a-windows-form}{Drawing a line between two points on a Panel} \\

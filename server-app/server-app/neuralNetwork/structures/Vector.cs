@@ -1,6 +1,6 @@
 ﻿namespace server_app.neuralNetwork.structures
 {
-	public class Vector
+	public readonly struct Vector
 	{
 		private readonly double[] values;
 		public double this[int i]

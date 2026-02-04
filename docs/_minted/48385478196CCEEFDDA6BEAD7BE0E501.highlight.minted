@@ -1,7 +1,7 @@
 \begin{MintedVerbatim}[commandchars=\\\{\}]
 \PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{server\PYGZus{}app.neuralNetwork.structures}
 \PYG{p}{\PYGZob{}}
-\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Vector}
+\PYG{+w}{	}\PYG{k}{public}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{Vector}
 \PYG{+w}{	}\PYG{p}{\PYGZob{}}
 \PYG{+w}{		}\PYG{k}{private}\PYG{+w}{ }\PYG{k}{readonly}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{p}{[]}\PYG{+w}{ }\PYG{n}{values}\PYG{p}{;}
 \PYG{+w}{		}\PYG{k}{public}\PYG{+w}{ }\PYG{k+kt}{double}\PYG{+w}{ }\PYG{k}{this}\PYG{p}{[}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{]}

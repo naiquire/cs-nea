@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.24)  3 FEB 2026 22:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.24)  4 FEB 2026 09:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -813,10 +813,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 731--732
 \pydata@fh@0=\write6
 \openout6 = `_7333154D5D4D3D25B3BFFBB7E34E7366.data.minted'.
 
-runsystem(latexminted config  --timestamp 20260203225057Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
+runsystem(latexminted config  --timestamp 20260204094130Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
 
 (./_7333154D5D4D3D25B3BFFBB7E34E7366.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20260203225057Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
+runsystem(latexminted cleanconfig  --timestamp 20260204094130Z 7333154D5D4D3D25B3BFFBB7E34E7366)...executed safely (allowed).
 
  (./_minted/vs.style.minted) (./_minted/A0287C037ACA26A900F54CB2BDA0E21C.highlight.minted) (./_minted/49EB4E6AF021BA11E7D0204B5C3FEE86.highlight.minted)
 Underfull \hbox (badness 10000) in paragraph at lines 755--756
@@ -1753,7 +1753,7 @@ Overfull \hbox (2.74086pt too wide) in paragraph at lines 11--11
 [][][][]\OT1/cmtt/m/n/10 @"{Environment.GetEnvironmentVariable("[]cs[]nea[]server[]")}\neuralNetwork\data\";[]|  
  []
 
-[130] [131] [132] [133] [134] [135]) (./_minted/0B3B48571806151BFF20401D20B8A7E8.highlight.minted [136] [137]) (./_minted/7FAC2D16F61464271FAC32401D43A723.highlight.minted) (./_minted/464084CD33C53A4E1DA72D8A320FF373.highlight.minted [138] [139] [140]) (./_minted/E2E9E94EB526FFB9B4C32AE6A957A912.highlight.minted [141]) (./_minted/6CB8BA0F38AE0E70DF6AD64699824494.highlight.minted [142]) (./_minted/72C635A66E246D137CFA27D7467EDFC0.highlight.minted [143]) (./_minted/8C4CE766A8142D51F4F6743E44D6185F.highlight.minted [144]
+[130] [131] [132] [133] [134] [135]) (./_minted/0B3B48571806151BFF20401D20B8A7E8.highlight.minted [136] [137]) (./_minted/7FAC2D16F61464271FAC32401D43A723.highlight.minted) (./_minted/A548CAF5E4191D6D51421BA41D99454E.highlight.minted [138] [139] [140]) (./_minted/48385478196CCEEFDDA6BEAD7BE0E501.highlight.minted [141]) (./_minted/6CB8BA0F38AE0E70DF6AD64699824494.highlight.minted [142]) (./_minted/72C635A66E246D137CFA27D7467EDFC0.highlight.minted [143]) (./_minted/8C4CE766A8142D51F4F6743E44D6185F.highlight.minted [144]
 Overfull \hbox (44.7405pt too wide) in paragraph at lines 71--71
 \OT1/cmtt/m/n/10 context.RequestServices.GetRequiredService<IHubContext<Connection>>();|  
  []
@@ -1799,12 +1799,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 9263--9264
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9269--9271
+Underfull \hbox (badness 10000) in paragraph at lines 9265--9269
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9272--9276
+Underfull \hbox (badness 10000) in paragraph at lines 9270--9272
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9273--9277
 
  []
 
@@ -1825,10 +1830,10 @@ Here is how much of TeX's memory you used:
  36 hyphenation exceptions out of 8191
  85i,14n,93p,1940b,2946s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on cs-nea.pdf (223 pages, 2961238 bytes).
+Output written on cs-nea.pdf (223 pages, 2961331 bytes).
 PDF statistics:
- 2115 PDF objects out of 2487 (max. 8388607)
- 1726 compressed objects within 18 object streams
+ 2116 PDF objects out of 2487 (max. 8388607)
+ 1727 compressed objects within 18 object streams
  635 named destinations out of 1000 (max. 500000)
  974 words of extra memory for PDF output out of 10000 (max. 10000000)
 
