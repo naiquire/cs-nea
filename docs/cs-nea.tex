@@ -496,6 +496,8 @@ The objective of this program is to allow users to practice writing the Latin sc
             \item A user's submission will be preprocessed to match the formatting of the training data.
             \item The network will accurately classify a user's submission into one of the 26 Latin characters.
             \item The user will be able to draw their submission to any size and scale.
+			\item User-defined matrix and vector data structures will be defined, which can have arithmetic operations performed on them.
+			\item The backpropagation algorithm will be applied to sufficiently train the neural network.
         \end{enumerate}
         \item The server will store a database containing data for each registered user.
         \begin{enumerate}
@@ -1859,9 +1861,9 @@ When it is detected that the connection has been lost, the `ConnectionClose()' m
 
 \subsection{Testing}
 
-The layout for the testing section first outlines the tests that will be completed, along with any information regarding these tests---such as the software used or any changes to the system. The tests are then given in a list, with each test having a timestamp in bold which links the test to the appropriate section in the testing video. If the test is directly testing one of the objectives, then this has been given in square brackets after the timestamp. If there is no link to an objective, then it is testing for the robustness of the solution. A table then outlines the input used to set up each test, along with the expected and observed outcomes. \\
+The layout for the testing section first outlines the tests that will be completed, along with any information regarding these tests---such as the software used or any changes to the system. The tests are then given in a list, with each test having a timestamp in bold which links the test to the appropriate section in the testing video. If the test is directly testing one of the objectives, then this has been given in square brackets after the timestamp. If there is no link to an objective, then it is testing for the robustness of the solution, or for the complex algorithms. A table then outlines the input used to set up each test, along with the expected and observed outcomes. \\
 
-\href{https://1drv.ms/f/c/3e1f08d3e4fd818b/IgCUS8aHwVSwRLBoNFkl4_LRAT6VirQSBWDmTAvQZIteqOY?e=ovwiRN}{Link to the Testing Video}
+The testing video is attached to the submission as a video file, and can also be accessed through \href{https://1drv.ms/f/c/3e1f08d3e4fd818b/IgCUS8aHwVSwRLBoNFkl4_LRAT6VirQSBWDmTAvQZIteqOY?e=ovwiRN}{this link}.
 
 \subsubsection{Accounts}
 
@@ -2047,10 +2049,10 @@ The layout for the testing section first outlines the tests that will be complet
     For this test, two accounts are setup with a given Elo rating where `account1' has a rating of 400, and `account2' has a rating of 300. A `Versus' game is then started with both of these users and `account1' is given 4 wins, 1 draw, and 5 losses. This results in `account1' obtaining a score of 4.5, and `account2' obtaining a score of 5.5. The expected scores of each user are then calculated using the Elo rating of each user.
     
     \begin{equation*}
-        E_A=10\cdot \frac{1}{1+10^{(300---400) / 400}}\approx 6.400649998
+        E_A=10\cdot \frac{1}{1+10^{(300-400) / 400}}\approx 6.400649998
     \end{equation*}
     \begin{equation*}
-        E_B=10\cdot \frac{1}{1+10^{(400---300) / 400}}\approx 3.599350002
+        E_B=10\cdot \frac{1}{1+10^{(400-300) / 400}}\approx 3.599350002
     \end{equation*}
 
     The updated ranks for both users can then be calculated using their expected score and their actual score.
@@ -2184,10 +2186,10 @@ The layout for the testing section first outlines the tests that will be complet
     The following tests confirm that the neural network is correctly applying matrix multiplication, and the backpropagation algorithm to the training data. The previous sets of tests show that the network is sufficiently trained therefore it is likely these tests will also pass. Regardless, these tests are still necessary for completeness. The randomness of the training data has been temporarily removed for these tests, and additional console logs have been added.
 
     \begin{enumerate}
-		\item \textbf{05:52} The multiplication operation is correctly applied to two matrices.
+		\item \textbf{05:52} [5.c.iv] The multiplication operation is correctly applied to two matrices.
         \item \textbf{05:58} The neuron errors for the output layer are correctly calculated.
         \item \textbf{06:08} The neuron errors for the hidden layers are correctly calculated.
-        \item \textbf{06:14} The network shows significant statistical evidence of correctly selecting the drawn letter.
+        \item \textbf{06:14} [5.c.v] The network shows significant statistical evidence of correctly selecting the drawn letter.
     \end{enumerate}
 
 	The algorithm for applying multiplication to two matrices is given in 1.4.2, however I will repeat it here in summary. Multiplication of matrices is not element-wise unlike addition, and instead sums the product of columns against rows. I have arbitrarily chosen two matrices of different dimensions where a multiplication operation is valid to perform on them.
@@ -2408,13 +2410,12 @@ I have also chosen to analyse test 4.1(b): how the duplicate friend invite was h
 \section{Evaluation}
 \noindent\rule{\textwidth}{0.2pt}
 \subsection{Overall Effectiveness of the System}
-% // finish this
+% // proofread
 As defined in the problem statement, this solution was developed to address the need for an enjoyable and simple way to learn to write the Latin script. I have implemented a program which allows a user to receive instant feedback on writing a Latin character, through three different game types. A drawing panel is presented to the user for each round of a game, and they can submit an attempt at writing the given letter. The server application accurately evaluates the user's submission and returns a percentage accuracy and their elapsed time. These results are then updated for the user's account in the database, which allows a user to view their progress in learning to write the Latin characters. \\
 
 The key component of this project is the multilayered neural network, which was implemented successfully and completely. It has been shown through extensive testing that the network is able to handle a variety of inputs and accurately evaluate each of them fairly. In particular, the speed of evaluation is almost instant---this was one of the concerns for using my own matrix and vector data structures. However it is clear that there is no noticeable time delay while a user's submission is being evaluated, therefore the algorithm I have implemented for performing matrix operations is efficient. \\
 
-% something about the client being easy to use and handles exceptions well
-
+As for what the user experiences while using the application, the client presents an easy to use and intuitive interface. Each section of the client application is split up, and navigating between these sections works flawlessly. Any exceptions which may occur on the server application are handled by the client by presenting relevant messages to the user. A user's account data is stored securely in the database, along with their learning progress of the Latin characters.
 
 \subsection{Evaluation of Objectives}
 \subsubsection{Core Objectives}
