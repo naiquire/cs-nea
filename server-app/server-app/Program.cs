@@ -13,12 +13,12 @@ namespace server_app
 
 		static void Main(string[] args)
 		{
-			Vector result = (new Vector([-1, 3, 2])) * (new Matrix(new double[,] { { 1, 2 }, { 5, 3 }, { 2, -5 } }));
-			Console.ReadKey();
-			//Data.BuildMatrices(Data.LoadWeights(), Data.LoadBiases());
+			Data.BuildMatrices(Data.LoadWeights(), Data.LoadBiases());
 
-			//startNginx();
-			//hostBuilder(args).Build().Run();
+			// startNginx();
+			hostBuilder(args).Build().Run();
+			Logger.SetupAsync();
+			Logger.Log("SERVER", "white", "Application started");
 		}
 
 		private static void startNginx()
@@ -26,7 +26,7 @@ namespace server_app
 			ProcessStartInfo startInfo = new()
 			{
 				FileName = "nginx.exe",
-				WorkingDirectory = @"C:\Users\naiquire\Documents\General\Relay\nginx-1.26.2",
+				WorkingDirectory = @"[INSERT_NGINX_DIRECTORY]",
 				UseShellExecute = true
 			};
 			Process.Start(startInfo);
@@ -85,8 +85,6 @@ namespace server_app
 			});
 
 			return host;
-			Logger.SetupAsync();
-			Logger.Log("SERVER", "white", "Application started");
 		}
 	}
 }
