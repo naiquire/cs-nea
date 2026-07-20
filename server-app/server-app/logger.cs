@@ -10,23 +10,23 @@ namespace server_app
 
 		public static async void Log(string code, string colour, string message)
 		{
-			//Console.Write($"[");
-			//if (Enum.TryParse(colour[0].ToString().ToUpper() + colour[1..], out ConsoleColor c))
-			//{
-			//	// capitalise the first letter of the colour string to match the enum type
-			//	Console.ForegroundColor = c;
-			//}
+			Console.Write($"[");
+			if (Enum.TryParse(colour[0].ToString().ToUpper() + colour[1..], out ConsoleColor c))
+			{
+				// capitalise the first letter of the colour string to match the enum type
+				Console.ForegroundColor = c;
+			}
 
-			//Console.Write($"{code}");
-			//Console.ResetColor();
-			//Console.WriteLine($"] {message}");
+			Console.Write($"{code}");
+			Console.ResetColor();
+			Console.WriteLine($"] {message}");
 
-			await _logChannel.Writer.WriteAsync((code, colour, message));
+			//await _logChannel.Writer.WriteAsync((code, colour, message));
 		}
 		public static async void ErrorLog(string message)
 		{
-			//Console.Write($"["); Console.ForegroundColor = ConsoleColor.Red; Console.Write($"ERROR"); Console.ResetColor(); Console.WriteLine($"] {message}");
-			await _errorChannel.Writer.WriteAsync(message);
+			Console.Write($"["); Console.ForegroundColor = ConsoleColor.Red; Console.Write($"ERROR"); Console.ResetColor(); Console.WriteLine($"] {message}");
+			//await _errorChannel.Writer.WriteAsync(message);
 		}
 		
 		public static void SetupAsync()

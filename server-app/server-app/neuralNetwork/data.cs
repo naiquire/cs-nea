@@ -7,7 +7,7 @@ namespace server_app.neuralNetwork
 {
 	public static class Data
 	{
-		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server")}\neuralNetwork\data\";
+		private static readonly string location = $@"{Environment.GetEnvironmentVariable("cs-nea-server")}neuralNetwork/data/";
 
 		public static readonly Matrix[] weightsMatrices = new Matrix[Network.layerCount - 1];
 		public static readonly Vector[] biasesVector = new Vector[Network.layerCount - 1];
@@ -200,7 +200,7 @@ namespace server_app.neuralNetwork
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
 				weights[i] = new double[Network.layerSizes[i], Network.layerSizes[i + 1]];
-				using (StreamReader sr = new($@"{location}weights\{i}.txt"))
+				using (StreamReader sr = new($@"{location}weights/{i}.txt"))
 				{
 					string[] lines = sr.ReadToEnd().Split('\n');
 					for (int j = 0; j < Network.layerSizes[i]; j++)
@@ -221,7 +221,7 @@ namespace server_app.neuralNetwork
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
 				biases[i] = new double[Network.layerSizes[i + 1]];
-				using (StreamReader sr = new($@"{location}biases\{i}.txt"))
+				using (StreamReader sr = new($@"{location}biases/{i}.txt"))
 				{
 					string[] s = sr.ReadToEnd().Split(',');
 					for (int j = 0; j < Network.layerSizes[i + 1]; j++)
@@ -245,7 +245,7 @@ namespace server_app.neuralNetwork
 					}
 					builder.Append($"{weights[i][j, weights[i].GetLength(1) - 1]}\n");
 				}
-				using (StreamWriter sw = new($@"{location}weights\{i}.txt"))
+				using (StreamWriter sw = new($@"{location}weights/{i}.txt"))
 				{
 					sw.Write(builder);
 				}
@@ -255,7 +255,7 @@ namespace server_app.neuralNetwork
 		{
 			for (int i = 0; i < Network.layerCount - 1; i++)
 			{
-				using (StreamWriter sw = new($@"{location}biases\{i}.txt"))
+				using (StreamWriter sw = new($@"{location}biases/{i}.txt"))
 				{
 					sw.Write(string.Join(',', biases[i]));
 				}
@@ -268,7 +268,7 @@ namespace server_app.neuralNetwork
 
 			Console.Write($"\r[ {100 * done / total,3}% ] Loading training images");
 
-			FileStream fs = new($@"{location}training\images.gz", FileMode.Open, FileAccess.ReadWrite);
+			FileStream fs = new($@"{location}training/images.gz", FileMode.Open, FileAccess.ReadWrite);
 			CompressionMode cm = CompressionMode.Decompress;
 
 			List<double[]> images = [];
@@ -310,7 +310,7 @@ namespace server_app.neuralNetwork
 			Console.WriteLine();
 
 			done = 0;
-			fs = new($@"{location}training\labels.gz", FileMode.Open, FileAccess.ReadWrite);
+			fs = new($@"{location}training/labels.gz", FileMode.Open, FileAccess.ReadWrite);
 
 			Console.Write($"\r[ {100 * done / total,3}% ] Loading training labels");
 

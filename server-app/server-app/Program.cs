@@ -17,7 +17,7 @@ namespace server_app
 
 			// startNginx();
 			hostBuilder(args).Build().Run();
-			Logger.SetupAsync();
+			//Logger.SetupAsync();
 			Logger.Log("SERVER", "white", "Application started");
 		}
 
@@ -81,7 +81,7 @@ namespace server_app
 				config.ConfigureLogging(logging => logging.SetMinimumLevel(LogLevel.None));
 
 				// bind to localhost on port 3900
-				config.UseUrls("http://localhost:3900");
+				config.UseUrls("http://0.0.0.0:3900");
 			});
 
 			return host;
