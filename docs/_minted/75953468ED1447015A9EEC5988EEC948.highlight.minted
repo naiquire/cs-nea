@@ -1,5 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
-\PYG{+w}{    }\PYG{k}{SELECT}\PYG{+w}{ }\PYG{n}{letter}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{accuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{esc}{time}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{total}
-\PYG{+w}{    }\PYG{k}{FROM}\PYG{+w}{ }\PYG{esc}{statistics}
-\PYG{+w}{    }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{userID}
-\end{MintedVerbatim}

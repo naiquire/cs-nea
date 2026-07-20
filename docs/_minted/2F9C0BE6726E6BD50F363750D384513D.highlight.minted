@@ -1,4 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
-\PYG{+w}{	}\PYG{n}{userData}\PYG{p}{(}\PYG{esc}{\underline{userID}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{password}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{aboutMe}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{localisation}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{dateCreated}\PYG{p}{)}
-\PYG{+w}{	}\PYG{n}{rating}\PYG{p}{(}\PYG{esc}{\underline{userID}}\PYG{o}{*}\PYG{p}{,}\PYG{+w}{ }\PYG{esc}{\underline{date}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rating}\PYG{p}{)}
-\end{MintedVerbatim}

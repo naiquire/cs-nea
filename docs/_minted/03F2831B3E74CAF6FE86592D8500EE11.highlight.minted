@@ -1,9 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }\PYG{k}{listen}\PYG{+w}{ }\PYG{l+m+mi}{5252}\PYG{p}{;}
-
-\PYG{+w}{    }\PYG{k}{location}\PYG{+w}{ }\PYG{l+s}{/cs\PYGZhy{}nea}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}pass}\PYG{+w}{ }\PYG{l+s}{http://localhost:3900}\PYG{p}{;}
-\PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}set\PYGZus{}header}\PYG{+w}{ }\PYG{l+s}{Upgrade}\PYG{+w}{ }\PYG{n+nv}{\PYGZdl{}http\PYGZus{}upgrade}\PYG{p}{;}
-\PYG{+w}{        }\PYG{k+kn}{proxy\PYGZus{}set\PYGZus{}header}\PYG{+w}{ }\PYG{l+s}{Connection}\PYG{+w}{ }\PYG{n+nv}{\PYGZdl{}connection\PYGZus{}upgrade}\PYG{p}{;}
-\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
-\end{MintedVerbatim}

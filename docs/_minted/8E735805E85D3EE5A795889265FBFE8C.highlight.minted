@@ -1,4 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{+w}{	}\PYG{k}{DELETE}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{rating}
-\PYG{+w}{	}\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{userID}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{userID}\PYG{+w}{ }\PYG{k}{AND}\PYG{+w}{ }\PYG{n+nb}{date}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{cutoffDate}
-\end{MintedVerbatim}

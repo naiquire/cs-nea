@@ -1,3 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }\PYG{k}{await}\PYG{+w}{ }\PYG{n}{hubconnection}\PYG{p}{.}\PYG{n}{InvokeAsync}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}requestedMethod\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parameter1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parameter2}\PYG{p}{);}
-\end{MintedVerbatim}

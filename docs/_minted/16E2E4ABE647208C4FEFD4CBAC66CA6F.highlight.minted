@@ -1,5 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }\PYG{k}{SELECT}\PYG{+w}{ }\PYG{n}{aboutMe}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{dateCreated}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rank}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{localisation}
-\PYG{+w}{    }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{userData}
-\PYG{+w}{    }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{userData}\PYG{p}{.}\PYG{n}{userID}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{userID}
-\end{MintedVerbatim}

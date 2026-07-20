@@ -1,4 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
-\PYG{+w}{    }\PYG{k}{INSERT}\PYG{+w}{ }\PYG{k}{INTO}\PYG{+w}{ }\PYG{esc}{statistics}
-\PYG{+w}{    }\PYG{k}{VALUES}\PYG{p}{(}\PYG{o}{@}\PYG{n}{userID}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{letter}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{accuracy}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{@}\PYG{esc}{time}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{@}\PYG{n}{total}\PYG{p}{)}
-\end{MintedVerbatim}
