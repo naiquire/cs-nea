@@ -211,3 +211,4 @@ FakesAssemblies/
 
 # custom
 /docs/
+!*.png
