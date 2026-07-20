@@ -7,7 +7,7 @@ Technical Solution for my Computer Science NEA
 * Libraries: SignalR, Windows Forms
 
 ## Installation Guide
-I do not intend on releasing this project as a full application, so installation requires building from source. The client application must be run on Windows since it uses Windows Forms. The server application is guaranteed to work on Windows and Arch Linux - other Linux distributions and MacOS are likely to work but are untested.
+I do not intend on releasing this project as a full application, so installation requires building from source. The client application must be run on Windows since it uses Windows Forms. The server application is guaranteed to work on Windows and Linux - other operating systems are likely to work but are untested.
 
 ### Prerequisites
 * [dotnet 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
@@ -21,7 +21,33 @@ Recommended to change working directory to a suitable folder: `Downloads`, `Docu
 git clone https://github.com/naiquire/cs-nea
 cd cs-nea
 ```
-Set the environment variable `cs-nea-server = $(pwd)/server-app/server-app`
+
+__SKIP TO [Execution](https://github.com/naiquire/cs-nea#execution) IF YOU DO NOT INTEND TO SETUP NGINX__
+NGINX is not required for this project to work, however allows the server to be securely exposed to the internet and accessed from a device on a different LAN. First download NGINX and place it in a suitable directory - this does not have to be the same as the cloned repository. Use the following configuration:
+```
+listen 5252;
+location /cs-nea {
+  proxy_pass http://localhost:3900;
+  proxy_set_header Upgrade $http_upgrade;
+  proxy_set_header Connection $connection_upgrade;
+}
+```
+Consult the [NGINX documentation](https://nginx.org/en/docs/) if you are unsure on how to configure NGINX.
+
+* Change the socket on **line 84 of Program.cs** to use localhost instead of 0.0.0.0
+* Uncomment **line 18 of Program.cs**
+* Adjust **line 29 of Program.cs** to point at the directory which NGINX is installed to
+
+### Execution
+
+First, open both the server and client solutions in Visual Studio. Navigate to **client-app/menus/main.cs** and adjust the `address` property to match the non-routable IP of the device the server is running on. Examples of what this may look like are shown below:
+```
+public const string address = "http://localhost:3900/cs-nea";
+public const string address = "http://192.168.0.24:3900/cs-nea";
+```
+If you have setup NGINX, then the IP should be changed to the routable IP of the server device, and the port number changed to 5252:
+```
+public const string address = "http://123.45.67.89:5252/cs-nea";
+```
 
 
-__IMPORTANT__ ~ the client can only connect to the server if they are running on the **same** device. (If you know what you are doing, installing NGINX can expose the server to the internet by configuring port forwarding on your router. I **highly** advise against exposing the server without NGINX for security reasons. To set up the server to use NGINX with autostart, **uncomment line 18 in Program.cs** and add the directory location of where `nginx.exe` has been installed to **line 29 of Program.cs**
